@@ -1,0 +1,11 @@
+{
+"type": "FeatureCollection",
+"name": "rainfall",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:OGC:1.3:CRS84" } },
+"features": [
+{ "type": "Feature", "properties": { "GM_LAYER": "Unknown Point Feature", "NAME": "Flexa", "LAYER": "Unknown Point Feature", "MAP_NAME": "Rainfall Record Station fix.shp", "ATTR_1": "Flexa", "POINT_SYMB": "Dot", "FONT_SIZE": 10, "FONT_COLOR": "RGB(0,0,0)", "FONT_CHARS": 1, "FONT_WEIGH": 400, "Id": null, "Station": null, "X": "125� 36' 55.0001\" E", "Y": "8� 52' 42.0000\" S" }, "geometry": { "type": "Point", "coordinates": [ 125.6152778, -8.878333333 ] } },
+{ "type": "Feature", "properties": { "GM_LAYER": "Unknown Point Feature", "NAME": "Hatubuilico", "LAYER": "Unknown Point Feature", "MAP_NAME": "Rainfall Record Station fix.shp", "ATTR_1": "Hatubuilico", "POINT_SYMB": "Dot", "FONT_SIZE": 10, "FONT_COLOR": "RGB(0,0,0)", "FONT_CHARS": 1, "FONT_WEIGH": 400, "Id": null, "Station": null, "X": "125� 31' 08.0000\" E", "Y": "8� 53' 38.0000\" S" }, "geometry": { "type": "Point", "coordinates": [ 125.5188889, -8.893888889 ] } },
+{ "type": "Feature", "properties": { "GM_LAYER": "Unknown Point Feature", "NAME": "Mausiga", "LAYER": "Unknown Point Feature", "MAP_NAME": "Rainfall Record Station fix.shp", "ATTR_1": "Mausiga", "POINT_SYMB": "Dot", "FONT_SIZE": 10, "FONT_COLOR": "RGB(0,0,0)", "FONT_CHARS": 1, "FONT_WEIGH": 400, "Id": null, "Station": null, "X": "125� 32' 17.0002\" E", "Y": "8� 57' 55.0000\" S" }, "geometry": { "type": "Point", "coordinates": [ 125.5380556, -8.965277778 ] } },
+{ "type": "Feature", "properties": { "GM_LAYER": "Unknown Point Feature", "NAME": "Zumalai", "LAYER": "Unknown Point Feature", "MAP_NAME": "Rainfall Record Station fix.shp", "ATTR_1": "Zumalai", "POINT_SYMB": "Dot", "FONT_SIZE": 10, "FONT_COLOR": "RGB(0,0,0)", "FONT_CHARS": 1, "FONT_WEIGH": 0, "Id": 0, "Station": "Zumalai", "X": "125� 27' 01.0490\" E", "Y": "9� 09' 20.5701\" S" }, "geometry": { "type": "Point", "coordinates": [ 125.450291381186659, -9.155713908654837 ] } }
+]
+}
