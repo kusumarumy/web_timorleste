@@ -93,53 +93,58 @@ export interface LayerGroup {
 }
 
 export const GROUPS: LayerGroup[] = [
-// AREA OF INTEREST
+  // AREA OF INTEREST
   {
-      id: "aoi_photo",
-      nameKey: "l_aoi_photo",
-      kind: "fill",
-      data: v("aoi_photo"),
+    titleKey: "g_aoi",
+    dot: "#F2D45C",
 
-      paint: {
-        "fill-color": "#F2D45C",
-        "fill-opacity": 0.42,
-        "fill-outline-color": "#F2D45C",
+    layers: [
+      {
+        id: "aoi_photo",
+        nameKey: "l_aoi_photo",
+        kind: "fill",
+        data: v("aoi_photo"),
+
+        paint: {
+          "fill-color": "#F2D45C",
+          "fill-opacity": 0.42,
+          "fill-outline-color": "#F2D45C",
+        },
+
+        defaultOn: true,
+
+        opacity: 0.42,
+        opacityProp: "fill-opacity",
+
+        legend: {
+          color: "#F2D45C",
+        },
       },
 
-      defaultOn: true,
+      {
+        id: "aoi_lidar",
+        nameKey: "l_aoi_lidar",
+        kind: "fill",
+        data: v("aoi_lidar"),
+        clickable: true,
 
-      opacity: 0.42,
-      opacityProp: "fill-opacity",
+        paint: {
+          "fill-color": "#F2D45C",
+          "fill-opacity": 0.25,
+          "fill-outline-color": "#F2D45C",
+        },
 
-      legend: {
-        color: "#F2D45C",
+        defaultOn: false,
+
+        opacity: 0.25,
+        opacityProp: "fill-opacity",
+
+        legend: {
+          color: "#F2D45C",
+        },
       },
-    },
-
-    {
-      id: "aoi_lidar",
-      nameKey: "l_aoi_lidar",
-      kind: "fill",
-      data: v("aoi_lidar"),
-      clickable: true,
-
-      paint: {
-        "fill-color": "#F2D45C",
-        "fill-opacity": 0.25,
-        "fill-outline-color": "#F2D45C",
-      },
-
-      defaultOn: false,
-
-      opacity: 0.25,
-      opacityProp: "fill-opacity",
-
-      legend: {
-        color: "#F2D45C",
-      },
-    },
-  ],
-},
+    ],
+  },
   // ADMINISTRASI
  {
   titleKey: "g_admin",
