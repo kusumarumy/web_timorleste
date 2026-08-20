@@ -58,7 +58,7 @@ di_raibere: "RAIBRE",
     l_irrigation_point: "Titik Irigasi",
     l_irrigation: "Irigasi",
     l_catchment: "Daerah Tangkapan Air",
-    l_watershed: "Genangan",
+    l_watershed: "Daerah Aliran Sungai",
     // Transportation
     l_road: "Jalan",
     // Contour
