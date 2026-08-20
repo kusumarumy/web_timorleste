@@ -386,12 +386,7 @@ export const GROUPS: LayerGroup[] = [
   data: v("rainfall"),
   clickable: true,
 
-  paint: {
-    "icon-image": "rainfall",
-    "icon-size": 0.30,
-    "icon-allow-overlap": true,
-    "icon-ignore-placement": true,
-  },
+  paint: {},
 
   defaultOn: false,
 
@@ -409,12 +404,7 @@ export const GROUPS: LayerGroup[] = [
 
   icon: icon("irrigation_point"),
 
-  paint: {
-    "icon-image": "irrigation_point",
-    "icon-size": 0.45,
-    "icon-allow-overlap": true,
-    "icon-ignore-placement": true,
-  },
+  paint: {},
 
   defaultOn: false,
 
@@ -431,11 +421,7 @@ export const GROUPS: LayerGroup[] = [
       data: v("irrigation"),
       clickable: true,
 
-      paint: {
-        "line-color": "#45A88A",
-        "line-width": 1.6,
-        "line-opacity": 1,
-      },
+      paint: {},
 
       defaultOn: false,
 
