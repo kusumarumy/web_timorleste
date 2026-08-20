@@ -25,7 +25,7 @@ export const BASEMAPS: Basemap[] = [
   {
     id: "ortho",
     labelKey: "bm_ortho",
-    tiles: [`${R2}/ortho/tiles/{z}/{x}/{y}.jpg`],
+    tiles: [`${R2}/orthophoto/tiles/{z}/{x}/{y}.jpg`],
     attribution: "Orthophoto",
     minzoom: 13,
   maxzoom: 17,
