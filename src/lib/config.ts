@@ -321,7 +321,7 @@ export const GROUPS: LayerGroup[] = [
     {
       id: "river",
       nameKey: "l_river",
-      kind: "line",
+      kind: "fill",
       data: v("river"),
       clickable: true,
 
@@ -373,9 +373,9 @@ export const GROUPS: LayerGroup[] = [
         size: 18,
         svg: `
           <svg xmlns="http://www.w3.org/2000/svg"
-               width="48"
-               height="48"
-               viewBox="0 0 48 48">
+               width="10"
+               height="10"
+               viewBox="0 0 10 10">
             <path
               d="M24 3
                  C24 3 9 21 9 31
@@ -420,9 +420,9 @@ export const GROUPS: LayerGroup[] = [
         size: 20,
         svg: `
           <svg xmlns="http://www.w3.org/2000/svg"
-               width="48"
-               height="48"
-               viewBox="0 0 48 48">
+               width="10"
+               height="10"
+               viewBox="0 0 10 10">
 
             <circle
               cx="24"
