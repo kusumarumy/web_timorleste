@@ -1,0 +1,63 @@
+/* ============================================================================
+   geo-tools.css — gaya untuk popup Identify & readout Ukur
+   Diselaraskan dengan tema panel gelap/teal aplikasi Ainaro-Belulik.
+   ============================================================================ */
+
+/* ---- Identify popup ---- */
+.geo-identify-popup .maplibregl-popup-content {
+  background: #0b2b28;
+  color: #e6fffb;
+  border: 1px solid rgba(45, 212, 191, 0.35);
+  border-radius: 10px;
+  padding: 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+  overflow: hidden;
+}
+.geo-identify-popup .maplibregl-popup-close-button {
+  color: #9decdf;
+  font-size: 16px;
+  padding: 2px 8px;
+}
+.geo-identify-popup .maplibregl-popup-tip { border-top-color: #0b2b28; }
+
+.geo-identify__title {
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #2dd4bf;
+  padding: 10px 12px;
+  background: rgba(45, 212, 191, 0.08);
+  border-bottom: 1px solid rgba(45, 212, 191, 0.2);
+}
+.geo-identify__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.geo-identify__table td { padding: 6px 12px; vertical-align: top; }
+.geo-identify__table td.k {
+  color: #7fd8cc;
+  font-weight: 600;
+  white-space: nowrap;
+  width: 40%;
+}
+.geo-identify__table td.v { color: #eafffb; word-break: break-word; }
+.geo-identify__table tr + tr td { border-top: 1px solid rgba(255, 255, 255, 0.06); }
+
+/* ---- Measure readout (dipakai komponen React di bawah) ---- */
+.geo-measure {
+  background: #0b2b28;
+  color: #e6fffb;
+  border: 1px solid rgba(45, 212, 191, 0.35);
+  border-radius: 10px;
+  padding: 12px 14px;
+  min-width: 220px;
+  font-size: 13px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+.geo-measure__row { display: flex; justify-content: space-between; gap: 16px; padding: 3px 0; }
+.geo-measure__row .lbl { color: #7fd8cc; }
+.geo-measure__row .val { font-variant-numeric: tabular-nums; font-weight: 600; }
+.geo-measure__hint { margin-top: 8px; font-size: 11px; color: #6ab5aa; opacity: 0.85; }
+.geo-measure__crs { margin-top: 4px; font-size: 10px; color: #4f8f86; letter-spacing: 0.03em; }
