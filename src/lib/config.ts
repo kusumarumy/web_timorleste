@@ -11,8 +11,8 @@ const r2Vector = (name: string) =>
 
 export const MAP = {
   centerUTM: [773279.2384, 8989643.1798],
-  center: [125.52550, -9.18448] as [number, number],
-  zoom: 12,
+  center: [125.58, -9.18448] as [number, number],
+  zoom: 10,
   pitch: 18,
   bearing: -18,
   maxPitch: 85,
