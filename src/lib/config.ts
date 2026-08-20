@@ -13,7 +13,7 @@ export const MAP = {
   centerUTM: [773279.2384, 8989643.1798],
   center: [125.52550, -9.18448] as [number, number],
   zoom: 12,
-  pitch: 58,
+  pitch: 18,
   bearing: -18,
   maxPitch: 85,
 };
@@ -105,7 +105,7 @@ export const GROUPS: LayerGroup[] = [
           "fill-opacity": 0.42,
           "fill-outline-color": "#D6C45A",
         },
-        defaultOn: false,
+        defaultOn: true,
         opacity: 0.42,
         opacityProp: "fill-opacity",
         legend: { color: "#D6C45A" },
