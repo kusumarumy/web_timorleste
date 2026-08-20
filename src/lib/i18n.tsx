@@ -7,8 +7,8 @@ type Dict = Record<string, string>;
 
 export const DICTS: Record<Lang, Dict> = {
   id: {
-    title: "Timor-Leste GeoLandscape",
-    sub: "Informasi Spasial Lanskap Timor-Leste",
+    title: "Ainaro-Belulik GeoLandscape",
+    sub: "Informasi Spasial Lanskap Ainaro-Belulik",
 
     eyebrow: "Panel Layer",
     panelsub: "Nyalakan atau matikan layer sesuai kebutuhan analisis.",
@@ -90,8 +90,8 @@ di_raibere: "RAIBRE",
   },
 
   en: {
-    title: "Timor-Leste GeoLandscape",
-    sub: "Timor-Leste Landscape Spatial Information",
+    title: "Ainaro-Belulik GeoLandscape",
+    sub: "Ainaro-Belulik Landscape Spatial Information",
 
     eyebrow: "Layer Panel",
     panelsub: "Toggle layers on or off to fit your analysis.",
@@ -165,8 +165,8 @@ di_raibere: "RAIBRE",
   },
 
   pt: {
-    title: "Timor-Leste GeoLandscape",
-    sub: "Informação Espacial da Paisagem de Timor-Leste",
+    title: "Ainaro-Belulik GeoLandscape",
+    sub: "Informação Espacial da Paisagem de Ainaro-Belulik",
 
     eyebrow: "Painel de Camadas",
     panelsub: "Ative ou desative camadas conforme a sua análise.",
