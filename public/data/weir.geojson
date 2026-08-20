@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"name": "weir",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32751" } },
+"features": [
+{ "type": "Feature", "properties": { "Name": "Weir Oebaba", "descriptio": null, "timestamp": null, "begin": null, "end": null, "altitudeMo": null, "tessellate": -1, "extrude": 0, "visibility": -1, "drawOrder": null, "icon": null, "LAYER": "Unknown Point Feature", "KML_STYLE": "msn_purple-pushpin", "POINT_SYMB": "Oebaba_kmz_GMD75D2_tmp_png_hs20x2@SCALE=1.1", "FONT_SIZE": 10, "FONT_COLOR": "RGB(0,0,0)", "FONT_CHARS": 1, "FONT_WEIGH": 400 }, "geometry": { "type": "Point", "coordinates": [ 777889.000030241208151, 8983065.000115659087896 ] } },
+{ "type": "Feature", "properties": { "Name": "Weir Raibere", "descriptio": null, "timestamp": null, "begin": null, "end": null, "altitudeMo": null, "tessellate": -1, "extrude": 0, "visibility": -1, "drawOrder": null, "icon": null, "LAYER": "Unknown Point Feature", "KML_STYLE": "msn_purple-pushpin", "POINT_SYMB": "Raibere_kmz_GMD76EF_tmp_png_hs20x2@SCALE=1.1", "FONT_SIZE": 10, "FONT_COLOR": "RGB(0,0,0)", "FONT_CHARS": 1, "FONT_WEIGH": 400 }, "geometry": { "type": "Point", "coordinates": [ 781091.000032497569919, 8998942.000114850699902 ] } }
+]
+}
