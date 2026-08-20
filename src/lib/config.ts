@@ -476,27 +476,49 @@ export const GROUPS: LayerGroup[] = [
     },
 
     {
-      id: "catchment",
-      nameKey: "l_catchment",
-      kind: "fill",
-      data: v("catchment"),
-      clickable: true,
+  id: "catchment",
+  nameKey: "l_catchment",
+  kind: "fill",
+  data: v("catchment"),
+  clickable: true,
 
-      paint: {
-        "fill-color": "#5A9BD5",
-        "fill-opacity": 0.25,
-        "fill-outline-color": "#5A9BD5",
-      },
+  paint: {
+    "fill-color": "#5A9BD5",
+    "fill-opacity": 0.25,
+    "fill-outline-color": "#5A9BD5",
+  },
 
-      defaultOn: false,
+  defaultOn: false,
+  opacity: 0.25,
+  opacityProp: "fill-opacity",
 
-      opacity: 0.25,
-      opacityProp: "fill-opacity",
+  legend: {
+    color: "#5A9BD5",
+  },
 
-      legend: {
-        color: "#5A9BD5",
-      },
+  sublayers: [
+    {
+      id: "catchment_dam_1",
+      labelKey: "catchment_dam_1",
+      filterValue: "Catchment Area DAM 1",
     },
+    {
+      id: "catchment_dam_2",
+      labelKey: "catchment_dam_2",
+      filterValue: "Catchment Area DAM 2",
+    },
+    {
+      id: "catchment_dam_3",
+      labelKey: "catchment_dam_3",
+      filterValue: "Catchment Area DAM 3",
+    },
+    {
+      id: "catchment_oebaba",
+      labelKey: "catchment_oebaba",
+      filterValue: "Catchment Area Oebaba",
+    },
+  ],
+},
 
     {
       id: "watershed",
