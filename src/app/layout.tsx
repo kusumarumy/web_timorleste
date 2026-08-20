@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 const display = Space_Grotesk({ subsets: ["latin"], variable: "--font-display" });
 
 export const metadata: Metadata = {
-  title: "Timor-Leste GeoLandscape",
+  title: "Ainaro-Belulik GeoLandscape",
   description: "Land · Water · Agriculture · Terrain",
 };
 
