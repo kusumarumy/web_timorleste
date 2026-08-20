@@ -76,6 +76,148 @@ function isWGS84GeoJSON(geojson: any): boolean {
   // Bukan WGS84 → diasumsikan UTM 51S
   return false;
 }
+const POINT_SVGS: Record<string, string> = {
+  rainfall: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+      <path
+        d="M32 6C32 6 14 27 14 41a18 18 0 0 0 36 0C50 27 32 6 32 6Z"
+        fill="#7B61A8"
+        stroke="#FFFFFF"
+        stroke-width="3"
+      />
+      <circle
+        cx="32"
+        cy="42"
+        r="6"
+        fill="#FFFFFF"
+        opacity="0.9"
+      />
+    </svg>
+  `,
+
+  irrigation_point: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+      <circle
+        cx="32"
+        cy="32"
+        r="23"
+        fill="#F28C52"
+        stroke="#FFFFFF"
+        stroke-width="3"
+      />
+      <circle
+        cx="32"
+        cy="32"
+        r="7"
+        fill="#FFFFFF"
+      />
+      <path
+        d="M32 9v12M32 43v12M9 32h12M43 32h12"
+        stroke="#FFFFFF"
+        stroke-width="5"
+        stroke-linecap="round"
+      />
+    </svg>
+  `,
+
+  weir: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+      <path
+        d="M15 14h34v36H15z"
+        fill="#2C7FB8"
+        stroke="#FFFFFF"
+        stroke-width="3"
+      />
+      <path
+        d="M8 40c7 0 7 8 14 8s7-8 14-8 7 8 14 8 7-8 14-8"
+        fill="none"
+        stroke="#FFFFFF"
+        stroke-width="4"
+      />
+      <path
+        d="M8 49c7 0 7 7 14 7s7-7 14-7 7 7 14 7 7-7 14-7"
+        fill="none"
+        stroke="#FFFFFF"
+        stroke-width="3"
+      />
+    </svg>
+  `,
+
+  waterbody_point: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+      <circle
+        cx="32"
+        cy="32"
+        r="25"
+        fill="#4AA6E0"
+        stroke="#FFFFFF"
+        stroke-width="3"
+      />
+      <path
+        d="M18 34c5-7 10 7 15 0s10 7 15 0"
+        fill="none"
+        stroke="#FFFFFF"
+        stroke-width="4"
+        stroke-linecap="round"
+      />
+      <circle cx="24" cy="23" r="3" fill="#FFFFFF"/>
+    </svg>
+  `,
+
+  building_point: `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+      <path
+        d="M13 56V18l19-10 19 10v38H13Z"
+        fill="#8A6F8F"
+        stroke="#FFFFFF"
+        stroke-width="3"
+      />
+      <path
+        d="M22 24h7v8h-7zM35 24h7v8h-7zM22 38h7v8h-7zM35 38h7v8h-7z"
+        fill="#FFFFFF"
+        opacity="0.9"
+      />
+    </svg>
+  `,
+};
+async function registerPointSVGs(map: MLMap) {
+  await Promise.all(
+    Object.entries(POINT_SVGS).map(([id, svg]) => {
+      if (map.hasImage(id)) {
+        return Promise.resolve();
+      }
+
+      return new Promise<void>((resolve, reject) => {
+        const svgDataUrl =
+          "data:image/svg+xml;charset=utf-8," +
+          encodeURIComponent(svg);
+
+        const image = new Image();
+
+        image.onload = () => {
+          try {
+            if (!map.hasImage(id)) {
+              map.addImage(id, image, {
+                pixelRatio: 1,
+              });
+            }
+            resolve();
+          } catch (error) {
+            reject(error);
+          }
+        };
+
+        image.onerror = () => {
+          reject(
+            new Error(`Gagal memuat SVG icon: ${id}`)
+          );
+        };
+
+        image.src = svgDataUrl;
+      });
+    })
+  );
+}
 function buildStyle(): maplibregl.StyleSpecification {
   const sources: Record<string, unknown> = {};
 
@@ -116,42 +258,83 @@ function buildStyle(): maplibregl.StyleSpecification {
 
   // DATA LAYERS
   ALL_LAYERS.forEach((l) => {
-    if (l.kind === "raster") {
-      sources[l.id] = {
-        type: "raster",
-        tiles: l.tiles,
-        tileSize: 256,
-        minzoom: l.minzoom ?? 0,
-        maxzoom: l.maxzoom ?? 22,
-      };
-      layers.push({
-        id: l.id,
-        type: "raster",
-        source: l.id,
-        paint: l.paint,
-        layout: {
-          visibility: l.defaultOn ? "visible" : "none",
-        },
-      } as any);
-    } else {
-      sources[l.id] = {
-        type: "geojson",
-        data: {
-          type: "FeatureCollection",
-          features: [],
-        },
-      };
-      layers.push({
-        id: l.id,
-        type: l.kind,
-        source: l.id,
-        paint: l.paint,
-        layout: {
-          visibility: l.defaultOn ? "visible" : "none",
-        },
-      } as any);
-    }
-  });
+  if (l.kind === "raster") {
+    sources[l.id] = {
+      type: "raster",
+      tiles: l.tiles,
+      tileSize: 256,
+      minzoom: l.minzoom ?? 0,
+      maxzoom: l.maxzoom ?? 22,
+    };
+
+    layers.push({
+      id: l.id,
+      type: "raster",
+      source: l.id,
+
+      paint: l.paint,
+
+      layout: {
+        visibility: l.defaultOn
+          ? "visible"
+          : "none",
+      },
+    } as any);
+
+  } else if (l.kind === "symbol") {
+
+    sources[l.id] = {
+      type: "geojson",
+      data: {
+        type: "FeatureCollection",
+        features: [],
+      },
+    };
+
+    layers.push({
+      id: l.id,
+      type: "symbol",
+      source: l.id,
+
+      layout: {
+        visibility: l.defaultOn
+          ? "visible"
+          : "none",
+
+        "icon-image": l.id,
+
+        "icon-size": 1,
+
+        "icon-allow-overlap": true,
+        "icon-ignore-placement": true,
+      },
+    } as any);
+
+  } else {
+
+    sources[l.id] = {
+      type: "geojson",
+      data: {
+        type: "FeatureCollection",
+        features: [],
+      },
+    };
+
+    layers.push({
+      id: l.id,
+      type: l.kind,
+      source: l.id,
+
+      paint: l.paint,
+
+      layout: {
+        visibility: l.defaultOn
+          ? "visible"
+          : "none",
+      },
+    } as any);
+  }
+});
   return {
     version: 8,
     glyphs:
@@ -377,6 +560,7 @@ loadingLayers.current.add(layer.id);
 
     // MAP LOAD
     map.on("load", async () => {
+      await registerPointSVGs(map);
       //console.log("MAP LOADED");
       //console.log(
       //  "STYLE:",
