@@ -59,7 +59,7 @@ export type TerrainKey = keyof typeof TERRAIN_OPTIONS; // "aws" | "r2"
 
 export const FIXED_EXAGGERATION = 1;
 
-export type LayerKind = "raster" | "fill" | "line" | "circle", "symbol";
+export type LayerKind = "raster" | "fill" | "line" | "circle" | "symbol";
 export interface LayerDef {
   id: string;
   nameKey: string;
