@@ -195,6 +195,109 @@ export default function MapCanvas({
   const ref = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MLMap | null>(null);
   const store = useMapStore;
+ // ============================================================
+// LAZY LOADING GEOJSON
+// Hanya download layer ketika layer tersebut dibutuhkan
+// ============================================================
+const loadedLayers = useRef(new Set<string>());
+const loadingLayers = useRef(new Set<string>());
+
+async function loadGeoJSONLayer(
+  map: MLMap,
+  layer: typeof ALL_LAYERS[number]
+) {
+  // Tidak perlu load kalau bukan GeoJSON
+  if (layer.kind === "raster" || !layer.data) {
+    return;
+  }
+
+  if (loadedLayers.current.has(layer.id)) {
+  return;
+}
+
+if (loadingLayers.current.has(layer.id)) {
+  return;
+}
+
+loadingLayers.current.add(layer.id);
+
+  try {
+    console.log(`Lazy loading layer: ${layer.id}`);
+
+    const response = await fetch(layer.data);
+
+    if (!response.ok) {
+      throw new Error(
+        `HTTP ${response.status} - ${response.statusText}`
+      );
+    }
+
+    const geojson = await response.json();
+
+    // Cek CRS
+    const alreadyWGS84 = isWGS84GeoJSON(geojson);
+
+    let geojson4326;
+
+    if (alreadyWGS84) {
+      geojson4326 = geojson;
+    } else {
+      console.log(
+        `↻ ${layer.id}: UTM 51S → WGS84`
+      );
+
+      geojson4326 = reprojectGeoJSON(geojson);
+    }
+
+    // Masukkan ke source MapLibre
+    const source = map.getSource(layer.id);
+
+    if (
+      source &&
+      "setData" in source
+    ) {
+      (
+        source as maplibregl.GeoJSONSource
+      ).setData(geojson4326);
+
+      // Terapkan filter subclass
+      const currentState = store.getState();
+
+      if (
+        layer.sublayers &&
+        map.getLayer(layer.id)
+      ) {
+        const filter = getSubkelasFilter(
+          layer,
+          currentState.subVisible
+        );
+
+        map.setFilter(
+          layer.id,
+          filter ?? null
+        );
+      }
+
+      loadedLayers.current.add(layer.id);
+
+      console.log(
+        `✓ Layer ${layer.id} selesai di-load`
+      );
+    } else {
+      console.warn(
+        `Source ${layer.id} tidak ditemukan`
+      );
+    }
+
+  } catch (error) {
+    console.error(
+      `Gagal loading layer ${layer.id}:`,
+      error
+    );
+  } finally {
+    loadingLayers.current.delete(layer.id);
+  }
+}
 
   function applyTerrain(map: MLMap, source: "off" | "aws" | "r2", exaggeration: number) {
     console.log("APPLY TERRAIN →", source, "| ex:", exaggeration);   
@@ -288,101 +391,28 @@ export default function MapCanvas({
       //);
 
       map.resize();
+// ============================================================
+// INITIAL LAZY LOAD
+// Hanya load layer yang defaultOn = true
+// ============================================================
 
-      // REPROJECT GEOJSON
-      // UTM 51S -> WGS84
-      //console.log("Memulai loading dan reprojection GeoJSON...");
-      await Promise.all(
-        ALL_LAYERS
-          .filter(
-            (l) =>
-              l.kind !== "raster" &&
-              l.data
-          )
-          .map(async (l) => {
-            try {
-              //console.log(`Loading layer: ${l.id}`);
+const initialLayers = ALL_LAYERS.filter(
+  (l) =>
+    l.kind !== "raster" &&
+    l.data &&
+    l.defaultOn
+);
 
-              const response = await fetch(
-                l.data!
-              );
+await Promise.all(
+  initialLayers.map((l) =>
+    loadGeoJSONLayer(map, l)
+  )
+);
 
-              if (!response.ok) {
-                throw new Error(
-                  `HTTP ${response.status} - ${response.statusText}`
-                );
-              }
-
-              const geojson =
-                await response.json();
-
-              //console.log(
-              //  `${l.id} - data asli UTM 51S:`,
-              //  geojson
-              //);
-
-              // 1. Reproject data UTM 51S -> WGS84
-              const alreadyWGS84 = isWGS84GeoJSON(geojson);
-
-              let geojson4326;
-
-              if (alreadyWGS84) {
-                //console.log(`✓ ${l.id}: GeoJSON sudah WGS84/CRS84, tidak perlu reprojection.`);
-                geojson4326 = geojson;
-              } else {
-                //console.log(`↻ ${l.id}: GeoJSON bukan WGS84, melakukan reprojection UTM 51S → WGS84.` );
-                geojson4326 = reprojectGeoJSON(geojson);
-              }
-
-              // 2. Masukkan data ke source MapLibre
-              const source = map.getSource(l.id);
-              if (source && "setData" in source) {
-                (source as maplibregl.GeoJSONSource).setData(geojson4326);
-                const currentState = store.getState();
-                if (l.sublayers && map.getLayer(l.id)) {
-                  const filter = getSubkelasFilter(
-                    l,
-                    currentState.subVisible
-                  );
-                  map.setFilter(
-                    l.id,
-                    filter ?? null
-                  );
-                }
-                //console.log(`✓ ${l.id} berhasil direproject dan ditampilkan`);
-
-                if (geojson4326?.features?.[0]?.geometry) {
-                  const geom = geojson4326.features[0].geometry;
-                  let sampleCoord: number[] | null = null;
-                  if (geom.type === "MultiPolygon") {
-                    sampleCoord = geom.coordinates[0][0][0];
-                  } else if (geom.type === "Polygon") {
-                    sampleCoord = geom.coordinates[0][0];
-                  } else if (geom.type === "Point") {
-                    sampleCoord = geom.coordinates;
-                  }
-                  if (sampleCoord && sampleCoord.length >= 2) {
-                    map.flyTo({
-                      center: [sampleCoord[0], sampleCoord[1]],
-                      zoom: 14,
-                      essential: true,
-                    });
-                  }
-                }
-
-              } else {
-                console.warn(`Source ${l.id} tidak ditemukan`);
-              }
-            } catch (error) {
-              console.error(`Gagal loading layer ${l.id}:`, error);
-            }
-          })
-      );
-
-      console.log(
-        "Semua GeoJSON selesai diproses."
-      );
-
+console.log(
+  "Initial GeoJSON lazy loading selesai."
+);
+     
       // TERRAIN
       const s = store.getState();
       applyTerrain(map, s.terrainSource, s.exaggeration);
@@ -535,65 +565,83 @@ export default function MapCanvas({
     []
   );
 
-  // LAYER VISIBILITY + OPACITY
-
   useEffect(
-    () =>
-      useMapStore.subscribe((s) => {
-        const map = mapRef.current;
+  () =>
+    useMapStore.subscribe((s) => {
+      const map = mapRef.current;
 
-        if (!map || !map.isStyleLoaded()) {
+      if (!map || !map.isStyleLoaded()) {
+        return;
+      }
+
+      ALL_LAYERS.forEach((l) => {
+        const mapLayer = map.getLayer(l.id);
+
+        if (!mapLayer) {
           return;
         }
 
-        ALL_LAYERS.forEach((l) => {
-          const mapLayer = map.getLayer(l.id);
+        const isVisible = !!s.visible[l.id];
 
-          if (!mapLayer) {
-            return;
-          }
+        // =====================================================
+        // LAZY LOAD
+        // Kalau user menyalakan layer, baru download datanya
+        // =====================================================
 
-          // LAYER VISIBILITY
+        if (
+          isVisible &&
+          l.kind !== "raster" &&
+          l.data
+        ) {
+          void loadGeoJSONLayer(map, l);
+        }
 
-          map.setLayoutProperty(
-            l.id,
-            "visibility",
-            s.visible[l.id]
-              ? "visible"
-              : "none"
+        // =====================================================
+        // VISIBILITY
+        // =====================================================
+
+        map.setLayoutProperty(
+          l.id,
+          "visibility",
+          isVisible
+            ? "visible"
+            : "none"
+        );
+
+        // =====================================================
+        // SUBCLASS FILTER
+        // =====================================================
+
+        if (l.sublayers) {
+          const filter = getSubkelasFilter(
+            l,
+            s.subVisible
           );
 
+          map.setFilter(
+            l.id,
+            filter ?? null
+          );
+        }
 
-          // SUBCLASS FILTER
+        // =====================================================
+        // OPACITY
+        // =====================================================
 
-          if (l.sublayers) {
-            const filter = getSubkelasFilter(
-              l,
-              s.subVisible
-            );
-
-            map.setFilter(
-              l.id,
-              filter ?? null
-            );
-          }
-
-          // OPACITY
-
-          if (
-            l.opacityProp &&
-            s.opacity[l.id] != null
-          ) {
-            map.setPaintProperty(
-              l.id,
-              l.opacityProp,
-              s.opacity[l.id]
-            );
-          }
-        });
-      }),
-    []
-  );
+        if (
+          l.opacityProp &&
+          s.opacity[l.id] != null
+        ) {
+          map.setPaintProperty(
+            l.id,
+            l.opacityProp,
+            s.opacity[l.id]
+          );
+        }
+      });
+    }),
+  []
+);
 
     // TERRAIN — baca nilai dari store sebagai dependency useEffect
   const terrainSource = useMapStore((s) => s.terrainSource);
