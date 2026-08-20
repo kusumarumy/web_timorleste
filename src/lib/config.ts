@@ -319,25 +319,27 @@ export const GROUPS: LayerGroup[] = [
 
   layers: [
     {
-      id: "river",
-      nameKey: "l_river",
-      kind: "fill",
-      data: v("river"),
-      clickable: true,
+  id: "river",
+  nameKey: "l_river",
+  kind: "fill",
+  data: v("river"),
+  clickable: true,
 
-      paint: {
-        "line-color": "#4AA6E0",
-        "line-width": 2.2,
-        "line-opacity": 1,
-      },
+  paint: {
+    "fill-color": "#4AA6E0",
+    "fill-opacity": 0.65,
+    "fill-outline-color": "#4AA6E0",
+  },
 
-      defaultOn: false,
+  defaultOn: false,
 
-      legend: {
-        color: "#4AA6E0",
-        line: true,
-      },
-    },
+  opacity: 0.65,
+  opacityProp: "fill-opacity",
+
+  legend: {
+    color: "#4AA6E0",
+  },
+},
 
    {
   id: "weir",
