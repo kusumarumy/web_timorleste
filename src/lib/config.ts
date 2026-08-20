@@ -339,27 +339,22 @@ export const GROUPS: LayerGroup[] = [
       },
     },
 
-    {
-      id: "weir",
-      nameKey: "l_weir",
-      kind: "line",
-      data: v("weir"),
-      clickable: true,
+   {
+  id: "weir",
+  nameKey: "l_weir",
+  kind: "symbol",
+  data: v("weir"),
+  clickable: true,
 
-      paint: {
-        "line-color": "#2C7FB8",
-        "line-width": 1.6,
-        "line-dasharray": [6, 3],
-        "line-opacity": 1,
-      },
+  paint: {},
 
-      defaultOn: false,
+  defaultOn: false,
 
-      legend: {
-        color: "#2C7FB8",
-        line: true,
-      },
-    },
+  legend: {
+    color: "#2C7FB8",
+    svg: "weir",
+  },
+},
 {
       id: "rainfall",
       nameKey: "l_rainfall",
