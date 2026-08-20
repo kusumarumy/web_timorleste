@@ -6,8 +6,8 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { IdentifyControl } from './identify';
-import { MeasureControl, fmtLen, fmtArea } from './measure';
+import { IdentifyControl } from '../lib/geotools/identify';
+import { MeasureControl, fmtLen, fmtArea } from '../lib/geotools/measure';
 import './geo-tools.css';
 
 // GANTI dgn id layer interaktif kamu (lihat di map.getStyle().layers)
