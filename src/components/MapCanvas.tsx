@@ -12,6 +12,7 @@ import { MAP, BASEMAPS, TERRAIN_OPTIONS, ALL_LAYERS, FIXED_EXAGGERATION } from "
 
 import { useMapStore } from "@/lib/store";
 import { reprojectGeoJSON } from "@/lib/reproject";
+import { getToolMode } from "./toolMode";
 function isWGS84GeoJSON(geojson: any): boolean {
   // 1. Cek metadata CRS
   const crsName =
@@ -232,7 +233,7 @@ function getSubkelasFilter(
 export default function MapCanvas({
   onReady,
 }: {
-  onReady?: () => void;
+  onReady?: (map: MLMap) => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MLMap | null>(null);
@@ -493,7 +494,7 @@ console.log(
             "click",
             l.id,
             (e) => {
-
+if (getToolMode()) return; 
               const p =
                 (e.features?.[0]
                   ?.properties ?? {}) as Record<
@@ -528,7 +529,7 @@ console.log(
         });
 
       // READY
-      onReady?.();
+      onReady?.(map);
     });
 
 
