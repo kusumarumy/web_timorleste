@@ -354,7 +354,6 @@ export const GROUPS: LayerGroup[] = [
 
   legend: {
     color: "#2C7FB8",
-    svg: "weir",
   },
 },
 {
