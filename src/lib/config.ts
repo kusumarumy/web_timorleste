@@ -9,6 +9,12 @@ const v = (name: string) =>
 const r2Vector = (name: string) =>
   `${R2}/vector/${name}.geojson`;
 
+const ICON_RAW =
+  `${GITHUB_RAW}/public/icons`;
+
+const icon = (name: string) =>
+  `${ICON_RAW}/${name}.png`;
+
 export const MAP = {
   centerUTM: [773279.2384, 8989643.1798],
   center: [125.58, -9.18448] as [number, number],
@@ -68,16 +74,26 @@ export interface LayerDef {
   data?: string;
   tiles?: string[];
   minzoom?: number;
-maxzoom?: number;
+  maxzoom?: number;
+
+  icon?: string;
+
   paint: Record<string, unknown>;
+
   svg?: {
     size: number;
     svg: string;
   };
+
   defaultOn: boolean;
   opacity?: number;
   opacityProp?: string;
-  legend?: { color: string; line?: boolean; circle?: boolean; svg?: string; };
+  legend?: {
+    color: string;
+    line?: boolean;
+    circle?: boolean;
+    svg?: string;
+  };
   clickable?: boolean;
   sublayers?: {
     id: string;
@@ -340,120 +356,73 @@ export const GROUPS: LayerGroup[] = [
     color: "#4AA6E0",
   },
 },
-
-   {
+    {
   id: "weir",
   nameKey: "l_weir",
   kind: "symbol",
   data: v("weir"),
   clickable: true,
 
-  paint: {},
+  icon: icon("weir"),
+
+  paint: {
+    "icon-image": "weir",
+    "icon-size": 0.45,
+    "icon-allow-overlap": true,
+    "icon-ignore-placement": true,
+  },
 
   defaultOn: false,
 
   legend: {
     color: "#2C7FB8",
+    svg: "weir",
   },
 },
 {
-      id: "rainfall",
-      nameKey: "l_rainfall",
-      kind: "symbol",
-      data: v("rainfall"),
-      clickable: true,
+  id: "rainfall",
+  nameKey: "l_rainfall",
+  kind: "symbol",
+  data: v("rainfall"),
+  clickable: true,
 
-      paint: {},
+  paint: {
+    "icon-image": "rainfall",
+    "icon-size": 0.30,
+    "icon-allow-overlap": true,
+    "icon-ignore-placement": true,
+  },
 
-      svg: {
-        size: 18,
-        svg: `
-          <svg xmlns="http://www.w3.org/2000/svg"
-               width="10"
-               height="10"
-               viewBox="0 0 10 10">
-            <path
-              d="M24 3
-                 C24 3 9 21 9 31
-                 C9 39 15.7 45 24 45
-                 C32.3 45 39 39 39 31
-                 C39 21 24 3 24 3Z"
-              fill="#7B61A8"
-              stroke="#FFFFFF"
-              stroke-width="2"/>
-            <path
-              d="M24 18
-                 C24 18 17 27 17 31
-                 C17 35 20 37 24 37
-                 C28 37 31 35 31 31
-                 C31 27 24 18 24 18Z"
-              fill="none"
-              stroke="#FFFFFF"
-              stroke-width="2"/>
-          </svg>
-        `,
-      },
+  defaultOn: false,
 
-      defaultOn: false,
-
-      legend: {
-        color: "#7B61A8",
-        svg: "rainfall",
-      },
-    },
-
-    // POINT — SVG
+  legend: {
+    color: "#7B61A8",
+    svg: "rainfall",
+  },
+},
     {
-      id: "irrigation_point",
-      nameKey: "l_irrigation_point",
-      kind: "symbol",
-      data: v("irrigation_point"),
-      clickable: true,
+  id: "irrigation_point",
+  nameKey: "l_irrigation_point",
+  kind: "symbol",
+  data: v("irrigation_point"),
+  clickable: true,
 
-      paint: {},
+  icon: icon("irrigation_point"),
 
-      svg: {
-        size: 20,
-        svg: `
-          <svg xmlns="http://www.w3.org/2000/svg"
-               width="10"
-               height="10"
-               viewBox="0 0 10 10">
+  paint: {
+    "icon-image": "irrigation_point",
+    "icon-size": 0.45,
+    "icon-allow-overlap": true,
+    "icon-ignore-placement": true,
+  },
 
-            <circle
-              cx="24"
-              cy="24"
-              r="19"
-              fill="none"
-              stroke="#F28C52"
-              stroke-width="5"/>
+  defaultOn: false,
 
-            <circle
-              cx="24"
-              cy="24"
-              r="6"
-              fill="#F28C52"/>
-
-            <path
-              d="M24 5V14
-                 M24 34V43
-                 M5 24H14
-                 M34 24H43"
-              stroke="#F28C52"
-              stroke-width="5"
-              stroke-linecap="round"/>
-
-          </svg>
-        `,
-      },
-
-      defaultOn: false,
-
-      legend: {
-        color: "#F28C52",
-        svg: "irrigation_point",
-      },
-    },
+  legend: {
+    color: "#F28C52",
+    svg: "irrigation_point",
+  },
+},
 
     {
       id: "irrigation",
