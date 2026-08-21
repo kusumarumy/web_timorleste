@@ -57,6 +57,32 @@ export default function MapTools({ map }) {
 
     console.log("MAPTOOLS: MeasureControl siap");
 
+    // ==========================================================
+    // Kalau user sudah memilih tool sebelum MeasureControl siap
+    // jalankan lagi tool tersebut.
+    // ==========================================================
+
+    const currentTool = getToolMode();
+
+    if (currentTool) {
+      console.log(
+        "MAPTOOLS: current tool saat init =",
+        currentTool
+      );
+
+      if (currentTool === "distance") {
+        measureRef.current.start("distance");
+      }
+
+      if (
+        currentTool === "length" ||
+        currentTool === "width" ||
+        currentTool === "area"
+      ) {
+        measureRef.current.start("area");
+      }
+    }
+
     return () => {
       identifyRef.current?.disable();
 
@@ -66,7 +92,7 @@ export default function MapTools({ map }) {
       identifyRef.current = null;
       measureRef.current = null;
     };
-  }, [map]); // <-- PENTING: jangan []
+  }, [map]);
 
   // ============================================================
   // DENGARKAN TOOL MODE DARI CONTROL PANEL
@@ -88,13 +114,19 @@ export default function MapTools({ map }) {
 
       if (!next) return;
 
+      // ========================================================
       // IDENTIFY
+      // ========================================================
+
       if (next === "identify") {
         identifyRef.current?.enable();
         return;
       }
 
+      // ========================================================
       // JARAK
+      // ========================================================
+
       if (next === "distance") {
         console.log("MAPTOOLS: start distance");
 
@@ -102,13 +134,19 @@ export default function MapTools({ map }) {
         return;
       }
 
+      // ========================================================
       // PANJANG / LEBAR / LUAS
+      // ========================================================
+
       if (
         next === "length" ||
         next === "width" ||
         next === "area"
       ) {
-        console.log("MAPTOOLS: start area →", next);
+        console.log(
+          "MAPTOOLS: start area →",
+          next
+        );
 
         measureRef.current?.start("area");
         return;
@@ -135,7 +173,10 @@ export default function MapTools({ map }) {
           }}
         >
 
-          {/* JARAK */}
+          {/* ==================================================
+              JARAK
+          ================================================== */}
+
           {tool === "distance" &&
             result.mode === "distance" && (
               <>
@@ -165,7 +206,10 @@ export default function MapTools({ map }) {
               </>
             )}
 
-          {/* PANJANG */}
+          {/* ==================================================
+              PANJANG
+          ================================================== */}
+
           {tool === "length" &&
             result.mode === "area" &&
             result.length != null && (
@@ -180,7 +224,10 @@ export default function MapTools({ map }) {
               </div>
             )}
 
-          {/* LEBAR */}
+          {/* ==================================================
+              LEBAR
+          ================================================== */}
+
           {tool === "width" &&
             result.mode === "area" &&
             result.width != null && (
@@ -195,7 +242,10 @@ export default function MapTools({ map }) {
               </div>
             )}
 
-          {/* LUAS */}
+          {/* ==================================================
+              LUAS
+          ================================================== */}
+
           {tool === "area" &&
             result.mode === "area" &&
             result.area != null && (
