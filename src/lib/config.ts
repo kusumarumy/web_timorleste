@@ -281,7 +281,7 @@ export const GROUPS: LayerGroup[] = [
   label: {
     field: "ELEVATION",
     minzoom: 11,
-    spacing: 250,
+    spacing: 300,
     size: 11,
     color: "#5A1715",
     haloColor: "#FFFFFF",
