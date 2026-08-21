@@ -1,9 +1,6 @@
 import maplibregl, {
   Map as MLMap,
   MapMouseEvent,
-} from "maplibre-gl";
-
-import type {
   GeoJSONSource,
 } from "maplibre-gl";
 
@@ -110,6 +107,7 @@ export class MeasureControl {
   mode: MeasureMode | null;
   coords: Coordinate[];
   hover: Coordinate | null;
+  private _popups = new Set<maplibregl.Popup>();
 
   constructor(
   map: MLMap,
@@ -244,11 +242,36 @@ export class MeasureControl {
       "visible"
     );
 
-    this.map.setLayoutProperty(
+       this.map.setLayoutProperty(
       L_VERT,
       "visibility",
       "visible"
     );
+  }
+
+  // ============================================================
+  // POPUP MANAGEMENT
+  // ============================================================
+
+  private _addPopup(
+    popup: maplibregl.Popup
+  ): void {
+    this._popups.add(popup);
+
+    popup.on("close", () => {
+      this._popups.delete(popup);
+    });
+
+    popup.addTo(this.map);
+  }
+
+  private _closePopups(): void {
+    this._popups.forEach((popup) => {
+      popup.remove();
+    });
+
+    this._popups.clear();
+  }
   }
 
   // ============================================================
@@ -368,45 +391,41 @@ export class MeasureControl {
 
     this.onResult(null);
   }
-
   // ============================================================
   // SET DATA
   // ============================================================
 
-  // ============================================================
-// SET DATA
-// ============================================================
+  private _setData(
+    coords: Coordinate[]
+  ): void {
+    const source =
+      this.map.getSource(SRC) as GeoJSONSource | undefined;
 
-private _setData(
-  coords: Coordinate[]
-): void {
-  const source =
-    this.map.getSource(SRC) as GeoJSONSource | undefined;
-
-  if (!source) {
-    console.warn(
-      "MEASURE: source tidak ditemukan"
-    );
-    return;
-  }
-
-  const geojson = this._fc(coords);
-
-  console.log(
-    "MEASURE DRAW:",
-    {
-      mode: this.mode,
-      coords,
-      geojson,
-      lineLayer:
-        !!this.map.getLayer(L_LINE),
-      vertexLayer:
-        !!this.map.getLayer(L_VERT),
+    if (!source) {
+      console.warn(
+        "MEASURE: source tidak ditemukan"
+      );
+      return;
     }
-  );
 
-  source.setData(geojson);
-}
+    const geojson =
+      this._fc(coords);
+
+    console.log(
+      "MEASURE DRAW:",
+      {
+        mode: this.mode,
+        coords,
+        geojson,
+        lineLayer:
+          !!this.map.getLayer(L_LINE),
+        vertexLayer:
+          !!this.map.getLayer(L_VERT),
+      }
+    );
+
+    source.setData(geojson);
+  }
   // ============================================================
   // CLICK
   // ============================================================
@@ -446,51 +465,58 @@ private _setData(
     // POPUP KOORDINAT
     // ==========================================================
 
-    new maplibregl.Popup({
-      closeButton: true,
-      closeOnClick: false,
-      offset: 12,
-      className:
-        "measure-coordinate-popup",
-    })
-      .setLngLat(e.lngLat)
-      .setHTML(`
-        <div style="
-          min-width: 150px;
-          font-family: Arial, sans-serif;
-        ">
+    const popup = new maplibregl.Popup({
+  closeButton: true,
+  closeOnClick: false,
+  offset: 12,
+  className: "measure-coordinate-popup",
+})
+  .setLngLat(e.lngLat)
+  .setHTML(`
+    <div style="
+      min-width: 150px;
+      font-family: Arial, sans-serif;
+      color: #1f2937;
+      background: #ffffff;
+    ">
 
-          <div style="
-            font-size: 11px;
-            font-weight: 700;
-            color: #0f766e;
-            margin-bottom: 6px;
-          ">
-            TITIK ${this.coords.length}
-          </div>
+      <div style="
+        font-size: 11px;
+        font-weight: 700;
+        color: #0f766e;
+        margin-bottom: 8px;
+      ">
+        TITIK ${this.coords.length}
+      </div>
 
-          <div style="
-            font-size: 11px;
-            line-height: 1.6;
-          ">
+      <div style="
+        font-size: 11px;
+        line-height: 1.6;
+        color: #1f2937;
+      ">
 
-            <div>
-              <b>Longitude</b><br/>
-              ${e.lngLat.lng.toFixed(6)}
-            </div>
-
-            <div style="
-              margin-top: 4px;
-            ">
-              <b>Latitude</b><br/>
-              ${e.lngLat.lat.toFixed(6)}
-            </div>
-
-          </div>
-
+        <div>
+          <b style="color:#374151;">Longitude</b><br/>
+          <span style="color:#111827;">
+            ${e.lngLat.lng.toFixed(6)}
+          </span>
         </div>
-      `)
-      .addTo(this.map);
+
+        <div style="
+          margin-top: 6px;
+        ">
+          <b style="color:#374151;">Latitude</b><br/>
+          <span style="color:#111827;">
+            ${e.lngLat.lat.toFixed(6)}
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+  `);
+
+this._addPopup(popup);
 
     // ==========================================================
     // GAMBAR ULANG
@@ -596,10 +622,11 @@ private _setData(
     // ==========================================================
 
     if (e.key === "Escape") {
-      this.clear();
-      this.stop();
-      return;
-    }
+  this._closePopups();
+  this.clear();
+  this.stop();
+  return;
+}
 
     // ==========================================================
     // ENTER
@@ -627,13 +654,17 @@ private _setData(
         true
       );
 
-      this._showResultPopup(
-        finalCoords[
-          finalCoords.length - 1
-        ],
-        finishedMode,
-        finalCoords
-      );
+    // Tutup semua popup titik
+this._closePopups();
+
+// Popup hasil
+this._showResultPopup(
+  finalCoords[
+    finalCoords.length - 1
+  ],
+  finishedMode,
+  finalCoords
+);
 
       this.stop();
     }
@@ -778,59 +809,66 @@ private _setData(
     }
 
     // ==========================================================
-    // LENGTH
-    // ==========================================================
+// LENGTH
+// ==========================================================
 
-    if (this.mode === "length") {
-      if (c.length >= 3) {
-        const r =
-          measurePolygon(
-            c,
-            k
-          ) as MeasurePolygonResult;
+if (this.mode === "length") {
+  if (c.length >= 2) {
+    const r =
+      measureLine(
+        c,
+        k
+      ) as MeasureLineResult | null;
 
-        this.onResult({
-          mode: "length",
-          length: r.length,
-          finished,
-          unit: "m",
-          k,
-        });
+    this.onResult(
+      r
+        ? {
+            mode: "length",
+            length: r.total,
+            finished,
+            unit: "m",
+            k,
+          }
+        : null
+    );
 
-        return;
-      }
-
-      this.onResult(null);
-      return;
-    }
-
-    // ==========================================================
-    // WIDTH
-    // ==========================================================
-
-    if (this.mode === "width") {
-      if (c.length >= 3) {
-        const r =
-          measurePolygon(
-            c,
-            k
-          ) as MeasurePolygonResult;
-
-        this.onResult({
-          mode: "width",
-          width: r.width,
-          finished,
-          unit: "m",
-          k,
-        });
-
-        return;
-      }
-
-      this.onResult(null);
-      return;
-    }
+    return;
   }
+
+  this.onResult(null);
+  return;
+}
+
+// ==========================================================
+// WIDTH
+// ==========================================================
+
+if (this.mode === "width") {
+  if (c.length >= 2) {
+    const r =
+      measureLine(
+        c,
+        k
+      ) as MeasureLineResult | null;
+
+    this.onResult(
+      r
+        ? {
+            mode: "width",
+            width: r.total,
+            finished,
+            unit: "m",
+            k,
+          }
+        : null
+    );
+
+    return;
+  }
+
+  this.onResult(null);
+  return;
+}
 
   // ============================================================
   // RESULT POPUP
@@ -849,10 +887,12 @@ private _setData(
     const lat = position[1];
 
     let html = `
-      <div style="
-        min-width: 190px;
-        font-family: Arial, sans-serif;
-      ">
+  <div style="
+    min-width: 190px;
+    font-family: Arial, sans-serif;
+    color: #1f2937;
+    background: #ffffff;
+  ">
 
         <div style="
           color: #0f766e;
@@ -883,13 +923,75 @@ private _setData(
             gap:15px;
             margin-bottom:5px;
           ">
-            <span>Jarak</span>
-            <b>${fmtLen(r.total)}</b>
+            <span style="color:#374151;">Jarak</span>
+<b style="color:#111827;">${fmtLen(r.total)}</b>
           </div>
         `;
       }
     }
+    // ==========================================================
+    // LENGTH
+    // ==========================================================
 
+    if (
+      mode === "length" &&
+      coords.length >= 3
+    ) {
+      const r =
+        measurePolygon(
+          coords,
+          this.scaleFactor
+        ) as MeasurePolygonResult;
+
+      html += `
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          gap:15px;
+          margin-bottom:5px;
+        ">
+          <span style="color:#374151;">
+            Panjang
+          </span>
+
+          <b style="color:#111827;">
+            ${fmtLen(r.length)}
+          </b>
+        </div>
+      `;
+    }
+
+    // ==========================================================
+    // WIDTH
+    // ==========================================================
+
+    if (
+      mode === "width" &&
+      coords.length >= 3
+    ) {
+      const r =
+        measurePolygon(
+          coords,
+          this.scaleFactor
+        ) as MeasurePolygonResult;
+
+      html += `
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          gap:15px;
+          margin-bottom:5px;
+        ">
+          <span style="color:#374151;">
+            Lebar
+          </span>
+
+          <b style="color:#111827;">
+            ${fmtLen(r.width)}
+          </b>
+        </div>
+      `;
+    }
     // ==========================================================
     // AREA
     // ==========================================================
@@ -911,8 +1013,8 @@ private _setData(
           gap:15px;
           margin-bottom:5px;
         ">
-          <span>Luas</span>
-          <b>${fmtArea(r.area)}</b>
+          <span style="color:#374151;">Luas</span>
+<b style="color:#111827;">${fmtArea(r.area)}</b>
         </div>
 
         <div style="
@@ -921,8 +1023,8 @@ private _setData(
           gap:15px;
           margin-bottom:5px;
         ">
-          <span>Panjang</span>
-          <b>${fmtLen(r.length)}</b>
+          <span style="color:#374151;">Panjang</span>
+<b style="color:#111827;">${fmtLen(r.length)}</b>
         </div>
 
         <div style="
@@ -930,8 +1032,8 @@ private _setData(
           justify-content:space-between;
           gap:15px;
         ">
-          <span>Lebar</span>
-          <b>${fmtLen(r.width)}</b>
+          <span style="color:#374151;">Lebar</span>
+<b style="color:#111827;">${fmtLen(r.width)}</b>
         </div>
       `;
     }
@@ -944,33 +1046,40 @@ private _setData(
         "/>
 
         <div style="
-          font-size:10px;
-        ">
-          <b>Longitude:</b>
-          ${lng.toFixed(6)}
-        </div>
+  font-size:10px;
+  color:#374151;
+">
+  <b>Longitude:</b>
+  <span style="color:#111827;">
+    ${lng.toFixed(6)}
+  </span>
+</div>
 
-        <div style="
-          font-size:10px;
-        ">
-          <b>Latitude:</b>
-          ${lat.toFixed(6)}
-        </div>
+<div style="
+  font-size:10px;
+  color:#374151;
+">
+  <b>Latitude:</b>
+  <span style="color:#111827;">
+    ${lat.toFixed(6)}
+  </span>
+</div>
 
       </div>
     `;
 
-    new maplibregl.Popup({
-      closeButton: true,
-      closeOnClick: false,
-      offset: 15,
-    })
-      .setLngLat({
-        lng,
-        lat,
-      })
-      .setHTML(html)
-      .addTo(this.map);
+    const popup = new maplibregl.Popup({
+  closeButton: true,
+  closeOnClick: false,
+  offset: 15,
+})
+  .setLngLat({
+    lng,
+    lat,
+  })
+  .setHTML(html);
+
+this._addPopup(popup);
   }
 
   // ============================================================
