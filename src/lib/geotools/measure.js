@@ -1,8 +1,3 @@
-// ============================================================================
-// measure.js — Tool "Ukur": jarak / luas / dimensi (panjang x lebar)
-// Interaksi & gambar di MapLibre; SEMUA hitungan didelegasikan ke geo.js
-// yang bekerja di EPSG:32751 (UTM 51S) untuk ketelitian tinggi.
-// ============================================================================
 import { measureLine, measurePolygon } from './geo';
 
 const SRC = '__measure_src';
