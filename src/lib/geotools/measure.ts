@@ -331,52 +331,56 @@ private _closePopups(): void {
   // REMOVE LISTENERS
   // ============================================================
 
-  private _removeListeners(): void {
-    this.map.off(
-      "click",
-      this._onClick
-    );
+ private _removeListeners(
+  removeKeyboard = true
+): void {
+  this.map.off(
+    "click",
+    this._onClick
+  );
 
-    this.map.off(
-      "mousemove",
-      this._onMove
-    );
+  this.map.off(
+    "mousemove",
+    this._onMove
+  );
 
-    this.map.off(
-      "dblclick",
-      this._onDbl
-    );
+  this.map.off(
+    "dblclick",
+    this._onDbl
+  );
 
+  if (removeKeyboard) {
     document.removeEventListener(
       "keydown",
       this._onKey
     );
-
-    if (this.map.doubleClickZoom) {
-      this.map.doubleClickZoom.enable();
-    }
-
-    this.map
-      .getCanvas()
-      .style.cursor = "";
   }
+
+  if (this.map.doubleClickZoom) {
+    this.map.doubleClickZoom.enable();
+  }
+
+  this.map
+    .getCanvas()
+    .style.cursor = "";
+}
 
   // ============================================================
   // STOP
   // ============================================================
 
   stop(): void {
-    this._removeListeners();
+  this._removeListeners(true);
 
-    /*
-     * Geometry hasil pengukuran
-     * tetap dibiarkan di peta.
-     */
+  /*
+   * Geometry hasil pengukuran
+   * tetap dibiarkan di peta.
+   */
 
-    this.hover = null;
+  this.hover = null;
 
-    this.onStop();
-  }
+  this.onStop();
+}
 
   // ============================================================
   // CLEAR
@@ -609,9 +613,16 @@ this._showResultPopup(
   finalCoords
 );
 
-    // Listener dimatikan,
-    // geometry tetap ada.
-    this.stop();
+    // ==========================================================
+// MATIKAN EVENT MOUSE SAJA
+// ESCAPE TETAP AKTIF
+// ==========================================================
+
+this._removeListeners(false);
+
+this.hover = null;
+
+this.onStop();
   }
 
   // ============================================================
@@ -630,9 +641,19 @@ this._showResultPopup(
     // ==========================================================
 
     if (e.key === "Escape") {
+  console.log(
+    "MEASURE ESCAPE - CLEAR"
+  );
+
+  // Tutup semua popup
   this._closePopups();
+
+  // Hapus geometry
   this.clear();
+
+  // Hentikan measurement
   this.stop();
+
   return;
 }
 
