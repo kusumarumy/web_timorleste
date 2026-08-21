@@ -807,11 +807,7 @@ this._showResultPopup(
       return;
     }
 
-    // ==========================================================
-// LENGTH
-// ==========================================================
-
-if (this.mode === "length") {
+   if (this.mode === "length") {
   if (c.length >= 2) {
     const r =
       measureLine(
@@ -837,10 +833,6 @@ if (this.mode === "length") {
   this.onResult(null);
   return;
 }
-
-// ==========================================================
-// WIDTH
-// ==========================================================
 
 if (this.mode === "width") {
   if (c.length >= 2) {
@@ -934,9 +926,9 @@ if (this.mode === "width") {
     // ==========================================================
 
     if (
-      mode === "length" &&
-      coords.length >= 3
-    ) {
+  mode === "length" &&
+  coords.length >= 2
+) {
       const r =
         measurePolygon(
           coords,
@@ -961,37 +953,35 @@ if (this.mode === "width") {
       `;
     }
 
-    // ==========================================================
-    // WIDTH
-    // ==========================================================
-
     if (
-      mode === "width" &&
-      coords.length >= 3
-    ) {
-      const r =
-        measurePolygon(
-          coords,
-          this.scaleFactor
-        ) as MeasurePolygonResult;
+  mode === "width" &&
+  coords.length >= 2
+) {
+  const r =
+    measureLine(
+      coords,
+      this.scaleFactor
+    ) as MeasureLineResult | null;
 
-      html += `
-        <div style="
-          display:flex;
-          justify-content:space-between;
-          gap:15px;
-          margin-bottom:5px;
-        ">
-          <span style="color:#374151;">
-            Lebar
-          </span>
+  if (r) {
+    html += `
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        gap:15px;
+        margin-bottom:5px;
+      ">
+        <span style="color:#374151;">
+          Lebar
+        </span>
 
-          <b style="color:#111827;">
-            ${fmtLen(r.width)}
-          </b>
-        </div>
-      `;
-    }
+        <b style="color:#111827;">
+          ${fmtLen(r.total)}
+        </b>
+      </div>
+    `;
+  }
+}
     // ==========================================================
     // AREA
     // ==========================================================
