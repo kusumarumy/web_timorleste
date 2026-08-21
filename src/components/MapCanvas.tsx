@@ -14,7 +14,6 @@ import { useMapStore } from "@/lib/store";
 import { reprojectGeoJSON } from "@/lib/reproject";
 import {
   getToolMode,
-  setToolMode,
   onToolMode,
 } from "./toolMode";
 import { MeasureControl } from "@/lib/geotools/measure";
