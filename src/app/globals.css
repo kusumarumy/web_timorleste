@@ -93,9 +93,8 @@
 .layer-loading-popup {
   position: absolute;
 
-  /* kanan, sedikit di atas legenda */
-  right: 24px;
-  bottom: 105px;
+  right: 10px;
+  top: 125px;
 
   z-index: 50;
 
