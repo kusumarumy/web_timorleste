@@ -1,9 +1,9 @@
 "use client";
 import { useState } from "react";
-import { setToolMode, getToolMode, onToolMode, ToolMode } from "./toolMode";
 import { GROUPS, LayerDef } from "@/lib/config";
 import { useMapStore } from "@/lib/store";
 import { useI18n } from "@/lib/i18n";
+import { setToolMode, getToolMode, onToolMode } from "./toolMode";
 
 function Toggle({ on, onClick }: { on: boolean; onClick: () => void }) {
   return (
