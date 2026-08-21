@@ -231,6 +231,43 @@ function getSubkelasFilter(
     ["literal", activeValues],
   ] as any;
 }
+async function registerMapIcons(map: MLMap) {
+  const icons = [
+    {
+      id: "weir",
+      url: "/icons/weir.png",
+    },
+    {
+      id: "rainfall",
+      url: "/icons/rainfall.png",
+    },
+    {
+      id: "irrigation_point",
+      url: "/icons/irrigation_point.png",
+    },
+  ];
+
+  for (const icon of icons) {
+    if (map.hasImage(icon.id)) {
+      continue;
+    }
+
+    try {
+      const image = await map.loadImage(icon.url);
+
+      if (!map.hasImage(icon.id)) {
+        map.addImage(icon.id, image.data);
+      }
+
+      console.log(`✓ Icon ${icon.id} berhasil didaftarkan`);
+    } catch (error) {
+      console.error(
+        `✗ Gagal load icon ${icon.id}:`,
+        error
+      );
+    }
+  }
+}
 export default function MapCanvas({
   onReady,
 }: {
@@ -433,13 +470,8 @@ loadingLayers.current.add(layer.id);
       //    .layers
       //    ?.map((l) => l.id)
       //);
-
       map.resize();
-// ============================================================
-// INITIAL LAZY LOAD
-// Hanya load layer yang defaultOn = true
-// ============================================================
-
+      await registerMapIcons(map);
 const initialLayers = ALL_LAYERS.filter(
   (l) =>
     l.kind !== "raster" &&
