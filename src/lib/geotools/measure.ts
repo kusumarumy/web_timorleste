@@ -4,6 +4,10 @@ import maplibregl, {
 } from "maplibre-gl";
 
 import type {
+  GeoJSONSource,
+} from "maplibre-gl";
+
+import type {
   Feature,
   FeatureCollection,
   LineString,
@@ -369,21 +373,19 @@ export class MeasureControl {
   // SET DATA
   // ============================================================
 
-  private _setData(
+  // ============================================================
+// SET DATA
+// ============================================================
+
+private _setData(
   coords: Coordinate[]
 ): void {
-  const source = this.map.getSource(SRC);
+  const source =
+    this.map.getSource(SRC) as GeoJSONSource | undefined;
 
   if (!source) {
     console.warn(
       "MEASURE: source tidak ditemukan"
-    );
-    return;
-  }
-
-  if (source.type !== "geojson") {
-    console.warn(
-      "MEASURE: source bukan GeoJSON source"
     );
     return;
   }
@@ -396,14 +398,15 @@ export class MeasureControl {
       mode: this.mode,
       coords,
       geojson,
-      lineLayer: !!this.map.getLayer(L_LINE),
-      vertexLayer: !!this.map.getLayer(L_VERT),
+      lineLayer:
+        !!this.map.getLayer(L_LINE),
+      vertexLayer:
+        !!this.map.getLayer(L_VERT),
     }
   );
 
   source.setData(geojson);
 }
-
   // ============================================================
   // CLICK
   // ============================================================
