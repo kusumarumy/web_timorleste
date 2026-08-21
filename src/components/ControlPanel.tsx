@@ -317,25 +317,17 @@ function MeasurementControl() {
 
       </div>
 
-      {/* KETERANGAN */}
       <p className="mt-2 text-[10px] leading-snug text-muted2">
-
-        {active === "distance" &&
-          "Klik beberapa titik untuk mengukur jarak."}
-
-        {active === "length" &&
-          "Gambar area untuk mendapatkan ukuran panjang."}
-
-        {active === "width" &&
-          "Gambar area untuk mendapatkan ukuran lebar."}
-
-        {active === "area" &&
-          "Gambar area untuk menghitung luas dan dimensi."}
-
-        {!active &&
-          "Pilih salah satu alat pengukuran."}
-
-      </p>
+  {active ? (
+    <>
+      Klik titik ·{" "}
+      <b className="text-teal">Double klik</b> selesai ·{" "}
+      <b className="text-teal">Esc</b> batal
+    </>
+  ) : (
+    "Pilih salah satu alat pengukuran."
+  )}
+</p>
     </div>
   );
 }
