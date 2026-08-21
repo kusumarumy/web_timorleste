@@ -28,93 +28,151 @@ export class MeasureControl {
     this._onKey = this._onKey.bind(this);
   }
 
-  // ============================================================
-  // LAYER PENGUKURAN
-  // ============================================================
-
   _ensureLayers() {
-    if (!this.map.getSource(SRC)) {
-      this.map.addSource(SRC, {
-        type: "geojson",
-        data: this._fc([]),
-      });
-    }
-
-    if (!this.map.getLayer(L_FILL)) {
-      this.map.addLayer({
-        id: L_FILL,
-        type: "fill",
-        source: SRC,
-        filter: ["==", "$type", "Polygon"],
-        paint: {
-          "fill-color": "#2dd4bf",
-          "fill-opacity": 0.15,
-        },
-      });
-    }
-
-    if (!this.map.getLayer(L_LINE)) {
-      this.map.addLayer({
-        id: L_LINE,
-        type: "line",
-        source: SRC,
-        filter: ["==", "$type", "LineString"],
-        layout: {
-          "line-cap": "round",
-          "line-join": "round",
-        },
-        paint: {
-          "line-color": "#2dd4bf",
-          "line-width": 2.5,
-          "line-dasharray": [2, 1],
-        },
-      });
-    }
-
-    if (!this.map.getLayer(L_VERT)) {
-      this.map.addLayer({
-        id: L_VERT,
-        type: "circle",
-        source: SRC,
-        filter: ["==", "$type", "Point"],
-        paint: {
-          "circle-radius": 5,
-          "circle-color": "#0f766e",
-          "circle-stroke-color": "#ffffff",
-          "circle-stroke-width": 2,
-        },
-      });
-    }
+  // SOURCE
+  if (!this.map.getSource(SRC)) {
+    this.map.addSource(SRC, {
+      type: "geojson",
+      data: this._fc([]),
+    });
   }
 
-  // ============================================================
-  // START
-  // ============================================================
-
-  start(mode) {
-    console.log("MEASURE START:", mode);
-
-    this._removeListeners();
-
-    this.mode = mode;
-    this.coords = [];
-    this.hover = null;
-    this.lastClickTime = 0;
-
-    this._ensureLayers();
-
-    this.map.on("click", this._onClick);
-    this.map.on("mousemove", this._onMove);
-    this.map.on("dblclick", this._onDbl);
-
-    document.addEventListener("keydown", this._onKey);
-
-    this.map.doubleClickZoom.disable();
-
-    this.map.getCanvas().style.cursor = "crosshair";
-
-    console.log("MEASURE CLICK LISTENER TERPASANG");
+  // FILL
+  if (!this.map.getLayer(L_FILL)) {
+    this.map.addLayer({
+      id: L_FILL,
+      type: "fill",
+      source: SRC,
+      filter: ["==", ["geometry-type"], "Polygon"],
+      paint: {
+        "fill-color": "#2dd4bf",
+        "fill-opacity": 0.15,
+      },
+    });
   }
+
+  // LINE
+  if (!this.map.getLayer(L_LINE)) {
+    this.map.addLayer({
+      id: L_LINE,
+      type: "line",
+      source: SRC,
+      filter: ["==", ["geometry-type"], "LineString"],
+      layout: {
+        "line-cap": "round",
+        "line-join": "round",
+        visibility: "visible",
+      },
+      paint: {
+        "line-color": "#ffff00",
+        "line-width": 3,
+        "line-opacity": 1,
+      },
+    });
+  }
+
+  // VERTEX
+  if (!this.map.getLayer(L_VERT)) {
+    this.map.addLayer({
+      id: L_VERT,
+      type: "circle",
+      source: SRC,
+      filter: ["==", ["geometry-type"], "Point"],
+      paint: {
+        "circle-radius": 5,
+        "circle-color": "#ffff00",
+        "circle-stroke-color": "#000000",
+        "circle-stroke-width": 2,
+      },
+    });
+  }
+
+  // Pastikan layer pengukuran terlihat
+  if (this.map.getLayer(L_LINE)) {
+    this.map.setLayoutProperty(
+      L_LINE,
+      "visibility",
+      "visible"
+    );
+  }
+
+  if (this.map.getLayer(L_VERT)) {
+    this.map.setLayoutProperty(
+      L_VERT,
+      "visibility",
+      "visible"
+    );
+  }
+
+  if (this.map.getLayer(L_FILL)) {
+    this.map.setLayoutProperty(
+      L_FILL,
+      "visibility",
+      "visible"
+    );
+  }
+
+  console.log(
+    "MEASURE LAYERS:",
+    {
+      source: !!this.map.getSource(SRC),
+      line: !!this.map.getLayer(L_LINE),
+      vertex: !!this.map.getLayer(L_VERT),
+      fill: !!this.map.getLayer(L_FILL),
+    }
+  );
+}
+
+start(mode) {
+  console.log("MEASURE START:", mode);
+
+  this._removeListeners();
+
+  this.mode = mode;
+  this.coords = [];
+  this.hover = null;
+  this.lastClickTime = 0;
+
+  this._ensureLayers();
+
+  // Pastikan geometry lama dibersihkan
+  const source = this.map.getSource(SRC);
+
+  if (source && "setData" in source) {
+    source.setData(
+      this._fc([])
+    );
+  }
+
+  this.map.on(
+    "click",
+    this._onClick
+  );
+
+  this.map.on(
+    "mousemove",
+    this._onMove
+  );
+
+  this.map.on(
+    "dblclick",
+    this._onDbl
+  );
+
+  document.addEventListener(
+    "keydown",
+    this._onKey
+  );
+
+  this.map.doubleClickZoom.disable();
+
+  this.map.getCanvas().style.cursor =
+    "crosshair";
+
+  console.log(
+    "MEASURE CLICK LISTENER TERPASANG"
+  );
+}
 
   // ============================================================
   // REMOVE LISTENER
@@ -281,13 +339,6 @@ export class MeasureControl {
       this.coords.length
     );
 
-    /*
-     * Jangan pop() titik lagi.
-     *
-     * Click yang menjadi bagian dari double-click
-     * sudah dicegah oleh _onClick().
-     */
-
     this.hover = null;
 
     // Simpan mode sebelum stop()
@@ -350,82 +401,125 @@ export class MeasureControl {
     return c;
   }
 
-  // ============================================================
-  // UPDATE
-  // ============================================================
+_update(finished = false) {
+  if (!this.mode) {
+    return;
+  }
 
-  _update(finished = false) {
-    if (!this.mode) {
-      return;
+  const c = this._working();
+
+  console.log(
+    "MEASURE UPDATE:",
+    {
+      mode: this.mode,
+      coords: c,
+      finished,
     }
+  );
 
-    const c = this._working();
+  const source = this.map.getSource(SRC);
 
-    const source = this.map.getSource(SRC);
+  if (!source || !("setData" in source)) {
+    console.warn(
+      "MEASURE SOURCE TIDAK DITEMUKAN"
+    );
+    return;
+  }
 
-    if (source && "setData" in source) {
-      source.setData(this._fc(c));
-    }
+  // ============================
+  // GAMBAR GEOMETRY
+  // ============================
 
-    const k = this.scaleFactor;
+  source.setData(
+    this._fc(c)
+  );
 
-    // ---------------- DISTANCE ----------------
+  // ============================
+  // PASTIKAN LAYER TERLIHAT
+  // ============================
 
-    if (this.mode === "distance") {
+  if (this.map.getLayer(L_LINE)) {
+    this.map.setLayoutProperty(
+      L_LINE,
+      "visibility",
+      "visible"
+    );
+  }
+
+  if (this.map.getLayer(L_VERT)) {
+    this.map.setLayoutProperty(
+      L_VERT,
+      "visibility",
+      "visible"
+    );
+  }
+
+  if (this.map.getLayer(L_FILL)) {
+    this.map.setLayoutProperty(
+      L_FILL,
+      "visibility",
+      "visible"
+    );
+  }
+
+  // ============================
+  // HITUNG HASIL
+  // ============================
+
+  const k = this.scaleFactor;
+
+  if (this.mode === "distance") {
+    const r = measureLine(c, k);
+
+    this.onResult(
+      r
+        ? {
+            mode: "distance",
+            ...r,
+            finished,
+            unit: "m",
+            k,
+          }
+        : null
+    );
+
+    return;
+  }
+
+  // ============================
+  // AREA
+  // ============================
+
+  if (this.mode === "area") {
+    if (c.length >= 3) {
+      const r = measurePolygon(c, k);
+
+      this.onResult({
+        mode: "area",
+        ...r,
+        finished,
+        unit: "m",
+        k,
+      });
+    } else if (c.length === 2) {
       const r = measureLine(c, k);
 
       this.onResult(
         r
           ? {
-              mode: "distance",
-              ...r,
+              mode: "area",
+              pendingPerimeter: r.total,
               finished,
               unit: "m",
               k,
             }
           : null
       );
-
-      return;
-    }
-
-    // ---------------- AREA ----------------
-
-    if (this.mode === "area") {
-      if (c.length >= 3) {
-        const r = measurePolygon(c, k);
-
-        this.onResult({
-          mode: "area",
-          ...r,
-          finished,
-          unit: "m",
-          k,
-        });
-      } else if (c.length === 2) {
-        const r = measureLine(c, k);
-
-        this.onResult(
-          r
-            ? {
-                mode: "area",
-                pendingPerimeter: r.total,
-                finished,
-                unit: "m",
-                k,
-              }
-            : null
-        );
-      } else {
-        this.onResult(null);
-      }
+    } else {
+      this.onResult(null);
     }
   }
-
-  // ============================================================
-  // RESULT POPUP
-  // ============================================================
-
+}
   _showResultPopup(
     position,
     mode,
@@ -551,66 +645,61 @@ export class MeasureControl {
       .setHTML(html)
       .addTo(this.map);
   }
+_fc(c) {
+  const feats = [];
 
-  // ============================================================
-  // GEOJSON
-  // ============================================================
+  // ============================
+  // POLYGON
+  // ============================
 
-  _fc(c) {
-    const feats = [];
-
-    // Polygon
-    if (
-      this.mode === "area" &&
-      c.length >= 3
-    ) {
-      feats.push({
-        type: "Feature",
-        geometry: {
-          type: "Polygon",
-          coordinates: [
-            [...c, c[0]],
-          ],
-        },
-        properties: {},
-      });
-    }
-
-    // Line
-    if (c.length >= 2) {
-      feats.push({
-        type: "Feature",
-        geometry: {
-          type: "LineString",
-          coordinates: c,
-        },
-        properties: {},
-      });
-    }
-
-    // Vertex
-    c.forEach((p) => {
-      feats.push({
-        type: "Feature",
-        geometry: {
-          type: "Point",
-          coordinates: p,
-        },
-        properties: {},
-      });
+  if (
+    this.mode === "area" &&
+    c.length >= 3
+  ) {
+    feats.push({
+      type: "Feature",
+      geometry: {
+        type: "Polygon",
+        coordinates: [
+          [...c, c[0]],
+        ],
+      },
+      properties: {},
     });
-
-    return {
-      type: "FeatureCollection",
-      features: feats,
-    };
   }
+
+  // ============================
+  // LINE
+  // ============================
+
+  if (c.length >= 2) {
+    feats.push({
+      type: "Feature",
+      geometry: {
+        type: "LineString",
+        coordinates: c,
+      },
+      properties: {},
+    });
+  }
+
+
+  c.forEach((p) => {
+    feats.push({
+      type: "Feature",
+      geometry: {
+        type: "Point",
+        coordinates: p,
+      },
+      properties: {},
+    });
+  });
+
+  return {
+    type: "FeatureCollection",
+    features: feats,
+  };
 }
-
-// ============================================================
-// FORMAT
-// ============================================================
-
 export function fmtLen(m) {
   return m >= 1000
     ? `${(m / 1000).toFixed(3)} km`
