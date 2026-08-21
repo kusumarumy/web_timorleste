@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { setToolMode, getToolMode, onToolMode, ToolMode } from "./toolMode";
 import { GROUPS, LayerDef } from "@/lib/config";
 import { useMapStore } from "@/lib/store";
 import { useI18n } from "@/lib/i18n";
@@ -178,7 +179,108 @@ function TerrainControl() {
     </div>
   );
 }
+function MeasurementControl() {
+  const [active, setActive] = useState<ToolMode>(getToolMode());
 
+  const activate = (tool: "length" | "width" | "area" | "distance") => {
+    if (tool === "distance") {
+      setToolMode(active === "distance" ? null : "distance");
+      return;
+    }
+
+    // Panjang, lebar, dan luas semuanya menggunakan
+    // polygon measurement engine yang sama.
+    setToolMode(active === "area" ? null : "area");
+  };
+
+  return (
+    <div className="m-1.5 mt-2 rounded-xl border border-strokeSoft bg-gradient-to-br from-teal/10 to-teal/[0.02] p-3">
+      {/* Judul */}
+      <div className="flex items-center gap-2 text-[13px] font-bold text-ink">
+        <svg
+          viewBox="0 0 24 24"
+          width="15"
+          height="15"
+          fill="none"
+          stroke="#2FA6A0"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M4 20L20 4" />
+          <path d="M7 17l-3 3" />
+          <path d="M17 7l3-3" />
+          <path d="M8 16l-2-2" />
+          <path d="M11 13l-2-2" />
+          <path d="M14 10l-2-2" />
+        </svg>
+
+        <span>Pengukuran</span>
+      </div>
+
+      {/* 4 tool */}
+      <div className="mt-2.5 grid grid-cols-2 gap-1.5">
+        {/* PANJANG */}
+        <button
+          onClick={() => activate("length")}
+          className={`flex items-center gap-2 rounded-lg border px-2.5 py-2 text-left transition-colors ${
+            active === "area"
+              ? "border-teal/40 bg-teal/15 text-ink"
+              : "border-stroke bg-bg/30 text-muted hover:border-teal/30 hover:bg-teal/[0.07] hover:text-ink"
+          }`}
+        >
+          <span className="text-[15px]">↔</span>
+          <span className="text-[11px] font-semibold">Panjang</span>
+        </button>
+
+        {/* LEBAR */}
+        <button
+          onClick={() => activate("width")}
+          className={`flex items-center gap-2 rounded-lg border px-2.5 py-2 text-left transition-colors ${
+            active === "area"
+              ? "border-teal/40 bg-teal/15 text-ink"
+              : "border-stroke bg-bg/30 text-muted hover:border-teal/30 hover:bg-teal/[0.07] hover:text-ink"
+          }`}
+        >
+          <span className="text-[15px]">↕</span>
+          <span className="text-[11px] font-semibold">Lebar</span>
+        </button>
+
+        {/* LUAS */}
+        <button
+          onClick={() => activate("area")}
+          className={`flex items-center gap-2 rounded-lg border px-2.5 py-2 text-left transition-colors ${
+            active === "area"
+              ? "border-teal/40 bg-teal/15 text-ink"
+              : "border-stroke bg-bg/30 text-muted hover:border-teal/30 hover:bg-teal/[0.07] hover:text-ink"
+          }`}
+        >
+          <span className="text-[15px]">▱</span>
+          <span className="text-[11px] font-semibold">Luas</span>
+        </button>
+
+        {/* JARAK */}
+        <button
+          onClick={() => activate("distance")}
+          className={`flex items-center gap-2 rounded-lg border px-2.5 py-2 text-left transition-colors ${
+            active === "distance"
+              ? "border-teal/40 bg-teal/15 text-ink"
+              : "border-stroke bg-bg/30 text-muted hover:border-teal/30 hover:bg-teal/[0.07] hover:text-ink"
+          }`}
+        >
+          <span className="text-[15px]">📏</span>
+          <span className="text-[11px] font-semibold">Jarak</span>
+        </button>
+      </div>
+
+      {/* Keterangan */}
+      <p className="mt-2 text-[10px] leading-snug text-muted2">
+        Panjang, lebar, dan luas dihitung dari area yang digambar pada peta.
+        Jarak menggunakan garis pengukuran.
+      </p>
+    </div>
+  );
+}
 export default function ControlPanel() {
   const { t } = useI18n();
   const [open, setOpen] = useState(false);
@@ -235,7 +337,7 @@ export default function ControlPanel() {
           {/* Isi panel */}
           <div className="flex-1 overflow-y-auto px-2 pb-3 pt-1.5">
             <TerrainControl />
-
+<MeasurementControl />
             {GROUPS.map((g) => (
               <div key={g.titleKey} className="mx-1.5 mb-1 mt-2">
                 <div className="flex items-center gap-2 px-1.5 py-1.5 text-[11px] font-bold uppercase tracking-wide text-muted2">
