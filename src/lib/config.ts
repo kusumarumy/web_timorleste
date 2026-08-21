@@ -1060,25 +1060,6 @@ export const GROUPS: LayerGroup[] = [
       },
 
       {
-        id: "oe_embankment",
-        nameKey: "l_oe_embankment",
-        kind: "fill",
-        data: v("oe_embankment"),
-        clickable: true,
-        paint: {
-          "fill-color": "#A16207",
-          "fill-opacity": 0.45,
-          "fill-outline-color": "#A16207",
-        },
-        defaultOn: false,
-        opacity: 0.45,
-        opacityProp: "fill-opacity",
-        legend: {
-          color: "#A16207",
-        },
-      },
-
-      {
         id: "oe_flushingcanal",
         nameKey: "l_oe_flushingcanal",
         kind: "line",
@@ -1092,19 +1073,6 @@ export const GROUPS: LayerGroup[] = [
         legend: {
           color: "#06B6D4",
           line: true,
-        },
-      },
-
-      {
-        id: "oe_flushinggate",
-        nameKey: "l_oe_flushinggate",
-        kind: "symbol",
-        data: v("oe_flushinggate"),
-        clickable: true,
-        paint: {},
-        defaultOn: false,
-        legend: {
-          color: "#0891B2",
         },
       },
 
@@ -1126,19 +1094,6 @@ export const GROUPS: LayerGroup[] = [
       },
 
       {
-        id: "oe_gate",
-        nameKey: "l_oe_gate",
-        kind: "symbol",
-        data: v("oe_gate"),
-        clickable: true,
-        paint: {},
-        defaultOn: false,
-        legend: {
-          color: "#7C3AED",
-        },
-      },
-
-      {
         id: "oe_guidewall",
         nameKey: "l_oe_guidewall",
         kind: "line",
@@ -1152,19 +1107,6 @@ export const GROUPS: LayerGroup[] = [
         legend: {
           color: "#6B7280",
           line: true,
-        },
-      },
-
-      {
-        id: "oe_ingate",
-        nameKey: "l_oe_ingate",
-        kind: "symbol",
-        data: v("oe_ingate"),
-        clickable: true,
-        paint: {},
-        defaultOn: false,
-        legend: {
-          color: "#16A34A",
         },
       },
 
@@ -1335,7 +1277,60 @@ export const GROUPS: LayerGroup[] = [
           line: true,
         },
       },
-
+{
+        id: "oe_embankment",
+        nameKey: "l_oe_embankment",
+        kind: "fill",
+        data: v("oe_embankment"),
+        clickable: true,
+        paint: {
+          "fill-color": "#A16207",
+          "fill-opacity": 0.45,
+          "fill-outline-color": "#A16207",
+        },
+        defaultOn: false,
+        opacity: 0.45,
+        opacityProp: "fill-opacity",
+        legend: {
+          color: "#A16207",
+        },
+      },
+      {
+        id: "oe_flushinggate",
+        nameKey: "l_oe_flushinggate",
+        kind: "symbol",
+        data: v("oe_flushinggate"),
+        clickable: true,
+        paint: {},
+        defaultOn: false,
+        legend: {
+          color: "#0891B2",
+        },
+      },
+      {
+        id: "oe_gate",
+        nameKey: "l_oe_gate",
+        kind: "symbol",
+        data: v("oe_gate"),
+        clickable: true,
+        paint: {},
+        defaultOn: false,
+        legend: {
+          color: "#7C3AED",
+        },
+      },
+      {
+        id: "oe_ingate",
+        nameKey: "l_oe_ingate",
+        kind: "symbol",
+        data: v("oe_ingate"),
+        clickable: true,
+        paint: {},
+        defaultOn: false,
+        legend: {
+          color: "#16A34A",
+        },
+      },
       {
         id: "oe_weirbody",
         nameKey: "l_oe_weirbody",
