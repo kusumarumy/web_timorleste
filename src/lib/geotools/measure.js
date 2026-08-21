@@ -602,6 +602,51 @@ export class MeasureControl {
 
       this.onResult(null);
     }
+    // ==========================================================
+// LENGTH
+// ==========================================================
+
+if (this.mode === "length") {
+  if (c.length >= 3) {
+    const r = measurePolygon(c, k);
+
+    this.onResult({
+      mode: "length",
+      length: r.length,
+      finished,
+      unit: "m",
+      k,
+    });
+
+    return;
+  }
+
+  this.onResult(null);
+  return;
+}
+
+// ==========================================================
+// WIDTH
+// ==========================================================
+
+if (this.mode === "width") {
+  if (c.length >= 3) {
+    const r = measurePolygon(c, k);
+
+    this.onResult({
+      mode: "width",
+      width: r.width,
+      finished,
+      unit: "m",
+      k,
+    });
+
+    return;
+  }
+
+  this.onResult(null);
+  return;
+}
   }
 
   // ============================================================
