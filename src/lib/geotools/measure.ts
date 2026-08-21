@@ -585,20 +585,29 @@ this._addPopup(popup);
       finalCoords
     );
 
-    // Hasil final
-    this._updateResult(
-      finalCoords,
-      true
-    );
+// Hasil final
+this._updateResult(
+  finalCoords,
+  true
+);
 
-    // Popup hasil
-    this._showResultPopup(
-      finalCoords[
-        finalCoords.length - 1
-      ],
-      finishedMode,
-      finalCoords
-    );
+// ==========================================================
+// TUTUP SEMUA POPUP TITIK
+// ==========================================================
+
+this._closePopups();
+
+// ==========================================================
+// TAMPILKAN POPUP HASIL SAJA
+// ==========================================================
+
+this._showResultPopup(
+  finalCoords[
+    finalCoords.length - 1
+  ],
+  finishedMode,
+  finalCoords
+);
 
     // Listener dimatikan,
     // geometry tetap ada.
@@ -921,37 +930,39 @@ if (this.mode === "width") {
         `;
       }
     }
-    // ==========================================================
-    // LENGTH
-    // ==========================================================
+   // ==========================================================
+// LENGTH
+// ==========================================================
 
-    if (
+if (
   mode === "length" &&
   coords.length >= 2
 ) {
-      const r =
-        measurePolygon(
-          coords,
-          this.scaleFactor
-        ) as MeasurePolygonResult;
+  const r =
+    measureLine(
+      coords,
+      this.scaleFactor
+    ) as MeasureLineResult | null;
 
-      html += `
-        <div style="
-          display:flex;
-          justify-content:space-between;
-          gap:15px;
-          margin-bottom:5px;
-        ">
-          <span style="color:#374151;">
-            Panjang
-          </span>
+  if (r) {
+    html += `
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        gap:15px;
+        margin-bottom:5px;
+      ">
+        <span style="color:#374151;">
+          Panjang
+        </span>
 
-          <b style="color:#111827;">
-            ${fmtLen(r.length)}
-          </b>
-        </div>
-      `;
-    }
+        <b style="color:#111827;">
+          ${fmtLen(r.total)}
+        </b>
+      </div>
+    `;
+  }
+}
 
     if (
   mode === "width" &&
