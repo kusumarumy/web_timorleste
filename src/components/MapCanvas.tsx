@@ -155,7 +155,7 @@ function buildStyle(): maplibregl.StyleSpecification {
       },
     } as any);
 
-  } else {
+    } else {
 
     sources[l.id] = {
       type: "geojson",
@@ -164,6 +164,10 @@ function buildStyle(): maplibregl.StyleSpecification {
         features: [],
       },
     };
+
+    // =====================================================
+    // NORMAL GEOJSON LAYER
+    // =====================================================
 
     layers.push({
       id: l.id,
@@ -178,6 +182,72 @@ function buildStyle(): maplibregl.StyleSpecification {
           : "none",
       },
     } as any);
+
+    // =====================================================
+    // LABEL LAYER
+    // Menggunakan source GeoJSON yang sama
+    // =====================================================
+
+    if (l.label) {
+
+      layers.push({
+        id: `${l.id}_label`,
+        type: "symbol",
+        source: l.id,
+
+        minzoom: l.label.minzoom ?? 0,
+        maxzoom: l.label.maxzoom ?? 24,
+
+        layout: {
+          visibility: l.defaultOn
+            ? "visible"
+            : "none",
+
+          // INI YANG MEMBUAT LABEL MENGIKUTI GARIS
+          "symbol-placement": "line",
+
+          // Jarak antar label
+          "symbol-spacing": l.label.spacing ?? 250,
+
+          // Field yang digunakan sebagai teks
+          "text-field": [
+            "get",
+            l.label.field,
+          ],
+
+          "text-size": l.label.size ?? 11,
+
+          // Label mengikuti arah garis
+          "text-rotation-alignment": "map",
+
+          // Tetap nyaman dibaca ketika map dipitch
+          "text-pitch-alignment": "viewport",
+
+          // Jangan tampilkan terlalu banyak label
+          "text-allow-overlap": false,
+          "text-ignore-placement": false,
+
+          // Mencegah label terlalu miring
+          "text-max-angle": 30,
+
+          // Label tetap terbaca dari kiri-kanan
+          "text-keep-upright": true,
+        },
+
+        paint: {
+          "text-color":
+            l.label.color ?? "#5A1715",
+
+          "text-halo-color":
+            l.label.haloColor ?? "#FFFFFF",
+
+          "text-halo-width":
+            l.label.haloWidth ?? 2,
+
+          "text-halo-blur": 0.2,
+        },
+      } as any);
+    }
   }
 });
   return {
@@ -643,10 +713,12 @@ if (getToolMode()) return;
 
       ALL_LAYERS.forEach((l) => {
         const mapLayer = map.getLayer(l.id);
+const labelLayer =
+  l.label && map.getLayer(`${l.id}_label`);
 
-        if (!mapLayer) {
-          return;
-        }
+if (!mapLayer) {
+  return;
+}
 
         const isVisible = !!s.visible[l.id];
 
