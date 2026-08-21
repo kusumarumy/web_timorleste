@@ -356,7 +356,7 @@ export const GROUPS: LayerGroup[] = [
     color: "#4AA6E0",
   },
 },
-    {
+{
   id: "weir",
   nameKey: "l_weir",
   kind: "symbol",
@@ -368,6 +368,15 @@ export const GROUPS: LayerGroup[] = [
   paint: {},
 
   defaultOn: false,
+
+  label: {
+    field: "Name",
+    minzoom: 10,
+    size: 11,
+    color: "#111827",
+    haloColor: "#FFFFFF",
+    haloWidth: 2,
+  },
 
   legend: {
     color: "#2C7FB8",
@@ -387,12 +396,21 @@ export const GROUPS: LayerGroup[] = [
 
   defaultOn: false,
 
+  label: {
+    field: "NAME",
+    minzoom: 10,
+    size: 11,
+    color: "#111827",
+    haloColor: "#FFFFFF",
+    haloWidth: 2,
+  },
+
   legend: {
     color: "#7B61A8",
     svg: "rainfall",
   },
 },
-    {
+  {
   id: "irrigation_point",
   nameKey: "l_irrigation_point",
   kind: "symbol",
@@ -404,6 +422,15 @@ export const GROUPS: LayerGroup[] = [
   paint: {},
 
   defaultOn: false,
+
+  label: {
+    field: "Name",
+    minzoom: 10,
+    size: 11,
+    color: "#111827",
+    haloColor: "#FFFFFF",
+    haloWidth: 2,
+  },
 
   legend: {
     color: "#F28C52",
