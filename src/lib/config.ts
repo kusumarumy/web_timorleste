@@ -371,12 +371,13 @@ export const GROUPS: LayerGroup[] = [
 
   label: {
     field: "Name",
-    minzoom: 10,
-    size: 11,
+    minzoom: 9,
+    size: 14,
     color: "#111827",
     haloColor: "#FFFFFF",
-    haloWidth: 2,
+    haloWidth: 3,
   },
+
 
   legend: {
     color: "#2C7FB8",
@@ -425,12 +426,13 @@ export const GROUPS: LayerGroup[] = [
 
   label: {
     field: "Name",
-    minzoom: 10,
-    size: 11,
+    minzoom: 9,
+    size: 14,
     color: "#111827",
     haloColor: "#FFFFFF",
-    haloWidth: 2,
+    haloWidth: 3,
   },
+
 
   legend: {
     color: "#F28C52",
