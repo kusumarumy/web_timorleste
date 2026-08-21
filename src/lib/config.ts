@@ -78,6 +78,17 @@ export interface LayerDef {
 
   icon?: string;
 
+  label?: {
+    field: string;
+    minzoom?: number;
+    maxzoom?: number;
+    spacing?: number;
+    size?: number;
+    color?: string;
+    haloColor?: string;
+    haloWidth?: number;
+  };
+
   paint: Record<string, unknown>;
 
   svg?: {
@@ -254,30 +265,33 @@ export const GROUPS: LayerGroup[] = [
 },
   // KONTUR
   {
-  titleKey: "g_contour",
-  dot: "#A00000",
+  id: "contour",
+  nameKey: "l_contour",
+  kind: "line",
+  data: r2Vector("contour"),
 
-  layers: [
-    {
-      id: "contour",
-      nameKey: "l_contour",
-      kind: "line",
-      data: r2Vector("contour"),
+  paint: {
+    "line-color": "#7A1E1A",
+    "line-width": 1.2,
+    "line-opacity": 0.9,
+  },
 
-      paint: {
-        "line-color": "#7A1E1A",
-        "line-width": 1.2,
-        "line-opacity": 0.9,
-      },
+  defaultOn: false,
 
-      defaultOn: false,
+  label: {
+    field: "ELEVATION",
+    minzoom: 11,
+    spacing: 250,
+    size: 11,
+    color: "#5A1715",
+    haloColor: "#FFFFFF",
+    haloWidth: 2,
+  },
 
-      legend: {
-        color: "#7A1E1A",
-        line: true,
-      },
-    },
-  ],
+  legend: {
+    color: "#7A1E1A",
+    line: true,
+  },
 },
   // JARINGAN
   {
