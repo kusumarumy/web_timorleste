@@ -1126,21 +1126,7 @@ export const GROUPS: LayerGroup[] = [
           line: true,
         },
       },
-
-      {
-        id: "oe_intake",
-        nameKey: "l_oe_intake",
-        kind: "symbol",
-        data: v("oe_intake"),
-        clickable: true,
-        paint: {},
-        defaultOn: false,
-        legend: {
-          color: "#0284C7",
-        },
-      },
-
-      {
+{
         id: "oe_irrigationcanal",
         nameKey: "l_oe_irrigationcanal",
         kind: "line",
@@ -1156,20 +1142,6 @@ export const GROUPS: LayerGroup[] = [
           line: true,
         },
       },
-
-      {
-        id: "oe_irrigationgate",
-        nameKey: "l_oe_irrigationgate",
-        kind: "symbol",
-        data: v("oe_irrigationgate"),
-        clickable: true,
-        paint: {},
-        defaultOn: false,
-        legend: {
-          color: "#15803D",
-        },
-      },
-
       {
         id: "oe_irrigationpier",
         nameKey: "l_oe_irrigationpier",
@@ -1184,6 +1156,64 @@ export const GROUPS: LayerGroup[] = [
         legend: {
           color: "#15803D",
           line: true,
+        },
+      },
+      {
+        id: "oe_strais",
+        nameKey: "l_oe_strais",
+        kind: "line",
+        data: v("oe_strais"),
+        clickable: true,
+        paint: {
+          "line-color": "#92400E",
+          "line-width": 2,
+        },
+        defaultOn: false,
+        legend: {
+          color: "#92400E",
+          line: true,
+        },
+      },
+
+      {
+        id: "oe_upstream",
+        nameKey: "l_oe_upstream",
+        kind: "line",
+        data: v("oe_upstream"),
+        clickable: true,
+        paint: {
+          "line-color": "#0EA5E9",
+          "line-width": 2,
+        },
+        defaultOn: false,
+        legend: {
+          color: "#0EA5E9",
+          line: true,
+        },
+      },
+      {
+        id: "oe_intake",
+        nameKey: "l_oe_intake",
+        kind: "symbol",
+        data: v("oe_intake"),
+        clickable: true,
+        paint: {},
+        defaultOn: false,
+        legend: {
+          color: "#0284C7",
+        },
+      },    
+
+      {
+        id: "oe_irrigationgate",
+        nameKey: "l_oe_irrigationgate",
+        kind: "symbol",
+        data: v("oe_irrigationgate"),
+        clickable: true,
+        paint: {},
+        defaultOn: false,
+        legend: {
+          color: "#15803D",
         },
       },
 
@@ -1241,40 +1271,6 @@ export const GROUPS: LayerGroup[] = [
         opacityProp: "fill-opacity",
         legend: {
           color: "#38BDF8",
-        },
-      },
-
-      {
-        id: "oe_strais",
-        nameKey: "l_oe_strais",
-        kind: "line",
-        data: v("oe_strais"),
-        clickable: true,
-        paint: {
-          "line-color": "#92400E",
-          "line-width": 2,
-        },
-        defaultOn: false,
-        legend: {
-          color: "#92400E",
-          line: true,
-        },
-      },
-
-      {
-        id: "oe_upstream",
-        nameKey: "l_oe_upstream",
-        kind: "line",
-        data: v("oe_upstream"),
-        clickable: true,
-        paint: {
-          "line-color": "#0EA5E9",
-          "line-width": 2,
-        },
-        defaultOn: false,
-        legend: {
-          color: "#0EA5E9",
-          line: true,
         },
       },
 {
