@@ -81,7 +81,13 @@ export class MeasureControl {
 
   _onClick(e) { this.coords.push([e.lngLat.lng, e.lngLat.lat]); this._update(); }
   _onMove(e) { this.hover = [e.lngLat.lng, e.lngLat.lat]; if (this.coords.length) this._update(); }
-  _onDbl() { if (this.coords.length > 1) this.coords.pop(); this.hover = null; this._update(true); this.stop(); }
+  _onDbl() {
+  if (this.coords.length < 2) return;
+
+  this.hover = null;
+  this._update(true);
+  this.stop();
+}
   _onKey(e) {
     if (e.key === 'Escape') { this.clear(); this.stop(); }
     else if (e.key === 'Enter') { this.hover = null; this._update(true); this.stop(); }
