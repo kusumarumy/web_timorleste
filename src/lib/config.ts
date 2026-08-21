@@ -150,7 +150,7 @@ export const GROUPS: LayerGroup[] = [
           "fill-outline-color": "#F2D45C",
         },
 
-        defaultOn: false,
+        defaultOn: true,
 
         opacity: 0.25,
         opacityProp: "fill-opacity",
