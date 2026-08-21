@@ -259,10 +259,10 @@ export const GROUPS: LayerGroup[] = [
 
   layers: [
     {
-      id: "cmay",
-      nameKey: "l_cmay",
+      id: "contour",
+      nameKey: "l_contour",
       kind: "line",
-      data: r2Vector("contour_mayor"),
+      data: r2Vector("contour_5mr"),
 
       paint: {
         "line-color": "#7A1E1A",
@@ -274,27 +274,6 @@ export const GROUPS: LayerGroup[] = [
 
       legend: {
         color: "#7A1E1A",
-        line: true,
-      },
-    },
-
-    {
-      id: "cmin",
-      nameKey: "l_cmin",
-      kind: "line",
-      data: r2Vector("contour_minor"),
-
-      paint: {
-        "line-color": "#A86A1A",
-        "line-width": 0.6,
-        "line-dasharray": [6, 3],
-        "line-opacity": 0.75,
-      },
-
-      defaultOn: false,
-
-      legend: {
-        color: "#A86A1A",
         line: true,
       },
     },
