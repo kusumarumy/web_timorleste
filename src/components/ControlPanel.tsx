@@ -20,15 +20,16 @@ function Toggle({ on, onClick }: { on: boolean; onClick: () => void }) {
 
 function LayerRow({ l }: { l: LayerDef }) {
   const { t } = useI18n();
+
   const {
-  visible,
-  toggle,
-  opacity,
-  setOpacity,
-  subVisible,
-  toggleSub,
-} = useMapStore();
-  
+    visible,
+    toggle,
+    opacity,
+    setOpacity,
+    subVisible,
+    toggleSub,
+  } = useMapStore();
+
   const on = visible[l.id];
   const sw = l.legend;
 
@@ -40,7 +41,22 @@ function LayerRow({ l }: { l: LayerDef }) {
 
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 text-[13px] font-semibold text-ink">
-            {sw && (
+
+            {/* =========================
+                SYMBOL / ICON LAYER
+                ========================= */}
+            {l.icon ? (
+              <span className="flex h-[24px] w-[24px] flex-none items-center justify-center">
+                <img
+                  src={l.icon}
+                  alt=""
+                  className="max-h-[24px] max-w-[24px] object-contain"
+                />
+              </span>
+            ) : sw ? (
+              /* =========================
+                 FALLBACK LEGEND COLOR
+                 ========================= */
               <span
                 className="inline-block h-[11px] w-[11px] flex-none rounded-[3px]"
                 style={
@@ -51,10 +67,17 @@ function LayerRow({ l }: { l: LayerDef }) {
                         height: 0,
                         borderRadius: 0,
                       }
-                    : { background: sw.color }
+                    : sw.circle
+                    ? {
+                        background: sw.color,
+                        borderRadius: "9999px",
+                      }
+                    : {
+                        background: sw.color,
+                      }
                 }
               />
-            )}
+            ) : null}
 
             {t(l.nameKey)}
           </div>
