@@ -1,5 +1,6 @@
 "use client";
-import { useState } from "react";
+
+import { useEffect, useState } from "react";
 import { GROUPS, LayerDef } from "@/lib/config";
 import { useMapStore } from "@/lib/store";
 import { useI18n } from "@/lib/i18n";
@@ -28,10 +29,8 @@ function LayerRow({ l }: { l: LayerDef }) {
   toggleSub,
 } = useMapStore();
   
-
   const on = visible[l.id];
   const sw = l.legend;
-
 
   return (
     <div>
@@ -193,9 +192,10 @@ function MeasurementControl() {
   ) => {
     if (active === mode) {
       setToolMode(null);
-    } else {
-      setToolMode(mode);
+      return;
     }
+
+    setToolMode(mode);
   };
 
   const buttonClass = (
@@ -209,7 +209,8 @@ function MeasurementControl() {
 
   return (
     <div className="m-1.5 mt-2 rounded-xl border border-strokeSoft bg-gradient-to-br from-teal/10 to-teal/[0.02] p-3">
-      {/* Judul */}
+
+      {/* HEADER */}
       <div className="flex items-center gap-2 text-[13px] font-bold text-ink">
         <svg
           viewBox="0 0 24 24"
@@ -232,11 +233,22 @@ function MeasurementControl() {
         <span>Pengukuran</span>
       </div>
 
-      {/* ======================================================
-          4 TOOLS
-      ====================================================== */}
-
+      {/* 4 TOOLS */}
       <div className="mt-2.5 grid grid-cols-2 gap-1.5">
+
+        {/* JARAK */}
+        <button
+          type="button"
+          onClick={() => activate("distance")}
+          className={buttonClass("distance")}
+          aria-pressed={active === "distance"}
+        >
+          <span className="text-[15px]">📏</span>
+
+          <span className="text-[11px] font-semibold">
+            Jarak
+          </span>
+        </button>
 
         {/* PANJANG */}
         <button
@@ -280,37 +292,26 @@ function MeasurementControl() {
           </span>
         </button>
 
-        {/* JARAK */}
-        <button
-          type="button"
-          onClick={() => activate("distance")}
-          className={buttonClass("distance")}
-          aria-pressed={active === "distance"}
-        >
-          <span className="text-[15px]">📏</span>
-
-          <span className="text-[11px] font-semibold">
-            Jarak
-          </span>
-        </button>
       </div>
 
-      {/* Keterangan */}
+      {/* KETERANGAN */}
       <p className="mt-2 text-[10px] leading-snug text-muted2">
-        {active === "length" &&
-          "Gambar area untuk mendapatkan dimensi panjang."}
-
-        {active === "width" &&
-          "Gambar area untuk mendapatkan dimensi lebar."}
-
-        {active === "area" &&
-          "Gambar area untuk menghitung luas permukaan."}
 
         {active === "distance" &&
           "Klik beberapa titik untuk mengukur jarak."}
 
+        {active === "length" &&
+          "Gambar area untuk mendapatkan ukuran panjang."}
+
+        {active === "width" &&
+          "Gambar area untuk mendapatkan ukuran lebar."}
+
+        {active === "area" &&
+          "Gambar area untuk menghitung luas dan dimensi."}
+
         {!active &&
           "Pilih salah satu alat pengukuran."}
+
       </p>
     </div>
   );
