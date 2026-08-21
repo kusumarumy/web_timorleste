@@ -14,7 +14,6 @@ import { useMapStore } from "@/lib/store";
 import { reprojectGeoJSON } from "@/lib/reproject";
 import { getToolMode, setToolMode } from "./toolMode";
 import { MeasureControl } from "@/lib/geotools/measure";
-import { useMeasureStore } from "@/lib/measureStore";
 function isWGS84GeoJSON(geojson: any): boolean {
   // 1. Cek metadata CRS
   const crsName =
@@ -529,17 +528,6 @@ if (getToolMode()) return;
             }
           );
         });
-      // TOOL UKUR — daftarkan instance ke measure store
-      const measure = new MeasureControl(map, {
-        scaleFactor: 1,
-        onResult: (r) => useMeasureStore.getState().setResult(r),
-        onStop: () => {
-          useMeasureStore.getState().setTool(null);
-          setToolMode(null);
-        },
-      });
-      useMeasureStore.getState().setControl(measure);
-      console.log("MEASURE CONTROL TERDAFTAR");
 
       // READY
       onReady?.(map);
