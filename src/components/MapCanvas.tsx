@@ -164,7 +164,7 @@ function buildStyle(): maplibregl.StyleSpecification {
 
         "icon-image": l.id,
 
-        "icon-size": 0.30,
+        "icon-size": 0.05,
 
         "icon-allow-overlap": true,
         "icon-ignore-placement": true,
