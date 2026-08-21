@@ -180,18 +180,32 @@ function TerrainControl() {
   );
 }
 function MeasurementControl() {
-  const [active, setActive] = useState<ToolMode>(getToolMode());
+  const [active, setActive] = useState(getToolMode());
 
-  const activate = (tool: "length" | "width" | "area" | "distance") => {
-    if (tool === "distance") {
-      setToolMode(active === "distance" ? null : "distance");
-      return;
+  useEffect(() => {
+    return onToolMode((mode) => {
+      setActive(mode);
+    });
+  }, []);
+
+  const activate = (
+    mode: "length" | "width" | "area" | "distance"
+  ) => {
+    if (active === mode) {
+      setToolMode(null);
+    } else {
+      setToolMode(mode);
     }
-
-    // Panjang, lebar, dan luas semuanya menggunakan
-    // polygon measurement engine yang sama.
-    setToolMode(active === "area" ? null : "area");
   };
+
+  const buttonClass = (
+    mode: "length" | "width" | "area" | "distance"
+  ) =>
+    `flex items-center gap-2 rounded-lg border px-2.5 py-2.5 transition-colors ${
+      active === mode
+        ? "border-teal/50 bg-teal text-[#04171a]"
+        : "border-stroke bg-bg/30 text-muted hover:border-teal/30 hover:bg-teal/[0.07] hover:text-ink"
+    }`;
 
   return (
     <div className="m-1.5 mt-2 rounded-xl border border-strokeSoft bg-gradient-to-br from-teal/10 to-teal/[0.02] p-3">
@@ -218,65 +232,85 @@ function MeasurementControl() {
         <span>Pengukuran</span>
       </div>
 
-      {/* 4 tool */}
+      {/* ======================================================
+          4 TOOLS
+      ====================================================== */}
+
       <div className="mt-2.5 grid grid-cols-2 gap-1.5">
+
         {/* PANJANG */}
         <button
+          type="button"
           onClick={() => activate("length")}
-          className={`flex items-center gap-2 rounded-lg border px-2.5 py-2 text-left transition-colors ${
-            active === "area"
-              ? "border-teal/40 bg-teal/15 text-ink"
-              : "border-stroke bg-bg/30 text-muted hover:border-teal/30 hover:bg-teal/[0.07] hover:text-ink"
-          }`}
+          className={buttonClass("length")}
+          aria-pressed={active === "length"}
         >
           <span className="text-[15px]">↔</span>
-          <span className="text-[11px] font-semibold">Panjang</span>
+
+          <span className="text-[11px] font-semibold">
+            Panjang
+          </span>
         </button>
 
         {/* LEBAR */}
         <button
+          type="button"
           onClick={() => activate("width")}
-          className={`flex items-center gap-2 rounded-lg border px-2.5 py-2 text-left transition-colors ${
-            active === "area"
-              ? "border-teal/40 bg-teal/15 text-ink"
-              : "border-stroke bg-bg/30 text-muted hover:border-teal/30 hover:bg-teal/[0.07] hover:text-ink"
-          }`}
+          className={buttonClass("width")}
+          aria-pressed={active === "width"}
         >
           <span className="text-[15px]">↕</span>
-          <span className="text-[11px] font-semibold">Lebar</span>
+
+          <span className="text-[11px] font-semibold">
+            Lebar
+          </span>
         </button>
 
         {/* LUAS */}
         <button
+          type="button"
           onClick={() => activate("area")}
-          className={`flex items-center gap-2 rounded-lg border px-2.5 py-2 text-left transition-colors ${
-            active === "area"
-              ? "border-teal/40 bg-teal/15 text-ink"
-              : "border-stroke bg-bg/30 text-muted hover:border-teal/30 hover:bg-teal/[0.07] hover:text-ink"
-          }`}
+          className={buttonClass("area")}
+          aria-pressed={active === "area"}
         >
           <span className="text-[15px]">▱</span>
-          <span className="text-[11px] font-semibold">Luas</span>
+
+          <span className="text-[11px] font-semibold">
+            Luas
+          </span>
         </button>
 
         {/* JARAK */}
         <button
+          type="button"
           onClick={() => activate("distance")}
-          className={`flex items-center gap-2 rounded-lg border px-2.5 py-2 text-left transition-colors ${
-            active === "distance"
-              ? "border-teal/40 bg-teal/15 text-ink"
-              : "border-stroke bg-bg/30 text-muted hover:border-teal/30 hover:bg-teal/[0.07] hover:text-ink"
-          }`}
+          className={buttonClass("distance")}
+          aria-pressed={active === "distance"}
         >
           <span className="text-[15px]">📏</span>
-          <span className="text-[11px] font-semibold">Jarak</span>
+
+          <span className="text-[11px] font-semibold">
+            Jarak
+          </span>
         </button>
       </div>
 
       {/* Keterangan */}
       <p className="mt-2 text-[10px] leading-snug text-muted2">
-        Panjang, lebar, dan luas dihitung dari area yang digambar pada peta.
-        Jarak menggunakan garis pengukuran.
+        {active === "length" &&
+          "Gambar area untuk mendapatkan dimensi panjang."}
+
+        {active === "width" &&
+          "Gambar area untuk mendapatkan dimensi lebar."}
+
+        {active === "area" &&
+          "Gambar area untuk menghitung luas permukaan."}
+
+        {active === "distance" &&
+          "Klik beberapa titik untuk mengukur jarak."}
+
+        {!active &&
+          "Pilih salah satu alat pengukuran."}
       </p>
     </div>
   );
