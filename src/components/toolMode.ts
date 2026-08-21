@@ -1,12 +1,23 @@
 // ============================================================================
 // src/components/toolMode.ts
-// State kecil bersama untuk "tool yang sedang aktif".
-// Dipakai MapTools (set) & MapCanvas (baca, utk mematikan popup identify
-// saat sedang mengukur). Tidak menyentuh zustand store yang sudah ada.
+// State kecil bersama untuk tool geospasial yang sedang aktif.
+// Dipakai ControlPanel / MapTools / MapCanvas.
+//
+// length  = pengukuran panjang polygon
+// width   = pengukuran lebar polygon
+// area    = pengukuran luas polygon
+// distance = pengukuran jarak/garis
 // ============================================================================
-export type ToolMode = null | "distance" | "area";
+
+export type ToolMode =
+  | null
+  | "distance"
+  | "length"
+  | "width"
+  | "area";
 
 let _mode: ToolMode = null;
+
 const subs = new Set<(m: ToolMode) => void>();
 
 export const getToolMode = (): ToolMode => _mode;
@@ -16,7 +27,12 @@ export const setToolMode = (m: ToolMode): void => {
   subs.forEach((f) => f(m));
 };
 
-export const onToolMode = (f: (m: ToolMode) => void): (() => void) => {
+export const onToolMode = (
+  f: (m: ToolMode) => void
+): (() => void) => {
   subs.add(f);
-  return () => subs.delete(f);
+
+  return () => {
+    subs.delete(f);
+  };
 };
