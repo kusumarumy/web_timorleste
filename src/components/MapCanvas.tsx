@@ -126,36 +126,87 @@ function buildStyle(): maplibregl.StyleSpecification {
       },
     } as any);
 
-  } else if (l.kind === "symbol") {
+ } else if (l.kind === "symbol") {
 
-    sources[l.id] = {
-      type: "geojson",
-      data: {
-        type: "FeatureCollection",
-        features: [],
-      },
-    };
+  sources[l.id] = {
+    type: "geojson",
+    data: {
+      type: "FeatureCollection",
+      features: [],
+    },
+  };
 
-    layers.push({
-      id: l.id,
-      type: "symbol",
-      source: l.id,
+  const symbolLayout: Record<string, unknown> = {
+    visibility: l.defaultOn
+      ? "visible"
+      : "none",
 
-      layout: {
-        visibility: l.defaultOn
-          ? "visible"
-          : "none",
+    // ICON
+    "icon-image": l.id,
+    "icon-size": 0.05,
 
-        "icon-image": l.id,
+    "icon-allow-overlap": true,
+    "icon-ignore-placement": true,
+  };
 
-        "icon-size": 0.05,
+  const symbolPaint: Record<string, unknown> = {};
 
-        "icon-allow-overlap": true,
-        "icon-ignore-placement": true,
-      },
-    } as any);
+  // =====================================================
+  // LABEL
+  // =====================================================
 
-    } else {
+  if (l.label) {
+    symbolLayout["text-field"] = [
+      "coalesce",
+      ["get", l.label.field],
+      "",
+    ];
+
+    symbolLayout["text-size"] = l.label.size ?? 11;
+
+    symbolLayout["text-anchor"] = "bottom-left";
+
+    // Posisi label kanan-atas dari icon
+    symbolLayout["text-offset"] = [0.8, -0.8];
+
+    symbolLayout["text-allow-overlap"] = true;
+    symbolLayout["text-ignore-placement"] = true;
+
+    if (l.label.spacing != null) {
+      symbolLayout["symbol-spacing"] = l.label.spacing;
+    }
+
+    symbolPaint["text-color"] =
+      l.label.color ?? "#111827";
+
+    symbolPaint["text-halo-color"] =
+      l.label.haloColor ?? "#FFFFFF";
+
+    symbolPaint["text-halo-width"] =
+      l.label.haloWidth ?? 2;
+
+    symbolPaint["text-halo-blur"] = 0.2;
+  }
+
+  layers.push({
+    id: l.id,
+    type: "symbol",
+    source: l.id,
+
+    layout: symbolLayout,
+
+    paint: symbolPaint,
+    
+    ...(l.label?.minzoom != null
+      ? { minzoom: l.label.minzoom }
+      : {}),
+
+    ...(l.label?.maxzoom != null
+      ? { maxzoom: l.label.maxzoom }
+      : {}),
+  } as any);
+
+} else {
 
     sources[l.id] = {
       type: "geojson",
