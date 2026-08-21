@@ -264,34 +264,41 @@ export const GROUPS: LayerGroup[] = [
   ],
 },
   // KONTUR
-  {
-  id: "contour",
-  nameKey: "l_contour",
-  kind: "line",
-  data: r2Vector("contour"),
+{
+  titleKey: "g_contour",
+  dot: "#7A1E1A",
 
-  paint: {
-    "line-color": "#7A1E1A",
-    "line-width": 1.2,
-    "line-opacity": 0.9,
-  },
+  layers: [
+    {
+      id: "contour",
+      nameKey: "l_contour",
+      kind: "line",
+      data: r2Vector("contour"),
 
-  defaultOn: false,
+      paint: {
+        "line-color": "#7A1E1A",
+        "line-width": 1.2,
+        "line-opacity": 0.9,
+      },
 
-  label: {
-    field: "ELEVATION",
-    minzoom: 11,
-    spacing: 300,
-    size: 11,
-    color: "#5A1715",
-    haloColor: "#FFFFFF",
-    haloWidth: 2,
-  },
+      defaultOn: false,
 
-  legend: {
-    color: "#7A1E1A",
-    line: true,
-  },
+      label: {
+        field: "ELEVATION",
+        minzoom: 11,
+        spacing: 300,
+        size: 11,
+        color: "#5A1715",
+        haloColor: "#FFFFFF",
+        haloWidth: 2,
+      },
+
+      legend: {
+        color: "#7A1E1A",
+        line: true,
+      },
+    },
+  ],
 },
   // JARINGAN
   {
