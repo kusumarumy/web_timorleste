@@ -12,7 +12,11 @@ import { MAP, BASEMAPS, TERRAIN_OPTIONS, ALL_LAYERS, FIXED_EXAGGERATION } from "
 
 import { useMapStore } from "@/lib/store";
 import { reprojectGeoJSON } from "@/lib/reproject";
-import { getToolMode, setToolMode } from "./toolMode";
+import {
+  getToolMode,
+  setToolMode,
+  onToolMode,
+} from "./toolMode";
 import { MeasureControl } from "@/lib/geotools/measure";
 import { useI18n } from "@/lib/i18n";
 function isWGS84GeoJSON(geojson: any): boolean {
@@ -380,6 +384,7 @@ export default function MapCanvas({
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MLMap | null>(null);
+  const measureRef = useRef<MeasureControl | null>(null);
   const store = useMapStore;
   const { t } = useI18n();
  // ============================================================
@@ -584,6 +589,18 @@ async function loadGeoJSONLayer(
       //);
       map.resize();
       await registerMapIcons(map);
+
+const measure = new MeasureControl(map, {
+  onResult: (result) => {
+    console.log("MEASURE RESULT:", result);
+  },
+
+  onStop: () => {
+    console.log("MEASURE STOP");
+  },
+});
+
+measureRef.current = measure;
 const initialLayers = ALL_LAYERS.filter(
   (l) =>
     l.kind !== "raster" &&
@@ -722,16 +739,41 @@ if (getToolMode()) return;
 
     // CLEANUP
 
-    return () => {
-      ro.disconnect();
+   return () => {
+  ro.disconnect();
 
-      map.remove();
+  if (measureRef.current) {
+    measureRef.current.stop();
+    measureRef.current = null;
+  }
 
-      mapRef.current = null;
-    };
+  map.remove();
+
+  mapRef.current = null;
+};
 
   }, []);
+useEffect(() => {
+  const unsubscribe = onToolMode((mode) => {
+    const measure = measureRef.current;
 
+    if (!measure) {
+      console.warn("MEASURE: control belum siap");
+      return;
+    }
+
+    if (!mode) {
+      measure.stop();
+      return;
+    }
+
+    console.log("MEASURE MODE →", mode);
+
+    measure.start(mode);
+  });
+
+  return unsubscribe;
+}, []);
   // BASEMAP CHANGE
   useEffect(
     () =>
