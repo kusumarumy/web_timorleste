@@ -62,8 +62,7 @@ di_raibere: "RAIBRE",
     // Transportation
     l_road: "Jalan",
     // Contour
-    l_cmay: "Kontur Mayor",
-    l_cmin: "Kontur Minor",
+    l_contour: "Kontur Interval 5 Meter",
     // AOI 
     l_aoi_photo: "AOI Foto Udara",
     l_aoi_lidar: "AOI LiDAR",
@@ -137,8 +136,7 @@ di_raibere: "RAIBRE",
     l_kotamadya: "Municipal Boundary",
     l_negara: "International Boundary",
     // Contour
-    l_cmay: "Mayor Contour",
-    l_cmin: "Minor Contour",
+    l_contour: "Interval Contour 5 Meter",
     // AOI 
     l_aoi_photo: "Aerial Photography AOI",
     l_aoi_lidar: "LiDAR AOI",
@@ -212,8 +210,7 @@ di_raibere: "RAIBRE",
     l_kotamadya: "Limite Municipal",
     l_negara: "Fronteira Internacional",
     // Contour
-    l_cmay: "Curva Mestra",
-    l_cmin: "Curva Secundária",
+    l_contour: "Contorno com Intervalo de 5 Metros",
     // AOI 
     l_aoi_photo: "AOI de Fotografia Aérea",
     l_aoi_lidar: "AOI LiDAR",
