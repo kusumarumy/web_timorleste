@@ -137,142 +137,141 @@ export class MeasureControl {
   this._onKey = this._onKey.bind(this);
 }
 
-  // ============================================================
-  // LAYERS
-  // ============================================================
+ // ============================================================
+// LAYERS
+// ============================================================
 
-  private _ensureLayers(): void {
-    // ==========================================================
-    // SOURCE
-    // ==========================================================
+private _ensureLayers(): void {
+  // ==========================================================
+  // SOURCE
+  // ==========================================================
 
-    if (!this.map.getSource(SRC)) {
-      this.map.addSource(SRC, {
-        type: "geojson",
-        data: {
-          type: "FeatureCollection",
-          features: [],
-        },
-      });
-    }
-
-    // ==========================================================
-    // FILL
-    // ==========================================================
-
-    if (!this.map.getLayer(L_FILL)) {
-      this.map.addLayer({
-        id: L_FILL,
-        type: "fill",
-        source: SRC,
-        filter: [
-          "==",
-          ["geometry-type"],
-          "Polygon",
-        ],
-        paint: {
-          "fill-color": "#2dd4bf",
-          "fill-opacity": 0.12,
-        },
-      });
-    }
-
-    // ==========================================================
-    // LINE
-    // ==========================================================
-
-    if (!this.map.getLayer(L_LINE)) {
-      this.map.addLayer({
-        id: L_LINE,
-        type: "line",
-        source: SRC,
-        filter: [
-          "==",
-          ["geometry-type"],
-          "LineString",
-        ],
-        layout: {
-          "line-cap": "round",
-          "line-join": "round",
-        },
-        paint: {
-          "line-color": "#ffff00",
-          "line-width": 4,
-          "line-opacity": 1,
-        },
-      });
-    }
-
-    // ==========================================================
-    // VERTEX
-    // ==========================================================
-
-    if (!this.map.getLayer(L_VERT)) {
-      this.map.addLayer({
-        id: L_VERT,
-        type: "circle",
-        source: SRC,
-        filter: [
-          "==",
-          ["geometry-type"],
-          "Point",
-        ],
-        paint: {
-          "circle-radius": 6,
-          "circle-color": "#ffff00",
-          "circle-stroke-color": "#000000",
-          "circle-stroke-width": 2,
-        },
-      });
-    }
-
-    // ==========================================================
-    // PASTIKAN TERLIHAT
-    // ==========================================================
-
-    this.map.setLayoutProperty(
-      L_FILL,
-      "visibility",
-      "visible"
-    );
-
-    this.map.setLayoutProperty(
-      L_LINE,
-      "visibility",
-      "visible"
-    );
-
-       this.map.setLayoutProperty(
-      L_VERT,
-      "visibility",
-      "visible"
-    );
-  }
-
-  // ============================================================
-  // POPUP MANAGEMENT
-  // ============================================================
-
-  private _addPopup(
-    popup: maplibregl.Popup
-  ): void {
-    this._popups.add(popup);
-
-    popup.on("close", () => {
-      this._popups.delete(popup);
+  if (!this.map.getSource(SRC)) {
+    this.map.addSource(SRC, {
+      type: "geojson",
+      data: {
+        type: "FeatureCollection",
+        features: [],
+      },
     });
-
-    popup.addTo(this.map);
   }
 
-  private _closePopups(): void {
-    this._popups.forEach((popup) => {
-      popup.remove();
+  // ==========================================================
+  // FILL
+  // ==========================================================
+
+  if (!this.map.getLayer(L_FILL)) {
+    this.map.addLayer({
+      id: L_FILL,
+      type: "fill",
+      source: SRC,
+      filter: [
+        "==",
+        ["geometry-type"],
+        "Polygon",
+      ],
+      paint: {
+        "fill-color": "#2dd4bf",
+        "fill-opacity": 0.12,
+      },
     });
+  }
 
-    this._popups.clear();
+  // ==========================================================
+  // LINE
+  // ==========================================================
+
+  if (!this.map.getLayer(L_LINE)) {
+    this.map.addLayer({
+      id: L_LINE,
+      type: "line",
+      source: SRC,
+      filter: [
+        "==",
+        ["geometry-type"],
+        "LineString",
+      ],
+      layout: {
+        "line-cap": "round",
+        "line-join": "round",
+      },
+      paint: {
+        "line-color": "#ffff00",
+        "line-width": 4,
+        "line-opacity": 1,
+      },
+    });
   }
+
+  // ==========================================================
+  // VERTEX
+  // ==========================================================
+
+  if (!this.map.getLayer(L_VERT)) {
+    this.map.addLayer({
+      id: L_VERT,
+      type: "circle",
+      source: SRC,
+      filter: [
+        "==",
+        ["geometry-type"],
+        "Point",
+      ],
+      paint: {
+        "circle-radius": 6,
+        "circle-color": "#ffff00",
+        "circle-stroke-color": "#000000",
+        "circle-stroke-width": 2,
+      },
+    });
   }
+
+  // ==========================================================
+  // PASTIKAN TERLIHAT
+  // ==========================================================
+
+  this.map.setLayoutProperty(
+    L_FILL,
+    "visibility",
+    "visible"
+  );
+
+  this.map.setLayoutProperty(
+    L_LINE,
+    "visibility",
+    "visible"
+  );
+
+  this.map.setLayoutProperty(
+    L_VERT,
+    "visibility",
+    "visible"
+  );
+}
+
+// ============================================================
+// POPUP MANAGEMENT
+// ============================================================
+
+private _addPopup(
+  popup: maplibregl.Popup
+): void {
+  this._popups.add(popup);
+
+  popup.on("close", () => {
+    this._popups.delete(popup);
+  });
+
+  popup.addTo(this.map);
+}
+
+private _closePopups(): void {
+  this._popups.forEach((popup) => {
+    popup.remove();
+  });
+
+  this._popups.clear();
+}
 
   // ============================================================
   // START
