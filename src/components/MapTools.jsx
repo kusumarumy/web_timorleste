@@ -8,8 +8,8 @@
 // - area     → Luas
 // - distance → Jarak
 //
-// Panjang, Lebar, dan Luas menggunakan MeasureControl mode "area".
-// Yang membedakan adalah nilai hasil yang ditampilkan ke pengguna.
+// Tombol pengukuran berada di ControlPanel.
+// MapTools hanya menjalankan MeasureControl dan menampilkan hasil.
 // ============================================================================
 
 "use client";
@@ -26,12 +26,14 @@ import {
 import {
   getToolMode,
   onToolMode,
-  setToolMode,
 } from "./toolMode";
 
 import "./geo-tools.css";
 
-// GANTI dengan ID layer interaktif sebenarnya
+// ============================================================================
+// LAYER YANG BISA DI-IDENTIFY
+// ============================================================================
+
 const INTERACTIVE_LAYERS = [
   "aoi-foto-udara",
   "aoi-lidar",
@@ -43,8 +45,16 @@ const INTERACTIVE_LAYERS = [
   "kontur-minor",
 ];
 
+// ============================================================================
+// FAKTOR SKALA
 // 1 = nilai grid UTM
+// ============================================================================
+
 const GROUND_K = 1;
+
+// ============================================================================
+// COMPONENT
+// ============================================================================
 
 export default function MapTools({ map }) {
   const identifyRef = useRef(null);
@@ -53,196 +63,251 @@ export default function MapTools({ map }) {
   const [tool, setTool] = useState(getToolMode());
   const [result, setResult] = useState(null);
 
-  // ============================================================
-  // INIT CONTROLS
-  // ============================================================
+  // ========================================================================
+  // INIT
+  // ========================================================================
 
   useEffect(() => {
     if (!map) return;
 
+    console.log("MapTools initialized");
+
+    // ----------------------------------------------------------
+    // IDENTIFY
+    // ----------------------------------------------------------
+
     identifyRef.current = new IdentifyControl(map, {
       layerIds: INTERACTIVE_LAYERS,
-      labelFn: (k) => k.replace(/_/g, " "),
+
+      labelFn: (key) =>
+        key.replace(/_/g, " "),
     });
+
+    // ----------------------------------------------------------
+    // MEASUREMENT
+    // ----------------------------------------------------------
 
     measureRef.current = new MeasureControl(map, {
       scaleFactor: GROUND_K,
-      onResult: setResult,
+
+      onResult: (value) => {
+        console.log("MEASURE RESULT:", value);
+        setResult(value);
+      },
     });
 
+    // ----------------------------------------------------------
+    // CLEANUP
+    // ----------------------------------------------------------
+
     return () => {
+      console.log("MapTools cleanup");
+
       identifyRef.current?.disable();
+
       measureRef.current?.stop();
+
       measureRef.current?.clear();
     };
   }, [map]);
 
-  // ============================================================
+  // ========================================================================
   // DENGARKAN TOOL MODE DARI CONTROL PANEL
-  // ============================================================
+  // ========================================================================
 
   useEffect(() => {
+    if (!map) return;
+
     const unsubscribe = onToolMode((next) => {
+      console.log("TOOL MODE:", next);
+
       setTool(next);
 
-      // Matikan tool sebelumnya
+      // ----------------------------------------------------------
+      // MATIKAN TOOL SEBELUMNYA
+      // ----------------------------------------------------------
+
       identifyRef.current?.disable();
+
       measureRef.current?.stop();
+
       measureRef.current?.clear();
 
       setResult(null);
 
-      if (!next) return;
+      // Tidak ada tool aktif
+      if (!next) {
+        return;
+      }
 
+      // ----------------------------------------------------------
       // IDENTIFY
+      // ----------------------------------------------------------
+
       if (next === "identify") {
         identifyRef.current?.enable();
         return;
       }
 
+      // ----------------------------------------------------------
       // JARAK
+      // ----------------------------------------------------------
+
       if (next === "distance") {
         measureRef.current?.start("distance");
         return;
       }
 
-      // PANJANG / LEBAR / LUAS
+      // ----------------------------------------------------------
+      // PANJANG
+      // LEBAR
+      // LUAS
       //
-      // Ketiganya menggambar polygon.
-      // Hasilnya sudah dihitung oleh measurePolygon().
+      // Ketiganya menggunakan mode polygon/area.
+      // MeasureControl menghitung:
+      // - area
+      // - perimeter
+      // - length
+      // - width
+      // ----------------------------------------------------------
+
       if (
         next === "length" ||
         next === "width" ||
         next === "area"
       ) {
         measureRef.current?.start("area");
+        return;
       }
     });
 
     return unsubscribe;
-  }, []);
+  }, [map]);
 
-  // ============================================================
-  // TOOLBAR LAMA
-  //
-  // Boleh dihapus kalau tombol sekarang sudah ada di ControlPanel.
-  // ============================================================
+  // ========================================================================
+  // HASIL PENGUKURAN
+  // ========================================================================
+
+  if (!result) {
+    return null;
+  }
 
   return (
-    <>
-      {result && (
-        <div
-          className="geo-measure"
-          style={{
-            position: "absolute",
-            top: 60,
-            right: 16,
-            zIndex: 20,
-          }}
-        >
-          {/* ==================================================
-              JARAK
-          ================================================== */}
+    <div
+      className="geo-measure"
+      style={{
+        position: "absolute",
+        top: 60,
+        right: 16,
+        zIndex: 20,
+      }}
+    >
+      {/* ================================================================
+          JARAK
+      ================================================================ */}
 
-          {tool === "distance" &&
-            result.mode === "distance" && (
-              <>
-                <div className="geo-measure__row">
-                  <span className="lbl">
-                    Jarak
-                  </span>
+      {tool === "distance" &&
+        result.mode === "distance" && (
+          <>
+            <div className="geo-measure__row">
+              <span className="lbl">
+                Jarak
+              </span>
 
-                  <span className="val">
-                    {fmtLen(result.total)}
-                  </span>
-                </div>
+              <span className="val">
+                {fmtLen(result.total)}
+              </span>
+            </div>
 
-                {result.segments?.length > 1 && (
-                  <div className="geo-measure__row">
-                    <span className="lbl">
-                      Segmen terakhir
-                    </span>
-
-                    <span className="val">
-                      {fmtLen(
-                        result.segments.at(-1)
-                      )}
-                    </span>
-                  </div>
-                )}
-              </>
-            )}
-
-          {/* ==================================================
-              PANJANG
-          ================================================== */}
-
-          {tool === "length" &&
-            result.mode === "area" &&
-            result.length != null && (
+            {result.segments?.length > 1 && (
               <div className="geo-measure__row">
                 <span className="lbl">
-                  Panjang
+                  Segmen terakhir
                 </span>
 
                 <span className="val">
-                  {fmtLen(result.length)}
+                  {fmtLen(
+                    result.segments.at(-1)
+                  )}
                 </span>
               </div>
             )}
+          </>
+        )}
 
-          {/* ==================================================
-              LEBAR
-          ================================================== */}
+      {/* ================================================================
+          PANJANG
+      ================================================================ */}
 
-          {tool === "width" &&
-            result.mode === "area" &&
-            result.width != null && (
-              <div className="geo-measure__row">
-                <span className="lbl">
-                  Lebar
-                </span>
+      {tool === "length" &&
+        result.mode === "area" &&
+        result.length != null && (
+          <div className="geo-measure__row">
+            <span className="lbl">
+              Panjang
+            </span>
 
-                <span className="val">
-                  {fmtLen(result.width)}
-                </span>
-              </div>
-            )}
-
-          {/* ==================================================
-              LUAS
-          ================================================== */}
-
-          {tool === "area" &&
-            result.mode === "area" &&
-            result.area != null && (
-              <>
-                <div className="geo-measure__row">
-                  <span className="lbl">
-                    Luas
-                  </span>
-
-                  <span className="val">
-                    {fmtArea(result.area)}
-                  </span>
-                </div>
-              </>
-            )}
-
-          <div className="geo-measure__hint">
-            Klik untuk menambah titik ·
-            double-click / Enter untuk selesai ·
-            Esc untuk batal
+            <span className="val">
+              {fmtLen(result.length)}
+            </span>
           </div>
+        )}
 
-          <div className="geo-measure__crs">
-            EPSG:32751 ·{" "}
-            {result.k === 1
-              ? "nilai grid UTM"
-              : `ground (k=${result.k})`}
+      {/* ================================================================
+          LEBAR
+      ================================================================ */}
+
+      {tool === "width" &&
+        result.mode === "area" &&
+        result.width != null && (
+          <div className="geo-measure__row">
+            <span className="lbl">
+              Lebar
+            </span>
+
+            <span className="val">
+              {fmtLen(result.width)}
+            </span>
           </div>
-        </div>
-      )}
-    </>
+        )}
+
+      {/* ================================================================
+          LUAS
+      ================================================================ */}
+
+      {tool === "area" &&
+        result.mode === "area" &&
+        result.area != null && (
+          <div className="geo-measure__row">
+            <span className="lbl">
+              Luas
+            </span>
+
+            <span className="val">
+              {fmtArea(result.area)}
+            </span>
+          </div>
+        )}
+
+      {/* ================================================================
+          PETUNJUK
+      ================================================================ */}
+
+      <div className="geo-measure__hint">
+        Klik untuk menambah titik · double-click /
+        Enter untuk selesai · Esc untuk batal
+      </div>
+
+      {/* ================================================================
+          CRS
+      ================================================================ */}
+
+      <div className="geo-measure__crs">
+        EPSG:32751 ·{" "}
+        {result.k === 1
+          ? "nilai grid UTM"
+          : `ground (k=${result.k})`}
+      </div>
+    </div>
   );
 }
