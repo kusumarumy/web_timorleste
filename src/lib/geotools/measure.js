@@ -212,31 +212,35 @@ export class MeasureControl {
     this.onResult(null);
   }
 
-  // ============================================================
-  // SET DATA
-  // ============================================================
+ _setData(coords) {
+  const source = this.map.getSource(SRC);
 
-  _setData(coords) {
-    const source = this.map.getSource(SRC);
-
-    if (!source) {
-      console.warn(
-        "MEASURE: source tidak ditemukan"
-      );
-      return;
-    }
-
-    if (typeof source.setData !== "function") {
-      console.warn(
-        "MEASURE: source bukan GeoJSON source"
-      );
-      return;
-    }
-
-    source.setData(
-      this._fc(coords)
+  if (!source) {
+    console.warn(
+      "MEASURE: source tidak ditemukan"
     );
+    return;
   }
+
+  if (typeof source.setData !== "function") {
+    console.warn(
+      "MEASURE: source bukan GeoJSON source"
+    );
+    return;
+  }
+
+  const geojson = this._fc(coords);
+
+  console.log("MEASURE DRAW:", {
+    mode: this.mode,
+    coords,
+    geojson,
+    lineLayer: !!this.map.getLayer(L_LINE),
+    vertexLayer: !!this.map.getLayer(L_VERT),
+  });
+
+  source.setData(geojson);
+}
 
   // ============================================================
   // CLICK
