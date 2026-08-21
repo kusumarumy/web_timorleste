@@ -72,7 +72,7 @@ export function Legend() {
 
       {/* CONTENT */}
       {open && (
-        <div className="max-h-[calc(100vh-150px)] overflow-y-auto px-3.5 pb-3 pt-2.5">
+        <div className="max-h-[55vh] overflow-y-auto px-3.5 pb-3 pt-2.5">
           
           <div className="flex flex-col gap-2.5">
             {items.map((l) => (
