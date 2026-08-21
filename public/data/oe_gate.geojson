@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "oe_gate",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32751" } },
+"features": [
+{ "type": "Feature", "properties": { "LAYER": "Unknown Area Type", "id": null, "DETAIL": "Gate" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 777851.265258792438544, 8983104.267974270507693 ], [ 777851.669698976911604, 8983104.912543315440416 ], [ 777852.73833790270146, 8983104.205090999603271 ], [ 777852.308004064718261, 8983103.586951412260532 ], [ 777851.265258792438544, 8983104.267974270507693 ] ] ] ] } }
+]
+}

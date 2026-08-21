@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "oe_crest",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32751" } },
+"features": [
+{ "type": "Feature", "properties": { "LAYER": "Unknown Area Type", "id": null, "DETAIL": "CREST" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 777855.893506811466068, 8983089.857862079516053 ], [ 777857.195683971745893, 8983092.201170390471816 ], [ 777932.20933884754777, 8983043.132215680554509 ], [ 777930.633535553468391, 8983040.660145426169038 ], [ 777855.893506811466068, 8983089.857862079516053 ] ] ] ] } }
+]
+}
