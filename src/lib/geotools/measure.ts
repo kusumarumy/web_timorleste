@@ -868,6 +868,7 @@ if (this.mode === "width") {
   this.onResult(null);
   return;
 }
+  }
 
   // ============================================================
   // RESULT POPUP
