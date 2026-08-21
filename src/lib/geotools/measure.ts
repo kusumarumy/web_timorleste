@@ -9,7 +9,6 @@ import type {
   LineString,
   Point,
   Polygon,
-  Position,
 } from "geojson";
 
 import {
@@ -108,44 +107,33 @@ export class MeasureControl {
   coords: Coordinate[];
   hover: Coordinate | null;
 
-  private _onClick: (e: MapMouseEvent) => void;
-  private _onMove: (e: MapMouseEvent) => void;
-  private _onDbl: (e: MapMouseEvent) => void;
-  private _onKey: (e: KeyboardEvent) => void;
-
   constructor(
-    map: MLMap,
-    options: MeasureControlOptions = {}
-  ) {
-    this.map = map;
+  map: MLMap,
+  options: MeasureControlOptions = {}
+) {
+  this.map = map;
 
-    this.onResult =
-      options.onResult ??
-      (() => {});
+  this.onResult =
+    options.onResult ??
+    (() => {});
 
-    this.onStop =
-      options.onStop ??
-      (() => {});
+  this.onStop =
+    options.onStop ??
+    (() => {});
 
-    this.scaleFactor =
-      options.scaleFactor ?? 1;
+  this.scaleFactor =
+    options.scaleFactor ?? 1;
 
-    this.mode = null;
-    this.coords = [];
-    this.hover = null;
+  this.mode = null;
+  this.coords = [];
+  this.hover = null;
 
-    this._onClick =
-      this._onClick.bind(this);
-
-    this._onMove =
-      this._onMove.bind(this);
-
-    this._onDbl =
-      this._onDbl.bind(this);
-
-    this._onKey =
-      this._onKey.bind(this);
-  }
+  // Bind event handler
+  this._onClick = this._onClick.bind(this);
+  this._onMove = this._onMove.bind(this);
+  this._onDbl = this._onDbl.bind(this);
+  this._onKey = this._onKey.bind(this);
+}
 
   // ============================================================
   // LAYERS
