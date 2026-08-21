@@ -1273,60 +1273,7 @@ export const GROUPS: LayerGroup[] = [
           color: "#38BDF8",
         },
       },
-{
-        id: "oe_embankment",
-        nameKey: "l_oe_embankment",
-        kind: "fill",
-        data: v("oe_embankment"),
-        clickable: true,
-        paint: {
-          "fill-color": "#A16207",
-          "fill-opacity": 0.45,
-          "fill-outline-color": "#A16207",
-        },
-        defaultOn: false,
-        opacity: 0.45,
-        opacityProp: "fill-opacity",
-        legend: {
-          color: "#A16207",
-        },
-      },
-      {
-        id: "oe_flushinggate",
-        nameKey: "l_oe_flushinggate",
-        kind: "symbol",
-        data: v("oe_flushinggate"),
-        clickable: true,
-        paint: {},
-        defaultOn: false,
-        legend: {
-          color: "#0891B2",
-        },
-      },
-      {
-        id: "oe_gate",
-        nameKey: "l_oe_gate",
-        kind: "symbol",
-        data: v("oe_gate"),
-        clickable: true,
-        paint: {},
-        defaultOn: false,
-        legend: {
-          color: "#7C3AED",
-        },
-      },
-      {
-        id: "oe_ingate",
-        nameKey: "l_oe_ingate",
-        kind: "symbol",
-        data: v("oe_ingate"),
-        clickable: true,
-        paint: {},
-        defaultOn: false,
-        legend: {
-          color: "#16A34A",
-        },
-      },
+
       {
         id: "oe_weirbody",
         nameKey: "l_oe_weirbody",
@@ -1507,6 +1454,22 @@ export const GROUPS: LayerGroup[] = [
           line: true,
         },
       },
+      {
+        id: "rei_upstream",
+        nameKey: "l_rei_upstream",
+        kind: "line",
+        data: v("rei_upstream"),
+        clickable: true,
+        paint: {
+          "line-color": "#0EA5E9",
+          "line-width": 2,
+        },
+        defaultOn: false,
+        legend: {
+          color: "#0EA5E9",
+          line: true,
+        },
+      },
 {
         id: "rei_flushinggate",
         nameKey: "l_rei_flushinggate",
@@ -1617,24 +1580,6 @@ export const GROUPS: LayerGroup[] = [
           color: "#38BDF8",
         },
       },
-
-      {
-        id: "rei_upstream",
-        nameKey: "l_rei_upstream",
-        kind: "line",
-        data: v("rei_upstream"),
-        clickable: true,
-        paint: {
-          "line-color": "#0EA5E9",
-          "line-width": 2,
-        },
-        defaultOn: false,
-        legend: {
-          color: "#0EA5E9",
-          line: true,
-        },
-      },
-
       {
         id: "rei_weirbody",
         nameKey: "l_rei_weirbody",
