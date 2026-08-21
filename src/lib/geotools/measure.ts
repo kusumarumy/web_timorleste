@@ -1,36 +1,161 @@
-import maplibregl from "maplibre-gl";
-import { measureLine, measurePolygon } from "./geo";
+import maplibregl, {
+  Map as MLMap,
+  MapMouseEvent,
+} from "maplibre-gl";
+
+import type {
+  Feature,
+  FeatureCollection,
+  LineString,
+  Point,
+  Polygon,
+  Position,
+} from "geojson";
+
+import {
+  measureLine,
+  measurePolygon,
+} from "./geo";
+
+import type { ToolMode } from "@/components/toolMode";
+
+// ============================================================================
+// CONSTANT
+// ============================================================================
 
 const SRC = "__measure_src";
 const L_FILL = "__measure_fill";
 const L_LINE = "__measure_line";
 const L_VERT = "__measure_vert";
 
+// ============================================================================
+// TYPE
+// ============================================================================
+
+type MeasureMode = Exclude<ToolMode, null>;
+
+type Coordinate = [number, number];
+
+interface MeasureLineResult {
+  total: number;
+  [key: string]: unknown;
+}
+
+interface MeasurePolygonResult {
+  area: number;
+  length: number;
+  width: number;
+  [key: string]: unknown;
+}
+
+type MeasureResult =
+  | {
+      mode: "distance";
+      total: number;
+      finished: boolean;
+      unit: "m";
+      k: number;
+      [key: string]: unknown;
+    }
+  | {
+      mode: "area";
+      area?: number;
+      length?: number;
+      width?: number;
+      pendingPerimeter?: number;
+      finished: boolean;
+      unit: "m";
+      k: number;
+      [key: string]: unknown;
+    }
+  | {
+      mode: "length";
+      length: number;
+      finished: boolean;
+      unit: "m";
+      k: number;
+      [key: string]: unknown;
+    }
+  | {
+      mode: "width";
+      width: number;
+      finished: boolean;
+      unit: "m";
+      k: number;
+      [key: string]: unknown;
+    }
+  | null;
+
+interface MeasureControlOptions {
+  onResult?: (result: MeasureResult) => void;
+  onStop?: () => void;
+  scaleFactor?: number;
+}
+
+// ============================================================================
+// MEASURE CONTROL
+// ============================================================================
+
 export class MeasureControl {
-  constructor(map, options = {}) {
+  map: MLMap;
+
+  onResult: (result: MeasureResult) => void;
+  onStop: () => void;
+
+  scaleFactor: number;
+
+  mode: MeasureMode | null;
+  coords: Coordinate[];
+  hover: Coordinate | null;
+
+  private _onClick: (e: MapMouseEvent) => void;
+  private _onMove: (e: MapMouseEvent) => void;
+  private _onDbl: (e: MapMouseEvent) => void;
+  private _onKey: (e: KeyboardEvent) => void;
+
+  constructor(
+    map: MLMap,
+    options: MeasureControlOptions = {}
+  ) {
     this.map = map;
 
-    this.onResult = options.onResult || (() => {});
-    this.onStop = options.onStop || (() => {});
+    this.onResult =
+      options.onResult ??
+      (() => {});
 
-    this.scaleFactor = options.scaleFactor ?? 1;
+    this.onStop =
+      options.onStop ??
+      (() => {});
+
+    this.scaleFactor =
+      options.scaleFactor ?? 1;
 
     this.mode = null;
     this.coords = [];
     this.hover = null;
 
-    this._onClick = this._onClick.bind(this);
-    this._onMove = this._onMove.bind(this);
-    this._onDbl = this._onDbl.bind(this);
-    this._onKey = this._onKey.bind(this);
+    this._onClick =
+      this._onClick.bind(this);
+
+    this._onMove =
+      this._onMove.bind(this);
+
+    this._onDbl =
+      this._onDbl.bind(this);
+
+    this._onKey =
+      this._onKey.bind(this);
   }
 
   // ============================================================
   // LAYERS
   // ============================================================
 
-  _ensureLayers() {
+  private _ensureLayers(): void {
+    // ==========================================================
     // SOURCE
+    // ==========================================================
+
     if (!this.map.getSource(SRC)) {
       this.map.addSource(SRC, {
         type: "geojson",
@@ -41,13 +166,20 @@ export class MeasureControl {
       });
     }
 
+    // ==========================================================
     // FILL
+    // ==========================================================
+
     if (!this.map.getLayer(L_FILL)) {
       this.map.addLayer({
         id: L_FILL,
         type: "fill",
         source: SRC,
-        filter: ["==", ["geometry-type"], "Polygon"],
+        filter: [
+          "==",
+          ["geometry-type"],
+          "Polygon",
+        ],
         paint: {
           "fill-color": "#2dd4bf",
           "fill-opacity": 0.12,
@@ -55,13 +187,20 @@ export class MeasureControl {
       });
     }
 
+    // ==========================================================
     // LINE
+    // ==========================================================
+
     if (!this.map.getLayer(L_LINE)) {
       this.map.addLayer({
         id: L_LINE,
         type: "line",
         source: SRC,
-        filter: ["==", ["geometry-type"], "LineString"],
+        filter: [
+          "==",
+          ["geometry-type"],
+          "LineString",
+        ],
         layout: {
           "line-cap": "round",
           "line-join": "round",
@@ -74,13 +213,20 @@ export class MeasureControl {
       });
     }
 
+    // ==========================================================
     // VERTEX
+    // ==========================================================
+
     if (!this.map.getLayer(L_VERT)) {
       this.map.addLayer({
         id: L_VERT,
         type: "circle",
         source: SRC,
-        filter: ["==", ["geometry-type"], "Point"],
+        filter: [
+          "==",
+          ["geometry-type"],
+          "Point",
+        ],
         paint: {
           "circle-radius": 6,
           "circle-color": "#ffff00",
@@ -90,7 +236,10 @@ export class MeasureControl {
       });
     }
 
-    // Pastikan terlihat
+    // ==========================================================
+    // PASTIKAN TERLIHAT
+    // ==========================================================
+
     this.map.setLayoutProperty(
       L_FILL,
       "visibility",
@@ -114,8 +263,11 @@ export class MeasureControl {
   // START
   // ============================================================
 
-  start(mode) {
-    console.log("MEASURE START:", mode);
+  start(mode: MeasureMode): void {
+    console.log(
+      "MEASURE START:",
+      mode
+    );
 
     // Lepas listener lama
     this._removeListeners();
@@ -130,9 +282,20 @@ export class MeasureControl {
     this._setData([]);
 
     // Listener
-    this.map.on("click", this._onClick);
-    this.map.on("mousemove", this._onMove);
-    this.map.on("dblclick", this._onDbl);
+    this.map.on(
+      "click",
+      this._onClick
+    );
+
+    this.map.on(
+      "mousemove",
+      this._onMove
+    );
+
+    this.map.on(
+      "dblclick",
+      this._onDbl
+    );
 
     document.addEventListener(
       "keydown",
@@ -141,7 +304,9 @@ export class MeasureControl {
 
     this.map.doubleClickZoom.disable();
 
-    this.map.getCanvas().style.cursor = "crosshair";
+    this.map
+      .getCanvas()
+      .style.cursor = "crosshair";
 
     console.log(
       "MEASURE CLICK LISTENER TERPASANG"
@@ -152,7 +317,7 @@ export class MeasureControl {
   // REMOVE LISTENERS
   // ============================================================
 
-  _removeListeners() {
+  private _removeListeners(): void {
     this.map.off(
       "click",
       this._onClick
@@ -177,21 +342,21 @@ export class MeasureControl {
       this.map.doubleClickZoom.enable();
     }
 
-    this.map.getCanvas().style.cursor = "";
+    this.map
+      .getCanvas()
+      .style.cursor = "";
   }
 
   // ============================================================
   // STOP
   // ============================================================
 
-  stop() {
+  stop(): void {
     this._removeListeners();
 
     /*
-     * Jangan langsung menghapus geometry.
-     *
-     * Geometry hasil pengukuran tetap dibiarkan
-     * di peta.
+     * Geometry hasil pengukuran
+     * tetap dibiarkan di peta.
      */
 
     this.hover = null;
@@ -203,7 +368,7 @@ export class MeasureControl {
   // CLEAR
   // ============================================================
 
-  clear() {
+  clear(): void {
     this.coords = [];
     this.hover = null;
 
@@ -212,46 +377,68 @@ export class MeasureControl {
     this.onResult(null);
   }
 
- _setData(coords) {
-  const source = this.map.getSource(SRC);
+  // ============================================================
+  // SET DATA
+  // ============================================================
 
-  if (!source) {
-    console.warn(
-      "MEASURE: source tidak ditemukan"
+  private _setData(
+    coords: Coordinate[]
+  ): void {
+    const source =
+      this.map.getSource(SRC);
+
+    if (!source) {
+      console.warn(
+        "MEASURE: source tidak ditemukan"
+      );
+      return;
+    }
+
+    if (
+      source.type !== "geojson" ||
+      typeof source.setData !== "function"
+    ) {
+      console.warn(
+        "MEASURE: source bukan GeoJSON source"
+      );
+      return;
+    }
+
+    const geojson =
+      this._fc(coords);
+
+    console.log(
+      "MEASURE DRAW:",
+      {
+        mode: this.mode,
+        coords,
+        geojson,
+        lineLayer:
+          !!this.map.getLayer(
+            L_LINE
+          ),
+        vertexLayer:
+          !!this.map.getLayer(
+            L_VERT
+          ),
+      }
     );
-    return;
+
+    source.setData(geojson);
   }
-
-  if (typeof source.setData !== "function") {
-    console.warn(
-      "MEASURE: source bukan GeoJSON source"
-    );
-    return;
-  }
-
-  const geojson = this._fc(coords);
-
-  console.log("MEASURE DRAW:", {
-    mode: this.mode,
-    coords,
-    geojson,
-    lineLayer: !!this.map.getLayer(L_LINE),
-    vertexLayer: !!this.map.getLayer(L_VERT),
-  });
-
-  source.setData(geojson);
-}
 
   // ============================================================
   // CLICK
   // ============================================================
 
-  _onClick(e) {
+  private _onClick(
+    e: MapMouseEvent
+  ): void {
     if (!this.mode) {
       return;
     }
 
-    const point = [
+    const point: Coordinate = [
       e.lngLat.lng,
       e.lngLat.lat,
     ];
@@ -262,12 +449,12 @@ export class MeasureControl {
     );
 
     // ==========================================================
-    // TITIK YANG SUDAH DIKLIK MENJADI PERMANEN
+    // TITIK PERMANEN
     // ==========================================================
 
     this.coords.push(point);
 
-    // Setelah klik, preview mouse dihapus dulu.
+    // Preview mouse dihapus
     this.hover = null;
 
     console.log(
@@ -283,7 +470,8 @@ export class MeasureControl {
       closeButton: true,
       closeOnClick: false,
       offset: 12,
-      className: "measure-coordinate-popup",
+      className:
+        "measure-coordinate-popup",
     })
       .setLngLat(e.lngLat)
       .setHTML(`
@@ -335,13 +523,16 @@ export class MeasureControl {
   // MOUSE MOVE
   // ============================================================
 
-  _onMove(e) {
+  private _onMove(
+    e: MapMouseEvent
+  ): void {
     if (!this.mode) {
       return;
     }
 
     /*
-     * Kalau belum ada titik, tidak perlu preview garis.
+     * Kalau belum ada titik,
+     * tidak perlu preview.
      */
 
     if (this.coords.length === 0) {
@@ -353,14 +544,6 @@ export class MeasureControl {
       e.lngLat.lat,
     ];
 
-    /*
-     * Gambar garis:
-     *
-     * titik permanen
-     *       ↓
-     * [P1, P2, P3] ----> mouse
-     */
-
     this._update();
   }
 
@@ -368,7 +551,9 @@ export class MeasureControl {
   // DOUBLE CLICK
   // ============================================================
 
-  _onDbl(e) {
+  private _onDbl(
+    _e: MapMouseEvent
+  ): void {
     if (!this.mode) {
       return;
     }
@@ -381,47 +566,37 @@ export class MeasureControl {
       return;
     }
 
-    const finishedMode = this.mode;
+    const finishedMode =
+      this.mode;
 
-    const finalCoords = this.coords.slice();
+    const finalCoords =
+      this.coords.slice();
 
-    /*
-     * Jangan masukkan posisi mouse sebagai
-     * titik tambahan.
-     */
-
+    // Jangan masukkan hover
     this.hover = null;
 
-    /*
-     * Gambar geometry final.
-     */
+    // Geometry final
+    this._setData(
+      finalCoords
+    );
 
-    this._setData(finalCoords);
-
-    /*
-     * Hitung hasil final.
-     */
-
+    // Hasil final
     this._updateResult(
       finalCoords,
       true
     );
 
-    /*
-     * Popup hasil tetap seperti sebelumnya.
-     */
-
+    // Popup hasil
     this._showResultPopup(
-      finalCoords[finalCoords.length - 1],
+      finalCoords[
+        finalCoords.length - 1
+      ],
       finishedMode,
       finalCoords
     );
 
-    /*
-     * Hanya matikan listener.
-     * Geometry tetap ada.
-     */
-
+    // Listener dimatikan,
+    // geometry tetap ada.
     this.stop();
   }
 
@@ -429,31 +604,43 @@ export class MeasureControl {
   // KEYBOARD
   // ============================================================
 
-  _onKey(e) {
+  private _onKey(
+    e: KeyboardEvent
+  ): void {
     if (!this.mode) {
       return;
     }
 
+    // ==========================================================
     // ESC
+    // ==========================================================
+
     if (e.key === "Escape") {
       this.clear();
       this.stop();
       return;
     }
 
+    // ==========================================================
     // ENTER
+    // ==========================================================
+
     if (e.key === "Enter") {
       if (this.coords.length === 0) {
         return;
       }
 
-      const finishedMode = this.mode;
+      const finishedMode =
+        this.mode;
 
-      const finalCoords = this.coords.slice();
+      const finalCoords =
+        this.coords.slice();
 
       this.hover = null;
 
-      this._setData(finalCoords);
+      this._setData(
+        finalCoords
+      );
 
       this._updateResult(
         finalCoords,
@@ -461,7 +648,9 @@ export class MeasureControl {
       );
 
       this._showResultPopup(
-        finalCoords[finalCoords.length - 1],
+        finalCoords[
+          finalCoords.length - 1
+        ],
         finishedMode,
         finalCoords
       );
@@ -474,13 +663,12 @@ export class MeasureControl {
   // WORKING COORDINATES
   // ============================================================
 
-  _working() {
-    const c = this.coords.slice();
+  private _working(): Coordinate[] {
+    const c =
+      this.coords.slice();
 
     /*
-     * Hover hanya untuk preview.
-     *
-     * Tidak masuk ke coords permanen.
+     * Hover hanya preview.
      */
 
     if (
@@ -497,28 +685,25 @@ export class MeasureControl {
   // UPDATE
   // ============================================================
 
-  _update(finished = false) {
+  private _update(
+    finished = false
+  ): void {
     if (!this.mode) {
       return;
     }
 
-    const c = this._working();
+    const c =
+      this._working();
 
     console.log(
       "MEASURE UPDATE:",
       c
     );
 
-    /*
-     * Gambar geometry
-     */
-
+    // Gambar geometry
     this._setData(c);
 
-    /*
-     * Hitung hasil
-     */
-
+    // Hitung hasil
     this._updateResult(
       c,
       finished
@@ -529,18 +714,23 @@ export class MeasureControl {
   // UPDATE RESULT
   // ============================================================
 
-  _updateResult(c, finished = false) {
-    const k = this.scaleFactor;
+  private _updateResult(
+    c: Coordinate[],
+    finished = false
+  ): void {
+    const k =
+      this.scaleFactor;
 
     // ==========================================================
     // DISTANCE
     // ==========================================================
 
     if (this.mode === "distance") {
-      const r = measureLine(
-        c,
-        k
-      );
+      const r =
+        measureLine(
+          c,
+          k
+        ) as MeasureLineResult | null;
 
       this.onResult(
         r
@@ -563,10 +753,11 @@ export class MeasureControl {
 
     if (this.mode === "area") {
       if (c.length >= 3) {
-        const r = measurePolygon(
-          c,
-          k
-        );
+        const r =
+          measurePolygon(
+            c,
+            k
+          ) as MeasurePolygonResult;
 
         this.onResult({
           mode: "area",
@@ -580,16 +771,18 @@ export class MeasureControl {
       }
 
       if (c.length === 2) {
-        const r = measureLine(
-          c,
-          k
-        );
+        const r =
+          measureLine(
+            c,
+            k
+          ) as MeasureLineResult | null;
 
         this.onResult(
           r
             ? {
                 mode: "area",
-                pendingPerimeter: r.total,
+                pendingPerimeter:
+                  r.total,
                 finished,
                 unit: "m",
                 k,
@@ -601,63 +794,73 @@ export class MeasureControl {
       }
 
       this.onResult(null);
+      return;
     }
+
     // ==========================================================
-// LENGTH
-// ==========================================================
+    // LENGTH
+    // ==========================================================
 
-if (this.mode === "length") {
-  if (c.length >= 3) {
-    const r = measurePolygon(c, k);
+    if (this.mode === "length") {
+      if (c.length >= 3) {
+        const r =
+          measurePolygon(
+            c,
+            k
+          ) as MeasurePolygonResult;
 
-    this.onResult({
-      mode: "length",
-      length: r.length,
-      finished,
-      unit: "m",
-      k,
-    });
+        this.onResult({
+          mode: "length",
+          length: r.length,
+          finished,
+          unit: "m",
+          k,
+        });
 
-    return;
-  }
+        return;
+      }
 
-  this.onResult(null);
-  return;
-}
+      this.onResult(null);
+      return;
+    }
 
-// ==========================================================
-// WIDTH
-// ==========================================================
+    // ==========================================================
+    // WIDTH
+    // ==========================================================
 
-if (this.mode === "width") {
-  if (c.length >= 3) {
-    const r = measurePolygon(c, k);
+    if (this.mode === "width") {
+      if (c.length >= 3) {
+        const r =
+          measurePolygon(
+            c,
+            k
+          ) as MeasurePolygonResult;
 
-    this.onResult({
-      mode: "width",
-      width: r.width,
-      finished,
-      unit: "m",
-      k,
-    });
+        this.onResult({
+          mode: "width",
+          width: r.width,
+          finished,
+          unit: "m",
+          k,
+        });
 
-    return;
-  }
+        return;
+      }
 
-  this.onResult(null);
-  return;
-}
+      this.onResult(null);
+      return;
+    }
   }
 
   // ============================================================
   // RESULT POPUP
   // ============================================================
 
-  _showResultPopup(
-    position,
-    mode,
-    coords
-  ) {
+  private _showResultPopup(
+    position: Coordinate | undefined,
+    mode: MeasureMode,
+    coords: Coordinate[]
+  ): void {
     if (!position) {
       return;
     }
@@ -686,10 +889,11 @@ if (this.mode === "width") {
     // ==========================================================
 
     if (mode === "distance") {
-      const r = measureLine(
-        coords,
-        this.scaleFactor
-      );
+      const r =
+        measureLine(
+          coords,
+          this.scaleFactor
+        ) as MeasureLineResult | null;
 
       if (r) {
         html += `
@@ -714,10 +918,11 @@ if (this.mode === "width") {
       mode === "area" &&
       coords.length >= 3
     ) {
-      const r = measurePolygon(
-        coords,
-        this.scaleFactor
-      );
+      const r =
+        measurePolygon(
+          coords,
+          this.scaleFactor
+        ) as MeasurePolygonResult;
 
       html += `
         <div style="
@@ -792,8 +997,10 @@ if (this.mode === "width") {
   // GEOJSON
   // ============================================================
 
-  _fc(c) {
-    const feats = [];
+  private _fc(
+    c: Coordinate[]
+  ): FeatureCollection {
+    const feats: Feature[] = [];
 
     // ==========================================================
     // POLYGON
@@ -803,17 +1010,19 @@ if (this.mode === "width") {
       this.mode === "area" &&
       c.length >= 3
     ) {
+      const polygon: Polygon = {
+        type: "Polygon",
+        coordinates: [
+          [
+            ...c,
+            c[0],
+          ],
+        ],
+      };
+
       feats.push({
         type: "Feature",
-        geometry: {
-          type: "Polygon",
-          coordinates: [
-            [
-              ...c,
-              c[0],
-            ],
-          ],
-        },
+        geometry: polygon,
         properties: {},
       });
     }
@@ -823,12 +1032,14 @@ if (this.mode === "width") {
     // ==========================================================
 
     if (c.length >= 2) {
+      const line: LineString = {
+        type: "LineString",
+        coordinates: c,
+      };
+
       feats.push({
         type: "Feature",
-        geometry: {
-          type: "LineString",
-          coordinates: c,
-        },
+        geometry: line,
         properties: {},
       });
     }
@@ -838,12 +1049,14 @@ if (this.mode === "width") {
     // ==========================================================
 
     c.forEach((p) => {
+      const point: Point = {
+        type: "Point",
+        coordinates: p,
+      };
+
       feats.push({
         type: "Feature",
-        geometry: {
-          type: "Point",
-          coordinates: p,
-        },
+        geometry: point,
         properties: {},
       });
     });
@@ -855,17 +1068,21 @@ if (this.mode === "width") {
   }
 }
 
-// ============================================================
+// ============================================================================
 // FORMAT
-// ============================================================
+// ============================================================================
 
-export function fmtLen(m) {
+export function fmtLen(
+  m: number
+): string {
   return m >= 1000
     ? `${(m / 1000).toFixed(3)} km`
     : `${m.toFixed(2)} m`;
 }
 
-export function fmtArea(m2) {
+export function fmtArea(
+  m2: number
+): string {
   return m2 >= 10000
     ? `${(m2 / 10000).toFixed(4)} ha (${m2.toFixed(2)} m²)`
     : `${m2.toFixed(2)} m²`;
