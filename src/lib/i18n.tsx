@@ -86,6 +86,8 @@ di_raibere: "RAIBRE",
     zoom: "Zoom",
     pitch: "Kemiringan",
     bearing: "Arah",
+    loading_layer_title: "Memuat Layer",
+loading_layer_text: "sedang dimuat...",
   },
 
   en: {
@@ -160,6 +162,8 @@ di_raibere: "RAIBRE",
     zoom: "Zoom",
     pitch: "Pitch",
     bearing: "Bearing",
+    loading_layer_title: "Loading Layers",
+loading_layer_text: "are loading...",
   },
 
   pt: {
@@ -234,6 +238,8 @@ di_raibere: "RAIBRE",
     zoom: "Zoom",
     pitch: "Inclinação",
     bearing: "Direção",
+    loading_layer_title: "A carregar camadas",
+loading_layer_text: "estão a carregar...",
   },
 };
 
