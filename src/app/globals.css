@@ -89,3 +89,92 @@
   color: #8FA6B4;
   font-size: 16px;
 }
+
+.layer-loading-popup {
+  position: absolute;
+
+  /* kanan, sedikit di atas legenda */
+  right: 24px;
+  bottom: 105px;
+
+  z-index: 50;
+
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  max-width: 360px;
+  min-width: 240px;
+
+  padding: 13px 16px;
+
+  background: rgba(27, 43, 54, 0.95);
+  backdrop-filter: blur(12px);
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.28);
+
+  color: #ffffff;
+
+  animation: layerLoadingIn 0.25s ease-out;
+}
+
+.layer-loading-content {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.layer-loading-title {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  color: #76c7d1;
+}
+
+.layer-loading-text {
+  font-size: 13px;
+  line-height: 1.5;
+
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.layer-loading-text strong {
+  color: #ffffff;
+}
+
+.layer-loading-spinner {
+  width: 22px;
+  height: 22px;
+
+  flex-shrink: 0;
+
+  border: 3px solid rgba(118, 199, 209, 0.2);
+  border-top-color: #76c7d1;
+
+  border-radius: 50%;
+
+  animation: layerLoadingSpin 0.8s linear infinite;
+}
+
+@keyframes layerLoadingSpin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes layerLoadingIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
