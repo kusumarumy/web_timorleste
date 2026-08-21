@@ -370,50 +370,39 @@ export class MeasureControl {
   // ============================================================
 
   private _setData(
-    coords: Coordinate[]
-  ): void {
-    const source =
-      this.map.getSource(SRC);
+  coords: Coordinate[]
+): void {
+  const source = this.map.getSource(SRC);
 
-    if (!source) {
-      console.warn(
-        "MEASURE: source tidak ditemukan"
-      );
-      return;
-    }
-
-    if (
-      source.type !== "geojson" ||
-      typeof source.setData !== "function"
-    ) {
-      console.warn(
-        "MEASURE: source bukan GeoJSON source"
-      );
-      return;
-    }
-
-    const geojson =
-      this._fc(coords);
-
-    console.log(
-      "MEASURE DRAW:",
-      {
-        mode: this.mode,
-        coords,
-        geojson,
-        lineLayer:
-          !!this.map.getLayer(
-            L_LINE
-          ),
-        vertexLayer:
-          !!this.map.getLayer(
-            L_VERT
-          ),
-      }
+  if (!source) {
+    console.warn(
+      "MEASURE: source tidak ditemukan"
     );
-
-    source.setData(geojson);
+    return;
   }
+
+  if (source.type !== "geojson") {
+    console.warn(
+      "MEASURE: source bukan GeoJSON source"
+    );
+    return;
+  }
+
+  const geojson = this._fc(coords);
+
+  console.log(
+    "MEASURE DRAW:",
+    {
+      mode: this.mode,
+      coords,
+      geojson,
+      lineLayer: !!this.map.getLayer(L_LINE),
+      vertexLayer: !!this.map.getLayer(L_VERT),
+    }
+  );
+
+  source.setData(geojson);
+}
 
   // ============================================================
   // CLICK
