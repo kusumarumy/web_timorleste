@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import maplibregl, {
   Map as MLMap,
   LngLatLike,
@@ -282,25 +282,33 @@ export default function MapCanvas({
 // ============================================================
 const loadedLayers = useRef(new Set<string>());
 const loadingLayers = useRef(new Set<string>());
+const [loadingLayerIds, setLoadingLayerIds] = useState<string[]>([]);
 
 async function loadGeoJSONLayer(
   map: MLMap,
   layer: typeof ALL_LAYERS[number]
 ) {
-  // Tidak perlu load kalau bukan GeoJSON
   if (layer.kind === "raster" || !layer.data) {
     return;
   }
 
   if (loadedLayers.current.has(layer.id)) {
-  return;
-}
+    return;
+  }
 
-if (loadingLayers.current.has(layer.id)) {
-  return;
-}
+  if (loadingLayers.current.has(layer.id)) {
+    return;
+  }
 
-loadingLayers.current.add(layer.id);
+  loadingLayers.current.add(layer.id);
+
+  setLoadingLayerIds((prev) => {
+    if (prev.includes(layer.id)) {
+      return prev;
+    }
+
+    return [...prev, layer.id];
+  });
 
   try {
     console.log(`Lazy loading layer: ${layer.id}`);
@@ -315,7 +323,6 @@ loadingLayers.current.add(layer.id);
 
     const geojson = await response.json();
 
-    // Cek CRS
     const alreadyWGS84 = isWGS84GeoJSON(geojson);
 
     let geojson4326;
@@ -330,18 +337,13 @@ loadingLayers.current.add(layer.id);
       geojson4326 = reprojectGeoJSON(geojson);
     }
 
-    // Masukkan ke source MapLibre
     const source = map.getSource(layer.id);
 
-    if (
-      source &&
-      "setData" in source
-    ) {
+    if (source && "setData" in source) {
       (
         source as maplibregl.GeoJSONSource
       ).setData(geojson4326);
 
-      // Terapkan filter subclass
       const currentState = store.getState();
 
       if (
@@ -377,6 +379,10 @@ loadingLayers.current.add(layer.id);
     );
   } finally {
     loadingLayers.current.delete(layer.id);
+
+    setLoadingLayerIds((prev) =>
+      prev.filter((id) => id !== layer.id)
+    );
   }
 }
 
@@ -736,15 +742,49 @@ if (getToolMode()) return;
     }
   }, [terrainSource, exaggeration]);
 
+const loadingLayerNames = loadingLayerIds.map((id) => {
+  const layer = ALL_LAYERS.find((l) => l.id === id);
 
   return (
+    layer?.label ??
+    layer?.name ??
+    id
+  );
+});
+  return (
+  <div
+    style={{
+      position: "absolute",
+      inset: 0,
+    }}
+    className="absolute inset-0 h-full w-full"
+  >
+    {/* MAP */}
     <div
       ref={ref}
-      style={{
-        position: "absolute",
-        inset: 0,
-      }}
       className="absolute inset-0 h-full w-full"
     />
-  );
+
+    {/* LOADING LAYER POPUP */}
+    {loadingLayerNames.length > 0 && (
+      <div className="layer-loading-popup">
+        <div className="layer-loading-spinner" />
+
+        <div className="layer-loading-content">
+          <div className="layer-loading-title">
+            Memuat Layer
+          </div>
+
+          <div className="layer-loading-text">
+            Layer{" "}
+            <strong>
+              {loadingLayerNames.join(", ")}
+            </strong>{" "}
+            sedang dimuat...
+          </div>
+        </div>
+      </div>
+    )}
+  </div>
+);
 }
