@@ -784,156 +784,6 @@ export const GROUPS: LayerGroup[] = [
 
     layers: [
       {
-        id: "genangan_areadesain",
-        nameKey: "l_genangan_areadesain",
-        kind: "fill",
-        data: v("genangan_areadesain"),
-        clickable: true,
-
-        paint: {
-          "fill-color": "#F59E0B",
-          "fill-opacity": 0.35,
-          "fill-outline-color": "#F59E0B",
-        },
-
-        defaultOn: false,
-
-        opacity: 0.35,
-        opacityProp: "fill-opacity",
-
-        legend: {
-          color: "#F59E0B",
-        },
-      },
-
-      {
-        id: "genangan_areagenangan",
-        nameKey: "l_genangan_areagenangan",
-        kind: "fill",
-        data: v("genangan_areagenangan"),
-        clickable: true,
-
-        paint: {
-          "fill-color": "#3B82F6",
-          "fill-opacity": 0.40,
-          "fill-outline-color": "#3B82F6",
-        },
-
-        defaultOn: false,
-
-        opacity: 0.40,
-        opacityProp: "fill-opacity",
-
-        legend: {
-          color: "#3B82F6",
-        },
-      },
-
-      {
-        id: "genangan_areasungai",
-        nameKey: "l_genangan_areasungai",
-        kind: "fill",
-        data: v("genangan_areasungai"),
-        clickable: true,
-
-        paint: {
-          "fill-color": "#60A5FA",
-          "fill-opacity": 0.35,
-          "fill-outline-color": "#60A5FA",
-        },
-
-        defaultOn: false,
-
-        opacity: 0.35,
-        opacityProp: "fill-opacity",
-
-        legend: {
-          color: "#60A5FA",
-        },
-      },
-
-      {
-        id: "genangan_garidesain",
-        nameKey: "l_genangan_garidesain",
-        kind: "line",
-        data: v("genangan_garidesain"),
-
-        paint: {
-          "line-color": "#F59E0B",
-          "line-width": 2,
-          "line-opacity": 1,
-        },
-
-        defaultOn: false,
-
-        legend: {
-          color: "#F59E0B",
-          line: true,
-        },
-      },
-
-      {
-        id: "genangan_gariskoordinat",
-        nameKey: "l_genangan_gariskoordinat",
-        kind: "line",
-        data: v("genangan_gariskoordinat"),
-
-        paint: {
-          "line-color": "#8B5CF6",
-          "line-width": 1.5,
-          "line-dasharray": [4, 3],
-          "line-opacity": 1,
-        },
-
-        defaultOn: false,
-
-        legend: {
-          color: "#8B5CF6",
-          line: true,
-        },
-      },
-
-      {
-        id: "genangan_gariskupasan",
-        nameKey: "l_genangan_gariskupasan",
-        kind: "line",
-        data: v("genangan_gariskupasan"),
-
-        paint: {
-          "line-color": "#EF4444",
-          "line-width": 2,
-          "line-opacity": 1,
-        },
-
-        defaultOn: false,
-
-        legend: {
-          color: "#EF4444",
-          line: true,
-        },
-      },
-
-      {
-        id: "genangan_garissungai",
-        nameKey: "l_genangan_garissungai",
-        kind: "line",
-        data: v("genangan_garissungai"),
-
-        paint: {
-          "line-color": "#2563EB",
-          "line-width": 2,
-          "line-opacity": 1,
-        },
-
-        defaultOn: false,
-
-        legend: {
-          color: "#2563EB",
-          line: true,
-        },
-      },
-
-      {
         id: "genangan_titikbor",
         nameKey: "l_genangan_titikbor",
         kind: "circle",
@@ -1018,6 +868,153 @@ export const GROUPS: LayerGroup[] = [
         legend: {
           color: "#EF4444",
           circle: true,
+        },
+      },
+      {
+        id: "genangan_garidesain",
+        nameKey: "l_genangan_garidesain",
+        kind: "line",
+        data: v("genangan_garidesain"),
+
+        paint: {
+          "line-color": "#F59E0B",
+          "line-width": 2,
+          "line-opacity": 1,
+        },
+
+        defaultOn: false,
+
+        legend: {
+          color: "#F59E0B",
+          line: true,
+        },
+      },
+
+      {
+        id: "genangan_gariskoordinat",
+        nameKey: "l_genangan_gariskoordinat",
+        kind: "line",
+        data: v("genangan_gariskoordinat"),
+
+        paint: {
+          "line-color": "#8B5CF6",
+          "line-width": 1.5,
+          "line-dasharray": [4, 3],
+          "line-opacity": 1,
+        },
+
+        defaultOn: false,
+
+        legend: {
+          color: "#8B5CF6",
+          line: true,
+        },
+      },
+
+      {
+        id: "genangan_gariskupasan",
+        nameKey: "l_genangan_gariskupasan",
+        kind: "line",
+        data: v("genangan_gariskupasan"),
+
+        paint: {
+          "line-color": "#EF4444",
+          "line-width": 2,
+          "line-opacity": 1,
+        },
+
+        defaultOn: false,
+
+        legend: {
+          color: "#EF4444",
+          line: true,
+        },
+      },
+
+      {
+        id: "genangan_garissungai",
+        nameKey: "l_genangan_garissungai",
+        kind: "line",
+        data: v("genangan_garissungai"),
+
+        paint: {
+          "line-color": "#2563EB",
+          "line-width": 2,
+          "line-opacity": 1,
+        },
+
+        defaultOn: false,
+
+        legend: {
+          color: "#2563EB",
+          line: true,
+        },
+      },
+      {
+        id: "genangan_areadesain",
+        nameKey: "l_genangan_areadesain",
+        kind: "fill",
+        data: v("genangan_areadesain"),
+        clickable: true,
+
+        paint: {
+          "fill-color": "#F59E0B",
+          "fill-opacity": 0.35,
+          "fill-outline-color": "#F59E0B",
+        },
+
+        defaultOn: false,
+
+        opacity: 0.35,
+        opacityProp: "fill-opacity",
+
+        legend: {
+          color: "#F59E0B",
+        },
+      },
+      {
+        id: "genangan_areagenangan",
+        nameKey: "l_genangan_areagenangan",
+        kind: "fill",
+        data: v("genangan_areagenangan"),
+        clickable: true,
+
+        paint: {
+          "fill-color": "#3B82F6",
+          "fill-opacity": 0.40,
+          "fill-outline-color": "#3B82F6",
+        },
+
+        defaultOn: false,
+
+        opacity: 0.40,
+        opacityProp: "fill-opacity",
+
+        legend: {
+          color: "#3B82F6",
+        },
+      },
+
+      {
+        id: "genangan_areasungai",
+        nameKey: "l_genangan_areasungai",
+        kind: "fill",
+        data: v("genangan_areasungai"),
+        clickable: true,
+
+        paint: {
+          "fill-color": "#60A5FA",
+          "fill-opacity": 0.35,
+          "fill-outline-color": "#60A5FA",
+        },
+
+        defaultOn: false,
+
+        opacity: 0.35,
+        opacityProp: "fill-opacity",
+
+        legend: {
+          color: "#60A5FA",
         },
       },
     ],
