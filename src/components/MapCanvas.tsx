@@ -740,12 +740,23 @@ if (!mapLayer) {
         // =====================================================
 
         map.setLayoutProperty(
-          l.id,
-          "visibility",
-          isVisible
-            ? "visible"
-            : "none"
-        );
+  l.id,
+  "visibility",
+  isVisible
+    ? "visible"
+    : "none"
+);
+
+// Label mengikuti visibility layer utama
+if (labelLayer) {
+  map.setLayoutProperty(
+    `${l.id}_label`,
+    "visibility",
+    isVisible
+      ? "visible"
+      : "none"
+  );
+}
 
         // =====================================================
         // SUBCLASS FILTER
