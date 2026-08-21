@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "rei_ingate",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32751" } },
+"features": [
+{ "type": "Feature", "properties": { "LAYER": "Unknown Area Type", "Id": 0, "Name": "Intake Gate" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 781098.039633667212911, 8998952.535008680075407 ], [ 781100.346804947010241, 8998953.49809393286705 ], [ 781101.479223880218342, 8998950.968672208487988 ], [ 781099.023885635891929, 8998949.920920111238956 ], [ 781098.039633667212911, 8998952.535008680075407 ] ] ] ] } }
+]
+}
