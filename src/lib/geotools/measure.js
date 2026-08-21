@@ -18,6 +18,7 @@ export class MeasureControl {
   constructor(map, options = {}) {
     this.map = map;
     this.onResult = options.onResult || (() => {});
+    this.onStop = options.onStop || (() => {});
     this.scaleFactor = options.scaleFactor ?? 1;
     this.mode = null;      // 'distance' | 'area'
     this.coords = [];      // vertex terkonfirmasi [lng,lat]
@@ -85,6 +86,7 @@ export class MeasureControl {
     this.map.doubleClickZoom.enable();
     this.map.getCanvas().style.cursor = '';
     this.mode = null;
+    this.onStop();
   }
 
   /** kosongkan gambar + hasil */
