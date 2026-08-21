@@ -1,4 +1,5 @@
-import { measureLine, measurePolygon } from './geo';
+import maplibregl from "maplibre-gl";
+import { measureLine, measurePolygon } from "./geo";
 
 const SRC = '__measure_src';
 const L_FILL = '__measure_fill';
@@ -79,7 +80,56 @@ export class MeasureControl {
     this.onResult(null);
   }
 
-  _onClick(e) { this.coords.push([e.lngLat.lng, e.lngLat.lat]); this._update(); }
+  _onClick(e) {
+  const point = [
+    e.lngLat.lng,
+    e.lngLat.lat,
+  ];
+
+  this.coords.push(point);
+
+  // Popup koordinat titik
+  new maplibregl.Popup({
+    closeButton: true,
+    closeOnClick: false,
+    offset: 12,
+    className: "measure-coordinate-popup",
+  })
+    .setLngLat(e.lngLat)
+    .setHTML(`
+      <div style="
+        min-width: 150px;
+        font-family: Arial, sans-serif;
+      ">
+        <div style="
+          font-size: 11px;
+          font-weight: 700;
+          color: #0f766e;
+          margin-bottom: 6px;
+        ">
+          TITIK ${this.coords.length}
+        </div>
+
+        <div style="
+          font-size: 11px;
+          line-height: 1.6;
+        ">
+          <div>
+            <b>Longitude</b><br/>
+            ${e.lngLat.lng.toFixed(6)}
+          </div>
+
+          <div style="margin-top: 4px;">
+            <b>Latitude</b><br/>
+            ${e.lngLat.lat.toFixed(6)}
+          </div>
+        </div>
+      </div>
+    `)
+    .addTo(this.map);
+
+  this._update();
+}
   _onMove(e) { this.hover = [e.lngLat.lng, e.lngLat.lat]; if (this.coords.length) this._update(); }
   _onDbl() {
   if (this.coords.length < 2) return;
