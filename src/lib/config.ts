@@ -17,7 +17,7 @@ const icon = (name: string) =>
 
 export const MAP = {
   centerUTM: [773279.2384, 8989643.1798],
-  center: [125.58, -9.18448] as [number, number],
+  center: [125.48428, -9.15017] as [number, number],
   zoom: 11,
   pitch: 18,
   bearing: -18,
