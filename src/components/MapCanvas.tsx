@@ -745,11 +745,7 @@ if (getToolMode()) return;
 const loadingLayerNames = loadingLayerIds.map((id) => {
   const layer = ALL_LAYERS.find((l) => l.id === id);
 
-  return (
-    layer?.label ??
-    layer?.name ??
-    id
-  );
+  return layer?.nameKey ?? id;
 });
   return (
   <div
