@@ -344,12 +344,7 @@ export const GROUPS: LayerGroup[] = [
 
   icon: icon("weir"),
 
-  paint: {
-    "icon-image": "weir",
-    "icon-size": 0.045,
-    "icon-allow-overlap": true,
-    "icon-ignore-placement": true,
-  },
+  paint: {},
 
   defaultOn: false,
 
@@ -367,12 +362,7 @@ export const GROUPS: LayerGroup[] = [
 
   icon: icon("rainfall"),
 
-  paint: {
-    "icon-image": "rainfall",
-    "icon-size": 0.045,
-    "icon-allow-overlap": true,
-    "icon-ignore-placement": true,
-  },
+  paint: {},
 
   defaultOn: false,
 
@@ -390,12 +380,7 @@ export const GROUPS: LayerGroup[] = [
 
   icon: icon("irrigation_point"),
 
-  paint: {
-    "icon-image": "irrigation_point",
-    "icon-size": 0.045,
-    "icon-allow-overlap": true,
-    "icon-ignore-placement": true,
-  },
+  paint: {},
 
   defaultOn: false,
 
