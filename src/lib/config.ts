@@ -262,7 +262,7 @@ export const GROUPS: LayerGroup[] = [
       id: "contour",
       nameKey: "l_contour",
       kind: "line",
-      data: r2Vector("contour_5m"),
+      data: r2Vector("contour"),
 
       paint: {
         "line-color": "#7A1E1A",
