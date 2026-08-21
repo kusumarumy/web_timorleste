@@ -16,10 +16,9 @@ import { getToolMode, setToolMode } from "./toolMode";
 import { MeasureControl } from "@/lib/geotools/measure";
 import { useI18n } from "@/lib/i18n";
 function isWGS84GeoJSON(geojson: any): boolean {
-  // 1. Cek metadata CRS
+
   const crsName =
     geojson?.crs?.properties?.name?.toString().toLowerCase() ?? "";
-
   if (
     crsName.includes("crs84") ||
     crsName.includes("4326") ||
@@ -28,12 +27,8 @@ function isWGS84GeoJSON(geojson: any): boolean {
   ) {
     return true;
   }
-
-  // 2. Ambil koordinat pertama
   function findFirstCoordinate(coords: any): number[] | null {
     if (!Array.isArray(coords)) return null;
-
-    // [x, y]
     if (
       coords.length >= 2 &&
       typeof coords[0] === "number" &&
@@ -41,49 +36,37 @@ function isWGS84GeoJSON(geojson: any): boolean {
     ) {
       return coords;
     }
-
     for (const item of coords) {
       const result = findFirstCoordinate(item);
       if (result) return result;
     }
-
     return null;
   }
-
   const firstFeature = geojson?.features?.[0];
   const coordinates =
     firstFeature?.geometry?.coordinates;
-
   const coord = findFirstCoordinate(coordinates);
-
   if (!coord) {
     console.warn(
       "Tidak dapat mendeteksi CRS: koordinat tidak ditemukan."
     );
-
     return false;
   }
-
   const [x, y] = coord;
 
   //console.log("Sample coordinate:", [x, y]);
 
-  // WGS84 longitude/latitude
   if (
     Math.abs(x) <= 180 &&
     Math.abs(y) <= 90
   ) {
     return true;
   }
-
-  // Bukan WGS84 → diasumsikan UTM 51S
   return false;
 }
 
 function buildStyle(): maplibregl.StyleSpecification {
   const sources: Record<string, unknown> = {};
-
-  // dua sumber DEM sekaligus (dibangun semua, dipakai sesuai pilihan user)
   Object.values(TERRAIN_OPTIONS).forEach((t) => {
     sources[`terrain_${t.id}`] = {
       type: "raster-dem",
