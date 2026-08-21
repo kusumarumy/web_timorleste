@@ -544,9 +544,6 @@ if (getToolMode()) return;
       // READY
       onReady?.(map);
     });
-      // READY
-      onReady?.(map);
-    });
 
 
     // MAP READOUT
