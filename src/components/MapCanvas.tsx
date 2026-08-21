@@ -14,6 +14,7 @@ import { useMapStore } from "@/lib/store";
 import { reprojectGeoJSON } from "@/lib/reproject";
 import { getToolMode, setToolMode } from "./toolMode";
 import { MeasureControl } from "@/lib/geotools/measure";
+import { useI18n } from "@/lib/i18n";
 function isWGS84GeoJSON(geojson: any): boolean {
   // 1. Cek metadata CRS
   const crsName =
@@ -276,6 +277,7 @@ export default function MapCanvas({
   const ref = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MLMap | null>(null);
   const store = useMapStore;
+  const { t } = useI18n();
  // ============================================================
 // LAZY LOADING GEOJSON
 // Hanya download layer ketika layer tersebut dibutuhkan
@@ -745,7 +747,9 @@ if (getToolMode()) return;
 const loadingLayerNames = loadingLayerIds.map((id) => {
   const layer = ALL_LAYERS.find((l) => l.id === id);
 
-  return layer?.nameKey ?? id;
+  return layer
+    ? t(layer.nameKey)
+    : id;
 });
   return (
   <div
@@ -761,26 +765,24 @@ const loadingLayerNames = loadingLayerIds.map((id) => {
       className="absolute inset-0 h-full w-full"
     />
 
-    {/* LOADING LAYER POPUP */}
     {loadingLayerNames.length > 0 && (
-      <div className="layer-loading-popup">
-        <div className="layer-loading-spinner" />
+  <div className="layer-loading-popup">
+    <div className="layer-loading-spinner" />
 
-        <div className="layer-loading-content">
-          <div className="layer-loading-title">
-            Memuat Layer
-          </div>
-
-          <div className="layer-loading-text">
-            Layer{" "}
-            <strong>
-              {loadingLayerNames.join(", ")}
-            </strong>{" "}
-            sedang dimuat...
-          </div>
-        </div>
+    <div className="layer-loading-content">
+      <div className="layer-loading-title">
+        {t("loading_layer_title")}
       </div>
-    )}
+
+      <div className="layer-loading-text">
+        <strong>
+          {loadingLayerNames.join(", ")}
+        </strong>{" "}
+        {t("loading_layer_text")}
+      </div>
+    </div>
+  </div>
+)}
   </div>
 );
 }
