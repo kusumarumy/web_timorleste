@@ -46,20 +46,35 @@ export class MeasureControl {
     });
   }
 
-  /** mulai mode: 'distance' atau 'area' */
   start(mode) {
-    this.stop();
-    this.mode = mode;
-    this.coords = [];
-    this.hover = null;
-    this._ensureLayers();
-    this.map.on('click', this._onClick);
-    this.map.on('mousemove', this._onMove);
-    this.map.on('dblclick', this._onDbl);
-    document.addEventListener('keydown', this._onKey);
-    this.map.doubleClickZoom.disable();
-    this.map.getCanvas().style.cursor = 'crosshair';
-  }
+  console.log("MEASURE START:", mode);
+
+  this.stop();
+
+  this.mode = mode;
+  this.coords = [];
+  this.hover = null;
+
+  this._ensureLayers();
+
+  this.map.on("click", this._onClick);
+  this.map.on("mousemove", this._onMove);
+  this.map.on("dblclick", this._onDbl);
+
+  document.addEventListener(
+    "keydown",
+    this._onKey
+  );
+
+  this.map.doubleClickZoom.disable();
+
+  this.map.getCanvas().style.cursor =
+    "crosshair";
+
+  console.log(
+    "MEASURE CLICK LISTENER TERPASANG"
+  );
+}
 
   /** hentikan interaksi (gambar tetap ada sampai clear()) */
   stop() {
@@ -131,11 +146,19 @@ export class MeasureControl {
   this._update();
 }
   _onMove(e) { this.hover = [e.lngLat.lng, e.lngLat.lat]; if (this.coords.length) this._update(); }
-  _onDbl() {
-  if (this.coords.length < 2) return;
+  _onDbl(e) {
+  if (this.coords.length > 1) {
+    this.coords.pop();
+  }
 
   this.hover = null;
+
   this._update(true);
+
+  this._showResultPopup(
+    this.coords[this.coords.length - 1]
+  );
+
   this.stop();
 }
   _onKey(e) {
@@ -165,7 +188,115 @@ export class MeasureControl {
       } else this.onResult(null);
     }
   }
+_showResultPopup(position) {
+  if (!position) return;
 
+  const lng = position[0];
+  const lat = position[1];
+
+  const c = this.coords.slice();
+
+  let html = `
+    <div style="
+      min-width: 190px;
+      font-family: Arial, sans-serif;
+    ">
+      <div style="
+        color: #0f766e;
+        font-size: 12px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      ">
+        HASIL PENGUKURAN
+      </div>
+  `;
+
+  if (this.mode === "distance") {
+    const r = measureLine(c, this.scaleFactor);
+
+    if (r) {
+      html += `
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          gap:15px;
+          margin-bottom:5px;
+        ">
+          <span>Jarak</span>
+          <b>${fmtLen(r.total)}</b>
+        </div>
+      `;
+    }
+  }
+
+  if (this.mode === "area" && c.length >= 3) {
+    const r = measurePolygon(
+      c,
+      this.scaleFactor
+    );
+
+    html += `
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        gap:15px;
+        margin-bottom:5px;
+      ">
+        <span>Luas</span>
+        <b>${fmtArea(r.area)}</b>
+      </div>
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        gap:15px;
+        margin-bottom:5px;
+      ">
+        <span>Panjang</span>
+        <b>${fmtLen(r.length)}</b>
+      </div>
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        gap:15px;
+      ">
+        <span>Lebar</span>
+        <b>${fmtLen(r.width)}</b>
+      </div>
+    `;
+  }
+
+  html += `
+      <hr style="
+        margin:8px 0;
+        border:0;
+        border-top:1px solid #ddd;
+      "/>
+
+      <div style="font-size:10px;">
+        <b>Longitude:</b> ${lng.toFixed(6)}
+      </div>
+
+      <div style="font-size:10px;">
+        <b>Latitude:</b> ${lat.toFixed(6)}
+      </div>
+
+    </div>
+  `;
+
+  new maplibregl.Popup({
+    closeButton: true,
+    closeOnClick: false,
+    offset: 15,
+  })
+    .setLngLat({
+      lng,
+      lat,
+    })
+    .setHTML(html)
+    .addTo(this.map);
+}
   _fc(c) {
     const feats = [];
     if (this.mode === 'area' && c.length >= 3) {
