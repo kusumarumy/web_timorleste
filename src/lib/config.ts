@@ -55,7 +55,7 @@ export const TERRAIN_OPTIONS = {
     id: "r2",
     label: "DEM Pengukuran",
     tiles: [`${R2}/dtm/{z}/{x}/{y}.png`],
-    encoding: "mapbox" as const,
+    encoding: "terrarium" as const,
     maxzoom: 15,
     adjustable: false,  // exaggeration terkunci
   },
