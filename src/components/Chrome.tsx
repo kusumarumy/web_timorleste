@@ -69,8 +69,9 @@ export function Legend() {
       </button>
 
       {open && (
-        <div className="flex flex-col gap-2.5 px-3.5 pb-3 pt-2.5">
-          {items.map((l) => (
+  <div className="max-h-[calc(100vh-150px)] overflow-y-auto px-3.5 pb-3 pt-2.5">
+    <div className="flex flex-col gap-2.5">
+      {items.map((l) => (
             <div
               key={l.id}
               className="flex items-center gap-2.5 text-[12px] text-ink"
