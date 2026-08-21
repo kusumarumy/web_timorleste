@@ -75,20 +75,44 @@ export function Legend() {
               key={l.id}
               className="flex items-center gap-2.5 text-[12px] text-ink"
             >
-              <span
-                className="h-3 w-[18px] flex-none rounded-[3px]"
-                style={
-                  l.legend!.line
-                    ? {
-                        height: 0,
-                        borderTop: `3px solid ${l.legend!.color}`,
-                        borderRadius: 0,
-                      }
-                    : {
-                        background: l.legend!.color,
-                      }
-                }
-              />
+              {/* =========================
+                  ICON LAYER
+                  ========================= */}
+              {l.icon ? (
+                <span className="flex h-[24px] w-[24px] flex-none items-center justify-center">
+                  <img
+                    src={l.icon}
+                    alt=""
+                    className="max-h-[24px] max-w-[24px] object-contain"
+                  />
+                </span>
+              ) : (
+                /* =========================
+                   FALLBACK LEGEND COLOR
+                   ========================= */
+                <span
+                  className="h-3 w-[18px] flex-none rounded-[3px]"
+                  style={
+                    l.legend!.line
+                      ? {
+                          height: 0,
+                          borderTop: `3px solid ${l.legend!.color}`,
+                          borderRadius: 0,
+                        }
+                      : l.legend!.circle
+                      ? {
+                          width: "12px",
+                          height: "12px",
+                          borderRadius: "9999px",
+                          background: l.legend!.color,
+                        }
+                      : {
+                          background: l.legend!.color,
+                        }
+                  }
+                />
+              )}
+
               {t(l.nameKey)}
             </div>
           ))}
