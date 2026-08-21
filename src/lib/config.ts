@@ -1424,19 +1424,6 @@ export const GROUPS: LayerGroup[] = [
       },
 
       {
-        id: "rei_flushinggate",
-        nameKey: "l_rei_flushinggate",
-        kind: "symbol",
-        data: v("rei_flushinggate"),
-        clickable: true,
-        paint: {},
-        defaultOn: false,
-        legend: {
-          color: "#0891B2",
-        },
-      },
-
-      {
         id: "rei_flushingpier",
         nameKey: "l_rei_flushingpier",
         kind: "line",
@@ -1471,32 +1458,6 @@ export const GROUPS: LayerGroup[] = [
       },
 
       {
-        id: "rei_ingate",
-        nameKey: "l_rei_ingate",
-        kind: "symbol",
-        data: v("rei_ingate"),
-        clickable: true,
-        paint: {},
-        defaultOn: false,
-        legend: {
-          color: "#16A34A",
-        },
-      },
-
-      {
-        id: "rei_intake",
-        nameKey: "l_rei_intake",
-        kind: "symbol",
-        data: v("rei_intake"),
-        clickable: true,
-        paint: {},
-        defaultOn: false,
-        legend: {
-          color: "#0284C7",
-        },
-      },
-
-      {
         id: "rei_irrigation",
         nameKey: "l_rei_irrigation",
         kind: "line",
@@ -1510,25 +1471,6 @@ export const GROUPS: LayerGroup[] = [
         legend: {
           color: "#22C55E",
           line: true,
-        },
-      },
-
-      {
-        id: "rei_parking",
-        nameKey: "l_rei_parking",
-        kind: "fill",
-        data: v("rei_parking"),
-        clickable: true,
-        paint: {
-          "fill-color": "#A8A29E",
-          "fill-opacity": 0.4,
-          "fill-outline-color": "#78716C",
-        },
-        defaultOn: false,
-        opacity: 0.4,
-        opacityProp: "fill-opacity",
-        legend: {
-          color: "#A8A29E",
         },
       },
 
@@ -1565,7 +1507,60 @@ export const GROUPS: LayerGroup[] = [
           line: true,
         },
       },
-
+{
+        id: "rei_flushinggate",
+        nameKey: "l_rei_flushinggate",
+        kind: "symbol",
+        data: v("rei_flushinggate"),
+        clickable: true,
+        paint: {},
+        defaultOn: false,
+        legend: {
+          color: "#0891B2",
+        },
+      },
+      {
+        id: "rei_ingate",
+        nameKey: "l_rei_ingate",
+        kind: "symbol",
+        data: v("rei_ingate"),
+        clickable: true,
+        paint: {},
+        defaultOn: false,
+        legend: {
+          color: "#16A34A",
+        },
+      },
+      {
+        id: "rei_intake",
+        nameKey: "l_rei_intake",
+        kind: "symbol",
+        data: v("rei_intake"),
+        clickable: true,
+        paint: {},
+        defaultOn: false,
+        legend: {
+          color: "#0284C7",
+        },
+      },
+      {
+        id: "rei_parking",
+        nameKey: "l_rei_parking",
+        kind: "fill",
+        data: v("rei_parking"),
+        clickable: true,
+        paint: {
+          "fill-color": "#A8A29E",
+          "fill-opacity": 0.4,
+          "fill-outline-color": "#78716C",
+        },
+        defaultOn: false,
+        opacity: 0.4,
+        opacityProp: "fill-opacity",
+        legend: {
+          color: "#A8A29E",
+        },
+      },
       {
         id: "rei_rock",
         nameKey: "l_rei_rock",
