@@ -388,21 +388,62 @@ export default function ControlPanel() {
           <div className="flex-1 overflow-y-auto px-2 pb-3 pt-1.5">
             <TerrainControl />
 <MeasurementControl />
-            {GROUPS.map((g) => (
-              <div key={g.titleKey} className="mx-1.5 mb-1 mt-2">
-                <div className="flex items-center gap-2 px-1.5 py-1.5 text-[11px] font-bold uppercase tracking-wide text-muted2">
-                  <span
-                    className="h-[7px] w-[7px] rounded-[2px]"
-                    style={{ background: g.dot }}
-                  />
-                  {t(g.titleKey)}
-                </div>
+            {/* =========================================================
+    DATA LAYER
+    ========================================================= */}
+<div className="m-1.5 mt-2 rounded-xl border border-strokeSoft bg-gradient-to-br from-teal/10 to-teal/[0.02] p-3">
 
-                {g.layers.map((l) => (
-                  <LayerRow key={l.id} l={l} />
-                ))}
-              </div>
-            ))}
+  {/* HEADER DATA LAYER */}
+  <div className="flex items-center gap-2 text-[13px] font-bold text-ink">
+    <svg
+      viewBox="0 0 24 24"
+      width="15"
+      height="15"
+      fill="none"
+      stroke="#2FA6A0"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <rect x="4" y="4" width="16" height="16" rx="2" />
+      <path d="M8 8h8" />
+      <path d="M8 12h8" />
+      <path d="M8 16h5" />
+    </svg>
+
+    <span>Data Layer</span>
+  </div>
+
+  {/* GROUP-GROUP LAYER */}
+  <div className="mt-2.5">
+    {GROUPS.map((g) => (
+      <div
+        key={g.titleKey}
+        className="mb-2 last:mb-0"
+      >
+        {/* GROUP TITLE */}
+        <div className="flex items-center gap-2 px-1.5 py-1.5 text-[10.5px] font-bold uppercase tracking-wide text-muted2">
+          <span
+            className="h-[7px] w-[7px] rounded-[2px] flex-none"
+            style={{ background: g.dot }}
+          />
+
+          {t(g.titleKey)}
+        </div>
+
+        {/* LAYERS */}
+        <div className="mt-0.5">
+          {g.layers.map((l) => (
+            <LayerRow
+              key={l.id}
+              l={l}
+            />
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
           </div>
         </aside>
       )}
