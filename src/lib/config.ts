@@ -31,10 +31,10 @@ export const BASEMAPS: Basemap[] = [
   {
     id: "ortho",
     labelKey: "bm_ortho",
-    tiles: [`${R2}/orthophoto/tiles/{z}/{x}/{y}.jpg`],
+    tiles: [`${R2}/orthophoto/tiles/{z}/{x}/{y}.png`],
     attribution: "Orthophoto",
     minzoom: 13,
-  maxzoom: 17,
+  maxzoom: 20,
   },
   { id: "dark", labelKey: "bm_dark", tiles: ["https://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"], attribution: "© CARTO © OSM" },
   { id: "hybrid", labelKey: "bm_hybrid", tiles: ["https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}"], attribution: "© Google Maps" },
