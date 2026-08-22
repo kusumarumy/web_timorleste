@@ -71,14 +71,16 @@ function isWGS84GeoJSON(geojson: any): boolean {
 function buildStyle(): maplibregl.StyleSpecification {
   const sources: Record<string, unknown> = {};
   Object.values(TERRAIN_OPTIONS).forEach((t) => {
-    sources[`terrain_${t.id}`] = {
-      type: "raster-dem",
-      tiles: t.tiles,
-      encoding: t.encoding,
-      tileSize: 256,
-      maxzoom: t.maxzoom,
-    };
-  });
+  sources[`terrain_${t.id}`] = {
+    type: "raster-dem",
+    tiles: t.tiles,
+    encoding: t.encoding,
+    tileSize: 256,
+    minzoom: t.minzoom,
+    maxzoom: t.maxzoom,
+    bounds: [...t.bounds] as [number, number, number, number],
+  };
+});
 
   const layers: maplibregl.LayerSpecification[] = [
     { id: "bg", type: "background", paint: { "background-color": "#0B1620" } } as any,
