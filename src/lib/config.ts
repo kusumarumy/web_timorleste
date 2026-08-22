@@ -52,13 +52,14 @@ export const TERRAIN_OPTIONS = {
     adjustable: true,   // exaggeration bisa diatur
   },
   r2: {
-    id: "r2",
-    label: "DEM Pengukuran",
-    tiles: [`${R2}/dtm/{z}/{x}/{y}.png`],
-    encoding: "terrarium" as const,
-    maxzoom: 16,
-    adjustable: false,  // exaggeration terkunci
-  },
+  id: "r2",
+  label: "DEM Pengukuran",
+  tiles: [`${R2}/dtm/{z}/{x}/{y}.png`],
+  encoding: "terrarium" as const,
+  minzoom: 10,
+  maxzoom: 16,
+  adjustable: false,
+},
 } as const;
 
 export type TerrainKey = keyof typeof TERRAIN_OPTIONS; // "aws" | "r2"
