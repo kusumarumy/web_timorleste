@@ -48,18 +48,21 @@ export const TERRAIN_OPTIONS = {
     label: "AWS Terrarium",
     tiles: ["https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"],
     encoding: "terrarium" as const,
+    minzoom: 0,
     maxzoom: 14,
-    adjustable: true,   // exaggeration bisa diatur
+    bounds: [-180, -85.0511, 180, 85.0511],
+    adjustable: true,
   },
   r2: {
-  id: "r2",
-  label: "DEM Pengukuran",
-  tiles: [`${R2}/dtm/{z}/{x}/{y}.png`],
-  encoding: "terrarium" as const,
-  minzoom: 10,
-  maxzoom: 16,
-  adjustable: false,
-},
+    id: "r2",
+    label: "DEM Pengukuran",
+    tiles: [`${R2}/dtm/{z}/{x}/{y}.png`],
+    encoding: "terrarium" as const,
+    minzoom: 8,
+    maxzoom: 16,
+    bounds: [125.3505, -9.2745, 125.6254, -8.9916],
+    adjustable: false,
+  },
 } as const;
 
 export type TerrainKey = keyof typeof TERRAIN_OPTIONS; // "aws" | "r2"
