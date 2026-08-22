@@ -533,75 +533,26 @@ export const GROUPS: LayerGroup[] = [
 
   layers: [
     {
-      id: "sugarcane",
-      nameKey: "l_sugarcane",
-      kind: "fill",
-      data: v("sugarcane"),
-      clickable: true,
+      id: "forestprotected",
+      nameKey: "l_forestprotected",
+      kind: "line",
+      data: v("forestprotected"),
 
       paint: {
-        "fill-color": "#F2D45C",
-        "fill-opacity": 0.35,
-        "fill-outline-color": "#F2D45C",
+        "line-color": "#2E7D32",
+        "line-width": 1.6,
+        "line-dasharray": [6, 3],
+        "line-opacity": 1,
       },
 
       defaultOn: false,
 
-      opacity: 0.35,
-      opacityProp: "fill-opacity",
-
       legend: {
-        color: "#F2D45C",
+        color: "#2E7D32",
+        line: true,
       },
-    },
-
-    {
-      id: "urban",
-      nameKey: "l_urban",
-      kind: "fill",
-      data: v("urban"),
-      clickable: true,
-
-      paint: {
-        "fill-color": "#E57373",
-        "fill-opacity": 0.35,
-        "fill-outline-color": "#E57373",
-      },
-
-      defaultOn: false,
-
-      opacity: 0.35,
-      opacityProp: "fill-opacity",
-
-      legend: {
-        color: "#E57373",
-      },
-    },
-
-    {
-      id: "ricefield",
-      nameKey: "l_ricefield",
-      kind: "fill",
-      data: v("ricefield"),
-      clickable: true,
-
-      paint: {
-        "fill-color": "#D8B24A",
-        "fill-opacity": 0.35,
-        "fill-outline-color": "#D8B24A",
-      },
-
-      defaultOn: false,
-
-      opacity: 0.35,
-      opacityProp: "fill-opacity",
-
-      legend: {
-        color: "#D8B24A",
-      },
-    },
-
-    {
+    },    
+ {
       id: "ricefield_8di",
       nameKey: "l_ricefield_8di",
       kind: "fill",
@@ -666,122 +617,6 @@ export const GROUPS: LayerGroup[] = [
         },
       ],
     },
-
-    {
-      id: "waterbody",
-      nameKey: "l_waterbody",
-      kind: "fill",
-      data: v("waterbody"),
-      clickable: true,
-
-      paint: {
-        "fill-color": "#4AA6E0",
-        "fill-opacity": 0.40,
-        "fill-outline-color": "#4AA6E0",
-      },
-
-      defaultOn: false,
-
-      opacity: 0.40,
-      opacityProp: "fill-opacity",
-
-      legend: {
-        color: "#4AA6E0",
-      },
-    },
-
-    {
-      id: "ground",
-      nameKey: "l_ground",
-      kind: "fill",
-      data: v("ground"),
-      clickable: true,
-
-      paint: {
-        "fill-color": "#C9B89C",
-        "fill-opacity": 0.35,
-        "fill-outline-color": "#C9B89C",
-      },
-
-      defaultOn: false,
-
-      opacity: 0.35,
-      opacityProp: "fill-opacity",
-
-      legend: {
-        color: "#C9B89C",
-      },
-    },
-
-    {
-      id: "palm",
-      nameKey: "l_palm",
-      kind: "fill",
-      data: v("palm"),
-      clickable: true,
-
-      paint: {
-        "fill-color": "#6DB86D",
-        "fill-opacity": 0.35,
-        "fill-outline-color": "#6DB86D",
-      },
-
-      defaultOn: false,
-
-      opacity: 0.35,
-      opacityProp: "fill-opacity",
-
-      legend: {
-        color: "#6DB86D",
-      },
-    },
-
-    {
-      id: "highveg",
-      nameKey: "l_highveg",
-      kind: "fill",
-      data: v("highveg"),
-      clickable: true,
-
-      paint: {
-        "fill-color": "#2E7D32",
-        "fill-opacity": 0.40,
-        "fill-outline-color": "#2E7D32",
-      },
-
-      defaultOn: false,
-
-      opacity: 0.40,
-      opacityProp: "fill-opacity",
-
-      legend: {
-        color: "#2E7D32",
-      },
-    },
-
-    {
-      id: "lowveg",
-      nameKey: "l_lowveg",
-      kind: "fill",
-      data: v("lowveg"),
-      clickable: true,
-
-      paint: {
-        "fill-color": "#A5D66B",
-        "fill-opacity": 0.35,
-        "fill-outline-color": "#A5D66B",
-      },
-
-      defaultOn: false,
-
-      opacity: 0.35,
-      opacityProp: "fill-opacity",
-
-      legend: {
-        color: "#A5D66B",
-      },
-    },
-
     {
       id: "building",
       nameKey: "l_building",
@@ -804,25 +639,182 @@ export const GROUPS: LayerGroup[] = [
         color: "#8A6F8F",
       },
     },
-
-    {
-      id: "forestprotected",
-      nameKey: "l_forestprotected",
-      kind: "line",
-      data: v("forestprotected"),
+        {
+      id: "lowveg",
+      nameKey: "l_lowveg",
+      kind: "fill",
+      data: v("lowveg"),
+      clickable: true,
 
       paint: {
-        "line-color": "#2E7D32",
-        "line-width": 1.6,
-        "line-dasharray": [6, 3],
-        "line-opacity": 1,
+        "fill-color": "#A5D66B",
+        "fill-opacity": 0.35,
+        "fill-outline-color": "#A5D66B",
       },
 
       defaultOn: false,
 
+      opacity: 0.35,
+      opacityProp: "fill-opacity",
+
+      legend: {
+        color: "#A5D66B",
+      },
+    },
+{
+      id: "highveg",
+      nameKey: "l_highveg",
+      kind: "fill",
+      data: v("highveg"),
+      clickable: true,
+
+      paint: {
+        "fill-color": "#2E7D32",
+        "fill-opacity": 0.40,
+        "fill-outline-color": "#2E7D32",
+      },
+
+      defaultOn: false,
+
+      opacity: 0.40,
+      opacityProp: "fill-opacity",
+
       legend: {
         color: "#2E7D32",
-        line: true,
+      },
+    },
+        
+    {
+      id: "ground",
+      nameKey: "l_ground",
+      kind: "fill",
+      data: v("ground"),
+      clickable: true,
+
+      paint: {
+        "fill-color": "#C9B89C",
+        "fill-opacity": 0.35,
+        "fill-outline-color": "#C9B89C",
+      },
+
+      defaultOn: false,
+
+      opacity: 0.35,
+      opacityProp: "fill-opacity",
+
+      legend: {
+        color: "#C9B89C",
+      },
+    },
+    {
+      id: "palm",
+      nameKey: "l_palm",
+      kind: "fill",
+      data: v("palm"),
+      clickable: true,
+
+      paint: {
+        "fill-color": "#6DB86D",
+        "fill-opacity": 0.35,
+        "fill-outline-color": "#6DB86D",
+      },
+
+      defaultOn: false,
+
+      opacity: 0.35,
+      opacityProp: "fill-opacity",
+
+      legend: {
+        color: "#6DB86D",
+      },
+    },
+    {
+      id: "ricefield",
+      nameKey: "l_ricefield",
+      kind: "fill",
+      data: v("ricefield"),
+      clickable: true,
+
+      paint: {
+        "fill-color": "#D8B24A",
+        "fill-opacity": 0.35,
+        "fill-outline-color": "#D8B24A",
+      },
+
+      defaultOn: false,
+
+      opacity: 0.35,
+      opacityProp: "fill-opacity",
+
+      legend: {
+        color: "#D8B24A",
+      },
+    },
+{
+      id: "sugarcane",
+      nameKey: "l_sugarcane",
+      kind: "fill",
+      data: v("sugarcane"),
+      clickable: true,
+
+      paint: {
+        "fill-color": "#F2D45C",
+        "fill-opacity": 0.35,
+        "fill-outline-color": "#F2D45C",
+      },
+
+      defaultOn: false,
+
+      opacity: 0.35,
+      opacityProp: "fill-opacity",
+
+      legend: {
+        color: "#F2D45C",
+      },
+    },
+   {
+      id: "urban",
+      nameKey: "l_urban",
+      kind: "fill",
+      data: v("urban"),
+      clickable: true,
+
+      paint: {
+        "fill-color": "#E57373",
+        "fill-opacity": 0.35,
+        "fill-outline-color": "#E57373",
+      },
+
+      defaultOn: false,
+
+      opacity: 0.35,
+      opacityProp: "fill-opacity",
+
+      legend: {
+        color: "#E57373",
+      },
+    },
+
+    {
+      id: "waterbody",
+      nameKey: "l_waterbody",
+      kind: "fill",
+      data: v("waterbody"),
+      clickable: true,
+
+      paint: {
+        "fill-color": "#4AA6E0",
+        "fill-opacity": 0.40,
+        "fill-outline-color": "#4AA6E0",
+      },
+
+      defaultOn: false,
+
+      opacity: 0.40,
+      opacityProp: "fill-opacity",
+
+      legend: {
+        color: "#4AA6E0",
       },
     },
   ],
