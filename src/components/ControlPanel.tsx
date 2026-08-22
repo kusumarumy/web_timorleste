@@ -335,6 +335,20 @@ export default function ControlPanel() {
   const { t } = useI18n();
   const [open, setOpen] = useState(false);
 
+  const [collapsedGroups, setCollapsedGroups] = useState<
+  Record<string, boolean>
+>(() =>
+  Object.fromEntries(
+    GROUPS.map((g) => [g.titleKey, true])
+  )
+);
+
+  const toggleGroup = (key: string) => {
+    setCollapsedGroups((prev) => ({
+      ...prev,
+      [key]: !prev[key],
+    }));
+  };
   return (
     <>
       {/* Tombol buka panel */}
@@ -415,34 +429,70 @@ export default function ControlPanel() {
   </div>
 
   {/* GROUP-GROUP LAYER */}
-  <div className="mt-2.5">
-    {GROUPS.map((g) => (
+<div className="mt-2.5">
+  {GROUPS.map((g) => {
+    const collapsed = collapsedGroups[g.titleKey];
+
+    return (
       <div
         key={g.titleKey}
-        className="mb-2 last:mb-0"
+        className="mb-1.5 last:mb-0"
       >
-        {/* GROUP TITLE */}
-        <div className="flex items-center gap-2 px-1.5 py-1.5 text-[10.5px] font-bold uppercase tracking-wide text-muted2">
+        {/* =====================================================
+            GROUP HEADER
+            ===================================================== */}
+        <button
+          type="button"
+          onClick={() => toggleGroup(g.titleKey)}
+          aria-expanded={!collapsed}
+          className="flex w-full items-center gap-2 rounded-lg px-1.5 py-2 text-left transition-colors hover:bg-teal/[0.07]"
+        >
+          {/* DOT */}
           <span
-            className="h-[7px] w-[7px] rounded-[2px] flex-none"
+            className="h-[7px] w-[7px] flex-none rounded-[2px]"
             style={{ background: g.dot }}
           />
 
-          {t(g.titleKey)}
-        </div>
+          {/* TITLE */}
+          <span className="flex-1 text-[10.5px] font-bold uppercase tracking-wide text-muted2">
+            {t(g.titleKey)}
+          </span>
 
-        {/* LAYERS */}
-        <div className="mt-0.5">
-          {g.layers.map((l) => (
-            <LayerRow
-              key={l.id}
-              l={l}
-            />
-          ))}
-        </div>
+          {/* CHEVRON */}
+          <svg
+            viewBox="0 0 24 24"
+            width="14"
+            height="14"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className={`flex-none text-muted2 transition-transform duration-200 ${
+              collapsed ? "" : "rotate-90"
+            }`}
+          >
+            <path d="M9 18l6-6-6-6" />
+          </svg>
+        </button>
+
+        {/* =====================================================
+            LAYERS
+            ===================================================== */}
+        {!collapsed && (
+          <div className="mt-0.5">
+            {g.layers.map((l) => (
+              <LayerRow
+                key={l.id}
+                l={l}
+              />
+            ))}
+          </div>
+        )}
       </div>
-    ))}
-  </div>
+    );
+  })}
+</div>
 </div>
           </div>
         </aside>
