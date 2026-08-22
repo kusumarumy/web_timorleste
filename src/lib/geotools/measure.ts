@@ -27,6 +27,7 @@ const SRC = "__measure_src";
 const L_FILL = "__measure_fill";
 const L_LINE = "__measure_line";
 const L_VERT = "__measure_vert";
+const L_LABEL = "__measure_label";
 
 // ============================================================================
 // TYPE
@@ -225,7 +226,36 @@ private _ensureLayers(): void {
       },
     });
   }
+// ==========================================================
+// LABEL TITIK
+// ==========================================================
 
+if (!this.map.getLayer(L_LABEL)) {
+  this.map.addLayer({
+    id: L_LABEL,
+    type: "symbol",
+    source: SRC,
+    filter: [
+      "==",
+      ["geometry-type"],
+      "Point",
+    ],
+    layout: {
+      "text-field": ["get", "label"],
+      "text-size": 12,
+      "text-anchor": "bottom",
+      "text-offset": [0, -1.2],
+      "text-allow-overlap": true,
+      "text-ignore-placement": true,
+    },
+    paint: {
+      "text-color": "#111827",
+      "text-halo-color": "#ffffff",
+      "text-halo-width": 4,
+      "text-halo-blur": 0.2,
+    },
+  });
+}
   // ==========================================================
   // PASTIKAN TERLIHAT
   // ==========================================================
@@ -247,6 +277,11 @@ private _ensureLayers(): void {
     "visibility",
     "visible"
   );
+  this.map.setLayoutProperty(
+  L_LABEL,
+  "visibility",
+  "visible"
+);
 }
 
 // ============================================================
@@ -387,13 +422,15 @@ private _closePopups(): void {
   // ============================================================
 
   clear(): void {
-    this.coords = [];
-    this.hover = null;
+  this._closePopups();
 
-    this._setData([]);
+  this.coords = [];
+  this.hover = null;
 
-    this.onResult(null);
-  }
+  this._setData([]);
+
+  this.onResult(null);
+}
   // ============================================================
   // SET DATA
   // ============================================================
@@ -463,63 +500,6 @@ private _closePopups(): void {
       "MEASURE COORDS:",
       this.coords
     );
-
-    // ==========================================================
-    // POPUP KOORDINAT
-    // ==========================================================
-
-    const popup = new maplibregl.Popup({
-  closeButton: true,
-  closeOnClick: false,
-  offset: 12,
-  className: "measure-coordinate-popup",
-})
-  .setLngLat(e.lngLat)
-  .setHTML(`
-    <div style="
-      min-width: 150px;
-      font-family: Arial, sans-serif;
-      color: #1f2937;
-      background: #ffffff;
-    ">
-
-      <div style="
-        font-size: 11px;
-        font-weight: 700;
-        color: #0f766e;
-        margin-bottom: 8px;
-      ">
-        TITIK ${this.coords.length}
-      </div>
-
-      <div style="
-        font-size: 11px;
-        line-height: 1.6;
-        color: #1f2937;
-      ">
-
-        <div>
-          <b style="color:#374151;">Longitude</b><br/>
-          <span style="color:#111827;">
-            ${e.lngLat.lng.toFixed(6)}
-          </span>
-        </div>
-
-        <div style="
-          margin-top: 6px;
-        ">
-          <b style="color:#374151;">Latitude</b><br/>
-          <span style="color:#111827;">
-            ${e.lngLat.lat.toFixed(6)}
-          </span>
-        </div>
-
-      </div>
-
-    </div>
-  `);
-
-this._addPopup(popup);
 
     // ==========================================================
     // GAMBAR ULANG
@@ -641,17 +621,9 @@ this.onStop();
     // ==========================================================
 
     if (e.key === "Escape") {
-  console.log(
-    "MEASURE ESCAPE - CLEAR"
-  );
+  console.log("MEASURE ESCAPE - CLEAR");
 
-  // Tutup semua popup
-  this._closePopups();
-
-  // Hapus geometry
   this.clear();
-
-  // Hentikan measurement
   this.stop();
 
   return;
@@ -1060,36 +1032,6 @@ if (
       `;
     }
 
-    html += `
-        <hr style="
-          margin:8px 0;
-          border:0;
-          border-top:1px solid #ddd;
-        "/>
-
-        <div style="
-  font-size:10px;
-  color:#374151;
-">
-  <b>Longitude:</b>
-  <span style="color:#111827;">
-    ${lng.toFixed(6)}
-  </span>
-</div>
-
-<div style="
-  font-size:10px;
-  color:#374151;
-">
-  <b>Latitude:</b>
-  <span style="color:#111827;">
-    ${lat.toFixed(6)}
-  </span>
-</div>
-
-      </div>
-    `;
-
     const popup = new maplibregl.Popup({
   closeButton: true,
   closeOnClick: false,
@@ -1156,21 +1098,25 @@ this._addPopup(popup);
     }
 
     // ==========================================================
-    // POINT
-    // ==========================================================
+// POINT + LABEL
+// ==========================================================
 
-    c.forEach((p) => {
-      const point: Point = {
-        type: "Point",
-        coordinates: p,
-      };
+// Hanya titik yang benar-benar sudah diklik.
+// Hover tidak dibuat menjadi label.
+this.coords.forEach((p, index) => {
+  const point: Point = {
+    type: "Point",
+    coordinates: p,
+  };
 
-      feats.push({
-        type: "Feature",
-        geometry: point,
-        properties: {},
-      });
-    });
+  feats.push({
+    type: "Feature",
+    geometry: point,
+    properties: {
+      label: `TITIK ${index + 1}`,
+    },
+  });
+});
 
     return {
       type: "FeatureCollection",
