@@ -335,27 +335,60 @@ export const GROUPS: LayerGroup[] = [
 
   layers: [
     {
-  id: "river",
-  nameKey: "l_river",
-  kind: "fill",
-  data: v("river"),
+  id: "irrigation_point",
+  nameKey: "l_irrigation_point",
+  kind: "symbol",
+  data: v("irrigation_point"),
   clickable: true,
 
-  paint: {
-    "fill-color": "#4AA6E0",
-    "fill-opacity": 0.65,
-    "fill-outline-color": "#4AA6E0",
-  },
+  icon: icon("irrigation_point"),
+
+  paint: {},
 
   defaultOn: false,
 
-  opacity: 0.65,
-  opacityProp: "fill-opacity",
+  label: {
+    field: "Name",
+    minzoom: 9,
+    size: 14,
+    color: "#111827",
+    haloColor: "#FFFFFF",
+    haloWidth: 3,
+  },
+
 
   legend: {
-    color: "#4AA6E0",
+    color: "#F28C52",
+    svg: "irrigation_point",
   },
 },
+   {
+  id: "rainfall",
+  nameKey: "l_rainfall",
+  kind: "symbol",
+  data: v("rainfall"),
+  clickable: true,
+
+  icon: icon("rainfall"),
+
+  paint: {},
+
+  defaultOn: false,
+
+  label: {
+    field: "NAME",
+    minzoom: 10,
+    size: 11,
+    color: "#111827",
+    haloColor: "#FFFFFF",
+    haloWidth: 2,
+  },
+
+  legend: {
+    color: "#7B61A8",
+    svg: "rainfall",
+  },
+}, 
 {
   id: "weir",
   nameKey: "l_weir",
@@ -384,61 +417,7 @@ export const GROUPS: LayerGroup[] = [
     svg: "weir",
   },
 },
-{
-  id: "rainfall",
-  nameKey: "l_rainfall",
-  kind: "symbol",
-  data: v("rainfall"),
-  clickable: true,
-
-  icon: icon("rainfall"),
-
-  paint: {},
-
-  defaultOn: false,
-
-  label: {
-    field: "NAME",
-    minzoom: 10,
-    size: 11,
-    color: "#111827",
-    haloColor: "#FFFFFF",
-    haloWidth: 2,
-  },
-
-  legend: {
-    color: "#7B61A8",
-    svg: "rainfall",
-  },
-},
-  {
-  id: "irrigation_point",
-  nameKey: "l_irrigation_point",
-  kind: "symbol",
-  data: v("irrigation_point"),
-  clickable: true,
-
-  icon: icon("irrigation_point"),
-
-  paint: {},
-
-  defaultOn: false,
-
-  label: {
-    field: "Name",
-    minzoom: 9,
-    size: 14,
-    color: "#111827",
-    haloColor: "#FFFFFF",
-    haloWidth: 3,
-  },
-
-
-  legend: {
-    color: "#F28C52",
-    svg: "irrigation_point",
-  },
-},
+ 
     {
       id: "irrigation",
       nameKey: "l_irrigation",
@@ -500,7 +479,28 @@ export const GROUPS: LayerGroup[] = [
     },
   ],
 },
+{
+  id: "river",
+  nameKey: "l_river",
+  kind: "fill",
+  data: v("river"),
+  clickable: true,
 
+  paint: {
+    "fill-color": "#4AA6E0",
+    "fill-opacity": 0.65,
+    "fill-outline-color": "#4AA6E0",
+  },
+
+  defaultOn: false,
+
+  opacity: 0.65,
+  opacityProp: "fill-opacity",
+
+  legend: {
+    color: "#4AA6E0",
+  },
+},
     {
       id: "watershed",
       nameKey: "l_watershed",
