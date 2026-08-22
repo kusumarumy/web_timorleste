@@ -776,25 +776,42 @@ useEffect(() => {
   return unsubscribe;
 }, []);
   // BASEMAP CHANGE
-  useEffect(
-    () =>
-      useMapStore.subscribe((s) => {
-        const map = mapRef.current;
-        if (!map || !map.isStyleLoaded()) return;
+  // BASEMAP CHANGE
+useEffect(
+  () =>
+    useMapStore.subscribe((s) => {
+      const map = mapRef.current;
+      if (!map || !map.isStyleLoaded()) return;
 
-        BASEMAPS.forEach((b) => {
-          const layerId = `bm_${b.id}`;
-          if (map.getLayer(layerId)) {
-            map.setLayoutProperty(
-              layerId,
-              "visibility",
-              b.id === s.basemap ? "visible" : "none"
-            );
-          }
-        });
-      }),
-    []
-  );
+      const isOrtho = s.basemap === "ortho";
+
+      BASEMAPS.forEach((b) => {
+        const layerId = `bm_${b.id}`;
+
+        if (!map.getLayer(layerId)) return;
+
+        let visible = false;
+
+        // Kalau Orthophoto aktif:
+        // Esri World Imagery tetap berada di bawahnya
+        if (isOrtho && b.id === "sat") {
+          visible = true;
+        }
+
+        // Basemap yang dipilih tetap visible
+        if (b.id === s.basemap) {
+          visible = true;
+        }
+
+        map.setLayoutProperty(
+          layerId,
+          "visibility",
+          visible ? "visible" : "none"
+        );
+      });
+    }),
+  []
+);
 
   useEffect(
   () =>
