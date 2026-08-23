@@ -1057,7 +1057,7 @@ if (
         gap:15px;
       ">
         <span style="color:#374151;">
-          Sudut (derajat)
+          Sudut (°)
         </span>
         <b style="color:#111827;">
           ${slopeDegree.toFixed(2)}°
