@@ -482,47 +482,54 @@ private _closePopups(): void {
 
     return elevation;
   }
-  // ============================================================
-  // CLICK
-  // ============================================================
-
   private _onClick(
-    e: MapMouseEvent
-  ): void {
-    if (!this.mode) {
-      return;
-    }
-
-    const point: Coordinate = [
-      e.lngLat.lng,
-      e.lngLat.lat,
-    ];
-
-    console.log(
-      "MEASURE CLICK:",
-      point
-    );
-
-    // ==========================================================
-    // TITIK PERMANEN
-    // ==========================================================
-
-    this.coords.push(point);
-
-    // Preview mouse dihapus
-    this.hover = null;
-
-    console.log(
-      "MEASURE COORDS:",
-      this.coords
-    );
-
-    // ==========================================================
-    // GAMBAR ULANG
-    // ==========================================================
-
-    this._update();
+  e: MapMouseEvent
+): void {
+  if (!this.mode) {
+    return;
   }
+
+  // ==========================================================
+  // DOUBLE CLICK
+  // ==========================================================
+  // MapLibre/browser mengirim:
+  // click detail=1
+  // click detail=2
+  // dblclick
+  //
+  // Klik kedua dari double-click JANGAN dijadikan titik baru.
+  // Titik pertama tetap dipakai sebagai titik pengukuran terakhir.
+  // ==========================================================
+
+  if (e.originalEvent.detail >= 2) {
+    console.log(
+      "MEASURE CLICK DIABAIKAN - BAGIAN DARI DOUBLE CLICK"
+    );
+
+    return;
+  }
+
+  const point: Coordinate = [
+    e.lngLat.lng,
+    e.lngLat.lat,
+  ];
+
+  console.log(
+    "MEASURE CLICK:",
+    point
+  );
+
+  this.coords.push(point);
+
+  this.hover = null;
+
+  console.log(
+    "MEASURE COORDS:",
+    this.coords
+  );
+
+  this._update();
+}
 
   // ============================================================
   // MOUSE MOVE
@@ -552,74 +559,60 @@ private _closePopups(): void {
     this._update();
   }
 
-  // ============================================================
-  // DOUBLE CLICK
-  // ============================================================
-
   private _onDbl(
-    _e: MapMouseEvent
-  ): void {
-    if (!this.mode) {
-      return;
-    }
-
-    console.log(
-      "MEASURE DOUBLE CLICK"
-    );
-
-    if (this.coords.length === 0) {
-      return;
-    }
-
-    const finishedMode =
-      this.mode;
-
-    const finalCoords =
-      this.coords.slice();
-
-    // Jangan masukkan hover
-    this.hover = null;
-
-    // Geometry final
-    this._setData(
-      finalCoords
-    );
-
-// Hasil final
-this._updateResult(
-  finalCoords,
-  true
-);
-
-// ==========================================================
-// TUTUP SEMUA POPUP TITIK
-// ==========================================================
-
-this._closePopups();
-
-// ==========================================================
-// TAMPILKAN POPUP HASIL SAJA
-// ==========================================================
-
-this._showResultPopup(
-  finalCoords[
-    finalCoords.length - 1
-  ],
-  finishedMode,
-  finalCoords
-);
-
-    // ==========================================================
-// MATIKAN EVENT MOUSE SAJA
-// ESCAPE TETAP AKTIF
-// ==========================================================
-
-this._removeListeners(false);
-
-this.hover = null;
-
-this.onStop();
+  _e: MapMouseEvent
+): void {
+  if (!this.mode) {
+    return;
   }
+
+  console.log(
+    "MEASURE DOUBLE CLICK - FINISH"
+  );
+
+  if (this.coords.length === 0) {
+    return;
+  }
+
+  const finishedMode = this.mode;
+
+  // Salin hanya titik yang benar-benar diklik.
+  // Klik kedua dari double-click sudah diabaikan
+  // oleh _onClick().
+  const finalCoords = this.coords.slice();
+
+  // Jangan tampilkan garis preview
+  this.hover = null;
+
+  // Geometry final
+  this._setData(finalCoords);
+
+  // Hasil final
+  this._updateResult(
+    finalCoords,
+    true
+  );
+
+  // Tutup popup titik/hasil sebelumnya
+  this._closePopups();
+
+  // Tampilkan popup hasil
+  this._showResultPopup(
+    finalCoords[
+      finalCoords.length - 1
+    ],
+    finishedMode,
+    finalCoords
+  );
+
+  // Matikan event mouse.
+  // Keyboard ESC tetap aktif.
+  this._removeListeners(false);
+
+  this.hover = null;
+
+  this.onStop();
+}
 
   // ============================================================
   // KEYBOARD
