@@ -56,7 +56,7 @@ export const TERRAIN_OPTIONS = {
   r2: {
     id: "r2",
     label: "DTM 3 m",
-    tiles: [`${R2}/dtm/{z}/{x}/{y}.png`],
+    tiles: [`${R2}/orthophoto/tiles/{z}/{x}/{y}.webp`],
     encoding: "terrarium" as const,
     minzoom: 8,
     maxzoom: 16,
