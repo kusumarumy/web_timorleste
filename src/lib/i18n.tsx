@@ -137,6 +137,21 @@ export const DICTS: Record<Lang, Dict> = {
     terrain: "Terrain 3D",
     exagg: "Elevasi",
     sub_ortho: "Ubin citra dari Cloudflare R2",
+    
+    // Control Panel
+    terrain_off: "Nonaktif",
+    measurement: "Pengukuran",
+    distance: "Jarak",
+    length: "Panjang",
+    width: "Lebar",
+    area: "Luas",
+    measurement_click: "Klik titik",
+    measurement_double_click: "Double klik",
+    measurement_finish: "selesai",
+    measurement_cancel: "batal",
+    measurement_select: "Pilih salah satu alat pengukuran.",
+    data_layer: "Data Layer",
+    terrain_locked: "Elevasi DEM pengukuran terkunci pada skala asli (1×).",
 
     // Map information
     zoom: "Zoom",
@@ -269,6 +284,21 @@ export const DICTS: Record<Lang, Dict> = {
     terrain: "3D Terrain",
     exagg: "Elevation",
     sub_ortho: "Image tiles from Cloudflare R2",
+    
+    // Control Panel
+    terrain_off: "Off",
+    measurement: "Measurement",
+    distance: "Distance",
+    length: "Length",
+    width: "Width",
+    area: "Area",
+    measurement_click: "Click points",
+    measurement_double_click: "Double click",
+    measurement_finish: "to finish",
+    measurement_cancel: "to cancel",
+    measurement_select: "Select a measurement tool.",
+    data_layer: "Data Layer",
+    terrain_locked: "The measurement DEM elevation is locked at the original scale (1×).",
 
     // Map information
     zoom: "Zoom",
@@ -401,6 +431,21 @@ export const DICTS: Record<Lang, Dict> = {
     terrain: "Terreno 3D",
     exagg: "Elevação",
     sub_ortho: "Ladrilhos de imagem do Cloudflare R2",
+    
+    // Control Panel
+    terrain_off: "Desativado",
+    measurement: "Medição",
+    distance: "Distância",
+    length: "Comprimento",
+    width: "Largura",
+    area: "Área",
+    measurement_click: "Clique nos pontos",
+    measurement_double_click: "Duplo clique",
+    measurement_finish: "para concluir",
+    measurement_cancel: "para cancelar",
+    measurement_select: "Selecione uma ferramenta de medição.",
+    data_layer: "Camadas de Dados",
+    terrain_locked: "A elevação do DEM de medição está bloqueada na escala original (1×).",
 
     // Map information
     zoom: "Zoom",
