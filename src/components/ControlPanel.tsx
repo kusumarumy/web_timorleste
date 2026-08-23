@@ -139,10 +139,10 @@ function TerrainControl() {
   const adjustable = terrainSource === "aws";
 
   const options: { id: "off" | "aws" | "r2"; label: string }[] = [
-    { id: "off", label: "Nonaktif" },
-    { id: "aws", label: "AWS Terrarium 30 m" },
-    { id: "r2", label: "DTM 3 m" },
-  ];
+  { id: "off", label: t("terrain_off") },
+  { id: "aws", label: "AWS Terrarium 30 m" },
+  { id: "r2", label: "DTM 3 m" },
+];
 
   return (
     <div className="m-1.5 rounded-xl border border-strokeSoft bg-gradient-to-br from-teal/10 to-teal/[0.02] p-3">
@@ -154,7 +154,7 @@ function TerrainControl() {
         {t("terrain")}
       </div>
 
-      {/* 3 pilihan sumber DEM */}
+      {/* 3 pilihan sumber DTM */}
       <div className="mt-2.5 flex gap-1 rounded-[10px] border border-stroke bg-bg/40 p-[3px]">
         {options.map((opt) => (
           <button
@@ -171,7 +171,7 @@ function TerrainControl() {
         ))}
       </div>
 
-      {/* Slider elevasi — hanya saat DEM aktif */}
+      {/* Slider elevasi — hanya saat DTM aktif */}
       {terrainSource !== "off" && (
         <div className={`mt-3 ${adjustable ? "" : "opacity-40"}`}>
           <div className="flex items-center gap-2.5">
@@ -193,7 +193,8 @@ function TerrainControl() {
 
           {!adjustable && (
             <p className="mt-1.5 text-[10px] leading-snug text-muted2">
-              Elevasi DEM pengukuran terkunci pada skala asli (1×).
+  {t("terrain_locked")}
+</p>
             </p>
           )}
         </div>
@@ -202,6 +203,7 @@ function TerrainControl() {
   );
 }
 function MeasurementControl() {
+  const { t } = useI18n();
   const [active, setActive] = useState(getToolMode());
 
   useEffect(() => {
@@ -253,7 +255,7 @@ function MeasurementControl() {
           <path d="M14 10l-2-2" />
         </svg>
 
-        <span>Pengukuran</span>
+        <span>{t("measurement")}</span>
       </div>
 
       {/* 4 TOOLS */}
@@ -269,8 +271,8 @@ function MeasurementControl() {
           <span className="text-[15px]">📏</span>
 
           <span className="text-[11px] font-semibold">
-            Jarak
-          </span>
+  {t("distance")}
+</span>
         </button>
 
         {/* PANJANG */}
@@ -283,8 +285,8 @@ function MeasurementControl() {
           <span className="text-[15px]">↔</span>
 
           <span className="text-[11px] font-semibold">
-            Panjang
-          </span>
+  {t("length")}
+</span>
         </button>
 
         {/* LEBAR */}
@@ -297,8 +299,8 @@ function MeasurementControl() {
           <span className="text-[15px]">↕</span>
 
           <span className="text-[11px] font-semibold">
-            Lebar
-          </span>
+  {t("width")}
+</span>
         </button>
 
         {/* LUAS */}
@@ -311,8 +313,8 @@ function MeasurementControl() {
           <span className="text-[15px]">▱</span>
 
           <span className="text-[11px] font-semibold">
-            Luas
-          </span>
+  {t("area")}
+</span>
         </button>
 
       </div>
@@ -320,12 +322,16 @@ function MeasurementControl() {
       <p className="mt-2 text-[10px] leading-snug text-muted2">
   {active ? (
     <>
-      Klik titik ·{" "}
-      <b className="text-teal">Double klik</b> selesai ·{" "}
-      <b className="text-teal">Esc</b> batal
+      {t("measurement_click")} ·{" "}
+      <b className="text-teal">
+        {t("measurement_double_click")}
+      </b>{" "}
+      {t("measurement_finish")} ·{" "}
+      <b className="text-teal">Esc</b>{" "}
+      {t("measurement_cancel")}
     </>
   ) : (
-    "Pilih salah satu alat pengukuran."
+    t("measurement_select")
   )}
 </p>
     </div>
@@ -425,7 +431,7 @@ export default function ControlPanel() {
       <path d="M8 16h5" />
     </svg>
 
-    <span>Data Layer</span>
+    <span>{t("data_layer")}</span>
   </div>
 
   {/* GROUP-GROUP LAYER */}
