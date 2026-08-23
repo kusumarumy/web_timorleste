@@ -906,7 +906,7 @@ this._showResultPopup(
 
     this.onResult(null);
   }
-  }
+  
 
   // ============================================================
   // RESULT POPUP
