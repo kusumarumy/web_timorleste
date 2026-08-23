@@ -1,20 +1,8 @@
-// ============================================================================
-// src/components/toolMode.ts
-// State kecil bersama untuk tool geospasial yang sedang aktif.
-// Dipakai ControlPanel / MapTools / MapCanvas.
-//
-// length  = pengukuran panjang polygon
-// width   = pengukuran lebar polygon
-// area    = pengukuran luas polygon
-// distance = pengukuran jarak/garis
-// ============================================================================
-
 export type ToolMode =
-  | null
   | "distance"
-  | "length"
-  | "width"
-  | "area";
+  | "elevation"
+  | "area"
+  | null;
 
 let _mode: ToolMode = null;
 
