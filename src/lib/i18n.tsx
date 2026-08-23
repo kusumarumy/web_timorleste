@@ -151,7 +151,7 @@ export const DICTS: Record<Lang, Dict> = {
     measurement_cancel: "batal",
     measurement_select: "Pilih salah satu alat pengukuran.",
     data_layer: "Data Layer",
-    terrain_locked: "Elevasi DEM pengukuran terkunci pada skala asli (1×).",
+    terrain_locked: "Elevasi DTM pengukuran terkunci pada skala asli (1×).",
 
     // Map information
     zoom: "Zoom",
@@ -298,7 +298,7 @@ export const DICTS: Record<Lang, Dict> = {
     measurement_cancel: "to cancel",
     measurement_select: "Select a measurement tool.",
     data_layer: "Data Layer",
-    terrain_locked: "The measurement DEM elevation is locked at the original scale (1×).",
+    terrain_locked: "The measurement DTM elevation is locked at the original scale (1×).",
 
     // Map information
     zoom: "Zoom",
@@ -445,7 +445,7 @@ export const DICTS: Record<Lang, Dict> = {
     measurement_cancel: "para cancelar",
     measurement_select: "Selecione uma ferramenta de medição.",
     data_layer: "Camadas de Dados",
-    terrain_locked: "A elevação do DEM de medição está bloqueada na escala original (1×).",
+    terrain_locked: "A elevação do DTM de medição está bloqueada na escala original (1×).",
 
     // Map information
     zoom: "Zoom",
