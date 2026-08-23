@@ -45,7 +45,7 @@ export const BASEMAPS: Basemap[] = [
 export const TERRAIN_OPTIONS = {
   aws: {
     id: "aws",
-    label: "AWS Terrarium",
+    label: "AWS Terrarium 30 m",
     tiles: ["https://s3.amazonaws.com/elevation-tiles-prod/terrarium/{z}/{x}/{y}.png"],
     encoding: "terrarium" as const,
     minzoom: 0,
@@ -55,7 +55,7 @@ export const TERRAIN_OPTIONS = {
   },
   r2: {
     id: "r2",
-    label: "DEM Pengukuran",
+    label: "DTM 3 m",
     tiles: [`${R2}/dtm/{z}/{x}/{y}.png`],
     encoding: "terrarium" as const,
     minzoom: 8,
