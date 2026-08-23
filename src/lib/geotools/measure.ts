@@ -967,7 +967,105 @@ this._showResultPopup(
         `;
       }
     }
-   
+   // ==========================================================
+// ELEVATION
+// ==========================================================
+
+if (
+  mode === "elevation" &&
+  coords.length >= 2
+) {
+  const r = measureLine(
+    coords.slice(0, 2),
+    this.scaleFactor
+  ) as MeasureLineResult | null;
+
+  const elevation1 = this._getElevation(coords[0]);
+  const elevation2 = this._getElevation(coords[1]);
+
+  if (
+    r &&
+    elevation1 != null &&
+    elevation2 != null
+  ) {
+    const deltaElevation =
+      elevation2 - elevation1;
+
+    const slopePercent =
+      (deltaElevation / r.total) * 100;
+
+    const slopeDegree =
+      Math.atan(
+        deltaElevation / r.total
+      ) *
+      (180 / Math.PI);
+
+    html += `
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        gap:15px;
+        margin-bottom:5px;
+      ">
+        <span style="color:#374151;">Jarak horizontal</span>
+        <b style="color:#111827;">${fmtLen(r.total)}</b>
+      </div>
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        gap:15px;
+        margin-bottom:5px;
+      ">
+        <span style="color:#374151;">Elevasi titik 1</span>
+        <b style="color:#111827;">${elevation1.toFixed(2)} m</b>
+      </div>
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        gap:15px;
+        margin-bottom:5px;
+      ">
+        <span style="color:#374151;">Elevasi titik 2</span>
+        <b style="color:#111827;">${elevation2.toFixed(2)} m</b>
+      </div>
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        gap:15px;
+        margin-bottom:5px;
+      ">
+        <span style="color:#374151;">Beda elevasi</span>
+        <b style="color:#111827;">${deltaElevation.toFixed(2)} m</b>
+      </div>
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        gap:15px;
+        margin-bottom:5px;
+      ">
+        <span style="color:#374151;">Kemiringan</span>
+        <b style="color:#111827;">${slopePercent.toFixed(2)}%</b>
+      </div>
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        gap:15px;
+      ">
+        <span style="color:#374151;">Sudut</span>
+        <b style="color:#111827;">${slopeDegree.toFixed(2)}°</b>
+      </div>
+    `;
+  }
+}
+
+// ==========================================================
+// AREA
+// ==========================================================
     // ==========================================================
     // AREA
     // ==========================================================
