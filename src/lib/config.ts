@@ -28,14 +28,14 @@ export type Basemap = { id: string; labelKey: string; tiles: string[]; attributi
 export const BASEMAPS: Basemap[] = [
   { id: "map", labelKey: "bm_map", tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"], attribution: "© OpenStreetMap" },
   { id: "sat", labelKey: "bm_sat", tiles: ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"], attribution: "Esri, Maxar" },
-  {
-    id: "ortho",
-    labelKey: "bm_ortho",
-    tiles: [`${R2}/orthophoto/tiles/{z}/{x}/{y}.png`],
-    attribution: "Orthophoto",
-    minzoom: 13,
-  maxzoom: 20,
-  },
+ {
+  id: "ortho",
+  labelKey: "bm_ortho",
+  tiles: [`${R2}/orthophoto/tiles/{z}/{x}/{y}.webp`],
+  attribution: "Orthophoto",
+  minzoom: 13,
+  maxzoom: 18,
+},
   { id: "dark", labelKey: "bm_dark", tiles: ["https://basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"], attribution: "© CARTO © OSM" },
   { id: "hybrid", labelKey: "bm_hybrid", tiles: ["https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}"], attribution: "© Google Maps" },
   { id: "streets", labelKey: "bm_streets", tiles: ["https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}"], attribution: "© Google Maps" },
@@ -56,7 +56,7 @@ export const TERRAIN_OPTIONS = {
   r2: {
     id: "r2",
     label: "DTM 3 m",
-    tiles: [`${R2}/orthophoto/tiles/{z}/{x}/{y}.webp`],
+    tiles: [`${R2}/dtm/{z}/{x}/{y}.png`],
     encoding: "terrarium" as const,
     minzoom: 8,
     maxzoom: 16,
