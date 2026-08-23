@@ -59,27 +59,24 @@ type MeasureResult =
       [key: string]: unknown;
     }
   | {
+      mode: "elevation";
+      horizontal: number;
+      elevation1: number;
+      elevation2: number;
+      deltaElevation: number;
+      slopePercent: number;
+      slopeDegree: number;
+      finished: boolean;
+      unit: "m";
+      k: number;
+      [key: string]: unknown;
+    }
+  | {
       mode: "area";
       area?: number;
       length?: number;
       width?: number;
       pendingPerimeter?: number;
-      finished: boolean;
-      unit: "m";
-      k: number;
-      [key: string]: unknown;
-    }
-  | {
-      mode: "length";
-      length: number;
-      finished: boolean;
-      unit: "m";
-      k: number;
-      [key: string]: unknown;
-    }
-  | {
-      mode: "width";
-      width: number;
       finished: boolean;
       unit: "m";
       k: number;
@@ -466,6 +463,25 @@ private _closePopups(): void {
 
     source.setData(geojson);
   }
+    // ============================================================
+  // GET TERRAIN ELEVATION
+  // ============================================================
+
+  private _getElevation(
+    coord: Coordinate
+  ): number | null {
+    const elevation =
+      this.map.queryTerrainElevation(coord);
+
+    if (
+      elevation == null ||
+      !Number.isFinite(elevation)
+    ) {
+      return null;
+    }
+
+    return elevation;
+  }
   // ============================================================
   // CLICK
   // ============================================================
@@ -722,7 +738,7 @@ this._showResultPopup(
     );
   }
 
-  // ============================================================
+    // ============================================================
   // UPDATE RESULT
   // ============================================================
 
@@ -730,8 +746,7 @@ this._showResultPopup(
     c: Coordinate[],
     finished = false
   ): void {
-    const k =
-      this.scaleFactor;
+    const k = this.scaleFactor;
 
     // ==========================================================
     // DISTANCE
@@ -755,6 +770,86 @@ this._showResultPopup(
             }
           : null
       );
+
+      return;
+    }
+
+    // ==========================================================
+    // ELEVATION
+    // ==========================================================
+
+    if (this.mode === "elevation") {
+      if (c.length < 2) {
+        this.onResult(null);
+        return;
+      }
+
+      // Hanya gunakan titik pertama dan titik kedua
+      const p1 = c[0];
+      const p2 = c[1];
+
+      // Jarak horizontal
+      const r =
+        measureLine(
+          [p1, p2],
+          k
+        ) as MeasureLineResult | null;
+
+      if (!r || r.total <= 0) {
+        this.onResult(null);
+        return;
+      }
+
+      // Elevasi terrain
+      const elevation1 =
+        this._getElevation(p1);
+
+      const elevation2 =
+        this._getElevation(p2);
+
+      // Terrain belum tersedia
+      if (
+        elevation1 == null ||
+        elevation2 == null
+      ) {
+        this.onResult(null);
+        return;
+      }
+
+      // Beda elevasi
+      const deltaElevation =
+        elevation2 - elevation1;
+
+      // Slope dalam persen
+      const slopePercent =
+        (deltaElevation / r.total) * 100;
+
+      // Slope dalam derajat
+      const slopeDegree =
+        Math.atan(
+          deltaElevation / r.total
+        ) *
+        (180 / Math.PI);
+
+      this.onResult({
+        mode: "elevation",
+
+        horizontal: r.total,
+
+        elevation1,
+        elevation2,
+
+        deltaElevation,
+
+        slopePercent,
+        slopeDegree,
+
+        finished,
+
+        unit: "m",
+
+        k,
+      });
 
       return;
     }
@@ -809,59 +904,8 @@ this._showResultPopup(
       return;
     }
 
-   if (this.mode === "length") {
-  if (c.length >= 2) {
-    const r =
-      measureLine(
-        c,
-        k
-      ) as MeasureLineResult | null;
-
-    this.onResult(
-      r
-        ? {
-            mode: "length",
-            length: r.total,
-            finished,
-            unit: "m",
-            k,
-          }
-        : null
-    );
-
-    return;
+    this.onResult(null);
   }
-
-  this.onResult(null);
-  return;
-}
-
-if (this.mode === "width") {
-  if (c.length >= 2) {
-    const r =
-      measureLine(
-        c,
-        k
-      ) as MeasureLineResult | null;
-
-    this.onResult(
-      r
-        ? {
-            mode: "width",
-            width: r.total,
-            finished,
-            unit: "m",
-            k,
-          }
-        : null
-    );
-
-    return;
-  }
-
-  this.onResult(null);
-  return;
-}
   }
 
   // ============================================================
@@ -923,69 +967,7 @@ if (this.mode === "width") {
         `;
       }
     }
-   // ==========================================================
-// LENGTH
-// ==========================================================
-
-if (
-  mode === "length" &&
-  coords.length >= 2
-) {
-  const r =
-    measureLine(
-      coords,
-      this.scaleFactor
-    ) as MeasureLineResult | null;
-
-  if (r) {
-    html += `
-      <div style="
-        display:flex;
-        justify-content:space-between;
-        gap:15px;
-        margin-bottom:5px;
-      ">
-        <span style="color:#374151;">
-          Panjang
-        </span>
-
-        <b style="color:#111827;">
-          ${fmtLen(r.total)}
-        </b>
-      </div>
-    `;
-  }
-}
-
-    if (
-  mode === "width" &&
-  coords.length >= 2
-) {
-  const r =
-    measureLine(
-      coords,
-      this.scaleFactor
-    ) as MeasureLineResult | null;
-
-  if (r) {
-    html += `
-      <div style="
-        display:flex;
-        justify-content:space-between;
-        gap:15px;
-        margin-bottom:5px;
-      ">
-        <span style="color:#374151;">
-          Lebar
-        </span>
-
-        <b style="color:#111827;">
-          ${fmtLen(r.total)}
-        </b>
-      </div>
-    `;
-  }
-}
+   
     // ==========================================================
     // AREA
     // ==========================================================
