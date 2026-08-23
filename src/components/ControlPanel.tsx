@@ -160,7 +160,7 @@ function TerrainControl() {
           <button
             key={opt.id}
             onClick={() => setTerrainSource(opt.id)}
-            className={`flex-1 rounded-lg px-2 py-1.5 text-[11px] font-semibold transition-colors ${
+           className={`flex-1 whitespace-nowrap rounded-lg px-1.5 py-1.5 text-[10px] font-semibold transition-colors ${
               terrainSource === opt.id
                 ? "bg-teal text-[#04171a]"
                 : "text-muted hover:text-ink"
