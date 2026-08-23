@@ -195,7 +195,6 @@ function TerrainControl() {
             <p className="mt-1.5 text-[10px] leading-snug text-muted2">
   {t("terrain_locked")}
 </p>
-            </p>
           )}
         </div>
       )}
