@@ -978,6 +978,7 @@ if (
 
   if (
     r &&
+    r.total > 0 &&
     elevation1 != null &&
     elevation2 != null
   ) {
@@ -1000,8 +1001,12 @@ if (
         gap:15px;
         margin-bottom:5px;
       ">
-        <span style="color:#374151;">Jarak horizontal</span>
-        <b style="color:#111827;">${fmtLen(r.total)}</b>
+        <span style="color:#374151;">
+          Elevasi titik 1
+        </span>
+        <b style="color:#111827;">
+          ${elevation1.toFixed(2)} m
+        </b>
       </div>
 
       <div style="
@@ -1010,8 +1015,12 @@ if (
         gap:15px;
         margin-bottom:5px;
       ">
-        <span style="color:#374151;">Elevasi titik 1</span>
-        <b style="color:#111827;">${elevation1.toFixed(2)} m</b>
+        <span style="color:#374151;">
+          Elevasi titik 2
+        </span>
+        <b style="color:#111827;">
+          ${elevation2.toFixed(2)} m
+        </b>
       </div>
 
       <div style="
@@ -1020,8 +1029,12 @@ if (
         gap:15px;
         margin-bottom:5px;
       ">
-        <span style="color:#374151;">Elevasi titik 2</span>
-        <b style="color:#111827;">${elevation2.toFixed(2)} m</b>
+        <span style="color:#374151;">
+          Beda elevasi
+        </span>
+        <b style="color:#111827;">
+          ${deltaElevation.toFixed(2)} m
+        </b>
       </div>
 
       <div style="
@@ -1030,18 +1043,12 @@ if (
         gap:15px;
         margin-bottom:5px;
       ">
-        <span style="color:#374151;">Beda elevasi</span>
-        <b style="color:#111827;">${deltaElevation.toFixed(2)} m</b>
-      </div>
-
-      <div style="
-        display:flex;
-        justify-content:space-between;
-        gap:15px;
-        margin-bottom:5px;
-      ">
-        <span style="color:#374151;">Kemiringan</span>
-        <b style="color:#111827;">${slopePercent.toFixed(2)}%</b>
+        <span style="color:#374151;">
+          Slope (%)
+        </span>
+        <b style="color:#111827;">
+          ${slopePercent.toFixed(2)}%
+        </b>
       </div>
 
       <div style="
@@ -1049,8 +1056,12 @@ if (
         justify-content:space-between;
         gap:15px;
       ">
-        <span style="color:#374151;">Sudut</span>
-        <b style="color:#111827;">${slopeDegree.toFixed(2)}°</b>
+        <span style="color:#374151;">
+          Sudut (derajat)
+        </span>
+        <b style="color:#111827;">
+          ${slopeDegree.toFixed(2)}°
+        </b>
       </div>
     `;
   }
