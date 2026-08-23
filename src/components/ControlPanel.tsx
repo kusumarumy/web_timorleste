@@ -140,8 +140,8 @@ function TerrainControl() {
 
   const options: { id: "off" | "aws" | "r2"; label: string }[] = [
     { id: "off", label: "Nonaktif" },
-    { id: "aws", label: "AWS Terrarium" },
-    { id: "r2", label: "DEM Pengukuran" },
+    { id: "aws", label: "AWS Terrarium 30 m" },
+    { id: "r2", label: "DTM 3 m" },
   ];
 
   return (
