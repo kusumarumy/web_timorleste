@@ -35,16 +35,12 @@ function LayerRow({ l }: { l: LayerDef }) {
 
   return (
     <div>
-      {/* Layer utama */}
       <div className="group flex items-center gap-2.5 rounded-[10px] px-2 py-2 transition-colors hover:bg-teal/[0.07]">
         <Toggle on={on} onClick={() => toggle(l.id)} />
 
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 text-[13px] font-semibold text-ink">
 
-            {/* =========================
-                SYMBOL / ICON LAYER
-                ========================= */}
             {l.icon ? (
               <span className="flex h-[24px] w-[24px] flex-none items-center justify-center">
                 <img
@@ -54,9 +50,6 @@ function LayerRow({ l }: { l: LayerDef }) {
                 />
               </span>
             ) : sw ? (
-              /* =========================
-                 FALLBACK LEGEND COLOR
-                 ========================= */
               <span
                 className="inline-block h-[11px] w-[11px] flex-none rounded-[3px]"
                 style={
@@ -102,7 +95,6 @@ function LayerRow({ l }: { l: LayerDef }) {
         )}
       </div>
 
-      {/* SUBCLASS */}
       {l.sublayers && on && (
         <div className="ml-10 mb-2 mt-0.5 space-y-0.5 border-l border-strokeSoft pl-3">
           {l.sublayers.map((sub) => (
@@ -135,7 +127,6 @@ function TerrainControl() {
     setExaggeration,
   } = useMapStore();
 
-  // hanya AWS Terrarium yang boleh diatur elevasinya
   const adjustable = terrainSource === "aws";
 
   const options: { id: "off" | "aws" | "r2"; label: string }[] = [
@@ -171,7 +162,6 @@ function TerrainControl() {
         ))}
       </div>
 
-      {/* Slider elevasi — hanya saat DTM aktif */}
       {terrainSource !== "off" && (
         <div className={`mt-3 ${adjustable ? "" : "opacity-40"}`}>
           <div className="flex items-center gap-2.5">
@@ -212,8 +202,8 @@ function MeasurementControl() {
   }, []);
 
   const activate = (
-    mode: "length" | "width" | "area" | "distance"
-  ) => {
+  mode: "distance" | "elevation" | "area"
+) => {
     if (active === mode) {
       setToolMode(null);
       return;
@@ -223,8 +213,8 @@ function MeasurementControl() {
   };
 
   const buttonClass = (
-    mode: "length" | "width" | "area" | "distance"
-  ) =>
+  mode: "distance" | "elevation" | "area"
+) =>
     `flex items-center gap-2 rounded-lg border px-2.5 py-2.5 transition-colors ${
       active === mode
         ? "border-teal/50 bg-teal text-[#04171a]"
@@ -257,10 +247,8 @@ function MeasurementControl() {
         <span>{t("measurement")}</span>
       </div>
 
-      {/* 4 TOOLS */}
-      <div className="mt-2.5 grid grid-cols-2 gap-1.5">
+      <div className="mt-2.5 grid grid-cols-3 gap-1.5">
 
-        {/* JARAK */}
         <button
           type="button"
           onClick={() => activate("distance")}
@@ -274,33 +262,19 @@ function MeasurementControl() {
 </span>
         </button>
 
-        {/* PANJANG */}
-        <button
-          type="button"
-          onClick={() => activate("length")}
-          className={buttonClass("length")}
-          aria-pressed={active === "length"}
-        >
-          <span className="text-[15px]">↔</span>
+        {/* ELEVASI */}
+<button
+  type="button"
+  onClick={() => activate("elevation")}
+  className={buttonClass("elevation")}
+  aria-pressed={active === "elevation"}
+>
+  <span className="text-[15px]">↕</span>
 
-          <span className="text-[11px] font-semibold">
-  {t("length")}
-</span>
-        </button>
-
-        {/* LEBAR */}
-        <button
-          type="button"
-          onClick={() => activate("width")}
-          className={buttonClass("width")}
-          aria-pressed={active === "width"}
-        >
-          <span className="text-[15px]">↕</span>
-
-          <span className="text-[11px] font-semibold">
-  {t("width")}
-</span>
-        </button>
+  <span className="text-[11px] font-semibold">
+    {t("elevation")}
+  </span>
+</button>
 
         {/* LUAS */}
         <button
