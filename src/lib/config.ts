@@ -135,7 +135,7 @@ export const GROUPS: LayerGroup[] = [
       nameKey: "l_aoi_photo",
       kind: "line",
       data: v("aoi_photo"),
-
+      clickable: true,
       paint: {
         "line-color": "#0000FF",
         "line-width": 2.5,
