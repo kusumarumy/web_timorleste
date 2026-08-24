@@ -28,6 +28,7 @@ export const DICTS: Record<Lang, Dict> = {
     g_genangan: "Layer Genangan",
     g_weir_oebaba: "Weir Oebaba",
     g_weir_reibera: "Weir Reibera",
+    g_maukola: "MAUKOLA",
 
     // Administration
     l_desa: "Batas Administrasi Desa",
