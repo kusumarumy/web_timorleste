@@ -137,7 +137,7 @@ export const GROUPS: LayerGroup[] = [
   data: v("aoi_photo"),
 
   paint: {
-    "fill-color": "#000000",
+    "fill-color": "#0000FF",
     "fill-opacity": 0,
     "fill-outline-color": "#0000FF",
   },
@@ -153,25 +153,27 @@ export const GROUPS: LayerGroup[] = [
   },
 },
 
-      {
+{
   id: "aoi_lidar",
   nameKey: "l_aoi_lidar",
   kind: "fill",
   data: v("aoi_lidar"),
+  clickable: true,
 
   paint: {
-    "fill-color": "#F2D45C",
-    "fill-opacity": 0.25,
-    "fill-outline-color": "#F2D45C",
+    "fill-color": "#0000FF",
+    "fill-opacity": 0,
+    "fill-outline-color": "#0000FF",
   },
 
   defaultOn: true,
 
-  opacity: 0.25,
+  opacity: 0,
   opacityProp: "fill-opacity",
 
   legend: {
-    color: "#F2D45C",
+    color: "#0000FF",
+    line: true,
   },
 },
     ],
