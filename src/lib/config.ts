@@ -131,49 +131,49 @@ export const GROUPS: LayerGroup[] = [
 
     layers: [
       {
-        id: "aoi_photo",
-        nameKey: "l_aoi_photo",
-        kind: "fill",
-        data: v("aoi_photo"),
+  id: "aoi_photo",
+  nameKey: "l_aoi_photo",
+  kind: "fill",
+  data: v("aoi_photo"),
 
-        paint: {
-          "fill-color": "#F2D45C",
-          "fill-opacity": 0.42,
-          "fill-outline-color": "#F2D45C",
-        },
+  paint: {
+    "fill-color": "#000000",
+    "fill-opacity": 0,
+    "fill-outline-color": "#0000FF",
+  },
 
-        defaultOn: true,
+  defaultOn: true,
 
-        opacity: 0.42,
-        opacityProp: "fill-opacity",
+  opacity: 0,
+  opacityProp: "fill-opacity",
 
-        legend: {
-          color: "#F2D45C",
-        },
-      },
+  legend: {
+    color: "#0000FF",
+    line: true,
+  },
+},
 
       {
-        id: "aoi_lidar",
-        nameKey: "l_aoi_lidar",
-        kind: "fill",
-        data: v("aoi_lidar"),
-        clickable: true,
+  id: "aoi_lidar",
+  nameKey: "l_aoi_lidar",
+  kind: "fill",
+  data: v("aoi_lidar"),
 
-        paint: {
-          "fill-color": "#F2D45C",
-          "fill-opacity": 0.25,
-          "fill-outline-color": "#F2D45C",
-        },
+  paint: {
+    "fill-color": "#F2D45C",
+    "fill-opacity": 0.25,
+    "fill-outline-color": "#F2D45C",
+  },
 
-        defaultOn: true,
+  defaultOn: true,
 
-        opacity: 0.25,
-        opacityProp: "fill-opacity",
+  opacity: 0.25,
+  opacityProp: "fill-opacity",
 
-        legend: {
-          color: "#F2D45C",
-        },
-      },
+  legend: {
+    color: "#F2D45C",
+  },
+},
     ],
   },
   // ADMINISTRASI
