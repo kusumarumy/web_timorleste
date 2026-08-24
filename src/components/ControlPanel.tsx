@@ -170,9 +170,7 @@ function TerrainControl() {
               {adjustable ? exaggeration.toFixed(1) : "1.0"}×
             </b>
           </div>
-          {!adjustable && (
-            <p className="mt-1.5 text-[10px] leading-snug text-muted2">
-  {t("terrain_locked")}
+          {!adjustable}
 </p>
           )}
         </div>
