@@ -69,7 +69,7 @@ function isWGS84GeoJSON(geojson: any): boolean {
   return false;
 }
 
-function buildStyle(): libregl.StyleSpecification {
+function buildStyle(): maplibregl.StyleSpecification {
   const sources: Record<string, unknown> = {};
   Object.values(TERRAIN_OPTIONS).forEach((t) => {
   sources[`terrain_${t.id}`] = {
@@ -83,7 +83,7 @@ function buildStyle(): libregl.StyleSpecification {
   };
 });
 
-  const layers: libregl.LayerSpecification[] = [
+ const layers: maplibregl.LayerSpecification[] = [
     { id: "bg", type: "background", paint: { "background-color": "#0B1620" } } as any,
   ];
 
