@@ -5,22 +5,16 @@ import { ALL_LAYERS, TerrainKey } from "./config";
 interface MapState {
   basemap: string;
   setBasemap: (id: string) => void;
-
   visible: Record<string, boolean>;
   toggle: (id: string) => void;
-
   subVisible: Record<string, boolean>;
   toggleSub: (id: string) => void;
-
   opacity: Record<string, number>;
   setOpacity: (id: string, v: number) => void;
-
-  // TERRAIN — "off" (default), atau salah satu sumber DEM
   terrainSource: "off" | TerrainKey;
   setTerrainSource: (t: "off" | TerrainKey) => void;
   exaggeration: number;
   setExaggeration: (v: number) => void;
-
   lng: number | null;
   lat: number | null;
   zoom: number;
@@ -34,11 +28,9 @@ const initialOpacity: Record<string, number> = {};
 const initialSubVisible: Record<string, boolean> = {};
 ALL_LAYERS.forEach((l) => {
   initialVisible[l.id] = l.defaultOn;
-
   if (l.opacity != null) {
     initialOpacity[l.id] = l.opacity;
   }
-
   (l.sublayers ?? []).forEach((sub) => {
     initialSubVisible[sub.id] = true;
   });
@@ -47,9 +39,7 @@ ALL_LAYERS.forEach((l) => {
 export const useMapStore = create<MapState>((set) => ({
   basemap: "map",
   setBasemap: (id) => set({ basemap: id }),
-
   visible: initialVisible,
-
   toggle: (id) =>
     set((s) => ({
       visible: {
@@ -59,13 +49,10 @@ export const useMapStore = create<MapState>((set) => ({
     })),
 
   subVisible: initialSubVisible,
-
   toggleSub: (id) =>
     set((s) => {
       const newValue = !s.subVisible[id];
-
       //console.log("TOGGLE SUBCLASS:", id, "=>", newValue);
-
       return {
         subVisible: {
           ...s.subVisible,
@@ -76,13 +63,10 @@ export const useMapStore = create<MapState>((set) => ({
 
   opacity: initialOpacity,
   setOpacity: (id, v) => set((s) => ({ opacity: { ...s.opacity, [id]: v } })),
-
-  // TERRAIN — default OFF sesuai ketentuan
   terrainSource: "off",
   setTerrainSource: (t) => set({ terrainSource: t }),
-  exaggeration: 1.6,
+  exaggeration: 1,
   setExaggeration: (v) => set({ exaggeration: v }),
-
   lng: null, lat: null, zoom: 14.4, pitch: 58, bearing: -18,
   setView: (v) => set(v),
 }));
