@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react";
 import maplibregl from "maplibre-gl";
 import { setToolMode, getToolMode } from "./toolMode";
 
-export default function IdentifyButton({ map }) {
+export default function IdentifyButton({ }) {
   const controlRef = useRef(null);
 
   useEffect(() => {
