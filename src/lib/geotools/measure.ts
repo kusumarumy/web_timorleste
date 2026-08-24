@@ -380,12 +380,7 @@ private _closePopups(): void {
   coord: Coordinate
 ): number | null {
   const elevation =
-    this.map.queryTerrainElevation(
-      coord,
-      {
-        exaggerated: false,
-      }
-    );
+    this.map.queryTerrainElevation(coord);
 
   if (
     elevation == null ||
