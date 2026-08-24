@@ -1065,6 +1065,11 @@ export const GROUPS: LayerGroup[] = [
       },
     ],
   },
+  {
+  titleKey: "g_maukola",
+  dot: "#F59E0B",
+  layers: [],
+},
     // WEIR OEBABA
   {
     titleKey: "g_weir_oebaba",
