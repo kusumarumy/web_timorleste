@@ -202,8 +202,8 @@ function MeasurementControl() {
   }, []);
 
   const activate = (
-  mode: "distance" | "elevation" | "area"
-) => {
+    mode: "distance" | "elevation" | "area"
+  ) => {
     if (active === mode) {
       setToolMode(null);
       return;
@@ -213,9 +213,9 @@ function MeasurementControl() {
   };
 
   const buttonClass = (
-  mode: "distance" | "elevation" | "area"
-) =>
-    `flex items-center gap-2 rounded-lg border px-2.5 py-2.5 transition-colors ${
+    mode: "distance" | "elevation" | "area"
+  ) =>
+    `flex items-center justify-center gap-1.5 rounded-lg border px-1.5 py-1.5 transition-colors ${
       active === mode
         ? "border-teal/50 bg-teal text-[#04171a]"
         : "border-stroke bg-bg/30 text-muted hover:border-teal/30 hover:bg-teal/[0.07] hover:text-ink"
@@ -225,7 +225,7 @@ function MeasurementControl() {
     <div className="m-1.5 mt-2 rounded-xl border border-strokeSoft bg-gradient-to-br from-teal/10 to-teal/[0.02] p-3">
 
       {/* HEADER */}
-      <div className="flex items-center gap-2 text-[10px] font-bold text-ink">
+      <div className="flex items-center gap-2 text-[13px] font-bold text-ink">
         <svg
           viewBox="0 0 24 24"
           width="15"
@@ -247,34 +247,36 @@ function MeasurementControl() {
         <span>{t("measurement")}</span>
       </div>
 
-      <div className="mt-2.5 grid grid-cols-3 gap-1.5">
+      {/* PILIHAN ALAT */}
+      <div className="mt-2.5 grid grid-cols-3 gap-1 rounded-[10px] border border-stroke bg-bg/40 p-[3px]">
 
+        {/* JARAK */}
         <button
           type="button"
           onClick={() => activate("distance")}
           className={buttonClass("distance")}
           aria-pressed={active === "distance"}
         >
-          <span className="text-[15px]">📏</span>
+          <span className="text-[13px]">📏</span>
 
-          <span className="text-[11px] font-semibold">
-  {t("distance")}
-</span>
+          <span className="whitespace-nowrap text-[10px] font-semibold">
+            {t("distance")}
+          </span>
         </button>
 
         {/* ELEVASI */}
-<button
-  type="button"
-  onClick={() => activate("elevation")}
-  className={buttonClass("elevation")}
-  aria-pressed={active === "elevation"}
->
-  <span className="text-[15px]">↕</span>
+        <button
+          type="button"
+          onClick={() => activate("elevation")}
+          className={buttonClass("elevation")}
+          aria-pressed={active === "elevation"}
+        >
+          <span className="text-[14px]">↕</span>
 
-  <span className="text-[11px] font-semibold">
-    {t("elevation")}
-  </span>
-</button>
+          <span className="whitespace-nowrap text-[10px] font-semibold">
+            {t("elevation")}
+          </span>
+        </button>
 
         {/* LUAS */}
         <button
@@ -283,30 +285,31 @@ function MeasurementControl() {
           className={buttonClass("area")}
           aria-pressed={active === "area"}
         >
-          <span className="text-[15px]">▱</span>
+          <span className="text-[13px]">▱</span>
 
-          <span className="text-[11px] font-semibold">
-  {t("area")}
-</span>
+          <span className="whitespace-nowrap text-[10px] font-semibold">
+            {t("area")}
+          </span>
         </button>
 
       </div>
 
+      {/* PETUNJUK */}
       <p className="mt-2 text-[10px] leading-snug text-muted2">
-  {active ? (
-    <>
-      {t("measurement_click")} ·{" "}
-      <b className="text-teal">
-        {t("measurement_double_click")}
-      </b>{" "}
-      {t("measurement_finish")} ·{" "}
-      <b className="text-teal">Esc</b>{" "}
-      {t("measurement_cancel")}
-    </>
-  ) : (
-    t("measurement_select")
-  )}
-</p>
+        {active ? (
+          <>
+            {t("measurement_click")} ·{" "}
+            <b className="text-teal">
+              {t("measurement_double_click")}
+            </b>{" "}
+            {t("measurement_finish")} ·{" "}
+            <b className="text-teal">Esc</b>{" "}
+            {t("measurement_cancel")}
+          </>
+        ) : (
+          t("measurement_select")
+        )}
+      </p>
     </div>
   );
 }
