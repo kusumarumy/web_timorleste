@@ -18,7 +18,7 @@ function Toggle({ on, onClick }: { on: boolean; onClick: () => void }) {
   );
 }
 
-function LayerRow({ l }: { l: LayerDef }) {
+function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
   const { t } = useI18n();
   const {
     visible,
@@ -34,8 +34,14 @@ function LayerRow({ l }: { l: LayerDef }) {
 
   return (
     <div>
-      <div className="group flex items-center gap-2.5 rounded-[10px] px-2 py-2 transition-colors hover:bg-teal/[0.07]">
+      {/* LAYER UTAMA */}
+      <div
+        className={`group flex items-center gap-2.5 rounded-[10px] py-2 transition-colors hover:bg-teal/[0.07] ${
+          depth > 0 ? "pl-5 pr-2" : "px-2"
+        }`}
+      >
         <Toggle on={on} onClick={() => toggle(l.id)} />
+
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 text-[13px] font-semibold text-ink">
             {l.icon ? (
@@ -68,14 +74,17 @@ function LayerRow({ l }: { l: LayerDef }) {
                 }
               />
             ) : null}
+
             {t(l.nameKey)}
           </div>
+
           {l.subKey && (
             <div className="mt-0.5 text-[10.5px] text-muted2">
               {t(l.subKey)}
             </div>
           )}
         </div>
+
         {l.opacityProp != null && (
           <input
             type="range"
@@ -89,6 +98,7 @@ function LayerRow({ l }: { l: LayerDef }) {
         )}
       </div>
 
+      {/* SUBLAYERS LAMA */}
       {l.sublayers && on && (
         <div className="ml-10 mb-2 mt-0.5 space-y-0.5 border-l border-strokeSoft pl-3">
           {l.sublayers.map((sub) => (
@@ -102,8 +112,22 @@ function LayerRow({ l }: { l: LayerDef }) {
                 onChange={() => toggleSub(sub.id)}
                 className="h-3.5 w-3.5 accent-teal"
               />
+
               <span>{t(sub.labelKey)}</span>
             </label>
+          ))}
+        </div>
+      )}
+
+      {/* CHILDREN */}
+      {l.children && l.children.length > 0 && on && (
+        <div className="ml-5 mb-1 border-l border-strokeSoft pl-2">
+          {l.children.map((child) => (
+            <LayerRow
+              key={child.id}
+              l={child}
+              depth={depth + 1}
+            />
           ))}
         </div>
       )}
