@@ -1,7 +1,9 @@
 export type ToolMode =
   | "distance"
-  | "elevation"
+  | "length"
+  | "width"
   | "area"
+  | "identify"
   | null;
 
 let _mode: ToolMode = null;
