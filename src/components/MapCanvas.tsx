@@ -976,5 +976,4 @@ const loadingLayerNames = loadingLayerIds.map((id) => {
     )}
   </div>
 );
-);
 }
