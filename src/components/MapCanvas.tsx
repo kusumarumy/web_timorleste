@@ -760,13 +760,19 @@ useEffect(() => {
   const unsubscribe = onToolMode((mode) => {
     const measure = measureRef.current;
 
-    if (!measure) {
-      console.warn("MEASURE: control belum siap");
+    if (!mode) {
+      measure?.stop();
       return;
     }
 
-    if (!mode) {
-      measure.stop();
+    // IDENTIFY bukan bagian dari MeasureControl
+    if (mode === "identify") {
+      measure?.stop();
+      return;
+    }
+
+    if (!measure) {
+      console.warn("MEASURE: control belum siap");
       return;
     }
 
@@ -777,8 +783,6 @@ useEffect(() => {
 
   return unsubscribe;
 }, []);
-  // BASEMAP CHANGE
-  // BASEMAP CHANGE
 useEffect(
   () =>
     useMapStore.subscribe((s) => {
