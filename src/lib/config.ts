@@ -79,9 +79,7 @@ export interface LayerDef {
   tiles?: string[];
   minzoom?: number;
   maxzoom?: number;
-
   icon?: string;
-
   label?: {
     field: string;
     minzoom?: number;
@@ -92,14 +90,11 @@ export interface LayerDef {
     haloColor?: string;
     haloWidth?: number;
   };
-
   paint: Record<string, unknown>;
-
   svg?: {
     size: number;
     svg: string;
   };
-
   defaultOn: boolean;
   opacity?: number;
   opacityProp?: string;
@@ -115,6 +110,7 @@ export interface LayerDef {
     labelKey: string;
     filterValue: string;
   }[];
+  children?: LayerDef[];
 }
 
 export interface LayerGroup {
@@ -1061,611 +1057,677 @@ export const GROUPS: LayerGroup[] = [
       },
     ],
   },
-  {
-  titleKey: "g_maukola",
-  dot: "#F59E0B",
-  layers: [],
+  // RAIBERE
+{
+  titleKey: "g_raibere",
+  dot: "#EC4899",
+
+  layers: [
+    // RAIBERE 2009
+    {
+      id: "raibere_2009",
+      nameKey: "l_raibere_2009",
+      kind: "line",
+      paint: {},
+      defaultOn: false,
+    },
+
+    {
+      id: "raibere_2026",
+      nameKey: "l_raibere_2026",
+      kind: "line",
+      paint: {},
+      defaultOn: false,
+
+      children: [
+        {
+          id: "rei_access",
+          nameKey: "l_rei_access",
+          kind: "line",
+          data: v("rei_access"),
+          clickable: true,
+          paint: {
+            "line-color": "#78716C",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#78716C",
+            line: true,
+          },
+        },
+
+        {
+          id: "rei_crest",
+          nameKey: "l_rei_crest",
+          kind: "line",
+          data: v("rei_crest"),
+          clickable: true,
+          paint: {
+            "line-color": "#7C3AED",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#7C3AED",
+            line: true,
+          },
+        },
+
+        {
+          id: "rei_downstream",
+          nameKey: "l_rei_downstream",
+          kind: "line",
+          data: v("rei_downstream"),
+          clickable: true,
+          paint: {
+            "line-color": "#2563EB",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#2563EB",
+            line: true,
+          },
+        },
+
+        {
+          id: "rei_flushingpier",
+          nameKey: "l_rei_flushingpier",
+          kind: "line",
+          data: v("rei_flushingpier"),
+          clickable: true,
+          paint: {
+            "line-color": "#0891B2",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#0891B2",
+            line: true,
+          },
+        },
+
+        {
+          id: "rei_flushingcanal",
+          nameKey: "l_rei_flushingcanal",
+          kind: "line",
+          data: v("rei_flushingcanal"),
+          clickable: true,
+          paint: {
+            "line-color": "#06B6D4",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#06B6D4",
+            line: true,
+          },
+        },
+
+        {
+          id: "rei_irrigation",
+          nameKey: "l_rei_irrigation",
+          kind: "line",
+          data: v("rei_irrigation"),
+          clickable: true,
+          paint: {
+            "line-color": "#22C55E",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#22C55E",
+            line: true,
+          },
+        },
+
+        {
+          id: "rei_primer",
+          nameKey: "l_rei_primer",
+          kind: "line",
+          data: v("rei_primer"),
+          clickable: true,
+          paint: {
+            "line-color": "#92400E",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#92400E",
+            line: true,
+          },
+        },
+
+        {
+          id: "rei_road",
+          nameKey: "l_rei_road",
+          kind: "line",
+          data: v("rei_road"),
+          clickable: true,
+          paint: {
+            "line-color": "#E1B94A",
+            "line-width": 2.2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#E1B94A",
+            line: true,
+          },
+        },
+
+        {
+          id: "rei_upstream",
+          nameKey: "l_rei_upstream",
+          kind: "line",
+          data: v("rei_upstream"),
+          clickable: true,
+          paint: {
+            "line-color": "#0EA5E9",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#0EA5E9",
+            line: true,
+          },
+        },
+
+        {
+          id: "rei_flushinggate",
+          nameKey: "l_rei_flushinggate",
+          kind: "symbol",
+          data: v("rei_flushinggate"),
+          clickable: true,
+          paint: {},
+          defaultOn: false,
+          legend: {
+            color: "#0891B2",
+          },
+        },
+
+        {
+          id: "rei_ingate",
+          nameKey: "l_rei_ingate",
+          kind: "symbol",
+          data: v("rei_ingate"),
+          clickable: true,
+          paint: {},
+          defaultOn: false,
+          legend: {
+            color: "#16A34A",
+          },
+        },
+
+        {
+          id: "rei_intake",
+          nameKey: "l_rei_intake",
+          kind: "symbol",
+          data: v("rei_intake"),
+          clickable: true,
+          paint: {},
+          defaultOn: false,
+          legend: {
+            color: "#0284C7",
+          },
+        },
+
+        {
+          id: "rei_parking",
+          nameKey: "l_rei_parking",
+          kind: "fill",
+          data: v("rei_parking"),
+          clickable: true,
+          paint: {
+            "fill-color": "#A8A29E",
+            "fill-opacity": 0.4,
+            "fill-outline-color": "#78716C",
+          },
+          defaultOn: false,
+          opacity: 0.4,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#A8A29E",
+          },
+        },
+
+        {
+          id: "rei_rock",
+          nameKey: "l_rei_rock",
+          kind: "fill",
+          data: v("rei_rock"),
+          clickable: true,
+          paint: {
+            "fill-color": "#78716C",
+            "fill-opacity": 0.45,
+            "fill-outline-color": "#57534E",
+          },
+          defaultOn: false,
+          opacity: 0.45,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#78716C",
+          },
+        },
+
+        {
+          id: "rei_silt",
+          nameKey: "l_rei_silt",
+          kind: "fill",
+          data: v("rei_silt"),
+          clickable: true,
+          paint: {
+            "fill-color": "#A8A29E",
+            "fill-opacity": 0.4,
+            "fill-outline-color": "#78716C",
+          },
+          defaultOn: false,
+          opacity: 0.4,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#A8A29E",
+          },
+        },
+
+        {
+          id: "rei_stilling",
+          nameKey: "l_rei_stilling",
+          kind: "fill",
+          data: v("rei_stilling"),
+          clickable: true,
+          paint: {
+            "fill-color": "#38BDF8",
+            "fill-opacity": 0.3,
+            "fill-outline-color": "#0284C7",
+          },
+          defaultOn: false,
+          opacity: 0.3,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#38BDF8",
+          },
+        },
+
+        {
+          id: "rei_weirbody",
+          nameKey: "l_rei_weirbody",
+          kind: "fill",
+          data: v("rei_weirbody"),
+          clickable: true,
+          paint: {
+            "fill-color": "#EC4899",
+            "fill-opacity": 0.5,
+            "fill-outline-color": "#BE185D",
+          },
+          defaultOn: false,
+          opacity: 0.5,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#EC4899",
+          },
+        },
+
+        {
+          id: "rei_wing",
+          nameKey: "l_rei_wing",
+          kind: "fill",
+          data: v("rei_wing"),
+          clickable: true,
+          paint: {
+            "fill-color": "#A855F7",
+            "fill-opacity": 0.4,
+            "fill-outline-color": "#7E22CE",
+          },
+          defaultOn: false,
+          opacity: 0.4,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#A855F7",
+          },
+        },
+      ],
+    },
+  ],
 },
-    // WEIR OEBABA
-  {
-    titleKey: "g_weir_oebaba",
-    dot: "#8B5CF6",
-
-    layers: [
-      {
-        id: "oe_crest",
-        nameKey: "l_oe_crest",
-        kind: "line",
-        data: v("oe_crest"),
-        clickable: true,
-        paint: {
-          "line-color": "#7C3AED",
-          "line-width": 2,
-        },
-        defaultOn: false,
-        legend: {
-          color: "#7C3AED",
-          line: true,
-        },
-      },
-
-      {
-        id: "oe_downstream",
-        nameKey: "l_oe_downstream",
-        kind: "line",
-        data: v("oe_downstream"),
-        clickable: true,
-        paint: {
-          "line-color": "#2563EB",
-          "line-width": 2,
-        },
-        defaultOn: false,
-        legend: {
-          color: "#2563EB",
-          line: true,
-        },
-      },
-
-      {
-        id: "oe_flushingcanal",
-        nameKey: "l_oe_flushingcanal",
-        kind: "line",
-        data: v("oe_flushingcanal"),
-        clickable: true,
-        paint: {
-          "line-color": "#06B6D4",
-          "line-width": 2,
-        },
-        defaultOn: false,
-        legend: {
-          color: "#06B6D4",
-          line: true,
-        },
-      },
-
-      {
-        id: "oe_flushingpier",
-        nameKey: "l_oe_flushingpier",
-        kind: "line",
-        data: v("oe_flushingpier"),
-        clickable: true,
-        paint: {
-          "line-color": "#0891B2",
-          "line-width": 2,
-        },
-        defaultOn: false,
-        legend: {
-          color: "#0891B2",
-          line: true,
-        },
-      },
-
-      {
-        id: "oe_guidewall",
-        nameKey: "l_oe_guidewall",
-        kind: "line",
-        data: v("oe_guidewall"),
-        clickable: true,
-        paint: {
-          "line-color": "#6B7280",
-          "line-width": 2,
-        },
-        defaultOn: false,
-        legend: {
-          color: "#6B7280",
-          line: true,
-        },
-      },
-
-      {
-        id: "oe_ingatepier",
-        nameKey: "l_oe_ingatepier",
-        kind: "line",
-        data: v("oe_ingatepier"),
-        clickable: true,
-        paint: {
-          "line-color": "#16A34A",
-          "line-width": 2,
-        },
-        defaultOn: false,
-        legend: {
-          color: "#16A34A",
-          line: true,
-        },
-      },
+  
 {
-        id: "oe_irrigationcanal",
-        nameKey: "l_oe_irrigationcanal",
-        kind: "line",
-        data: v("oe_irrigationcanal"),
-        clickable: true,
-        paint: {
-          "line-color": "#22C55E",
-          "line-width": 2,
-        },
-        defaultOn: false,
-        legend: {
-          color: "#22C55E",
-          line: true,
-        },
-      },
-      {
-        id: "oe_irrigationpier",
-        nameKey: "l_oe_irrigationpier",
-        kind: "line",
-        data: v("oe_irrigationpier"),
-        clickable: true,
-        paint: {
-          "line-color": "#15803D",
-          "line-width": 2,
-        },
-        defaultOn: false,
-        legend: {
-          color: "#15803D",
-          line: true,
-        },
-      },
-      {
-        id: "oe_strais",
-        nameKey: "l_oe_strais",
-        kind: "line",
-        data: v("oe_strais"),
-        clickable: true,
-        paint: {
-          "line-color": "#92400E",
-          "line-width": 2,
-        },
-        defaultOn: false,
-        legend: {
-          color: "#92400E",
-          line: true,
-        },
-      },
+  titleKey: "g_oebaba",
+  dot: "#8B5CF6",
 
-      {
-        id: "oe_upstream",
-        nameKey: "l_oe_upstream",
-        kind: "line",
-        data: v("oe_upstream"),
-        clickable: true,
-        paint: {
-          "line-color": "#0EA5E9",
-          "line-width": 2,
-        },
-        defaultOn: false,
-        legend: {
-          color: "#0EA5E9",
-          line: true,
-        },
-      },
-      {
-        id: "oe_intake",
-        nameKey: "l_oe_intake",
-        kind: "symbol",
-        data: v("oe_intake"),
-        clickable: true,
-        paint: {},
-        defaultOn: false,
-        legend: {
-          color: "#0284C7",
-        },
-      },    
+  layers: [
+    {
+      id: "oebaba_2009",
+      nameKey: "l_oebaba_2009",
+      kind: "line",
+      paint: {},
+      defaultOn: false,
+    },
 
-      {
-        id: "oe_irrigationgate",
-        nameKey: "l_oe_irrigationgate",
-        kind: "symbol",
-        data: v("oe_irrigationgate"),
-        clickable: true,
-        paint: {},
-        defaultOn: false,
-        legend: {
-          color: "#15803D",
-        },
-      },
+    {
+      id: "oebaba_2026",
+      nameKey: "l_oebaba_2026",
+      kind: "line",
+      paint: {},
+      defaultOn: false,
 
-      {
-        id: "oe_operatinghouse",
-        nameKey: "l_oe_operatinghouse",
-        kind: "fill",
-        data: v("oe_operatinghouse"),
-        clickable: true,
-        paint: {
-          "fill-color": "#78716C",
-          "fill-opacity": 0.5,
-          "fill-outline-color": "#57534E",
+      children: [
+        {
+          id: "oe_crest",
+          nameKey: "l_oe_crest",
+          kind: "line",
+          data: v("oe_crest"),
+          clickable: true,
+          paint: {
+            "line-color": "#7C3AED",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#7C3AED",
+            line: true,
+          },
         },
-        defaultOn: false,
-        opacity: 0.5,
-        opacityProp: "fill-opacity",
-        legend: {
-          color: "#78716C",
-        },
-      },
 
-      {
-        id: "oe_silt",
-        nameKey: "l_oe_silt",
-        kind: "fill",
-        data: v("oe_silt"),
-        clickable: true,
-        paint: {
-          "fill-color": "#A8A29E",
-          "fill-opacity": 0.4,
-          "fill-outline-color": "#78716C",
+        {
+          id: "oe_downstream",
+          nameKey: "l_oe_downstream",
+          kind: "line",
+          data: v("oe_downstream"),
+          clickable: true,
+          paint: {
+            "line-color": "#2563EB",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#2563EB",
+            line: true,
+          },
         },
-        defaultOn: false,
-        opacity: 0.4,
-        opacityProp: "fill-opacity",
-        legend: {
-          color: "#A8A29E",
-        },
-      },
 
-      {
-        id: "oe_stilling",
-        nameKey: "l_oe_stilling",
-        kind: "fill",
-        data: v("oe_stilling"),
-        clickable: true,
-        paint: {
-          "fill-color": "#38BDF8",
-          "fill-opacity": 0.3,
-          "fill-outline-color": "#0284C7",
+        {
+          id: "oe_flushingcanal",
+          nameKey: "l_oe_flushingcanal",
+          kind: "line",
+          data: v("oe_flushingcanal"),
+          clickable: true,
+          paint: {
+            "line-color": "#06B6D4",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#06B6D4",
+            line: true,
+          },
         },
-        defaultOn: false,
-        opacity: 0.3,
-        opacityProp: "fill-opacity",
-        legend: {
-          color: "#38BDF8",
-        },
-      },
 
-      {
-        id: "oe_weirbody",
-        nameKey: "l_oe_weirbody",
-        kind: "fill",
-        data: v("oe_weirbody"),
-        clickable: true,
-        paint: {
-          "fill-color": "#7C3AED",
-          "fill-opacity": 0.5,
-          "fill-outline-color": "#5B21B6",
+        {
+          id: "oe_flushingpier",
+          nameKey: "l_oe_flushingpier",
+          kind: "line",
+          data: v("oe_flushingpier"),
+          clickable: true,
+          paint: {
+            "line-color": "#0891B2",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#0891B2",
+            line: true,
+          },
         },
-        defaultOn: false,
-        opacity: 0.5,
-        opacityProp: "fill-opacity",
-        legend: {
-          color: "#7C3AED",
-        },
-      },
 
-      {
-        id: "oe_wing",
-        nameKey: "l_oe_wing",
-        kind: "fill",
-        data: v("oe_wing"),
-        clickable: true,
-        paint: {
-          "fill-color": "#6366F1",
-          "fill-opacity": 0.4,
-          "fill-outline-color": "#4338CA",
+        {
+          id: "oe_guidewall",
+          nameKey: "l_oe_guidewall",
+          kind: "line",
+          data: v("oe_guidewall"),
+          clickable: true,
+          paint: {
+            "line-color": "#6B7280",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#6B7280",
+            line: true,
+          },
         },
-        defaultOn: false,
-        opacity: 0.4,
-        opacityProp: "fill-opacity",
-        legend: {
-          color: "#6366F1",
-        },
-      },
-    ],
-  },
-    // WEIR REIBERA
-  {
-    titleKey: "g_weir_reibera",
-    dot: "#EC4899",
 
-    layers: [
-      {
-        id: "rei_access",
-        nameKey: "l_rei_access",
-        kind: "line",
-        data: v("rei_access"),
-        clickable: true,
-        paint: {
-          "line-color": "#78716C",
-          "line-width": 2,
+        {
+          id: "oe_ingatepier",
+          nameKey: "l_oe_ingatepier",
+          kind: "line",
+          data: v("oe_ingatepier"),
+          clickable: true,
+          paint: {
+            "line-color": "#16A34A",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#16A34A",
+            line: true,
+          },
         },
-        defaultOn: false,
-        legend: {
-          color: "#78716C",
-          line: true,
-        },
-      },
 
-      {
-        id: "rei_crest",
-        nameKey: "l_rei_crest",
-        kind: "line",
-        data: v("rei_crest"),
-        clickable: true,
-        paint: {
-          "line-color": "#7C3AED",
-          "line-width": 2,
+        {
+          id: "oe_irrigationcanal",
+          nameKey: "l_oe_irrigationcanal",
+          kind: "line",
+          data: v("oe_irrigationcanal"),
+          clickable: true,
+          paint: {
+            "line-color": "#22C55E",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#22C55E",
+            line: true,
+          },
         },
-        defaultOn: false,
-        legend: {
-          color: "#7C3AED",
-          line: true,
-        },
-      },
 
-      {
-        id: "rei_downstream",
-        nameKey: "l_rei_downstream",
-        kind: "line",
-        data: v("rei_downstream"),
-        clickable: true,
-        paint: {
-          "line-color": "#2563EB",
-          "line-width": 2,
+        {
+          id: "oe_irrigationpier",
+          nameKey: "l_oe_irrigationpier",
+          kind: "line",
+          data: v("oe_irrigationpier"),
+          clickable: true,
+          paint: {
+            "line-color": "#15803D",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#15803D",
+            line: true,
+          },
         },
-        defaultOn: false,
-        legend: {
-          color: "#2563EB",
-          line: true,
-        },
-      },
 
-      {
-        id: "rei_flushingpier",
-        nameKey: "l_rei_flushingpier",
-        kind: "line",
-        data: v("rei_flushingpier"),
-        clickable: true,
-        paint: {
-          "line-color": "#0891B2",
-          "line-width": 2,
+        {
+          id: "oe_strais",
+          nameKey: "l_oe_strais",
+          kind: "line",
+          data: v("oe_strais"),
+          clickable: true,
+          paint: {
+            "line-color": "#92400E",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#92400E",
+            line: true,
+          },
         },
-        defaultOn: false,
-        legend: {
-          color: "#0891B2",
-          line: true,
-        },
-      },
 
-      {
-        id: "rei_flushingcanal",
-        nameKey: "l_rei_flushingcanal",
-        kind: "line",
-        data: v("rei_flushingcanal"),
-        clickable: true,
-        paint: {
-          "line-color": "#06B6D4",
-          "line-width": 2,
+        {
+          id: "oe_upstream",
+          nameKey: "l_oe_upstream",
+          kind: "line",
+          data: v("oe_upstream"),
+          clickable: true,
+          paint: {
+            "line-color": "#0EA5E9",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#0EA5E9",
+            line: true,
+          },
         },
-        defaultOn: false,
-        legend: {
-          color: "#06B6D4",
-          line: true,
-        },
-      },
 
-      {
-        id: "rei_irrigation",
-        nameKey: "l_rei_irrigation",
-        kind: "line",
-        data: v("rei_irrigation"),
-        clickable: true,
-        paint: {
-          "line-color": "#22C55E",
-          "line-width": 2,
+        {
+          id: "oe_intake",
+          nameKey: "l_oe_intake",
+          kind: "symbol",
+          data: v("oe_intake"),
+          clickable: true,
+          paint: {},
+          defaultOn: false,
+          legend: {
+            color: "#0284C7",
+          },
         },
-        defaultOn: false,
-        legend: {
-          color: "#22C55E",
-          line: true,
-        },
-      },
 
-      {
-        id: "rei_primer",
-        nameKey: "l_rei_primer",
-        kind: "line",
-        data: v("rei_primer"),
-        clickable: true,
-        paint: {
-          "line-color": "#92400E",
-          "line-width": 2,
+        {
+          id: "oe_irrigationgate",
+          nameKey: "l_oe_irrigationgate",
+          kind: "symbol",
+          data: v("oe_irrigationgate"),
+          clickable: true,
+          paint: {},
+          defaultOn: false,
+          legend: {
+            color: "#15803D",
+          },
         },
-        defaultOn: false,
-        legend: {
-          color: "#92400E",
-          line: true,
-        },
-      },
 
-      {
-        id: "rei_road",
-        nameKey: "l_rei_road",
-        kind: "line",
-        data: v("rei_road"),
-        clickable: true,
-        paint: {
-          "line-color": "#E1B94A",
-          "line-width": 2.2,
+        {
+          id: "oe_operatinghouse",
+          nameKey: "l_oe_operatinghouse",
+          kind: "fill",
+          data: v("oe_operatinghouse"),
+          clickable: true,
+          paint: {
+            "fill-color": "#78716C",
+            "fill-opacity": 0.5,
+            "fill-outline-color": "#57534E",
+          },
+          defaultOn: false,
+          opacity: 0.5,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#78716C",
+          },
         },
-        defaultOn: false,
-        legend: {
-          color: "#E1B94A",
-          line: true,
+
+        {
+          id: "oe_silt",
+          nameKey: "l_oe_silt",
+          kind: "fill",
+          data: v("oe_silt"),
+          clickable: true,
+          paint: {
+            "fill-color": "#A8A29E",
+            "fill-opacity": 0.4,
+            "fill-outline-color": "#78716C",
+          },
+          defaultOn: false,
+          opacity: 0.4,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#A8A29E",
+          },
         },
-      },
-      {
-        id: "rei_upstream",
-        nameKey: "l_rei_upstream",
-        kind: "line",
-        data: v("rei_upstream"),
-        clickable: true,
-        paint: {
-          "line-color": "#0EA5E9",
-          "line-width": 2,
+
+        {
+          id: "oe_stilling",
+          nameKey: "l_oe_stilling",
+          kind: "fill",
+          data: v("oe_stilling"),
+          clickable: true,
+          paint: {
+            "fill-color": "#38BDF8",
+            "fill-opacity": 0.3,
+            "fill-outline-color": "#0284C7",
+          },
+          defaultOn: false,
+          opacity: 0.3,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#38BDF8",
+          },
         },
-        defaultOn: false,
-        legend: {
-          color: "#0EA5E9",
-          line: true,
+
+        {
+          id: "oe_weirbody",
+          nameKey: "l_oe_weirbody",
+          kind: "fill",
+          data: v("oe_weirbody"),
+          clickable: true,
+          paint: {
+            "fill-color": "#7C3AED",
+            "fill-opacity": 0.5,
+            "fill-outline-color": "#5B21B6",
+          },
+          defaultOn: false,
+          opacity: 0.5,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#7C3AED",
+          },
         },
-      },
+
+        {
+          id: "oe_wing",
+          nameKey: "l_oe_wing",
+          kind: "fill",
+          data: v("oe_wing"),
+          clickable: true,
+          paint: {
+            "fill-color": "#6366F1",
+            "fill-opacity": 0.4,
+            "fill-outline-color": "#4338CA",
+          },
+          defaultOn: false,
+          opacity: 0.4,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#6366F1",
+          },
+        },
+      ],
+    },
+  ],
+},
 {
-        id: "rei_flushinggate",
-        nameKey: "l_rei_flushinggate",
-        kind: "symbol",
-        data: v("rei_flushinggate"),
-        clickable: true,
-        paint: {},
-        defaultOn: false,
-        legend: {
-          color: "#0891B2",
-        },
-      },
-      {
-        id: "rei_ingate",
-        nameKey: "l_rei_ingate",
-        kind: "symbol",
-        data: v("rei_ingate"),
-        clickable: true,
-        paint: {},
-        defaultOn: false,
-        legend: {
-          color: "#16A34A",
-        },
-      },
-      {
-        id: "rei_intake",
-        nameKey: "l_rei_intake",
-        kind: "symbol",
-        data: v("rei_intake"),
-        clickable: true,
-        paint: {},
-        defaultOn: false,
-        legend: {
-          color: "#0284C7",
-        },
-      },
-      {
-        id: "rei_parking",
-        nameKey: "l_rei_parking",
-        kind: "fill",
-        data: v("rei_parking"),
-        clickable: true,
-        paint: {
-          "fill-color": "#A8A29E",
-          "fill-opacity": 0.4,
-          "fill-outline-color": "#78716C",
-        },
-        defaultOn: false,
-        opacity: 0.4,
-        opacityProp: "fill-opacity",
-        legend: {
-          color: "#A8A29E",
-        },
-      },
-      {
-        id: "rei_rock",
-        nameKey: "l_rei_rock",
-        kind: "fill",
-        data: v("rei_rock"),
-        clickable: true,
-        paint: {
-          "fill-color": "#78716C",
-          "fill-opacity": 0.45,
-          "fill-outline-color": "#57534E",
-        },
-        defaultOn: false,
-        opacity: 0.45,
-        opacityProp: "fill-opacity",
-        legend: {
-          color: "#78716C",
-        },
-      },
+  titleKey: "g_lomea",
+  dot: "#F59E0B",
 
-      {
-        id: "rei_silt",
-        nameKey: "l_rei_silt",
-        kind: "fill",
-        data: v("rei_silt"),
-        clickable: true,
-        paint: {
-          "fill-color": "#A8A29E",
-          "fill-opacity": 0.4,
-          "fill-outline-color": "#78716C",
-        },
-        defaultOn: false,
-        opacity: 0.4,
-        opacityProp: "fill-opacity",
-        legend: {
-          color: "#A8A29E",
-        },
-      },
-
-      {
-        id: "rei_stilling",
-        nameKey: "l_rei_stilling",
-        kind: "fill",
-        data: v("rei_stilling"),
-        clickable: true,
-        paint: {
-          "fill-color": "#38BDF8",
-          "fill-opacity": 0.3,
-          "fill-outline-color": "#0284C7",
-        },
-        defaultOn: false,
-        opacity: 0.3,
-        opacityProp: "fill-opacity",
-        legend: {
-          color: "#38BDF8",
-        },
-      },
-      {
-        id: "rei_weirbody",
-        nameKey: "l_rei_weirbody",
-        kind: "fill",
-        data: v("rei_weirbody"),
-        clickable: true,
-        paint: {
-          "fill-color": "#EC4899",
-          "fill-opacity": 0.5,
-          "fill-outline-color": "#BE185D",
-        },
-        defaultOn: false,
-        opacity: 0.5,
-        opacityProp: "fill-opacity",
-        legend: {
-          color: "#EC4899",
-        },
-      },
-
-      {
-        id: "rei_wing",
-        nameKey: "l_rei_wing",
-        kind: "fill",
-        data: v("rei_wing"),
-        clickable: true,
-        paint: {
-          "fill-color": "#A855F7",
-          "fill-opacity": 0.4,
-          "fill-outline-color": "#7E22CE",
-        },
-        defaultOn: false,
-        opacity: 0.4,
-        opacityProp: "fill-opacity",
-        legend: {
-          color: "#A855F7",
-        },
-      },
-    ],
-  },
+  layers: [
+    {
+      id: "lomea_2009",
+      nameKey: "l_lomea_2009",
+      kind: "line",
+      paint: {},
+      defaultOn: false,
+    },
+  ],
+},
+   
 ];
 
-export const ALL_LAYERS: LayerDef[] = GROUPS.flatMap((g) => g.layers);
+const flattenLayers = (layers: LayerDef[]): LayerDef[] =>
+  layers.flatMap((layer) => [
+    ...(layer.data ? [layer] : []),
+    ...(layer.children ? flattenLayers(layer.children) : []),
+  ]);
+
+export const ALL_LAYERS: LayerDef[] = GROUPS.flatMap((g) =>
+  flattenLayers(g.layers)
+);
