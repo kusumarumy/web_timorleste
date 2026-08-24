@@ -19,19 +19,11 @@ import {
 
 import type { ToolMode } from "@/components/toolMode";
 
-// ============================================================================
-// CONSTANT
-// ============================================================================
-
 const SRC = "__measure_src";
 const L_FILL = "__measure_fill";
 const L_LINE = "__measure_line";
 const L_VERT = "__measure_vert";
 const L_LABEL = "__measure_label";
-
-// ============================================================================
-// TYPE
-// ============================================================================
 
 type MeasureMode = Exclude<ToolMode, null>;
 
@@ -90,10 +82,6 @@ interface MeasureControlOptions {
   scaleFactor?: number;
 }
 
-// ============================================================================
-// MEASURE CONTROL
-// ============================================================================
-
 export class MeasureControl {
   map: MLMap;
 
@@ -135,15 +123,7 @@ export class MeasureControl {
   this._onKey = this._onKey.bind(this);
 }
 
- // ============================================================
-// LAYERS
-// ============================================================
-
 private _ensureLayers(): void {
-  // ==========================================================
-  // SOURCE
-  // ==========================================================
-
   if (!this.map.getSource(SRC)) {
     this.map.addSource(SRC, {
       type: "geojson",
@@ -153,11 +133,6 @@ private _ensureLayers(): void {
       },
     });
   }
-
-  // ==========================================================
-  // FILL
-  // ==========================================================
-
   if (!this.map.getLayer(L_FILL)) {
     this.map.addLayer({
       id: L_FILL,
@@ -174,11 +149,6 @@ private _ensureLayers(): void {
       },
     });
   }
-
-  // ==========================================================
-  // LINE
-  // ==========================================================
-
   if (!this.map.getLayer(L_LINE)) {
     this.map.addLayer({
       id: L_LINE,
@@ -200,11 +170,6 @@ private _ensureLayers(): void {
       },
     });
   }
-
-  // ==========================================================
-  // VERTEX
-  // ==========================================================
-
   if (!this.map.getLayer(L_VERT)) {
     this.map.addLayer({
       id: L_VERT,
@@ -223,10 +188,6 @@ private _ensureLayers(): void {
       },
     });
   }
-// ==========================================================
-// LABEL TITIK
-// ==========================================================
-
 if (!this.map.getLayer(L_LABEL)) {
   this.map.addLayer({
     id: L_LABEL,
@@ -253,10 +214,6 @@ if (!this.map.getLayer(L_LABEL)) {
     },
   });
 }
-  // ==========================================================
-  // PASTIKAN TERLIHAT
-  // ==========================================================
-
   this.map.setLayoutProperty(
     L_FILL,
     "visibility",
@@ -281,10 +238,6 @@ if (!this.map.getLayer(L_LABEL)) {
 );
 }
 
-// ============================================================
-// POPUP MANAGEMENT
-// ============================================================
-
 private _addPopup(
   popup: maplibregl.Popup
 ): void {
@@ -305,63 +258,41 @@ private _closePopups(): void {
   this._popups.clear();
 }
 
-  // ============================================================
-  // START
-  // ============================================================
-
   start(mode: MeasureMode): void {
     console.log(
       "MEASURE START:",
       mode
     );
-
-    // Lepas listener lama
     this._removeListeners();
-
     this.mode = mode;
     this.coords = [];
     this.hover = null;
-
     this._ensureLayers();
-
-    // Bersihkan geometry lama
     this._setData([]);
-
-    // Listener
     this.map.on(
       "click",
       this._onClick
     );
-
     this.map.on(
       "mousemove",
       this._onMove
     );
-
     this.map.on(
       "dblclick",
       this._onDbl
     );
-
     document.addEventListener(
       "keydown",
       this._onKey
     );
-
     this.map.doubleClickZoom.disable();
-
     this.map
       .getCanvas()
       .style.cursor = "crosshair";
-
     console.log(
       "MEASURE CLICK LISTENER TERPASANG"
     );
   }
-
-  // ============================================================
-  // REMOVE LISTENERS
-  // ============================================================
 
  private _removeListeners(
   removeKeyboard = true
@@ -396,27 +327,11 @@ private _closePopups(): void {
     .getCanvas()
     .style.cursor = "";
 }
-
-  // ============================================================
-  // STOP
-  // ============================================================
-
   stop(): void {
   this._removeListeners(true);
-
-  /*
-   * Geometry hasil pengukuran
-   * tetap dibiarkan di peta.
-   */
-
   this.hover = null;
-
   this.onStop();
 }
-
-  // ============================================================
-  // CLEAR
-  // ============================================================
 
   clear(): void {
   this._closePopups();
@@ -428,10 +343,7 @@ private _closePopups(): void {
 
   this.onResult(null);
 }
-  // ============================================================
-  // SET DATA
-  // ============================================================
-
+  
   private _setData(
     coords: Coordinate[]
   ): void {
@@ -463,16 +375,14 @@ private _closePopups(): void {
 
     source.setData(geojson);
   }
-    // ============================================================
-  // GET TERRAIN ELEVATION
-  // ============================================================
 
   private _getElevation(
     coord: Coordinate
   ): number | null {
     const elevation =
       this.map.queryTerrainElevation(coord);
-
+      exaggerated: false,
+        });
     if (
       elevation == null ||
       !Number.isFinite(elevation)
