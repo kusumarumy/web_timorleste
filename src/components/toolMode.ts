@@ -3,6 +3,7 @@ export type ToolMode =
   | "length"
   | "width"
   | "area"
+  | "elevation"
   | "identify"
   | null;
 
