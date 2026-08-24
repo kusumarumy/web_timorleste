@@ -20,7 +20,6 @@ function Toggle({ on, onClick }: { on: boolean; onClick: () => void }) {
 
 function LayerRow({ l }: { l: LayerDef }) {
   const { t } = useI18n();
-
   const {
     visible,
     toggle,
@@ -37,10 +36,8 @@ function LayerRow({ l }: { l: LayerDef }) {
     <div>
       <div className="group flex items-center gap-2.5 rounded-[10px] px-2 py-2 transition-colors hover:bg-teal/[0.07]">
         <Toggle on={on} onClick={() => toggle(l.id)} />
-
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 text-[13px] font-semibold text-ink">
-
             {l.icon ? (
               <span className="flex h-[24px] w-[24px] flex-none items-center justify-center">
                 <img
@@ -71,17 +68,14 @@ function LayerRow({ l }: { l: LayerDef }) {
                 }
               />
             ) : null}
-
             {t(l.nameKey)}
           </div>
-
           {l.subKey && (
             <div className="mt-0.5 text-[10.5px] text-muted2">
               {t(l.subKey)}
             </div>
           )}
         </div>
-
         {l.opacityProp != null && (
           <input
             type="range"
@@ -108,7 +102,6 @@ function LayerRow({ l }: { l: LayerDef }) {
                 onChange={() => toggleSub(sub.id)}
                 className="h-3.5 w-3.5 accent-teal"
               />
-
               <span>{t(sub.labelKey)}</span>
             </label>
           ))}
@@ -144,8 +137,6 @@ function TerrainControl() {
         </svg>
         {t("terrain")}
       </div>
-
-      {/* 3 pilihan sumber DTM */}
       <div className="mt-2.5 flex gap-1 rounded-[10px] border border-stroke bg-bg/40 p-[3px]">
         {options.map((opt) => (
           <button
@@ -161,7 +152,6 @@ function TerrainControl() {
           </button>
         ))}
       </div>
-
       {terrainSource !== "off" && (
         <div className={`mt-3 ${adjustable ? "" : "opacity-40"}`}>
           <div className="flex items-center gap-2.5">
@@ -180,7 +170,6 @@ function TerrainControl() {
               {adjustable ? exaggeration.toFixed(1) : "1.0"}×
             </b>
           </div>
-
           {!adjustable && (
             <p className="mt-1.5 text-[10px] leading-snug text-muted2">
   {t("terrain_locked")}
@@ -191,16 +180,15 @@ function TerrainControl() {
     </div>
   );
 }
+
 function MeasurementControl() {
   const { t } = useI18n();
   const [active, setActive] = useState(getToolMode());
-
   useEffect(() => {
     return onToolMode((mode) => {
       setActive(mode);
     });
   }, []);
-
   const activate = (
     mode: "distance" | "elevation" | "area"
   ) => {
@@ -208,10 +196,8 @@ function MeasurementControl() {
       setToolMode(null);
       return;
     }
-
     setToolMode(mode);
   };
-
   const buttonClass = (
     mode: "distance" | "elevation" | "area"
   ) =>
@@ -220,11 +206,8 @@ function MeasurementControl() {
         ? "border-teal/50 bg-teal text-[#04171a]"
         : "border-stroke bg-bg/30 text-muted hover:border-teal/30 hover:bg-teal/[0.07] hover:text-ink"
     }`;
-
   return (
     <div className="m-1.5 mt-2 rounded-xl border border-strokeSoft bg-gradient-to-br from-teal/10 to-teal/[0.02] p-3">
-
-      {/* HEADER */}
       <div className="flex items-center gap-2 text-[13px] font-bold text-ink">
         <svg
           viewBox="0 0 24 24"
@@ -243,14 +226,9 @@ function MeasurementControl() {
           <path d="M11 13l-2-2" />
           <path d="M14 10l-2-2" />
         </svg>
-
         <span>{t("measurement")}</span>
       </div>
-
-      {/* PILIHAN ALAT */}
       <div className="mt-2.5 grid grid-cols-3 gap-1 rounded-[10px] border border-stroke bg-bg/40 p-[3px]">
-
-        {/* JARAK */}
         <button
           type="button"
           onClick={() => activate("distance")}
@@ -258,13 +236,10 @@ function MeasurementControl() {
           aria-pressed={active === "distance"}
         >
           <span className="text-[13px]">📏</span>
-
           <span className="whitespace-nowrap text-[10px] font-semibold">
             {t("distance")}
           </span>
         </button>
-
-        {/* ELEVASI */}
         <button
           type="button"
           onClick={() => activate("elevation")}
@@ -272,13 +247,10 @@ function MeasurementControl() {
           aria-pressed={active === "elevation"}
         >
           <span className="text-[14px]">↕</span>
-
           <span className="whitespace-nowrap text-[10px] font-semibold">
             {t("elevation")}
           </span>
         </button>
-
-        {/* LUAS */}
         <button
           type="button"
           onClick={() => activate("area")}
@@ -286,15 +258,11 @@ function MeasurementControl() {
           aria-pressed={active === "area"}
         >
           <span className="text-[13px]">▱</span>
-
           <span className="whitespace-nowrap text-[10px] font-semibold">
             {t("area")}
           </span>
         </button>
-
       </div>
-
-      {/* PETUNJUK */}
       <p className="mt-2 text-[10px] leading-snug text-muted2">
         {active ? (
           <>
@@ -324,7 +292,6 @@ export default function ControlPanel() {
     GROUPS.map((g) => [g.titleKey, true])
   )
 );
-
   const toggleGroup = (key: string) => {
     setCollapsedGroups((prev) => ({
       ...prev,
@@ -333,7 +300,6 @@ export default function ControlPanel() {
   };
   return (
     <>
-      {/* Tombol buka panel */}
       {!open && (
         <button
           onClick={() => setOpen(true)}
@@ -352,24 +318,18 @@ export default function ControlPanel() {
           </svg>
         </button>
       )}
-
-      {/* Panel kontrol */}
       {open && (
         <aside className="absolute bottom-11 left-4 top-[70px] z-[15] flex w-[312px] flex-col overflow-hidden rounded-2xl border border-stroke bg-panel/90 shadow-[0_18px_50px_rgba(0,0,0,.45)] backdrop-blur-xl max-md:inset-x-2.5 max-md:bottom-auto max-md:top-16 max-md:max-h-[52%] max-md:w-auto">
-
-          {/* Header */}
           <div className="border-b border-strokeSoft px-4 pb-2.5 pt-3.5">
             <div className="flex items-start justify-between">
               <div>
                 <div className="text-[10.5px] font-bold uppercase tracking-[1.4px] text-teal">
                   {t("eyebrow")}
                 </div>
-
                 <p className="mt-1.5 text-[11.5px] leading-snug text-muted">
                   {t("panelsub")}
                 </p>
               </div>
-
               <button
                 onClick={() => setOpen(false)}
                 aria-label="Close panel"
@@ -379,17 +339,11 @@ export default function ControlPanel() {
               </button>
             </div>
           </div>
-
-          {/* Isi panel */}
           <div className="flex-1 overflow-y-auto px-2 pb-3 pt-1.5">
             <TerrainControl />
 <MeasurementControl />
-            {/* =========================================================
-    DATA LAYER
-    ========================================================= */}
+    
 <div className="m-1.5 mt-2 rounded-xl border border-strokeSoft bg-gradient-to-br from-teal/10 to-teal/[0.02] p-3">
-
-  {/* HEADER DATA LAYER */}
   <div className="flex items-center gap-2 text-[13px] font-bold text-ink">
     <svg
       viewBox="0 0 24 24"
@@ -406,41 +360,29 @@ export default function ControlPanel() {
       <path d="M8 12h8" />
       <path d="M8 16h5" />
     </svg>
-
     <span>{t("data_layer")}</span>
   </div>
-
-  {/* GROUP-GROUP LAYER */}
 <div className="mt-2.5">
   {GROUPS.map((g) => {
     const collapsed = collapsedGroups[g.titleKey];
-
     return (
       <div
         key={g.titleKey}
         className="mb-1.5 last:mb-0"
       >
-        {/* =====================================================
-            GROUP HEADER
-            ===================================================== */}
         <button
           type="button"
           onClick={() => toggleGroup(g.titleKey)}
           aria-expanded={!collapsed}
           className="flex w-full items-center gap-2 rounded-lg px-1.5 py-2 text-left transition-colors hover:bg-teal/[0.07]"
         >
-          {/* DOT */}
           <span
             className="h-[7px] w-[7px] flex-none rounded-[2px]"
             style={{ background: g.dot }}
           />
-
-          {/* TITLE */}
           <span className="flex-1 text-[10.5px] font-bold uppercase tracking-wide text-muted2">
             {t(g.titleKey)}
           </span>
-
-          {/* CHEVRON */}
           <svg
             viewBox="0 0 24 24"
             width="14"
@@ -457,10 +399,6 @@ export default function ControlPanel() {
             <path d="M9 18l6-6-6-6" />
           </svg>
         </button>
-
-        {/* =====================================================
-            LAYERS
-            ===================================================== */}
         {!collapsed && (
           <div className="mt-0.5">
             {g.layers.map((l) => (
