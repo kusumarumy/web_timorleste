@@ -145,7 +145,7 @@ export const GROUPS: LayerGroup[] = [
       defaultOn: true,
 
       legend: {
-        color: "#0000FF",
+        color: "#4DA6FF",
         line: true,
       },
     },
