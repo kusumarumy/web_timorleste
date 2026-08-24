@@ -153,28 +153,29 @@ function TerrainControl() {
         ))}
       </div>
       {terrainSource !== "off" && (
-        <div className={`mt-3 ${adjustable ? "" : "opacity-40"}`}>
-          <div className="flex items-center gap-2.5">
-            <span className="w-16 text-[10.5px] text-muted">{t("exagg")}</span>
-            <input
-              type="range"
-              min={0}
-              max={3}
-              step={0.1}
-              value={adjustable ? exaggeration : 1}
-              disabled={!adjustable}
-              onChange={(e) => setExaggeration(+e.target.value)}
-              className="h-[3px] flex-1 accent-teal disabled:cursor-not-allowed"
-            />
-            <b className="w-7 text-right text-[11px] text-teal">
-              {adjustable ? exaggeration.toFixed(1) : "1.0"}×
-            </b>
-          </div>
-          {!adjustable}
-</p>
-          )}
-        </div>
-      )}
+  <div className={`mt-3 ${adjustable ? "" : "opacity-40"}`}>
+    <div className="flex items-center gap-2.5">
+      <span className="w-16 text-[10.5px] text-muted">
+        {t("exagg")}
+      </span>
+
+      <input
+        type="range"
+        min={0}
+        max={3}
+        step={0.1}
+        value={adjustable ? exaggeration : 1}
+        disabled={!adjustable}
+        onChange={(e) => setExaggeration(+e.target.value)}
+        className="h-[3px] flex-1 accent-teal disabled:cursor-not-allowed"
+      />
+
+      <b className="w-7 text-right text-[11px] text-teal">
+        {adjustable ? exaggeration.toFixed(1) : "1.0"}×
+      </b>
+    </div>
+  </div>
+)}
     </div>
   );
 }
