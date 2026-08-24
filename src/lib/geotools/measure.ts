@@ -377,39 +377,27 @@ private _closePopups(): void {
   }
 
   private _getElevation(
-    coord: Coordinate
-  ): number | null {
-    const elevation =
-      this.map.queryTerrainElevation(coord);
-      exaggerated: false,
-        });
-    if (
-      elevation == null ||
-      !Number.isFinite(elevation)
-    ) {
-      return null;
-    }
-
-    return elevation;
+  coord: Coordinate
+): number | null {
+  const elevation =
+    this.map.queryTerrainElevation(coord);
+    exaggerated: false,
+      });
+  if (
+    elevation == null ||
+    !Number.isFinite(elevation)
+  ) {
+    return null;
   }
+
+  return elevation;
+}
   private _onClick(
   e: MapMouseEvent
 ): void {
   if (!this.mode) {
     return;
   }
-
-  // ==========================================================
-  // DOUBLE CLICK
-  // ==========================================================
-  // MapLibre/browser mengirim:
-  // click detail=1
-  // click detail=2
-  // dblclick
-  //
-  // Klik kedua dari double-click JANGAN dijadikan titik baru.
-  // Titik pertama tetap dipakai sebagai titik pengukuran terakhir.
-  // ==========================================================
 
   if (e.originalEvent.detail >= 2) {
     console.log(
@@ -440,10 +428,6 @@ private _closePopups(): void {
 
   this._update();
 }
-
-  // ============================================================
-  // MOUSE MOVE
-  // ============================================================
 
   private _onMove(
     e: MapMouseEvent
@@ -485,28 +469,15 @@ private _closePopups(): void {
   }
 
   const finishedMode = this.mode;
-
-  // Salin hanya titik yang benar-benar diklik.
-  // Klik kedua dari double-click sudah diabaikan
-  // oleh _onClick().
   const finalCoords = this.coords.slice();
-
-  // Jangan tampilkan garis preview
   this.hover = null;
-
-  // Geometry final
   this._setData(finalCoords);
-
-  // Hasil final
   this._updateResult(
     finalCoords,
     true
   );
 
-  // Tutup popup titik/hasil sebelumnya
   this._closePopups();
-
-  // Tampilkan popup hasil
   this._showResultPopup(
     finalCoords[
       finalCoords.length - 1
@@ -515,18 +486,10 @@ private _closePopups(): void {
     finalCoords
   );
 
-  // Matikan event mouse.
-  // Keyboard ESC tetap aktif.
   this._removeListeners(false);
-
   this.hover = null;
-
   this.onStop();
 }
-
-  // ============================================================
-  // KEYBOARD
-  // ============================================================
 
   private _onKey(
     e: KeyboardEvent
@@ -534,11 +497,6 @@ private _closePopups(): void {
     if (!this.mode) {
       return;
     }
-
-    // ==========================================================
-    // ESC
-    // ==========================================================
-
     if (e.key === "Escape") {
   console.log("MEASURE ESCAPE - CLEAR");
 
@@ -547,10 +505,6 @@ private _closePopups(): void {
 
   return;
 }
-
-    // ==========================================================
-    // ENTER
-    // ==========================================================
 
     if (e.key === "Enter") {
       if (this.coords.length === 0) {
@@ -574,10 +528,8 @@ private _closePopups(): void {
         true
       );
 
-    // Tutup semua popup titik
 this._closePopups();
 
-// Popup hasil
 this._showResultPopup(
   finalCoords[
     finalCoords.length - 1
@@ -589,10 +541,6 @@ this._showResultPopup(
       this.stop();
     }
   }
-
-  // ============================================================
-  // WORKING COORDINATES
-  // ============================================================
 
   private _working(): Coordinate[] {
     const c =
@@ -611,10 +559,6 @@ this._showResultPopup(
 
     return c;
   }
-
-  // ============================================================
-  // UPDATE
-  // ============================================================
 
   private _update(
     finished = false
@@ -641,19 +585,11 @@ this._showResultPopup(
     );
   }
 
-    // ============================================================
-  // UPDATE RESULT
-  // ============================================================
-
   private _updateResult(
     c: Coordinate[],
     finished = false
   ): void {
     const k = this.scaleFactor;
-
-    // ==========================================================
-    // DISTANCE
-    // ==========================================================
 
     if (this.mode === "distance") {
       const r =
@@ -677,21 +613,15 @@ this._showResultPopup(
       return;
     }
 
-    // ==========================================================
-    // ELEVATION
-    // ==========================================================
-
     if (this.mode === "elevation") {
       if (c.length < 2) {
         this.onResult(null);
         return;
       }
 
-      // Hanya gunakan titik pertama dan titik kedua
       const p1 = c[0];
       const p2 = c[1];
 
-      // Jarak horizontal
       const r =
         measureLine(
           [p1, p2],
@@ -710,7 +640,6 @@ this._showResultPopup(
       const elevation2 =
         this._getElevation(p2);
 
-      // Terrain belum tersedia
       if (
         elevation1 == null ||
         elevation2 == null
@@ -719,15 +648,12 @@ this._showResultPopup(
         return;
       }
 
-      // Beda elevasi
       const deltaElevation =
         elevation2 - elevation1;
 
-      // Slope dalam persen
       const slopePercent =
         (deltaElevation / r.total) * 100;
 
-      // Slope dalam derajat
       const slopeDegree =
         Math.atan(
           deltaElevation / r.total
@@ -756,10 +682,6 @@ this._showResultPopup(
 
       return;
     }
-
-    // ==========================================================
-    // AREA
-    // ==========================================================
 
     if (this.mode === "area") {
       if (c.length >= 3) {
@@ -809,11 +731,6 @@ this._showResultPopup(
 
     this.onResult(null);
   }
-  
-
-  // ============================================================
-  // RESULT POPUP
-  // ============================================================
 
   private _showResultPopup(
     position: Coordinate | undefined,
@@ -845,10 +762,6 @@ this._showResultPopup(
         </div>
     `;
 
-    // ==========================================================
-    // DISTANCE
-    // ==========================================================
-
     if (mode === "distance") {
       const r =
         measureLine(
@@ -870,9 +783,6 @@ this._showResultPopup(
         `;
       }
     }
-   // ==========================================================
-// ELEVATION
-// ==========================================================
 
 if (
   mode === "elevation" &&
@@ -977,13 +887,6 @@ if (
   }
 }
 
-// ==========================================================
-// AREA
-// ==========================================================
-    // ==========================================================
-    // AREA
-    // ==========================================================
-
     if (
       mode === "area" &&
       coords.length >= 3
@@ -1040,18 +943,10 @@ if (
 this._addPopup(popup);
   }
 
-  // ============================================================
-  // GEOJSON
-  // ============================================================
-
   private _fc(
     c: Coordinate[]
   ): FeatureCollection {
     const feats: Feature[] = [];
-
-    // ==========================================================
-    // POLYGON
-    // ==========================================================
 
     if (
       this.mode === "area" &&
@@ -1074,10 +969,6 @@ this._addPopup(popup);
       });
     }
 
-    // ==========================================================
-    // LINE
-    // ==========================================================
-
     if (c.length >= 2) {
       const line: LineString = {
         type: "LineString",
@@ -1091,12 +982,6 @@ this._addPopup(popup);
       });
     }
 
-    // ==========================================================
-// POINT + LABEL
-// ==========================================================
-
-// Hanya titik yang benar-benar sudah diklik.
-// Hover tidak dibuat menjadi label.
 this.coords.forEach((p, index) => {
   const point: Point = {
     type: "Point",
@@ -1118,10 +1003,6 @@ this.coords.forEach((p, index) => {
     };
   }
 }
-
-// ============================================================================
-// FORMAT
-// ============================================================================
 
 export function fmtLen(
   m: number
