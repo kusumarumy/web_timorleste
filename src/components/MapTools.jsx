@@ -14,19 +14,11 @@ import {
   onToolMode,
 } from "./toolMode";
 
+import { ALL_LAYERS } from "../lib/config";
 import "./geo-tools.css";
-
-const INTERACTIVE_LAYERS = [
-  "aoi-foto-udara",
-  "aoi-lidar",
-  "batas-desa",
-  "batas-posto",
-  "batas-kotamadya",
-  "batas-negara",
-  "kontur-mayor",
-  "kontur-minor",
-];
-
+const INTERACTIVE_LAYERS = ALL_LAYERS
+  .filter((layer) => layer.clickable)
+  .map((layer) => layer.id);
 const GROUND_K = 1;
 
 export default function MapTools({ map }) {
