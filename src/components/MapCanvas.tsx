@@ -17,6 +17,7 @@ import {
   onToolMode,
 } from "./toolMode";
 import { MeasureControl } from "@/lib/geotools/measure";
+import IdentifyButton from "./IdentifyButton";
 import { useI18n } from "@/lib/i18n";
 function isWGS84GeoJSON(geojson: any): boolean {
 
@@ -68,7 +69,7 @@ function isWGS84GeoJSON(geojson: any): boolean {
   return false;
 }
 
-function buildStyle(): maplibregl.StyleSpecification {
+function buildStyle(): libregl.StyleSpecification {
   const sources: Record<string, unknown> = {};
   Object.values(TERRAIN_OPTIONS).forEach((t) => {
   sources[`terrain_${t.id}`] = {
@@ -82,7 +83,7 @@ function buildStyle(): maplibregl.StyleSpecification {
   };
 });
 
-  const layers: maplibregl.LayerSpecification[] = [
+  const layers: libregl.LayerSpecification[] = [
     { id: "bg", type: "background", paint: { "background-color": "#0B1620" } } as any,
   ];
 
@@ -943,24 +944,37 @@ const loadingLayerNames = loadingLayerIds.map((id) => {
       className="absolute inset-0 h-full w-full"
     />
 
-    {loadingLayerNames.length > 0 && (
-  <div className="layer-loading-popup">
-    <div className="layer-loading-spinner" />
-
-    <div className="layer-loading-content">
-      <div className="layer-loading-title">
-        {t("loading_layer_title")}
-      </div>
-
-      <div className="layer-loading-text">
-        <strong>
-          {loadingLayerNames.join(", ")}
-        </strong>{" "}
-        {t("loading_layer_text")}
-      </div>
+    {/* IDENTIFY BUTTON */}
+    <div
+      style={{
+        position: "absolute",
+        top: 200,
+        right: 10,
+        zIndex: 10,
+      }}
+    >
+      <IdentifyButton />
     </div>
+
+    {loadingLayerNames.length > 0 && (
+      <div className="layer-loading-popup">
+        <div className="layer-loading-spinner" />
+
+        <div className="layer-loading-content">
+          <div className="layer-loading-title">
+            {t("loading_layer_title")}
+          </div>
+
+          <div className="layer-loading-text">
+            <strong>
+              {loadingLayerNames.join(", ")}
+            </strong>{" "}
+            {t("loading_layer_text")}
+          </div>
+        </div>
+      </div>
+    )}
   </div>
-)}
-  </div>
+);
 );
 }
