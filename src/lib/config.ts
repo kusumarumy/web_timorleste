@@ -1497,10 +1497,10 @@ export const GROUPS: LayerGroup[] = [
         },
 
         {
-          id: "oe_ingatepier",
-          nameKey: "l_oe_ingatepier",
+          id: "oe_ingatpier",
+          nameKey: "l_oe_ingatpier",
           kind: "line",
-          data: v("oe_ingatepier"),
+          data: v("oe_ingatpier"),
           clickable: true,
           paint: {
             "line-color": "#16A34A",
