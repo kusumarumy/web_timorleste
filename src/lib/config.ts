@@ -1330,7 +1330,7 @@ export const GROUPS: LayerGroup[] = [
           id: "rei_flushingcanal",
           nameKey: "l_rei_flushingcanal",
           kind: "line",
-          data: v("rei_flushingcanal"),
+          data: v("rei_flusingcanal"),
           clickable: true,
           paint: {
             "line-color": "#06B6D4",
