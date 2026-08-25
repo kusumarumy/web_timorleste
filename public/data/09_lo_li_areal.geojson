@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "09_lo_li_areal",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32751" } },
+"features": [
+{ "type": "Feature", "properties": { "LAYER": "Luas Areal Topo", "GM_TYPE": "Unknown Line Type", "ELEVATION": 0 }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ 759964.207683644490317, 8975822.629065062850714 ], [ 760200.0, 8975794.641208304092288 ], [ 760435.640429633087479, 8975717.246619904413819 ], [ 761594.641208305372857, 8975600.0 ] ] ] } }
+]
+}
