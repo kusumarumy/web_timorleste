@@ -1400,7 +1400,7 @@ export const GROUPS: LayerGroup[] = [
       nameKey: "l_oebaba_2009",
       kind: "line",
       paint: {},
-      defaultOn: false,
+      defaultOn: true,
     },
 
     {
@@ -1408,7 +1408,7 @@ export const GROUPS: LayerGroup[] = [
       nameKey: "l_oebaba_2026",
       kind: "line",
       paint: {},
-      defaultOn: false,
+      defaultOn: true,
 
       children: [
         {
@@ -1421,7 +1421,7 @@ export const GROUPS: LayerGroup[] = [
             "line-color": "#7C3AED",
             "line-width": 2,
           },
-          defaultOn: false,
+          defaultOn: true,
           legend: {
             color: "#7C3AED",
             line: true,
@@ -1438,7 +1438,7 @@ export const GROUPS: LayerGroup[] = [
             "line-color": "#2563EB",
             "line-width": 2,
           },
-          defaultOn: false,
+          defaultOn: true,
           legend: {
             color: "#2563EB",
             line: true,
@@ -1455,7 +1455,7 @@ export const GROUPS: LayerGroup[] = [
             "line-color": "#06B6D4",
             "line-width": 2,
           },
-          defaultOn: false,
+          defaultOn: true,
           legend: {
             color: "#06B6D4",
             line: true,
@@ -1472,7 +1472,7 @@ export const GROUPS: LayerGroup[] = [
             "line-color": "#0891B2",
             "line-width": 2,
           },
-          defaultOn: false,
+          defaultOn: true,
           legend: {
             color: "#0891B2",
             line: true,
@@ -1506,7 +1506,7 @@ export const GROUPS: LayerGroup[] = [
             "line-color": "#16A34A",
             "line-width": 2,
           },
-          defaultOn: false,
+          defaultOn: true,
           legend: {
             color: "#16A34A",
             line: true,
@@ -1523,7 +1523,7 @@ export const GROUPS: LayerGroup[] = [
             "line-color": "#22C55E",
             "line-width": 2,
           },
-          defaultOn: false,
+          defaultOn: true,
           legend: {
             color: "#22C55E",
             line: true,
@@ -1540,7 +1540,7 @@ export const GROUPS: LayerGroup[] = [
             "line-color": "#15803D",
             "line-width": 2,
           },
-          defaultOn: false,
+          defaultOn: true,
           legend: {
             color: "#15803D",
             line: true,
@@ -1557,7 +1557,7 @@ export const GROUPS: LayerGroup[] = [
             "line-color": "#92400E",
             "line-width": 2,
           },
-          defaultOn: false,
+          defaultOn: true,
           legend: {
             color: "#92400E",
             line: true,
@@ -1574,7 +1574,7 @@ export const GROUPS: LayerGroup[] = [
             "line-color": "#0EA5E9",
             "line-width": 2,
           },
-          defaultOn: false,
+          defaultOn: true,
           legend: {
             color: "#0EA5E9",
             line: true,
@@ -1588,7 +1588,7 @@ export const GROUPS: LayerGroup[] = [
           data: v("oe_intake"),
           clickable: true,
           paint: {},
-          defaultOn: false,
+          defaultOn: true,
           legend: {
             color: "#0284C7",
           },
@@ -1601,7 +1601,7 @@ export const GROUPS: LayerGroup[] = [
           data: v("oe_irrigationgate"),
           clickable: true,
           paint: {},
-          defaultOn: false,
+          defaultOn: true,
           legend: {
             color: "#15803D",
           },
@@ -1618,7 +1618,7 @@ export const GROUPS: LayerGroup[] = [
             "fill-opacity": 0.5,
             "fill-outline-color": "#57534E",
           },
-          defaultOn: false,
+          defaultOn: true,
           opacity: 0.5,
           opacityProp: "fill-opacity",
           legend: {
@@ -1637,7 +1637,7 @@ export const GROUPS: LayerGroup[] = [
             "fill-opacity": 0.4,
             "fill-outline-color": "#78716C",
           },
-          defaultOn: false,
+          defaultOn: true,
           opacity: 0.4,
           opacityProp: "fill-opacity",
           legend: {
@@ -1656,7 +1656,7 @@ export const GROUPS: LayerGroup[] = [
             "fill-opacity": 0.3,
             "fill-outline-color": "#0284C7",
           },
-          defaultOn: false,
+          defaultOn: true,
           opacity: 0.3,
           opacityProp: "fill-opacity",
           legend: {
@@ -1675,7 +1675,7 @@ export const GROUPS: LayerGroup[] = [
             "fill-opacity": 0.5,
             "fill-outline-color": "#5B21B6",
           },
-          defaultOn: false,
+          defaultOn: true,
           opacity: 0.5,
           opacityProp: "fill-opacity",
           legend: {
@@ -1694,7 +1694,7 @@ export const GROUPS: LayerGroup[] = [
             "fill-opacity": 0.4,
             "fill-outline-color": "#4338CA",
           },
-          defaultOn: false,
+          defaultOn: true,
           opacity: 0.4,
           opacityProp: "fill-opacity",
           legend: {
@@ -1715,7 +1715,7 @@ export const GROUPS: LayerGroup[] = [
       nameKey: "l_lomea_2009",
       kind: "line",
       paint: {},
-      defaultOn: false,
+      defaultOn: true,
     },
   ],
 },
