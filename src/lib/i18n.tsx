@@ -26,20 +26,31 @@ export const DICTS: Record<Lang, Dict> = {
     g_hydro: "Hidrologi",
     g_land: "Tutupan Lahan",
     g_genangan: "Layer Genangan",
-    g_weir_oebaba: "Weir Oebaba",
-    g_weir_reibera: "Weir Reibera",
-    g_maukola: "MAUKOLA",
+    g_raibere: "RAIBERE",
+    g_oebaba: "OEBABA",
+    g_lomea: "LOMEA",
+
+    // Layer RAIBERE / OEBABA / LOMEA
+    l_raibere_2009: "RAIBERE 2009",
+    l_raibere_2026: "RAIBERE 2026",
+
+    l_oebaba_2009: "OEBABA 2009",
+    l_oebaba_2026: "OEBABA 2026",
+
+    l_lomea_2009: "LOMEA 2009",
 
     // Administration
     l_desa: "Batas Administrasi Desa",
     l_posto: "Batas Administrasi Posto",
     l_kotamadya: "Batas Administrasi Kotamadya",
     l_negara: "Batas Administrasi Negara",
-    // Land Cover 
+
+    // Land Cover
     l_sugarcane: "Tebu",
     l_urban: "Permukiman",
     l_ricefield: "Sawah",
     l_ricefield_8di: "8 Daerah Irigasi",
+
     di_akadiru_kede: "AKADIRU KEDE",
     di_buiha: "BUIHA",
     di_kakeulaku: "KAKEULAKU",
@@ -48,6 +59,7 @@ export const DICTS: Record<Lang, Dict> = {
     di_oebaba: "OEBABA",
     di_paulata: "PAULATA",
     di_raibere: "RAIBRE",
+
     l_waterbody: "Badan Air",
     l_ground: "Lahan Terbuka",
     l_palm: "Kelapa Sawit",
@@ -55,6 +67,7 @@ export const DICTS: Record<Lang, Dict> = {
     l_lowveg: "Vegetasi Rendah",
     l_building: "Bangunan",
     l_forestprotected: "Hutan Lindung",
+
     // Hydrology
     l_river: "Sungai",
     l_weir: "Bendungan",
@@ -63,13 +76,17 @@ export const DICTS: Record<Lang, Dict> = {
     l_irrigation: "Irigasi",
     l_catchment: "Daerah Tangkapan Air",
     l_watershed: "Daerah Aliran Sungai",
+
     // Transportation
     l_road: "Jalan",
+
     // Contour
     l_contour: "Kontur Interval 5 Meter",
-    // AOI 
+
+    // AOI
     l_aoi_photo: "AOI Foto Udara",
     l_aoi_lidar: "AOI LiDAR",
+
     // Genangan
     l_genangan_areadesain: "Area Desain",
     l_genangan_areagenangan: "Area Genangan",
@@ -82,29 +99,8 @@ export const DICTS: Record<Lang, Dict> = {
     l_genangan_titikdesain: "Titik Desain",
     l_genangan_titikkoordinat: "Titik Koordinat",
     l_genangan_titikkupasan: "Titik Kupasan",
-    // Weir Oebaba
-    l_oe_crest: "Mercu",
-    l_oe_downstream: "Hilir",
-    l_oe_embankment: "Tanggul",
-    l_oe_flushingcanal: "Saluran Penguras",
-    l_oe_flushinggate: "Pintu Penguras",
-    l_oe_flushingpier: "Pilar Pintu Penguras",
-    l_oe_gate: "Pintu",
-    l_oe_guidewall: "Dinding Pengarah",
-    l_oe_ingate: "Pintu Masuk",
-    l_oe_ingatepier: "Pilar Pintu Masuk",
-    l_oe_intake: "Bangunan Pengambilan",
-    l_oe_irrigationcanal: "Saluran Irigasi",
-    l_oe_irrigationgate: "Pintu Irigasi",
-    l_oe_irrigationpier: "Pilar Irigasi",
-    l_oe_operatinghouse: "Rumah Operasi",
-    l_oe_silt: "Sedimen",
-    l_oe_stilling: "Kolam Olak",
-    l_oe_strais: "Tangga",
-    l_oe_upstream: "Hulu",
-    l_oe_weirbody: "Badan Bendung",
-    l_oe_wing: "Sayap Bendung",
-    // Weir Reibera
+
+    // RAIBERE 2026
     l_rei_access: "Akses",
     l_rei_crest: "Mercu",
     l_rei_downstream: "Hilir",
@@ -124,42 +120,63 @@ export const DICTS: Record<Lang, Dict> = {
     l_rei_weirbody: "Badan Bendung",
     l_rei_wing: "Sayap Bendung",
 
+    // OEBABA 2026
+    l_oe_crest: "Mercu",
+    l_oe_downstream: "Hilir",
+    l_oe_flushingcanal: "Saluran Penguras",
+    l_oe_flushingpier: "Pilar Pintu Penguras",
+    l_oe_guidewall: "Dinding Pengarah",
+    l_oe_ingatepier: "Pilar Pintu Masuk",
+    l_oe_irrigationcanal: "Saluran Irigasi",
+    l_oe_irrigationpier: "Pilar Irigasi",
+    l_oe_strais: "Tangga",
+    l_oe_upstream: "Hulu",
+    l_oe_intake: "Bangunan Pengambilan",
+    l_oe_irrigationgate: "Pintu Irigasi",
+    l_oe_operatinghouse: "Rumah Operasi",
+    l_oe_silt: "Sedimen",
+    l_oe_stilling: "Kolam Olak",
+    l_oe_weirbody: "Badan Bendung",
+    l_oe_wing: "Sayap Bendung",
+
     // Basemap
-    "bm_map": "OpenStreetMap",
-    "bm_sat": "Esri World Imagery",
-    "bm_ortho": "Orthophoto",
-    "bm_dark": "Carto Dark",
-    "bm_light": "Carto Light",
-    "bm_hybrid": "Google Satelit Hybrid",
-    "bm_streets": "Google Streets",
-    "bm_opentopo": "OpenTopoMap",
+    bm_map: "OpenStreetMap",
+    bm_sat: "Esri World Imagery",
+    bm_ortho: "Orthophoto",
+    bm_dark: "Carto Dark",
+    bm_light: "Carto Light",
+    bm_hybrid: "Google Satelit Hybrid",
+    bm_streets: "Google Streets",
+    bm_opentopo: "OpenTopoMap",
 
     // Terrain
     terrain: "Terrain 3D",
     exagg: "Elevasi",
     sub_ortho: "Ubin citra dari Cloudflare R2",
-    
-    // Control Panel
-terrain_off: "Nonaktif",
-measurement: "Pengukuran",
-distance: "Jarak",
-elevation: "Elevasi",
-slope: "Slope",
-area: "Luas",
-measurement_click: "Klik titik",
-measurement_double_click: "Double klik",
-measurement_finish: "selesai",
-measurement_cancel: "batal",
-measurement_select: "Pilih salah satu alat pengukuran.",
-data_layer: "Data Layer",
-terrain_locked: "Elevasi DTM pengukuran terkunci pada skala asli (1×).",
 
-// Hasil pengukuran elevasi
-elevation_start: "Elevasi Awal",
-elevation_end: "Elevasi Akhir",
-elevation_diff: "Beda Elevasi",
-slope_percent: "Slope (%)",
-slope_degree: "Slope (°)",
+    // Control Panel
+    terrain_off: "Nonaktif",
+    measurement: "Pengukuran",
+    distance: "Jarak",
+    elevation: "Elevasi",
+    slope: "Slope",
+    area: "Luas",
+
+    measurement_click: "Klik titik",
+    measurement_double_click: "Double klik",
+    measurement_finish: "selesai",
+    measurement_cancel: "batal",
+    measurement_select: "Pilih salah satu alat pengukuran.",
+
+    data_layer: "Data Layer",
+    terrain_locked: "Elevasi DTM pengukuran terkunci pada skala asli (1×).",
+
+    // Hasil pengukuran elevasi
+    elevation_start: "Elevasi Awal",
+    elevation_end: "Elevasi Akhir",
+    elevation_diff: "Beda Elevasi",
+    slope_percent: "Slope (%)",
+    slope_degree: "Slope (°)",
 
     // Map information
     zoom: "Zoom",
@@ -189,14 +206,34 @@ slope_degree: "Slope (°)",
     g_hydro: "Hydrology",
     g_land: "Land Cover",
     g_genangan: "Flooding Layers",
-    g_weir_oebaba: "Oebaba Weir",
-    g_weir_reibera: "Reibera Weir",
+    g_raibere: "RAIBERE",
+    g_oebaba: "OEBABA",
+    g_lomea: "LOMEA",
 
-    // Land Cover 
+    // Layer RAIBERE / OEBABA / LOMEA
+    l_raibere_2009: "RAIBERE 2009",
+    l_raibere_2026: "RAIBERE 2026",
+
+    l_oebaba_2009: "OEBABA 2009",
+    l_oebaba_2026: "OEBABA 2026",
+
+    l_lomea_2009: "LOMEA 2009",
+
+    // Land Cover
     l_sugarcane: "Sugar Cane",
     l_urban: "Urban Area",
     l_ricefield: "Rice Field",
     l_ricefield_8di: "8 Irrigation Areas",
+
+    di_akadiru_kede: "AKADIRU KEDE",
+    di_buiha: "BUIHA",
+    di_kakeulaku: "KAKEULAKU",
+    di_lias: "LIAS",
+    di_luan_kadoe: "LUAN KADOE",
+    di_oebaba: "OEBABA",
+    di_paulata: "PAULATA",
+    di_raibere: "RAIBRE",
+
     l_waterbody: "Water Body",
     l_ground: "Ground",
     l_palm: "Palm Tree",
@@ -204,6 +241,7 @@ slope_degree: "Slope (°)",
     l_lowveg: "Low Vegetation",
     l_building: "Building",
     l_forestprotected: "Protected Forest Boundary",
+
     // Hydrology
     l_river: "River",
     l_weir: "Weir",
@@ -212,53 +250,37 @@ slope_degree: "Slope (°)",
     l_irrigation: "Irrigation",
     l_catchment: "Catchment Area",
     l_watershed: "Watershed",
+
     // Network
     l_road: "Road",
+
     // Administration
     l_desa: "Village Boundary",
     l_posto: "Administrative Post Boundary",
     l_kotamadya: "Municipal Boundary",
     l_negara: "International Boundary",
+
     // Contour
     l_contour: "Interval Contour 5 Meter",
-    // AOI 
+
+    // AOI
     l_aoi_photo: "Aerial Photography AOI",
     l_aoi_lidar: "LiDAR AOI",
-// Flooding
+
+    // Flooding
     l_genangan_areadesain: "Design Area",
     l_genangan_areagenangan: "Flooded Area",
     l_genangan_areasungai: "River Area",
     l_genangan_garidesain: "Design Line",
-    l_genangan_garikoordinat: "Coordinate Line",
+    l_genangan_gariskoordinat: "Coordinate Line",
     l_genangan_gariskupasan: "Excavation Line",
     l_genangan_garissungai: "River Line",
     l_genangan_titikbor: "Borehole Point",
     l_genangan_titikdesain: "Design Point",
     l_genangan_titikkoordinat: "Coordinate Point",
     l_genangan_titikkupasan: "Excavation Point",
-    // Weir Oebaba
-    l_oe_crest: "Crest",
-    l_oe_downstream: "Downstream",
-    l_oe_embankment: "Embankment",
-    l_oe_flushingcanal: "Flushing Canal",
-    l_oe_flushinggate: "Flushing Gate",
-    l_oe_flushingpier: "Flushing Pier",
-    l_oe_gate: "Gate",
-    l_oe_guidewall: "Guide Wall",
-    l_oe_ingate: "Inlet Gate",
-    l_oe_ingatepier: "Inlet Gate Pier",
-    l_oe_intake: "Intake",
-    l_oe_irrigationcanal: "Irrigation Canal",
-    l_oe_irrigationgate: "Irrigation Gate",
-    l_oe_irrigationpier: "Irrigation Pier",
-    l_oe_operatinghouse: "Operating House",
-    l_oe_silt: "Silt",
-    l_oe_stilling: "Stilling Basin",
-    l_oe_strais: "Stairs",
-    l_oe_upstream: "Upstream",
-    l_oe_weirbody: "Weir Body",
-    l_oe_wing: "Wing",
-    // Weir Reibera
+
+    // RAIBERE 2026
     l_rei_access: "Access",
     l_rei_crest: "Crest",
     l_rei_downstream: "Downstream",
@@ -277,39 +299,61 @@ slope_degree: "Slope (°)",
     l_rei_upstream: "Upstream",
     l_rei_weirbody: "Weir Body",
     l_rei_wing: "Wing",
-    
+
+    // OEBABA 2026
+    l_oe_crest: "Crest",
+    l_oe_downstream: "Downstream",
+    l_oe_flushingcanal: "Flushing Canal",
+    l_oe_flushingpier: "Flushing Pier",
+    l_oe_guidewall: "Guide Wall",
+    l_oe_ingatepier: "Inlet Gate Pier",
+    l_oe_irrigationcanal: "Irrigation Canal",
+    l_oe_irrigationpier: "Irrigation Pier",
+    l_oe_strais: "Stairs",
+    l_oe_upstream: "Upstream",
+    l_oe_intake: "Intake",
+    l_oe_irrigationgate: "Irrigation Gate",
+    l_oe_operatinghouse: "Operating House",
+    l_oe_silt: "Silt",
+    l_oe_stilling: "Stilling Basin",
+    l_oe_weirbody: "Weir Body",
+    l_oe_wing: "Wing",
+
     // Basemap
-    "bm_map": "OpenStreetMap",
-    "bm_sat": "Esri World Imagery",
-    "bm_ortho": "Orthophoto",
-    "bm_dark": "Carto Dark",
-    "bm_light": "Carto Light",
-    "bm_hybrid": "Google Satelit Hybrid",
-    "bm_streets": "Google Streets",
-    "bm_opentopo": "OpenTopoMap",
+    bm_map: "OpenStreetMap",
+    bm_sat: "Esri World Imagery",
+    bm_ortho: "Orthophoto",
+    bm_dark: "Carto Dark",
+    bm_light: "Carto Light",
+    bm_hybrid: "Google Satelit Hybrid",
+    bm_streets: "Google Streets",
+    bm_opentopo: "OpenTopoMap",
 
     // Terrain
     terrain: "3D Terrain",
     exagg: "Elevation",
     sub_ortho: "Image tiles from Cloudflare R2",
-    
+
     // Control Panel
     terrain_off: "Off",
     measurement: "Measurement",
     distance: "Horizontal Distance",
-elevation: "Elevation",
-slope: "Slope",
-area: "Area",
+    elevation: "Elevation",
+    slope: "Slope",
+    area: "Area",
+
     measurement_click: "Click points",
     measurement_double_click: "Double click",
     measurement_finish: "to finish",
     measurement_cancel: "to cancel",
     measurement_select: "Select a measurement tool.",
+
     elevation_start: "Start Elevation",
-elevation_end: "End Elevation",
-elevation_diff: "Elevation Difference",
-slope_percent: "Slope (%)",
-slope_degree: "Slope (°)",
+    elevation_end: "End Elevation",
+    elevation_diff: "Elevation Difference",
+    slope_percent: "Slope (%)",
+    slope_degree: "Slope (°)",
+
     data_layer: "Data Layer",
     terrain_locked: "The measurement DTM elevation is locked at the original scale (1×).",
 
@@ -341,14 +385,34 @@ slope_degree: "Slope (°)",
     g_hydro: "Hidrologia",
     g_land: "Cobertura do Solo",
     g_genangan: "Camadas de Inundação",
-    g_weir_oebaba: "Açude Oebaba",
-    g_weir_reibera: "Açude Reibera",
+    g_raibere: "RAIBERE",
+    g_oebaba: "OEBABA",
+    g_lomea: "LOMEA",
 
-    // Land Cover 
+    // Layer RAIBERE / OEBABA / LOMEA
+    l_raibere_2009: "RAIBERE 2009",
+    l_raibere_2026: "RAIBERE 2026",
+
+    l_oebaba_2009: "OEBABA 2009",
+    l_oebaba_2026: "OEBABA 2026",
+
+    l_lomea_2009: "LOMEA 2009",
+
+    // Land Cover
     l_sugarcane: "Cana-de-açúcar",
     l_urban: "Área Urbana",
     l_ricefield: "Arrozal",
     l_ricefield_8di: "8 Áreas de Irrigação",
+
+    di_akadiru_kede: "AKADIRU KEDE",
+    di_buiha: "BUIHA",
+    di_kakeulaku: "KAKEULAKU",
+    di_lias: "LIAS",
+    di_luan_kadoe: "LUAN KADOE",
+    di_oebaba: "OEBABA",
+    di_paulata: "PAULATA",
+    di_raibere: "RAIBRE",
+
     l_waterbody: "Corpo de Água",
     l_ground: "Solo Exposto",
     l_palm: "Palmeiras",
@@ -356,6 +420,7 @@ slope_degree: "Slope (°)",
     l_lowveg: "Vegetação Baixa",
     l_building: "Edifício",
     l_forestprotected: "Limite da Floresta Protegida",
+
     // Hydrology
     l_river: "Rio",
     l_weir: "Poço",
@@ -364,18 +429,23 @@ slope_degree: "Slope (°)",
     l_irrigation: "Irrigação",
     l_catchment: "Bacia de Drenagem",
     l_watershed: "Bacia Hidrográfica",
-    // Network 
+
+    // Network
     l_road: "Estrada",
-    // Administração
+
+    // Administration
     l_desa: "Limite da Suco",
     l_posto: "Limite do Posto Administrativo",
     l_kotamadya: "Limite Municipal",
     l_negara: "Fronteira Internacional",
+
     // Contour
     l_contour: "Contorno com Intervalo de 5 Metros",
-    // AOI 
+
+    // AOI
     l_aoi_photo: "AOI de Fotografia Aérea",
     l_aoi_lidar: "AOI LiDAR",
+
     // Inundação
     l_genangan_areadesain: "Área de Projeto",
     l_genangan_areagenangan: "Área Inundada",
@@ -388,29 +458,8 @@ slope_degree: "Slope (°)",
     l_genangan_titikdesain: "Ponto de Projeto",
     l_genangan_titikkoordinat: "Ponto de Coordenadas",
     l_genangan_titikkupasan: "Ponto de Escavação",
-    // Barragem Oebaba
-    l_oe_crest: "Crista",
-    l_oe_downstream: "Jusante",
-    l_oe_embankment: "Aterro",
-    l_oe_flushingcanal: "Canal de Descarga de Sedimentos",
-    l_oe_flushinggate: "Comporta de Descarga",
-    l_oe_flushingpier: "Pilar da Comporta de Descarga",
-    l_oe_gate: "Comporta",
-    l_oe_guidewall: "Parede de Orientação",
-    l_oe_ingate: "Comporta de Entrada",
-    l_oe_ingatepier: "Pilar da Comporta de Entrada",
-    l_oe_intake: "Tomada de Água",
-    l_oe_irrigationcanal: "Canal de Irrigação",
-    l_oe_irrigationgate: "Comporta de Irrigação",
-    l_oe_irrigationpier: "Pilar de Irrigação",
-    l_oe_operatinghouse: "Casa de Operação",
-    l_oe_silt: "Sedimentos",
-    l_oe_stilling: "Bacia de Dissipação",
-    l_oe_strais: "Escadas",
-    l_oe_upstream: "Montante",
-    l_oe_weirbody: "Corpo da Barragem",
-    l_oe_wing: "Ala da Barragem",
-    // Barragem Reibera
+
+    // RAIBERE 2026
     l_rei_access: "Acesso",
     l_rei_crest: "Crista",
     l_rei_downstream: "Jusante",
@@ -429,39 +478,61 @@ slope_degree: "Slope (°)",
     l_rei_upstream: "Montante",
     l_rei_weirbody: "Corpo da Barragem",
     l_rei_wing: "Ala da Barragem",
-    
+
+    // OEBABA 2026
+    l_oe_crest: "Crista",
+    l_oe_downstream: "Jusante",
+    l_oe_flushingcanal: "Canal de Descarga de Sedimentos",
+    l_oe_flushingpier: "Pilar da Comporta de Descarga",
+    l_oe_guidewall: "Parede de Orientação",
+    l_oe_ingatepier: "Pilar da Comporta de Entrada",
+    l_oe_irrigationcanal: "Canal de Irrigação",
+    l_oe_irrigationpier: "Pilar de Irrigação",
+    l_oe_strais: "Escadas",
+    l_oe_upstream: "Montante",
+    l_oe_intake: "Tomada de Água",
+    l_oe_irrigationgate: "Comporta de Irrigação",
+    l_oe_operatinghouse: "Casa de Operação",
+    l_oe_silt: "Sedimentos",
+    l_oe_stilling: "Bacia de Dissipação",
+    l_oe_weirbody: "Corpo da Barragem",
+    l_oe_wing: "Ala da Barragem",
+
     // Basemap
-    "bm_map": "OpenStreetMap",
-    "bm_sat": "Esri World Imagery",
-    "bm_ortho": "Orthophoto",
-    "bm_dark": "Carto Dark",
-    "bm_light": "Carto Light",
-    "bm_hybrid": "Google Satelit Hybrid",
-    "bm_streets": "Google Streets",
-    "bm_opentopo": "OpenTopoMap",
+    bm_map: "OpenStreetMap",
+    bm_sat: "Esri World Imagery",
+    bm_ortho: "Orthophoto",
+    bm_dark: "Carto Dark",
+    bm_light: "Carto Light",
+    bm_hybrid: "Google Satelit Hybrid",
+    bm_streets: "Google Streets",
+    bm_opentopo: "OpenTopoMap",
 
     // Terrain
     terrain: "Terreno 3D",
     exagg: "Elevação",
     sub_ortho: "Ladrilhos de imagem do Cloudflare R2",
-    
+
     // Control Panel
     terrain_off: "Desativado",
     measurement: "Medição",
     distance: "Distância Horizontal",
-elevation: "Elevação",
-slope: "Declive",
-area: "Área",
+    elevation: "Elevação",
+    slope: "Declive",
+    area: "Área",
+
     measurement_click: "Clique nos pontos",
     measurement_double_click: "Duplo clique",
     measurement_finish: "para concluir",
     measurement_cancel: "para cancelar",
     measurement_select: "Selecione uma ferramenta de medição.",
+
     elevation_start: "Elevação Inicial",
-elevation_end: "Elevação Final",
-elevation_diff: "Diferença de Elevação",
-slope_percent: "Declive (%)",
-slope_degree: "Declive (°)",
+    elevation_end: "Elevação Final",
+    elevation_diff: "Diferença de Elevação",
+    slope_percent: "Declive (%)",
+    slope_degree: "Declive (°)",
+
     data_layer: "Camadas de Dados",
     terrain_locked: "A elevação do DTM de medição está bloqueada na escala original (1×).",
 
@@ -474,13 +545,20 @@ slope_degree: "Declive (°)",
   },
 };
 
-const Ctx = createContext<{ lang: Lang; setLang: (l: Lang) => void; t: (k: string) => string }>({
-  lang: "id", setLang: () => { }, t: (k) => k,
+const Ctx = createContext<{
+  lang: Lang;
+  setLang: (l: Lang) => void;
+  t: (k: string) => string;
+}>({
+  lang: "id",
+  setLang: () => {},
+  t: (k) => k,
 });
 
 export function I18nProvider({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>("id");
   const t = (k: string) => DICTS[lang][k] ?? k;
+
   return <Ctx.Provider value={{ lang, setLang, t }}>{children}</Ctx.Provider>;
 }
 
