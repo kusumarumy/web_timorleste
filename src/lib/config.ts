@@ -1111,7 +1111,7 @@ export const GROUPS: LayerGroup[] = [
           id: "lo_asesoris",
           nameKey: "l_lo_asesoris",
           kind: "symbol",
-          data: v("09_lo_asesoris"),
+          data: v("09_lo_asesories"),
           clickable: true,
 
           paint: {},
@@ -1164,7 +1164,7 @@ export const GROUPS: LayerGroup[] = [
           id: "lo_sal_kwarter",
           nameKey: "l_lo_sal_kwarter",
           kind: "line",
-          data: v("09_lo_sal_kwarter"),
+          data: v("09_lo_salkwarter"),
           clickable: true,
 
           paint: {
@@ -1183,7 +1183,7 @@ export const GROUPS: LayerGroup[] = [
           id: "lo_luas_areal_topo",
           nameKey: "l_lo_luas_areal_topo",
           kind: "fill",
-          data: v("09_lo_luas_areal_topo"),
+          data: v("09_lo_area"),
           clickable: true,
 
           paint: {
@@ -1205,7 +1205,7 @@ export const GROUPS: LayerGroup[] = [
           id: "lo_kode_bm",
           nameKey: "l_lo_kode_bm",
           kind: "symbol",
-          data: v("09_lo_kode_bm"),
+          data: v("09_lo_kodebm"),
           clickable: true,
 
           paint: {},
@@ -1220,7 +1220,7 @@ export const GROUPS: LayerGroup[] = [
           id: "lo_bm",
           nameKey: "l_lo_bm",
           kind: "symbol",
-          data: v("09_lo_bm"),
+          data: v("09_lo_bmcp"),
           clickable: true,
 
           paint: {},
