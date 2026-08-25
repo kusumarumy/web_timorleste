@@ -138,7 +138,16 @@ export const DICTS: Record<Lang, Dict> = {
     l_oe_stilling: "Kolam Olak",
     l_oe_weirbody: "Badan Bendung",
     l_oe_wing: "Sayap Bendung",
-
+    // LOMEA 2009
+    l_lo_bangunan: "Bangunan",
+    l_lo_bangsadap: "Bangunan Sadap",
+    l_lo_asesoris: "Asesoris",
+    l_lo_00: "Saluran 00",
+    l_lo_tertiary: "Saluran Tersier",
+    l_lo_sal_kwarter: "Saluran Kuarter",
+    l_lo_luas_areal_topo: "Luas Areal Topografi",
+    l_lo_kode_bm: "Kode BM",
+    l_lo_bm: "BM",
     // Basemap
     bm_map: "OpenStreetMap",
     bm_sat: "Esri World Imagery",
@@ -319,6 +328,16 @@ export const DICTS: Record<Lang, Dict> = {
     l_oe_weirbody: "Weir Body",
     l_oe_wing: "Wing",
 
+    //LOMEA 2009
+    l_lo_bangunan: "Building",
+    l_lo_bangsadap: "Intake Structure",
+    l_lo_asesoris: "Accessories",
+    l_lo_00: "Canal 00",
+    l_lo_tertiary: "Tertiary Canal",
+    l_lo_sal_kwarter: "Quaternary Canal",
+    l_lo_luas_areal_topo: "Topographic Area",
+    l_lo_kode_bm: "BM Code",
+    l_lo_bm: "BM",
     // Basemap
     bm_map: "OpenStreetMap",
     bm_sat: "Esri World Imagery",
@@ -348,11 +367,11 @@ export const DICTS: Record<Lang, Dict> = {
     measurement_cancel: "to cancel",
     measurement_select: "Select a measurement tool.",
 
-    elevation_start: "Start Elevation",
-    elevation_end: "End Elevation",
-    elevation_diff: "Elevation Difference",
-    slope_percent: "Slope (%)",
-    slope_degree: "Slope (°)",
+    elevation_start: "Point 1 Elevation",
+elevation_end: "Point 2 Elevation",
+elevation_diff: "Elevation Difference",
+slope_percent: "Slope (%)",
+slope_degree: "Angle (°)",
 
     data_layer: "Data Layer",
     terrain_locked: "The measurement DTM elevation is locked at the original scale (1×).",
@@ -497,7 +516,16 @@ export const DICTS: Record<Lang, Dict> = {
     l_oe_stilling: "Bacia de Dissipação",
     l_oe_weirbody: "Corpo da Barragem",
     l_oe_wing: "Ala da Barragem",
-
+    // LOMEA 2009
+    l_lo_bangunan: "Edifício",
+    l_lo_bangsadap: "Estrutura de Tomada",
+    l_lo_asesoris: "Acessórios",
+    l_lo_00: "Canal 00",
+    l_lo_tertiary: "Canal Terciário",
+    l_lo_sal_kwarter: "Canal Quaternário",
+    l_lo_luas_areal_topo: "Área Topográfica",
+    l_lo_kode_bm: "Código BM",
+    l_lo_bm: "BM",
     // Basemap
     bm_map: "OpenStreetMap",
     bm_sat: "Esri World Imagery",
@@ -527,11 +555,11 @@ export const DICTS: Record<Lang, Dict> = {
     measurement_cancel: "para cancelar",
     measurement_select: "Selecione uma ferramenta de medição.",
 
-    elevation_start: "Elevação Inicial",
-    elevation_end: "Elevação Final",
-    elevation_diff: "Diferença de Elevação",
-    slope_percent: "Declive (%)",
-    slope_degree: "Declive (°)",
+    elevation_start: "Elevação do Ponto 1",
+elevation_end: "Elevação do Ponto 2",
+elevation_diff: "Diferença de Elevação",
+slope_percent: "Declive (%)",
+slope_degree: "Ângulo (°)",
 
     data_layer: "Camadas de Dados",
     terrain_locked: "A elevação do DTM de medição está bloqueada na escala original (1×).",
