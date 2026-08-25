@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"name": "09_lo_po_salkwarter",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32751" } },
+"features": [
+{ "type": "Feature", "properties": { "NAME": "K", "LAYER": "SAL KWARTER", "GM_TYPE": "Text", "ELEVATION": 0.0 }, "geometry": { "type": "Point", "coordinates": [ 769001.424937385832891, 8978618.736896960064769 ] } },
+{ "type": "Feature", "properties": { "NAME": "K", "LAYER": "SAL KWARTER", "GM_TYPE": "Text", "ELEVATION": -6.004 }, "geometry": { "type": "Point", "coordinates": [ 769001.424937385832891, 8978618.736896960064769 ] } }
+]
+}
