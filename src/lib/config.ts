@@ -1057,6 +1057,184 @@ export const GROUPS: LayerGroup[] = [
       },
     ],
   },
+  // LOMEA
+{
+  titleKey: "g_lomea",
+  dot: "#F59E0B",
+  layers: [
+    {
+      id: "lomea_2009",
+      nameKey: "l_lomea_2009",
+      kind: "line",
+      paint: {},
+      defaultOn: true,
+
+      children: [
+        {
+          id: "lo_bangunan",
+          nameKey: "l_lo_bangunan",
+          kind: "fill",
+          data: v("09_lo_bangunan"),
+          clickable: true,
+
+          paint: {
+            "fill-color": "#8B5CF6",
+            "fill-opacity": 0.45,
+            "fill-outline-color": "#7C3AED",
+          },
+
+          defaultOn: true,
+
+          opacity: 0.45,
+          opacityProp: "fill-opacity",
+
+          legend: {
+            color: "#8B5CF6",
+          },
+        },
+        {
+          id: "lo_bangsadap",
+          nameKey: "l_lo_bangsadap",
+          kind: "symbol",
+          data: v("09_lo_bangsadap"),
+          clickable: true,
+
+          paint: {},
+
+          defaultOn: true,
+
+          legend: {
+            color: "#EC4899",
+          },
+        },
+        {
+          id: "lo_asesoris",
+          nameKey: "l_lo_asesoris",
+          kind: "symbol",
+          data: v("09_lo_asesoris"),
+          clickable: true,
+
+          paint: {},
+
+          defaultOn: true,
+
+          legend: {
+            color: "#F59E0B",
+          },
+        },
+        {
+          id: "lo_00",
+          nameKey: "l_lo_00",
+          kind: "line",
+          data: v("09_lo_00"),
+          clickable: true,
+
+          paint: {
+            "line-color": "#6B7280",
+            "line-width": 2,
+          },
+
+          defaultOn: true,
+
+          legend: {
+            color: "#6B7280",
+            line: true,
+          },
+        },
+        {
+          id: "lo_tertiary",
+          nameKey: "l_lo_tertiary",
+          kind: "line",
+          data: r2Vector("09_lo_tertiary"),
+          clickable: true,
+
+          paint: {
+            "line-color": "#F59E0B",
+            "line-width": 2.2,
+          },
+
+          defaultOn: true,
+
+          legend: {
+            color: "#F59E0B",
+            line: true,
+          },
+        },
+        {
+          id: "lo_sal_kwarter",
+          nameKey: "l_lo_sal_kwarter",
+          kind: "line",
+          data: v("09_lo_sal_kwarter"),
+          clickable: true,
+
+          paint: {
+            "line-color": "#06B6D4",
+            "line-width": 2,
+          },
+
+          defaultOn: true,
+
+          legend: {
+            color: "#06B6D4",
+            line: true,
+          },
+        },
+        {
+          id: "lo_luas_areal_topo",
+          nameKey: "l_lo_luas_areal_topo",
+          kind: "fill",
+          data: v("09_lo_luas_areal_topo"),
+          clickable: true,
+
+          paint: {
+            "fill-color": "#22C55E",
+            "fill-opacity": 0.30,
+            "fill-outline-color": "#16A34A",
+          },
+
+          defaultOn: true,
+
+          opacity: 0.30,
+          opacityProp: "fill-opacity",
+
+          legend: {
+            color: "#22C55E",
+          },
+        },
+        {
+          id: "lo_kode_bm",
+          nameKey: "l_lo_kode_bm",
+          kind: "symbol",
+          data: v("09_lo_kode_bm"),
+          clickable: true,
+
+          paint: {},
+
+          defaultOn: true,
+
+          legend: {
+            color: "#2563EB",
+          },
+        },
+        {
+          id: "lo_bm",
+          nameKey: "l_lo_bm",
+          kind: "symbol",
+          data: v("09_lo_bm"),
+          clickable: true,
+
+          paint: {},
+
+          defaultOn: true,
+
+          legend: {
+            color: "#DC2626",
+          },
+        },
+      ],
+    },
+  ],
+},
   // RAIBERE
 {
   titleKey: "g_raibere",
@@ -1702,20 +1880,6 @@ export const GROUPS: LayerGroup[] = [
           },
         },
       ],
-    },
-  ],
-},
-{
-  titleKey: "g_lomea",
-  dot: "#F59E0B",
-
-  layers: [
-    {
-      id: "lomea_2009",
-      nameKey: "l_lomea_2009",
-      kind: "line",
-      paint: {},
-      defaultOn: true,
     },
   ],
 },
