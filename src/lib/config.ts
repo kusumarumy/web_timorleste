@@ -2953,3 +2953,5 @@ export const isCascadeParent = (id: string): boolean =>
 export const ALL_LAYERS: LayerDef[] = GROUPS.flatMap((g) =>
   flattenLayers(g.layers)
 );
+
+export const LEGEND_LAYERS: LayerDef[] = ALL_LAYERS.filter((l) => l.legend);
