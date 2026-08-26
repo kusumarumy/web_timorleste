@@ -1,0 +1,13 @@
+{
+"type": "FeatureCollection",
+"name": "09_rei_po_text",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32751" } },
+"features": [
+{ "type": "Feature", "properties": { "NAME": "RAIBERE MAIN CANAL", "LAYER": "TEXT", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 781475.507528200396337, 8998640.119369374588132 ] } },
+{ "type": "Feature", "properties": { "NAME": "RAIBERE FREE INTAKE", "LAYER": "TEXT", "GM_TYPE": "Text", "ELEVATION": 279 }, "geometry": { "type": "Point", "coordinates": [ 781090.350491167977452, 8999109.810531949624419 ] } },
+{ "type": "Feature", "properties": { "NAME": "RAIBERE SECONDARY CANAL", "LAYER": "TEXT", "GM_TYPE": "Text", "ELEVATION": 262 }, "geometry": { "type": "Point", "coordinates": [ 782168.246161492890678, 8997344.082049045711756 ] } },
+{ "type": "Feature", "properties": { "NAME": "RAIBERE MAIN CANAL", "LAYER": "TEXT", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 781475.507528200396337, 8998640.119369374588132 ] } },
+{ "type": "Feature", "properties": { "NAME": "RAIBERE FREE INTAKE", "LAYER": "TEXT", "GM_TYPE": "Text", "ELEVATION": 279 }, "geometry": { "type": "Point", "coordinates": [ 781090.350491167977452, 8999109.810531949624419 ] } },
+{ "type": "Feature", "properties": { "NAME": "RAIBERE SECONDARY CANAL", "LAYER": "TEXT", "GM_TYPE": "Text", "ELEVATION": 262 }, "geometry": { "type": "Point", "coordinates": [ 782168.246161492890678, 8997344.082049045711756 ] } }
+]
+}
