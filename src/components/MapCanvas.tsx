@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import maplibregl, {
   Map as MLMap,
   LngLatLike,
-  Popup,
 } from "maplibre-gl";
 
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -17,8 +16,9 @@ import {
   onToolMode,
 } from "./toolMode";
 import { MeasureControl } from "@/lib/geotools/measure";
-import IdentifyButton from "./IdentifyButton";
+import { IdentifyControl } from "@/lib/geotools/identify";
 import { useI18n } from "@/lib/i18n";
+
 function isWGS84GeoJSON(geojson: any): boolean {
 
   const crsName =
@@ -202,7 +202,7 @@ function buildStyle(): maplibregl.StyleSpecification {
     layout: symbolLayout,
 
     paint: symbolPaint,
-    
+
     ...(l.label?.minzoom != null
       ? { minzoom: l.label.minzoom }
       : {}),
@@ -315,6 +315,7 @@ function buildStyle(): maplibregl.StyleSpecification {
     layers,
   };
 }
+
 function getSubkelasFilter(
   layer: typeof ALL_LAYERS[number],
   subVisible: Record<string, boolean>
@@ -342,6 +343,7 @@ function getSubkelasFilter(
     ["literal", activeValues],
   ] as any;
 }
+
 async function registerMapIcons(map: MLMap) {
   const icons = [
     {
@@ -379,6 +381,7 @@ async function registerMapIcons(map: MLMap) {
     }
   }
 }
+
 export default function MapCanvas({
   onReady,
 }: {
@@ -389,6 +392,12 @@ export default function MapCanvas({
   const measureRef = useRef<MeasureControl | null>(null);
   const store = useMapStore;
   const { t } = useI18n();
+
+  // Init map pakai deps [], jadi simpan translator di ref
+  // supaya label Identify selalu ikut bahasa yang aktif.
+  const tRef = useRef(t);
+  tRef.current = t;
+
  // ============================================================
 // LAZY LOADING GEOJSON
 // Hanya download layer ketika layer tersebut dibutuhkan
@@ -500,7 +509,7 @@ async function loadGeoJSONLayer(
 }
 
   function applyTerrain(map: MLMap, source: "off" | "aws" | "r2", exaggeration: number) {
-    console.log("APPLY TERRAIN →", source, "| ex:", exaggeration);   
+    console.log("APPLY TERRAIN →", source, "| ex:", exaggeration);
     if (source === "off") { map.setTerrain(null); return; }
     const opt = TERRAIN_OPTIONS[source];
     map.setTerrain({
@@ -508,6 +517,7 @@ async function loadGeoJSONLayer(
       exaggeration: opt.adjustable ? exaggeration : FIXED_EXAGGERATION,
     });
   }
+
   // INIT MAP
   useEffect(() => {
     if (!ref.current || mapRef.current) return;
@@ -527,7 +537,7 @@ async function loadGeoJSONLayer(
       },
     });
     mapRef.current = map;
-    if (typeof window !== "undefined") (window as any).__map = map; 
+    if (typeof window !== "undefined") (window as any).__map = map;
 
 
     // RESIZE
@@ -568,6 +578,42 @@ async function loadGeoJSONLayer(
       }),
       "top-right"
     );
+
+    // IDENTIFY — didaftarkan setelah NavigationControl
+    // supaya tombolnya duduk tepat di bawah kompas
+    map.addControl(
+      new IdentifyControl({
+        getLayerIds: (m) => {
+          const s = store.getState();
+
+          return ALL_LAYERS
+            .filter(
+              (l) =>
+                l.kind !== "raster" &&
+                l.clickable !== false &&
+                !!s.visible[l.id]
+            )
+            .map((l) => l.id)
+            .filter((id) => !!m.getLayer(id));
+        },
+
+        getLayerLabel: (id) => {
+          const layer = ALL_LAYERS.find((l) => l.id === id);
+
+          return layer
+            ? tRef.current(layer.nameKey)
+            : id;
+        },
+
+        texts: {
+          button: "Identify",
+          empty: "Tidak ada fitur di titik ini.",
+          noAttribute: "Fitur ini tidak punya atribut.",
+        },
+      }),
+      "top-right"
+    );
+
     map.addControl(
       new maplibregl.ScaleControl({
         maxWidth: 120,
@@ -579,48 +625,38 @@ async function loadGeoJSONLayer(
     // MAP LOAD
     map.on("load", async () => {
       //console.log("MAP LOADED");
-      //console.log(
-      //  "STYLE:",
-      //  map.getStyle()
-      //);
-      //console.log(
-      //  "LAYERS:",
-      //  map
-      //    .getStyle()
-      //    .layers
-      //    ?.map((l) => l.id)
-      //);
       map.resize();
       await registerMapIcons(map);
 
-const measure = new MeasureControl(map, {
-  onResult: (result) => {
-    console.log("MEASURE RESULT:", result);
-  },
+      const measure = new MeasureControl(map, {
+        onResult: (result) => {
+          console.log("MEASURE RESULT:", result);
+        },
 
-  onStop: () => {
-    console.log("MEASURE STOP");
-  },
-});
+        onStop: () => {
+          console.log("MEASURE STOP");
+        },
+      });
 
-measureRef.current = measure;
-const initialLayers = ALL_LAYERS.filter(
-  (l) =>
-    l.kind !== "raster" &&
-    l.data &&
-    l.defaultOn
-);
+      measureRef.current = measure;
 
-await Promise.all(
-  initialLayers.map((l) =>
-    loadGeoJSONLayer(map, l)
-  )
-);
+      const initialLayers = ALL_LAYERS.filter(
+        (l) =>
+          l.kind !== "raster" &&
+          l.data &&
+          l.defaultOn
+      );
 
-console.log(
-  "Initial GeoJSON lazy loading selesai."
-);
-     
+      await Promise.all(
+        initialLayers.map((l) =>
+          loadGeoJSONLayer(map, l)
+        )
+      );
+
+      console.log(
+        "Initial GeoJSON lazy loading selesai."
+      );
+
       // TERRAIN
       const s = store.getState();
       applyTerrain(map, s.terrainSource, s.exaggeration);
@@ -635,68 +671,15 @@ console.log(
         "fog-ground-blend": 0.4,
       } as any);
 
-      // POPUPS
-ALL_LAYERS
-  .filter((l) => l.clickable)
-  .forEach((l) => {
-    map.on("mouseenter", l.id, () => {
-      map.getCanvas().style.cursor = "pointer";
+      // CATATAN:
+      // Blok popup per-layer yang lama sudah dihapus.
+      // Semua atribut sekarang dibaca otomatis oleh IdentifyControl.
+
+      // READY
+      onReady?.(map);
     });
 
-    map.on("mouseleave", l.id, () => {
-      map.getCanvas().style.cursor = "";
-    });
 
-    map.on("click", l.id, (e) => {
-      const mode = getToolMode();
-
-      console.log("IDENTIFY CLICK");
-      console.log("TOOL MODE:", mode);
-
-      // Jangan identify ketika sedang melakukan pengukuran
-      if (
-        mode === "distance" ||
-        mode === "length" ||
-        mode === "width" ||
-        mode === "area" ||
-        mode === "elevation"
-      ) {
-        return;
-      }
-
-      const p =
-        (e.features?.[0]?.properties ?? {}) as Record<
-          string,
-          unknown
-        >;
-
-      const rows = Object.entries(p)
-        .map(
-          ([k, val]) =>
-            `<div class="pop-r">
-              <span>${k}</span>
-              <b>${val}</b>
-            </div>`
-        )
-        .join("");
-
-      new Popup({
-        offset: 12,
-      })
-        .setLngLat(e.lngLat)
-        .setHTML(
-          `<div class="pop-t">
-            ${p.name ?? "Feature"}
-          </div>
-          ${rows}`
-        )
-        .addTo(map);
-    });
-  });
-
-// READY
-onReady?.(map);
-  });
     // MAP READOUT
     const readout = () => {
       const c = map.getCenter();
@@ -738,19 +721,24 @@ onReady?.(map);
       }
     });
 
-   // CLEANUP
-return () => {
-  ro.disconnect();
 
-  if (measureRef.current) {
-    measureRef.current.stop();
-    measureRef.current = null;
-  }
+    // CLEANUP
 
-  map.remove();
-  mapRef.current = null;
-};
-}, []);
+    return () => {
+      ro.disconnect();
+
+      if (measureRef.current) {
+        measureRef.current.stop();
+        measureRef.current = null;
+      }
+
+      map.remove();
+
+      mapRef.current = null;
+    };
+
+  }, []);
+
 useEffect(() => {
   const unsubscribe = onToolMode((mode) => {
     const measure = measureRef.current;
@@ -778,6 +766,7 @@ useEffect(() => {
 
   return unsubscribe;
 }, []);
+
 useEffect(
   () =>
     useMapStore.subscribe((s) => {
@@ -929,6 +918,7 @@ const loadingLayerNames = loadingLayerIds.map((id) => {
     ? t(layer.nameKey)
     : id;
 });
+
   return (
   <div
     style={{
@@ -942,18 +932,6 @@ const loadingLayerNames = loadingLayerIds.map((id) => {
       ref={ref}
       className="absolute inset-0 h-full w-full"
     />
-
-    {/* IDENTIFY BUTTON */}
-    <div
-      style={{
-        position: "absolute",
-        top: 200,
-        right: 10,
-        zIndex: 10,
-      }}
-    >
-      <IdentifyButton />
-    </div>
 
     {loadingLayerNames.length > 0 && (
       <div className="layer-loading-popup">
