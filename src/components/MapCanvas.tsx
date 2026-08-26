@@ -16,7 +16,7 @@ import {
   onToolMode,
 } from "./toolMode";
 import { MeasureControl } from "@/lib/geotools/measure";
-import { IdentifyControl } from "@/lib/geotools/identify";
+import { IdentifyTool } from "@/lib/geotools/identifyTool";
 import { useI18n } from "@/lib/i18n";
 
 function isWGS84GeoJSON(geojson: any): boolean {
@@ -390,6 +390,7 @@ export default function MapCanvas({
   const ref = useRef<HTMLDivElement>(null);
   const mapRef = useRef<MLMap | null>(null);
   const measureRef = useRef<MeasureControl | null>(null);
+  const identifyRef = useRef<IdentifyTool | null>(null);
   const store = useMapStore;
   const { t } = useI18n();
 
@@ -579,40 +580,24 @@ async function loadGeoJSONLayer(
       "top-right"
     );
 
-    // IDENTIFY — didaftarkan setelah NavigationControl
-    // supaya tombolnya duduk tepat di bawah kompas
-    map.addControl(
-      new IdentifyControl({
-        getLayerIds: (m) => {
-          const s = store.getState();
-
-          return ALL_LAYERS
-            .filter(
-              (l) =>
-                l.kind !== "raster" &&
-                l.clickable !== false &&
-                !!s.visible[l.id]
-            )
-            .map((l) => l.id)
-            .filter((id) => !!m.getLayer(id));
-        },
-
-        getLayerLabel: (id) => {
-          const layer = ALL_LAYERS.find((l) => l.id === id);
-
-          return layer
-            ? tRef.current(layer.nameKey)
-            : id;
-        },
-
-        texts: {
-          button: "Identify",
-          empty: "Tidak ada fitur di titik ini.",
-          noAttribute: "Fitur ini tidak punya atribut.",
-        },
-      }),
-      "top-right"
-    );
+    identifyRef.current = new IdentifyTool(map, {
+  getLayerIds: (m) => {
+    const s = store.getState();
+    return ALL_LAYERS
+      .filter((l) => l.kind !== "raster" && l.clickable !== false && !!s.visible[l.id])
+      .map((l) => l.id)
+      .filter((id) => !!m.getLayer(id));
+  },
+  getLayerLabel: (id) => {
+    const layer = ALL_LAYERS.find((l) => l.id === id);
+    return layer ? tRef.current(layer.nameKey) : id;
+  },
+  texts: {
+    button: "Identify",
+    empty: "Tidak ada fitur di titik ini.",
+    noAttribute: "Fitur ini tidak punya atribut.",
+  },
+});
 
     map.addControl(
       new maplibregl.ScaleControl({
@@ -731,7 +716,8 @@ async function loadGeoJSONLayer(
         measureRef.current.stop();
         measureRef.current = null;
       }
-
+identifyRef.current?.destroy();
+identifyRef.current = null;
       map.remove();
 
       mapRef.current = null;
