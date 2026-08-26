@@ -773,9 +773,8 @@ console.log(
     });
 
 
-    // CLEANUP
-
-   return () => {
+   // CLEANUP
+return () => {
   ro.disconnect();
 
   if (measureRef.current) {
@@ -784,11 +783,9 @@ console.log(
   }
 
   map.remove();
-
   mapRef.current = null;
 };
-
-  }, []);
+}, []);
 useEffect(() => {
   const unsubscribe = onToolMode((mode) => {
     const measure = measureRef.current;
