@@ -639,103 +639,63 @@ console.log(
 ALL_LAYERS
   .filter((l) => l.clickable)
   .forEach((l) => {
-    map.on(
-      "mouseenter",
-      l.id,
-      () => {
-        map.getCanvas().style.cursor = "pointer";
-      }
-    );
-
-    map.on(
-      "mouseleave",
-      l.id,
-      () => {
-        map.getCanvas().style.cursor = "";
-      }
-    );
-
-    map.on(
-      "click",
-      l.id,
-      (e) => {
-        const mode = getToolMode();
-
-        console.log("IDENTIFY CLICK");
-        console.log("TOOL MODE:", mode);
-
-        // Hanya blok Identify ketika sedang measurement
-        if (
-          mode === "distance" ||
-          mode === "length" ||
-          mode === "width" ||
-          mode === "area" ||
-          mode === "elevation"
-        ) {
-          return;
-        }
-
-        const p =
-          (e.features?.[0]?.properties ?? {}) as Record<
-            string,
-            unknown
-          >;
-
-        const rows =
-          Object.entries(p)
-            .map(
-              ([k, val]) =>
-                `<div class="pop-r">
-                  <span>${k}</span>
-                  <b>${val}</b>
-                </div>`
-            )
-            .join("");
-
-        new Popup({
-          offset: 12,
-        })
-          .setLngLat(e.lngLat)
-          .setHTML(
-            `<div class="pop-t">
-              ${p.name ?? "Feature"}
-            </div>
-            ${rows}`
-          )
-          .addTo(map);
-      }
-    );
-  });
-              const rows =
-                Object.entries(p)
-                  .map(
-                    ([k, val]) =>
-                      `<div class="pop-r">
-                        <span>${k}</span>
-                        <b>${val}</b>
-                      </div>`
-                  )
-                  .join("");
-
-              new Popup({
-                offset: 12,
-              })
-                .setLngLat(e.lngLat)
-                .setHTML(
-                  `<div class="pop-t">
-                    ${p.name ?? "Feature"}
-                  </div>
-                  ${rows}`
-                )
-                .addTo(map);
-            }
-          );
-        });
-
-      // READY
-      onReady?.(map);
+    map.on("mouseenter", l.id, () => {
+      map.getCanvas().style.cursor = "pointer";
     });
 
+    map.on("mouseleave", l.id, () => {
+      map.getCanvas().style.cursor = "";
+    });
+
+    map.on("click", l.id, (e) => {
+      const mode = getToolMode();
+
+      console.log("IDENTIFY CLICK");
+      console.log("TOOL MODE:", mode);
+
+      // Jangan identify ketika sedang melakukan pengukuran
+      if (
+        mode === "distance" ||
+        mode === "length" ||
+        mode === "width" ||
+        mode === "area" ||
+        mode === "elevation"
+      ) {
+        return;
+      }
+
+      const p =
+        (e.features?.[0]?.properties ?? {}) as Record<
+          string,
+          unknown
+        >;
+
+      const rows = Object.entries(p)
+        .map(
+          ([k, val]) =>
+            `<div class="pop-r">
+              <span>${k}</span>
+              <b>${val}</b>
+            </div>`
+        )
+        .join("");
+
+      new Popup({
+        offset: 12,
+      })
+        .setLngLat(e.lngLat)
+        .setHTML(
+          `<div class="pop-t">
+            ${p.name ?? "Feature"}
+          </div>
+          ${rows}`
+        )
+        .addTo(map);
+    });
+  });
+
+// READY
+onReady?.(map);
 
     // MAP READOUT
     const readout = () => {
