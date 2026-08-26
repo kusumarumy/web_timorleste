@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "26_rei_ar_primer",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32751" } },
+"features": [
+{ "type": "Feature", "properties": { "LAYER": "Unknown Area Type", "Id": 0, "Name": "Primer Canal Gate" }, "geometry": { "type": "MultiPolygon", "coordinates": [ [ [ [ 781148.281155886361375, 8998917.648496862500906 ], [ 781150.115326944738626, 8998919.507920736446977 ], [ 781151.793639644049108, 8998917.894713580608368 ], [ 781149.953325897455215, 8998916.103327102959156 ], [ 781148.281155886361375, 8998917.648496862500906 ] ] ] ] } }
+]
+}
