@@ -1,8 +1,3 @@
-// ============================================================
-// IdentifyControl
-// Klik objek pada peta -> tampilkan semua atribut GeoJSON
-// ============================================================
-
 export class IdentifyControl {
   constructor(map, options = {}) {
     this.map = map;
