@@ -1229,30 +1229,10 @@ export const GROUPS: LayerGroup[] = [
           },
 
           {
-            id: "lo_ar_kodebm",
-            nameKey: "l_lo_ar_kodebm",
+            id: "lo_ar_salkwarter",
+            nameKey: "l_lo_ar_salkwarter",
             kind: "fill",
-            data: v("09_lo_ar_kodebm"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "fill-color": "#16A34A",
-              "fill-opacity": 0.35,
-              "fill-outline-color": "#15803D",
-            },
-            defaultOn: false,
-            opacity: 0.35,
-            opacityProp: "fill-opacity",
-            legend: {
-              color: "#16A34A",
-            },
-          },
-
-          {
-            id: "lo_ar_salkwater",
-            nameKey: "l_lo_ar_salkwater",
-            kind: "fill",
-            data: v("09_lo_ar_salkwater"),
+            data: v("09_lo_ar_salkwarter"),
             clickable: true,
             lazy: true,
             paint: {
@@ -1437,24 +1417,6 @@ export const GROUPS: LayerGroup[] = [
           },
 
           {
-            id: "lo_li_design",
-            nameKey: "l_lo_li_design",
-            kind: "line",
-            data: v("09_lo_li_design"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "line-color": "#22C55E",
-              "line-width": 2,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#22C55E",
-              line: true,
-            },
-          },
-
-          {
             id: "lo_li_jalan",
             nameKey: "l_lo_li_jalan",
             kind: "line",
@@ -1576,24 +1538,6 @@ export const GROUPS: LayerGroup[] = [
             defaultOn: false,
             legend: {
               color: "#16A34A",
-              line: true,
-            },
-          },
-
-          {
-            id: "lo_li_salkwater",
-            nameKey: "l_lo_li_salkwater",
-            kind: "line",
-            data: v("09_lo_li_salkwater"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "line-color": "#06B6D4",
-              "line-width": 2,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#06B6D4",
               line: true,
             },
           },
