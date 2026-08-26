@@ -51,33 +51,20 @@ export function TopBar() {
 
 export function Legend() {
   const { t } = useI18n();
-
-  const { visible, subVisible } = useMapStore();
-
+  const { visible } = useMapStore();
   const [open, setOpen] = useState(true);
 
   const items = GROUPS
     .flatMap((g) => g.layers)
     .flatMap((layer) => {
-      /*
-        JIKA ADA CHILD / SUBLAYER
-        tampilkan hanya child yang aktif
-      */
-      if (layer.sublayers && layer.sublayers.length > 0) {
-        return layer.sublayers
-          .filter((sub) => sub.legend && subVisible[sub.id])
-          .map((sub) => ({
-            ...sub,
-
-            // optional: simpan info parent
-            parentId: layer.id,
-          }));
+      // Parent dengan children
+      if (layer.children?.length) {
+        return layer.children.filter(
+          (child) => child.legend && visible[child.id]
+        );
       }
 
-      /*
-        JIKA TIDAK ADA CHILD
-        tampilkan layer parent jika aktif
-      */
+      // Layer biasa
       return layer.legend && visible[layer.id]
         ? [layer]
         : [];
