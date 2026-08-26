@@ -1,0 +1,9 @@
+{
+"type": "FeatureCollection",
+"name": "09_oe_po_bmcp",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32751" } },
+"features": [
+{ "type": "Feature", "properties": { "NAME": "Cp.0", "LAYER": "BM dan Cp", "GM_TYPE": "Text", "ELEVATION": 34 }, "geometry": { "type": "Point", "coordinates": [ 777816.358677547308616, 8983092.723390461876988 ] } },
+{ "type": "Feature", "properties": { "NAME": "BM OB.17", "LAYER": "BM dan Cp", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 772978.448302891105413, 8984134.032123450189829 ] } }
+]
+}

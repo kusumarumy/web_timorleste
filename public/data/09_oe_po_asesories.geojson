@@ -1,0 +1,27 @@
+{
+"type": "FeatureCollection",
+"name": "09_oe_po_asesories",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32751" } },
+"features": [
+{ "type": "Feature", "properties": { "NAME": "ALTERNATIF AXIS BY TOPOGRAPHI TEAM", "LAYER": "06.Asesories", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 777866.720804308657534, 8983077.24662346765399 ] } },
+{ "type": "Feature", "properties": { "NAME": "HAREKAEN VILAGE", "LAYER": "06.Asesories", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 773160.81994659663178, 8984071.905260501429439 ] } },
+{ "type": "Feature", "properties": { "NAME": "BELAKU VILAGE", "LAYER": "06.Asesories", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 772738.525136686279438, 8982698.248472645878792 ] } },
+{ "type": "Feature", "properties": { "NAME": "OBABA VILAGE", "LAYER": "06.Asesories", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 776507.096396521432325, 8983278.282608579844236 ] } },
+{ "type": "Feature", "properties": { "NAME": "EX TRANSMIGRASI SP.1 AND SP.2 AREA", "LAYER": "06.Asesories", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 776008.487363467807882, 8981285.457686770707369 ] } },
+{ "type": "Feature", "properties": { "NAME": "OEULITAY VILAGE", "LAYER": "06.Asesories", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 775782.243335727252997, 8983369.294353833422065 ] } },
+{ "type": "Feature", "properties": { "NAME": "OEBORA VILAGE", "LAYER": "06.Asesories", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 775010.030300635029562, 8983427.172499185428023 ] } },
+{ "type": "Feature", "properties": { "NAME": "HOLITOY VILAGE", "LAYER": "06.Asesories", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 774465.431959587265737, 8983549.667707992717624 ] } },
+{ "type": "Feature", "properties": { "NAME": "EX TRANSMIGRASI SP.1 AND SP.2 AREA", "LAYER": "06.Asesories", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 775528.471829023445025, 8980707.620489353314042 ] } },
+{ "type": "Feature", "properties": { "NAME": "EX TRANSMIGRASI SP.1 AND SP.2 AREA", "LAYER": "06.Asesories", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 775690.17567373579368, 8979885.810011267662048 ] } },
+{ "type": "Feature", "properties": { "NAME": "EX TRANSMIGRASI SP.1 AND SP.2 AREA", "LAYER": "06.Asesories", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 776765.190048922086135, 8980847.950775338336825 ] } },
+{ "type": "Feature", "properties": { "NAME": "EX TRANSMIGRASI SP.1 AND SP.2 AREA", "LAYER": "06.Asesories", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 776431.263868484529667, 8981689.926204504445195 ] } },
+{ "type": "Feature", "properties": { "NAME": "EX TRANSMIGRASI SP.1 AND SP.2 AREA", "LAYER": "06.Asesories", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 776806.874612915911712, 8980155.92294517159462 ] } },
+{ "type": "Feature", "properties": { "NAME": "areal rumput tinggi 4 meter dan berair sebelum lahan sawah", "LAYER": "06.Asesories", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 774714.446918737958185, 8982007.368143882602453 ] } },
+{ "type": "Feature", "properties": { "NAME": "pohon sagu dan kebun", "LAYER": "06.Asesories", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 774221.567321960115805, 8981215.969049025326967 ] } },
+{ "type": "Feature", "properties": { "NAME": "ex SMP", "LAYER": "06.Asesories", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 772950.755340988049284, 8983277.264798283576965 ] } },
+{ "type": "Feature", "properties": { "NAME": "SD / SMP", "LAYER": "06.Asesories", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 772854.760335184051655, 8982075.295379655435681 ] } },
+{ "type": "Feature", "properties": { "NAME": "ex PLN", "LAYER": "06.Asesories", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 772744.911364271654747, 8982087.474871309474111 ] } },
+{ "type": "Feature", "properties": { "NAME": "KAPELA", "LAYER": "06.Asesories", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 772764.056143887806684, 8981825.242578651756048 ] } },
+{ "type": "Feature", "properties": { "NAME": "BELAKO TRASMIGRASI VILAGE AND AREA", "LAYER": "06.Asesories", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 772387.184836142812856, 8982032.976499171927571 ] } }
+]
+}

@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"name": "09_oe_po_gridnot",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32751" } },
+"features": [
+{ "type": "Feature", "properties": { "NAME": "8,980,800", "LAYER": "08.Grid Not", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 778469.497082573128864, 8980779.810767473652959 ] } },
+{ "type": "Feature", "properties": { "NAME": "8,982,000", "LAYER": "08.Grid Not", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 778469.497082573128864, 8981979.810767473652959 ] } },
+{ "type": "Feature", "properties": { "NAME": "8,983,200", "LAYER": "08.Grid Not", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 778469.497082573128864, 8983179.810767473652959 ] } }
+]
+}

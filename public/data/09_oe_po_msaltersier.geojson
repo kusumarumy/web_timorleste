@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"name": "09_oe_po_msaltersier",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32751" } },
+"features": [
+{ "type": "Feature", "properties": { "NAME": "K.1", "LAYER": "MSal Tersier", "GM_TYPE": "Text", "ELEVATION": 0 }, "geometry": { "type": "Point", "coordinates": [ 777220.353179479483515, 8982974.783492606133223 ] } },
+{ "type": "Feature", "properties": { "NAME": "K.3", "LAYER": "MSal Tersier", "GM_TYPE": "Text", "ELEVATION": 26 }, "geometry": { "type": "Point", "coordinates": [ 775393.444826741702855, 8980144.423972385004163 ] } },
+{ "type": "Feature", "properties": { "NAME": "K.2", "LAYER": "MSal Tersier", "GM_TYPE": "Text", "ELEVATION": 26 }, "geometry": { "type": "Point", "coordinates": [ 775157.975787084549665, 8980167.709655964747071 ] } }
+]
+}
