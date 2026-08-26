@@ -696,7 +696,7 @@ ALL_LAYERS
 
 // READY
 onReady?.(map);
-
+  });
     // MAP READOUT
     const readout = () => {
       const c = map.getCenter();
@@ -737,7 +737,6 @@ onReady?.(map);
           });
       }
     });
-
 
    // CLEANUP
 return () => {
