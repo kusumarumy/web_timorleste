@@ -636,70 +636,76 @@ console.log(
       } as any);
 
       // POPUPS
-      ALL_LAYERS
-        .filter((l) => l.clickable)
-        .forEach((l) => {
-          map.on(
-            "mouseenter",
-            l.id,
-            () => {
-              map.getCanvas().style.cursor =
-                "pointer";
-            }
-          );
-          map.on(
-            "mouseleave",
-            l.id,
-            () => {
-              map.getCanvas().style.cursor =
-                "";
-            }
-          );
-          map.on(
-  "click",
-  l.id,
-  (e) => {
-    const mode = getToolMode();
+ALL_LAYERS
+  .filter((l) => l.clickable)
+  .forEach((l) => {
+    map.on(
+      "mouseenter",
+      l.id,
+      () => {
+        map.getCanvas().style.cursor = "pointer";
+      }
+    );
 
-    console.log("IDENTIFY CLICK");
-    console.log("TOOL MODE:", mode);
+    map.on(
+      "mouseleave",
+      l.id,
+      () => {
+        map.getCanvas().style.cursor = "";
+      }
+    );
 
-    // Hanya blok Identify ketika BENAR-BENAR sedang measure
-    if (mode === "distance" || mode === "area") {
-      return;
-    }
+    map.on(
+      "click",
+      l.id,
+      (e) => {
+        const mode = getToolMode();
 
-    const p =
-      (e.features?.[0]?.properties ?? {}) as Record<
-        string,
-        unknown
-      >;
+        console.log("IDENTIFY CLICK");
+        console.log("TOOL MODE:", mode);
 
-    const rows =
-      Object.entries(p)
-        .map(
-          ([k, val]) =>
-            `<div class="pop-r">
-              <span>${k}</span>
-              <b>${val}</b>
-            </div>`
-        )
-        .join("");
+        // Hanya blok Identify ketika sedang measurement
+        if (
+          mode === "distance" ||
+          mode === "length" ||
+          mode === "width" ||
+          mode === "area" ||
+          mode === "elevation"
+        ) {
+          return;
+        }
 
-    new Popup({
-      offset: 12,
-    })
-      .setLngLat(e.lngLat)
-      .setHTML(
-        `<div class="pop-t">
-          ${p.name ?? "Feature"}
-        </div>
-        ${rows}`
-      )
-      .addTo(map);
-  }
-);
+        const p =
+          (e.features?.[0]?.properties ?? {}) as Record<
+            string,
+            unknown
+          >;
 
+        const rows =
+          Object.entries(p)
+            .map(
+              ([k, val]) =>
+                `<div class="pop-r">
+                  <span>${k}</span>
+                  <b>${val}</b>
+                </div>`
+            )
+            .join("");
+
+        new Popup({
+          offset: 12,
+        })
+          .setLngLat(e.lngLat)
+          .setHTML(
+            `<div class="pop-t">
+              ${p.name ?? "Feature"}
+            </div>
+            ${rows}`
+          )
+          .addTo(map);
+      }
+    );
+  });
               const rows =
                 Object.entries(p)
                   .map(
