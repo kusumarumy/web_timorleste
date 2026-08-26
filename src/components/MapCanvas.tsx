@@ -109,10 +109,6 @@ function buildStyle(): maplibregl.StyleSpecification {
   // DATA LAYERS
   ALL_LAYERS.forEach((l) => {
 
-    // =====================================================
-    // RASTER
-    // =====================================================
-
     if (l.kind === "raster") {
       sources[l.id] = {
         type: "raster",
@@ -135,10 +131,7 @@ function buildStyle(): maplibregl.StyleSpecification {
             : "none",
         },
       } as any);
-
-    // =====================================================
-    // SYMBOL — icon + label menyatu di satu layer
-    // =====================================================
+    }
 
     } else if (l.kind === "symbol") {
 
