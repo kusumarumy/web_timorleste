@@ -1860,14 +1860,13 @@ export const GROUPS: LayerGroup[] = [
 // =====================================================
 {
   titleKey: "g_raibere",
-  dot: "#10B981",
+  dot: "#14B8A6",
 
   layers: [
 
     // =====================================================
     // RAIBERE 2009
     // =====================================================
-
     {
       id: "raibere_2009",
       nameKey: "l_raibere_2009",
@@ -1882,13 +1881,12 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei09_ar_0",
           kind: "fill",
           data: v("09_rei_ar_0"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "fill-color": "#8B5CF6",
             "fill-opacity": 0.35,
             "fill-outline-color": "#7C3AED",
           },
-          defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
@@ -1901,13 +1899,12 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei09_ar_bangsadap",
           kind: "fill",
           data: v("09_rei_ar_bangsadap"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "fill-color": "#F59E0B",
             "fill-opacity": 0.35,
             "fill-outline-color": "#D97706",
           },
-          defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
@@ -1920,13 +1917,12 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei09_ar_bmcp",
           kind: "fill",
           data: v("09_rei_ar_bmcp"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "fill-color": "#2563EB",
             "fill-opacity": 0.35,
             "fill-outline-color": "#1D4ED8",
           },
-          defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
@@ -1939,13 +1935,12 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei09_ar_boxkwarter",
           kind: "fill",
           data: v("09_rei_ar_boxkwarter"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "fill-color": "#0891B2",
             "fill-opacity": 0.35,
             "fill-outline-color": "#0E7490",
           },
-          defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
@@ -1958,13 +1953,12 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei09_ar_boxtersier",
           kind: "fill",
           data: v("09_rei_ar_boxtersier"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "fill-color": "#06B6D4",
             "fill-opacity": 0.35,
             "fill-outline-color": "#0891B2",
           },
-          defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
@@ -1977,13 +1971,12 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei09_ar_desain",
           kind: "fill",
           data: v("09_rei_ar_desain"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "fill-color": "#22C55E",
             "fill-opacity": 0.35,
             "fill-outline-color": "#16A34A",
           },
-          defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
@@ -1996,13 +1989,12 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei09_ar_legend",
           kind: "fill",
           data: v("09_rei_ar_legend"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "fill-color": "#A855F7",
             "fill-opacity": 0.35,
             "fill-outline-color": "#9333EA",
           },
-          defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
@@ -2015,35 +2007,29 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei09_ar_salpemb",
           kind: "fill",
           data: v("09_rei_ar_salpemb"),
-          clickable: true,
-          paint: {
-            "fill-color": "#EC4899",
-            "fill-opacity": 0.35,
-            "fill-outline-color": "#DB2777",
-          },
           defaultOn: false,
+          paint: {
+            "fill-color": "#14B8A6",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#0F766E",
+          },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#EC4899",
+            color: "#14B8A6",
           },
         },
-
-        // -------------------------
-        // LINE
-        // -------------------------
 
         {
           id: "rei09_li_bangunan",
           nameKey: "l_rei09_li_bangunan",
           kind: "line",
           data: v("09_rei_li_bangunan"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "line-color": "#7C3AED",
             "line-width": 2,
           },
-          defaultOn: false,
           legend: {
             color: "#7C3AED",
             line: true,
@@ -2055,12 +2041,11 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei09_li_contourmayor",
           kind: "line",
           data: v("09_rei_li_contourmayor"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "line-color": "#92400E",
-            "line-width": 1.5,
+            "line-width": 2,
           },
-          defaultOn: false,
           legend: {
             color: "#92400E",
             line: true,
@@ -2072,12 +2057,11 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei09_li_contourminor",
           kind: "line",
           data: v("09_rei_li_contourminor"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "line-color": "#A16207",
-            "line-width": 1,
+            "line-width": 1.2,
           },
-          defaultOn: false,
           legend: {
             color: "#A16207",
             line: true,
@@ -2089,14 +2073,13 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei09_li_cotambah",
           kind: "line",
           data: v("09_rei_li_cotambah"),
-          clickable: true,
+          defaultOn: false,
           paint: {
-            "line-color": "#0EA5E9",
+            "line-color": "#16A34A",
             "line-width": 2,
           },
-          defaultOn: false,
           legend: {
-            color: "#0EA5E9",
+            color: "#16A34A",
             line: true,
           },
         },
@@ -2106,12 +2089,11 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei09_li_jalan",
           kind: "line",
           data: v("09_rei_li_jalan"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "line-color": "#E1B94A",
             "line-width": 2,
           },
-          defaultOn: false,
           legend: {
             color: "#E1B94A",
             line: true,
@@ -2123,14 +2105,13 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei09_li_linepol",
           kind: "line",
           data: v("09_rei_li_linepol"),
-          clickable: true,
+          defaultOn: false,
           paint: {
-            "line-color": "#6B7280",
+            "line-color": "#64748B",
             "line-width": 2,
           },
-          defaultOn: false,
           legend: {
-            color: "#6B7280",
+            color: "#64748B",
             line: true,
           },
         },
@@ -2140,12 +2121,11 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei09_li_salexisting",
           kind: "line",
           data: v("09_rei_li_salexisting"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "line-color": "#16A34A",
             "line-width": 2,
           },
-          defaultOn: false,
           legend: {
             color: "#16A34A",
             line: true,
@@ -2157,12 +2137,11 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei09_li_saltersier",
           kind: "line",
           data: v("09_rei_li_saltersier"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "line-color": "#7C3AED",
             "line-width": 2,
           },
-          defaultOn: false,
           legend: {
             color: "#7C3AED",
             line: true,
@@ -2174,28 +2153,23 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei09_li_sungaialur",
           kind: "line",
           data: v("09_rei_li_sungaialur"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "line-color": "#0284C7",
             "line-width": 2,
           },
-          defaultOn: false,
           legend: {
             color: "#0284C7",
             line: true,
           },
         },
 
-        // -------------------------
-        // POINT
-        // -------------------------
-
         {
           id: "rei09_po_asesories",
           nameKey: "l_rei09_po_asesories",
           kind: "circle",
           data: v("09_rei_po_asesories"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "circle-color": "#EC4899",
             "circle-radius": 5,
@@ -2203,7 +2177,6 @@ export const GROUPS: LayerGroup[] = [
             "circle-stroke-color": "#FFFFFF",
             "circle-stroke-width": 1,
           },
-          defaultOn: false,
           legend: {
             color: "#EC4899",
             circle: true,
@@ -2215,17 +2188,15 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei09_po_crosstierser",
           kind: "circle",
           data: v("09_rei_po_crosstierser"),
-          clickable: true,
+          defaultOn: false,
           paint: {
-            "circle-color": "#F59E0B",
+            "circle-color": "#2563EB",
             "circle-radius": 5,
-            "circle-opacity": 1,
             "circle-stroke-color": "#FFFFFF",
             "circle-stroke-width": 1,
           },
-          defaultOn: false,
           legend: {
-            color: "#F59E0B",
+            color: "#2563EB",
             circle: true,
           },
         },
@@ -2235,12 +2206,8 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei09_po_namabang",
           kind: "symbol",
           data: v("09_rei_po_namabang"),
-          clickable: true,
-          paint: {},
           defaultOn: false,
-          legend: {
-            color: "#111827",
-          },
+          paint: {},
         },
 
         {
@@ -2248,15 +2215,13 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei09_po_patoksaluran",
           kind: "circle",
           data: v("09_rei_po_patoksaluran"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "circle-color": "#DC2626",
             "circle-radius": 5,
-            "circle-opacity": 1,
             "circle-stroke-color": "#FFFFFF",
             "circle-stroke-width": 1,
           },
-          defaultOn: false,
           legend: {
             color: "#DC2626",
             circle: true,
@@ -2268,12 +2233,8 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei09_po_text",
           kind: "symbol",
           data: v("09_rei_po_text"),
-          clickable: true,
-          paint: {},
           defaultOn: false,
-          legend: {
-            color: "#111827",
-          },
+          paint: {},
         },
 
         {
@@ -2281,12 +2242,8 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei09_po_textcrosscanal",
           kind: "symbol",
           data: v("09_rei_po_textcrosscanal"),
-          clickable: true,
-          paint: {},
           defaultOn: false,
-          legend: {
-            color: "#111827",
-          },
+          paint: {},
         },
 
         {
@@ -2294,25 +2251,17 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei09_po_textcrosstierser",
           kind: "symbol",
           data: v("09_rei_po_textcrosstierser"),
-          clickable: true,
-          paint: {},
           defaultOn: false,
-          legend: {
-            color: "#111827",
-          },
+          paint: {},
         },
 
         {
           id: "rei09_po_textpol",
-          nameKey: "l_rei09_po_textpol",
+          nameKey: "l_rei_po_textpol",
           kind: "symbol",
           data: v("09_rei_po_textpol"),
-          clickable: true,
-          paint: {},
           defaultOn: false,
-          legend: {
-            color: "#111827",
-          },
+          paint: {},
         },
       ],
     },
@@ -2320,7 +2269,6 @@ export const GROUPS: LayerGroup[] = [
     // =====================================================
     // RAIBERE 2026
     // =====================================================
-
     {
       id: "raibere_2026",
       nameKey: "l_raibere_2026",
@@ -2329,19 +2277,17 @@ export const GROUPS: LayerGroup[] = [
       defaultOn: false,
 
       children: [
-
         {
           id: "rei26_ar_access",
           nameKey: "l_rei26_ar_access",
           kind: "fill",
           data: v("26_rei_ar_access"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "fill-color": "#F59E0B",
             "fill-opacity": 0.35,
             "fill-outline-color": "#D97706",
           },
-          defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
@@ -2354,13 +2300,12 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei26_ar_crest",
           kind: "fill",
           data: v("26_rei_ar_crest"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "fill-color": "#7C3AED",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#5B21B6",
+            "fill-outline-color": "#6D28D9",
           },
-          defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
@@ -2373,13 +2318,12 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei26_ar_downstream",
           kind: "fill",
           data: v("26_rei_ar_downstream"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "fill-color": "#2563EB",
             "fill-opacity": 0.35,
             "fill-outline-color": "#1D4ED8",
           },
-          defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
@@ -2392,13 +2336,12 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei26_ar_flushingcanal",
           kind: "fill",
           data: v("26_rei_ar_flushingcanal"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "fill-color": "#06B6D4",
             "fill-opacity": 0.35,
             "fill-outline-color": "#0891B2",
           },
-          defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
@@ -2411,32 +2354,12 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei26_ar_flushinggate",
           kind: "fill",
           data: v("26_rei_ar_flushinggate"),
-          clickable: true,
-          paint: {
-            "fill-color": "#0EA5E9",
-            "fill-opacity": 0.35,
-            "fill-outline-color": "#0284C7",
-          },
           defaultOn: false,
-          opacity: 0.35,
-          opacityProp: "fill-opacity",
-          legend: {
-            color: "#0EA5E9",
-          },
-        },
-
-        {
-          id: "rei26_ar_flushingpier",
-          nameKey: "l_rei26_ar_flushingpier",
-          kind: "fill",
-          data: v("26_rei_ar_flushingpier"),
-          clickable: true,
           paint: {
             "fill-color": "#0891B2",
             "fill-opacity": 0.35,
             "fill-outline-color": "#0E7490",
           },
-          defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
@@ -2445,17 +2368,34 @@ export const GROUPS: LayerGroup[] = [
         },
 
         {
+          id: "rei26_ar_flushingpier",
+          nameKey: "l_rei26_ar_flushingpier",
+          kind: "fill",
+          data: v("26_rei_ar_flushingpier"),
+          defaultOn: false,
+          paint: {
+            "fill-color": "#0EA5E9",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#0284C7",
+          },
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#0EA5E9",
+          },
+        },
+
+        {
           id: "rei26_ar_ingate",
           nameKey: "l_rei26_ar_ingate",
           kind: "fill",
           data: v("26_rei_ar_ingate"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "fill-color": "#16A34A",
             "fill-opacity": 0.35,
             "fill-outline-color": "#15803D",
           },
-          defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
@@ -2468,13 +2408,12 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei26_ar_intake",
           kind: "fill",
           data: v("26_rei_ar_intake"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "fill-color": "#22C55E",
             "fill-opacity": 0.35,
             "fill-outline-color": "#16A34A",
           },
-          defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
@@ -2487,13 +2426,12 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei26_ar_irrigation",
           kind: "fill",
           data: v("26_rei_ar_irrigation"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "fill-color": "#15803D",
             "fill-opacity": 0.35,
             "fill-outline-color": "#166534",
           },
-          defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
@@ -2506,13 +2444,12 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei26_ar_parking",
           kind: "fill",
           data: v("26_rei_ar_parking"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "fill-color": "#78716C",
             "fill-opacity": 0.35,
             "fill-outline-color": "#57534E",
           },
-          defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
@@ -2525,13 +2462,12 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei26_ar_primer",
           kind: "fill",
           data: v("26_rei_ar_primer"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "fill-color": "#92400E",
             "fill-opacity": 0.35,
             "fill-outline-color": "#78350F",
           },
-          defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
@@ -2544,13 +2480,12 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei26_ar_road",
           kind: "fill",
           data: v("26_rei_ar_road"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "fill-color": "#CA8A04",
             "fill-opacity": 0.35,
             "fill-outline-color": "#A16207",
           },
-          defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
@@ -2563,17 +2498,16 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei26_ar_rock",
           kind: "fill",
           data: v("26_rei_ar_rock"),
-          clickable: true,
-          paint: {
-            "fill-color": "#6B7280",
-            "fill-opacity": 0.35,
-            "fill-outline-color": "#4B5563",
-          },
           defaultOn: false,
+          paint: {
+            "fill-color": "#64748B",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#475569",
+          },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#6B7280",
+            color: "#64748B",
           },
         },
 
@@ -2582,13 +2516,12 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei26_ar_silt",
           kind: "fill",
           data: v("26_rei_ar_silt"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "fill-color": "#A8A29E",
             "fill-opacity": 0.35,
             "fill-outline-color": "#78716C",
           },
-          defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
@@ -2601,13 +2534,12 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei26_ar_stilling",
           kind: "fill",
           data: v("26_rei_ar_stilling"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "fill-color": "#38BDF8",
             "fill-opacity": 0.35,
             "fill-outline-color": "#0284C7",
           },
-          defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
@@ -2620,13 +2552,12 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei26_ar_upstream",
           kind: "fill",
           data: v("26_rei_ar_upstream"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "fill-color": "#0EA5E9",
             "fill-opacity": 0.35,
             "fill-outline-color": "#0284C7",
           },
-          defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
@@ -2639,14 +2570,13 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei26_ar_weirbody",
           kind: "fill",
           data: v("26_rei_ar_weirbody"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "fill-color": "#7C3AED",
-            "fill-opacity": 0.5,
+            "fill-opacity": 0.35,
             "fill-outline-color": "#5B21B6",
           },
-          defaultOn: false,
-          opacity: 0.5,
+          opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
             color: "#7C3AED",
@@ -2658,14 +2588,13 @@ export const GROUPS: LayerGroup[] = [
           nameKey: "l_rei26_ar_wing",
           kind: "fill",
           data: v("26_rei_ar_wing"),
-          clickable: true,
+          defaultOn: false,
           paint: {
             "fill-color": "#6366F1",
-            "fill-opacity": 0.4,
+            "fill-opacity": 0.35,
             "fill-outline-color": "#4338CA",
           },
-          defaultOn: false,
-          opacity: 0.4,
+          opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
             color: "#6366F1",
@@ -2675,7 +2604,6 @@ export const GROUPS: LayerGroup[] = [
     },
   ],
 },
-  
 {
   titleKey: "g_oebaba",
   dot: "#8B5CF6",
