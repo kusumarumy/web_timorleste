@@ -92,58 +92,59 @@ export default function MapTools({ map }) {
 
   useEffect(() => {
     const unsubscribe = onToolMode((next) => {
-      console.log("MAPTOOLS: tool mode =", next);
+  console.log("MAPTOOLS: tool mode =", next);
 
-      setTool(next);
+  setTool(next);
 
-      // Matikan tool sebelumnya
-      identifyRef.current?.disable();
+  // ========================================================
+  // IDENTIFY
+  // ========================================================
 
-      measureRef.current?.stop();
-      measureRef.current?.clear();
+  if (next === "identify") {
+    identifyRef.current?.enable();
+    return;
+  }
 
-      setResult(null);
+  // ========================================================
+  // TOOL SELAIN IDENTIFY
+  // ========================================================
 
-      if (!next) return;
+  identifyRef.current?.disable();
 
-      // ========================================================
-      // IDENTIFY
-      // ========================================================
+  // Hanya reset measure jika memang tool measure berubah
+  measureRef.current?.stop();
+  measureRef.current?.clear();
 
-      if (next === "identify") {
-        identifyRef.current?.enable();
-        return;
-      }
+  setResult(null);
 
-      // ========================================================
-      // JARAK
-      // ========================================================
+  if (!next) return;
 
-      if (next === "distance") {
-        console.log("MAPTOOLS: start distance");
+  // ========================================================
+  // JARAK
+  // ========================================================
 
-        measureRef.current?.start("distance");
-        return;
-      }
+  if (next === "distance") {
+    console.log("MAPTOOLS: start distance");
 
-      // ========================================================
-      // PANJANG / LEBAR / LUAS
-      // ========================================================
+    measureRef.current?.start("distance");
+    return;
+  }
 
-      if (
-        next === "length" ||
-        next === "width" ||
-        next === "area"
-      ) {
-        console.log(
-          "MAPTOOLS: start area →",
-          next
-        );
+  // ========================================================
+  // PANJANG / LEBAR / LUAS
+  // ========================================================
 
-        measureRef.current?.start("area");
-        return;
-      }
-    });
+  if (
+    next === "length" ||
+    next === "width" ||
+    next === "area"
+  ) {
+    console.log("MAPTOOLS: start area →", next);
+
+    measureRef.current?.start("area");
+    return;
+  }
+});
 
     return unsubscribe;
   }, []);
