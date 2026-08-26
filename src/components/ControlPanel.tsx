@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { GROUPS, LayerDef } from "@/lib/config";
+import { GROUPS, LayerDef, getDescendantIds } from "@/lib/config";
 import { useMapStore } from "@/lib/store";
 import { useI18n } from "@/lib/i18n";
 import { setToolMode, getToolMode, onToolMode } from "./toolMode";
@@ -29,8 +29,20 @@ function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
     toggleSub,
   } = useMapStore();
 
-  const on = visible[l.id];
+    const on = visible[l.id];
   const sw = l.legend;
+
+  const handleToggle = () => {
+    const next = !on;
+    toggle(l.id);
+
+    // parent ber-cascade: samakan seluruh turunannya dengan status parent
+    if (l.cascade) {
+      for (const childId of getDescendantIds(l.id)) {
+        if ((visible[childId] ?? false) !== next) toggle(childId);
+      }
+    }
+  };
 
   return (
     <div>
@@ -39,8 +51,7 @@ function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
         className={`group flex items-center gap-2.5 rounded-[10px] py-2 transition-colors hover:bg-teal/[0.07] ${
           depth > 0 ? "pl-5 pr-2" : "px-2"
         }`}
-      >
-        <Toggle on={on} onClick={() => toggle(l.id)} />
+      >        <Toggle on={on} onClick={handleToggle} />
 
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 text-[13px] font-semibold text-ink">
