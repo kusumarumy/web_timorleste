@@ -1,9 +1,0 @@
-{
-"type": "FeatureCollection",
-"name": "09_oe_li_patoksaluran",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32751" } },
-"features": [
-{ "type": "Feature", "properties": { "LAYER": "Patok Saluran", "GM_TYPE": "Unknown Line Type", "ELEVATION": 0 }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ 772183.67564935493283, 8982160.157703265547752 ], [ 772214.625844669877551, 8982159.327597575262189 ] ] ] } },
-{ "type": "Feature", "properties": { "LAYER": "Patok Saluran", "GM_TYPE": "Unknown Line Type", "ELEVATION": 0 }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ 772233.62273808917962, 8982665.173843173310161 ], [ 772287.705977835808881, 8982661.046755522489548 ], [ 772336.00743147614412, 8982657.902585629373789 ], [ 772386.945913270581514, 8982655.081901354715228 ], [ 772440.461956649902277, 8982651.571526387706399 ] ] ] } }
-]
-}
