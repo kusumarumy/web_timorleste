@@ -112,6 +112,7 @@ export interface LayerDef {
     filterValue: string;
   }[];
   children?: LayerDef[];
+  cascade?: boolean;
 }
 
 export interface LayerGroup {
@@ -1071,7 +1072,7 @@ export const GROUPS: LayerGroup[] = [
         paint: {},
         defaultOn: false,
         lazy: true,
-
+        cascade: true,
         children: [
           // =====================================================
           // AREA
@@ -1873,7 +1874,7 @@ export const GROUPS: LayerGroup[] = [
       kind: "line",
       paint: {},
       defaultOn: false,
-
+      cascade: true,
       children: [
 
         {
@@ -2257,7 +2258,7 @@ export const GROUPS: LayerGroup[] = [
 
         {
           id: "rei09_po_textpol",
-          nameKey: "l_rei_po_textpol",
+          nameKey: "l_rei09_po_textpol",
           kind: "symbol",
           data: v("09_rei_po_textpol"),
           defaultOn: false,
@@ -2275,7 +2276,7 @@ export const GROUPS: LayerGroup[] = [
       kind: "line",
       paint: {},
       defaultOn: false,
-
+      cascade: true,
       children: [
         {
           id: "rei26_ar_access",
@@ -2615,6 +2616,7 @@ export const GROUPS: LayerGroup[] = [
       kind: "line",
       paint: {},
       defaultOn: true,
+      cascade: true,
     },
 
     {
@@ -2623,7 +2625,7 @@ export const GROUPS: LayerGroup[] = [
       kind: "line",
       paint: {},
       defaultOn: true,
-
+      cascade: true,
       children: [
         {
           id: "oe_crest",
@@ -2927,7 +2929,27 @@ const flattenLayers = (layers: LayerDef[]): LayerDef[] =>
     ...(layer.data ? [layer] : []),
     ...(layer.children ? flattenLayers(layer.children) : []),
   ]);
+const findLayer = (layers: LayerDef[], id: string): LayerDef | undefined => {
+  for (const l of layers) {
+    if (l.id === id) return l;
+    const hit = l.children && findLayer(l.children, id);
+    if (hit) return hit;
+  }
+  return undefined;
+};
 
+const collectIds = (layers: LayerDef[]): string[] =>
+  layers.flatMap((l) => [l.id, ...(l.children ? collectIds(l.children) : [])]);
+
+/** Semua id turunan (rekursif) dari sebuah layer parent. */
+export const getDescendantIds = (id: string): string[] => {
+  const node = findLayer(GROUPS.flatMap((g) => g.layers), id);
+  return node?.children ? collectIds(node.children) : [];
+};
+
+/** Apakah layer ini parent ber-cascade. */
+export const isCascadeParent = (id: string): boolean =>
+  findLayer(GROUPS.flatMap((g) => g.layers), id)?.cascade === true;
 export const ALL_LAYERS: LayerDef[] = GROUPS.flatMap((g) =>
   flattenLayers(g.layers)
 );
