@@ -1,8 +1,0 @@
-{
-"type": "FeatureCollection",
-"name": "09_oe_li_bangbagi",
-"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32751" } },
-"features": [
-{ "type": "Feature", "properties": { "LAYER": "Bang bagi", "GM_TYPE": "Unknown Line Type", "ELEVATION": 0 }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ 777737.414280787925236, 8983016.806998070329428 ], [ 777756.450476133264601, 8982972.086167579516768 ] ] ] } }
-]
-}
