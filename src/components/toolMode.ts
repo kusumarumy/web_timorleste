@@ -1,7 +1,5 @@
 export type ToolMode =
   | "distance"
-  | "length"
-  | "width"
   | "area"
   | "elevation"
   | "identify"
