@@ -2185,10 +2185,10 @@ export const GROUPS: LayerGroup[] = [
         },
 
         {
-          id: "rei09_po_crosstierser",
-          nameKey: "l_rei09_po_crosstierser",
+          id: "rei09_po_crosstersier",
+          nameKey: "l_rei09_po_crosstersier",
           kind: "circle",
-          data: v("09_rei_po_crosstierser"),
+          data: v("09_rei_po_crosstersier"),
           defaultOn: false,
           paint: {
             "circle-color": "#2563EB",
@@ -2248,10 +2248,10 @@ export const GROUPS: LayerGroup[] = [
         },
 
         {
-          id: "rei09_po_textcrosstierser",
-          nameKey: "l_rei09_po_textcrosstierser",
+          id: "rei09_po_textcrosstersier",
+          nameKey: "l_rei09_po_textcrosstersier",
           kind: "symbol",
-          data: v("09_rei_po_textcrosstierser"),
+          data: v("09_rei_po_textcrosstersier"),
           defaultOn: false,
           paint: {},
         },
