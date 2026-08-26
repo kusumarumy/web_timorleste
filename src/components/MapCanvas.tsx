@@ -131,8 +131,7 @@ function buildStyle(): maplibregl.StyleSpecification {
             : "none",
         },
       } as any);
-    }
-
+    
     } else if (l.kind === "symbol") {
 
       sources[l.id] = {
@@ -209,10 +208,6 @@ function buildStyle(): maplibregl.StyleSpecification {
           : {}),
       } as any);
 
-    // =====================================================
-    // FILL / LINE / CIRCLE
-    // =====================================================
-
     } else {
 
       sources[l.id] = {
@@ -236,14 +231,6 @@ function buildStyle(): maplibregl.StyleSpecification {
             : "none",
         },
       } as any);
-
-      // ---------------------------------------------------
-      // LABEL LAYER — source GeoJSON yang sama
-      //
-      // Hanya LineString yang cocok pakai symbol-placement
-      // "line". Poligon dan titik memakai "point", karena
-      // dengan "line" labelnya sering tidak muncul.
-      // ---------------------------------------------------
 
       if (l.label) {
 
