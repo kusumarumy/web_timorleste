@@ -921,10 +921,10 @@ export const GROUPS: LayerGroup[] = [
         },
       },
       {
-        id: "genangan_garidesain",
-        nameKey: "l_genangan_garidesain",
+        id: "genangan_garisdesain",
+        nameKey: "l_genangan_garisdesain",
         kind: "line",
-        data: v("genangan_garidesain"),
+        data: v("genangan_garisdesain"),
 
         paint: {
           "line-color": "#F59E0B",
