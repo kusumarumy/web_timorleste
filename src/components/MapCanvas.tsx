@@ -255,12 +255,12 @@ function buildStyle(): maplibregl.StyleSpecification {
       },
     } as any);
 
-    // =====================================================
+        // =====================================================
     // LABEL LAYER
-    // Menggunakan source GeoJSON yang sama
     // =====================================================
 
     if (l.label) {
+      const isPolygon = l.kind === "fill";
 
       layers.push({
         id: `${l.id}_label`,
@@ -275,35 +275,42 @@ function buildStyle(): maplibregl.StyleSpecification {
             ? "visible"
             : "none",
 
-          // INI YANG MEMBUAT LABEL MENGIKUTI GARIS
-          "symbol-placement": "line",
-
-          // Jarak antar label
-          "symbol-spacing": l.label.spacing ?? 250,
-
-          // Field yang digunakan sebagai teks
           "text-field": [
-            "get",
-            l.label.field,
+            "coalesce",
+            ["get", l.label.field],
+            "",
           ],
 
           "text-size": l.label.size ?? 11,
 
-          // Label mengikuti arah garis
-          "text-rotation-alignment": "map",
-
-          // Tetap nyaman dibaca ketika map dipitch
-          "text-pitch-alignment": "viewport",
-
-          // Jangan tampilkan terlalu banyak label
           "text-allow-overlap": false,
           "text-ignore-placement": false,
 
-          // Mencegah label terlalu miring
-          "text-max-angle": 30,
+          // ==========================================
+          // POLYGON
+          // ==========================================
+          ...(isPolygon
+            ? {
+                "symbol-placement": "point",
+                "text-anchor": "center",
+                "text-rotation-alignment": "map",
+                "text-pitch-alignment": "viewport",
+              }
 
-          // Label tetap terbaca dari kiri-kanan
-          "text-keep-upright": true,
+            // ==========================================
+            // LINE
+            // ==========================================
+            : {
+                "symbol-placement": "line",
+                "symbol-spacing":
+                  l.label.spacing ?? 250,
+
+                "text-rotation-alignment": "map",
+                "text-pitch-alignment": "viewport",
+
+                "text-max-angle": 30,
+                "text-keep-upright": true,
+              }),
         },
 
         paint: {
