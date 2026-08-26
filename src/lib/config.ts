@@ -551,70 +551,71 @@ export const GROUPS: LayerGroup[] = [
       },
     },    
  {
-      id: "ricefield_8di",
-      nameKey: "l_ricefield_8di",
-      kind: "fill",
-      data: v("ricefield_8di"),
-      clickable: true,
+  id: "ricefield_8di",
+  nameKey: "l_ricefield_8di",
+  kind: "fill",
+  data: v("ricefield_8di"),
+  clickable: true,
 
-      paint: {
-        "fill-color": "#D8B24A",
-        "fill-opacity": 0.35,
-        "fill-outline-color": "#D8B24A",
-      },
+  paint: {
+    "fill-color": "#D8B24A",
+    "fill-opacity": 0.35,
+    "fill-outline-color": "#E76F51",
+  },
 
-      defaultOn: false,
+  defaultOn: false,
 
-      opacity: 0.35,
-      opacityProp: "fill-opacity",
+  opacity: 0.35,
+  opacityProp: "fill-opacity",
 
-      legend: {
-        color: "#D8B24A",
-      },
+  legend: {
+    color: "#E76F51",
+    line: true,
+  },
 
-      sublayers: [
-        {
-          id: "akadiru_kede",
-          labelKey: "di_akadiru_kede",
-          filterValue: "AKADIRU KEDE",
-        },
-        {
-          id: "buiha",
-          labelKey: "di_buiha",
-          filterValue: "BUIHA",
-        },
-        {
-          id: "kakeulaku",
-          labelKey: "di_kakeulaku",
-          filterValue: "KAKEULAKU",
-        },
-        {
-          id: "lias",
-          labelKey: "di_lias",
-          filterValue: "LIAS",
-        },
-        {
-          id: "luan_kadoe",
-          labelKey: "di_luan_kadoe",
-          filterValue: "LUAN KADOE",
-        },
-        {
-          id: "oebaba",
-          labelKey: "di_oebaba",
-          filterValue: "OEBABA",
-        },
-        {
-          id: "paulata",
-          labelKey: "di_paulata",
-          filterValue: "PAULATA",
-        },
-        {
-          id: "raibere",
-          labelKey: "di_raibere",
-          filterValue: "RAIBRE",
-        },
-      ],
+  sublayers: [
+    {
+      id: "akadiru_kede",
+      labelKey: "di_akadiru_kede",
+      filterValue: "AKADIRU KEDE",
     },
+    {
+      id: "buiha",
+      labelKey: "di_buiha",
+      filterValue: "BUIHA",
+    },
+    {
+      id: "kakeulaku",
+      labelKey: "di_kakeulaku",
+      filterValue: "KAKEULAKU",
+    },
+    {
+      id: "lias",
+      labelKey: "di_lias",
+      filterValue: "LIAS",
+    },
+    {
+      id: "luan_kadoe",
+      labelKey: "di_luan_kadoe",
+      filterValue: "LUAN KADOE",
+    },
+    {
+      id: "oebaba",
+      labelKey: "di_oebaba",
+      filterValue: "OEBABA",
+    },
+    {
+      id: "paulata",
+      labelKey: "di_paulata",
+      filterValue: "PAULATA",
+    },
+    {
+      id: "raibere",
+      labelKey: "di_raibere",
+      filterValue: "RAIBRE",
+    },
+  ],
+},
     {
       id: "building",
       nameKey: "l_building",
