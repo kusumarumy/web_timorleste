@@ -12,6 +12,7 @@ const subs = new Set<(m: ToolMode) => void>();
 export const getToolMode = (): ToolMode => _mode;
 
 export const setToolMode = (m: ToolMode): void => {
+  if (_mode === m) return;
   _mode = m;
   subs.forEach((f) => f(m));
 };
