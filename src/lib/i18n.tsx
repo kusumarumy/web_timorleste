@@ -76,6 +76,10 @@ export const DICTS: Record<Lang, Dict> = {
     l_irrigation: "Irigasi",
     l_catchment: "Daerah Tangkapan Air",
     l_watershed: "Daerah Aliran Sungai",
+    catchment_dam_1: "Daerah Tangkapan Air DAM 1",
+    catchment_dam_2: "Daerah Tangkapan Air DAM 2",
+    catchment_dam_3: "Daerah Tangkapan Air DAM 3",
+    catchment_oebaba: "Daerah Tangkapan Air OEBABA",
 
     // Transportation
     l_road: "Jalan",
@@ -318,6 +322,10 @@ export const DICTS: Record<Lang, Dict> = {
     l_irrigation: "Irrigation",
     l_catchment: "Catchment Area",
     l_watershed: "Watershed",
+    catchment_dam_1: "Catchment Area DAM 1",
+    catchment_dam_2: "Catchment Area DAM 2",
+    catchment_dam_3: "Catchment Area DAM 3",
+    catchment_oebaba: "Catchment Area OEBABA",
 
     // Network
     l_road: "Road",
@@ -490,10 +498,10 @@ export const DICTS: Record<Lang, Dict> = {
     measurement_select: "Select a measurement tool.",
 
     elevation_start: "Point 1 Elevation",
-elevation_end: "Point 2 Elevation",
-elevation_diff: "Elevation Difference",
-slope_percent: "Slope (%)",
-slope_degree: "Angle (°)",
+    elevation_end: "Point 2 Elevation",
+    elevation_diff: "Elevation Difference",
+    slope_percent: "Slope (%)",
+    slope_degree: "Angle (°)",
 
     data_layer: "Data Layer",
     terrain_locked: "The measurement DTM elevation is locked at the original scale (1×).",
@@ -570,6 +578,10 @@ slope_degree: "Angle (°)",
     l_irrigation: "Irrigação",
     l_catchment: "Bacia de Drenagem",
     l_watershed: "Bacia Hidrográfica",
+    catchment_dam_1: "Área de Captação DAM 1",
+    catchment_dam_2: "Área de Captação DAM 2",
+    catchment_dam_3: "Área de Captação DAM 3",
+    catchment_oebaba: "Área de Captação OEBABA",
 
     // Network
     l_road: "Estrada",
