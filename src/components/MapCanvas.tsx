@@ -484,20 +484,30 @@ async function loadGeoJSONLayer(
 
       const currentState = store.getState();
 
-      if (
-        layer.sublayers &&
-        map.getLayer(layer.id)
-      ) {
-        const filter = getSubkelasFilter(
-          layer,
-          currentState.subVisible
-        );
+      if (layer.sublayers) {
+  const filter = getSubkelasFilter(
+    layer,
+    currentState.subVisible
+  );
 
-        map.setFilter(
-          layer.id,
-          filter ?? null
-        );
-      }
+  // Polygon
+  if (map.getLayer(layer.id)) {
+    map.setFilter(
+      layer.id,
+      filter ?? null
+    );
+  }
+
+  // Label
+  const labelId = `${layer.id}_label`;
+
+  if (map.getLayer(labelId)) {
+    map.setFilter(
+      labelId,
+      filter ?? null
+    );
+  }
+}
 
       loadedLayers.current.add(layer.id);
 
@@ -860,21 +870,30 @@ if (labelLayer) {
   );
 }
 
-        // =====================================================
-        // SUBCLASS FILTER
-        // =====================================================
-
         if (l.sublayers) {
-          const filter = getSubkelasFilter(
-            l,
-            s.subVisible
-          );
+  const filter = getSubkelasFilter(
+    l,
+    s.subVisible
+  );
 
-          map.setFilter(
-            l.id,
-            filter ?? null
-          );
-        }
+  // Filter polygon
+  if (map.getLayer(l.id)) {
+    map.setFilter(
+      l.id,
+      filter ?? null
+    );
+  }
+
+  // Filter label
+  const labelId = `${l.id}_label`;
+
+  if (map.getLayer(labelId)) {
+    map.setFilter(
+      labelId,
+      filter ?? null
+    );
+  }
+}
 
         // =====================================================
         // OPACITY
