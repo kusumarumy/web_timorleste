@@ -1,0 +1,8 @@
+{
+"type": "FeatureCollection",
+"name": "09_oe_li_tertiarypoint",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::32751" } },
+"features": [
+{ "type": "Feature", "properties": { "LAYER": "TERTIARY_POINT", "GM_TYPE": "Unknown Line Type", "ELEVATION": 0 }, "geometry": { "type": "MultiLineString", "coordinates": [ [ [ 773520.465012590168044, 8980942.877263160422444 ], [ 773566.746205135248601, 8980960.939117752015591 ], [ 773614.835241216816939, 8980979.000961972400546 ] ] ] } }
+]
+}
