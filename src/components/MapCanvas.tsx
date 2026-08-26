@@ -157,75 +157,58 @@ function buildStyle(): maplibregl.StyleSpecification {
 
   const symbolPaint: Record<string, unknown> = {};
 
- if (l.label) {
-  const isPolygon =
-    l.kind === "fill";
+  // LABEL UNTUK SYMBOL
+  if (l.label) {
+    symbolLayout["text-field"] = [
+      "coalesce",
+      ["get", l.label.field],
+      "",
+    ];
+
+    symbolLayout["text-size"] = l.label.size ?? 11;
+
+    symbolLayout["text-anchor"] = "bottom-left";
+
+    symbolLayout["text-offset"] = [0.8, -0.8];
+
+    symbolLayout["text-allow-overlap"] = true;
+    symbolLayout["text-ignore-placement"] = true;
+
+    if (l.label.spacing != null) {
+      symbolLayout["symbol-spacing"] = l.label.spacing;
+    }
+
+    symbolPaint["text-color"] =
+      l.label.color ?? "#111827";
+
+    symbolPaint["text-halo-color"] =
+      l.label.haloColor ?? "#FFFFFF";
+
+    symbolPaint["text-halo-width"] =
+      l.label.haloWidth ?? 2;
+
+    symbolPaint["text-halo-blur"] = 0.2;
+  }
 
   layers.push({
-    id: `${l.id}_label`,
+    id: l.id,
     type: "symbol",
     source: l.id,
 
-    minzoom: l.label.minzoom ?? 0,
-    maxzoom: l.label.maxzoom ?? 24,
+    layout: symbolLayout,
 
-    layout: {
-      visibility: l.defaultOn
-        ? "visible"
-        : "none",
+    paint: symbolPaint,
 
-      "text-field": [
-        "coalesce",
-        ["get", l.label.field],
-        "",
-      ],
+    ...(l.label?.minzoom != null
+      ? { minzoom: l.label.minzoom }
+      : {}),
 
-      "text-size": l.label.size ?? 11,
-
-      "text-allow-overlap": false,
-      "text-ignore-placement": false,
-
-      // ==========================================
-      // POLYGON
-      // ==========================================
-      ...(isPolygon
-        ? {
-            "symbol-placement": "point",
-            "text-anchor": "center",
-            "text-rotation-alignment": "map",
-            "text-pitch-alignment": "viewport",
-          }
-
-        // ==========================================
-        // LINE
-        // ==========================================
-        : {
-            "symbol-placement": "line",
-            "symbol-spacing":
-              l.label.spacing ?? 250,
-
-            "text-rotation-alignment": "map",
-            "text-pitch-alignment": "viewport",
-
-            "text-max-angle": 30,
-            "text-keep-upright": true,
-          }),
-    },
-
-    paint: {
-      "text-color":
-        l.label.color ?? "#5A1715",
-
-      "text-halo-color":
-        l.label.haloColor ?? "#FFFFFF",
-
-      "text-halo-width":
-        l.label.haloWidth ?? 2,
-
-      "text-halo-blur": 0.2,
-    },
+    ...(l.label?.maxzoom != null
+      ? { maxzoom: l.label.maxzoom }
+      : {}),
   } as any);
-}
+
+} else {
 
 } else {
 
