@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import { BASEMAPS, GROUPS } from "@/lib/config";
+import { BASEMAPS, GROUPS, LEGEND_LAYERS } from "@/lib/config";
 import { useMapStore } from "@/lib/store";
 import { useI18n, Lang } from "@/lib/i18n";
 
@@ -51,12 +51,37 @@ export function TopBar() {
 
 export function Legend() {
   const { t } = useI18n();
-  const { visible } = useMapStore();
+
+  const { visible, subVisible } = useMapStore();
+
   const [open, setOpen] = useState(true);
 
   const items = GROUPS
     .flatMap((g) => g.layers)
-    .filter((l) => l.legend && visible[l.id]);
+    .flatMap((layer) => {
+      /*
+        JIKA ADA CHILD / SUBLAYER
+        tampilkan hanya child yang aktif
+      */
+      if (layer.sublayers && layer.sublayers.length > 0) {
+        return layer.sublayers
+          .filter((sub) => sub.legend && subVisible[sub.id])
+          .map((sub) => ({
+            ...sub,
+
+            // optional: simpan info parent
+            parentId: layer.id,
+          }));
+      }
+
+      /*
+        JIKA TIDAK ADA CHILD
+        tampilkan layer parent jika aktif
+      */
+      return layer.legend && visible[layer.id]
+        ? [layer]
+        : [];
+    });
 
   return (
     <div className="absolute bottom-[65px] right-4 z-[15] w-[210px] overflow-hidden rounded-[14px] border border-stroke bg-panel/90 shadow-[0_14px_40px_rgba(0,0,0,.4)] backdrop-blur-xl max-md:hidden">
@@ -73,13 +98,14 @@ export function Legend() {
       {/* CONTENT */}
       {open && (
         <div className="max-h-[55vh] overflow-y-auto px-3.5 pb-3 pt-2.5">
-          
           <div className="flex flex-col gap-2.5">
+
             {items.map((l) => (
               <div
                 key={l.id}
                 className="flex items-center gap-2.5 text-[12px] text-ink"
               >
+
                 {/* ICON LAYER */}
                 {l.icon ? (
                   <span className="flex h-[24px] w-[24px] flex-none items-center justify-center">
@@ -94,31 +120,32 @@ export function Legend() {
                   <span
                     className="h-3 w-[18px] flex-none rounded-[3px]"
                     style={
-                      l.legend!.line
+                      l.legend?.line
                         ? {
                             height: 0,
-                            borderTop: `3px solid ${l.legend!.color}`,
+                            borderTop: `3px solid ${l.legend.color}`,
                             borderRadius: 0,
                           }
-                        : l.legend!.circle
+                        : l.legend?.circle
                         ? {
                             width: "12px",
                             height: "12px",
                             borderRadius: "9999px",
-                            background: l.legend!.color,
+                            background: l.legend?.color,
                           }
                         : {
-                            background: l.legend!.color,
+                            background: l.legend?.color,
                           }
                     }
                   />
                 )}
 
                 {t(l.nameKey)}
+
               </div>
             ))}
-          </div>
 
+          </div>
         </div>
       )}
     </div>
