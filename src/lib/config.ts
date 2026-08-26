@@ -1262,7 +1262,7 @@ export const GROUPS: LayerGroup[] = [
             id: "lo_ar_tertiary",
             nameKey: "l_lo_ar_tertiary",
             kind: "fill",
-            data: v("09_lo_ar_tertiary"),
+            data: r2Vector("09_lo_ar_tertiary"),
             clickable: true,
             lazy: true,
             paint: {
@@ -2041,7 +2041,7 @@ export const GROUPS: LayerGroup[] = [
           id: "rei09_li_contourmayor",
           nameKey: "l_rei09_li_contourmayor",
           kind: "line",
-          data: v("09_rei_li_contourmayor"),
+          data: r2Vector("09_rei_li_contourmayor"),
           defaultOn: false,
           paint: {
             "line-color": "#92400E",
@@ -2057,7 +2057,7 @@ export const GROUPS: LayerGroup[] = [
           id: "rei09_li_contourminor",
           nameKey: "l_rei09_li_contourminor",
           kind: "line",
-          data: v("09_rei_li_contourminor"),
+          data: r2Vector("09_rei_li_contourminor"),
           defaultOn: false,
           paint: {
             "line-color": "#A16207",
