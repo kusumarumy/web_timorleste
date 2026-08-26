@@ -656,16 +656,49 @@ console.log(
             }
           );
           map.on(
-            "click",
-            l.id,
-            (e) => {
-if (getToolMode()) return; 
-              const p =
-                (e.features?.[0]
-                  ?.properties ?? {}) as Record<
-                    string,
-                    unknown
-                  >;
+  "click",
+  l.id,
+  (e) => {
+    const mode = getToolMode();
+
+    console.log("IDENTIFY CLICK");
+    console.log("TOOL MODE:", mode);
+
+    // Hanya blok Identify ketika BENAR-BENAR sedang measure
+    if (mode === "distance" || mode === "area") {
+      return;
+    }
+
+    const p =
+      (e.features?.[0]?.properties ?? {}) as Record<
+        string,
+        unknown
+      >;
+
+    const rows =
+      Object.entries(p)
+        .map(
+          ([k, val]) =>
+            `<div class="pop-r">
+              <span>${k}</span>
+              <b>${val}</b>
+            </div>`
+        )
+        .join("");
+
+    new Popup({
+      offset: 12,
+    })
+      .setLngLat(e.lngLat)
+      .setHTML(
+        `<div class="pop-t">
+          ${p.name ?? "Feature"}
+        </div>
+        ${rows}`
+      )
+      .addTo(map);
+  }
+);
 
               const rows =
                 Object.entries(p)
