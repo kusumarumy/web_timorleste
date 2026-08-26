@@ -119,92 +119,7 @@ export interface LayerGroup {
   dot: string;
   layers: LayerDef[];
 }
-const lomeaArea = (
-  id: string,
-  nameKey: string,
-  file: string,
-  color: string,
-  outlineColor: string = color
-): LayerDef => ({
-  id,
-  nameKey,
-  kind: "fill",
-  data: v(file),
-  clickable: true,
-  lazy: true,
 
-  paint: {
-    "fill-color": color,
-    "fill-opacity": 0.35,
-    "fill-outline-color": outlineColor,
-  },
-
-  defaultOn: false,
-
-  opacity: 0.35,
-  opacityProp: "fill-opacity",
-
-  legend: {
-    color,
-  },
-});
-
-const lomeaLine = (
-  id: string,
-  nameKey: string,
-  file: string,
-  color: string,
-  width = 2
-): LayerDef => ({
-  id,
-  nameKey,
-  kind: "line",
-  data: v(file),
-  clickable: true,
-  lazy: true,
-
-  paint: {
-    "line-color": color,
-    "line-width": width,
-    "line-opacity": 1,
-  },
-
-  defaultOn: false,
-
-  legend: {
-    color,
-    line: true,
-  },
-});
-
-const lomeaPoint = (
-  id: string,
-  nameKey: string,
-  file: string,
-  color: string
-): LayerDef => ({
-  id,
-  nameKey,
-  kind: "circle",
-  data: v(file),
-  clickable: true,
-  lazy: true,
-
-  paint: {
-    "circle-color": color,
-    "circle-radius": 5,
-    "circle-opacity": 1,
-    "circle-stroke-color": "#FFFFFF",
-    "circle-stroke-width": 1,
-  },
-
-  defaultOn: false,
-
-  legend: {
-    color,
-    circle: true,
-  },
-});
 export const GROUPS: LayerGroup[] = [
   // AREA OF INTEREST
 {
@@ -1143,319 +1058,803 @@ export const GROUPS: LayerGroup[] = [
       },
     ],
   },
-  // LOMEA
-{
-  titleKey: "g_lomea",
-  dot: "#F59E0B",
+   // LOMEA
+  {
+    titleKey: "g_lomea",
+    dot: "#F59E0B",
 
-  layers: [
-    {
-      id: "lomea_2009",
-      nameKey: "l_lomea_2009",
-      kind: "line",
-      paint: {},
+    layers: [
+      {
+        id: "lomea_2009",
+        nameKey: "l_lomea_2009",
+        kind: "line",
+        paint: {},
+        defaultOn: false,
+        lazy: true,
 
-      // PENTING:
-      // tidak ikut aktif dan tidak dipanggil saat initial load
-      defaultOn: false,
-      lazy: true,
+        children: [
+          // =====================================================
+          // AREA
+          // =====================================================
 
-      children: [
-        // =====================================================
-        // 09_lo_ar_  → AREA
-        // =====================================================
+          {
+            id: "lo_ar_00",
+            nameKey: "l_lo_ar_00",
+            kind: "fill",
+            data: v("09_lo_ar_00"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "fill-color": "#8B5CF6",
+              "fill-opacity": 0.35,
+              "fill-outline-color": "#7C3AED",
+            },
+            defaultOn: false,
+            opacity: 0.35,
+            opacityProp: "fill-opacity",
+            legend: {
+              color: "#8B5CF6",
+            },
+          },
 
-        lomeaArea(
-          "lo_ar_00",
-          "l_lo_ar_00",
-          "09_lo_ar_00",
-          "#8B5CF6"
-        ),
+          {
+            id: "lo_ar_areal",
+            nameKey: "l_lo_ar_areal",
+            kind: "fill",
+            data: v("09_lo_ar_areal"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "fill-color": "#A855F7",
+              "fill-opacity": 0.35,
+              "fill-outline-color": "#9333EA",
+            },
+            defaultOn: false,
+            opacity: 0.35,
+            opacityProp: "fill-opacity",
+            legend: {
+              color: "#A855F7",
+            },
+          },
 
-        lomeaArea(
-          "lo_ar_areal",
-          "l_lo_ar_areal",
-          "09_lo_ar_areal",
-          "#A855F7"
-        ),
+          {
+            id: "lo_ar_asesories",
+            nameKey: "l_lo_ar_asesories",
+            kind: "fill",
+            data: v("09_lo_ar_asesories"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "fill-color": "#EC4899",
+              "fill-opacity": 0.35,
+              "fill-outline-color": "#DB2777",
+            },
+            defaultOn: false,
+            opacity: 0.35,
+            opacityProp: "fill-opacity",
+            legend: {
+              color: "#EC4899",
+            },
+          },
 
-        lomeaArea(
-          "lo_ar_asesories",
-          "l_lo_ar_asesories",
-          "09_lo_ar_asesories",
-          "#EC4899"
-        ),
+          {
+            id: "lo_ar_bangsadap",
+            nameKey: "l_lo_ar_bangsadap",
+            kind: "fill",
+            data: v("09_lo_ar_bangsadap"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "fill-color": "#F59E0B",
+              "fill-opacity": 0.35,
+              "fill-outline-color": "#D97706",
+            },
+            defaultOn: false,
+            opacity: 0.35,
+            opacityProp: "fill-opacity",
+            legend: {
+              color: "#F59E0B",
+            },
+          },
 
-        lomeaArea(
-          "lo_ar_bangsadap",
-          "l_lo_ar_bangsadap",
-          "09_lo_ar_bangsadap",
-          "#F59E0B"
-        ),
+          {
+            id: "lo_ar_bangunan",
+            nameKey: "l_lo_ar_bangunan",
+            kind: "fill",
+            data: v("09_lo_ar_bangunan"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "fill-color": "#7C3AED",
+              "fill-opacity": 0.35,
+              "fill-outline-color": "#6D28D9",
+            },
+            defaultOn: false,
+            opacity: 0.35,
+            opacityProp: "fill-opacity",
+            legend: {
+              color: "#7C3AED",
+            },
+          },
 
-        lomeaArea(
-          "lo_ar_bangunan",
-          "l_lo_ar_bangunan",
-          "09_lo_ar_bangunan",
-          "#7C3AED"
-        ),
+          {
+            id: "lo_ar_bmcp",
+            nameKey: "l_lo_ar_bmcp",
+            kind: "fill",
+            data: v("09_lo_ar_bmcp"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "fill-color": "#2563EB",
+              "fill-opacity": 0.35,
+              "fill-outline-color": "#1D4ED8",
+            },
+            defaultOn: false,
+            opacity: 0.35,
+            opacityProp: "fill-opacity",
+            legend: {
+              color: "#2563EB",
+            },
+          },
 
-        lomeaArea(
-          "lo_ar_bmcp",
-          "l_lo_ar_bmcp",
-          "09_lo_ar_bmcp",
-          "#2563EB"
-        ),
+          {
+            id: "lo_ar_box",
+            nameKey: "l_lo_ar_box",
+            kind: "fill",
+            data: v("09_lo_ar_box"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "fill-color": "#0891B2",
+              "fill-opacity": 0.35,
+              "fill-outline-color": "#0E7490",
+            },
+            defaultOn: false,
+            opacity: 0.35,
+            opacityProp: "fill-opacity",
+            legend: {
+              color: "#0891B2",
+            },
+          },
 
-        lomeaArea(
-          "lo_ar_box",
-          "l_lo_ar_box",
-          "09_lo_ar_box",
-          "#0891B2"
-        ),
+          {
+            id: "lo_ar_kodebm",
+            nameKey: "l_lo_ar_kodebm",
+            kind: "fill",
+            data: v("09_lo_ar_kodebm"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "fill-color": "#16A34A",
+              "fill-opacity": 0.35,
+              "fill-outline-color": "#15803D",
+            },
+            defaultOn: false,
+            opacity: 0.35,
+            opacityProp: "fill-opacity",
+            legend: {
+              color: "#16A34A",
+            },
+          },
 
-        lomeaArea(
-          "lo_ar_kodebm",
-          "l_lo_ar_kodebm",
-          "09_lo_ar_kodebm",
-          "#16A34A"
-        ),
+          {
+            id: "lo_ar_salkwater",
+            nameKey: "l_lo_ar_salkwater",
+            kind: "fill",
+            data: v("09_lo_ar_salkwater"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "fill-color": "#06B6D4",
+              "fill-opacity": 0.35,
+              "fill-outline-color": "#0891B2",
+            },
+            defaultOn: false,
+            opacity: 0.35,
+            opacityProp: "fill-opacity",
+            legend: {
+              color: "#06B6D4",
+            },
+          },
 
-        lomeaArea(
-          "lo_ar_salkwater",
-          "l_lo_ar_salkwater",
-          "09_lo_ar_salkwater",
-          "#06B6D4"
-        ),
+          {
+            id: "lo_ar_tertiary",
+            nameKey: "l_lo_ar_tertiary",
+            kind: "fill",
+            data: v("09_lo_ar_tertiary"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "fill-color": "#22C55E",
+              "fill-opacity": 0.35,
+              "fill-outline-color": "#16A34A",
+            },
+            defaultOn: false,
+            opacity: 0.35,
+            opacityProp: "fill-opacity",
+            legend: {
+              color: "#22C55E",
+            },
+          },
 
-        lomeaArea(
-          "lo_ar_tertiary",
-          "l_lo_ar_tertiary",
-          "09_lo_ar_tertiary",
-          "#22C55E"
-        ),
+          // =====================================================
+          // LINE
+          // =====================================================
 
-        // =====================================================
-        // 09_lo_li_  → LINE
-        // =====================================================
+          {
+            id: "lo_li_areal",
+            nameKey: "l_lo_li_areal",
+            kind: "line",
+            data: v("09_lo_li_areal"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#7C3AED",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#7C3AED",
+              line: true,
+            },
+          },
 
-        lomeaLine(
-          "lo_li_areal",
-          "l_lo_li_areal",
-          "09_lo_li_areal",
-          "#7C3AED"
-        ),
+          {
+            id: "lo_li_asesories",
+            nameKey: "l_lo_li_asesories",
+            kind: "line",
+            data: v("09_lo_li_asesories"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#EC4899",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#EC4899",
+              line: true,
+            },
+          },
 
-        lomeaLine(
-          "lo_li_asesories",
-          "l_lo_li_asesories",
-          "09_lo_li_asesories",
-          "#EC4899"
-        ),
+          {
+            id: "lo_li_asjalan",
+            nameKey: "l_lo_li_asjalan",
+            kind: "line",
+            data: v("09_lo_li_asjalan"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#78716C",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#78716C",
+              line: true,
+            },
+          },
 
-        lomeaLine(
-          "lo_li_asjalan",
-          "l_lo_li_asjalan",
-          "09_lo_li_asjalan",
-          "#78716C"
-        ),
+          {
+            id: "lo_li_bataslaut",
+            nameKey: "l_lo_li_bataslaut",
+            kind: "line",
+            data: v("09_lo_li_bataslaut"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#0EA5E9",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#0EA5E9",
+              line: true,
+            },
+          },
 
-        lomeaLine(
-          "lo_li_bataslaut",
-          "l_lo_li_bataslaut",
-          "09_lo_li_bataslaut",
-          "#0EA5E9"
-        ),
+          {
+            id: "lo_li_bmcp",
+            nameKey: "l_lo_li_bmcp",
+            kind: "line",
+            data: v("09_lo_li_bmcp"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#2563EB",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#2563EB",
+              line: true,
+            },
+          },
 
-        lomeaLine(
-          "lo_li_bmcp",
-          "l_lo_li_bmcp",
-          "09_lo_li_bmcp",
-          "#2563EB"
-        ),
+          {
+            id: "lo_li_box",
+            nameKey: "l_lo_li_box",
+            kind: "line",
+            data: v("09_lo_li_box"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#6B7280",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#6B7280",
+              line: true,
+            },
+          },
 
-        lomeaLine(
-          "lo_li_box",
-          "l_lo_li_box",
-          "09_lo_li_box",
-          "#6B7280"
-        ),
+          {
+            id: "lo_li_crossline",
+            nameKey: "l_lo_li_crossline",
+            kind: "line",
+            data: v("09_lo_li_crossline"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#F59E0B",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#F59E0B",
+              line: true,
+            },
+          },
 
-        lomeaLine(
-          "lo_li_crossline",
-          "l_lo_li_crossline",
-          "09_lo_li_crossline",
-          "#F59E0B"
-        ),
+          {
+            id: "lo_li_designdrain",
+            nameKey: "l_lo_li_designdrain",
+            kind: "line",
+            data: v("09_lo_li_designdrain"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#0891B2",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#0891B2",
+              line: true,
+            },
+          },
 
-        lomeaLine(
-          "lo_li_designdrain",
-          "l_lo_li_designdrain",
-          "09_lo_li_designdrain",
-          "#0891B2"
-        ),
+          {
+            id: "lo_li_design",
+            nameKey: "l_lo_li_design",
+            kind: "line",
+            data: v("09_lo_li_design"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#22C55E",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#22C55E",
+              line: true,
+            },
+          },
 
-        lomeaLine(
-          "lo_li_design",
-          "l_lo_li_design",
-          "09_lo_li_design",
-          "#22C55E"
-        ),
+          {
+            id: "lo_li_jalan",
+            nameKey: "l_lo_li_jalan",
+            kind: "line",
+            data: v("09_lo_li_jalan"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#E1B94A",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#E1B94A",
+              line: true,
+            },
+          },
 
-        lomeaLine(
-          "lo_li_jalan",
-          "l_lo_li_jalan",
-          "09_lo_li_jalan",
-          "#E1B94A"
-        ),
+          {
+            id: "lo_li_jalanlain",
+            nameKey: "l_lo_li_jalanlain",
+            kind: "line",
+            data: v("09_lo_li_jalanlain"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#CA8A04",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#CA8A04",
+              line: true,
+            },
+          },
 
-        lomeaLine(
-          "lo_li_jalanlain",
-          "l_lo_li_jalanlain",
-          "09_lo_li_jalanlain",
-          "#CA8A04"
-        ),
+          {
+            id: "lo_li_jembatan",
+            nameKey: "l_lo_li_jembatan",
+            kind: "line",
+            data: v("09_lo_li_jembatan"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#92400E",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#92400E",
+              line: true,
+            },
+          },
 
-        lomeaLine(
-          "lo_li_jembatan",
-          "l_lo_li_jembatan",
-          "09_lo_li_jembatan",
-          "#92400E"
-        ),
+          {
+            id: "lo_li_kodebm",
+            nameKey: "l_lo_li_kodebm",
+            kind: "line",
+            data: v("09_lo_li_kodebm"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#2563EB",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#2563EB",
+              line: true,
+            },
+          },
 
-        lomeaLine(
-          "lo_li_kodebm",
-          "l_lo_li_kodebm",
-          "09_lo_li_kodebm",
-          "#2563EB"
-        ),
+          {
+            id: "lo_li_pembuangutama",
+            nameKey: "l_lo_li_pembuangutama",
+            kind: "line",
+            data: v("09_lo_li_pembuangutama"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#0284C7",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#0284C7",
+              line: true,
+            },
+          },
 
-        lomeaLine(
-          "lo_li_pembuangutama",
-          "l_lo_li_pembuangutama",
-          "09_lo_li_pembuangutama",
-          "#0284C7"
-        ),
+          {
+            id: "lo_li_profile",
+            nameKey: "l_lo_li_profile",
+            kind: "line",
+            data: v("09_lo_li_profile"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#64748B",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#64748B",
+              line: true,
+            },
+          },
 
-        lomeaLine(
-          "lo_li_profile",
-          "l_lo_li_profile",
-          "09_lo_li_profile",
-          "#64748B"
-        ),
+          {
+            id: "lo_li_salexisting",
+            nameKey: "l_lo_li_salexisting",
+            kind: "line",
+            data: v("09_lo_li_salexisting"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#16A34A",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#16A34A",
+              line: true,
+            },
+          },
 
-        lomeaLine(
-          "lo_li_salexisting",
-          "l_lo_li_salexisting",
-          "09_lo_li_salexisting",
-          "#16A34A"
-        ),
+          {
+            id: "lo_li_salkwater",
+            nameKey: "l_lo_li_salkwater",
+            kind: "line",
+            data: v("09_lo_li_salkwater"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#06B6D4",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#06B6D4",
+              line: true,
+            },
+          },
 
-        lomeaLine(
-          "lo_li_salkwater",
-          "l_lo_li_salkwater",
-          "09_lo_li_salkwater",
-          "#06B6D4"
-        ),
+          {
+            id: "lo_li_salnodata",
+            nameKey: "l_lo_li_salnodata",
+            kind: "line",
+            data: v("09_lo_li_salnodata"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#9CA3AF",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#9CA3AF",
+              line: true,
+            },
+          },
 
-        lomeaLine(
-          "lo_li_salnodata",
-          "l_lo_li_salnodata",
-          "09_lo_li_salnodata",
-          "#9CA3AF"
-        ),
+          {
+            id: "lo_li_salters",
+            nameKey: "l_lo_li_salters",
+            kind: "line",
+            data: v("09_lo_li_salters"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#7C3AED",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#7C3AED",
+              line: true,
+            },
+          },
 
-        lomeaLine(
-          "lo_li_salters",
-          "l_lo_li_salters",
-          "09_lo_li_salters",
-          "#7C3AED"
-        ),
+          {
+            id: "lo_li_tertiarycrossline",
+            nameKey: "l_lo_li_tertiarycrossline",
+            kind: "line",
+            data: v("09_lo_li_tertiarycrossline"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#F59E0B",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#F59E0B",
+              line: true,
+            },
+          },
 
-        lomeaLine(
-          "lo_li_tertiarycrossline",
-          "l_lo_li_tertiarycrossline",
-          "09_lo_li_tertiarycrossline",
-          "#F59E0B"
-        ),
+          {
+            id: "lo_li_textgcp",
+            nameKey: "l_lo_li_textgcp",
+            kind: "line",
+            data: v("09_lo_li_textgcp"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#DC2626",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#DC2626",
+              line: true,
+            },
+          },
 
-        lomeaLine(
-          "lo_li_textgcp",
-          "l_lo_li_textgcp",
-          "09_lo_li_textgcp",
-          "#DC2626"
-        ),
+          // =====================================================
+          // POINT
+          // =====================================================
 
-        // =====================================================
-        // 09_lo_po_  → POINT
-        // =====================================================
+          {
+            id: "lo_po_asesories",
+            nameKey: "l_lo_po_asesories",
+            kind: "circle",
+            data: v("09_lo_po_asesories"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "circle-color": "#EC4899",
+              "circle-radius": 5,
+              "circle-opacity": 1,
+              "circle-stroke-color": "#FFFFFF",
+              "circle-stroke-width": 1,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#EC4899",
+              circle: true,
+            },
+          },
 
-        lomeaPoint(
-          "lo_po_asesories",
-          "l_lo_po_asesories",
-          "09_lo_po_asesories",
-          "#EC4899"
-        ),
+          {
+            id: "lo_po_bmcp",
+            nameKey: "l_lo_po_bmcp",
+            kind: "circle",
+            data: v("09_lo_po_bmcp"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "circle-color": "#2563EB",
+              "circle-radius": 5,
+              "circle-opacity": 1,
+              "circle-stroke-color": "#FFFFFF",
+              "circle-stroke-width": 1,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#2563EB",
+              circle: true,
+            },
+          },
 
-        lomeaPoint(
-          "lo_po_bmcp",
-          "l_lo_po_bmcp",
-          "09_lo_po_bmcp",
-          "#2563EB"
-        ),
+          {
+            id: "lo_po_design",
+            nameKey: "l_lo_po_design",
+            kind: "circle",
+            data: v("09_lo_po_design"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "circle-color": "#F59E0B",
+              "circle-radius": 5,
+              "circle-opacity": 1,
+              "circle-stroke-color": "#FFFFFF",
+              "circle-stroke-width": 1,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#F59E0B",
+              circle: true,
+            },
+          },
 
-        lomeaPoint(
-          "lo_po_design",
-          "l_lo_po_design",
-          "09_lo_po_design",
-          "#F59E0B"
-        ),
+          {
+            id: "lo_po_kodebm",
+            nameKey: "l_lo_po_kodebm",
+            kind: "circle",
+            data: v("09_lo_po_kodebm"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "circle-color": "#7C3AED",
+              "circle-radius": 5,
+              "circle-opacity": 1,
+              "circle-stroke-color": "#FFFFFF",
+              "circle-stroke-width": 1,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#7C3AED",
+              circle: true,
+            },
+          },
 
-        lomeaPoint(
-          "lo_po_kodebm",
-          "l_lo_po_kodebm",
-          "09_lo_po_kodebm",
-          "#7C3AED"
-        ),
+          {
+            id: "lo_po_patoksaluran",
+            nameKey: "l_lo_po_patoksaluran",
+            kind: "circle",
+            data: v("09_lo_po_patoksaluran"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "circle-color": "#DC2626",
+              "circle-radius": 5,
+              "circle-opacity": 1,
+              "circle-stroke-color": "#FFFFFF",
+              "circle-stroke-width": 1,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#DC2626",
+              circle: true,
+            },
+          },
 
-        lomeaPoint(
-          "lo_po_patoksaluran",
-          "l_lo_po_patoksaluran",
-          "09_lo_po_patoksaluran",
-          "#DC2626"
-        ),
+          {
+            id: "lo_po_salkwater",
+            nameKey: "l_lo_po_salkwater",
+            kind: "circle",
+            data: v("09_lo_po_salkwater"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "circle-color": "#06B6D4",
+              "circle-radius": 5,
+              "circle-opacity": 1,
+              "circle-stroke-color": "#FFFFFF",
+              "circle-stroke-width": 1,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#06B6D4",
+              circle: true,
+            },
+          },
 
-        lomeaPoint(
-          "lo_po_salkwater",
-          "l_lo_po_salkwater",
-          "09_lo_po_salkwater",
-          "#06B6D4"
-        ),
+          {
+            id: "lo_po_tertiarycrosspoint",
+            nameKey: "l_lo_po_tertiarycrosspoint",
+            kind: "circle",
+            data: v("09_lo_po_tertiarycrosspoint"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "circle-color": "#22C55E",
+              "circle-radius": 5,
+              "circle-opacity": 1,
+              "circle-stroke-color": "#FFFFFF",
+              "circle-stroke-width": 1,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#22C55E",
+              circle: true,
+            },
+          },
 
-        lomeaPoint(
-          "lo_po_tertiarycrosspoint",
-          "l_lo_po_tertiarycrosspoint",
-          "09_lo_po_tertiarycrosspoint",
-          "#22C55E"
-        ),
+          {
+            id: "lo_po_textcrosstertiary",
+            nameKey: "l_lo_po_textcrosstertiary",
+            kind: "circle",
+            data: v("09_lo_po_textcrosstertiary"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "circle-color": "#F97316",
+              "circle-radius": 5,
+              "circle-opacity": 1,
+              "circle-stroke-color": "#FFFFFF",
+              "circle-stroke-width": 1,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#F97316",
+              circle: true,
+            },
+          },
 
-        lomeaPoint(
-          "lo_po_textcrosstertiary",
-          "l_lo_po_textcrosstertiary",
-          "09_lo_po_textcrosstertiary",
-          "#F97316"
-        ),
-
-        lomeaPoint(
-          "lo_po_textgcp",
-          "l_lo_po_textgcp",
-          "09_lo_po_textgcp",
-          "#EF4444"
-        ),
-      ],
-    },
-  ],
-},
+          {
+            id: "lo_po_textgcp",
+            nameKey: "l_lo_po_textgcp",
+            kind: "circle",
+            data: v("09_lo_po_textgcp"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "circle-color": "#EF4444",
+              "circle-radius": 5,
+              "circle-opacity": 1,
+              "circle-stroke-color": "#FFFFFF",
+              "circle-stroke-width": 1,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#EF4444",
+              circle: true,
+            },
+          },
+        ],
+      },
+    ],
+  },
  // RAIBERE
 {
   titleKey: "g_raibere",
