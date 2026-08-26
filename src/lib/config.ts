@@ -1858,313 +1858,822 @@ export const GROUPS: LayerGroup[] = [
  // =====================================================
 // RAIBERE
 // =====================================================
-
-// RAIBERE 2009
 {
-  id: "rei09_ar_0",
-  nameKey: "l_rei09_ar_0",
-  kind: "fill",
-  data: v("09_rei_ar_0"),
-},
+  titleKey: "g_raibere",
+  dot: "#10B981",
 
-{
-  id: "rei09_ar_bangsadap",
-  nameKey: "l_rei09_ar_bangsadap",
-  kind: "fill",
-  data: v("09_rei_ar_bangsadap"),
-},
+  layers: [
 
-{
-  id: "rei09_ar_bmcp",
-  nameKey: "l_rei09_ar_bmcp",
-  kind: "fill",
-  data: v("09_rei_ar_bmcp"),
-},
+    // =====================================================
+    // RAIBERE 2009
+    // =====================================================
 
-{
-  id: "rei09_ar_boxkwarter",
-  nameKey: "l_rei09_ar_boxkwarter",
-  kind: "fill",
-  data: v("09_rei_ar_boxkwarter"),
-},
+    {
+      id: "raibere_2009",
+      nameKey: "l_raibere_2009",
+      kind: "line",
+      paint: {},
+      defaultOn: false,
 
-{
-  id: "rei09_ar_boxtersier",
-  nameKey: "l_rei09_ar_boxtersier",
-  kind: "fill",
-  data: v("09_rei_ar_boxtersier"),
-},
+      children: [
 
-{
-  id: "rei09_ar_desain",
-  nameKey: "l_rei09_ar_desain",
-  kind: "fill",
-  data: v("09_rei_ar_desain"),
-},
+        {
+          id: "rei09_ar_0",
+          nameKey: "l_rei09_ar_0",
+          kind: "fill",
+          data: v("09_rei_ar_0"),
+          clickable: true,
+          paint: {
+            "fill-color": "#8B5CF6",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#7C3AED",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#8B5CF6",
+          },
+        },
 
-{
-  id: "rei09_ar_legend",
-  nameKey: "l_rei09_ar_legend",
-  kind: "fill",
-  data: v("09_rei_ar_legend"),
-},
+        {
+          id: "rei09_ar_bangsadap",
+          nameKey: "l_rei09_ar_bangsadap",
+          kind: "fill",
+          data: v("09_rei_ar_bangsadap"),
+          clickable: true,
+          paint: {
+            "fill-color": "#F59E0B",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#D97706",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#F59E0B",
+          },
+        },
 
-{
-  id: "rei09_ar_salpemb",
-  nameKey: "l_rei09_ar_salpemb",
-  kind: "fill",
-  data: v("09_rei_ar_salpemb"),
-},
+        {
+          id: "rei09_ar_bmcp",
+          nameKey: "l_rei09_ar_bmcp",
+          kind: "fill",
+          data: v("09_rei_ar_bmcp"),
+          clickable: true,
+          paint: {
+            "fill-color": "#2563EB",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#1D4ED8",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#2563EB",
+          },
+        },
 
-{
-  id: "rei09_li_bangunan",
-  nameKey: "l_rei09_li_bangunan",
-  kind: "line",
-  data: v("09_rei_li_bangunan"),
-},
+        {
+          id: "rei09_ar_boxkwarter",
+          nameKey: "l_rei09_ar_boxkwarter",
+          kind: "fill",
+          data: v("09_rei_ar_boxkwarter"),
+          clickable: true,
+          paint: {
+            "fill-color": "#0891B2",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#0E7490",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#0891B2",
+          },
+        },
 
-{
-  id: "rei09_li_contourmayor",
-  nameKey: "l_rei09_li_contourmayor",
-  kind: "line",
-  data: v("09_rei_li_contourmayor"),
-},
+        {
+          id: "rei09_ar_boxtersier",
+          nameKey: "l_rei09_ar_boxtersier",
+          kind: "fill",
+          data: v("09_rei_ar_boxtersier"),
+          clickable: true,
+          paint: {
+            "fill-color": "#06B6D4",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#0891B2",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#06B6D4",
+          },
+        },
 
-{
-  id: "rei09_li_contourminor",
-  nameKey: "l_rei09_li_contourminor",
-  kind: "line",
-  data: v("09_rei_li_contourminor"),
-},
+        {
+          id: "rei09_ar_desain",
+          nameKey: "l_rei09_ar_desain",
+          kind: "fill",
+          data: v("09_rei_ar_desain"),
+          clickable: true,
+          paint: {
+            "fill-color": "#22C55E",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#16A34A",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#22C55E",
+          },
+        },
 
-{
-  id: "rei09_li_cotambah",
-  nameKey: "l_rei09_li_cotambah",
-  kind: "line",
-  data: v("09_rei_li_cotambah"),
-},
+        {
+          id: "rei09_ar_legend",
+          nameKey: "l_rei09_ar_legend",
+          kind: "fill",
+          data: v("09_rei_ar_legend"),
+          clickable: true,
+          paint: {
+            "fill-color": "#A855F7",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#9333EA",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#A855F7",
+          },
+        },
 
-{
-  id: "rei09_li_jalan",
-  nameKey: "l_rei09_li_jalan",
-  kind: "line",
-  data: v("09_rei_li_jalan"),
-},
+        {
+          id: "rei09_ar_salpemb",
+          nameKey: "l_rei09_ar_salpemb",
+          kind: "fill",
+          data: v("09_rei_ar_salpemb"),
+          clickable: true,
+          paint: {
+            "fill-color": "#EC4899",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#DB2777",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#EC4899",
+          },
+        },
 
-{
-  id: "rei09_li_linepol",
-  nameKey: "l_rei09_li_linepol",
-  kind: "line",
-  data: v("09_rei_li_linepol"),
-},
+        // -------------------------
+        // LINE
+        // -------------------------
 
-{
-  id: "rei09_li_salexisting",
-  nameKey: "l_rei09_li_salexisting",
-  kind: "line",
-  data: v("09_rei_li_salexisting"),
-},
+        {
+          id: "rei09_li_bangunan",
+          nameKey: "l_rei09_li_bangunan",
+          kind: "line",
+          data: v("09_rei_li_bangunan"),
+          clickable: true,
+          paint: {
+            "line-color": "#7C3AED",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#7C3AED",
+            line: true,
+          },
+        },
 
-{
-  id: "rei09_li_saltersier",
-  nameKey: "l_rei09_li_saltersier",
-  kind: "line",
-  data: v("09_rei_li_saltersier"),
-},
+        {
+          id: "rei09_li_contourmayor",
+          nameKey: "l_rei09_li_contourmayor",
+          kind: "line",
+          data: v("09_rei_li_contourmayor"),
+          clickable: true,
+          paint: {
+            "line-color": "#92400E",
+            "line-width": 1.5,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#92400E",
+            line: true,
+          },
+        },
 
-{
-  id: "rei09_li_sungaialur",
-  nameKey: "l_rei09_li_sungaialur",
-  kind: "line",
-  data: v("09_rei_li_sungaialur"),
-},
+        {
+          id: "rei09_li_contourminor",
+          nameKey: "l_rei09_li_contourminor",
+          kind: "line",
+          data: v("09_rei_li_contourminor"),
+          clickable: true,
+          paint: {
+            "line-color": "#A16207",
+            "line-width": 1,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#A16207",
+            line: true,
+          },
+        },
 
-{
-  id: "rei09_po_asesories",
-  nameKey: "l_rei09_po_asesories",
-  kind: "circle",
-  data: v("09_rei_po_asesories"),
-},
+        {
+          id: "rei09_li_cotambah",
+          nameKey: "l_rei09_li_cotambah",
+          kind: "line",
+          data: v("09_rei_li_cotambah"),
+          clickable: true,
+          paint: {
+            "line-color": "#0EA5E9",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#0EA5E9",
+            line: true,
+          },
+        },
 
-{
-  id: "rei09_po_crosstierser",
-  nameKey: "l_rei09_po_crosstierser",
-  kind: "circle",
-  data: v("09_rei_po_crosstierser"),
-},
+        {
+          id: "rei09_li_jalan",
+          nameKey: "l_rei09_li_jalan",
+          kind: "line",
+          data: v("09_rei_li_jalan"),
+          clickable: true,
+          paint: {
+            "line-color": "#E1B94A",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#E1B94A",
+            line: true,
+          },
+        },
 
-{
-  id: "rei09_po_namabang",
-  nameKey: "l_rei09_po_namabang",
-  kind: "symbol",
-  data: v("09_rei_po_namabang"),
-},
+        {
+          id: "rei09_li_linepol",
+          nameKey: "l_rei09_li_linepol",
+          kind: "line",
+          data: v("09_rei_li_linepol"),
+          clickable: true,
+          paint: {
+            "line-color": "#6B7280",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#6B7280",
+            line: true,
+          },
+        },
 
-{
-  id: "rei09_po_patoksaluran",
-  nameKey: "l_rei09_po_patoksaluran",
-  kind: "circle",
-  data: v("09_rei_po_patoksaluran"),
-},
+        {
+          id: "rei09_li_salexisting",
+          nameKey: "l_rei09_li_salexisting",
+          kind: "line",
+          data: v("09_rei_li_salexisting"),
+          clickable: true,
+          paint: {
+            "line-color": "#16A34A",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#16A34A",
+            line: true,
+          },
+        },
 
-{
-  id: "rei09_po_text",
-  nameKey: "l_rei09_po_text",
-  kind: "symbol",
-  data: v("09_rei_po_text"),
-},
+        {
+          id: "rei09_li_saltersier",
+          nameKey: "l_rei09_li_saltersier",
+          kind: "line",
+          data: v("09_rei_li_saltersier"),
+          clickable: true,
+          paint: {
+            "line-color": "#7C3AED",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#7C3AED",
+            line: true,
+          },
+        },
 
-{
-  id: "rei09_po_textcrosscanal",
-  nameKey: "l_rei09_po_textcrosscanal",
-  kind: "symbol",
-  data: v("09_rei_po_textcrosscanal"),
-},
+        {
+          id: "rei09_li_sungaialur",
+          nameKey: "l_rei09_li_sungaialur",
+          kind: "line",
+          data: v("09_rei_li_sungaialur"),
+          clickable: true,
+          paint: {
+            "line-color": "#0284C7",
+            "line-width": 2,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#0284C7",
+            line: true,
+          },
+        },
 
-{
-  id: "rei09_po_textcrosstierser",
-  nameKey: "l_rei09_po_textcrosstierser",
-  kind: "symbol",
-  data: v("09_rei_po_textcrosstierser"),
-},
+        // -------------------------
+        // POINT
+        // -------------------------
 
-{
-  id: "rei09_po_textpol",
-  nameKey: "l_rei09_po_textpol",
-  kind: "symbol",
-  data: v("09_rei_po_textpol"),
-},
+        {
+          id: "rei09_po_asesories",
+          nameKey: "l_rei09_po_asesories",
+          kind: "circle",
+          data: v("09_rei_po_asesories"),
+          clickable: true,
+          paint: {
+            "circle-color": "#EC4899",
+            "circle-radius": 5,
+            "circle-opacity": 1,
+            "circle-stroke-color": "#FFFFFF",
+            "circle-stroke-width": 1,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#EC4899",
+            circle: true,
+          },
+        },
 
+        {
+          id: "rei09_po_crosstierser",
+          nameKey: "l_rei09_po_crosstierser",
+          kind: "circle",
+          data: v("09_rei_po_crosstierser"),
+          clickable: true,
+          paint: {
+            "circle-color": "#F59E0B",
+            "circle-radius": 5,
+            "circle-opacity": 1,
+            "circle-stroke-color": "#FFFFFF",
+            "circle-stroke-width": 1,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#F59E0B",
+            circle: true,
+          },
+        },
 
-// =====================================================
-// RAIBERE 2026
-// =====================================================
+        {
+          id: "rei09_po_namabang",
+          nameKey: "l_rei09_po_namabang",
+          kind: "symbol",
+          data: v("09_rei_po_namabang"),
+          clickable: true,
+          paint: {},
+          defaultOn: false,
+          legend: {
+            color: "#111827",
+          },
+        },
 
-{
-  id: "rei26_ar_access",
-  nameKey: "l_rei26_ar_access",
-  kind: "fill",
-  data: v("26_rei_ar_access"),
-},
+        {
+          id: "rei09_po_patoksaluran",
+          nameKey: "l_rei09_po_patoksaluran",
+          kind: "circle",
+          data: v("09_rei_po_patoksaluran"),
+          clickable: true,
+          paint: {
+            "circle-color": "#DC2626",
+            "circle-radius": 5,
+            "circle-opacity": 1,
+            "circle-stroke-color": "#FFFFFF",
+            "circle-stroke-width": 1,
+          },
+          defaultOn: false,
+          legend: {
+            color: "#DC2626",
+            circle: true,
+          },
+        },
 
-{
-  id: "rei26_ar_crest",
-  nameKey: "l_rei26_ar_crest",
-  kind: "fill",
-  data: v("26_rei_ar_crest"),
-},
+        {
+          id: "rei09_po_text",
+          nameKey: "l_rei09_po_text",
+          kind: "symbol",
+          data: v("09_rei_po_text"),
+          clickable: true,
+          paint: {},
+          defaultOn: false,
+          legend: {
+            color: "#111827",
+          },
+        },
 
-{
-  id: "rei26_ar_downstream",
-  nameKey: "l_rei26_ar_downstream",
-  kind: "fill",
-  data: v("26_rei_ar_downstream"),
-},
+        {
+          id: "rei09_po_textcrosscanal",
+          nameKey: "l_rei09_po_textcrosscanal",
+          kind: "symbol",
+          data: v("09_rei_po_textcrosscanal"),
+          clickable: true,
+          paint: {},
+          defaultOn: false,
+          legend: {
+            color: "#111827",
+          },
+        },
 
-{
-  id: "rei26_ar_flushingcanal",
-  nameKey: "l_rei26_ar_flushingcanal",
-  kind: "fill",
-  data: v("26_rei_ar_flushingcanal"),
-},
+        {
+          id: "rei09_po_textcrosstierser",
+          nameKey: "l_rei09_po_textcrosstierser",
+          kind: "symbol",
+          data: v("09_rei_po_textcrosstierser"),
+          clickable: true,
+          paint: {},
+          defaultOn: false,
+          legend: {
+            color: "#111827",
+          },
+        },
 
-{
-  id: "rei26_ar_flushinggate",
-  nameKey: "l_rei26_ar_flushinggate",
-  kind: "fill",
-  data: v("26_rei_ar_flushinggate"),
-},
+        {
+          id: "rei09_po_textpol",
+          nameKey: "l_rei09_po_textpol",
+          kind: "symbol",
+          data: v("09_rei_po_textpol"),
+          clickable: true,
+          paint: {},
+          defaultOn: false,
+          legend: {
+            color: "#111827",
+          },
+        },
+      ],
+    },
 
-{
-  id: "rei26_ar_flushingpier",
-  nameKey: "l_rei26_ar_flushingpier",
-  kind: "fill",
-  data: v("26_rei_ar_flushingpier"),
-},
+    // =====================================================
+    // RAIBERE 2026
+    // =====================================================
 
-{
-  id: "rei26_ar_ingate",
-  nameKey: "l_rei26_ar_ingate",
-  kind: "fill",
-  data: v("26_rei_ar_ingate"),
-},
+    {
+      id: "raibere_2026",
+      nameKey: "l_raibere_2026",
+      kind: "line",
+      paint: {},
+      defaultOn: false,
 
-{
-  id: "rei26_ar_intake",
-  nameKey: "l_rei26_ar_intake",
-  kind: "fill",
-  data: v("26_rei_ar_intake"),
-},
+      children: [
 
-{
-  id: "rei26_ar_irrigation",
-  nameKey: "l_rei26_ar_irrigation",
-  kind: "fill",
-  data: v("26_rei_ar_irrigation"),
-},
+        {
+          id: "rei26_ar_access",
+          nameKey: "l_rei26_ar_access",
+          kind: "fill",
+          data: v("26_rei_ar_access"),
+          clickable: true,
+          paint: {
+            "fill-color": "#F59E0B",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#D97706",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#F59E0B",
+          },
+        },
 
-{
-  id: "rei26_ar_parking",
-  nameKey: "l_rei26_ar_parking",
-  kind: "fill",
-  data: v("26_rei_ar_parking"),
-},
+        {
+          id: "rei26_ar_crest",
+          nameKey: "l_rei26_ar_crest",
+          kind: "fill",
+          data: v("26_rei_ar_crest"),
+          clickable: true,
+          paint: {
+            "fill-color": "#7C3AED",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#5B21B6",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#7C3AED",
+          },
+        },
 
-{
-  id: "rei26_ar_primer",
-  nameKey: "l_rei26_ar_primer",
-  kind: "fill",
-  data: v("26_rei_ar_primer"),
-},
+        {
+          id: "rei26_ar_downstream",
+          nameKey: "l_rei26_ar_downstream",
+          kind: "fill",
+          data: v("26_rei_ar_downstream"),
+          clickable: true,
+          paint: {
+            "fill-color": "#2563EB",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#1D4ED8",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#2563EB",
+          },
+        },
 
-{
-  id: "rei26_ar_road",
-  nameKey: "l_rei26_ar_road",
-  kind: "fill",
-  data: v("26_rei_ar_road"),
-},
+        {
+          id: "rei26_ar_flushingcanal",
+          nameKey: "l_rei26_ar_flushingcanal",
+          kind: "fill",
+          data: v("26_rei_ar_flushingcanal"),
+          clickable: true,
+          paint: {
+            "fill-color": "#06B6D4",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#0891B2",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#06B6D4",
+          },
+        },
 
-{
-  id: "rei26_ar_rock",
-  nameKey: "l_rei26_ar_rock",
-  kind: "fill",
-  data: v("26_rei_ar_rock"),
-},
+        {
+          id: "rei26_ar_flushinggate",
+          nameKey: "l_rei26_ar_flushinggate",
+          kind: "fill",
+          data: v("26_rei_ar_flushinggate"),
+          clickable: true,
+          paint: {
+            "fill-color": "#0EA5E9",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#0284C7",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#0EA5E9",
+          },
+        },
 
-{
-  id: "rei26_ar_silt",
-  nameKey: "l_rei26_ar_silt",
-  kind: "fill",
-  data: v("26_rei_ar_silt"),
-},
+        {
+          id: "rei26_ar_flushingpier",
+          nameKey: "l_rei26_ar_flushingpier",
+          kind: "fill",
+          data: v("26_rei_ar_flushingpier"),
+          clickable: true,
+          paint: {
+            "fill-color": "#0891B2",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#0E7490",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#0891B2",
+          },
+        },
 
-{
-  id: "rei26_ar_stilling",
-  nameKey: "l_rei26_ar_stilling",
-  kind: "fill",
-  data: v("26_rei_ar_stilling"),
-},
+        {
+          id: "rei26_ar_ingate",
+          nameKey: "l_rei26_ar_ingate",
+          kind: "fill",
+          data: v("26_rei_ar_ingate"),
+          clickable: true,
+          paint: {
+            "fill-color": "#16A34A",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#15803D",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#16A34A",
+          },
+        },
 
-{
-  id: "rei26_ar_upstream",
-  nameKey: "l_rei26_ar_upstream",
-  kind: "fill",
-  data: v("26_rei_ar_upstream"),
-},
+        {
+          id: "rei26_ar_intake",
+          nameKey: "l_rei26_ar_intake",
+          kind: "fill",
+          data: v("26_rei_ar_intake"),
+          clickable: true,
+          paint: {
+            "fill-color": "#22C55E",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#16A34A",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#22C55E",
+          },
+        },
 
-{
-  id: "rei26_ar_weirbody",
-  nameKey: "l_rei26_ar_weirbody",
-  kind: "fill",
-  data: v("26_rei_ar_weirbody"),
-},
+        {
+          id: "rei26_ar_irrigation",
+          nameKey: "l_rei26_ar_irrigation",
+          kind: "fill",
+          data: v("26_rei_ar_irrigation"),
+          clickable: true,
+          paint: {
+            "fill-color": "#15803D",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#166534",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#15803D",
+          },
+        },
 
-{
-  id: "rei26_ar_wing",
-  nameKey: "l_rei26_ar_wing",
-  kind: "fill",
-  data: v("26_rei_ar_wing"),
-},
+        {
+          id: "rei26_ar_parking",
+          nameKey: "l_rei26_ar_parking",
+          kind: "fill",
+          data: v("26_rei_ar_parking"),
+          clickable: true,
+          paint: {
+            "fill-color": "#78716C",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#57534E",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#78716C",
+          },
+        },
+
+        {
+          id: "rei26_ar_primer",
+          nameKey: "l_rei26_ar_primer",
+          kind: "fill",
+          data: v("26_rei_ar_primer"),
+          clickable: true,
+          paint: {
+            "fill-color": "#92400E",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#78350F",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#92400E",
+          },
+        },
+
+        {
+          id: "rei26_ar_road",
+          nameKey: "l_rei26_ar_road",
+          kind: "fill",
+          data: v("26_rei_ar_road"),
+          clickable: true,
+          paint: {
+            "fill-color": "#CA8A04",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#A16207",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#CA8A04",
+          },
+        },
+
+        {
+          id: "rei26_ar_rock",
+          nameKey: "l_rei26_ar_rock",
+          kind: "fill",
+          data: v("26_rei_ar_rock"),
+          clickable: true,
+          paint: {
+            "fill-color": "#6B7280",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#4B5563",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#6B7280",
+          },
+        },
+
+        {
+          id: "rei26_ar_silt",
+          nameKey: "l_rei26_ar_silt",
+          kind: "fill",
+          data: v("26_rei_ar_silt"),
+          clickable: true,
+          paint: {
+            "fill-color": "#A8A29E",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#78716C",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#A8A29E",
+          },
+        },
+
+        {
+          id: "rei26_ar_stilling",
+          nameKey: "l_rei26_ar_stilling",
+          kind: "fill",
+          data: v("26_rei_ar_stilling"),
+          clickable: true,
+          paint: {
+            "fill-color": "#38BDF8",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#0284C7",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#38BDF8",
+          },
+        },
+
+        {
+          id: "rei26_ar_upstream",
+          nameKey: "l_rei26_ar_upstream",
+          kind: "fill",
+          data: v("26_rei_ar_upstream"),
+          clickable: true,
+          paint: {
+            "fill-color": "#0EA5E9",
+            "fill-opacity": 0.35,
+            "fill-outline-color": "#0284C7",
+          },
+          defaultOn: false,
+          opacity: 0.35,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#0EA5E9",
+          },
+        },
+
+        {
+          id: "rei26_ar_weirbody",
+          nameKey: "l_rei26_ar_weirbody",
+          kind: "fill",
+          data: v("26_rei_ar_weirbody"),
+          clickable: true,
+          paint: {
+            "fill-color": "#7C3AED",
+            "fill-opacity": 0.5,
+            "fill-outline-color": "#5B21B6",
+          },
+          defaultOn: false,
+          opacity: 0.5,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#7C3AED",
+          },
+        },
+
+        {
+          id: "rei26_ar_wing",
+          nameKey: "l_rei26_ar_wing",
+          kind: "fill",
+          data: v("26_rei_ar_wing"),
+          clickable: true,
+          paint: {
+            "fill-color": "#6366F1",
+            "fill-opacity": 0.4,
+            "fill-outline-color": "#4338CA",
+          },
+          defaultOn: false,
+          opacity: 0.4,
+          opacityProp: "fill-opacity",
+          legend: {
+            color: "#6366F1",
+          },
+        },
+      ],
+    },
+  ],
 },
   
 {
