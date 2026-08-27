@@ -595,15 +595,6 @@ export const GROUPS: LayerGroup[] = [
     line: true,
   },
 
-  // LABEL SUBKELAS
-  label: {
-    field: "layer",
-    size: 11,
-    color: "#8B3A2E",
-    haloColor: "#FFFFFF",
-    haloWidth: 1.5,
-  },
-
   sublayers: [
     {
       id: "akadiru_kede",
