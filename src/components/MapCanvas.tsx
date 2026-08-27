@@ -87,56 +87,28 @@ function buildStyle(): maplibregl.StyleSpecification {
   ];
 
   // BASEMAP
-  BASEMAPS.forEach((b) => {
-    sources[`bm_${b.id}`] = {
-      type: "raster",
-      tiles: b.tiles,
-      tileSize: 256,
-      attribution: b.attribution,
-      ...(b.minzoom != null ? { minzoom: b.minzoom } : {}),
-      ...(b.maxzoom != null ? { maxzoom: b.maxzoom } : {}),
-    };
-    layers.push({
-  id: `${l.id}_outline`,
-  type: "line",
-  source: l.id,
+BASEMAPS.forEach((b) => {
+  sources[`bm_${b.id}`] = {
+    type: "raster",
+    tiles: b.tiles,
+    tileSize: 256,
+    attribution: b.attribution,
+    ...(b.minzoom != null ? { minzoom: b.minzoom } : {}),
+    ...(b.maxzoom != null ? { maxzoom: b.maxzoom } : {}),
+  };
 
-  layout: {
-    visibility: l.defaultOn
-      ? "visible"
-      : "none",
-  },
+  layers.push({
+    id: `bm_${b.id}`,
+    type: "raster",
+    source: `bm_${b.id}`,
 
-  paint: {
-    "line-color":
-      l.id === "desa"
-        ? "#E53935"
-        : l.id === "posto"
-        ? "#FF6B6B"
-        : l.id === "kotamadya"
-        ? "#A66DD4"
-        : "#000000",
-
-    "line-width":
-      l.id === "desa"
-        ? 1.2
-        : l.id === "posto"
-        ? 1.6
-        : l.id === "kotamadya"
-        ? 2
-        : 1,
-
-    "line-dasharray":
-      l.id === "desa"
-        ? [8, 4]
-        : l.id === "posto"
-        ? [10, 5]
-        : l.id === "kotamadya"
-        ? [12, 5]
-        : [1, 0],
-  },
-} as any);
-  });
+    layout: {
+      visibility: b.id === "sat"
+        ? "visible"
+        : "none",
+    },
+  } as any);
+});
 
   // DATA LAYERS
   ALL_LAYERS.forEach((l) => {
@@ -350,6 +322,55 @@ function buildStyle(): maplibregl.StyleSpecification {
       "text-halo-blur": 0.2,
     },
   } as any);
+        // =====================================================
+// OUTLINE POLYGON
+// Fill transparan, hanya batas polygon yang terlihat
+// =====================================================
+
+if (l.kind === "fill") {
+  layers.push({
+    id: `${l.id}_outline`,
+    type: "line",
+    source: l.id,
+
+    layout: {
+      visibility: l.defaultOn
+        ? "visible"
+        : "none",
+    },
+
+    paint: {
+      "line-color":
+        l.id === "desa"
+          ? "#E53935"
+          : l.id === "posto"
+          ? "#FF6B6B"
+          : l.id === "kotamadya"
+          ? "#A66DD4"
+          : "#000000",
+
+      "line-width":
+        l.id === "desa"
+          ? 1.2
+          : l.id === "posto"
+          ? 1.6
+          : l.id === "kotamadya"
+          ? 2
+          : 1,
+
+      "line-dasharray":
+        l.id === "desa"
+          ? [8, 4]
+          : l.id === "posto"
+          ? [10, 5]
+          : l.id === "kotamadya"
+          ? [12, 5]
+          : [1, 0],
+
+      "line-opacity": 1,
+    },
+  } as any);
+}
 }
     }
   });
@@ -852,18 +873,18 @@ export default function MapCanvas({
           const mapLayer = map.getLayer(l.id);
 
           const labelLayer =
-            l.label && map.getLayer(`${l.id}_label`);
+  l.label && map.getLayer(`${l.id}_label`);
+
+const outlineLayer =
+  l.kind === "fill"
+    ? map.getLayer(`${l.id}_outline`)
+    : null;
 
           if (!mapLayer) {
             return;
           }
 
           const isVisible = !!s.visible[l.id];
-
-          // =====================================================
-          // LAZY LOAD
-          // Kalau user menyalakan layer, baru download datanya
-          // =====================================================
 
           if (
             isVisible &&
@@ -872,11 +893,6 @@ export default function MapCanvas({
           ) {
             void loadGeoJSONLayer(map, l);
           }
-
-          // =====================================================
-          // VISIBILITY
-          // =====================================================
-
           map.setLayoutProperty(
             l.id,
             "visibility",
@@ -895,11 +911,16 @@ export default function MapCanvas({
                 : "none"
             );
           }
-
-          // =====================================================
-          // SUBCLASS FILTER
-          // =====================================================
-
+// Outline mengikuti visibility layer utama
+if (outlineLayer) {
+  map.setLayoutProperty(
+    `${l.id}_outline`,
+    "visibility",
+    isVisible
+      ? "visible"
+      : "none"
+  );
+}
           if (l.sublayers) {
             const filter = getSubkelasFilter(
               l,
@@ -911,10 +932,6 @@ export default function MapCanvas({
               filter ?? null
             );
           }
-
-          // =====================================================
-          // OPACITY
-          // =====================================================
 
           if (
             l.opacityProp &&
