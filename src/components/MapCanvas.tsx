@@ -422,6 +422,22 @@ async function registerMapIcons(map: MLMap) {
       id: "irrigation_point",
       url: "/icons/irrigation_point.png",
     },
+    {
+      id: "drill",
+      url: "/icons/drill.png",
+    },
+    {
+      id: "kupasan",
+      url: "/icons/kupasan.png",
+    },
+    {
+      id: "desain",
+      url: "/icons/desain.png",
+    },
+    {
+      id: "kupasan",
+      url: "/icons/kupasan.png",
+    },
   ];
 
   for (const icon of icons) {
