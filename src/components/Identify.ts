@@ -320,12 +320,25 @@ private removeHighlight() {
   // ---------- EVENTS ----------
 
   private handleMove = (e: MapMouseEvent) => {
-    const map = this.map;
-    if (!map || !this.active) return;
+  const map = this.map;
+  if (!map || !this.active) return;
 
-    const hit = this.query(e.point).length > 0;
-    map.getCanvas().style.cursor = hit ? CURSOR_HIT : CURSOR_IDLE;
-  };
+  const features = this.query(e.point);
+  const feature = features[0] ?? null;
+
+  if (feature) {
+    map.getCanvas().style.cursor = CURSOR_HIT;
+    this.highlightFeature(feature);
+  } else {
+    map.getCanvas().style.cursor = CURSOR_IDLE;
+
+    // Kalau tidak sedang ada popup hasil klik,
+    // hilangkan highlight hover.
+    if (!this.popup) {
+      this.removeHighlight();
+    }
+  }
+};
 
   private handleClick = (e: MapMouseEvent) => {
     const map = this.map;
@@ -336,8 +349,10 @@ private removeHighlight() {
 this.closePopup();
 
 if (features.length > 0) {
-  this.highlightFeature(features[0]);
+  this.selectedFeature = features[0];
+  this.highlightFeature(this.selectedFeature);
 } else {
+  this.selectedFeature = null;
   this.removeHighlight();
 }
 
