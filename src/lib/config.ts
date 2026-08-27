@@ -1172,24 +1172,6 @@ export const GROUPS: LayerGroup[] = [
           },
 
           {
-            id: "lo_li_bataslaut",
-            nameKey: "l_lo_li_bataslaut",
-            kind: "line",
-            data: v("09_lo_li_bataslaut"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "line-color": "#0EA5E9",
-              "line-width": 2,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#0EA5E9",
-              line: true,
-            },
-          },
-
-          {
             id: "lo_li_crossline",
             nameKey: "l_lo_li_crossline",
             kind: "line",
@@ -1208,10 +1190,10 @@ export const GROUPS: LayerGroup[] = [
           },
 
           {
-            id: "lo_li_designdrain",
-            nameKey: "l_lo_li_designdrain",
+            id: "lo_li_desaindrain",
+            nameKey: "l_lo_li_desaindrain",
             kind: "line",
-            data: v("09_lo_li_designdrain"),
+            data: v("09_lo_li_desaindrain"),
             clickable: true,
             lazy: true,
             paint: {
@@ -1239,24 +1221,6 @@ export const GROUPS: LayerGroup[] = [
             defaultOn: false,
             legend: {
               color: "#E1B94A",
-              line: true,
-            },
-          },
-
-          {
-            id: "lo_li_jalanlain",
-            nameKey: "l_lo_li_jalanlain",
-            kind: "line",
-            data: v("09_lo_li_jalanlain"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "line-color": "#CA8A04",
-              "line-width": 2,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#CA8A04",
               line: true,
             },
           },
@@ -1329,24 +1293,6 @@ export const GROUPS: LayerGroup[] = [
             defaultOn: false,
             legend: {
               color: "#16A34A",
-              line: true,
-            },
-          },
-
-          {
-            id: "lo_li_salnodata",
-            nameKey: "l_lo_li_salnodata",
-            kind: "line",
-            data: v("09_lo_li_salnodata"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "line-color": "#9CA3AF",
-              "line-width": 2,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#9CA3AF",
               line: true,
             },
           },
