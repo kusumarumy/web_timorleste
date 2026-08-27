@@ -889,7 +889,7 @@ export const GROUPS: LayerGroup[] = [
 
         legend: {
           color: "#8B5CF6",
-          svgL "coordinate",
+          svg: "coordinate",
         },
       },
 
