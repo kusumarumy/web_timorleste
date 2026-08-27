@@ -253,6 +253,7 @@ export const DICTS: Record<Lang, Dict> = {
     bearing: "Arah",
     loading_layer_title: "Memuat Layer",
     loading_layer_text: "sedang dimuat...",
+    elevation_info: "Elevasi menggunakan DTM 3 m."
   },
 
   en: {
@@ -506,6 +507,7 @@ export const DICTS: Record<Lang, Dict> = {
     bearing: "Bearing",
     loading_layer_title: "Loading Layers",
     loading_layer_text: "are loading...",
+    elevation_info: "Elevation uses the 3 m DTM."
   },
 
   pt: {
@@ -758,6 +760,7 @@ slope_degree: "Ângulo (°)",
     bearing: "Direção",
     loading_layer_title: "A carregar camadas",
     loading_layer_text: "estão a carregar...",
+    elevation_info: "A elevação utiliza o DTM de 3 m."
   },
 };
 
