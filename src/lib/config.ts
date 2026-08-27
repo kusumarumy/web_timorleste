@@ -1400,18 +1400,11 @@ export const GROUPS: LayerGroup[] = [
       },
     ],
   },
- // =====================================================
-// RAIBERE
-// =====================================================
 {
   titleKey: "g_raibere",
   dot: "#14B8A6",
 
   layers: [
-
-    // =====================================================
-    // RAIBERE 2009
-    // =====================================================
     {
       id: "raibere_2009",
       nameKey: "l_raibere_2009",
@@ -1420,8 +1413,154 @@ export const GROUPS: LayerGroup[] = [
       defaultOn: false,
       cascade: true,
       children: [
+{
+          id: "rei09_po_asesories",
+          nameKey: "l_rei09_po_asesories",
+          kind: "circle",
+          data: v("09_rei_po_asesories"),
+          defaultOn: false,
+          paint: {
+            "circle-color": "#EC4899",
+            "circle-radius": 5,
+            "circle-opacity": 1,
+            "circle-stroke-color": "#FFFFFF",
+            "circle-stroke-width": 1,
+          },
+          legend: {
+            color: "#EC4899",
+            circle: true,
+          },
+        },
 
         {
+          id: "rei09_po_patoksaluran",
+          nameKey: "l_rei09_po_patoksaluran",
+          kind: "circle",
+          data: v("09_rei_po_patoksaluran"),
+          defaultOn: false,
+          paint: {
+            "circle-color": "#DC2626",
+            "circle-radius": 5,
+            "circle-stroke-color": "#FFFFFF",
+            "circle-stroke-width": 1,
+          },
+          legend: {
+            color: "#DC2626",
+            circle: true,
+          },
+        },
+        {
+          id: "rei09_li_bangunan",
+          nameKey: "l_rei09_li_bangunan",
+          kind: "line",
+          data: v("09_rei_li_bangunan"),
+          defaultOn: false,
+          paint: {
+            "line-color": "#7C3AED",
+            "line-width": 2,
+          },
+          legend: {
+            color: "#7C3AED",
+            line: true,
+          },
+        },
+
+        {
+          id: "rei09_li_cotambah",
+          nameKey: "l_rei09_li_cotambah",
+          kind: "line",
+          data: v("09_rei_li_cotambah"),
+          defaultOn: false,
+          paint: {
+            "line-color": "#16A34A",
+            "line-width": 2,
+          },
+          legend: {
+            color: "#16A34A",
+            line: true,
+          },
+        },
+
+        {
+          id: "rei09_li_jalan",
+          nameKey: "l_rei09_li_jalan",
+          kind: "line",
+          data: v("09_rei_li_jalan"),
+          defaultOn: false,
+          paint: {
+            "line-color": "#E1B94A",
+            "line-width": 2,
+          },
+          legend: {
+            color: "#E1B94A",
+            line: true,
+          },
+        },
+
+        {
+          id: "rei09_li_linepol",
+          nameKey: "l_rei09_li_linepol",
+          kind: "line",
+          data: v("09_rei_li_linepol"),
+          defaultOn: false,
+          paint: {
+            "line-color": "#64748B",
+            "line-width": 2,
+          },
+          legend: {
+            color: "#64748B",
+            line: true,
+          },
+        },
+
+        {
+          id: "rei09_li_salexisting",
+          nameKey: "l_rei09_li_salexisting",
+          kind: "line",
+          data: v("09_rei_li_salexisting"),
+          defaultOn: false,
+          paint: {
+            "line-color": "#16A34A",
+            "line-width": 2,
+          },
+          legend: {
+            color: "#16A34A",
+            line: true,
+          },
+        },
+
+        {
+          id: "rei09_li_saltersier",
+          nameKey: "l_rei09_li_saltersier",
+          kind: "line",
+          data: v("09_rei_li_saltersier"),
+          defaultOn: false,
+          paint: {
+            "line-color": "#7C3AED",
+            "line-width": 2,
+          },
+          legend: {
+            color: "#7C3AED",
+            line: true,
+          },
+        },
+
+        {
+          id: "rei09_li_sungaialur",
+          nameKey: "l_rei09_li_sungaialur",
+          kind: "line",
+          data: v("09_rei_li_sungaialur"),
+          defaultOn: false,
+          paint: {
+            "line-color": "#0284C7",
+            "line-width": 2,
+          },
+          legend: {
+            color: "#0284C7",
+            line: true,
+          },
+        },
+{
           id: "rei09_ar_0",
           nameKey: "l_rei09_ar_0",
           kind: "fill",
@@ -1564,250 +1703,8 @@ export const GROUPS: LayerGroup[] = [
             color: "#14B8A6",
           },
         },
+        
 
-        {
-          id: "rei09_li_bangunan",
-          nameKey: "l_rei09_li_bangunan",
-          kind: "line",
-          data: v("09_rei_li_bangunan"),
-          defaultOn: false,
-          paint: {
-            "line-color": "#7C3AED",
-            "line-width": 2,
-          },
-          legend: {
-            color: "#7C3AED",
-            line: true,
-          },
-        },
-
-        {
-          id: "rei09_li_contourmayor",
-          nameKey: "l_rei09_li_contourmayor",
-          kind: "line",
-          data: r2Vector("09_rei_li_contourmayor"),
-          defaultOn: false,
-          paint: {
-            "line-color": "#92400E",
-            "line-width": 2,
-          },
-          legend: {
-            color: "#92400E",
-            line: true,
-          },
-        },
-
-        {
-          id: "rei09_li_contourminor",
-          nameKey: "l_rei09_li_contourminor",
-          kind: "line",
-          data: r2Vector("09_rei_li_contourminor"),
-          defaultOn: false,
-          paint: {
-            "line-color": "#A16207",
-            "line-width": 1.2,
-          },
-          legend: {
-            color: "#A16207",
-            line: true,
-          },
-        },
-
-        {
-          id: "rei09_li_cotambah",
-          nameKey: "l_rei09_li_cotambah",
-          kind: "line",
-          data: v("09_rei_li_cotambah"),
-          defaultOn: false,
-          paint: {
-            "line-color": "#16A34A",
-            "line-width": 2,
-          },
-          legend: {
-            color: "#16A34A",
-            line: true,
-          },
-        },
-
-        {
-          id: "rei09_li_jalan",
-          nameKey: "l_rei09_li_jalan",
-          kind: "line",
-          data: v("09_rei_li_jalan"),
-          defaultOn: false,
-          paint: {
-            "line-color": "#E1B94A",
-            "line-width": 2,
-          },
-          legend: {
-            color: "#E1B94A",
-            line: true,
-          },
-        },
-
-        {
-          id: "rei09_li_linepol",
-          nameKey: "l_rei09_li_linepol",
-          kind: "line",
-          data: v("09_rei_li_linepol"),
-          defaultOn: false,
-          paint: {
-            "line-color": "#64748B",
-            "line-width": 2,
-          },
-          legend: {
-            color: "#64748B",
-            line: true,
-          },
-        },
-
-        {
-          id: "rei09_li_salexisting",
-          nameKey: "l_rei09_li_salexisting",
-          kind: "line",
-          data: v("09_rei_li_salexisting"),
-          defaultOn: false,
-          paint: {
-            "line-color": "#16A34A",
-            "line-width": 2,
-          },
-          legend: {
-            color: "#16A34A",
-            line: true,
-          },
-        },
-
-        {
-          id: "rei09_li_saltersier",
-          nameKey: "l_rei09_li_saltersier",
-          kind: "line",
-          data: v("09_rei_li_saltersier"),
-          defaultOn: false,
-          paint: {
-            "line-color": "#7C3AED",
-            "line-width": 2,
-          },
-          legend: {
-            color: "#7C3AED",
-            line: true,
-          },
-        },
-
-        {
-          id: "rei09_li_sungaialur",
-          nameKey: "l_rei09_li_sungaialur",
-          kind: "line",
-          data: v("09_rei_li_sungaialur"),
-          defaultOn: false,
-          paint: {
-            "line-color": "#0284C7",
-            "line-width": 2,
-          },
-          legend: {
-            color: "#0284C7",
-            line: true,
-          },
-        },
-
-        {
-          id: "rei09_po_asesories",
-          nameKey: "l_rei09_po_asesories",
-          kind: "circle",
-          data: v("09_rei_po_asesories"),
-          defaultOn: false,
-          paint: {
-            "circle-color": "#EC4899",
-            "circle-radius": 5,
-            "circle-opacity": 1,
-            "circle-stroke-color": "#FFFFFF",
-            "circle-stroke-width": 1,
-          },
-          legend: {
-            color: "#EC4899",
-            circle: true,
-          },
-        },
-
-        {
-          id: "rei09_po_crosstersier",
-          nameKey: "l_rei09_po_crosstersier",
-          kind: "circle",
-          data: v("09_rei_po_crosstersier"),
-          defaultOn: false,
-          paint: {
-            "circle-color": "#2563EB",
-            "circle-radius": 5,
-            "circle-stroke-color": "#FFFFFF",
-            "circle-stroke-width": 1,
-          },
-          legend: {
-            color: "#2563EB",
-            circle: true,
-          },
-        },
-
-        {
-          id: "rei09_po_namabang",
-          nameKey: "l_rei09_po_namabang",
-          kind: "symbol",
-          data: v("09_rei_po_namabang"),
-          defaultOn: false,
-          paint: {},
-        },
-
-        {
-          id: "rei09_po_patoksaluran",
-          nameKey: "l_rei09_po_patoksaluran",
-          kind: "circle",
-          data: v("09_rei_po_patoksaluran"),
-          defaultOn: false,
-          paint: {
-            "circle-color": "#DC2626",
-            "circle-radius": 5,
-            "circle-stroke-color": "#FFFFFF",
-            "circle-stroke-width": 1,
-          },
-          legend: {
-            color: "#DC2626",
-            circle: true,
-          },
-        },
-
-        {
-          id: "rei09_po_text",
-          nameKey: "l_rei09_po_text",
-          kind: "symbol",
-          data: v("09_rei_po_text"),
-          defaultOn: false,
-          paint: {},
-        },
-
-        {
-          id: "rei09_po_textcrosscanal",
-          nameKey: "l_rei09_po_textcrosscanal",
-          kind: "symbol",
-          data: v("09_rei_po_textcrosscanal"),
-          defaultOn: false,
-          paint: {},
-        },
-
-        {
-          id: "rei09_po_textcrosstersier",
-          nameKey: "l_rei09_po_textcrosstersier",
-          kind: "symbol",
-          data: v("09_rei_po_textcrosstersier"),
-          defaultOn: false,
-          paint: {},
-        },
-
-        {
-          id: "rei09_po_textpol",
-          nameKey: "l_rei09_po_textpol",
-          kind: "symbol",
-          data: v("09_rei_po_textpol"),
-          defaultOn: false,
-          paint: {},
-        },
       ],
     },
 
