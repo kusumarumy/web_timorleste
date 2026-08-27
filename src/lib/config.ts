@@ -1340,7 +1340,7 @@ export const GROUPS: LayerGroup[] = [
             lazy: true,
             paint: {
               "circle-color": "#EC4899",
-              "circle-radius": 5,
+              "circle-radius": 2,
               "circle-opacity": 1,
               "circle-stroke-color": "#FFFFFF",
               "circle-stroke-width": 1,
@@ -1361,7 +1361,7 @@ export const GROUPS: LayerGroup[] = [
             lazy: true,
             paint: {
               "circle-color": "#2563EB",
-              "circle-radius": 5,
+              "circle-radius": 2,
               "circle-opacity": 1,
               "circle-stroke-color": "#FFFFFF",
               "circle-stroke-width": 1,
@@ -1382,7 +1382,7 @@ export const GROUPS: LayerGroup[] = [
             lazy: true,
             paint: {
               "circle-color": "#F59E0B",
-              "circle-radius": 5,
+              "circle-radius": 2,
               "circle-opacity": 1,
               "circle-stroke-color": "#FFFFFF",
               "circle-stroke-width": 1,
@@ -1403,7 +1403,7 @@ export const GROUPS: LayerGroup[] = [
             lazy: true,
             paint: {
               "circle-color": "#7C3AED",
-              "circle-radius": 5,
+              "circle-radius": 2,
               "circle-opacity": 1,
               "circle-stroke-color": "#FFFFFF",
               "circle-stroke-width": 1,
@@ -1424,7 +1424,7 @@ export const GROUPS: LayerGroup[] = [
             lazy: true,
             paint: {
               "circle-color": "#22C55E",
-              "circle-radius": 5,
+              "circle-radius": 2,
               "circle-opacity": 1,
               "circle-stroke-color": "#FFFFFF",
               "circle-stroke-width": 1,
@@ -1445,7 +1445,7 @@ export const GROUPS: LayerGroup[] = [
             lazy: true,
             paint: {
               "circle-color": "#F97316",
-              "circle-radius": 5,
+              "circle-radius": 2,
               "circle-opacity": 1,
               "circle-stroke-color": "#FFFFFF",
               "circle-stroke-width": 1,
