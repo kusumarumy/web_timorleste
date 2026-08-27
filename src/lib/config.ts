@@ -1278,7 +1278,23 @@ export const GROUPS: LayerGroup[] = [
               line: true,
             },
           },
-
+{
+            id: "lo_li_patoksaluran",
+            nameKey: "l_lo_li_patoksaluran",
+            kind: "line",
+            data: v("09_lo_li_patoksaluran"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#DC2626",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#DC2626",
+              line: true,
+            },
+          },
           {
             id: "lo_li_salexisting",
             nameKey: "l_lo_li_salexisting",
@@ -1395,27 +1411,6 @@ export const GROUPS: LayerGroup[] = [
             defaultOn: false,
             legend: {
               color: "#7C3AED",
-              circle: true,
-            },
-          },
-
-          {
-            id: "lo_po_patoksaluran",
-            nameKey: "l_lo_po_patoksaluran",
-            kind: "circle",
-            data: v("09_lo_po_patoksaluran"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "circle-color": "#DC2626",
-              "circle-radius": 5,
-              "circle-opacity": 1,
-              "circle-stroke-color": "#FFFFFF",
-              "circle-stroke-width": 1,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#DC2626",
               circle: true,
             },
           },
