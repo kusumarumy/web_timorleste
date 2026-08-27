@@ -330,6 +330,7 @@ private _closePopups(): void {
   stop(): void {
   this._removeListeners(true);
   this.hover = null;
+  this.mode = null;
   this.onStop();
 }
 
@@ -497,11 +498,14 @@ private _closePopups(): void {
       return;
     }
     if (e.key === "Escape") {
-  console.log("MEASURE ESCAPE - CLEAR");
-
-  this.clear();
+  console.log("MEASURE ESCAPE - CLEAR & STOP");
+  e.preventDefault();
+  this._closePopups();
+  this.coords = [];
+  this.hover = null;
+  this._setData([]);
+  this.onResult(null);
   this.stop();
-
   return;
 }
 
