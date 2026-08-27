@@ -37,7 +37,7 @@ ALL_LAYERS.forEach((l) => {
 });
 
 export const useMapStore = create<MapState>((set) => ({
-  basemap: "map",
+  basemap: "sat",
   setBasemap: (id) => set({ basemap: id }),
   visible: initialVisible,
   toggle: (id) =>
