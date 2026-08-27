@@ -123,7 +123,6 @@ export const DICTS: Record<Lang, Dict> = {
     l_lo_li_patoksaluran: "Patok Saluran",
     l_lo_po_salkwater: "Saluran Kwater",
     l_lo_po_tertiarycrosspoint: "Tertiary Cross Point",
-    l_lo_po_textcrosstertiary: "Text Cross Tertiary",
     
     // OEBABA 2009
     l_oe09_ar_0: "Area Dasar",
@@ -393,13 +392,11 @@ export const DICTS: Record<Lang, Dict> = {
     l_lo_li_salters: "Salters",
     l_lo_li_tertiarycrossline: "Tertiary Crossline",
     l_lo_po_asesories: "Accessories",
-    l_lo_po_bmcp: "BMCP",
     l_lo_po_design: "Design",
     l_lo_po_kodebm: "BM Code",
     l_lo_li_patoksaluran: "Canal Stake",
     l_lo_po_salkwater: "Quaternary Canal",
     l_lo_po_tertiarycrosspoint: "Tertiary Cross Point",
-    l_lo_po_textcrosstertiary: "Tertiary Cross Text",
 
     // OEBABA 2009
     l_oe09_ar_0: "Base Area",
@@ -668,13 +665,11 @@ export const DICTS: Record<Lang, Dict> = {
     l_lo_li_salexisting: "Canal Existente",
     l_lo_li_salters: "Salters",
     l_lo_po_asesories: "Acessórios",
-    l_lo_po_bmcp: "BMCP",
     l_lo_po_design: "Projeto",
     l_lo_po_kodebm: "Código BM",
     l_lo_li_patoksaluran: "Estaca do Canal",
     l_lo_po_salkwater: "Canal Quaternário",
     l_lo_po_tertiarycrosspoint: "Ponto Transversal Terciário",
-    l_lo_po_textcrosstertiary: "Texto Transversal Terciário",
     l_lo_po_textgcp: "Texto GCP",
    
     // OEBABA 2009
