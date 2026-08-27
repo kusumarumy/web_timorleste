@@ -103,15 +103,12 @@ export const DICTS: Record<Lang, Dict> = {
     l_genangan_titikkupasan: "Titik Kupasan",
 
     // LOMEA 2009
-    l_lo_ar_00: "Area 00",
     l_lo_ar_areal: "Areal",
-    l_lo_ar_asesories: "Asesoris",
     l_lo_ar_bangsadap: "Bangsadap",
     l_lo_ar_bangunan: "Bangunan",
     l_lo_ar_bmcp: "BMCP",
     l_lo_ar_box: "Box",
     l_lo_ar_salkwarter: "Saluran Kwater",
-    l_lo_ar_tertiary: "Tertiary",
     l_lo_li_areal: "Areal",
     l_lo_li_asesories: "Asesoris",
     l_lo_li_asjalan: "As Jalan",
@@ -395,7 +392,6 @@ export const DICTS: Record<Lang, Dict> = {
     l_genangan_titikkupasan: "Excavation Point",
 
     // LOMEA 2009
-    l_lo_ar_00: "Area 00",
     l_lo_ar_areal: "Areal",
     l_lo_ar_asesories: "Accessories",
     l_lo_ar_bangsadap: "Intake Structure",
@@ -403,9 +399,7 @@ export const DICTS: Record<Lang, Dict> = {
     l_lo_ar_bmcp: "BMCP",
     l_lo_ar_box: "Box",
     l_lo_ar_salkwarter: "Quaternary Canal",
-    l_lo_ar_tertiary: "Tertiary",
     l_lo_li_areal: "Areal",
-    l_lo_li_asesories: "Accessories",
     l_lo_li_asjalan: "Road Features",
     l_lo_li_bataslaut: "Sea Boundary",
     l_lo_li_bmcp: "BMCP",
@@ -686,7 +680,6 @@ export const DICTS: Record<Lang, Dict> = {
     l_genangan_titikkupasan: "Ponto de Escavação",
     
     // LOMEA 2009
-    l_lo_ar_00: "Área 00",
     l_lo_ar_areal: "Área",
     l_lo_ar_asesories: "Acessórios",
     l_lo_ar_bangsadap: "Estrutura de Tomada",
@@ -694,7 +687,6 @@ export const DICTS: Record<Lang, Dict> = {
     l_lo_ar_bmcp: "BMCP",
     l_lo_ar_box: "Caixa",
     l_lo_ar_salkwater: "Canal Quaternário",
-    l_lo_ar_tertiary: "Canal Terciário",
     l_lo_li_areal: "Área",
     l_lo_li_asesories: "Acessórios",
     l_lo_li_asjalan: "Elementos Rodoviários",
