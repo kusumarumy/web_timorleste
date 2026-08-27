@@ -467,7 +467,57 @@ private handleClick = (e: MapMouseEvent) => {
 
     return out;
   }
+// ---------- QUERY ----------
 
+private query(point: { x: number; y: number }): MapGeoJSONFeature[] {
+  const map = this.map;
+  if (!map) return [];
+
+  const ids = this.opts
+    .getLayerIds(map)
+    .filter((id) => !!map.getLayer(id));
+
+  if (ids.length === 0) return [];
+
+  const pad = this.opts.tolerance ?? 6;
+
+  const bbox: [PointLike, PointLike] = [
+    [point.x - pad, point.y - pad],
+    [point.x + pad, point.y + pad],
+  ];
+
+  let raw: MapGeoJSONFeature[] = [];
+
+  try {
+    raw = map.queryRenderedFeatures(bbox, {
+      layers: ids,
+    });
+  } catch (err) {
+    console.warn("IDENTIFY: query gagal", err);
+    return [];
+  }
+
+  // Hindari fitur yang sama muncul berkali-kali,
+  // misalnya karena tile terpotong.
+  const seen = new Set<string>();
+  const out: MapGeoJSONFeature[] = [];
+  const max = this.opts.maxFeatures ?? 8;
+
+  for (const f of raw) {
+    const key = `${f.layer?.id}::${
+      f.id ?? JSON.stringify(f.properties ?? {})
+    }`;
+
+    if (seen.has(key)) continue;
+
+    seen.add(key);
+    out.push(f);
+
+    if (out.length >= max) break;
+  }
+
+  return out;
+}
   // ---------- POPUP CONTENT ----------
 
   private layerLabel(layerId: string) {
