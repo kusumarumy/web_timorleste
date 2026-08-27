@@ -47,6 +47,10 @@ const ICON_SVG = `<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="t
   <rect x="10.85" y="10.4" width="2.3" height="7.2" rx="1.15" fill="currentColor"/>
 </svg>`;
 
+// Warna cahaya highlight
+const GLOW = "#22D3EE";
+const CORE = "#FFFFFF";
+
 // ============================================================
 // OPTIONS
 // ============================================================
@@ -56,7 +60,7 @@ export type IdentifyControlOptions = {
   getLayerLabel?: (layerId: string) => string;
   getFieldLabel?: (key: string) => string;
 
-  /** Tambahan field yang ingin disembunyikan, di luar daftar bawaan. */
+  /** Tambahan field yang disembunyikan, di luar daftar bawaan. */
   hiddenFields?: string[];
 
   titleFields?: string[];
@@ -84,12 +88,12 @@ const DEFAULT_TITLE_FIELDS = [
   "kelas",
 ];
 
-// Atribut teknis + sisa styling dari konversi KML/KMZ.
-// Ini bukan data, jadi tidak perlu tampil di popup.
+// Atribut teknis + sisa styling dari konversi KML/KMZ
 const DEFAULT_HIDDEN_FIELDS = [
   "geometry",
   "bbox",
   "__id",
+  "__hl",
   "source",
   "layer",
   "tessellate",
@@ -105,10 +109,16 @@ const DEFAULT_HIDDEN_FIELDS = [
 ];
 
 // Pola nama field yang hampir pasti styling, bukan data.
+// Contoh yang tertangkap: KML STYLE, POINT SYMB, FONT SIZE,
+// FONT COLOR, BORDER STY, BORDER COL, FILL COL.
 const HIDDEN_PATTERNS: RegExp[] = [
-  /style/i, // KML STYLE, styleUrl, styleHash, LabelStyle
-  /symb/i, // POINT SYMB, LINE SYMB
-  /^font[\s_-]/i, // FONT SIZE, FONT COLOR
+  /style/i,
+  /symb/i,
+  /^font[\s_-]/i,
+  /^border[\s_-]/i,
+  /^fill[\s_-]/i,
+  /^line[\s_-]?(sty|col|width)/i,
+  /(^|[\s_-])(sty|col|colour|color)$/i,
   /^icon[\s_-]?(scale|color|href)?$/i,
   /^label[\s_-]?(color|size|scale)/i,
 ];
@@ -131,9 +141,7 @@ function formatValue(value: unknown): string {
   if (typeof value === "number") {
     return Number.isInteger(value)
       ? value.toLocaleString("id-ID")
-      : value.toLocaleString("id-ID", {
-          maximumFractionDigits: 4,
-        });
+      : value.toLocaleString("id-ID", { maximumFractionDigits: 4 });
   }
 
   if (typeof value === "boolean") return value ? "Ya" : "Tidak";
@@ -150,16 +158,38 @@ function formatValue(value: unknown): string {
 }
 
 function isLink(value: unknown): value is string {
-  return (
-    typeof value === "string" && /^https?:\/\//i.test(value.trim())
-  );
+  return typeof value === "string" && /^https?:\/\//i.test(value.trim());
 }
 
 function featureKey(f: MapGeoJSONFeature): string {
-  return `${f.layer?.id}::${
-    f.id ?? JSON.stringify(f.properties ?? {})
-  }`;
+  return `${f.layer?.id}::${f.id ?? JSON.stringify(f.properties ?? {})}`;
 }
+
+const IS_SELECT = ["==", ["get", "__hl"], "select"] as any;
+
+const POLY_TYPES = [
+  "match",
+  ["geometry-type"],
+  ["Polygon", "MultiPolygon"],
+  true,
+  false,
+] as any;
+
+const LINE_TYPES = [
+  "match",
+  ["geometry-type"],
+  ["LineString", "MultiLineString", "Polygon", "MultiPolygon"],
+  true,
+  false,
+] as any;
+
+const POINT_TYPES = [
+  "match",
+  ["geometry-type"],
+  ["Point", "MultiPoint"],
+  true,
+  false,
+] as any;
 
 // ============================================================
 // CONTROL
@@ -176,8 +206,22 @@ export class IdentifyControl implements IControl {
   // HIGHLIGHT
   private readonly HL_SRC = "__identify_hl_src";
   private readonly HL_FILL = "__identify_hl_fill";
-  private readonly HL_LINE = "__identify_hl_line";
-  private readonly HL_POINT = "__identify_hl_point";
+  private readonly HL_GLOW = "__identify_hl_glow";
+  private readonly HL_MID = "__identify_hl_mid";
+  private readonly HL_CORE = "__identify_hl_core";
+  private readonly HL_PT_GLOW = "__identify_hl_pt_glow";
+  private readonly HL_PT_CORE = "__identify_hl_pt_core";
+
+  private get hlLayerIds(): string[] {
+    return [
+      this.HL_FILL,
+      this.HL_GLOW,
+      this.HL_MID,
+      this.HL_CORE,
+      this.HL_PT_GLOW,
+      this.HL_PT_CORE,
+    ];
+  }
 
   private selectedFeature: MapGeoJSONFeature | null = null;
   private hoverFeature: MapGeoJSONFeature | null = null;
@@ -186,6 +230,8 @@ export class IdentifyControl implements IControl {
   private prevCursor = "";
   private unsub: (() => void) | null = null;
   private moveRaf = 0;
+  private pulseRaf = 0;
+  private pulseStart = 0;
 
   constructor(opts: IdentifyControlOptions) {
     this.opts = opts;
@@ -221,6 +267,13 @@ export class IdentifyControl implements IControl {
     this.container = container;
     this.button = button;
 
+    // Layer highlight dibuat sekali saja saat style siap
+    if (map.isStyleLoaded()) {
+      this.ensureHighlightLayers();
+    } else {
+      map.once("load", () => this.ensureHighlightLayers());
+    }
+
     this.unsub = onToolMode((mode) => {
       this.sync(mode === "identify");
     });
@@ -237,6 +290,8 @@ export class IdentifyControl implements IControl {
       cancelAnimationFrame(this.moveRaf);
       this.moveRaf = 0;
     }
+
+    this.stopPulse();
 
     this.unsub?.();
     this.unsub = null;
@@ -305,116 +360,128 @@ export class IdentifyControl implements IControl {
   // ============================================================
   // HIGHLIGHT
   //
-  // Satu source, tiga layer, gaya dibedakan lewat properti __hl:
-  //   "hover"  → objek di bawah kursor
-  //   "select" → objek yang sedang diklik
+  // Efek cahaya ditiru dengan menumpuk beberapa layer:
+  // lebar & redup di bawah, tipis & terang di atas.
+  // Layer terluar berdenyut selama ada objek terpilih.
   // ============================================================
 
   private ensureHighlightLayers(): boolean {
     const map = this.map;
     if (!map) return false;
 
-    // addLayer akan gagal kalau style belum siap
-    if (!map.isStyleLoaded()) {
-      map.once("idle", () => {
-        if (this.ensureHighlightLayers()) {
-          this.renderHighlight();
-        }
-      });
-
-      return false;
-    }
-
     try {
       if (!map.getSource(this.HL_SRC)) {
         map.addSource(this.HL_SRC, {
           type: "geojson",
-          data: {
-            type: "FeatureCollection",
-            features: [],
-          },
+          data: { type: "FeatureCollection", features: [] },
         });
       }
 
-      const isSelect = ["==", ["get", "__hl"], "select"];
-
-      // POLYGON — isian
+      // POLIGON — isian
       if (!map.getLayer(this.HL_FILL)) {
         map.addLayer({
           id: this.HL_FILL,
           type: "fill",
           source: this.HL_SRC,
-          filter: [
-            "match",
-            ["geometry-type"],
-            ["Polygon", "MultiPolygon"],
-            true,
-            false,
-          ],
+          filter: POLY_TYPES,
           paint: {
-            "fill-color": "#00E5FF",
-            "fill-opacity": ["case", isSelect, 0.3, 0.12],
+            "fill-color": GLOW,
+            "fill-opacity": ["case", IS_SELECT, 0.25, 0.1],
           },
         } as any);
       }
 
-      // GARIS — sekaligus tepi poligon,
-      // ini yang bikin poligon terpilih benar-benar kelihatan
-      if (!map.getLayer(this.HL_LINE)) {
+      // GARIS — lapis cahaya terluar, hanya untuk objek terpilih
+      if (!map.getLayer(this.HL_GLOW)) {
         map.addLayer({
-          id: this.HL_LINE,
+          id: this.HL_GLOW,
           type: "line",
           source: this.HL_SRC,
-          filter: [
-            "match",
-            ["geometry-type"],
-            ["LineString", "MultiLineString", "Polygon", "MultiPolygon"],
-            true,
-            false,
-          ],
-          layout: {
-            "line-cap": "round",
-            "line-join": "round",
-          },
+          filter: ["all", LINE_TYPES, IS_SELECT] as any,
+          layout: { "line-cap": "round", "line-join": "round" },
           paint: {
-            "line-color": ["case", isSelect, "#00E5FF", "#67E8F9"],
-            "line-width": ["case", isSelect, 5, 3],
-            "line-opacity": 0.95,
+            "line-color": GLOW,
+            "line-width": 16,
+            "line-opacity": 0.18,
+            "line-blur": 6,
           },
         } as any);
       }
 
-      // TITIK — dibuat sebagai cincin di LUAR ikon,
-      // supaya tidak tertutup simbol layer-nya
-      if (!map.getLayer(this.HL_POINT)) {
+      // GARIS — lapis tengah
+      if (!map.getLayer(this.HL_MID)) {
         map.addLayer({
-          id: this.HL_POINT,
+          id: this.HL_MID,
+          type: "line",
+          source: this.HL_SRC,
+          filter: LINE_TYPES,
+          layout: { "line-cap": "round", "line-join": "round" },
+          paint: {
+            "line-color": GLOW,
+            "line-width": ["case", IS_SELECT, 9, 5],
+            "line-opacity": ["case", IS_SELECT, 0.55, 0.35],
+            "line-blur": 2,
+          },
+        } as any);
+      }
+
+      // GARIS — inti terang
+      if (!map.getLayer(this.HL_CORE)) {
+        map.addLayer({
+          id: this.HL_CORE,
+          type: "line",
+          source: this.HL_SRC,
+          filter: LINE_TYPES,
+          layout: { "line-cap": "round", "line-join": "round" },
+          paint: {
+            "line-color": ["case", IS_SELECT, CORE, GLOW],
+            "line-width": ["case", IS_SELECT, 2.5, 1.8],
+            "line-opacity": 1,
+          },
+        } as any);
+      }
+
+      // TITIK — halo cahaya, hanya untuk objek terpilih
+      if (!map.getLayer(this.HL_PT_GLOW)) {
+        map.addLayer({
+          id: this.HL_PT_GLOW,
           type: "circle",
           source: this.HL_SRC,
-          filter: [
-            "match",
-            ["geometry-type"],
-            ["Point", "MultiPoint"],
-            true,
-            false,
-          ],
+          filter: ["all", POINT_TYPES, IS_SELECT] as any,
           paint: {
-            "circle-radius": ["case", isSelect, 16, 12],
-            "circle-color": "#00E5FF",
-            "circle-opacity": 0.15,
-            "circle-stroke-color": [
-              "case",
-              isSelect,
-              "#00E5FF",
-              "#67E8F9",
-            ],
-            "circle-stroke-width": ["case", isSelect, 4, 2],
+            "circle-color": GLOW,
+            "circle-radius": 24,
+            "circle-opacity": 0.18,
+            "circle-blur": 0.8,
+          },
+        } as any);
+      }
+
+      // TITIK — cincin di luar ikon, jadi ikon tetap terlihat
+      if (!map.getLayer(this.HL_PT_CORE)) {
+        map.addLayer({
+          id: this.HL_PT_CORE,
+          type: "circle",
+          source: this.HL_SRC,
+          filter: POINT_TYPES,
+          paint: {
+            "circle-color": GLOW,
+            "circle-radius": ["case", IS_SELECT, 17, 13],
+            "circle-opacity": 0.12,
+            "circle-stroke-color": ["case", IS_SELECT, CORE, GLOW],
+            "circle-stroke-width": ["case", IS_SELECT, 3.5, 2],
             "circle-stroke-opacity": 0.95,
           },
         } as any);
       }
     } catch (err) {
       console.warn("IDENTIFY: gagal menyiapkan layer highlight", err);
+
+      // Style belum siap — coba lagi setelah map tenang
+      map.once("idle", () => {
+        if (this.ensureHighlightLayers()) this.renderHighlight();
+      });
+
       return false;
     }
 
@@ -427,18 +494,18 @@ export class IdentifyControl implements IControl {
 
     if (!this.ensureHighlightLayers()) return;
 
-    const source = map.getSource(this.HL_SRC) as
-      | GeoJSONSource
-      | undefined;
+    const source = map.getSource(this.HL_SRC) as GeoJSONSource | undefined;
 
-    if (!source) return;
+    if (!source) {
+      console.warn("IDENTIFY: source highlight tidak ditemukan");
+      return;
+    }
 
     const features: Feature[] = [];
 
     const sel = this.selectedFeature;
     const hov = this.hoverFeature;
 
-    // Hover hanya digambar kalau bukan objek yang sedang dipilih
     if (hov && (!sel || featureKey(hov) !== featureKey(sel))) {
       features.push({
         type: "Feature",
@@ -455,15 +522,89 @@ export class IdentifyControl implements IControl {
       });
     }
 
-    source.setData({
-      type: "FeatureCollection",
-      features,
-    });
+    source.setData({ type: "FeatureCollection", features });
 
-    // Pastikan highlight selalu berada paling atas
-    [this.HL_FILL, this.HL_LINE, this.HL_POINT].forEach((id) => {
+    // Highlight harus selalu di paling atas
+    this.hlLayerIds.forEach((id) => {
       if (map.getLayer(id)) map.moveLayer(id);
     });
+
+    if (sel) {
+      console.log(
+        "IDENTIFY HIGHLIGHT →",
+        sel.layer?.id,
+        sel.geometry?.type
+      );
+
+      this.startPulse();
+    } else {
+      this.stopPulse();
+    }
+  }
+
+  // ---------- PULSE ----------
+
+  private startPulse() {
+    if (this.pulseRaf) return;
+
+    this.pulseStart = performance.now();
+
+    const tick = () => {
+      const map = this.map;
+
+      if (!map || !this.selectedFeature) {
+        this.pulseRaf = 0;
+        return;
+      }
+
+      const t = (performance.now() - this.pulseStart) / 1000;
+
+      // 0 → 1 → 0 setiap ~1,6 detik
+      const s = (Math.sin((t * Math.PI * 2) / 1.6) + 1) / 2;
+
+      try {
+        if (map.getLayer(this.HL_GLOW)) {
+          map.setPaintProperty(
+            this.HL_GLOW,
+            "line-width",
+            14 + 8 * s
+          );
+
+          map.setPaintProperty(
+            this.HL_GLOW,
+            "line-opacity",
+            0.12 + 0.22 * s
+          );
+        }
+
+        if (map.getLayer(this.HL_PT_GLOW)) {
+          map.setPaintProperty(
+            this.HL_PT_GLOW,
+            "circle-radius",
+            20 + 10 * s
+          );
+
+          map.setPaintProperty(
+            this.HL_PT_GLOW,
+            "circle-opacity",
+            0.12 + 0.22 * s
+          );
+        }
+      } catch {
+        // layer sedang tidak tersedia, abaikan frame ini
+      }
+
+      this.pulseRaf = requestAnimationFrame(tick);
+    };
+
+    this.pulseRaf = requestAnimationFrame(tick);
+  }
+
+  private stopPulse() {
+    if (!this.pulseRaf) return;
+
+    cancelAnimationFrame(this.pulseRaf);
+    this.pulseRaf = 0;
   }
 
   // ---------- EVENTS ----------
@@ -472,7 +613,6 @@ export class IdentifyControl implements IControl {
     const map = this.map;
     if (!map || !this.active) return;
 
-    // queryRenderedFeatures cukup mahal, cukup sekali per frame
     if (this.moveRaf) return;
 
     this.moveRaf = requestAnimationFrame(() => {
@@ -482,9 +622,7 @@ export class IdentifyControl implements IControl {
 
       const feature = this.query(e.point)[0] ?? null;
 
-      map.getCanvas().style.cursor = feature
-        ? CURSOR_HIT
-        : CURSOR_IDLE;
+      map.getCanvas().style.cursor = feature ? CURSOR_HIT : CURSOR_IDLE;
 
       const prevKey = this.hoverFeature
         ? featureKey(this.hoverFeature)
@@ -531,7 +669,6 @@ export class IdentifyControl implements IControl {
       popup.setDOMContent(this.buildContent(features));
     }
 
-    // Tutup popup = batalkan pilihan
     popup.on("close", () => {
       this.selectedFeature = null;
       this.renderHighlight();
@@ -624,11 +761,7 @@ export class IdentifyControl implements IControl {
       const realKey = lower.get(c.toLowerCase());
       const val = realKey ? props[realKey] : undefined;
 
-      if (
-        val !== null &&
-        val !== undefined &&
-        String(val).trim() !== ""
-      ) {
+      if (val !== null && val !== undefined && String(val).trim() !== "") {
         return String(val);
       }
     }
@@ -711,9 +844,7 @@ export class IdentifyControl implements IControl {
         return true;
       });
 
-      const dataEntries = all.filter(
-        ([k]) => !this.isStylingField(k)
-      );
+      const dataEntries = all.filter(([k]) => !this.isStylingField(k));
 
       const hiddenCount = all.length - dataEntries.length;
 
@@ -726,8 +857,7 @@ export class IdentifyControl implements IControl {
         const none = document.createElement("div");
         none.className = "identify-pop-none";
         none.textContent =
-          this.opts.texts?.noAttribute ??
-          "Fitur ini tidak punya atribut.";
+          this.opts.texts?.noAttribute ?? "Fitur ini tidak punya atribut.";
 
         body.appendChild(none);
       } else {
@@ -771,8 +901,7 @@ export class IdentifyControl implements IControl {
 
       root.appendChild(body);
 
-      // TOGGLE — atribut styling disembunyikan secara heuristik,
-      // jadi tetap sediakan jalan untuk melihat semuanya
+      // TOGGLE ATRIBUT TEKNIS
       if (hiddenCount > 0) {
         const foot = document.createElement("div");
         foot.className = "identify-pop-foot";
