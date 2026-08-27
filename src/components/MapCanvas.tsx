@@ -66,7 +66,15 @@ function isWGS84GeoJSON(geojson: any): boolean {
   }
   return false;
 }
+function getIconId(iconUrl?: string): string | undefined {
+  if (!iconUrl) return undefined;
 
+  const filename = iconUrl.split("/").pop();
+
+  if (!filename) return undefined;
+
+  return filename.replace(/\.png$/i, "");
+}
 function buildStyle(): maplibregl.StyleSpecification {
   const sources: Record<string, unknown> = {};
 
@@ -147,17 +155,21 @@ BASEMAPS.forEach((b) => {
       };
 
       const symbolLayout: Record<string, unknown> = {
-        visibility: l.defaultOn
-          ? "visible"
-          : "none",
+  visibility: l.defaultOn
+    ? "visible"
+    : "none",
 
-        // ICON
-        "icon-image": l.id,
-        "icon-size": 0.05,
+  "icon-size": 0.05,
 
-        "icon-allow-overlap": true,
-        "icon-ignore-placement": true,
-      };
+  "icon-allow-overlap": true,
+  "icon-ignore-placement": true,
+};
+
+const iconId = getIconId(l.icon);
+
+if (iconId) {
+  symbolLayout["icon-image"] = iconId;
+}
 
       const symbolPaint: Record<string, unknown> = {};
 
@@ -383,15 +395,7 @@ if (l.kind === "fill") {
     layers,
   };
 }
-function getIconId(iconUrl?: string): string | undefined {
-  if (!iconUrl) return undefined;
 
-  const filename = iconUrl.split("/").pop();
-
-  if (!filename) return undefined;
-
-  return filename.replace(/\.png$/i, "");
-}
 function getSubkelasFilter(
   layer: typeof ALL_LAYERS[number],
   subVisible: Record<string, boolean>
