@@ -383,7 +383,15 @@ if (l.kind === "fill") {
     layers,
   };
 }
+function getIconId(iconUrl?: string): string | undefined {
+  if (!iconUrl) return undefined;
 
+  const filename = iconUrl.split("/").pop();
+
+  if (!filename) return undefined;
+
+  return filename.replace(/\.png$/i, "");
+}
 function getSubkelasFilter(
   layer: typeof ALL_LAYERS[number],
   subVisible: Record<string, boolean>
