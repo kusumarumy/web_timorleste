@@ -61,7 +61,7 @@ const DEFAULT_TITLE_FIELDS = [
   "kelas",
 ];
 
-const DEFAULT_HIDDEN_FIELDS = ["geometry", "bbox", "__id", "layer", "source"];
+const DEFAULT_HIDDEN_FIELDS = ["geometry", "bbox", "__id", "source"];
 
 function titleCase(key: string) {
   return key
@@ -339,7 +339,7 @@ if (features.length > 0) {
   this.highlightFeature(features[0]);
 } else {
   this.removeHighlight();
-};
+}
 
     const popup = new Popup({
       offset: 14,
