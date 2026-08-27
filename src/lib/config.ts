@@ -845,44 +845,34 @@ export const GROUPS: LayerGroup[] = [
       {
         id: "genangan_titikbor",
         nameKey: "l_genangan_titikbor",
-        kind: "circle",
+        kind: "symbol",
         data: v("genangan_titikbor"),
-
-        paint: {
-          "circle-color": "#DC2626",
-          "circle-radius": 5,
-          "circle-opacity": 1,
-          "circle-stroke-color": "#FFFFFF",
-          "circle-stroke-width": 1,
-        },
+        clickable: true,
+        icon: icon("drill"),
+        paint: {},
 
         defaultOn: false,
 
         legend: {
           color: "#DC2626",
-          circle: true,
+          svg: "drill",
         },
       },
 
       {
         id: "genangan_titikdesain",
         nameKey: "l_genangan_titikdesain",
-        kind: "circle",
+        kind: "symbol",
         data: v("genangan_titikdesain"),
-
-        paint: {
-          "circle-color": "#F59E0B",
-          "circle-radius": 5,
-          "circle-opacity": 1,
-          "circle-stroke-color": "#FFFFFF",
-          "circle-stroke-width": 1,
-        },
+        clickable: true,
+        icon: icon("desain"),
+        paint: {},
 
         defaultOn: false,
 
         legend: {
           color: "#F59E0B",
-          circle: true,
+          svg: "desain",
         },
       },
 
@@ -891,20 +881,15 @@ export const GROUPS: LayerGroup[] = [
         nameKey: "l_genangan_titikkoordinat",
         kind: "circle",
         data: v("genangan_titikkoordinat"),
-
-        paint: {
-          "circle-color": "#8B5CF6",
-          "circle-radius": 5,
-          "circle-opacity": 1,
-          "circle-stroke-color": "#FFFFFF",
-          "circle-stroke-width": 1,
-        },
+        clickable: true,
+        icon: icon("coordinate"),
+        paint: {},
 
         defaultOn: false,
 
         legend: {
           color: "#8B5CF6",
-          circle: true,
+          svgL "coordinate",
         },
       },
 
@@ -913,20 +898,15 @@ export const GROUPS: LayerGroup[] = [
         nameKey: "l_genangan_titikkupasan",
         kind: "circle",
         data: v("genangan_titikkupasan"),
-
-        paint: {
-          "circle-color": "#EF4444",
-          "circle-radius": 5,
-          "circle-opacity": 1,
-          "circle-stroke-color": "#FFFFFF",
-          "circle-stroke-width": 1,
-        },
+        clickable: true,
+        icon: icon("kupasan"),
+        paint: {},
 
         defaultOn: false,
 
         legend: {
           color: "#EF4444",
-          circle: true,
+          svg: "kupasan",
         },
       },
       {
