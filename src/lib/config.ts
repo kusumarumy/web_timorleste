@@ -1158,27 +1158,6 @@ export const GROUPS: LayerGroup[] = [
           },
 
           {
-            id: "lo_po_tertiarycrosspoint",
-            nameKey: "l_lo_po_tertiarycrosspoint",
-            kind: "circle",
-            data: v("09_lo_po_tertiarycrosspoint"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "circle-color": "#22C55E",
-              "circle-radius": 2,
-              "circle-opacity": 1,
-              "circle-stroke-color": "#FFFFFF",
-              "circle-stroke-width": 1,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#22C55E",
-              circle: true,
-            },
-          },
-
-          {
             id: "lo_li_asjalan",
             nameKey: "l_lo_li_asjalan",
             kind: "line",
