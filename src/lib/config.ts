@@ -2061,24 +2061,7 @@ export const GROUPS: LayerGroup[] = [
       lazy: true,
       cascade: true,
       children: [
-       
-        {
-          id: "oe09_po_asesories",
-          nameKey: "l_oe09_po_asesories",
-          kind: "circle",
-          data: v("09_oe_po_asesories"),
-          clickable: true,
-          lazy: true,
-          paint: {
-            "circle-color": "#EC4899",
-            "circle-radius": 2,
-            "circle-opacity": 1,
-            "circle-stroke-color": "#FFFFFF",
-            "circle-stroke-width": 1,
-          },
-          defaultOn: false,
-          legend: { color: "#EC4899", circle: true },
-        },
+      
         {
           id: "oe09_po_bmcp",
           nameKey: "l_oe09_po_bmcp",
@@ -2252,18 +2235,6 @@ export const GROUPS: LayerGroup[] = [
           paint: { "line-color": "#2563EB", "line-width": 2 },
           defaultOn: false,
           legend: { color: "#2563EB", line: true },
-        },
-     
-        {
-          id: "oe09_li_tertiarycrossline",
-          nameKey: "l_oe09_li_tertiarycrossline",
-          kind: "line",
-          data: v("09_oe_li_tertiarycrossline"),
-          clickable: true,
-          lazy: true,
-          paint: { "line-color": "#F97316", "line-width": 2 },
-          defaultOn: false,
-          legend: { color: "#F97316", line: true },
         },
         
         {
