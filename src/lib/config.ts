@@ -1179,26 +1179,6 @@ export const GROUPS: LayerGroup[] = [
           },
 
           {
-            id: "lo_po_textcrosstertiary",
-            nameKey: "l_lo_po_textcrosstertiary",
-            kind: "circle",
-            data: v("09_lo_po_textcrosstertiary"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "circle-color": "#F97316",
-              "circle-radius": 2,
-              "circle-opacity": 1,
-              "circle-stroke-color": "#FFFFFF",
-              "circle-stroke-width": 1,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#F97316",
-              circle: true,
-            },
-          },
-          {
             id: "lo_li_asjalan",
             nameKey: "l_lo_li_asjalan",
             kind: "line",
