@@ -234,74 +234,91 @@ function buildStyle(): maplibregl.StyleSpecification {
 
       if (l.label) {
 
-        const usesLinePlacement = l.kind === "line";
+  const isPolygon = l.kind === "fill";
+  const isLine = l.kind === "line";
 
-        const labelLayout: Record<string, unknown> = {
-          visibility: l.defaultOn
-            ? "visible"
-            : "none",
+  const labelLayout: Record<string, unknown> = {
+    visibility: l.defaultOn
+      ? "visible"
+      : "none",
 
-          "text-field": [
-            "get",
-            l.label.field,
-          ],
+    // Ambil nama dari atribut GeoJSON
+    "text-field": [
+      "coalesce",
+      ["get", l.label.field],
+      "",
+    ],
 
-          "text-size": l.label.size ?? 11,
+    "text-size": l.label.size ?? 11,
 
-          // Tetap nyaman dibaca ketika map dipitch
-          "text-pitch-alignment": "viewport",
+    // Label tetap nyaman saat map dipitch
+    "text-pitch-alignment": "viewport",
 
-          "text-allow-overlap": false,
-          "text-ignore-placement": false,
-        };
+    "text-allow-overlap": false,
+    "text-ignore-placement": false,
+  };
 
-        if (usesLinePlacement) {
-          // Label mengikuti arah garis
-          labelLayout["symbol-placement"] = "line";
+  // ==========================================
+  // POLYGON
+  // Desa / Posto / Kotamadya / Ricefield
+  // ==========================================
+  if (isPolygon) {
 
-          // Jarak antar label
-          labelLayout["symbol-spacing"] =
-            l.label.spacing ?? 250;
+    labelLayout["symbol-placement"] = "point";
 
-          labelLayout["text-rotation-alignment"] = "map";
+    // Tengah
+    labelLayout["text-anchor"] = "center";
 
-          // Mencegah label terlalu miring
-          labelLayout["text-max-angle"] = 30;
+    labelLayout["text-rotation-alignment"] = "viewport";
 
-          // Label tetap terbaca dari kiri-kanan
-          labelLayout["text-keep-upright"] = true;
-        } else {
-          // Poligon: satu label di titik representatif
-          // Titik: label mengikuti posisi fiturnya
-          labelLayout["symbol-placement"] = "point";
-          labelLayout["text-anchor"] = "center";
-          labelLayout["text-rotation-alignment"] = "viewport";
-        }
+  }
 
-        layers.push({
-          id: `${l.id}_label`,
-          type: "symbol",
-          source: l.id,
+  // ==========================================
+  // LINE
+  // Sungai / Jalan / Batas garis
+  // ==========================================
+  else if (isLine) {
 
-          minzoom: l.label.minzoom ?? 0,
-          maxzoom: l.label.maxzoom ?? 24,
+    // Label mengikuti garis
+    labelLayout["symbol-placement"] = "line";
 
-          layout: labelLayout,
+    // Jarak antar label
+    labelLayout["symbol-spacing"] =
+      l.label.spacing ?? 250;
 
-          paint: {
-            "text-color":
-              l.label.color ?? "#5A1715",
+    labelLayout["text-rotation-alignment"] = "map";
 
-            "text-halo-color":
-              l.label.haloColor ?? "#FFFFFF",
+    // Mencegah label terlalu miring
+    labelLayout["text-max-angle"] = 30;
 
-            "text-halo-width":
-              l.label.haloWidth ?? 2,
+    // Label tetap terbaca
+    labelLayout["text-keep-upright"] = true;
+  }
 
-            "text-halo-blur": 0.2,
-          },
-        } as any);
-      }
+  layers.push({
+    id: `${l.id}_label`,
+    type: "symbol",
+    source: l.id,
+
+    minzoom: l.label.minzoom ?? 0,
+    maxzoom: l.label.maxzoom ?? 24,
+
+    layout: labelLayout,
+
+    paint: {
+      "text-color":
+        l.label.color ?? "#5A1715",
+
+      "text-halo-color":
+        l.label.haloColor ?? "#FFFFFF",
+
+      "text-halo-width":
+        l.label.haloWidth ?? 2,
+
+      "text-halo-blur": 0.2,
+    },
+  } as any);
+}
     }
   });
 
