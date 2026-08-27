@@ -152,7 +152,7 @@ BASEMAPS.forEach((b) => {
           : "none",
 
         // ICON
-        "icon-image": l.id,
+        "icon-image": l.icon,
         "icon-size": 0.05,
 
         "icon-allow-overlap": true,
@@ -435,8 +435,8 @@ async function registerMapIcons(map: MLMap) {
       url: "/icons/desain.png",
     },
     {
-      id: "kupasan",
-      url: "/icons/kupasan.png",
+      id: "coordinate",
+      url: "/icons/coordinate.png",
     },
   ];
 
