@@ -152,7 +152,7 @@ BASEMAPS.forEach((b) => {
           : "none",
 
         // ICON
-        "icon-image": l.icon,
+        "icon-image": l.id,
         "icon-size": 0.05,
 
         "icon-allow-overlap": true,
