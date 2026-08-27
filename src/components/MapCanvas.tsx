@@ -87,7 +87,7 @@ function buildStyle(): maplibregl.StyleSpecification {
   ];
 
   // BASEMAP
-  BASEMAPS.forEach((b, i) => {
+  BASEMAPS.forEach((b) => {
     sources[`bm_${b.id}`] = {
       type: "raster",
       tiles: b.tiles,
@@ -101,7 +101,7 @@ function buildStyle(): maplibregl.StyleSpecification {
       type: "raster",
       source: `bm_${b.id}`,
       layout: {
-        visibility: i === 0 ? "visible" : "none",
+        visibility: b.id === "sat" ? "visible" : "none",
       },
     } as any);
   });
