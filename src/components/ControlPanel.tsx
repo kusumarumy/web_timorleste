@@ -313,20 +313,26 @@ function MeasurementControl() {
         </button>
       </div>
       <p className="mt-2 text-[10px] leading-snug text-muted2">
-        {active ? (
-          <>
-            {t("measurement_click")} ·{" "}
-            <b className="text-teal">
-              {t("measurement_double_click")}
-            </b>{" "}
-            {t("measurement_finish")} ·{" "}
-            <b className="text-teal">Esc</b>{" "}
-            {t("measurement_cancel")}
-          </>
-        ) : (
-          t("measurement_select")
-        )}
-      </p>
+  {active ? (
+    <>
+      {t("measurement_click")} ·{" "}
+      <b className="text-teal">
+        {t("measurement_double_click")}
+      </b>{" "}
+      {t("measurement_finish")} ·{" "}
+      <b className="text-teal">Esc</b>{" "}
+      {t("measurement_cancel")}
+
+      {active === "elevation" && (
+        <span className="mt-1 block text-teal/80">
+          ℹ {t("elevation_info")}
+        </span>
+      )}
+    </>
+  ) : (
+    t("measurement_select")
+  )}
+</p>
     </div>
   );
 }
