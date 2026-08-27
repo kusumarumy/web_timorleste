@@ -1073,30 +1073,6 @@ export const GROUPS: LayerGroup[] = [
         lazy: true,
         cascade: true,
         children: [
-          // =====================================================
-          // AREA
-          // =====================================================
-
-          {
-            id: "lo_ar_00",
-            nameKey: "l_lo_ar_00",
-            kind: "fill",
-            data: v("09_lo_ar_00"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "fill-color": "#8B5CF6",
-              "fill-opacity": 0.35,
-              "fill-outline-color": "#7C3AED",
-            },
-            defaultOn: false,
-            opacity: 0.35,
-            opacityProp: "fill-opacity",
-            legend: {
-              color: "#8B5CF6",
-            },
-          },
-
           {
             id: "lo_ar_areal",
             nameKey: "l_lo_ar_areal",
@@ -1114,26 +1090,6 @@ export const GROUPS: LayerGroup[] = [
             opacityProp: "fill-opacity",
             legend: {
               color: "#A855F7",
-            },
-          },
-
-          {
-            id: "lo_ar_asesories",
-            nameKey: "l_lo_ar_asesories",
-            kind: "fill",
-            data: v("09_lo_ar_asesories"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "fill-color": "#EC4899",
-              "fill-opacity": 0.35,
-              "fill-outline-color": "#DB2777",
-            },
-            defaultOn: false,
-            opacity: 0.35,
-            opacityProp: "fill-opacity",
-            legend: {
-              color: "#EC4899",
             },
           },
 
@@ -1178,26 +1134,6 @@ export const GROUPS: LayerGroup[] = [
           },
 
           {
-            id: "lo_ar_bmcp",
-            nameKey: "l_lo_ar_bmcp",
-            kind: "fill",
-            data: v("09_lo_ar_bmcp"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "fill-color": "#2563EB",
-              "fill-opacity": 0.35,
-              "fill-outline-color": "#1D4ED8",
-            },
-            defaultOn: false,
-            opacity: 0.35,
-            opacityProp: "fill-opacity",
-            legend: {
-              color: "#2563EB",
-            },
-          },
-
-          {
             id: "lo_ar_box",
             nameKey: "l_lo_ar_box",
             kind: "fill",
@@ -1214,86 +1150,6 @@ export const GROUPS: LayerGroup[] = [
             opacityProp: "fill-opacity",
             legend: {
               color: "#0891B2",
-            },
-          },
-
-          {
-            id: "lo_ar_salkwarter",
-            nameKey: "l_lo_ar_salkwarter",
-            kind: "fill",
-            data: v("09_lo_ar_salkwarter"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "fill-color": "#06B6D4",
-              "fill-opacity": 0.35,
-              "fill-outline-color": "#0891B2",
-            },
-            defaultOn: false,
-            opacity: 0.35,
-            opacityProp: "fill-opacity",
-            legend: {
-              color: "#06B6D4",
-            },
-          },
-
-          {
-            id: "lo_ar_tertiary",
-            nameKey: "l_lo_ar_tertiary",
-            kind: "fill",
-            data: r2Vector("09_lo_ar_tertiary"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "fill-color": "#22C55E",
-              "fill-opacity": 0.35,
-              "fill-outline-color": "#16A34A",
-            },
-            defaultOn: false,
-            opacity: 0.35,
-            opacityProp: "fill-opacity",
-            legend: {
-              color: "#22C55E",
-            },
-          },
-
-          // =====================================================
-          // LINE
-          // =====================================================
-
-          {
-            id: "lo_li_areal",
-            nameKey: "l_lo_li_areal",
-            kind: "line",
-            data: v("09_lo_li_areal"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "line-color": "#7C3AED",
-              "line-width": 2,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#7C3AED",
-              line: true,
-            },
-          },
-
-          {
-            id: "lo_li_asesories",
-            nameKey: "l_lo_li_asesories",
-            kind: "line",
-            data: v("09_lo_li_asesories"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "line-color": "#EC4899",
-              "line-width": 2,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#EC4899",
-              line: true,
             },
           },
 
@@ -1329,42 +1185,6 @@ export const GROUPS: LayerGroup[] = [
             defaultOn: false,
             legend: {
               color: "#0EA5E9",
-              line: true,
-            },
-          },
-
-          {
-            id: "lo_li_bmcp",
-            nameKey: "l_lo_li_bmcp",
-            kind: "line",
-            data: v("09_lo_li_bmcp"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "line-color": "#2563EB",
-              "line-width": 2,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#2563EB",
-              line: true,
-            },
-          },
-
-          {
-            id: "lo_li_box",
-            nameKey: "l_lo_li_box",
-            kind: "line",
-            data: v("09_lo_li_box"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "line-color": "#6B7280",
-              "line-width": 2,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#6B7280",
               line: true,
             },
           },
@@ -1460,24 +1280,6 @@ export const GROUPS: LayerGroup[] = [
           },
 
           {
-            id: "lo_li_kodebm",
-            nameKey: "l_lo_li_kodebm",
-            kind: "line",
-            data: v("09_lo_li_kodebm"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "line-color": "#2563EB",
-              "line-width": 2,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#2563EB",
-              line: true,
-            },
-          },
-
-          {
             id: "lo_li_pembuangutama",
             nameKey: "l_lo_li_pembuangutama",
             kind: "line",
@@ -1566,47 +1368,7 @@ export const GROUPS: LayerGroup[] = [
               line: true,
             },
           },
-
-          {
-            id: "lo_li_tertiarycrossline",
-            nameKey: "l_lo_li_tertiarycrossline",
-            kind: "line",
-            data: v("09_lo_li_tertiarycrossline"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "line-color": "#F59E0B",
-              "line-width": 2,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#F59E0B",
-              line: true,
-            },
-          },
-
-          {
-            id: "lo_li_textgcp",
-            nameKey: "l_lo_li_textgcp",
-            kind: "line",
-            data: v("09_lo_li_textgcp"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "line-color": "#DC2626",
-              "line-width": 2,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#DC2626",
-              line: true,
-            },
-          },
-
-          // =====================================================
-          // POINT
-          // =====================================================
-
+        
           {
             id: "lo_po_asesories",
             nameKey: "l_lo_po_asesories",
@@ -1775,26 +1537,6 @@ export const GROUPS: LayerGroup[] = [
             },
           },
 
-          {
-            id: "lo_po_textgcp",
-            nameKey: "l_lo_po_textgcp",
-            kind: "circle",
-            data: v("09_lo_po_textgcp"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "circle-color": "#EF4444",
-              "circle-radius": 5,
-              "circle-opacity": 1,
-              "circle-stroke-color": "#FFFFFF",
-              "circle-stroke-width": 1,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#EF4444",
-              circle: true,
-            },
-          },
         ],
       },
     ],
