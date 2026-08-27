@@ -1416,27 +1416,6 @@ export const GROUPS: LayerGroup[] = [
           },
 
           {
-            id: "lo_po_salkwater",
-            nameKey: "l_lo_po_salkwater",
-            kind: "circle",
-            data: v("09_lo_po_salkwater"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "circle-color": "#06B6D4",
-              "circle-radius": 5,
-              "circle-opacity": 1,
-              "circle-stroke-color": "#FFFFFF",
-              "circle-stroke-width": 1,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#06B6D4",
-              circle: true,
-            },
-          },
-
-          {
             id: "lo_po_tertiarycrosspoint",
             nameKey: "l_lo_po_tertiarycrosspoint",
             kind: "circle",
