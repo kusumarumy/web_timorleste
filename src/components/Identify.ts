@@ -10,7 +10,6 @@ import type {
 } from "maplibre-gl";
 
 import { Popup } from "maplibre-gl";
-import { Popup } from "maplibre-gl";
 import { getToolMode, onToolMode, setToolMode } from "@/components/toolMode";
 
 function cursorSvg(accent: string) {
