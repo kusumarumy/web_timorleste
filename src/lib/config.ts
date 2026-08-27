@@ -1074,264 +1074,6 @@ export const GROUPS: LayerGroup[] = [
         cascade: true,
         children: [
           {
-            id: "lo_ar_areal",
-            nameKey: "l_lo_ar_areal",
-            kind: "fill",
-            data: v("09_lo_ar_areal"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "fill-color": "#A855F7",
-              "fill-opacity": 0.35,
-              "fill-outline-color": "#9333EA",
-            },
-            defaultOn: false,
-            opacity: 0.35,
-            opacityProp: "fill-opacity",
-            legend: {
-              color: "#A855F7",
-            },
-          },
-
-          {
-            id: "lo_ar_bangsadap",
-            nameKey: "l_lo_ar_bangsadap",
-            kind: "fill",
-            data: v("09_lo_ar_bangsadap"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "fill-color": "#F59E0B",
-              "fill-opacity": 0.35,
-              "fill-outline-color": "#D97706",
-            },
-            defaultOn: false,
-            opacity: 0.35,
-            opacityProp: "fill-opacity",
-            legend: {
-              color: "#F59E0B",
-            },
-          },
-
-          {
-            id: "lo_ar_bangunan",
-            nameKey: "l_lo_ar_bangunan",
-            kind: "fill",
-            data: v("09_lo_ar_bangunan"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "fill-color": "#7C3AED",
-              "fill-opacity": 0.35,
-              "fill-outline-color": "#6D28D9",
-            },
-            defaultOn: false,
-            opacity: 0.35,
-            opacityProp: "fill-opacity",
-            legend: {
-              color: "#7C3AED",
-            },
-          },
-
-          {
-            id: "lo_ar_box",
-            nameKey: "l_lo_ar_box",
-            kind: "fill",
-            data: v("09_lo_ar_box"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "fill-color": "#0891B2",
-              "fill-opacity": 0.35,
-              "fill-outline-color": "#0E7490",
-            },
-            defaultOn: false,
-            opacity: 0.35,
-            opacityProp: "fill-opacity",
-            legend: {
-              color: "#0891B2",
-            },
-          },
-
-          {
-            id: "lo_li_asjalan",
-            nameKey: "l_lo_li_asjalan",
-            kind: "line",
-            data: v("09_lo_li_asjalan"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "line-color": "#78716C",
-              "line-width": 2,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#78716C",
-              line: true,
-            },
-          },
-
-          {
-            id: "lo_li_crossline",
-            nameKey: "l_lo_li_crossline",
-            kind: "line",
-            data: v("09_lo_li_crossline"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "line-color": "#F59E0B",
-              "line-width": 2,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#F59E0B",
-              line: true,
-            },
-          },
-
-          {
-            id: "lo_li_desaindrain",
-            nameKey: "l_lo_li_desaindrain",
-            kind: "line",
-            data: v("09_lo_li_desaindrain"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "line-color": "#0891B2",
-              "line-width": 2,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#0891B2",
-              line: true,
-            },
-          },
-
-          {
-            id: "lo_li_jalan",
-            nameKey: "l_lo_li_jalan",
-            kind: "line",
-            data: v("09_lo_li_jalan"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "line-color": "#E1B94A",
-              "line-width": 2,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#E1B94A",
-              line: true,
-            },
-          },
-
-          {
-            id: "lo_li_jembatan",
-            nameKey: "l_lo_li_jembatan",
-            kind: "line",
-            data: v("09_lo_li_jembatan"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "line-color": "#92400E",
-              "line-width": 2,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#92400E",
-              line: true,
-            },
-          },
-
-          {
-            id: "lo_li_pembuangutama",
-            nameKey: "l_lo_li_pembuangutama",
-            kind: "line",
-            data: v("09_lo_li_pembuangutama"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "line-color": "#0284C7",
-              "line-width": 2,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#0284C7",
-              line: true,
-            },
-          },
-
-          {
-            id: "lo_li_profile",
-            nameKey: "l_lo_li_profile",
-            kind: "line",
-            data: v("09_lo_li_profile"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "line-color": "#64748B",
-              "line-width": 2,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#64748B",
-              line: true,
-            },
-          },
-{
-            id: "lo_li_patoksaluran",
-            nameKey: "l_lo_li_patoksaluran",
-            kind: "line",
-            data: v("09_lo_li_patoksaluran"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "line-color": "#DC2626",
-              "line-width": 2,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#DC2626",
-              line: true,
-            },
-          },
-          {
-            id: "lo_li_salexisting",
-            nameKey: "l_lo_li_salexisting",
-            kind: "line",
-            data: v("09_lo_li_salexisting"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "line-color": "#16A34A",
-              "line-width": 2,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#16A34A",
-              line: true,
-            },
-          },
-
-          {
-            id: "lo_li_salters",
-            nameKey: "l_lo_li_salters",
-            kind: "line",
-            data: v("09_lo_li_salters"),
-            clickable: true,
-            lazy: true,
-            paint: {
-              "line-color": "#7C3AED",
-              "line-width": 2,
-            },
-            defaultOn: false,
-            legend: {
-              color: "#7C3AED",
-              line: true,
-            },
-          },
-        
-          {
             id: "lo_po_asesories",
             nameKey: "l_lo_po_asesories",
             kind: "circle",
@@ -1454,6 +1196,244 @@ export const GROUPS: LayerGroup[] = [
             legend: {
               color: "#F97316",
               circle: true,
+            },
+          },
+          {
+            id: "lo_li_asjalan",
+            nameKey: "l_lo_li_asjalan",
+            kind: "line",
+            data: v("09_lo_li_asjalan"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#78716C",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#78716C",
+              line: true,
+            },
+          },
+
+          {
+            id: "lo_li_crossline",
+            nameKey: "l_lo_li_crossline",
+            kind: "line",
+            data: v("09_lo_li_crossline"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#F59E0B",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#F59E0B",
+              line: true,
+            },
+          },
+
+          {
+            id: "lo_li_desaindrain",
+            nameKey: "l_lo_li_desaindrain",
+            kind: "line",
+            data: v("09_lo_li_desaindrain"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#0891B2",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#0891B2",
+              line: true,
+            },
+          },
+
+          {
+            id: "lo_li_jalan",
+            nameKey: "l_lo_li_jalan",
+            kind: "line",
+            data: v("09_lo_li_jalan"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#E1B94A",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#E1B94A",
+              line: true,
+            },
+          },
+
+          {
+            id: "lo_li_jembatan",
+            nameKey: "l_lo_li_jembatan",
+            kind: "line",
+            data: v("09_lo_li_jembatan"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#92400E",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#92400E",
+              line: true,
+            },
+          },
+
+          {
+            id: "lo_li_pembuangutama",
+            nameKey: "l_lo_li_pembuangutama",
+            kind: "line",
+            data: v("09_lo_li_pembuangutama"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#0284C7",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#0284C7",
+              line: true,
+            },
+          },
+{
+            id: "lo_li_patoksaluran",
+            nameKey: "l_lo_li_patoksaluran",
+            kind: "line",
+            data: v("09_lo_li_patoksaluran"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#DC2626",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#DC2626",
+              line: true,
+            },
+          },
+          {
+            id: "lo_li_salexisting",
+            nameKey: "l_lo_li_salexisting",
+            kind: "line",
+            data: v("09_lo_li_salexisting"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#16A34A",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#16A34A",
+              line: true,
+            },
+          },
+
+          {
+            id: "lo_li_salters",
+            nameKey: "l_lo_li_salters",
+            kind: "line",
+            data: v("09_lo_li_salters"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "line-color": "#7C3AED",
+              "line-width": 2,
+            },
+            defaultOn: false,
+            legend: {
+              color: "#7C3AED",
+              line: true,
+            },
+          },
+        {
+            id: "lo_ar_areal",
+            nameKey: "l_lo_ar_areal",
+            kind: "fill",
+            data: v("09_lo_ar_areal"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "fill-color": "#A855F7",
+              "fill-opacity": 0.35,
+              "fill-outline-color": "#9333EA",
+            },
+            defaultOn: false,
+            opacity: 0.35,
+            opacityProp: "fill-opacity",
+            legend: {
+              color: "#A855F7",
+            },
+          },
+
+          {
+            id: "lo_ar_bangsadap",
+            nameKey: "l_lo_ar_bangsadap",
+            kind: "fill",
+            data: v("09_lo_ar_bangsadap"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "fill-color": "#F59E0B",
+              "fill-opacity": 0.35,
+              "fill-outline-color": "#D97706",
+            },
+            defaultOn: false,
+            opacity: 0.35,
+            opacityProp: "fill-opacity",
+            legend: {
+              color: "#F59E0B",
+            },
+          },
+
+          {
+            id: "lo_ar_bangunan",
+            nameKey: "l_lo_ar_bangunan",
+            kind: "fill",
+            data: v("09_lo_ar_bangunan"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "fill-color": "#7C3AED",
+              "fill-opacity": 0.35,
+              "fill-outline-color": "#6D28D9",
+            },
+            defaultOn: false,
+            opacity: 0.35,
+            opacityProp: "fill-opacity",
+            legend: {
+              color: "#7C3AED",
+            },
+          },
+
+          {
+            id: "lo_ar_box",
+            nameKey: "l_lo_ar_box",
+            kind: "fill",
+            data: v("09_lo_ar_box"),
+            clickable: true,
+            lazy: true,
+            paint: {
+              "fill-color": "#0891B2",
+              "fill-opacity": 0.35,
+              "fill-outline-color": "#0E7490",
+            },
+            defaultOn: false,
+            opacity: 0.35,
+            opacityProp: "fill-opacity",
+            legend: {
+              color: "#0891B2",
             },
           },
 
