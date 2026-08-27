@@ -12,6 +12,7 @@ import {
 import {
   getToolMode,
   onToolMode,
+  setToolMode,
 } from "./toolMode";
 
 import { ALL_LAYERS } from "../lib/config";
@@ -43,9 +44,18 @@ export default function MapTools({ map }) {
     });
 
     measureRef.current = new MeasureControl(map, {
-      scaleFactor: GROUND_K,
-      onResult: setResult,
-    });
+  scaleFactor: GROUND_K,
+
+  onResult: setResult,
+
+  onStop: () => {
+    console.log("MAPTOOLS: measure stopped → OFF");
+
+    setResult(null);
+    setTool(null);
+    setToolMode(null);
+  },
+});
 
     console.log("MAPTOOLS: MeasureControl siap");
 
@@ -108,16 +118,17 @@ export default function MapTools({ map }) {
   // ========================================================
   // TOOL SELAIN IDENTIFY
   // ========================================================
+identifyRef.current?.disable();
 
-  identifyRef.current?.disable();
-
-  // Hanya reset measure jika memang tool measure berubah
-  measureRef.current?.stop();
-  measureRef.current?.clear();
-
+if (!next) {
   setResult(null);
+  return;
+}
 
-  if (!next) return;
+measureRef.current?.stop();
+measureRef.current?.clear();
+
+setResult(null);
 
   // ========================================================
   // JARAK
