@@ -177,67 +177,89 @@ export const GROUPS: LayerGroup[] = [
 
   layers: [
     {
-      id: "desa",
-      nameKey: "l_desa",
-      kind: "line",
-      data: v("desa"),
+  id: "desa",
+  nameKey: "l_desa",
+  kind: "line",
+  data: v("desa"),
 
-      paint: {
-        "line-color": "#E53935",
-        "line-width": 1.2,
-        "line-dasharray": [8, 4],
-        "line-opacity": 1,
-      },
+  paint: {
+    "line-color": "#E53935",
+    "line-width": 1.2,
+    "line-dasharray": [8, 4],
+    "line-opacity": 1,
+  },
 
-      defaultOn: false,
+  defaultOn: false,
 
-      legend: {
-        color: "#E53935",
-        line: true,
-      },
-    },
+  legend: {
+    color: "#E53935",
+    line: true,
+  },
 
-    {
-      id: "posto",
-      nameKey: "l_posto",
-      kind: "line",
-      data: v("posto"),
+  label: {
+    field: "adm3_name",
+    size: 10,
+    color: "#C62828",
+    haloColor: "#FFFFFF",
+    haloWidth: 1.5,
+  },
+},
+{
+  id: "posto",
+  nameKey: "l_posto",
+  kind: "line",
+  data: v("posto"),
 
-      paint: {
-        "line-color": "#FF6B6B",
-        "line-width": 1.6,
-        "line-dasharray": [10, 5],
-        "line-opacity": 1,
-      },
+  paint: {
+    "line-color": "#FF6B6B",
+    "line-width": 1.6,
+    "line-dasharray": [10, 5],
+    "line-opacity": 1,
+  },
 
-      defaultOn: false,
+  defaultOn: false,
 
-      legend: {
-        color: "#FF6B6B",
-        line: true,
-      },
-    },
+  legend: {
+    color: "#FF6B6B",
+    line: true,
+  },
 
-    {
-      id: "kotamadya",
-      nameKey: "l_kotamadya",
-      kind: "line",
-      data: v("kotamadya"),
+  label: {
+    field: "adm2_name",
+    size: 11,
+    color: "#C62828",
+    haloColor: "#FFFFFF",
+    haloWidth: 1.5,
+  },
+},
+{
+  id: "kotamadya",
+  nameKey: "l_kotamadya",
+  kind: "line",
+  data: v("kotamadya"),
 
-      paint: {
-        "line-color": "#A66DD4",
-        "line-width": 2,
-        "line-dasharray": [12, 5],
-        "line-opacity": 1,
-      },
+  paint: {
+    "line-color": "#A66DD4",
+    "line-width": 2,
+    "line-dasharray": [12, 5],
+    "line-opacity": 1,
+  },
 
-      defaultOn: false,
+  defaultOn: false,
 
-      legend: {
-        color: "#A66DD4",
-        line: true,
-      },
-    },
+  legend: {
+    color: "#A66DD4",
+    line: true,
+  },
+
+  label: {
+    field: "adm1_name",
+    size: 12,
+    color: "#7B3FB3",
+    haloColor: "#FFFFFF",
+    haloWidth: 2,
+  },
+},
 
     {
       id: "negara",
