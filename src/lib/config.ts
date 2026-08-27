@@ -176,98 +176,86 @@ export const GROUPS: LayerGroup[] = [
   dot: "#E39A4A",
 
   layers: [
-    {
-      id: "desa",
-      nameKey: "l_desa",
-      kind: "fill",
-      data: v("desa"),
+    {{
+  id: "desa",
+  nameKey: "l_desa",
+  kind: "fill",
+  data: v("desa"),
 
-      paint: {
-        // TRANSPARAN
-        "fill-color": "#FFFFFF",
-        "fill-opacity": 0,
+  paint: {
+    "fill-color": "#FFFFFF",
+    "fill-opacity": 0,
+  },
 
-        // OUTLINE
-        "fill-outline-color": "#E53935",
-      },
+  defaultOn: false,
 
-      defaultOn: false,
+  legend: {
+    color: "#E53935",
+    line: true,
+  },
 
-      legend: {
-        color: "#E53935",
-        line: true,
-      },
+  label: {
+    field: "adm3_name",
+    size: 10,
+    color: "#C62828",
+    haloColor: "#FFFFFF",
+    haloWidth: 1.5,
+  },
+},
 
-      label: {
-        field: "adm3_name",
-        size: 10,
-        color: "#C62828",
-        haloColor: "#FFFFFF",
-        haloWidth: 1.5,
-      },
-    },
+{
+  id: "posto",
+  nameKey: "l_posto",
+  kind: "fill",
+  data: v("posto"),
 
-    {
-      id: "posto",
-      nameKey: "l_posto",
-      kind: "fill",
-      data: v("posto"),
+  paint: {
+    "fill-color": "#FFFFFF",
+    "fill-opacity": 0,
+  },
 
-      paint: {
-        // TRANSPARAN
-        "fill-color": "#FFFFFF",
-        "fill-opacity": 0,
+  defaultOn: false,
 
-        // OUTLINE
-        "fill-outline-color": "#FF6B6B",
-      },
+  legend: {
+    color: "#FF6B6B",
+    line: true,
+  },
 
-      defaultOn: false,
+  label: {
+    field: "adm2_name",
+    size: 11,
+    color: "#C62828",
+    haloColor: "#FFFFFF",
+    haloWidth: 1.5,
+  },
+},
 
-      legend: {
-        color: "#FF6B6B",
-        line: true,
-      },
+{
+  id: "kotamadya",
+  nameKey: "l_kotamadya",
+  kind: "fill",
+  data: v("kotamadya"),
 
-      label: {
-        field: "adm2_name",
-        size: 11,
-        color: "#C62828",
-        haloColor: "#FFFFFF",
-        haloWidth: 1.5,
-      },
-    },
+  paint: {
+    "fill-color": "#FFFFFF",
+    "fill-opacity": 0,
+  },
 
-    {
-      id: "kotamadya",
-      nameKey: "l_kotamadya",
-      kind: "fill",
-      data: v("kotamadya"),
+  defaultOn: false,
 
-      paint: {
-        // TRANSPARAN
-        "fill-color": "#FFFFFF",
-        "fill-opacity": 0,
+  legend: {
+    color: "#A66DD4",
+    line: true,
+  },
 
-        // OUTLINE
-        "fill-outline-color": "#A66DD4",
-      },
-
-      defaultOn: false,
-
-      legend: {
-        color: "#A66DD4",
-        line: true,
-      },
-
-      label: {
-        field: "adm1_name",
-        size: 12,
-        color: "#7B3FB3",
-        haloColor: "#FFFFFF",
-        haloWidth: 2,
-      },
-    },
+  label: {
+    field: "adm1_name",
+    size: 12,
+    color: "#7B3FB3",
+    haloColor: "#FFFFFF",
+    haloWidth: 2,
+  },
+},
 
     {
       id: "negara",
