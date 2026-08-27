@@ -171,95 +171,103 @@ export const GROUPS: LayerGroup[] = [
   ],
 },
   // ADMINISTRASI
- {
+{
   titleKey: "g_admin",
   dot: "#E39A4A",
 
   layers: [
     {
-  id: "desa",
-  nameKey: "l_desa",
-  kind: "line",
-  data: v("desa"),
+      id: "desa",
+      nameKey: "l_desa",
+      kind: "fill",
+      data: v("desa"),
 
-  paint: {
-    "line-color": "#E53935",
-    "line-width": 1.2,
-    "line-dasharray": [8, 4],
-    "line-opacity": 1,
-  },
+      paint: {
+        // TRANSPARAN
+        "fill-color": "#FFFFFF",
+        "fill-opacity": 0,
 
-  defaultOn: false,
+        // OUTLINE
+        "fill-outline-color": "#E53935",
+      },
 
-  legend: {
-    color: "#E53935",
-    line: true,
-  },
+      defaultOn: false,
 
-  label: {
-    field: "adm3_name",
-    size: 10,
-    color: "#C62828",
-    haloColor: "#FFFFFF",
-    haloWidth: 1.5,
-  },
-},
-{
-  id: "posto",
-  nameKey: "l_posto",
-  kind: "line",
-  data: v("posto"),
+      legend: {
+        color: "#E53935",
+        line: true,
+      },
 
-  paint: {
-    "line-color": "#FF6B6B",
-    "line-width": 1.6,
-    "line-dasharray": [10, 5],
-    "line-opacity": 1,
-  },
+      label: {
+        field: "adm3_name",
+        size: 10,
+        color: "#C62828",
+        haloColor: "#FFFFFF",
+        haloWidth: 1.5,
+      },
+    },
 
-  defaultOn: false,
+    {
+      id: "posto",
+      nameKey: "l_posto",
+      kind: "fill",
+      data: v("posto"),
 
-  legend: {
-    color: "#FF6B6B",
-    line: true,
-  },
+      paint: {
+        // TRANSPARAN
+        "fill-color": "#FFFFFF",
+        "fill-opacity": 0,
 
-  label: {
-    field: "adm2_name",
-    size: 11,
-    color: "#C62828",
-    haloColor: "#FFFFFF",
-    haloWidth: 1.5,
-  },
-},
-{
-  id: "kotamadya",
-  nameKey: "l_kotamadya",
-  kind: "line",
-  data: v("kotamadya"),
+        // OUTLINE
+        "fill-outline-color": "#FF6B6B",
+      },
 
-  paint: {
-    "line-color": "#A66DD4",
-    "line-width": 2,
-    "line-dasharray": [12, 5],
-    "line-opacity": 1,
-  },
+      defaultOn: false,
 
-  defaultOn: false,
+      legend: {
+        color: "#FF6B6B",
+        line: true,
+      },
 
-  legend: {
-    color: "#A66DD4",
-    line: true,
-  },
+      label: {
+        field: "adm2_name",
+        size: 11,
+        color: "#C62828",
+        haloColor: "#FFFFFF",
+        haloWidth: 1.5,
+      },
+    },
 
-  label: {
-    field: "adm1_name",
-    size: 12,
-    color: "#7B3FB3",
-    haloColor: "#FFFFFF",
-    haloWidth: 2,
-  },
-},
+    {
+      id: "kotamadya",
+      nameKey: "l_kotamadya",
+      kind: "fill",
+      data: v("kotamadya"),
+
+      paint: {
+        // TRANSPARAN
+        "fill-color": "#FFFFFF",
+        "fill-opacity": 0,
+
+        // OUTLINE
+        "fill-outline-color": "#A66DD4",
+      },
+
+      defaultOn: false,
+
+      legend: {
+        color: "#A66DD4",
+        line: true,
+      },
+
+      label: {
+        field: "adm1_name",
+        size: 12,
+        color: "#7B3FB3",
+        haloColor: "#FFFFFF",
+        haloWidth: 2,
+      },
+    },
 
     {
       id: "negara",
