@@ -551,10 +551,10 @@ export const GROUPS: LayerGroup[] = [
       },
     },    
  {
-  id: "ricefield_8di",
-  nameKey: "l_ricefield_8di",
+  id: "8irrigationareas",
+  nameKey: "l_8irrigationareas",
   kind: "fill",
-  data: v("ricefield_8di"),
+  data: v("8irrigationareas"),
   clickable: true,
 
   paint: {
