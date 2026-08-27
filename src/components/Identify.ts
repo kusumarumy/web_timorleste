@@ -112,7 +112,9 @@ private highlightSourceId = "__identify_highlight_source";
 private highlightFillId = "__identify_highlight_fill";
 private highlightLineId = "__identify_highlight_line";
 private highlightPointId = "__identify_highlight_point";
+  private selectedFeature: MapGeoJSONFeature | null = null;
   private active = false;
+  
   private prevCursor = "";
   private unsub: (() => void) | null = null;
 
@@ -198,7 +200,7 @@ private highlightPointId = "__identify_highlight_point";
   map.on("mousemove", this.handleMove);
 }
 
-  private disable() {
+private disable() {
   const map = this.map;
   if (!map) return;
 
@@ -208,6 +210,7 @@ private highlightPointId = "__identify_highlight_point";
   map.getCanvas().style.cursor = this.prevCursor || "";
 
   this.closePopup();
+  this.selectedFeature = null;
   this.removeHighlight();
 }
   private closePopup() {
@@ -328,56 +331,94 @@ private removeHighlight() {
 
   if (feature) {
     map.getCanvas().style.cursor = CURSOR_HIT;
-    this.highlightFeature(feature);
+
+    // Kalau belum ada objek yang dipilih lewat klik,
+    // tampilkan highlight hover.
+    if (!this.selectedFeature) {
+      this.highlightFeature(feature);
+    }
   } else {
     map.getCanvas().style.cursor = CURSOR_IDLE;
 
-    // Kalau tidak sedang ada popup hasil klik,
+    // Kalau belum ada objek yang dipilih,
     // hilangkan highlight hover.
-    if (!this.popup) {
+    if (!this.selectedFeature) {
       this.removeHighlight();
     }
   }
 };
 
-  private handleClick = (e: MapMouseEvent) => {
-    const map = this.map;
-    if (!map || !this.active) return;
+private handleClick = (e: MapMouseEvent) => {
+  const map = this.map;
+  if (!map || !this.active) return;
 
-    const features = this.query(e.point);
+  const features = this.query(e.point);
 
-this.closePopup();
+  this.closePopup();
 
-if (features.length > 0) {
-  this.selectedFeature = features[0];
-  this.highlightFeature(this.selectedFeature);
-} else {
-  this.selectedFeature = null;
-  this.removeHighlight();
-}
+  if (features.length > 0) {
+    this.selectedFeature = features[0];
+    this.highlightFeature(this.selectedFeature);
+  } else {
+    this.selectedFeature = null;
+    this.removeHighlight();
+  }
 
-    const popup = new Popup({
-      offset: 14,
-      maxWidth: "330px",
-      className: "identify-popup",
-      closeButton: true,
-      closeOnClick: false,
-    }).setLngLat(e.lngLat);
+  const popup = new Popup({
+    offset: 14,
+    maxWidth: "330px",
+    className: "identify-popup",
+    closeButton: true,
+    closeOnClick: false,
+  }).setLngLat(e.lngLat);
 
-    if (features.length === 0) {
-      const empty = document.createElement("div");
-      empty.className = "identify-pop identify-pop--empty";
-      empty.textContent =
-        this.opts.texts?.empty ?? "Tidak ada fitur di titik ini.";
-      popup.setDOMContent(empty);
-    } else {
-      popup.setDOMContent(this.buildContent(features));
-    }
+  if (features.length === 0) {
+    const empty = document.createElement("div");
+    empty.className = "identify-pop identify-pop--empty";
+    empty.textContent =
+      this.opts.texts?.empty ?? "Tidak ada fitur di titik ini.";
+    popup.setDOMContent(empty);
+  } else {
+    popup.setDOMContent(this.buildContent(features));
+  }
+private handleClick = (e: MapMouseEvent) => {
+  const map = this.map;
+  if (!map || !this.active) return;
 
-    popup.addTo(map);
-    this.popup = popup;
-  };
+  const features = this.query(e.point);
 
+  this.closePopup();
+
+  if (features.length > 0) {
+    this.selectedFeature = features[0];
+    this.highlightFeature(this.selectedFeature);
+  } else {
+    this.selectedFeature = null;
+    this.removeHighlight();
+  }
+
+  const popup = new Popup({
+    offset: 14,
+    maxWidth: "330px",
+    className: "identify-popup",
+    closeButton: true,
+    closeOnClick: false,
+  }).setLngLat(e.lngLat);
+
+  if (features.length === 0) {
+    const empty = document.createElement("div");
+    empty.className = "identify-pop identify-pop--empty";
+    empty.textContent =
+      this.opts.texts?.empty ?? "Tidak ada fitur di titik ini.";
+    popup.setDOMContent(empty);
+  } else {
+    popup.setDOMContent(this.buildContent(features));
+  }
+
+  popup.addTo(map);
+  this.popup = popup;
+};
+};
   // ---------- QUERY ----------
 
   private query(point: { x: number; y: number }): MapGeoJSONFeature[] {
