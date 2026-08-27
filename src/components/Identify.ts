@@ -140,7 +140,10 @@ export class IdentifyControl implements IControl {
   private container: HTMLDivElement | null = null;
   private button: HTMLButtonElement | null = null;
   private popup: Popup | null = null;
-
+private highlightSourceId = "__identify_highlight_source";
+private highlightFillId = "__identify_highlight_fill";
+private highlightLineId = "__identify_highlight_line";
+private highlightPointId = "__identify_highlight_point";
   private active = false;
   private prevCursor = "";
   private unsub: (() => void) | null = null;
@@ -214,34 +217,135 @@ export class IdentifyControl implements IControl {
   }
 
   private enable() {
-    const map = this.map;
-    if (!map) return;
+  const map = this.map;
+  if (!map) return;
 
-    const canvas = map.getCanvas();
-    this.prevCursor = canvas.style.cursor;
-    canvas.style.cursor = CURSOR_IDLE;
+  this.ensureHighlightLayers();
 
-    map.on("click", this.handleClick);
-    map.on("mousemove", this.handleMove);
-  }
+  const canvas = map.getCanvas();
+  this.prevCursor = canvas.style.cursor;
+  canvas.style.cursor = CURSOR_IDLE;
+
+  map.on("click", this.handleClick);
+  map.on("mousemove", this.handleMove);
+}
 
   private disable() {
-    const map = this.map;
-    if (!map) return;
+  const map = this.map;
+  if (!map) return;
 
-    map.off("click", this.handleClick);
-    map.off("mousemove", this.handleMove);
+  map.off("click", this.handleClick);
+  map.off("mousemove", this.handleMove);
 
-    map.getCanvas().style.cursor = this.prevCursor || "";
+  map.getCanvas().style.cursor = this.prevCursor || "";
 
-    this.closePopup();
-  }
-
+  this.closePopup();
+  this.removeHighlight();
+}
   private closePopup() {
     this.popup?.remove();
     this.popup = null;
   }
+// ---------- HIGHLIGHT ----------
 
+private ensureHighlightLayers() {
+  const map = this.map;
+  if (!map) return;
+
+  if (!map.getSource(this.highlightSourceId)) {
+    map.addSource(this.highlightSourceId, {
+      type: "geojson",
+      data: {
+        type: "FeatureCollection",
+        features: [],
+      },
+    });
+  }
+
+  if (!map.getLayer(this.highlightFillId)) {
+    map.addLayer({
+      id: this.highlightFillId,
+      type: "fill",
+      source: this.highlightSourceId,
+      paint: {
+        "fill-color": "#00FFFF",
+        "fill-opacity": 0.10,
+      },
+    });
+  }
+
+  if (!map.getLayer(this.highlightLineId)) {
+    map.addLayer({
+      id: this.highlightLineId,
+      type: "line",
+      source: this.highlightSourceId,
+      paint: {
+        "line-color": "#00FFFF",
+        "line-width": 4,
+        "line-opacity": 0.95,
+      },
+    });
+  }
+
+  if (!map.getLayer(this.highlightPointId)) {
+    map.addLayer({
+      id: this.highlightPointId,
+      type: "circle",
+      source: this.highlightSourceId,
+      paint: {
+        "circle-color": "#00FFFF",
+        "circle-radius": 7,
+        "circle-stroke-color": "#FFFFFF",
+        "circle-stroke-width": 2,
+      },
+    });
+  }
+}
+
+private highlightFeature(feature: MapGeoJSONFeature | null) {
+  const map = this.map;
+  if (!map) return;
+
+  this.ensureHighlightLayers();
+
+  const source = map.getSource(this.highlightSourceId);
+
+  if (!source || source.type !== "geojson") return;
+
+  if (!feature) {
+    source.setData({
+      type: "FeatureCollection",
+      features: [],
+    });
+    return;
+  }
+
+  source.setData({
+    type: "FeatureCollection",
+    features: [
+      {
+        type: "Feature",
+        id: feature.id,
+        properties: {},
+        geometry: feature.geometry,
+      },
+    ],
+  });
+}
+
+private removeHighlight() {
+  const map = this.map;
+  if (!map) return;
+
+  const source = map.getSource(this.highlightSourceId);
+
+  if (source && source.type === "geojson") {
+    source.setData({
+      type: "FeatureCollection",
+      features: [],
+    });
+  }
+}
   // ---------- EVENTS ----------
 
   private handleMove = (e: MapMouseEvent) => {
@@ -258,7 +362,13 @@ export class IdentifyControl implements IControl {
 
     const features = this.query(e.point);
 
-    this.closePopup();
+this.closePopup();
+
+if (features.length > 0) {
+  this.highlightFeature(features[0]);
+} else {
+  this.removeHighlight();
+};
 
     const popup = new Popup({
       offset: 14,
@@ -399,9 +509,10 @@ export class IdentifyControl implements IControl {
         prev.textContent = "‹";
         prev.setAttribute("aria-label", "Fitur sebelumnya");
         prev.addEventListener("click", () => {
-          index = (index - 1 + features.length) % features.length;
-          render();
-        });
+  index = (index - 1 + features.length) % features.length;
+  this.highlightFeature(features[index]);
+  render();
+});
 
         const count = document.createElement("span");
         count.className = "identify-pager-count";
@@ -413,9 +524,10 @@ export class IdentifyControl implements IControl {
         next.textContent = "›";
         next.setAttribute("aria-label", "Fitur berikutnya");
         next.addEventListener("click", () => {
-          index = (index + 1) % features.length;
-          render();
-        });
+  index = (index + 1) % features.length;
+  this.highlightFeature(features[index]);
+  render();
+});
 
         pager.append(prev, count, next);
         root.appendChild(pager);
