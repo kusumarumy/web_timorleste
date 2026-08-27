@@ -6,18 +6,12 @@ import type {
   MapGeoJSONFeature,
   MapMouseEvent,
   PointLike,
+  GeoJSONSource,
 } from "maplibre-gl";
+
 import { Popup } from "maplibre-gl";
-
-// Sesuaikan path ini dengan lokasi toolMode.ts di project-mu.
-// MapCanvas meng-import "./toolMode", jadi kalau MapCanvas ada di
-// src/components, path di bawah ini biasanya sudah benar.
+import { Popup } from "maplibre-gl";
 import { getToolMode, onToolMode, setToolMode } from "@/components/toolMode";
-
-// ============================================================
-// CURSOR
-// Kursor kustom: panah + badge huruf "i"
-// ============================================================
 
 function cursorSvg(accent: string) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
@@ -33,43 +27,22 @@ function toCursor(svg: string) {
     svg
   )}") 5 2, crosshair`;
 }
-
-// Biru = tool aktif, hijau = ada fitur di bawah kursor
 const CURSOR_IDLE = toCursor(cursorSvg("#2563EB"));
 const CURSOR_HIT = toCursor(cursorSvg("#16A34A"));
-
 const ICON_SVG = `<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
   <circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.9"/>
   <circle cx="12" cy="7.6" r="1.35" fill="currentColor"/>
   <rect x="10.85" y="10.4" width="2.3" height="7.2" rx="1.15" fill="currentColor"/>
 </svg>`;
 
-// ============================================================
-// OPTIONS
-// ============================================================
-
 export type IdentifyControlOptions = {
-  /** Layer id yang boleh di-query. Dipanggil setiap klik, jadi selalu up-to-date. */
   getLayerIds: (map: MLMap) => string[];
-
-  /** Nama layer yang tampil di popup (mis. hasil t(layer.nameKey)). */
   getLayerLabel?: (layerId: string) => string;
-
-  /** Label field yang tampil di popup. Default: snake_case → Title Case. */
   getFieldLabel?: (key: string) => string;
-
-  /** Field internal yang tidak perlu ditampilkan. */
   hiddenFields?: string[];
-
-  /** Kandidat field untuk judul popup, diurutkan dari prioritas tertinggi. */
   titleFields?: string[];
-
-  /** Maksimal fitur yang ditampung pager popup. Default 8. */
   maxFeatures?: number;
-
-  /** Radius klik dalam pixel — bantu klik titik & garis tipis. Default 6. */
   tolerance?: number;
-
   texts?: {
     button?: string;
     empty?: string;
@@ -90,10 +63,6 @@ const DEFAULT_TITLE_FIELDS = [
 ];
 
 const DEFAULT_HIDDEN_FIELDS = ["geometry", "bbox", "__id", "layer", "source"];
-
-// ============================================================
-// HELPERS
-// ============================================================
 
 function titleCase(key: string) {
   return key
@@ -308,9 +277,11 @@ private highlightFeature(feature: MapGeoJSONFeature | null) {
 
   this.ensureHighlightLayers();
 
-  const source = map.getSource(this.highlightSourceId);
+  const source = map.getSource(
+    this.highlightSourceId
+  ) as GeoJSONSource | undefined;
 
-  if (!source || source.type !== "geojson") return;
+  if (!source) return;
 
   if (!feature) {
     source.setData({
@@ -332,19 +303,20 @@ private highlightFeature(feature: MapGeoJSONFeature | null) {
     ],
   });
 }
-
 private removeHighlight() {
   const map = this.map;
   if (!map) return;
 
-  const source = map.getSource(this.highlightSourceId);
+  const source = map.getSource(
+    this.highlightSourceId
+  ) as GeoJSONSource | undefined;
 
-  if (source && source.type === "geojson") {
-    source.setData({
-      type: "FeatureCollection",
-      features: [],
-    });
-  }
+  if (!source) return;
+
+  source.setData({
+    type: "FeatureCollection",
+    features: [],
+  });
 }
   // ---------- EVENTS ----------
 
