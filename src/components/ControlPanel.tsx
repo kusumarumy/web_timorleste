@@ -218,10 +218,25 @@ function TerrainControl() {
 function MeasurementControl() {
   const { t } = useI18n();
   const [active, setActive] = useState(getToolMode());
+
   useEffect(() => {
-    return onToolMode((mode) => {
+    const unsubscribe = onToolMode((mode) => {
       setActive(mode);
     });
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        // Matikan status tool di ControlPanel
+        setToolMode(null);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      unsubscribe();
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
   const activate = (
     mode: "distance" | "elevation" | "area"
