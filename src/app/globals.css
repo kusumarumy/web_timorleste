@@ -345,7 +345,32 @@
   .identify-pop-body {
     max-height: 200px;
   }
-}on.identify-button.active .identify-icon {
-  border-color: #ffffff;
-  color: #ffffff;
+}
+
+/* ---------- FOOTER / TOGGLE ATRIBUT TEKNIS ---------- */
+
+.identify-pop-foot {
+  padding: 6px 12px 9px;
+  background: #ffffff;
+  border-top: 1px solid #e5e7eb;
+}
+
+.identify-toggle {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: #2563eb;
+  font-size: 11px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.identify-toggle:hover {
+  color: #1d4ed8;
+}
+
+.identify-row--styling .identify-key,
+.identify-row--styling .identify-val {
+  color: #9ca3af;
+  font-weight: 500;
 }
