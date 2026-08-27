@@ -357,136 +357,206 @@ export class IdentifyControl implements IControl {
     this.popup = null;
   }
 
-  // ============================================================
-  // HIGHLIGHT
-  //
-  // Efek cahaya ditiru dengan menumpuk beberapa layer:
-  // lebar & redup di bawah, tipis & terang di atas.
-  // Layer terluar berdenyut selama ada objek terpilih.
-  // ============================================================
+private ensureHighlightLayers(): boolean {
+  const map = this.map;
 
-  private ensureHighlightLayers(): boolean {
-    const map = this.map;
-    if (!map) return false;
-
-    try {
-      if (!map.getSource(this.HL_SRC)) {
-        map.addSource(this.HL_SRC, {
-          type: "geojson",
-          data: { type: "FeatureCollection", features: [] },
-        });
-      }
-
-      // POLIGON — isian
-      if (!map.getLayer(this.HL_FILL)) {
-        map.addLayer({
-          id: this.HL_FILL,
-          type: "fill",
-          source: this.HL_SRC,
-          filter: POLY_TYPES,
-          paint: {
-            "fill-color": GLOW,
-            "fill-opacity": ["case", IS_SELECT, 0.25, 0.1],
-          },
-        } as any);
-      }
-
-      // GARIS — lapis cahaya terluar, hanya untuk objek terpilih
-      if (!map.getLayer(this.HL_GLOW)) {
-        map.addLayer({
-          id: this.HL_GLOW,
-          type: "line",
-          source: this.HL_SRC,
-          filter: ["all", LINE_TYPES, IS_SELECT] as any,
-          layout: { "line-cap": "round", "line-join": "round" },
-          paint: {
-            "line-color": GLOW,
-            "line-width": 16,
-            "line-opacity": 0.18,
-            "line-blur": 6,
-          },
-        } as any);
-      }
-
-      // GARIS — lapis tengah
-      if (!map.getLayer(this.HL_MID)) {
-        map.addLayer({
-          id: this.HL_MID,
-          type: "line",
-          source: this.HL_SRC,
-          filter: LINE_TYPES,
-          layout: { "line-cap": "round", "line-join": "round" },
-          paint: {
-            "line-color": GLOW,
-            "line-width": ["case", IS_SELECT, 9, 5],
-            "line-opacity": ["case", IS_SELECT, 0.55, 0.35],
-            "line-blur": 2,
-          },
-        } as any);
-      }
-
-      // GARIS — inti terang
-      if (!map.getLayer(this.HL_CORE)) {
-        map.addLayer({
-          id: this.HL_CORE,
-          type: "line",
-          source: this.HL_SRC,
-          filter: LINE_TYPES,
-          layout: { "line-cap": "round", "line-join": "round" },
-          paint: {
-            "line-color": ["case", IS_SELECT, CORE, GLOW],
-            "line-width": ["case", IS_SELECT, 2.5, 1.8],
-            "line-opacity": 1,
-          },
-        } as any);
-      }
-
-      // TITIK — halo cahaya, hanya untuk objek terpilih
-      if (!map.getLayer(this.HL_PT_GLOW)) {
-        map.addLayer({
-          id: this.HL_PT_GLOW,
-          type: "circle",
-          source: this.HL_SRC,
-          filter: ["all", POINT_TYPES, IS_SELECT] as any,
-          paint: {
-            "circle-color": GLOW,
-            "circle-radius": 24,
-            "circle-opacity": 0.18,
-            "circle-blur": 0.8,
-          },
-        } as any);
-      }
-
-      // TITIK — cincin di luar ikon, jadi ikon tetap terlihat
-      if (!map.getLayer(this.HL_PT_CORE)) {
-        map.addLayer({
-          id: this.HL_PT_CORE,
-          type: "circle",
-          source: this.HL_SRC,
-          filter: POINT_TYPES,
-          paint: {
-            "circle-color": GLOW,
-            "circle-radius": ["case", IS_SELECT, 17, 13],
-            "circle-opacity": 0.12,
-            "circle-stroke-color": ["case", IS_SELECT, CORE, GLOW],
-            "circle-stroke-width": ["case", IS_SELECT, 3.5, 2],
-            "circle-stroke-opacity": 0.95,
-          },
-        } as any);
-      }
-    } catch (err) {
-      console.warn("IDENTIFY: gagal menyiapkan layer highlight", err);
-
-      // Style belum siap — coba lagi setelah map tenang
-      map.once("idle", () => {
-        if (this.ensureHighlightLayers()) this.renderHighlight();
-      });
-
-      return false;
-    }
-
-    return true;
+  if (!map) {
+    return false;
   }
+
+  // ============================================================
+  // SOURCE
+  // ============================================================
+
+  if (!map.getSource(this.HL_SRC)) {
+    map.addSource(this.HL_SRC, {
+      type: "geojson",
+
+      data: {
+        type: "FeatureCollection",
+        features: [],
+      },
+    });
+  }
+
+  // ============================================================
+  // POLYGON FILL
+  // ============================================================
+
+  if (!map.getLayer(this.HL_FILL)) {
+    map.addLayer({
+      id: this.HL_FILL,
+
+      type: "fill",
+
+      source: this.HL_SRC,
+
+      filter: [
+        "all",
+        IS_SELECT,
+        POLY_TYPES,
+      ],
+
+      paint: {
+        "fill-color": CORE,
+
+        "fill-opacity": 0.16,
+      },
+    });
+  }
+
+  // ============================================================
+  // OUTER GLOW
+  // ============================================================
+
+  if (!map.getLayer(this.HL_GLOW)) {
+    map.addLayer({
+      id: this.HL_GLOW,
+
+      type: "line",
+
+      source: this.HL_SRC,
+
+      filter: [
+        "all",
+        IS_SELECT,
+        LINE_TYPES,
+      ],
+
+      paint: {
+        "line-color": GLOW,
+
+        "line-width": 16,
+
+        "line-opacity": 0.22,
+
+        "line-blur": 7,
+      },
+    });
+  }
+
+  // ============================================================
+  // MIDDLE GLOW
+  // ============================================================
+
+  if (!map.getLayer(this.HL_MID)) {
+    map.addLayer({
+      id: this.HL_MID,
+
+      type: "line",
+
+      source: this.HL_SRC,
+
+      filter: [
+        "all",
+        IS_SELECT,
+        LINE_TYPES,
+      ],
+
+      paint: {
+        "line-color": GLOW,
+
+        "line-width": 8,
+
+        "line-opacity": 0.9,
+
+        "line-blur": 2,
+      },
+    });
+  }
+
+  // ============================================================
+  // WHITE CORE
+  // ============================================================
+
+  if (!map.getLayer(this.HL_CORE)) {
+    map.addLayer({
+      id: this.HL_CORE,
+
+      type: "line",
+
+      source: this.HL_SRC,
+
+      filter: [
+        "all",
+        IS_SELECT,
+        LINE_TYPES,
+      ],
+
+      paint: {
+        "line-color": CORE,
+
+        "line-width": 2.5,
+
+        "line-opacity": 1,
+      },
+    });
+  }
+
+  // ============================================================
+  // POINT GLOW
+  // ============================================================
+
+  if (!map.getLayer(this.HL_PT_GLOW)) {
+    map.addLayer({
+      id: this.HL_PT_GLOW,
+
+      type: "circle",
+
+      source: this.HL_SRC,
+
+      filter: [
+        "all",
+        IS_SELECT,
+        POINT_TYPES,
+      ],
+
+      paint: {
+        "circle-color": GLOW,
+
+        "circle-radius": 22,
+
+        "circle-opacity": 0.28,
+
+        "circle-blur": 0.6,
+      },
+    });
+  }
+
+  // ============================================================
+  // POINT CORE
+  // ============================================================
+
+  if (!map.getLayer(this.HL_PT_CORE)) {
+    map.addLayer({
+      id: this.HL_PT_CORE,
+
+      type: "circle",
+
+      source: this.HL_SRC,
+
+      filter: [
+        "all",
+        IS_SELECT,
+        POINT_TYPES,
+      ],
+
+      paint: {
+        "circle-color": GLOW,
+
+        "circle-radius": 8,
+
+        "circle-opacity": 1,
+
+        "circle-stroke-color": CORE,
+
+        "circle-stroke-width": 3,
+      },
+    });
+  }
+
+  return true;
+}
 
   private renderHighlight() {
     const map = this.map;
@@ -670,9 +740,12 @@ export class IdentifyControl implements IControl {
     }
 
     popup.on("close", () => {
-      this.selectedFeature = null;
-      this.renderHighlight();
-    });
+  this.popup = null;
+
+  this.selectedFeature = null;
+
+  this.renderHighlight();
+});
 
     popup.addTo(map);
 
