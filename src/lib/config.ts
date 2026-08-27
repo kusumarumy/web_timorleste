@@ -176,7 +176,7 @@ export const GROUPS: LayerGroup[] = [
   dot: "#E39A4A",
 
   layers: [
-    {{
+    {
   id: "desa",
   nameKey: "l_desa",
   kind: "fill",
