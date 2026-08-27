@@ -97,13 +97,45 @@ function buildStyle(): maplibregl.StyleSpecification {
       ...(b.maxzoom != null ? { maxzoom: b.maxzoom } : {}),
     };
     layers.push({
-      id: `bm_${b.id}`,
-      type: "raster",
-      source: `bm_${b.id}`,
-      layout: {
-        visibility: b.id === "sat" ? "visible" : "none",
-      },
-    } as any);
+  id: `${l.id}_outline`,
+  type: "line",
+  source: l.id,
+
+  layout: {
+    visibility: l.defaultOn
+      ? "visible"
+      : "none",
+  },
+
+  paint: {
+    "line-color":
+      l.id === "desa"
+        ? "#E53935"
+        : l.id === "posto"
+        ? "#FF6B6B"
+        : l.id === "kotamadya"
+        ? "#A66DD4"
+        : "#000000",
+
+    "line-width":
+      l.id === "desa"
+        ? 1.2
+        : l.id === "posto"
+        ? 1.6
+        : l.id === "kotamadya"
+        ? 2
+        : 1,
+
+    "line-dasharray":
+      l.id === "desa"
+        ? [8, 4]
+        : l.id === "posto"
+        ? [10, 5]
+        : l.id === "kotamadya"
+        ? [12, 5]
+        : [1, 0],
+  },
+} as any);
   });
 
   // DATA LAYERS
