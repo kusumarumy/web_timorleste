@@ -2559,7 +2559,6 @@ export const GROUPS: LayerGroup[] = [
    
 ];
 
-
 const flattenLayers = (layers: LayerDef[]): LayerDef[] =>
   layers.flatMap((layer) => [
     ...(layer.data ? [layer] : []),
