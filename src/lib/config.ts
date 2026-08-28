@@ -125,7 +125,7 @@ export const GROUPS: LayerGroup[] = [
   // AREA OF INTEREST
 {
   titleKey: "g_aoi",
-  dot: "#F2D45C",
+  dot: "#00A6D6",
 
   layers: [
     {
@@ -135,7 +135,7 @@ export const GROUPS: LayerGroup[] = [
       data: v("aoi_photo"),
       clickable: true,
       paint: {
-        "line-color": "#4DA6FF",
+        "line-color": "#4FC3F7",
         "line-width": 2.5,
         "line-opacity": 1,
       },
@@ -143,7 +143,7 @@ export const GROUPS: LayerGroup[] = [
       defaultOn: true,
 
       legend: {
-        color: "#4DA6FF",
+        color: "#4FC3F7",
         line: true,
       },
     },
@@ -156,7 +156,7 @@ export const GROUPS: LayerGroup[] = [
       clickable: true,
 
       paint: {
-        "line-color": "#0000FF",
+        "line-color": "#1565C0",
         "line-width": 2.5,
         "line-opacity": 1,
       },
@@ -164,7 +164,7 @@ export const GROUPS: LayerGroup[] = [
       defaultOn: true,
 
       legend: {
-        color: "#0000FF",
+        color: "#1565C0",
         line: true,
       },
     },
@@ -173,7 +173,7 @@ export const GROUPS: LayerGroup[] = [
   // ADMINISTRASI
 {
   titleKey: "g_admin",
-  dot: "#E39A4A",
+  dot: "#212121",
 
   layers: [
     {
@@ -183,14 +183,14 @@ export const GROUPS: LayerGroup[] = [
   data: v("desa"),
 
   paint: {
-    "fill-color": "#FFFFFF",
+    "fill-color": "#FBC02D",
     "fill-opacity": 0,
   },
 
   defaultOn: false,
 
   legend: {
-    color: "#E53935",
+    color: "#FBC02D",
     line: true,
   },
 
@@ -210,14 +210,14 @@ export const GROUPS: LayerGroup[] = [
   data: v("posto"),
 
   paint: {
-    "fill-color": "#FFFFFF",
+    "fill-color": "#F57C00",
     "fill-opacity": 0,
   },
 
   defaultOn: false,
 
   legend: {
-    color: "#FF6B6B",
+    color: "#F57C00",
     line: true,
   },
 
@@ -237,14 +237,14 @@ export const GROUPS: LayerGroup[] = [
   data: v("kotamadya"),
 
   paint: {
-    "fill-color": "#FFFFFF",
+    "fill-color": "#C2185B",
     "fill-opacity": 0,
   },
 
   defaultOn: false,
 
   legend: {
-    color: "#A66DD4",
+    color: "#C2185B",
     line: true,
   },
 
@@ -264,7 +264,7 @@ export const GROUPS: LayerGroup[] = [
       data: v("negara"),
 
       paint: {
-        "line-color": "#F39C12",
+        "line-color": "#212121",
         "line-width": 2.4,
         "line-dasharray": [14, 7],
         "line-opacity": 1,
@@ -273,7 +273,7 @@ export const GROUPS: LayerGroup[] = [
       defaultOn: false,
 
       legend: {
-        color: "#F39C12",
+        color: "#212121",
         line: true,
       },
     },
@@ -282,7 +282,7 @@ export const GROUPS: LayerGroup[] = [
   // KONTUR
 {
   titleKey: "g_contour",
-  dot: "#7A1E1A",
+  dot: "#8D4A2B",
 
   layers: [
     {
@@ -292,7 +292,7 @@ export const GROUPS: LayerGroup[] = [
       data: r2Vector("contour"),
 
       paint: {
-        "line-color": "#7A1E1A",
+        "line-color": "#8D4A2B",
         "line-width": 1.2,
         "line-opacity": 0.9,
       },
@@ -310,7 +310,7 @@ export const GROUPS: LayerGroup[] = [
       },
 
       legend: {
-        color: "#7A1E1A",
+        color: "#8D4A2B",
         line: true,
       },
     },
@@ -319,7 +319,7 @@ export const GROUPS: LayerGroup[] = [
   // JARINGAN
   {
   titleKey: "g_net",
-  dot: "#E7C46B",
+  dot: "#E53935",
 
   layers: [
     {
@@ -330,7 +330,7 @@ export const GROUPS: LayerGroup[] = [
       clickable: true,
 
       paint: {
-        "line-color": "#E1B94A",
+        "line-color": "#E53935",
         "line-width": 2.2,
         "line-opacity": 1,
       },
@@ -338,7 +338,7 @@ export const GROUPS: LayerGroup[] = [
       defaultOn: false,
 
       legend: {
-        color: "#E1B94A",
+        color: "#E53935",
         line: true,
       },
     },
@@ -347,7 +347,7 @@ export const GROUPS: LayerGroup[] = [
   // HIDROLOGI
   {
   titleKey: "g_hydro",
-  dot: "#4AA6E0",
+  dot: "#1E88E5",
 
   layers: [
     {
@@ -374,7 +374,7 @@ export const GROUPS: LayerGroup[] = [
 
 
   legend: {
-    color: "#F28C52",
+    color: "#43A047",
     svg: "irrigation_point",
   },
 },
@@ -401,7 +401,7 @@ export const GROUPS: LayerGroup[] = [
   },
 
   legend: {
-    color: "#7B61A8",
+    color: "#7B1FA2",
     svg: "rainfall",
   },
 }, 
@@ -429,7 +429,7 @@ export const GROUPS: LayerGroup[] = [
 
 
   legend: {
-    color: "#2C7FB8",
+    color: "#424242",
     svg: "weir",
   },
 },
@@ -446,7 +446,7 @@ export const GROUPS: LayerGroup[] = [
       defaultOn: false,
 
       legend: {
-        color: "#45A88A",
+        color: "#1E88E5",
         line: true,
       },
     },
@@ -459,9 +459,9 @@ export const GROUPS: LayerGroup[] = [
   clickable: true,
 
   paint: {
-    "fill-color": "#5A9BD5",
+    "fill-color": "#90CAF9",
     "fill-opacity": 0.25,
-    "fill-outline-color": "#5A9BD5",
+    "fill-outline-color": "#6791B3",
   },
 
   defaultOn: false,
@@ -469,7 +469,7 @@ export const GROUPS: LayerGroup[] = [
   opacityProp: "fill-opacity",
 
   legend: {
-    color: "#5A9BD5",
+    color: "#90CAF9",
   },
 
   sublayers: [
@@ -503,9 +503,9 @@ export const GROUPS: LayerGroup[] = [
   clickable: true,
 
   paint: {
-    "fill-color": "#4AA6E0",
+    "fill-color": "#00ACC1",
     "fill-opacity": 0.65,
-    "fill-outline-color": "#4AA6E0",
+    "fill-outline-color": "#007B8A",
   },
 
   defaultOn: false,
@@ -514,7 +514,7 @@ export const GROUPS: LayerGroup[] = [
   opacityProp: "fill-opacity",
 
   legend: {
-    color: "#4AA6E0",
+    color: "#00ACC1",
   },
 },
     {
@@ -525,9 +525,9 @@ export const GROUPS: LayerGroup[] = [
       clickable: true,
 
       paint: {
-        "fill-color": "#3B82C4",
+        "fill-color": "#B3E5FC",
         "fill-opacity": 0.20,
-        "fill-outline-color": "#3B82C4",
+        "fill-outline-color": "#80A4B5",
       },
 
       defaultOn: false,
@@ -536,7 +536,7 @@ export const GROUPS: LayerGroup[] = [
       opacityProp: "fill-opacity",
 
       legend: {
-        color: "#3B82C4",
+        color: "#B3E5FC",
       },
     },
   ],
@@ -545,7 +545,7 @@ export const GROUPS: LayerGroup[] = [
   // TUTUPAN LAHAN
  {
   titleKey: "g_land",
-  dot: "#3FB27A",
+  dot: "#2E7D32",
 
   layers: [
     {
@@ -555,7 +555,7 @@ export const GROUPS: LayerGroup[] = [
       data: v("forestprotected"),
 
       paint: {
-        "line-color": "#2E7D32",
+        "line-color": "#00695C",
         "line-width": 1.6,
         "line-dasharray": [6, 3],
         "line-opacity": 1,
@@ -564,7 +564,7 @@ export const GROUPS: LayerGroup[] = [
       defaultOn: false,
 
       legend: {
-        color: "#2E7D32",
+        color: "#00695C",
         line: true,
       },
     },    
@@ -576,9 +576,9 @@ export const GROUPS: LayerGroup[] = [
   clickable: true,
 
   paint: {
-    "fill-color": "#D8B24A",
+    "fill-color": "#C49A00",
     "fill-opacity": 0.35,
-    "fill-outline-color": "#E76F51",
+    "fill-outline-color": "#8D6E00",
   },
 
   defaultOn: false,
@@ -587,7 +587,7 @@ export const GROUPS: LayerGroup[] = [
   opacityProp: "fill-opacity",
 
   legend: {
-    color: "#E76F51",
+    color: "#C49A00",
     line: true,
   },
 
@@ -642,9 +642,9 @@ export const GROUPS: LayerGroup[] = [
       clickable: true,
 
       paint: {
-        "fill-color": "#8A6F8F",
+        "fill-color": "#424242",
         "fill-opacity": 0.40,
-        "fill-outline-color": "#8A6F8F",
+        "fill-outline-color": "#2F2F2F",
       },
 
       defaultOn: false,
@@ -653,7 +653,7 @@ export const GROUPS: LayerGroup[] = [
       opacityProp: "fill-opacity",
 
       legend: {
-        color: "#8A6F8F",
+        color: "#424242",
       },
     },
         {
@@ -664,9 +664,9 @@ export const GROUPS: LayerGroup[] = [
       clickable: true,
 
       paint: {
-        "fill-color": "#A5D66B",
+        "fill-color": "#9CCC65",
         "fill-opacity": 0.35,
-        "fill-outline-color": "#A5D66B",
+        "fill-outline-color": "#709248",
       },
 
       defaultOn: false,
@@ -675,7 +675,7 @@ export const GROUPS: LayerGroup[] = [
       opacityProp: "fill-opacity",
 
       legend: {
-        color: "#A5D66B",
+        color: "#9CCC65",
       },
     },
 {
@@ -688,7 +688,7 @@ export const GROUPS: LayerGroup[] = [
       paint: {
         "fill-color": "#2E7D32",
         "fill-opacity": 0.40,
-        "fill-outline-color": "#2E7D32",
+        "fill-outline-color": "#215A24",
       },
 
       defaultOn: false,
@@ -709,9 +709,9 @@ export const GROUPS: LayerGroup[] = [
       clickable: true,
 
       paint: {
-        "fill-color": "#C9B89C",
+        "fill-color": "#C8A97E",
         "fill-opacity": 0.35,
-        "fill-outline-color": "#C9B89C",
+        "fill-outline-color": "#90795A",
       },
 
       defaultOn: false,
@@ -720,7 +720,7 @@ export const GROUPS: LayerGroup[] = [
       opacityProp: "fill-opacity",
 
       legend: {
-        color: "#C9B89C",
+        color: "#C8A97E",
       },
     },
     {
@@ -731,9 +731,9 @@ export const GROUPS: LayerGroup[] = [
       clickable: true,
 
       paint: {
-        "fill-color": "#6DB86D",
+        "fill-color": "#66A65C",
         "fill-opacity": 0.35,
-        "fill-outline-color": "#6DB86D",
+        "fill-outline-color": "#497742",
       },
 
       defaultOn: false,
@@ -742,7 +742,7 @@ export const GROUPS: LayerGroup[] = [
       opacityProp: "fill-opacity",
 
       legend: {
-        color: "#6DB86D",
+        color: "#66A65C",
       },
     },
     {
@@ -753,9 +753,9 @@ export const GROUPS: LayerGroup[] = [
       clickable: true,
 
       paint: {
-        "fill-color": "#D8B24A",
+        "fill-color": "#FBC02D",
         "fill-opacity": 0.35,
-        "fill-outline-color": "#D8B24A",
+        "fill-outline-color": "#B48A20",
       },
 
       defaultOn: false,
@@ -764,7 +764,7 @@ export const GROUPS: LayerGroup[] = [
       opacityProp: "fill-opacity",
 
       legend: {
-        color: "#D8B24A",
+        color: "#FBC02D",
       },
     },
 {
@@ -775,9 +775,9 @@ export const GROUPS: LayerGroup[] = [
       clickable: true,
 
       paint: {
-        "fill-color": "#F2D45C",
+        "fill-color": "#F9D64A",
         "fill-opacity": 0.35,
-        "fill-outline-color": "#F2D45C",
+        "fill-outline-color": "#B39A35",
       },
 
       defaultOn: false,
@@ -786,7 +786,7 @@ export const GROUPS: LayerGroup[] = [
       opacityProp: "fill-opacity",
 
       legend: {
-        color: "#F2D45C",
+        color: "#F9D64A",
       },
     },
    {
@@ -799,7 +799,7 @@ export const GROUPS: LayerGroup[] = [
       paint: {
         "fill-color": "#E57373",
         "fill-opacity": 0.35,
-        "fill-outline-color": "#E57373",
+        "fill-outline-color": "#A45252",
       },
 
       defaultOn: false,
@@ -820,9 +820,9 @@ export const GROUPS: LayerGroup[] = [
       clickable: true,
 
       paint: {
-        "fill-color": "#4AA6E0",
+        "fill-color": "#29B6F6",
         "fill-opacity": 0.40,
-        "fill-outline-color": "#4AA6E0",
+        "fill-outline-color": "#1D83B1",
       },
 
       defaultOn: false,
@@ -831,7 +831,7 @@ export const GROUPS: LayerGroup[] = [
       opacityProp: "fill-opacity",
 
       legend: {
-        color: "#4AA6E0",
+        color: "#29B6F6",
       },
     },
   ],
@@ -839,7 +839,7 @@ export const GROUPS: LayerGroup[] = [
     // LAYER GENANGAN
   {
     titleKey: "g_genangan",
-    dot: "#3B82F6",
+    dot: "#7B1FA2",
 
     layers: [
       {
@@ -854,7 +854,7 @@ export const GROUPS: LayerGroup[] = [
         defaultOn: false,
 
         legend: {
-          color: "#DC2626",
+          color: "#D32F2F",
           svg: "drill",
         },
       },
@@ -871,7 +871,7 @@ export const GROUPS: LayerGroup[] = [
         defaultOn: false,
 
         legend: {
-          color: "#F59E0B",
+          color: "#F57C00",
           svg: "desain",
         },
       },
@@ -888,7 +888,7 @@ export const GROUPS: LayerGroup[] = [
         defaultOn: false,
 
         legend: {
-          color: "#8B5CF6",
+          color: "#7B1FA2",
           svg: "coordinate",
         },
       },
@@ -905,7 +905,7 @@ export const GROUPS: LayerGroup[] = [
         defaultOn: false,
 
         legend: {
-          color: "#EF4444",
+          color: "#D32F2F",
           svg: "kupasan",
         },
       },
@@ -916,7 +916,7 @@ export const GROUPS: LayerGroup[] = [
         data: v("genangan_garisdesain"),
 
         paint: {
-          "line-color": "#F59E0B",
+          "line-color": "#F57C00",
           "line-width": 2,
           "line-opacity": 1,
         },
@@ -924,7 +924,7 @@ export const GROUPS: LayerGroup[] = [
         defaultOn: false,
 
         legend: {
-          color: "#F59E0B",
+          color: "#F57C00",
           line: true,
         },
       },
@@ -936,7 +936,7 @@ export const GROUPS: LayerGroup[] = [
         data: v("genangan_gariskoordinat"),
 
         paint: {
-          "line-color": "#8B5CF6",
+          "line-color": "#7B1FA2",
           "line-width": 1.5,
           "line-dasharray": [4, 3],
           "line-opacity": 1,
@@ -945,7 +945,7 @@ export const GROUPS: LayerGroup[] = [
         defaultOn: false,
 
         legend: {
-          color: "#8B5CF6",
+          color: "#7B1FA2",
           line: true,
         },
       },
@@ -957,7 +957,7 @@ export const GROUPS: LayerGroup[] = [
         data: v("genangan_gariskupasan"),
 
         paint: {
-          "line-color": "#EF4444",
+          "line-color": "#D32F2F",
           "line-width": 2,
           "line-opacity": 1,
         },
@@ -965,7 +965,7 @@ export const GROUPS: LayerGroup[] = [
         defaultOn: false,
 
         legend: {
-          color: "#EF4444",
+          color: "#D32F2F",
           line: true,
         },
       },
@@ -977,7 +977,7 @@ export const GROUPS: LayerGroup[] = [
         data: v("genangan_garissungai"),
 
         paint: {
-          "line-color": "#2563EB",
+          "line-color": "#00A6D6",
           "line-width": 2,
           "line-opacity": 1,
         },
@@ -985,7 +985,7 @@ export const GROUPS: LayerGroup[] = [
         defaultOn: false,
 
         legend: {
-          color: "#2563EB",
+          color: "#00A6D6",
           line: true,
         },
       },
@@ -997,9 +997,9 @@ export const GROUPS: LayerGroup[] = [
         clickable: true,
 
         paint: {
-          "fill-color": "#F59E0B",
+          "fill-color": "#F57C00",
           "fill-opacity": 0.35,
-          "fill-outline-color": "#F59E0B",
+          "fill-outline-color": "#B05900",
         },
 
         defaultOn: false,
@@ -1008,7 +1008,7 @@ export const GROUPS: LayerGroup[] = [
         opacityProp: "fill-opacity",
 
         legend: {
-          color: "#F59E0B",
+          color: "#F57C00",
         },
       },
       {
@@ -1019,9 +1019,9 @@ export const GROUPS: LayerGroup[] = [
         clickable: true,
 
         paint: {
-          "fill-color": "#3B82F6",
+          "fill-color": "#1976D2",
           "fill-opacity": 0.40,
-          "fill-outline-color": "#3B82F6",
+          "fill-outline-color": "#125497",
         },
 
         defaultOn: false,
@@ -1030,7 +1030,7 @@ export const GROUPS: LayerGroup[] = [
         opacityProp: "fill-opacity",
 
         legend: {
-          color: "#3B82F6",
+          color: "#1976D2",
         },
       },
 
@@ -1042,9 +1042,9 @@ export const GROUPS: LayerGroup[] = [
         clickable: true,
 
         paint: {
-          "fill-color": "#60A5FA",
+          "fill-color": "#00A6D6",
           "fill-opacity": 0.35,
-          "fill-outline-color": "#60A5FA",
+          "fill-outline-color": "#00779A",
         },
 
         defaultOn: false,
@@ -1053,7 +1053,7 @@ export const GROUPS: LayerGroup[] = [
         opacityProp: "fill-opacity",
 
         legend: {
-          color: "#60A5FA",
+          color: "#00A6D6",
         },
       },
     ],
@@ -1061,7 +1061,7 @@ export const GROUPS: LayerGroup[] = [
    // LOMEA
   {
     titleKey: "g_lomea",
-    dot: "#F59E0B",
+    dot: "#FF9800",
 
     layers: [
       {
@@ -1081,15 +1081,15 @@ export const GROUPS: LayerGroup[] = [
             clickable: true,
             lazy: true,
             paint: {
-              "circle-color": "#EC4899",
+              "circle-color": "#D81B60",
               "circle-radius": 2,
               "circle-opacity": 1,
-              "circle-stroke-color": "#FFFFFF",
+              "circle-stroke-color": "#9B1345",
               "circle-stroke-width": 1,
             },
             defaultOn: false,
             legend: {
-              color: "#EC4899",
+              color: "#D81B60",
               circle: true,
             },
           },
@@ -1102,15 +1102,15 @@ export const GROUPS: LayerGroup[] = [
             clickable: true,
             lazy: true,
             paint: {
-              "circle-color": "#2563EB",
+              "circle-color": "#1E88E5",
               "circle-radius": 2,
               "circle-opacity": 1,
-              "circle-stroke-color": "#FFFFFF",
+              "circle-stroke-color": "#1561A4",
               "circle-stroke-width": 1,
             },
             defaultOn: false,
             legend: {
-              color: "#2563EB",
+              color: "#1E88E5",
               circle: true,
             },
           },
@@ -1123,15 +1123,15 @@ export const GROUPS: LayerGroup[] = [
             clickable: true,
             lazy: true,
             paint: {
-              "circle-color": "#F59E0B",
+              "circle-color": "#F39C12",
               "circle-radius": 2,
               "circle-opacity": 1,
-              "circle-stroke-color": "#FFFFFF",
+              "circle-stroke-color": "#AE700C",
               "circle-stroke-width": 1,
             },
             defaultOn: false,
             legend: {
-              color: "#F59E0B",
+              color: "#F39C12",
               circle: true,
             },
           },
@@ -1144,15 +1144,15 @@ export const GROUPS: LayerGroup[] = [
             clickable: true,
             lazy: true,
             paint: {
-              "circle-color": "#7C3AED",
+              "circle-color": "#6A1B9A",
               "circle-radius": 2,
               "circle-opacity": 1,
-              "circle-stroke-color": "#FFFFFF",
+              "circle-stroke-color": "#4C136E",
               "circle-stroke-width": 1,
             },
             defaultOn: false,
             legend: {
-              color: "#7C3AED",
+              color: "#6A1B9A",
               circle: true,
             },
           },
@@ -1165,12 +1165,12 @@ export const GROUPS: LayerGroup[] = [
             clickable: true,
             lazy: true,
             paint: {
-              "line-color": "#78716C",
+              "line-color": "#757575",
               "line-width": 2,
             },
             defaultOn: false,
             legend: {
-              color: "#78716C",
+              color: "#757575",
               line: true,
             },
           },
@@ -1183,12 +1183,12 @@ export const GROUPS: LayerGroup[] = [
             clickable: true,
             lazy: true,
             paint: {
-              "line-color": "#F59E0B",
+              "line-color": "#FF9800",
               "line-width": 2,
             },
             defaultOn: false,
             legend: {
-              color: "#F59E0B",
+              color: "#FF9800",
               line: true,
             },
           },
@@ -1201,12 +1201,12 @@ export const GROUPS: LayerGroup[] = [
             clickable: true,
             lazy: true,
             paint: {
-              "line-color": "#0891B2",
+              "line-color": "#1565C0",
               "line-width": 2,
             },
             defaultOn: false,
             legend: {
-              color: "#0891B2",
+              color: "#1565C0",
               line: true,
             },
           },
@@ -1219,12 +1219,12 @@ export const GROUPS: LayerGroup[] = [
             clickable: true,
             lazy: true,
             paint: {
-              "line-color": "#E1B94A",
+              "line-color": "#E67E22",
               "line-width": 2,
             },
             defaultOn: false,
             legend: {
-              color: "#E1B94A",
+              color: "#E67E22",
               line: true,
             },
           },
@@ -1237,12 +1237,12 @@ export const GROUPS: LayerGroup[] = [
             clickable: true,
             lazy: true,
             paint: {
-              "line-color": "#92400E",
+              "line-color": "#212121",
               "line-width": 2,
             },
             defaultOn: false,
             legend: {
-              color: "#92400E",
+              color: "#212121",
               line: true,
             },
           },
@@ -1255,12 +1255,12 @@ export const GROUPS: LayerGroup[] = [
             clickable: true,
             lazy: true,
             paint: {
-              "line-color": "#0284C7",
+              "line-color": "#1565C0",
               "line-width": 2,
             },
             defaultOn: false,
             legend: {
-              color: "#0284C7",
+              color: "#1565C0",
               line: true,
             },
           },
@@ -1272,12 +1272,12 @@ export const GROUPS: LayerGroup[] = [
             clickable: true,
             lazy: true,
             paint: {
-              "line-color": "#DC2626",
+              "line-color": "#D32F2F",
               "line-width": 2,
             },
             defaultOn: false,
             legend: {
-              color: "#DC2626",
+              color: "#D32F2F",
               line: true,
             },
           },
@@ -1289,12 +1289,12 @@ export const GROUPS: LayerGroup[] = [
             clickable: true,
             lazy: true,
             paint: {
-              "line-color": "#16A34A",
+              "line-color": "#2E7D32",
               "line-width": 2,
             },
             defaultOn: false,
             legend: {
-              color: "#16A34A",
+              color: "#2E7D32",
               line: true,
             },
           },
@@ -1307,12 +1307,12 @@ export const GROUPS: LayerGroup[] = [
             clickable: true,
             lazy: true,
             paint: {
-              "line-color": "#7C3AED",
+              "line-color": "#7B1FA2",
               "line-width": 2,
             },
             defaultOn: false,
             legend: {
-              color: "#7C3AED",
+              color: "#7B1FA2",
               line: true,
             },
           },
@@ -1324,15 +1324,15 @@ export const GROUPS: LayerGroup[] = [
             clickable: true,
             lazy: true,
             paint: {
-              "fill-color": "#A855F7",
+              "fill-color": "#B0BEC5",
               "fill-opacity": 0.35,
-              "fill-outline-color": "#9333EA",
+              "fill-outline-color": "#7E888D",
             },
             defaultOn: false,
             opacity: 0.35,
             opacityProp: "fill-opacity",
             legend: {
-              color: "#A855F7",
+              color: "#B0BEC5",
             },
           },
 
@@ -1344,15 +1344,15 @@ export const GROUPS: LayerGroup[] = [
             clickable: true,
             lazy: true,
             paint: {
-              "fill-color": "#F59E0B",
+              "fill-color": "#FF9800",
               "fill-opacity": 0.35,
-              "fill-outline-color": "#D97706",
+              "fill-outline-color": "#B76D00",
             },
             defaultOn: false,
             opacity: 0.35,
             opacityProp: "fill-opacity",
             legend: {
-              color: "#F59E0B",
+              color: "#FF9800",
             },
           },
 
@@ -1364,15 +1364,15 @@ export const GROUPS: LayerGroup[] = [
             clickable: true,
             lazy: true,
             paint: {
-              "fill-color": "#7C3AED",
+              "fill-color": "#424242",
               "fill-opacity": 0.35,
-              "fill-outline-color": "#6D28D9",
+              "fill-outline-color": "#2F2F2F",
             },
             defaultOn: false,
             opacity: 0.35,
             opacityProp: "fill-opacity",
             legend: {
-              color: "#7C3AED",
+              color: "#424242",
             },
           },
 
@@ -1384,15 +1384,15 @@ export const GROUPS: LayerGroup[] = [
             clickable: true,
             lazy: true,
             paint: {
-              "fill-color": "#0891B2",
+              "fill-color": "#00ACC1",
               "fill-opacity": 0.35,
-              "fill-outline-color": "#0E7490",
+              "fill-outline-color": "#007B8A",
             },
             defaultOn: false,
             opacity: 0.35,
             opacityProp: "fill-opacity",
             legend: {
-              color: "#0891B2",
+              color: "#00ACC1",
             },
           },
 
@@ -1420,14 +1420,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_rei_po_asesories"),
           defaultOn: false,
           paint: {
-            "circle-color": "#EC4899",
+            "circle-color": "#D81B60",
             "circle-radius": 2,
             "circle-opacity": 1,
-            "circle-stroke-color": "#FFFFFF",
+            "circle-stroke-color": "#9B1345",
             "circle-stroke-width": 1,
           },
           legend: {
-            color: "#EC4899",
+            color: "#D81B60",
             circle: true,
           },
         },
@@ -1439,13 +1439,13 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_rei_po_patoksaluran"),
           defaultOn: false,
           paint: {
-            "circle-color": "#DC2626",
+            "circle-color": "#D32F2F",
             "circle-radius": 2,
-            "circle-stroke-color": "#FFFFFF",
+            "circle-stroke-color": "#972121",
             "circle-stroke-width": 1,
           },
           legend: {
-            color: "#DC2626",
+            color: "#D32F2F",
             circle: true,
           },
         },
@@ -1456,11 +1456,11 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_rei_li_bangunan"),
           defaultOn: false,
           paint: {
-            "line-color": "#7C3AED",
+            "line-color": "#424242",
             "line-width": 2,
           },
           legend: {
-            color: "#7C3AED",
+            color: "#424242",
             line: true,
           },
         },
@@ -1472,11 +1472,11 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_rei_li_cotambah"),
           defaultOn: false,
           paint: {
-            "line-color": "#16A34A",
+            "line-color": "#2E7D32",
             "line-width": 2,
           },
           legend: {
-            color: "#16A34A",
+            color: "#2E7D32",
             line: true,
           },
         },
@@ -1488,11 +1488,11 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_rei_li_jalan"),
           defaultOn: false,
           paint: {
-            "line-color": "#E1B94A",
+            "line-color": "#E67E22",
             "line-width": 2,
           },
           legend: {
-            color: "#E1B94A",
+            color: "#E67E22",
             line: true,
           },
         },
@@ -1504,11 +1504,11 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_rei_li_linepol"),
           defaultOn: false,
           paint: {
-            "line-color": "#64748B",
+            "line-color": "#616161",
             "line-width": 2,
           },
           legend: {
-            color: "#64748B",
+            color: "#616161",
             line: true,
           },
         },
@@ -1520,11 +1520,11 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_rei_li_salexisting"),
           defaultOn: false,
           paint: {
-            "line-color": "#16A34A",
+            "line-color": "#2E7D32",
             "line-width": 2,
           },
           legend: {
-            color: "#16A34A",
+            color: "#2E7D32",
             line: true,
           },
         },
@@ -1536,11 +1536,11 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_rei_li_saltersier"),
           defaultOn: false,
           paint: {
-            "line-color": "#7C3AED",
+            "line-color": "#7B1FA2",
             "line-width": 2,
           },
           legend: {
-            color: "#7C3AED",
+            color: "#7B1FA2",
             line: true,
           },
         },
@@ -1552,11 +1552,11 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_rei_li_sungaialur"),
           defaultOn: false,
           paint: {
-            "line-color": "#0284C7",
+            "line-color": "#00ACC1",
             "line-width": 2,
           },
           legend: {
-            color: "#0284C7",
+            color: "#00ACC1",
             line: true,
           },
         },
@@ -1567,14 +1567,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_rei_ar_0"),
           defaultOn: false,
           paint: {
-            "fill-color": "#8B5CF6",
+            "fill-color": "#9E9E9E",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#7C3AED",
+            "fill-outline-color": "#717171",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#8B5CF6",
+            color: "#9E9E9E",
           },
         },
 
@@ -1585,14 +1585,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_rei_ar_bangsadap"),
           defaultOn: false,
           paint: {
-            "fill-color": "#F59E0B",
+            "fill-color": "#FF9800",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#D97706",
+            "fill-outline-color": "#B76D00",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#F59E0B",
+            color: "#FF9800",
           },
         },
 
@@ -1603,14 +1603,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_rei_ar_bmcp"),
           defaultOn: false,
           paint: {
-            "fill-color": "#2563EB",
+            "fill-color": "#1E88E5",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#1D4ED8",
+            "fill-outline-color": "#1561A4",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#2563EB",
+            color: "#1E88E5",
           },
         },
 
@@ -1621,14 +1621,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_rei_ar_boxkwarter"),
           defaultOn: false,
           paint: {
-            "fill-color": "#0891B2",
+            "fill-color": "#00ACC1",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#0E7490",
+            "fill-outline-color": "#007B8A",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#0891B2",
+            color: "#00ACC1",
           },
         },
 
@@ -1639,14 +1639,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_rei_ar_boxtersier"),
           defaultOn: false,
           paint: {
-            "fill-color": "#06B6D4",
+            "fill-color": "#0097A7",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#0891B2",
+            "fill-outline-color": "#006C78",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#06B6D4",
+            color: "#0097A7",
           },
         },
 
@@ -1657,14 +1657,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_rei_ar_desain"),
           defaultOn: false,
           paint: {
-            "fill-color": "#22C55E",
+            "fill-color": "#43A047",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#16A34A",
+            "fill-outline-color": "#307333",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#22C55E",
+            color: "#43A047",
           },
         },
 
@@ -1675,14 +1675,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_rei_ar_legend"),
           defaultOn: false,
           paint: {
-            "fill-color": "#A855F7",
+            "fill-color": "#616161",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#9333EA",
+            "fill-outline-color": "#454545",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#A855F7",
+            color: "#616161",
           },
         },
 
@@ -1693,14 +1693,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_rei_ar_salpemb"),
           defaultOn: false,
           paint: {
-            "fill-color": "#14B8A6",
+            "fill-color": "#26A69A",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#0F766E",
+            "fill-outline-color": "#1B776E",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#14B8A6",
+            color: "#26A69A",
           },
         },
         
@@ -1726,14 +1726,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("26_rei_ar_access"),
           defaultOn: false,
           paint: {
-            "fill-color": "#F59E0B",
+            "fill-color": "#FF9800",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#D97706",
+            "fill-outline-color": "#B76D00",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#F59E0B",
+            color: "#FF9800",
           },
         },
 
@@ -1744,14 +1744,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("26_rei_ar_crest"),
           defaultOn: false,
           paint: {
-            "fill-color": "#7C3AED",
+            "fill-color": "#6A1B9A",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#6D28D9",
+            "fill-outline-color": "#4C136E",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#7C3AED",
+            color: "#6A1B9A",
           },
         },
 
@@ -1762,14 +1762,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("26_rei_ar_downstream"),
           defaultOn: false,
           paint: {
-            "fill-color": "#2563EB",
+            "fill-color": "#1565C0",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#1D4ED8",
+            "fill-outline-color": "#0F488A",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#2563EB",
+            color: "#1565C0",
           },
         },
 
@@ -1780,14 +1780,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("26_rei_ar_flushingcanal"),
           defaultOn: false,
           paint: {
-            "fill-color": "#06B6D4",
+            "fill-color": "#00ACC1",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#0891B2",
+            "fill-outline-color": "#007B8A",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#06B6D4",
+            color: "#00ACC1",
           },
         },
 
@@ -1798,14 +1798,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("26_rei_ar_flushinggate"),
           defaultOn: false,
           paint: {
-            "fill-color": "#0891B2",
+            "fill-color": "#00838F",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#0E7490",
+            "fill-outline-color": "#005E66",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#0891B2",
+            color: "#00838F",
           },
         },
 
@@ -1816,14 +1816,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("26_rei_ar_flushingpier"),
           defaultOn: false,
           paint: {
-            "fill-color": "#0EA5E9",
+            "fill-color": "#039BE5",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#0284C7",
+            "fill-outline-color": "#026FA4",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#0EA5E9",
+            color: "#039BE5",
           },
         },
 
@@ -1834,14 +1834,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("26_rei_ar_ingate"),
           defaultOn: false,
           paint: {
-            "fill-color": "#16A34A",
+            "fill-color": "#2E7D32",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#15803D",
+            "fill-outline-color": "#215A24",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#16A34A",
+            color: "#2E7D32",
           },
         },
 
@@ -1852,14 +1852,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("26_rei_ar_intake"),
           defaultOn: false,
           paint: {
-            "fill-color": "#22C55E",
+            "fill-color": "#43A047",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#16A34A",
+            "fill-outline-color": "#307333",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#22C55E",
+            color: "#43A047",
           },
         },
 
@@ -1870,14 +1870,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("26_rei_ar_irrigation"),
           defaultOn: false,
           paint: {
-            "fill-color": "#15803D",
+            "fill-color": "#1B5E20",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#166534",
+            "fill-outline-color": "#134317",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#15803D",
+            color: "#1B5E20",
           },
         },
 
@@ -1888,14 +1888,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("26_rei_ar_parking"),
           defaultOn: false,
           paint: {
-            "fill-color": "#78716C",
+            "fill-color": "#616161",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#57534E",
+            "fill-outline-color": "#454545",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#78716C",
+            color: "#616161",
           },
         },
 
@@ -1906,14 +1906,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("26_rei_ar_primer"),
           defaultOn: false,
           paint: {
-            "fill-color": "#92400E",
+            "fill-color": "#795548",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#78350F",
+            "fill-outline-color": "#573D33",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#92400E",
+            color: "#795548",
           },
         },
 
@@ -1924,14 +1924,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("26_rei_ar_road"),
           defaultOn: false,
           paint: {
-            "fill-color": "#CA8A04",
+            "fill-color": "#E67E22",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#A16207",
+            "fill-outline-color": "#A55A18",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#CA8A04",
+            color: "#E67E22",
           },
         },
 
@@ -1942,14 +1942,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("26_rei_ar_rock"),
           defaultOn: false,
           paint: {
-            "fill-color": "#64748B",
+            "fill-color": "#616161",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#475569",
+            "fill-outline-color": "#454545",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#64748B",
+            color: "#616161",
           },
         },
 
@@ -1960,14 +1960,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("26_rei_ar_silt"),
           defaultOn: false,
           paint: {
-            "fill-color": "#A8A29E",
+            "fill-color": "#BDBDBD",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#78716C",
+            "fill-outline-color": "#888888",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#A8A29E",
+            color: "#BDBDBD",
           },
         },
 
@@ -1978,14 +1978,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("26_rei_ar_stilling"),
           defaultOn: false,
           paint: {
-            "fill-color": "#38BDF8",
+            "fill-color": "#4FC3F7",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#0284C7",
+            "fill-outline-color": "#388CB1",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#38BDF8",
+            color: "#4FC3F7",
           },
         },
 
@@ -1996,14 +1996,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("26_rei_ar_upstream"),
           defaultOn: false,
           paint: {
-            "fill-color": "#0EA5E9",
+            "fill-color": "#0288D1",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#0284C7",
+            "fill-outline-color": "#016196",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#0EA5E9",
+            color: "#0288D1",
           },
         },
 
@@ -2014,14 +2014,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("26_rei_ar_weirbody"),
           defaultOn: false,
           paint: {
-            "fill-color": "#7C3AED",
+            "fill-color": "#512DA8",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#5B21B6",
+            "fill-outline-color": "#3A2078",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#7C3AED",
+            color: "#512DA8",
           },
         },
 
@@ -2032,14 +2032,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("26_rei_ar_wing"),
           defaultOn: false,
           paint: {
-            "fill-color": "#6366F1",
+            "fill-color": "#3949AB",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#4338CA",
+            "fill-outline-color": "#29347B",
           },
           opacity: 0.35,
           opacityProp: "fill-opacity",
           legend: {
-            color: "#6366F1",
+            color: "#3949AB",
           },
         },
       ],
@@ -2048,7 +2048,7 @@ export const GROUPS: LayerGroup[] = [
 },
 {
   titleKey: "g_oebaba",
-  dot: "#8B5CF6",
+  dot: "#6A1B9A",
 
   layers: [
     
@@ -2070,14 +2070,14 @@ export const GROUPS: LayerGroup[] = [
           clickable: true,
           lazy: true,
           paint: {
-            "circle-color": "#2563EB",
+            "circle-color": "#1E88E5",
             "circle-radius": 2,
             "circle-opacity": 1,
-            "circle-stroke-color": "#FFFFFF",
+            "circle-stroke-color": "#1561A4",
             "circle-stroke-width": 1,
           },
           defaultOn: false,
-          legend: { color: "#2563EB", circle: true },
+          legend: { color: "#1E88E5", circle: true },
         },
        
         {
@@ -2088,14 +2088,14 @@ export const GROUPS: LayerGroup[] = [
           clickable: true,
           lazy: true,
           paint: {
-            "circle-color": "#475569",
+            "circle-color": "#424242",
             "circle-radius": 2,
             "circle-opacity": 1,
-            "circle-stroke-color": "#FFFFFF",
+            "circle-stroke-color": "#2F2F2F",
             "circle-stroke-width": 1,
           },
           defaultOn: false,
-          legend: { color: "#475569", circle: true },
+          legend: { color: "#424242", circle: true },
         },
       
         {
@@ -2106,14 +2106,14 @@ export const GROUPS: LayerGroup[] = [
           clickable: true,
           lazy: true,
           paint: {
-            "circle-color": "#DC2626",
+            "circle-color": "#D32F2F",
             "circle-radius": 2,
             "circle-opacity": 1,
-            "circle-stroke-color": "#FFFFFF",
+            "circle-stroke-color": "#972121",
             "circle-stroke-width": 1,
           },
           defaultOn: false,
-          legend: { color: "#DC2626", circle: true },
+          legend: { color: "#D32F2F", circle: true },
         },
         {
           id: "oe09_po_profile",
@@ -2123,14 +2123,14 @@ export const GROUPS: LayerGroup[] = [
           clickable: true,
           lazy: true,
           paint: {
-            "circle-color": "#0891B2",
+            "circle-color": "#7E57C2",
             "circle-radius": 2,
             "circle-opacity": 1,
-            "circle-stroke-color": "#FFFFFF",
+            "circle-stroke-color": "#5A3E8B",
             "circle-stroke-width": 1,
           },
           defaultOn: false,
-          legend: { color: "#0891B2", circle: true },
+          legend: { color: "#7E57C2", circle: true },
         },
       
         {
@@ -2140,9 +2140,9 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_oe_li_desainpembuang"),
           clickable: true,
           lazy: true,
-          paint: { "line-color": "#0284C7", "line-width": 2 },
+          paint: { "line-color": "#1565C0", "line-width": 2 },
           defaultOn: false,
-          legend: { color: "#0284C7", line: true },
+          legend: { color: "#1565C0", line: true },
         },
         {
           id: "oe09_li_design",
@@ -2151,9 +2151,9 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_oe_li_design"),
           clickable: true,
           lazy: true,
-          paint: { "line-color": "#F59E0B", "line-width": 2 },
+          paint: { "line-color": "#F39C12", "line-width": 2 },
           defaultOn: false,
-          legend: { color: "#F59E0B", line: true },
+          legend: { color: "#F39C12", line: true },
         },
   
         {
@@ -2163,9 +2163,9 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_oe_li_jalan"),
           clickable: true,
           lazy: true,
-          paint: { "line-color": "#E1B94A", "line-width": 2 },
+          paint: { "line-color": "#E67E22", "line-width": 2 },
           defaultOn: false,
-          legend: { color: "#E1B94A", line: true },
+          legend: { color: "#E67E22", line: true },
         },
       
         {
@@ -2175,9 +2175,9 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_oe_li_linepol"),
           clickable: true,
           lazy: true,
-          paint: { "line-color": "#475569", "line-width": 2 },
+          paint: { "line-color": "#616161", "line-width": 2 },
           defaultOn: false,
-          legend: { color: "#475569", line: true },
+          legend: { color: "#616161", line: true },
         },
        
         {
@@ -2187,9 +2187,9 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_oe_li_msalkwarter"),
           clickable: true,
           lazy: true,
-          paint: { "line-color": "#06B6D4", "line-width": 2 },
+          paint: { "line-color": "#00ACC1", "line-width": 2 },
           defaultOn: false,
-          legend: { color: "#06B6D4", line: true },
+          legend: { color: "#00ACC1", line: true },
         },
         {
           id: "oe09_li_msalpembuang",
@@ -2198,9 +2198,9 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_oe_li_msalpembuang"),
           clickable: true,
           lazy: true,
-          paint: { "line-color": "#0EA5E9", "line-width": 2 },
+          paint: { "line-color": "#0288D1", "line-width": 2 },
           defaultOn: false,
-          legend: { color: "#0EA5E9", line: true },
+          legend: { color: "#0288D1", line: true },
         },
         {
           id: "oe09_li_msaltersier",
@@ -2209,9 +2209,9 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_oe_li_msaltersier"),
           clickable: true,
           lazy: true,
-          paint: { "line-color": "#7C3AED", "line-width": 2 },
+          paint: { "line-color": "#7B1FA2", "line-width": 2 },
           defaultOn: false,
-          legend: { color: "#7C3AED", line: true },
+          legend: { color: "#7B1FA2", line: true },
         },
 
         {
@@ -2221,9 +2221,9 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_oe_li_salexisting"),
           clickable: true,
           lazy: true,
-          paint: { "line-color": "#16A34A", "line-width": 2 },
+          paint: { "line-color": "#2E7D32", "line-width": 2 },
           defaultOn: false,
-          legend: { color: "#16A34A", line: true },
+          legend: { color: "#2E7D32", line: true },
         },
         {
           id: "oe09_li_sungaialur",
@@ -2232,9 +2232,9 @@ export const GROUPS: LayerGroup[] = [
           data: v("09_oe_li_sungaialur"),
           clickable: true,
           lazy: true,
-          paint: { "line-color": "#2563EB", "line-width": 2 },
+          paint: { "line-color": "#00ACC1", "line-width": 2 },
           defaultOn: false,
-          legend: { color: "#2563EB", line: true },
+          legend: { color: "#00ACC1", line: true },
         },
         
         {
@@ -2245,14 +2245,14 @@ export const GROUPS: LayerGroup[] = [
           clickable: true,
           lazy: true,
           paint: {
-            "fill-color": "#4AA6E0",
+            "fill-color": "#4FC3F7",
             "fill-opacity": 0.40,
-            "fill-outline-color": "#0284C7",
+            "fill-outline-color": "#388CB1",
           },
           defaultOn: false,
           opacity: 0.40,
           opacityProp: "fill-opacity",
-          legend: { color: "#4AA6E0" },
+          legend: { color: "#4FC3F7" },
         },
         {
           id: "oe09_ar_arsir",
@@ -2262,14 +2262,14 @@ export const GROUPS: LayerGroup[] = [
           clickable: true,
           lazy: true,
           paint: {
-            "fill-color": "#A8A29E",
+            "fill-color": "#BDBDBD",
             "fill-opacity": 0.30,
-            "fill-outline-color": "#78716C",
+            "fill-outline-color": "#888888",
           },
           defaultOn: false,
           opacity: 0.30,
           opacityProp: "fill-opacity",
-          legend: { color: "#A8A29E" },
+          legend: { color: "#BDBDBD" },
         },
         {
           id: "oe09_ar_bangbagi",
@@ -2279,14 +2279,14 @@ export const GROUPS: LayerGroup[] = [
           clickable: true,
           lazy: true,
           paint: {
-            "fill-color": "#EC4899",
+            "fill-color": "#EC407A",
             "fill-opacity": 0.40,
-            "fill-outline-color": "#DB2777",
+            "fill-outline-color": "#A92E57",
           },
           defaultOn: false,
           opacity: 0.40,
           opacityProp: "fill-opacity",
-          legend: { color: "#EC4899" },
+          legend: { color: "#EC407A" },
         },
         {
           id: "oe09_ar_lahanpotensi",
@@ -2296,14 +2296,14 @@ export const GROUPS: LayerGroup[] = [
           clickable: true,
           lazy: true,
           paint: {
-            "fill-color": "#22C55E",
+            "fill-color": "#66BB6A",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#16A34A",
+            "fill-outline-color": "#49864C",
           },
           defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
-          legend: { color: "#22C55E" },
+          legend: { color: "#66BB6A" },
         },
         {
           id: "oe09_ar_mbangsadap",
@@ -2313,14 +2313,14 @@ export const GROUPS: LayerGroup[] = [
           clickable: true,
           lazy: true,
           paint: {
-            "fill-color": "#F59E0B",
+            "fill-color": "#FF9800",
             "fill-opacity": 0.40,
-            "fill-outline-color": "#D97706",
+            "fill-outline-color": "#B76D00",
           },
           defaultOn: false,
           opacity: 0.40,
           opacityProp: "fill-opacity",
-          legend: { color: "#F59E0B" },
+          legend: { color: "#FF9800" },
         },
 
         {
@@ -2331,14 +2331,14 @@ export const GROUPS: LayerGroup[] = [
           clickable: true,
           lazy: true,
           paint: {
-            "fill-color": "#E57373",
+            "fill-color": "#F4A261",
             "fill-opacity": 0.35,
-            "fill-outline-color": "#C0392B",
+            "fill-outline-color": "#AF7445",
           },
           defaultOn: false,
           opacity: 0.35,
           opacityProp: "fill-opacity",
-          legend: { color: "#E57373" },
+          legend: { color: "#F4A261" },
         },
       
       ],
@@ -2358,9 +2358,9 @@ export const GROUPS: LayerGroup[] = [
           kind: "line",
           data: v("oe_crest"),
           clickable: true,
-          paint: { "line-color": "#7C3AED", "line-width": 2 },
+          paint: { "line-color": "#6A1B9A", "line-width": 2 },
           defaultOn: false,
-          legend: { color: "#7C3AED", line: true },
+          legend: { color: "#6A1B9A", line: true },
         },
         {
           id: "oe_downstream",
@@ -2368,9 +2368,9 @@ export const GROUPS: LayerGroup[] = [
           kind: "line",
           data: v("oe_downstream"),
           clickable: true,
-          paint: { "line-color": "#2563EB", "line-width": 2 },
+          paint: { "line-color": "#1565C0", "line-width": 2 },
           defaultOn: false,
-          legend: { color: "#2563EB", line: true },
+          legend: { color: "#1565C0", line: true },
         },
         {
           id: "oe_flushingcanal",
@@ -2378,9 +2378,9 @@ export const GROUPS: LayerGroup[] = [
           kind: "line",
           data: v("oe_flushingcanal"),
           clickable: true,
-          paint: { "line-color": "#06B6D4", "line-width": 2 },
+          paint: { "line-color": "#00ACC1", "line-width": 2 },
           defaultOn: false,
-          legend: { color: "#06B6D4", line: true },
+          legend: { color: "#00ACC1", line: true },
         },
         {
           id: "oe_flushingpier",
@@ -2388,9 +2388,9 @@ export const GROUPS: LayerGroup[] = [
           kind: "line",
           data: v("oe_flushingpier"),
           clickable: true,
-          paint: { "line-color": "#0891B2", "line-width": 2 },
+          paint: { "line-color": "#039BE5", "line-width": 2 },
           defaultOn: false,
-          legend: { color: "#0891B2", line: true },
+          legend: { color: "#039BE5", line: true },
         },
         {
           id: "oe_guidewall",
@@ -2398,9 +2398,9 @@ export const GROUPS: LayerGroup[] = [
           kind: "line",
           data: v("oe_guidewall"),
           clickable: true,
-          paint: { "line-color": "#6B7280", "line-width": 2 },
+          paint: { "line-color": "#616161", "line-width": 2 },
           defaultOn: false,
-          legend: { color: "#6B7280", line: true },
+          legend: { color: "#616161", line: true },
         },
         {
           id: "oe_ingatpier",
@@ -2408,9 +2408,9 @@ export const GROUPS: LayerGroup[] = [
           kind: "line",
           data: v("oe_ingatpier"),
           clickable: true,
-          paint: { "line-color": "#16A34A", "line-width": 2 },
+          paint: { "line-color": "#2E7D32", "line-width": 2 },
           defaultOn: false,
-          legend: { color: "#16A34A", line: true },
+          legend: { color: "#2E7D32", line: true },
         },
         {
           id: "oe_irrigationcanal",
@@ -2418,9 +2418,9 @@ export const GROUPS: LayerGroup[] = [
           kind: "line",
           data: v("oe_irrigationcanal"),
           clickable: true,
-          paint: { "line-color": "#22C55E", "line-width": 2 },
+          paint: { "line-color": "#43A047", "line-width": 2 },
           defaultOn: false,
-          legend: { color: "#22C55E", line: true },
+          legend: { color: "#43A047", line: true },
         },
         {
           id: "oe_irrigationpier",
@@ -2428,9 +2428,9 @@ export const GROUPS: LayerGroup[] = [
           kind: "line",
           data: v("oe_irrigationpier"),
           clickable: true,
-          paint: { "line-color": "#15803D", "line-width": 2 },
+          paint: { "line-color": "#1B5E20", "line-width": 2 },
           defaultOn: false,
-          legend: { color: "#15803D", line: true },
+          legend: { color: "#1B5E20", line: true },
         },
         {
           id: "oe_strais",
@@ -2438,9 +2438,9 @@ export const GROUPS: LayerGroup[] = [
           kind: "line",
           data: v("oe_strais"),
           clickable: true,
-          paint: { "line-color": "#92400E", "line-width": 2 },
+          paint: { "line-color": "#795548", "line-width": 2 },
           defaultOn: false,
-          legend: { color: "#92400E", line: true },
+          legend: { color: "#795548", line: true },
         },
         {
           id: "oe_upstream",
@@ -2448,9 +2448,9 @@ export const GROUPS: LayerGroup[] = [
           kind: "line",
           data: v("oe_upstream"),
           clickable: true,
-          paint: { "line-color": "#0EA5E9", "line-width": 2 },
+          paint: { "line-color": "#0288D1", "line-width": 2 },
           defaultOn: false,
-          legend: { color: "#0EA5E9", line: true },
+          legend: { color: "#0288D1", line: true },
         },
         {
           id: "oe_intake",
@@ -2479,14 +2479,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("oe_operatinghouse"),
           clickable: true,
           paint: {
-            "fill-color": "#78716C",
+            "fill-color": "#424242",
             "fill-opacity": 0.5,
-            "fill-outline-color": "#57534E",
+            "fill-outline-color": "#2F2F2F",
           },
           defaultOn: false,
           opacity: 0.5,
           opacityProp: "fill-opacity",
-          legend: { color: "#78716C" },
+          legend: { color: "#424242" },
         },
         {
           id: "oe_silt",
@@ -2495,14 +2495,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("oe_silt"),
           clickable: true,
           paint: {
-            "fill-color": "#A8A29E",
+            "fill-color": "#BDBDBD",
             "fill-opacity": 0.4,
-            "fill-outline-color": "#78716C",
+            "fill-outline-color": "#888888",
           },
           defaultOn: false,
           opacity: 0.4,
           opacityProp: "fill-opacity",
-          legend: { color: "#A8A29E" },
+          legend: { color: "#BDBDBD" },
         },
         {
           id: "oe_stilling",
@@ -2511,14 +2511,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("oe_stilling"),
           clickable: true,
           paint: {
-            "fill-color": "#38BDF8",
+            "fill-color": "#4FC3F7",
             "fill-opacity": 0.3,
-            "fill-outline-color": "#0284C7",
+            "fill-outline-color": "#388CB1",
           },
           defaultOn: false,
           opacity: 0.3,
           opacityProp: "fill-opacity",
-          legend: { color: "#38BDF8" },
+          legend: { color: "#4FC3F7" },
         },
         {
           id: "oe_weirbody",
@@ -2527,14 +2527,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("oe_weirbody"),
           clickable: true,
           paint: {
-            "fill-color": "#7C3AED",
+            "fill-color": "#512DA8",
             "fill-opacity": 0.5,
-            "fill-outline-color": "#5B21B6",
+            "fill-outline-color": "#3A2078",
           },
           defaultOn: false,
           opacity: 0.5,
           opacityProp: "fill-opacity",
-          legend: { color: "#7C3AED" },
+          legend: { color: "#512DA8" },
         },
         {
           id: "oe_wing",
@@ -2543,14 +2543,14 @@ export const GROUPS: LayerGroup[] = [
           data: v("oe_wing"),
           clickable: true,
           paint: {
-            "fill-color": "#6366F1",
+            "fill-color": "#3949AB",
             "fill-opacity": 0.4,
-            "fill-outline-color": "#4338CA",
+            "fill-outline-color": "#29347B",
           },
           defaultOn: false,
           opacity: 0.4,
           opacityProp: "fill-opacity",
-          legend: { color: "#6366F1" },
+          legend: { color: "#3949AB" },
         },
       ],
     },
@@ -2558,6 +2558,7 @@ export const GROUPS: LayerGroup[] = [
 },
    
 ];
+
 
 const flattenLayers = (layers: LayerDef[]): LayerDef[] =>
   layers.flatMap((layer) => [
