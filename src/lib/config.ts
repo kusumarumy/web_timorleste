@@ -28,14 +28,7 @@ export type Basemap = { id: string; labelKey: string; tiles: string[]; attributi
 export const BASEMAPS: Basemap[] = [
   { id: "map", labelKey: "bm_map", tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"], attribution: "© OpenStreetMap" },
   { id: "sat", labelKey: "bm_sat", tiles: ["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"], attribution: "Esri, Maxar" },
- {
-  id: "ortho",
-  labelKey: "bm_ortho",
-  tiles: [`${R2}/orthophoto/tiles/{z}/{x}/{y}.webp`],
-  attribution: "Orthophoto",
-  minzoom: 13,
-  maxzoom: 21,
-},
+  { id: "ortho", labelKey: "bm_ortho", tiles: [`${R2}/orthophoto/tiles/{z}/{x}/{y}.webp`], attribution: "Orthophoto", minzoom: 13, maxzoom: 21, },
   { id: "hybrid", labelKey: "bm_hybrid", tiles: ["https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}"], attribution: "© Google Maps" },
   { id: "streets", labelKey: "bm_streets", tiles: ["https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}"], attribution: "© Google Maps" },
   { id: "opentopo", labelKey: "bm_opentopo", tiles: ["https://tile.opentopomap.org/{z}/{x}/{y}.png"], attribution: "© OpenTopoMap" },
@@ -49,7 +42,7 @@ export const TERRAIN_OPTIONS = {
     minzoom: 0,
     maxzoom: 14,
     bounds: [-180, -85.0511, 180, 85.0511],
-    adjustable: true,
+    adjustable: false,
   },
   r2: {
     id: "r2",
@@ -64,9 +57,6 @@ export const TERRAIN_OPTIONS = {
 } as const;
 
 export type TerrainKey = keyof typeof TERRAIN_OPTIONS; // "aws" | "r2"
-
-export const FIXED_EXAGGERATION = 1;
-
 export type LayerKind = "raster" | "fill" | "line" | "circle" | "symbol";
 export interface LayerDef {
   id: string;
