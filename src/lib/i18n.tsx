@@ -103,7 +103,7 @@ export const DICTS: Record<Lang, Dict> = {
     l_genangan_titikkupasan: "Titik Kupasan",
 
     // LOMEA 2009
-    l_lo_ar_areal: "Areal",
+    l_lo_ar_areal: "Area",
     l_lo_ar_bangsadap: "Bangsadap",
     l_lo_ar_bangunan: "Bangunan",
     l_lo_ar_box: "Box",
@@ -127,7 +127,7 @@ export const DICTS: Record<Lang, Dict> = {
     // OEBABA 2009
     l_oe09_ar_0: "Area Dasar",
     l_oe09_ar_aliranair: "Aliran Air",
-    l_oe09_ar_arsir: "Arsiran",
+    l_oe09_ar_arsir: "Area",
     l_oe09_ar_bangbagi: "Bangunan Bagi",
     l_oe09_ar_lahanpotensi: "Lahan Potensial",
     l_oe09_ar_mbangsadap: "Bangunan Sadap",
@@ -188,7 +188,7 @@ export const DICTS: Record<Lang, Dict> = {
     l_oe_wing: "Sayap Bendung",
     
     // RAIBERE 2009
-    l_rei09_ar_0: "Area 00",
+    l_rei09_ar_0: "Area",
     l_rei09_ar_bangsadap: "Bangsadap",
     l_rei09_ar_bmcp: "BMCP",
     l_rei09_ar_boxkwarter: "Box Kwater",
@@ -381,7 +381,7 @@ export const DICTS: Record<Lang, Dict> = {
     l_genangan_titikkupasan: "Excavation Point",
 
     // LOMEA 2009
-    l_lo_ar_areal: "Areal",
+    l_lo_ar_areal: "Area",
     l_lo_ar_bangsadap: "Intake Structure",
     l_lo_ar_bangunan: "Building",
     l_lo_ar_box: "Box",
@@ -405,7 +405,7 @@ export const DICTS: Record<Lang, Dict> = {
     // OEBABA 2009
     l_oe09_ar_0: "Base Area",
     l_oe09_ar_aliranair: "Water Flow",
-    l_oe09_ar_arsir: "Hatching",
+    l_oe09_ar_arsir: "Area",
     l_oe09_ar_bangbagi: "Division Structure",
     l_oe09_ar_lahanpotensi: "Potential Land",
     l_oe09_ar_mbangsadap: "Offtake Structure",
@@ -466,7 +466,7 @@ export const DICTS: Record<Lang, Dict> = {
     l_oe_wing: "Wing",
     
     // RAIBERE 2009
-    l_rei09_ar_0: "Area 00",
+    l_rei09_ar_0: "Area",
     l_rei09_ar_bangsadap: "Intake Structure",
     l_rei09_ar_bmcp: "BMCP",
     l_rei09_ar_boxkwarter: "Quaternary Box",
@@ -685,7 +685,7 @@ export const DICTS: Record<Lang, Dict> = {
     // OEBABA 2009
     l_oe09_ar_0: "Área Base",
     l_oe09_ar_aliranair: "Escoamento de Água",
-    l_oe09_ar_arsir: "Tracejado",
+    l_oe09_ar_arsir: "Área",
     l_oe09_ar_bangbagi: "Estrutura de Divisão",
     l_oe09_ar_lahanpotensi: "Terreno Potencial",
     l_oe09_ar_mbangsadap: "Estrutura de Tomada",
@@ -746,7 +746,7 @@ export const DICTS: Record<Lang, Dict> = {
     l_oe_wing: "Ala da Barragem",
     
     // RAIBERE 2009
-    l_rei09_ar_0: "Área 00",
+    l_rei09_ar_0: "Área",
     l_rei09_ar_bangsadap: "Estrutura de Tomada",
     l_rei09_ar_bmcp: "BMCP",
     l_rei09_ar_boxkwarter: "Caixa Quaternária",
