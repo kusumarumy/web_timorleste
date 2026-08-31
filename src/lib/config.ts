@@ -2363,7 +2363,7 @@ export const GROUPS: LayerGroup[] = [
             data: v("09_oe_po_profile"),
             clickable: true,
             lazy: true,
-            icon: icon("symbol"),
+            icon: icon("profil"),
             iconSize: 0.02,
             paint: {},
             defaultOn: false,
