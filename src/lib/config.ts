@@ -543,13 +543,11 @@ const linePaint = (s: {
     : {}),
 });
 
-const lineLegend = (
-  style: {
-    color: string;
-    width: number;
-    dasharray?: number[];
-  },
-) => ({
+const lineLegend = (s: {
+  color: string;
+  width: number;
+  dasharray?: readonly number[];
+}) => ({
   color: style.color,
   line: true,
   width: style.width,
