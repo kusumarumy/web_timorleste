@@ -263,7 +263,6 @@ export const DICTS: Record<Lang, Dict> = {
     measurement_select: "Pilih salah satu alat pengukuran.",
 
     data_layer: "Data Layer",
-    terrain_locked: "Elevasi DTM pengukuran terkunci pada skala asli (1×).",
 
     // Hasil pengukuran elevasi
     elevation_start: "Elevasi Awal",
@@ -543,7 +542,6 @@ export const DICTS: Record<Lang, Dict> = {
     slope_degree: "Angle (°)",
 
     data_layer: "Data Layer",
-    terrain_locked: "The measurement DTM elevation is locked at the original scale (1×).",
 
     // Map information
     zoom: "Zoom",
@@ -817,7 +815,6 @@ slope_percent: "Declive (%)",
 slope_degree: "Ângulo (°)",
 
     data_layer: "Camadas de Dados",
-    terrain_locked: "A elevação do DTM de medição está bloqueada na escala original (1×).",
 
     // Map information
     zoom: "Zoom",
