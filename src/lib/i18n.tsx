@@ -275,13 +275,6 @@ export const DICTS: Record<Lang, Dict> = {
     measurement_point: "TITIK",
     data_layer: "Data Layer",
 
-    // Hasil pengukuran elevasi
-    elevation_start: "Elevasi Awal",
-    elevation_end: "Elevasi Akhir",
-    elevation_diff: "Beda Elevasi",
-    slope_percent: "Slope (%)",
-    slope_degree: "Slope (°)",
-
     // Map information
     zoom: "Zoom",
     pitch: "Kemiringan",
@@ -557,12 +550,7 @@ export const DICTS: Record<Lang, Dict> = {
     measurement_slope: "Slope (%)",
     measurement_angle: "Angle (°)",
     measurement_point: "POINT",
-    elevation_start: "Point 1 Elevation",
-    elevation_end: "Point 2 Elevation",
-    elevation_diff: "Elevation Difference",
-    slope_percent: "Slope (%)",
-    slope_degree: "Angle (°)",
-
+    
     data_layer: "Data Layer",
 
     // Map information
@@ -840,12 +828,7 @@ export const DICTS: Record<Lang, Dict> = {
     measurement_slope: "Declive (%)",
     measurement_angle: "Ângulo (°)",
     measurement_point: "PONTO",
-    elevation_start: "Elevação do Ponto 1",
-    elevation_end: "Elevação do Ponto 2",
-    elevation_diff: "Diferença de Elevação",
-    slope_percent: "Declive (%)",
-    slope_degree: "Ângulo (°)",
-
+   
     data_layer: "Camadas de Dados",
 
     // Map information
