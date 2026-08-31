@@ -1246,13 +1246,9 @@ export const GROUPS: LayerGroup[] = [
         kind: "symbol",
         data: v("genangan_titikbor"),
         clickable: true,
-
         icon: icon("drill"),
-
         paint: {},
-
         defaultOn: false,
-
         legend: {
           color: SYM.point.drill,
           svg: "drill",
@@ -1265,13 +1261,9 @@ export const GROUPS: LayerGroup[] = [
         kind: "symbol",
         data: v("genangan_titikdesain"),
         clickable: true,
-
         icon: icon("desain"),
-
         paint: {},
-
         defaultOn: false,
-
         legend: {
           color: SYM.point.design,
           svg: "desain",
@@ -1286,9 +1278,7 @@ export const GROUPS: LayerGroup[] = [
         clickable: true,
         icon: icon("coordinate"),
         paint: {},
-
         defaultOn: false,
-
         legend: {
           color: SYM.point.coordinate,
           svg: "coordinate",
@@ -1298,18 +1288,12 @@ export const GROUPS: LayerGroup[] = [
       {
         id: "genangan_titikkupasan",
         nameKey: "l_genangan_titikkupasan",
-        kind: "circle",
+        kind: "symbol",
         data: v("genangan_titikkupasan"),
         clickable: true,
-
-        paint: pointPaint(
-          SYM.point.kupasan,
-          2.5,
-          "#972121",
-        ),
-
+        icon: icon("kupasan"),
+        paint: {},
         defaultOn: false,
-
         legend: {
           color: SYM.point.kupasan,
           svg: "kupasan",
