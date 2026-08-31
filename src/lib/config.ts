@@ -457,9 +457,21 @@ const SYM = {
     },
 
     intake: {
-      color: "#43A047",
+    color: "#43A047",
+    opacity: 0.30,
+    outline: "#307333",
+    },
+    
+    gate: {
+      color: "#15803D",
       opacity: 0.30,
-      outline: "#307333",
+      outline: "#0F5C2B",
+    },
+    
+    irrigationStructure: {
+      color: "#2E7D32",
+      opacity: 0.30,
+      outline: "#215A24",
     },
 
     irrigationStructure: {
@@ -2629,11 +2641,6 @@ export const GROUPS: LayerGroup[] = [
         ],
       },
 
-
-      /* =====================================================
-         OEBABA 2026
-      ===================================================== */
-
       {
         id: "oebaba_2026",
         nameKey: "l_oebaba_2026",
@@ -2775,40 +2782,37 @@ export const GROUPS: LayerGroup[] = [
           },
 
 
-          /* ---------------- POINT ---------------- */
-
           {
             id: "oe_intake",
             nameKey: "l_oe_intake",
-            kind: "symbol",
+            kind: "fill",
             data: v("oe_intake"),
             clickable: true,
             defaultOn: false,
-
-            paint: {},
-
-            legend: {
-              color: SYM.point.intake,
-            },
+          
+            paint: fillPaint(SYM.polygon.intake),
+          
+            opacity: SYM.polygon.intake.opacity,
+            opacityProp: "fill-opacity",
+          
+            legend: fillLegend(SYM.polygon.intake),
           },
-
-          {
-            id: "oe_irrigationgate",
-            nameKey: "l_oe_irrigationgate",
-            kind: "symbol",
-            data: v("oe_irrigationgate"),
-            clickable: true,
-            defaultOn: false,
-
-            paint: {},
-
-            legend: {
-              color: SYM.point.gate,
-            },
-          },
-
-
-          /* ---------------- POLYGON ---------------- */
+          
+            {
+          id: "oe_irrigationgate",
+          nameKey: "l_oe_irrigationgate",
+          kind: "fill",
+          data: v("oe_irrigationgate"),
+          clickable: true,
+          defaultOn: false,
+        
+          paint: fillPaint(SYM.polygon.gate),
+        
+          opacity: SYM.polygon.gate.opacity,
+          opacityProp: "fill-opacity",
+        
+          legend: fillLegend(SYM.polygon.gate),
+        },
 
           {
             id: "oe_operatinghouse",
