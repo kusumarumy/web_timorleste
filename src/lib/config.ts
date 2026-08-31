@@ -1463,13 +1463,13 @@ export const GROUPS: LayerGroup[] = [
           },
 
           {
-            id: "lo_po_bmcp",
-            nameKey: "l_lo_po_bmcp",
+            id: "lo_po_cp",
+            nameKey: "l_lo_po_cp",
             kind: "symbol",
-            data: v("09_lo_po_bmcp"),
+            data: v("09_lo_po_cp"),
             clickable: true,
             lazy: true,
-            icon: icon("bm"),
+            icon: icon("cp"),
             iconSize: 0.02,
             paint: {},
             defaultOn: false,
@@ -1497,21 +1497,20 @@ export const GROUPS: LayerGroup[] = [
           },
 
           {
-            id: "lo_po_kodebm",
-            nameKey: "l_lo_po_kodebm",
-            kind: "circle",
-            data: v("09_lo_po_kodebm"),
+            id: "lo_po_bm",
+            nameKey: "l_lo_po_bm",
+            kind: "symbol",
+            data: v("09_lo_po_bm"),
             clickable: true,
             lazy: true,
-
+            icon: icon("bm"),
+            iconSize: 0.02,
             paint: pointPaint(
               "#6A1B9A",
               2.5,
               "#4C136E",
             ),
-
             defaultOn: false,
-
             legend: {
               color: "#6A1B9A",
               circle: true,
