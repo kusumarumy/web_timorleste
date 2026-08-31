@@ -151,33 +151,40 @@ function TerrainControl() {
   const {
     terrainSource,
     setTerrainSource,
-    exaggeration,
-    setExaggeration,
   } = useMapStore();
 
-  const adjustable = terrainSource === "aws";
-
   const options: { id: "off" | "aws" | "r2"; label: string }[] = [
-  { id: "off", label: t("terrain_off") },
-  { id: "aws", label: "AWS Terrarium 30 m" },
-  { id: "r2", label: "DTM 3 m" },
-];
+    { id: "off", label: t("terrain_off") },
+    { id: "aws", label: "AWS Terrarium 30 m" },
+    { id: "r2", label: "DTM 3 m" },
+  ];
 
   return (
     <div className="m-1.5 rounded-xl border border-strokeSoft bg-gradient-to-br from-teal/10 to-teal/[0.02] p-3">
       {/* Judul */}
       <div className="flex items-center gap-2 text-[13px] font-bold text-ink">
-        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#2FA6A0" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <svg
+          viewBox="0 0 24 24"
+          width="15"
+          height="15"
+          fill="none"
+          stroke="#2FA6A0"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
           <path d="M3 20l6-12 4 7 3-5 5 10z" />
         </svg>
         {t("terrain")}
       </div>
+
+      {/* Pilihan Terrain */}
       <div className="mt-2.5 flex gap-1 rounded-[10px] border border-stroke bg-bg/40 p-[3px]">
         {options.map((opt) => (
           <button
             key={opt.id}
             onClick={() => setTerrainSource(opt.id)}
-           className={`flex-1 whitespace-nowrap rounded-lg px-1.5 py-1.5 text-[10px] font-semibold transition-colors ${
+            className={`flex-1 whitespace-nowrap rounded-lg px-1.5 py-1.5 text-[10px] font-semibold transition-colors ${
               terrainSource === opt.id
                 ? "bg-teal text-[#04171a]"
                 : "text-muted hover:text-ink"
@@ -187,30 +194,6 @@ function TerrainControl() {
           </button>
         ))}
       </div>
-      {terrainSource !== "off" && (
-  <div className={`mt-3 ${adjustable ? "" : "opacity-40"}`}>
-    <div className="flex items-center gap-2.5">
-      <span className="w-16 text-[10.5px] text-muted">
-        {t("exagg")}
-      </span>
-
-      <input
-        type="range"
-        min={0}
-        max={3}
-        step={0.1}
-        value={adjustable ? exaggeration : 1}
-        disabled={!adjustable}
-        onChange={(e) => setExaggeration(+e.target.value)}
-        className="h-[3px] flex-1 accent-teal disabled:cursor-not-allowed"
-      />
-
-      <b className="w-7 text-right text-[11px] text-teal">
-        {adjustable ? exaggeration.toFixed(1) : "1.0"}×
-      </b>
-    </div>
-  </div>
-)}
     </div>
   );
 }
