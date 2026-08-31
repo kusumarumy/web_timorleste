@@ -1261,7 +1261,7 @@ export const GROUPS: LayerGroup[] = [
         kind: "symbol",
         data: v("genangan_titikdesain"),
         clickable: true,
-        icon: icon("desain"),
+        icon: icon("desain.png"),
         paint: {},
         defaultOn: false,
         legend: {
@@ -1480,7 +1480,7 @@ export const GROUPS: LayerGroup[] = [
             data: v("09_lo_po_design"),
             clickable: true,
             lazy: true,
-            icon: icon("desain.png")
+            icon: icon("desain.png"),
             paint: {},
             defaultOn: false,
             legend: {
