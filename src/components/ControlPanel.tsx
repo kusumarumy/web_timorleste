@@ -77,10 +77,15 @@ function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
                     : sw.circle
                     ? {
                         background: sw.color,
+                        opacity: sw.opacity ?? 1,
                         borderRadius: "9999px",
                       }
                     : {
                         background: sw.color,
+                        opacity: sw.opacity ?? 1,
+                        border: l.kind === "fill"
+                          ? `1px solid ${sw.color}`
+                          : undefined,
                       }
                 }
               />
