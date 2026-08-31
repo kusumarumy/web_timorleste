@@ -575,18 +575,11 @@ const SYM = {
   },
 } as const;
 
-
-/* =========================================================
-   HELPERS
-========================================================= */
-
-const linePaint = (
-  style: {
-    color: string;
-    width: number;
-    dasharray?: number[];
-  },
-) => ({
+const linePaint = (s: {
+  color: string;
+  width: number;
+  dasharray?: readonly number[];
+}) => ({
   "line-color": style.color,
   "line-width": style.width,
   ...(style.dasharray
