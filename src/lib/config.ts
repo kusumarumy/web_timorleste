@@ -1464,7 +1464,7 @@ export const GROUPS: LayerGroup[] = [
             data: v("09_lo_po_bmcp"),
             clickable: true,
             lazy: true,
-            icon: icon("bm.png")
+            icon: icon("bm.png"),
             paint: {},
             defaultOn: false,
             legend: {
