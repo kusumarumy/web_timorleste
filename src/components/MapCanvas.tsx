@@ -6,7 +6,7 @@ import "maplibre-gl/dist/maplibre-gl.css";
 import { MAP, BASEMAPS, TERRAIN_OPTIONS, ALL_LAYERS} from "@/lib/config";
 import { useMapStore } from "@/lib/store";
 import { reprojectGeoJSON } from "@/lib/reproject";
-import { getToolMode, onToolMode,} from "./toolMode";
+import { getToolMode, onToolMode, setToolMode,} from "./toolMode";
 import { MeasureControl } from "@/lib/geotools/measure";
 import { IdentifyTool } from "@/lib/geotools/identifyTool";
 import { useI18n } from "@/lib/i18n";
@@ -565,9 +565,7 @@ export default function MapCanvas({
 
   onStop: () => {
     console.log("MEASURE STOP → CONTROL PANEL OFF");
-
-    // Matikan mode measurement di Control Panel
-    onToolMode(null);
+    setToolMode(null);
   },
 });
       measureRef.current = measure;
