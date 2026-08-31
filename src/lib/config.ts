@@ -1773,29 +1773,20 @@ export const GROUPS: LayerGroup[] = [
               circle: true,
             },
           },
-
           {
             id: "rei09_po_patoksaluran",
             nameKey: "l_rei09_po_patoksaluran",
-            kind: "circle",
+            kind: "symbol",
             data: v("09_rei_po_patoksaluran"),
             defaultOn: false,
-
-            paint: pointPaint(
-              SYM.point.patokSaluran,
-              2.5,
-              "#972121",
-            ),
-
+            icon: icon("canal"),
+            iconSize: 0.02,
+            paint: {},
             legend: {
               color: SYM.point.patokSaluran,
               circle: true,
             },
           },
-
-
-          /* ---------------- LINE ---------------- */
-
           {
             id: "rei09_li_bangunan",
             nameKey: "l_rei09_li_bangunan",
@@ -2351,19 +2342,14 @@ export const GROUPS: LayerGroup[] = [
           {
             id: "oe09_po_patoksaluran",
             nameKey: "l_oe09_po_patoksaluran",
-            kind: "circle",
+            kind: "symbol",
             data: v("09_oe_po_patoksaluran"),
             clickable: true,
             lazy: true,
-
-            paint: pointPaint(
-              SYM.point.patokSaluran,
-              2.5,
-              "#972121",
-            ),
-
+            icon: icon("canal"),
+            iconSize: 0.02,
+            paint: {},
             defaultOn: false,
-
             legend: {
               color: SYM.point.patokSaluran,
               circle: true,
@@ -2373,27 +2359,19 @@ export const GROUPS: LayerGroup[] = [
           {
             id: "oe09_po_profile",
             nameKey: "l_oe09_po_profile",
-            kind: "circle",
+            kind: "symbol",
             data: v("09_oe_po_profile"),
             clickable: true,
             lazy: true,
-
-            paint: pointPaint(
-              SYM.point.profile,
-              2.5,
-              "#5A3E8B",
-            ),
-
+            icon: icon("symbol"),
+            iconSize: 0.02,
+            paint: {},
             defaultOn: false,
-
             legend: {
               color: SYM.point.profile,
               circle: true,
             },
           },
-
-
-          /* ---------------- LINE ---------------- */
 
           {
             id: "oe09_li_desainpembuang",
