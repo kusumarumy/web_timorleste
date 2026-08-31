@@ -1423,11 +1423,6 @@ export const GROUPS: LayerGroup[] = [
     ],
   },
 
-
-  /* =======================================================
-     LOMEA
-  ======================================================= */
-
   {
     titleKey: "g_lomea",
     dot: "#FF9800",
@@ -1444,22 +1439,15 @@ export const GROUPS: LayerGroup[] = [
         cascade: true,
 
         children: [
-
-          /* ---------------- POINT ---------------- */
-
           {
             id: "lo_po_asesories",
             nameKey: "l_lo_po_asesories",
-            kind: "circle",
+            kind: "symbol",
             data: v("09_lo_po_asesories"),
             clickable: true,
             lazy: true,
-
-            paint: pointPaint(
-              SYM.point.accessories,
-              2.5,
-              "#9B1345",
-            ),
+            icon: icon("aksesories.png"),
+            paint: {},
 
             defaultOn: false,
 
@@ -1472,19 +1460,13 @@ export const GROUPS: LayerGroup[] = [
           {
             id: "lo_po_bmcp",
             nameKey: "l_lo_po_bmcp",
-            kind: "circle",
+            kind: "symbol",
             data: v("09_lo_po_bmcp"),
             clickable: true,
             lazy: true,
-
-            paint: pointPaint(
-              SYM.point.bmcp,
-              2.5,
-              "#1561A4",
-            ),
-
+            icon: icon("bm.png")
+            paint: {},
             defaultOn: false,
-
             legend: {
               color: SYM.point.bmcp,
               circle: true,
@@ -1494,19 +1476,13 @@ export const GROUPS: LayerGroup[] = [
           {
             id: "lo_po_design",
             nameKey: "l_lo_po_design",
-            kind: "circle",
+            kind: "symbol",
             data: v("09_lo_po_design"),
             clickable: true,
             lazy: true,
-
-            paint: pointPaint(
-              SYM.point.design,
-              2.5,
-              "#AE700C",
-            ),
-
+            icon: icon("desain.png")
+            paint: {},
             defaultOn: false,
-
             legend: {
               color: SYM.point.design,
               circle: true,
@@ -1762,20 +1738,11 @@ export const GROUPS: LayerGroup[] = [
     ],
   },
 
-
-  /* =======================================================
-     RAIBERE
-  ======================================================= */
-
   {
     titleKey: "g_raibere",
     dot: "#14B8A6",
 
     layers: [
-
-      /* =====================================================
-         RAIBERE 2009
-      ===================================================== */
 
       {
         id: "raibere_2009",
@@ -1787,15 +1754,13 @@ export const GROUPS: LayerGroup[] = [
 
         children: [
 
-          /* ---------------- POINT ---------------- */
-
           {
             id: "rei09_po_asesories",
             nameKey: "l_rei09_po_asesories",
-            kind: "circle",
+            kind: "symbol",
             data: v("09_rei_po_asesories"),
             defaultOn: false,
-
+            icon: icon("aksesories.png"),
             paint: pointPaint(
               SYM.point.accessories,
               2.5,
