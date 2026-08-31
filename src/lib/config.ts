@@ -139,6 +139,7 @@ export interface LayerDef {
   minzoom?: number;
   maxzoom?: number;
   icon?: string;
+  iconSize?: number;
   lazy?: boolean;
 
   label?: {
