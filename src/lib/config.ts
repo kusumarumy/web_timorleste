@@ -1234,11 +1234,6 @@ export const GROUPS: LayerGroup[] = [
     ],
   },
 
-
-  /* =======================================================
-     GENANGAN
-  ======================================================= */
-
   {
     titleKey: "g_genangan",
     dot: "#7B1FA2",
@@ -1286,15 +1281,11 @@ export const GROUPS: LayerGroup[] = [
       {
         id: "genangan_titikkoordinat",
         nameKey: "l_genangan_titikkoordinat",
-        kind: "circle",
+        kind: "symbol",
         data: v("genangan_titikkoordinat"),
         clickable: true,
-
-        paint: pointPaint(
-          SYM.point.coordinate,
-          2.5,
-          "#4C136E",
-        ),
+        icon: icon("coordinate"),
+        paint: {},
 
         defaultOn: false,
 
