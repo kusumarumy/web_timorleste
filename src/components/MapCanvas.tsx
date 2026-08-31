@@ -648,7 +648,17 @@ export default function MapCanvas({
       mapRef.current = null;
     };
   }, []);
+useEffect(() => {
+  const measure = measureRef.current;
 
+  if (!measure) {
+    return;
+  }
+
+  measure.setTranslator(
+    (key) => tRef.current(key)
+  );
+}, [t]);
   useEffect(() => {
     const unsubscribe = onToolMode((mode) => {
       const measure = measureRef.current;
