@@ -1059,7 +1059,7 @@ private _buildResultPopupHtml(
     features: feats,
   };
 }
-
+}
 export function fmtLen(
   m: number
 ): string {
