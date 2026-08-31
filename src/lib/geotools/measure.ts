@@ -391,11 +391,6 @@ private _closePopups(): void {
       return;
     }
 
-    /*
-     * Kalau belum ada titik,
-     * tidak perlu preview.
-     */
-
     if (this.coords.length === 0) {
       return;
     }
@@ -953,7 +948,7 @@ this.coords.forEach((p, index) => {
     type: "Feature",
     geometry: point,
     properties: {
-      label: `TITIK ${index + 1}`,
+      llabel: `${this.t("measurement_point")} ${index + 1}`,
     },
   });
 });
