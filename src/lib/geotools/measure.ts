@@ -331,7 +331,6 @@ private _closePopups(): void {
   this._removeListeners(true);
   this.hover = null;
   this.mode = null;
-  this.onStop();
 }
   clear(): void {
   this._closePopups();
@@ -347,7 +346,24 @@ private _closePopups(): void {
   this._setData([]);
   this.onResult(null);
 }
-  
+  cancel(): void {
+  console.log("MEASURE CANCEL");
+
+  this._closePopups();
+  this._removeListeners(true);
+
+  this.coords = [];
+  this.hover = null;
+  this.mode = null;
+  this._displayMode = null;
+
+  this._resultPopup = null;
+  this._resultPopupState = null;
+
+  this._setData([]);
+  this.onResult(null);
+  this.onStop();
+}
   private _setData(
     coords: Coordinate[]
   ): void {
@@ -446,16 +462,12 @@ private _closePopups(): void {
     this._update();
   }
 
-  private _onDbl(
-  _e: MapMouseEvent
-): void {
+  private _onDbl(_e: MapMouseEvent): void {
   if (!this.mode) {
     return;
   }
 
-  console.log(
-    "MEASURE DOUBLE CLICK - FINISH"
-  );
+  console.log("MEASURE DOUBLE CLICK - FINISH");
 
   if (this.coords.length === 0) {
     return;
@@ -463,81 +475,78 @@ private _closePopups(): void {
 
   const finishedMode = this.mode;
   const finalCoords = this.coords.slice();
+
   this._displayMode = finishedMode;
   this.hover = null;
+
   this._setData(finalCoords);
+
   this._updateResult(
     finalCoords,
     true
   );
 
   this._closePopups();
+
   this._showResultPopup(
-    finalCoords[
-      finalCoords.length - 1
-    ],
+    finalCoords[finalCoords.length - 1],
     finishedMode,
     finalCoords
   );
 
+  // Stop drawing interaction,
+  // tetapi keyboard ESC tetap aktif
   this._removeListeners(false);
+
   this.hover = null;
-  this.onStop();
 }
 
-  private _onKey(
-    e: KeyboardEvent
-  ): void {
-    if (!this.mode) {
+  private _onKey(e: KeyboardEvent): void {
+  if (e.key === "Escape") {
+    console.log("MEASURE ESCAPE - CANCEL");
+
+    e.preventDefault();
+    e.stopPropagation();
+
+    this.cancel();
+    return;
+  }
+
+  if (!this.mode) {
+    return;
+  }
+
+  if (e.key === "Enter") {
+    if (this.coords.length === 0) {
       return;
     }
-    if (e.key === "Escape") {
-  console.log("MEASURE ESCAPE - CLEAR & STOP");
-  e.preventDefault();
-  this._closePopups();
-  this.coords = [];
-  this.hover = null;
-  this._setData([]);
-  this.onResult(null);
-  this.stop();
-  return;
-}
 
-    if (e.key === "Enter") {
-      if (this.coords.length === 0) {
-        return;
-      }
+    const finishedMode = this.mode;
+    const finalCoords = this.coords.slice();
 
-      const finishedMode =
-        this.mode;
+    this._displayMode = finishedMode;
+    this.hover = null;
 
-      const finalCoords =
-        this.coords.slice();
-      this._displayMode = finishedMode;
-      this.hover = null;
+    this._setData(finalCoords);
 
-      this._setData(
-        finalCoords
-      );
+    this._updateResult(
+      finalCoords,
+      true
+    );
 
-      this._updateResult(
-        finalCoords,
-        true
-      );
+    this._closePopups();
 
-this._closePopups();
+    this._showResultPopup(
+      finalCoords[finalCoords.length - 1],
+      finishedMode,
+      finalCoords
+    );
 
-this._showResultPopup(
-  finalCoords[
-    finalCoords.length - 1
-  ],
-  finishedMode,
-  finalCoords
-);
+    this.stop();
 
-      this.stop();
-    }
+    return;
   }
+}
 
   private _working(): Coordinate[] {
     const c =
