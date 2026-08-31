@@ -474,12 +474,6 @@ const SYM = {
       outline: "#215A24",
     },
 
-    irrigationStructure: {
-      color: "#2E7D32",
-      opacity: 0.30,
-      outline: "#215A24",
-    },
-
     parking: {
       color: "#616161",
       opacity: 0.30,
