@@ -29,8 +29,25 @@ function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
     toggleSub,
   } = useMapStore();
 
-    const on = visible[l.id];
-  const sw = l.legend;
+  const on = visible[l.id];
+
+const paintColor =
+  l.kind === "fill"
+    ? l.paint["fill-color"]
+    : l.kind === "line"
+    ? l.paint["line-color"]
+    : l.kind === "circle"
+    ? l.paint["circle-color"]
+    : undefined;
+
+const paintOpacity =
+  l.kind === "fill"
+    ? l.paint["fill-opacity"]
+    : l.kind === "line"
+    ? l.paint["line-opacity"]
+    : l.kind === "circle"
+    ? l.paint["circle-opacity"]
+    : undefined;
 
   const handleToggle = () => {
     const next = !on;
@@ -63,32 +80,36 @@ function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
                   className="max-h-[24px] max-w-[24px] object-contain"
                 />
               </span>
-            ) : sw ? (
+            ) : paintColor ? (
               <span
-                className="inline-block h-[11px] w-[11px] flex-none rounded-[3px]"
-                style={
-                  sw.line
-                    ? {
-                        background: "none",
-                        borderTop: `3px solid ${sw.color}`,
-                        height: 0,
-                        borderRadius: 0,
-                      }
-                    : sw.circle
-                    ? {
-                        background: sw.color,
-                        opacity: sw.opacity ?? 1,
-                        borderRadius: "9999px",
-                      }
-                    : {
-                        background: sw.color,
-                        opacity: sw.opacity ?? 1,
-                        border: l.kind === "fill"
-                          ? `1px solid ${sw.color}`
-                          : undefined,
-                      }
-                }
-              />
+  className="inline-block h-[11px] w-[11px] flex-none rounded-[3px]"
+  style={
+    l.kind === "line"
+      ? {
+          background: "none",
+          borderTop: `3px solid ${paintColor as string}`,
+          height: 0,
+          borderRadius: 0,
+        }
+      : l.kind === "circle"
+      ? {
+          background: paintColor as string,
+          opacity:
+            typeof paintOpacity === "number"
+              ? paintOpacity
+              : 1,
+          borderRadius: "9999px",
+        }
+      : {
+          background: paintColor as string,
+          opacity:
+            typeof paintOpacity === "number"
+              ? paintOpacity
+              : 1,
+          border: `1px solid ${paintColor as string}`,
+        }
+  }
+/>
             ) : null}
 
             {t(l.nameKey)}
