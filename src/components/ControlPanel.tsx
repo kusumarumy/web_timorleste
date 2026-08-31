@@ -17,7 +17,44 @@ function Toggle({ on, onClick }: { on: boolean; onClick: () => void }) {
     </button>
   );
 }
+function getPaintStyle(l: LayerDef) {
+  const paint = l.paint as Record<string, unknown>;
 
+  if (l.kind === "line") {
+    return {
+      type: "line" as const,
+      color: paint["line-color"] as string | undefined,
+      opacity:
+        typeof paint["line-opacity"] === "number"
+          ? paint["line-opacity"]
+          : 1,
+    };
+  }
+
+  if (l.kind === "fill") {
+    return {
+      type: "fill" as const,
+      color: paint["fill-color"] as string | undefined,
+      opacity:
+        typeof paint["fill-opacity"] === "number"
+          ? paint["fill-opacity"]
+          : 1,
+    };
+  }
+
+  if (l.kind === "circle") {
+    return {
+      type: "circle" as const,
+      color: paint["circle-color"] as string | undefined,
+      opacity:
+        typeof paint["circle-opacity"] === "number"
+          ? paint["circle-opacity"]
+          : 1,
+    };
+  }
+
+  return null;
+}
 function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
   const { t } = useI18n();
   const {
@@ -30,7 +67,7 @@ function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
   } = useMapStore();
 
   const on = visible[l.id];
-
+const symbol = getPaintStyle(l);
 
   const handleToggle = () => {
     const next = !on;
@@ -63,27 +100,33 @@ function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
       className="max-h-[24px] max-w-[24px] object-contain"
     />
   </span>
-) : l.legend ? (
+) : symbol?.color ? (
   <span
-    className="inline-block h-[11px] w-[11px] flex-none rounded-[3px]"
+    className="inline-block flex-none"
     style={
-      l.legend.line
+      symbol.type === "line"
         ? {
-            background: "none",
-            borderTop: `3px solid ${l.legend.color}`,
+            width: 18,
             height: 0,
-            borderRadius: 0,
+            background: "none",
+            borderTop: `3px solid ${symbol.color}`,
+            opacity: symbol.opacity,
           }
-        : l.legend.circle
+        : symbol.type === "circle"
         ? {
-            background: l.legend.color,
-            opacity: l.legend.opacity ?? 1,
+            width: 12,
+            height: 12,
+            background: symbol.color,
+            opacity: symbol.opacity,
             borderRadius: "9999px",
           }
         : {
-            background: l.legend.color,
-            opacity: l.legend.opacity ?? 1,
-            border: `1px solid ${l.legend.color}`,
+            width: 11,
+            height: 11,
+            background: symbol.color,
+            opacity: symbol.opacity,
+            border: `1px solid ${symbol.color}`,
+            borderRadius: "3px",
           }
     }
   />
