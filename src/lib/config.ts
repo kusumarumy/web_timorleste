@@ -299,10 +299,10 @@ const SYM = {
 
   point: {
     patokSaluran: "#D32F2F",
-    bmcp: "#1E88E5",
+    bm: "#1E88E5",
     design: "#F39C12",
     accessories: "#D81B60",
-    legend: "#424242",
+    cp: "#424242",
     profile: "#7E57C2",
     intake: "#0284C7",
     gate: "#15803D",
@@ -1474,7 +1474,7 @@ export const GROUPS: LayerGroup[] = [
             paint: {},
             defaultOn: false,
             legend: {
-              color: SYM.point.bmcp,
+              color: SYM.point.cp,
               circle: true,
             },
           },
