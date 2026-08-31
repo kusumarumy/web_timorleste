@@ -15,11 +15,6 @@ const ICON_RAW =
 const icon = (name: string) =>
   `${ICON_RAW}/${name}.png`;
 
-
-/* =========================================================
-   MAP
-========================================================= */
-
 export const MAP = {
   centerUTM: [773279.2384, 8989643.1798],
   center: [125.48428, -9.15017] as [number, number],
@@ -28,11 +23,6 @@ export const MAP = {
   bearing: -18,
   maxPitch: 85,
 };
-
-
-/* =========================================================
-   BASEMAP
-========================================================= */
 
 export type Basemap = {
   id: string;
@@ -101,11 +91,6 @@ export const BASEMAPS: Basemap[] = [
   },
 ];
 
-
-/* =========================================================
-   TERRAIN
-========================================================= */
-
 export const TERRAIN_OPTIONS = {
   aws: {
     id: "aws",
@@ -136,11 +121,6 @@ export const TERRAIN_OPTIONS = {
 
 export type TerrainKey =
   keyof typeof TERRAIN_OPTIONS;
-
-
-/* =========================================================
-   LAYER TYPES
-========================================================= */
 
 export type LayerKind =
   | "raster"
@@ -213,21 +193,7 @@ export interface LayerGroup {
   layers: LayerDef[];
 }
 
-
-/* =========================================================
-   STANDARD SYMBOLOGY
-   =========================================================
-   SATU SUMBER WARNA UNTUK:
-
-   1. MAP
-   2. LEGEND
-   3. CONTROL PANEL
-========================================================= */
-
 const SYM = {
-  /* -------------------------------------------------------
-     LINE
-  ------------------------------------------------------- */
 
   line: {
     road: {
@@ -326,11 +292,6 @@ const SYM = {
     },
   },
 
-
-  /* -------------------------------------------------------
-     POINT
-  ------------------------------------------------------- */
-
   point: {
     patokSaluran: "#D32F2F",
     bmcp: "#1E88E5",
@@ -344,11 +305,6 @@ const SYM = {
     kupasan: "#D32F2F",
     drill: "#D32F2F",
   },
-
-
-  /* -------------------------------------------------------
-     POLYGON
-  ------------------------------------------------------- */
 
   polygon: {
     building: {
@@ -580,12 +536,11 @@ const linePaint = (s: {
   width: number;
   dasharray?: readonly number[];
 }) => ({
-  "line-color": style.color,
-  "line-width": style.width,
-  ...(style.dasharray
-    ? { "line-dasharray": style.dasharray }
+  "line-color": s.color,
+  "line-width": s.width,
+  ...(s.dasharray
+    ? { "line-dasharray": [...s.dasharray] }
     : {}),
-  "line-opacity": 1,
 });
 
 const lineLegend = (
@@ -641,16 +596,7 @@ const pointPaint = (
     : {}),
 });
 
-
-/* =========================================================
-   GROUPS
-========================================================= */
-
 export const GROUPS: LayerGroup[] = [
-
-  /* =======================================================
-     AREA OF INTEREST
-  ======================================================= */
 
   {
     titleKey: "g_aoi",
@@ -698,11 +644,6 @@ export const GROUPS: LayerGroup[] = [
       },
     ],
   },
-
-
-  /* =======================================================
-     ADMINISTRASI
-  ======================================================= */
 
   {
     titleKey: "g_admin",
@@ -818,11 +759,6 @@ export const GROUPS: LayerGroup[] = [
     ],
   },
 
-
-  /* =======================================================
-     KONTUR
-  ======================================================= */
-
   {
     titleKey: "g_contour",
     dot: "#8D4A2B",
@@ -852,12 +788,6 @@ export const GROUPS: LayerGroup[] = [
       },
     ],
   },
-
-
-  /* =======================================================
-     JARINGAN
-  ======================================================= */
-
   {
     titleKey: "g_net",
     dot: SYM.line.road.color,
@@ -878,11 +808,6 @@ export const GROUPS: LayerGroup[] = [
       },
     ],
   },
-
-
-  /* =======================================================
-     HIDROLOGI
-  ======================================================= */
 
   {
     titleKey: "g_hydro",
@@ -1063,11 +988,6 @@ export const GROUPS: LayerGroup[] = [
       },
     ],
   },
-
-
-  /* =======================================================
-     TUTUPAN LAHAN
-  ======================================================= */
 
   {
     titleKey: "g_land",
