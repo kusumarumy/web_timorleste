@@ -1871,14 +1871,18 @@ export const GROUPS: LayerGroup[] = [
             kind: "line",
             data: v("09_rei_li_sungaialur"),
             defaultOn: false,
-
             paint: linePaint(SYM.line.river),
-
             legend: lineLegend(SYM.line.river),
           },
-
-
-          /* ---------------- POLYGON ---------------- */
+          {
+            id: "rei09_li_desain",
+            nameKey: "l_rei09_li_desain",
+            kind: "line",
+            data: v("09_rei_li_desain"),
+            defaultOn: false,
+            paint: linePaint(SYM.line.design),
+            legend: lineLegend(SYM.line.design),
+          },
 
           {
             id: "rei09_ar_0",
@@ -1954,22 +1958,6 @@ export const GROUPS: LayerGroup[] = [
 
             legend: fillLegend(SYM.polygon.canal),
           },
-
-          {
-            id: "rei09_ar_desain",
-            nameKey: "l_rei09_ar_desain",
-            kind: "fill",
-            data: v("09_rei_ar_desain"),
-            defaultOn: false,
-
-            paint: fillPaint(SYM.polygon.design),
-
-            opacity: SYM.polygon.design.opacity,
-            opacityProp: "fill-opacity",
-
-            legend: fillLegend(SYM.polygon.design),
-          },
-
           {
             id: "rei09_ar_legend",
             nameKey: "l_rei09_ar_legend",
