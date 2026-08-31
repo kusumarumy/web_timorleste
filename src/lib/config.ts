@@ -2294,21 +2294,11 @@ export const GROUPS: LayerGroup[] = [
     ],
   },
 
-
-  /* =======================================================
-     OEBABA
-  ======================================================= */
-
   {
     titleKey: "g_oebaba",
     dot: "#6A1B9A",
 
     layers: [
-
-      /* =====================================================
-         OEBABA 2009
-      ===================================================== */
-
       {
         id: "oebaba_2009",
         nameKey: "l_oebaba_2009",
@@ -2317,27 +2307,18 @@ export const GROUPS: LayerGroup[] = [
         defaultOn: false,
         lazy: true,
         cascade: true,
-
         children: [
-
-          /* ---------------- POINT ---------------- */
-
           {
-            id: "oe09_po_bmcp",
-            nameKey: "l_oe09_po_bmcp",
-            kind: "circle",
-            data: v("09_oe_po_bmcp"),
+            id: "oe09_po_bm",
+            nameKey: "l_oe09_po_bm",
+            kind: "symbol",
+            data: v("09_oe_po_bm"),
             clickable: true,
             lazy: true,
-
-            paint: pointPaint(
-              SYM.point.bmcp,
-              2.5,
-              "#1561A4",
-            ),
-
+            icon: icon("bm"),
+            iconSize: 0.02,
+            paint: {},
             defaultOn: false,
-
             legend: {
               color: SYM.point.bmcp,
               circle: true,
@@ -2345,21 +2326,16 @@ export const GROUPS: LayerGroup[] = [
           },
 
           {
-            id: "oe09_po_legend",
-            nameKey: "l_oe09_po_legend",
-            kind: "circle",
-            data: v("09_oe_po_legend"),
+            id: "oe09_po_cp",
+            nameKey: "l_oe09_po_cp",
+            kind: "symbol",
+            data: v("09_oe_po_cp"),
             clickable: true,
             lazy: true,
-
-            paint: pointPaint(
-              SYM.point.legend,
-              2.5,
-              "#2F2F2F",
-            ),
-
+            icon: icon("cp"),
+            iconSize: 0.02,
+            paint:{},
             defaultOn: false,
-
             legend: {
               color: SYM.point.legend,
               circle: true,
