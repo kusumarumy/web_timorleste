@@ -156,7 +156,7 @@ export interface LayerDef {
   paint: Record<string, unknown>;
 
   svg?: {
-    size: 0.2;
+    size: number;
     svg: string;
   };
 
@@ -823,9 +823,8 @@ export const GROUPS: LayerGroup[] = [
         kind: "symbol",
         data: v("irrigation_point"),
         clickable: true,
-
         icon: icon("irrigation_point"),
-
+        iconSize: 0.15,
         paint: {},
 
         defaultOn: false,
@@ -853,7 +852,7 @@ export const GROUPS: LayerGroup[] = [
         clickable: true,
 
         icon: icon("rainfall"),
-
+        iconSize: 0.15,
         paint: {},
 
         defaultOn: false,
@@ -881,7 +880,7 @@ export const GROUPS: LayerGroup[] = [
         clickable: true,
 
         icon: icon("weir"),
-
+        iconSize: 0.15,
         paint: {},
 
         defaultOn: false,
@@ -1248,6 +1247,7 @@ export const GROUPS: LayerGroup[] = [
         data: v("genangan_titikbor"),
         clickable: true,
         icon: icon("drill"),
+        iconSize: 0.15,
         paint: {},
         defaultOn: false,
         legend: {
@@ -1263,6 +1263,7 @@ export const GROUPS: LayerGroup[] = [
         data: v("genangan_titikdesain"),
         clickable: true,
         icon: icon("desain"),
+        iconSize: 0.15,
         paint: {},
         defaultOn: false,
         legend: {
@@ -1278,6 +1279,7 @@ export const GROUPS: LayerGroup[] = [
         data: v("genangan_titikkoordinat"),
         clickable: true,
         icon: icon("coordinate"),
+        iconSize: 0.15,
         paint: {},
         defaultOn: false,
         legend: {
@@ -1293,6 +1295,7 @@ export const GROUPS: LayerGroup[] = [
         data: v("genangan_titikkupasan"),
         clickable: true,
         icon: icon("kupasan"),
+        iconSize: 0.15,
         paint: {},
         defaultOn: false,
         legend: {
@@ -1448,6 +1451,7 @@ export const GROUPS: LayerGroup[] = [
             clickable: true,
             lazy: true,
             icon: icon("aksesories"),
+            iconSize: 0.10,
             paint: {},
 
             defaultOn: false,
@@ -1466,6 +1470,7 @@ export const GROUPS: LayerGroup[] = [
             clickable: true,
             lazy: true,
             icon: icon("bm"),
+            iconSize: 0.10,
             paint: {},
             defaultOn: false,
             legend: {
@@ -1482,6 +1487,7 @@ export const GROUPS: LayerGroup[] = [
             clickable: true,
             lazy: true,
             icon: icon("desain"),
+            iconSize: 0.10,
             paint: {},
             defaultOn: false,
             legend: {
@@ -1756,6 +1762,7 @@ export const GROUPS: LayerGroup[] = [
             data: v("09_rei_po_asesories"),
             defaultOn: false,
             icon: icon("aksesories"),
+            iconSize: 0.10,
             paint: pointPaint(
               SYM.point.accessories,
               2.5,
