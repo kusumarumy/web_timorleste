@@ -2215,20 +2215,26 @@ export const GROUPS: LayerGroup[] = [
             legend: fillLegend(SYM.polygon.rock),
           },
 
-          {
-            id: "rei26_ar_silt",
-            nameKey: "l_rei26_ar_silt",
-            kind: "fill",
-            data: v("26_rei_ar_silt"),
-            defaultOn: false,
+         {
+  id: "rei26_ar_silt",
+  nameKey: "l_rei26_ar_silt",
+  kind: "fill",
+  data: v("26_rei_ar_silt"),
+  defaultOn: false,
 
-            paint: fillPaint(SYM.polygon.silt),
+  paint: {
+    "fill-color": "#FF0000",
+    "fill-opacity": 0.8,
+    "fill-outline-color": "#000000",
+  },
 
-            opacity: SYM.polygon.silt.opacity,
-            opacityProp: "fill-opacity",
+  opacity: 0.8,
+  opacityProp: "fill-opacity",
 
-            legend: fillLegend(SYM.polygon.silt),
-          },
+  legend: {
+    color: "#FF0000",
+  },
+},
 
           {
             id: "rei26_ar_stilling",
