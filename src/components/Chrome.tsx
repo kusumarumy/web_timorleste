@@ -118,13 +118,18 @@ export function Legend() {
                             width: "12px",
                             height: "12px",
                             borderRadius: "9999px",
-                            background: l.legend?.color,
+                            background: l.legend.color,
+                            opacity: l.legend.opacity ?? 1,
                           }
                         : {
                             background: l.legend?.color,
+                            opacity: l.legend?.opacity ?? 1,
+                            border: l.kind === "fill"
+                              ? `1px solid ${l.legend?.color}`
+                              : undefined,
                           }
                     }
-                  />
+                                      />
                 )}
 
                 {t(l.nameKey)}
