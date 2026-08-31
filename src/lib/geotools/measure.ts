@@ -70,7 +70,16 @@ export class MeasureControl {
   mode: MeasureMode | null;
   coords: Coordinate[];
   hover: Coordinate | null;
-  private _popups = new Set<maplibregl.Popup>();
+  private _displayMode: MeasureMode | null = null;
+  private _resultPopup: maplibregl.Popup | null = null;
+  private _resultPopupState:
+    | {
+        position: Coordinate;
+        mode: MeasureMode;
+        coords: Coordinate[];
+      }
+    | null = null;
+private _popups = new Set<maplibregl.Popup>();
   constructor(
   map: MLMap,
   options: MeasureControlOptions = {}
@@ -95,7 +104,31 @@ export class MeasureControl {
   this._onDbl = this._onDbl.bind(this);
   this._onKey = this._onKey.bind(this);
 }
+setTranslator(t: (key: string) => string): void {
+  this.t = t;
+  if (this.coords.length > 0) {
+    this._setData(this.coords);
+  }
+  if (
+    this._resultPopup &&
+    this._resultPopupState
+  ) {
+    const { position, mode, coords } =
+      this._resultPopupState;
 
+    this._resultPopup.setHTML(
+      this._buildResultPopupHtml(
+        mode,
+        coords
+      )
+    );
+
+    this._resultPopup.setLngLat({
+      lng: position[0],
+      lat: position[1],
+    });
+  }
+}
 private _ensureLayers(): void {
   if (!this.map.getSource(SRC)) {
     this.map.addSource(SRC, {
@@ -234,8 +267,11 @@ private _closePopups(): void {
     );
     this._removeListeners();
     this.mode = mode;
+    this._displayMode = mode;
     this.coords = [];
     this.hover = null;
+    this._resultPopup = null;
+    this._resultPopupState = null;
     this._ensureLayers();
     this._setData([]);
     this.map.on(
@@ -299,8 +335,15 @@ private _closePopups(): void {
 }
   clear(): void {
   this._closePopups();
+
+  this._resultPopup = null;
+  this._resultPopupState = null;
+
   this.coords = [];
   this.hover = null;
+  this.mode = null;
+  this._displayMode = null;
+
   this._setData([]);
   this.onResult(null);
 }
@@ -420,6 +463,7 @@ private _closePopups(): void {
 
   const finishedMode = this.mode;
   const finalCoords = this.coords.slice();
+  this._displayMode = finishedMode;
   this.hover = null;
   this._setData(finalCoords);
   this._updateResult(
@@ -469,7 +513,7 @@ private _closePopups(): void {
 
       const finalCoords =
         this.coords.slice();
-
+      this._displayMode = finishedMode;
       this.hover = null;
 
       this._setData(
@@ -677,46 +721,82 @@ this._showResultPopup(
   }
 
   private _showResultPopup(
-    position: Coordinate | undefined,
-    mode: MeasureMode,
-    coords: Coordinate[]
-  ): void {
-    if (!position) {
-      return;
+  position: Coordinate | undefined,
+  mode: MeasureMode,
+  coords: Coordinate[]
+): void {
+  if (!position) {
+    return;
+  }
+
+  const html =
+    this._buildResultPopupHtml(
+      mode,
+      coords
+    );
+
+  const popup =
+    new maplibregl.Popup({
+      closeButton: true,
+      closeOnClick: false,
+      offset: 15,
+    })
+      .setLngLat({
+        lng: position[0],
+        lat: position[1],
+      })
+      .setHTML(html);
+
+  this._resultPopup = popup;
+
+  this._resultPopupState = {
+    position: [...position] as Coordinate,
+    mode,
+    coords: coords.slice(),
+  };
+
+  popup.on("close", () => {
+    if (this._resultPopup === popup) {
+      this._resultPopup = null;
+      this._resultPopupState = null;
     }
+  });
 
-    const lng = position[0];
-    const lat = position[1];
+  this._addPopup(popup);
+}
+private _buildResultPopupHtml(
+  mode: MeasureMode,
+  coords: Coordinate[]
+): string {
+  const t = this.t;
 
-    const t = this.t;
-
-let html = `
-  <div style="
-    min-width: 190px;
-    font-family: Arial, sans-serif;
-    color: #1f2937;
-    background: #ffffff;
-  ">
-
+  let html = `
     <div style="
-      color: #0f766e;
-      font-size: 12px;
-      font-weight: 700;
-      margin-bottom: 8px;
+      min-width: 190px;
+      font-family: Arial, sans-serif;
+      color: #1f2937;
+      background: #ffffff;
     ">
-      ${t("measurement_result")}
-    </div>
-`;
 
-    if (mode === "distance") {
-      const r =
-        measureLine(
-          coords,
-          this.scaleFactor
-        ) as MeasureLineResult | null;
+      <div style="
+        color: #0f766e;
+        font-size: 12px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      ">
+        ${t("measurement_result")}
+      </div>
+  `;
 
-      if (r) {
-        html += `
+  if (mode === "distance") {
+    const r =
+      measureLine(
+        coords,
+        this.scaleFactor
+      ) as MeasureLineResult | null;
+
+    if (r) {
+      html += `
         <div style="
           display:flex;
           justify-content:space-between;
@@ -726,126 +806,48 @@ let html = `
           <span style="color:#374151;">
             ${t("measurement_distance")}
           </span>
+
           <b style="color:#111827;">
             ${fmtLen(r.total)}
           </b>
         </div>
       `;
-      }
     }
-
-if (
-  mode === "elevation" &&
-  coords.length >= 2
-) {
-  const r = measureLine(
-    coords.slice(0, 2),
-    this.scaleFactor
-  ) as MeasureLineResult | null;
-
-  const elevation1 = this._getElevation(coords[0]);
-  const elevation2 = this._getElevation(coords[1]);
+  }
 
   if (
-    r &&
-    r.total > 0 &&
-    elevation1 != null &&
-    elevation2 != null
+    mode === "elevation" &&
+    coords.length >= 2
   ) {
-    const deltaElevation =
-      elevation2 - elevation1;
+    const r =
+      measureLine(
+        coords.slice(0, 2),
+        this.scaleFactor
+      ) as MeasureLineResult | null;
 
-    const slopePercent =
-      (deltaElevation / r.total) * 100;
+    const elevation1 =
+      this._getElevation(coords[0]);
 
-    const slopeDegree =
-      Math.atan(
-        deltaElevation / r.total
-      ) *
-      (180 / Math.PI);
-
-    html += `
-  <div style="
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
-    margin-bottom:5px;
-  ">
-    <span style="color:#374151;">
-      ${t("measurement_elevation_point_1")}
-    </span>
-    <b style="color:#111827;">
-      ${elevation1.toFixed(2)} m
-    </b>
-  </div>
-
-  <div style="
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
-    margin-bottom:5px;
-  ">
-    <span style="color:#374151;">
-      ${t("measurement_elevation_point_2")}
-    </span>
-    <b style="color:#111827;">
-      ${elevation2.toFixed(2)} m
-    </b>
-  </div>
-
-  <div style="
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
-    margin-bottom:5px;
-  ">
-    <span style="color:#374151;">
-      ${t("measurement_elevation_difference")}
-    </span>
-    <b style="color:#111827;">
-      ${deltaElevation.toFixed(2)} m
-    </b>
-  </div>
-
-  <div style="
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
-    margin-bottom:5px;
-  ">
-    <span style="color:#374151;">
-      ${t("measurement_slope")}
-    </span>
-    <b style="color:#111827;">
-      ${slopePercent.toFixed(2)}%
-    </b>
-  </div>
-
-  <div style="
-    display:flex;
-    justify-content:space-between;
-    gap:15px;
-  ">
-    <span style="color:#374151;">
-      ${t("measurement_angle")}
-    </span>
-    <b style="color:#111827;">
-      ${slopeDegree.toFixed(2)}°
-    </b>
-  </div>
-`;
-  }
-}
+    const elevation2 =
+      this._getElevation(coords[1]);
 
     if (
-      mode === "area" &&
-      coords.length >= 3
+      r &&
+      r.total > 0 &&
+      elevation1 != null &&
+      elevation2 != null
     ) {
-      const r =
-        measurePolygon(
-          coords,
-          this.scaleFactor
-        ) as MeasurePolygonResult;
+      const deltaElevation =
+        elevation2 - elevation1;
+
+      const slopePercent =
+        (deltaElevation / r.total) * 100;
+
+      const slopeDegree =
+        Math.atan(
+          deltaElevation / r.total
+        ) *
+        (180 / Math.PI);
 
       html += `
         <div style="
@@ -855,9 +857,12 @@ if (
           margin-bottom:5px;
         ">
           <span style="color:#374151;">
-  ${t("measurement_area")}
-</span>
-<b style="color:#111827;">${fmtArea(r.area)}</b>
+            ${t("measurement_elevation_point_1")}
+          </span>
+
+          <b style="color:#111827;">
+            ${elevation1.toFixed(2)} m
+          </b>
         </div>
 
         <div style="
@@ -867,9 +872,42 @@ if (
           margin-bottom:5px;
         ">
           <span style="color:#374151;">
-  ${t("measurement_length")}
-</span>
-<b style="color:#111827;">${fmtLen(r.length)}</b>
+            ${t("measurement_elevation_point_2")}
+          </span>
+
+          <b style="color:#111827;">
+            ${elevation2.toFixed(2)} m
+          </b>
+        </div>
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          gap:15px;
+          margin-bottom:5px;
+        ">
+          <span style="color:#374151;">
+            ${t("measurement_elevation_difference")}
+          </span>
+
+          <b style="color:#111827;">
+            ${deltaElevation.toFixed(2)} m
+          </b>
+        </div>
+
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          gap:15px;
+          margin-bottom:5px;
+        ">
+          <span style="color:#374151;">
+            ${t("measurement_slope")}
+          </span>
+
+          <b style="color:#111827;">
+            ${slopePercent.toFixed(2)}%
+          </b>
         </div>
 
         <div style="
@@ -878,86 +916,139 @@ if (
           gap:15px;
         ">
           <span style="color:#374151;">
-  ${t("measurement_width")}
-</span>
-<b style="color:#111827;">${fmtLen(r.width)}</b>
+            ${t("measurement_angle")}
+          </span>
+
+          <b style="color:#111827;">
+            ${slopeDegree.toFixed(2)}°
+          </b>
         </div>
       `;
     }
-
-    const popup = new maplibregl.Popup({
-  closeButton: true,
-  closeOnClick: false,
-  offset: 15,
-})
-  .setLngLat({
-    lng,
-    lat,
-  })
-  .setHTML(html);
-
-this._addPopup(popup);
   }
 
+  if (
+    mode === "area" &&
+    coords.length >= 3
+  ) {
+    const r =
+      measurePolygon(
+        coords,
+        this.scaleFactor
+      ) as MeasurePolygonResult;
+
+    html += `
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        gap:15px;
+        margin-bottom:5px;
+      ">
+        <span style="color:#374151;">
+          ${t("measurement_area")}
+        </span>
+
+        <b style="color:#111827;">
+          ${fmtArea(r.area)}
+        </b>
+      </div>
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        gap:15px;
+        margin-bottom:5px;
+      ">
+        <span style="color:#374151;">
+          ${t("measurement_length")}
+        </span>
+
+        <b style="color:#111827;">
+          ${fmtLen(r.length)}
+        </b>
+      </div>
+
+      <div style="
+        display:flex;
+        justify-content:space-between;
+        gap:15px;
+      ">
+        <span style="color:#374151;">
+          ${t("measurement_width")}
+        </span>
+
+        <b style="color:#111827;">
+          ${fmtLen(r.width)}
+        </b>
+      </div>
+    `;
+  }
+
+  html += `</div>`;
+
+  return html;
+}
   private _fc(
-    c: Coordinate[]
-  ): FeatureCollection {
-    const feats: Feature[] = [];
+  c: Coordinate[]
+): FeatureCollection {
+  const feats: Feature[] = [];
 
-    if (
-      this.mode === "area" &&
-      c.length >= 3
-    ) {
-      const polygon: Polygon = {
-        type: "Polygon",
-        coordinates: [
-          [
-            ...c,
-            c[0],
-          ],
+  const currentMode =
+    this.mode ?? this._displayMode;
+
+  if (
+    currentMode === "area" &&
+    c.length >= 3
+  ) {
+    const polygon: Polygon = {
+      type: "Polygon",
+      coordinates: [
+        [
+          ...c,
+          c[0],
         ],
-      };
-
-      feats.push({
-        type: "Feature",
-        geometry: polygon,
-        properties: {},
-      });
-    }
-
-    if (c.length >= 2) {
-      const line: LineString = {
-        type: "LineString",
-        coordinates: c,
-      };
-
-      feats.push({
-        type: "Feature",
-        geometry: line,
-        properties: {},
-      });
-    }
-
-this.coords.forEach((p, index) => {
-  const point: Point = {
-    type: "Point",
-    coordinates: p,
-  };
-
-  feats.push({
-    type: "Feature",
-    geometry: point,
-    properties: {
-      label: `${this.t("measurement_point")} ${index + 1}`,
-    },
-  });
-});
-
-    return {
-      type: "FeatureCollection",
-      features: feats,
+      ],
     };
+
+    feats.push({
+      type: "Feature",
+      geometry: polygon,
+      properties: {},
+    });
   }
+
+  if (c.length >= 2) {
+    const line: LineString = {
+      type: "LineString",
+      coordinates: c,
+    };
+
+    feats.push({
+      type: "Feature",
+      geometry: line,
+      properties: {},
+    });
+  }
+
+  this.coords.forEach((p, index) => {
+    const point: Point = {
+      type: "Point",
+      coordinates: p,
+    };
+
+    feats.push({
+      type: "Feature",
+      geometry: point,
+      properties: {
+        label: `${this.t("measurement_point")} ${index + 1}`,
+      },
+    });
+  });
+
+  return {
+    type: "FeatureCollection",
+    features: feats,
+  };
 }
 
 export function fmtLen(
