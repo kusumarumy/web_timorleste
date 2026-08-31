@@ -133,7 +133,7 @@ BASEMAPS.forEach((b) => {
   visibility: l.defaultOn
     ? "visible"
     : "none",
-  "icon-size": 0.05,
+  "icon-size": l.iconSize ?? 0.05,
   "icon-allow-overlap": true,
   "icon-ignore-placement": true,
 };
