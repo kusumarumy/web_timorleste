@@ -7,7 +7,7 @@ import maplibregl, {
 } from "maplibre-gl";
 
 import "maplibre-gl/dist/maplibre-gl.css";
-import { MAP, BASEMAPS, TERRAIN_OPTIONS, ALL_LAYERS, FIXED_EXAGGERATION } from "@/lib/config";
+import { MAP, BASEMAPS, TERRAIN_OPTIONS, ALL_LAYERS} from "@/lib/config";
 
 import { useMapStore } from "@/lib/store";
 import { reprojectGeoJSON } from "@/lib/reproject";
@@ -601,13 +601,12 @@ export default function MapCanvas({
     }
   }
 
-  function applyTerrain(map: MLMap, source: "off" | "aws" | "r2", exaggeration: number) {
-    console.log("APPLY TERRAIN →", source, "| ex:", exaggeration);
+  function applyTerrain(map: MLMap, source: "off" | "aws" | "r2") {
+    console.log("APPLY TERRAIN →", source, ");
     if (source === "off") { map.setTerrain(null); return; }
     const opt = TERRAIN_OPTIONS[source];
     map.setTerrain({
-      source: `terrain_${source}`,
-      exaggeration: opt.adjustable ? exaggeration : FIXED_EXAGGERATION,
+      source: `terrain_${source}`,,
     });
   }
 
@@ -738,7 +737,7 @@ export default function MapCanvas({
 
       // TERRAIN
       const s = store.getState();
-      applyTerrain(map, s.terrainSource, s.exaggeration);
+      applyTerrain(map, s.terrainSource);
 
       // SKY
       map.setSky({
@@ -978,20 +977,19 @@ if (outlineLayer) {
 
   // TERRAIN — baca nilai dari store sebagai dependency useEffect
   const terrainSource = useMapStore((s) => s.terrainSource);
-  const exaggeration = useMapStore((s) => s.exaggeration);
 
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
 
-    const run = () => applyTerrain(map, terrainSource, exaggeration);
+    const run = () => applyTerrain(map, terrainSource);
 
     if (map.isStyleLoaded()) {
       run();
     } else {
       map.once("idle", run);
     }
-  }, [terrainSource, exaggeration]);
+  }, [terrainSource]);
 
   const loadingLayerNames = loadingLayerIds.map((id) => {
     const layer = ALL_LAYERS.find((l) => l.id === id);
