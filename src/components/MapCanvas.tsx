@@ -564,7 +564,10 @@ export default function MapCanvas({
   },
 
   onStop: () => {
-    console.log("MEASURE STOP");
+    console.log("MEASURE STOP → CONTROL PANEL OFF");
+
+    // Matikan mode measurement di Control Panel
+    onToolMode(null);
   },
 });
       measureRef.current = measure;
