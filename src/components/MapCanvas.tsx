@@ -1,26 +1,17 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import maplibregl, {
-  Map as MLMap,
-  LngLatLike,
-} from "maplibre-gl";
-
+import maplibregl, { Map as MLMap, LngLatLike,} from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import { MAP, BASEMAPS, TERRAIN_OPTIONS, ALL_LAYERS} from "@/lib/config";
-
 import { useMapStore } from "@/lib/store";
 import { reprojectGeoJSON } from "@/lib/reproject";
-import {
-  getToolMode,
-  onToolMode,
-} from "./toolMode";
+import { getToolMode, onToolMode,} from "./toolMode";
 import { MeasureControl } from "@/lib/geotools/measure";
 import { IdentifyTool } from "@/lib/geotools/identifyTool";
 import { useI18n } from "@/lib/i18n";
 
 function isWGS84GeoJSON(geojson: any): boolean {
-
   const crsName =
     geojson?.crs?.properties?.name?.toString().toLowerCase() ?? "";
   if (
@@ -57,7 +48,6 @@ function isWGS84GeoJSON(geojson: any): boolean {
     return false;
   }
   const [x, y] = coord;
-
   if (
     Math.abs(x) <= 180 &&
     Math.abs(y) <= 90
@@ -68,16 +58,12 @@ function isWGS84GeoJSON(geojson: any): boolean {
 }
 function getIconId(iconUrl?: string): string | undefined {
   if (!iconUrl) return undefined;
-
   const filename = iconUrl.split("/").pop();
-
   if (!filename) return undefined;
-
   return filename.replace(/\.png$/i, "");
 }
 function buildStyle(): maplibregl.StyleSpecification {
   const sources: Record<string, unknown> = {};
-
   Object.values(TERRAIN_OPTIONS).forEach((t) => {
     sources[`terrain_${t.id}`] = {
       type: "raster-dem",
@@ -93,8 +79,6 @@ function buildStyle(): maplibregl.StyleSpecification {
   const layers: maplibregl.LayerSpecification[] = [
     { id: "bg", type: "background", paint: { "background-color": "#0B1620" } } as any,
   ];
-
-  // BASEMAP
 BASEMAPS.forEach((b) => {
   sources[`bm_${b.id}`] = {
     type: "raster",
@@ -104,12 +88,10 @@ BASEMAPS.forEach((b) => {
     ...(b.minzoom != null ? { minzoom: b.minzoom } : {}),
     ...(b.maxzoom != null ? { maxzoom: b.maxzoom } : {}),
   };
-
   layers.push({
     id: `bm_${b.id}`,
     type: "raster",
     source: `bm_${b.id}`,
-
     layout: {
       visibility: b.id === "sat"
         ? "visible"
@@ -118,9 +100,7 @@ BASEMAPS.forEach((b) => {
   } as any);
 });
 
-  // DATA LAYERS
   ALL_LAYERS.forEach((l) => {
-
     if (l.kind === "raster") {
       sources[l.id] = {
         type: "raster",
@@ -129,23 +109,18 @@ BASEMAPS.forEach((b) => {
         minzoom: l.minzoom ?? 0,
         maxzoom: l.maxzoom ?? 22,
       };
-
       layers.push({
         id: l.id,
         type: "raster",
         source: l.id,
-
         paint: l.paint,
-
         layout: {
           visibility: l.defaultOn
             ? "visible"
             : "none",
         },
       } as any);
-    
     } else if (l.kind === "symbol") {
-
       sources[l.id] = {
         type: "geojson",
         data: {
@@ -158,74 +133,52 @@ BASEMAPS.forEach((b) => {
   visibility: l.defaultOn
     ? "visible"
     : "none",
-
   "icon-size": 0.05,
-
   "icon-allow-overlap": true,
   "icon-ignore-placement": true,
 };
 
 const iconId = getIconId(l.icon);
-
 if (iconId) {
   symbolLayout["icon-image"] = iconId;
 }
-
       const symbolPaint: Record<string, unknown> = {};
-
       if (l.label) {
         symbolLayout["text-field"] = [
           "coalesce",
           ["get", l.label.field],
           "",
         ];
-
         symbolLayout["text-size"] = l.label.size ?? 11;
-
         symbolLayout["text-anchor"] = "bottom-left";
-
-        // Posisi label kanan-atas dari icon
         symbolLayout["text-offset"] = [0.8, -0.8];
-
         symbolLayout["text-allow-overlap"] = true;
         symbolLayout["text-ignore-placement"] = true;
-
         if (l.label.spacing != null) {
           symbolLayout["symbol-spacing"] = l.label.spacing;
         }
-
         symbolPaint["text-color"] =
           l.label.color ?? "#111827";
-
         symbolPaint["text-halo-color"] =
           l.label.haloColor ?? "#FFFFFF";
-
         symbolPaint["text-halo-width"] =
           l.label.haloWidth ?? 2;
-
         symbolPaint["text-halo-blur"] = 0.2;
       }
-
       layers.push({
         id: l.id,
         type: "symbol",
         source: l.id,
-
         layout: symbolLayout,
-
         paint: symbolPaint,
-
         ...(l.label?.minzoom != null
           ? { minzoom: l.label.minzoom }
           : {}),
-
         ...(l.label?.maxzoom != null
           ? { maxzoom: l.label.maxzoom }
           : {}),
       } as any);
-
     } else {
-
       sources[l.id] = {
         type: "geojson",
         data: {
@@ -233,124 +186,76 @@ if (iconId) {
           features: [],
         },
       };
-
       layers.push({
         id: l.id,
         type: l.kind,
         source: l.id,
-
         paint: l.paint,
-
         layout: {
           visibility: l.defaultOn
             ? "visible"
             : "none",
         },
       } as any);
-
       if (l.label) {
-
   const isPolygon = l.kind === "fill";
   const isLine = l.kind === "line";
-
   const labelLayout: Record<string, unknown> = {
     visibility: l.defaultOn
       ? "visible"
       : "none",
-
-    // Ambil nama dari atribut GeoJSON
     "text-field": [
       "coalesce",
       ["get", l.label.field],
       "",
     ],
-
     "text-size": l.label.size ?? 11,
-
-    // Label tetap nyaman saat map dipitch
     "text-pitch-alignment": "viewport",
-
     "text-allow-overlap": false,
     "text-ignore-placement": false,
   };
-
-  // ==========================================
-  // POLYGON
-  // Desa / Posto / Kotamadya / Ricefield
-  // ==========================================
+        
   if (isPolygon) {
-
     labelLayout["symbol-placement"] = "point";
-
-    // Tengah
     labelLayout["text-anchor"] = "center";
-
     labelLayout["text-rotation-alignment"] = "viewport";
-
   }
-
-  // ==========================================
-  // LINE
-  // Sungai / Jalan / Batas garis
-  // ==========================================
   else if (isLine) {
-
-    // Label mengikuti garis
     labelLayout["symbol-placement"] = "line";
-
-    // Jarak antar label
     labelLayout["symbol-spacing"] =
       l.label.spacing ?? 250;
-
     labelLayout["text-rotation-alignment"] = "map";
-
-    // Mencegah label terlalu miring
     labelLayout["text-max-angle"] = 30;
-
-    // Label tetap terbaca
     labelLayout["text-keep-upright"] = true;
   }
-
   layers.push({
     id: `${l.id}_label`,
     type: "symbol",
     source: l.id,
-
     minzoom: l.label.minzoom ?? 0,
     maxzoom: l.label.maxzoom ?? 24,
-
     layout: labelLayout,
-
     paint: {
       "text-color":
         l.label.color ?? "#5A1715",
-
       "text-halo-color":
         l.label.haloColor ?? "#FFFFFF",
-
       "text-halo-width":
         l.label.haloWidth ?? 2,
-
       "text-halo-blur": 0.2,
     },
   } as any);
-        // =====================================================
-// OUTLINE POLYGON
-// Fill transparan, hanya batas polygon yang terlihat
-// =====================================================
-
+        
 if (l.kind === "fill") {
   layers.push({
     id: `${l.id}_outline`,
     type: "line",
     source: l.id,
-
     layout: {
       visibility: l.defaultOn
         ? "visible"
         : "none",
     },
-
     paint: {
       "line-color":
         l.id === "desa"
@@ -360,7 +265,6 @@ if (l.kind === "fill") {
           : l.id === "kotamadya"
           ? "#A66DD4"
           : "#000000",
-
       "line-width":
         l.id === "desa"
           ? 1.2
@@ -369,7 +273,6 @@ if (l.kind === "fill") {
           : l.id === "kotamadya"
           ? 2
           : 1,
-
       "line-dasharray":
         l.id === "desa"
           ? [8, 4]
@@ -378,7 +281,6 @@ if (l.kind === "fill") {
           : l.id === "kotamadya"
           ? [12, 5]
           : [1, 0],
-
       "line-opacity": 1,
     },
   } as any);
@@ -386,7 +288,6 @@ if (l.kind === "fill") {
 }
     }
   });
-
   return {
     version: 8,
     glyphs:
@@ -456,14 +357,11 @@ async function registerMapIcons(map: MLMap) {
     if (map.hasImage(icon.id)) {
       continue;
     }
-
     try {
       const image = await map.loadImage(icon.url);
-
       if (!map.hasImage(icon.id)) {
         map.addImage(icon.id, image.data);
       }
-
       console.log(`✓ Icon ${icon.id} berhasil didaftarkan`);
     } catch (error) {
       console.error(
@@ -485,16 +383,8 @@ export default function MapCanvas({
   const identifyRef = useRef<IdentifyTool | null>(null);
   const store = useMapStore;
   const { t } = useI18n();
-
-  // Init map pakai deps [], jadi simpan translator di ref
-  // supaya label Identify selalu ikut bahasa yang aktif.
   const tRef = useRef(t);
   tRef.current = t;
-
-  // ============================================================
-  // LAZY LOADING GEOJSON
-  // Hanya download layer ketika layer tersebut dibutuhkan
-  // ============================================================
   const loadedLayers = useRef(new Set<string>());
   const loadingLayers = useRef(new Set<string>());
   const [loadingLayerIds, setLoadingLayerIds] = useState<string[]>([]);
@@ -506,30 +396,23 @@ export default function MapCanvas({
     if (layer.kind === "raster" || !layer.data) {
       return;
     }
-
     if (loadedLayers.current.has(layer.id)) {
       return;
     }
-
     if (loadingLayers.current.has(layer.id)) {
       return;
     }
-
     loadingLayers.current.add(layer.id);
-
     setLoadingLayerIds((prev) => {
       if (prev.includes(layer.id)) {
         return prev;
       }
-
       return [...prev, layer.id];
     });
 
     try {
       console.log(`Lazy loading layer: ${layer.id}`);
-
       const response = await fetch(layer.data);
-
       if (!response.ok) {
         throw new Error(
           `HTTP ${response.status} - ${response.statusText}`
@@ -537,30 +420,22 @@ export default function MapCanvas({
       }
 
       const geojson = await response.json();
-
       const alreadyWGS84 = isWGS84GeoJSON(geojson);
-
       let geojson4326;
-
       if (alreadyWGS84) {
         geojson4326 = geojson;
       } else {
         console.log(
           `↻ ${layer.id}: UTM 51S → WGS84`
         );
-
         geojson4326 = reprojectGeoJSON(geojson);
       }
-
       const source = map.getSource(layer.id);
-
       if (source && "setData" in source) {
         (
           source as maplibregl.GeoJSONSource
         ).setData(geojson4326);
-
         const currentState = store.getState();
-
         if (
           layer.sublayers &&
           map.getLayer(layer.id)
@@ -569,15 +444,12 @@ export default function MapCanvas({
             layer,
             currentState.subVisible
           );
-
           map.setFilter(
             layer.id,
             filter ?? null
           );
         }
-
         loadedLayers.current.add(layer.id);
-
         console.log(
           `✓ Layer ${layer.id} selesai di-load`
         );
@@ -586,7 +458,6 @@ export default function MapCanvas({
           `Source ${layer.id} tidak ditemukan`
         );
       }
-
     } catch (error) {
       console.error(
         `Gagal loading layer ${layer.id}:`,
@@ -594,30 +465,24 @@ export default function MapCanvas({
       );
     } finally {
       loadingLayers.current.delete(layer.id);
-
       setLoadingLayerIds((prev) =>
         prev.filter((id) => id !== layer.id)
       );
     }
   }
-
   function applyTerrain(map: MLMap, source: "off" | "aws" | "r2") {
   console.log("APPLY TERRAIN →", source);
-
   if (source === "off") {
     map.setTerrain(null);
     return;
   }
-
   map.setTerrain({
     source: `terrain_${source}`,
   });
 }
 
-  // INIT MAP
   useEffect(() => {
     if (!ref.current || mapRef.current) return;
-
     const map = new maplibregl.Map({
       container: ref.current,
       style: buildStyle(),
@@ -633,9 +498,6 @@ export default function MapCanvas({
     });
     mapRef.current = map;
     if (typeof window !== "undefined") (window as any).__map = map;
-
-
-    // RESIZE
     const ro = new ResizeObserver(() => {
       requestAnimationFrame(() => {
         if (mapRef.current) {
@@ -649,28 +511,18 @@ export default function MapCanvas({
         mapRef.current.resize();
       }
     });
-
-    // ERROR
     map.on("error", (e) => {
       console.error("MAPLIBRE ERROR:", e.error);
     });
-
-
-    // CONTROLS
     map.addControl(
       new maplibregl.NavigationControl({
         visualizePitch: true,
       }),
       "top-right"
     );
-
-    // IDENTIFY
-    // Dibuat setelah NavigationControl supaya tombolnya
-    // disisipkan tepat di bawah kompas.
     identifyRef.current = new IdentifyTool(map, {
       getLayerIds: (m) => {
         const s = store.getState();
-
         return ALL_LAYERS
           .filter(
             (l) =>
@@ -681,22 +533,18 @@ export default function MapCanvas({
           .map((l) => l.id)
           .filter((id) => !!m.getLayer(id));
       },
-
       getLayerLabel: (id) => {
         const layer = ALL_LAYERS.find((l) => l.id === id);
-
         return layer
           ? tRef.current(layer.nameKey)
           : id;
       },
-
       texts: {
         button: "Identify",
         empty: "Tidak ada fitur di titik ini.",
         noAttribute: "Fitur ini tidak punya atribut.",
       },
     });
-
     map.addControl(
       new maplibregl.ScaleControl({
         maxWidth: 120,
@@ -705,23 +553,18 @@ export default function MapCanvas({
       "bottom-left"
     );
 
-    // MAP LOAD
     map.on("load", async () => {
       map.resize();
       await registerMapIcons(map);
-
       const measure = new MeasureControl(map, {
         onResult: (result) => {
           console.log("MEASURE RESULT:", result);
         },
-
         onStop: () => {
           console.log("MEASURE STOP");
         },
       });
-
       measureRef.current = measure;
-
       const initialLayers = ALL_LAYERS.filter(
         (l) =>
           l.kind !== "raster" &&
@@ -734,16 +577,11 @@ export default function MapCanvas({
           loadGeoJSONLayer(map, l)
         )
       );
-
       console.log(
         "Initial GeoJSON lazy loading selesai."
       );
-
-      // TERRAIN
       const s = store.getState();
       applyTerrain(map, s.terrainSource);
-
-      // SKY
       map.setSky({
         "sky-color": "#12324A",
         "horizon-color": "#0B1620",
@@ -752,20 +590,12 @@ export default function MapCanvas({
         "horizon-fog-blend": 0.5,
         "fog-ground-blend": 0.4,
       } as any);
-
-      // CATATAN:
-      // Popup per-layer yang lama sudah dihapus.
-      // Semua atribut dibaca otomatis oleh IdentifyTool.
-
-      // READY
       onReady?.(map);
     });
 
 
-    // MAP READOUT
     const readout = () => {
       const c = map.getCenter();
-
       if (
         Number.isFinite(c.lng) &&
         Number.isFinite(c.lat)
@@ -782,13 +612,11 @@ export default function MapCanvas({
 
     map.on("move", readout);
 
-    // MOUSE COORDINATE
     map.on("mousemove", (e) => {
       const {
         lng,
         lat,
       } = e.lngLat;
-
       if (
         Number.isFinite(lng) &&
         Number.isFinite(lat)
@@ -803,79 +631,55 @@ export default function MapCanvas({
     });
 
 
-    // CLEANUP
     return () => {
       ro.disconnect();
-
       if (measureRef.current) {
         measureRef.current.stop();
         measureRef.current = null;
       }
-
       if (identifyRef.current) {
         identifyRef.current.destroy();
         identifyRef.current = null;
       }
-
       map.remove();
-
       mapRef.current = null;
     };
-
   }, []);
 
-  // TOOL MODE
   useEffect(() => {
     const unsubscribe = onToolMode((mode) => {
       const measure = measureRef.current;
-
       if (!mode) {
         measure?.stop();
         return;
       }
-
-      // IDENTIFY bukan bagian dari MeasureControl
       if (mode === "identify") {
         measure?.stop();
         return;
       }
-
       if (!measure) {
         console.warn("MEASURE: control belum siap");
         return;
       }
-
       console.log("MEASURE MODE →", mode);
-
       measure.start(mode);
     });
-
     return unsubscribe;
   }, []);
 
-  // BASEMAP
   useEffect(
     () =>
       useMapStore.subscribe((s) => {
         const map = mapRef.current;
         if (!map || !map.isStyleLoaded()) return;
-
         const isOrtho = s.basemap === "ortho";
-
         BASEMAPS.forEach((b) => {
           const layerId = `bm_${b.id}`;
-
           if (!map.getLayer(layerId)) return;
-
           let visible = false;
-
-          // Kalau Orthophoto aktif:
-          // Esri World Imagery tetap berada di bawahnya
           if (isOrtho && b.id === "sat") {
             visible = true;
           }
-
-          // Basemap yang dipilih tetap visible
           if (b.id === s.basemap) {
             visible = true;
           }
@@ -890,7 +694,6 @@ export default function MapCanvas({
     []
   );
 
-  // LAYER VISIBILITY / FILTER / OPACITY
   useEffect(
     () =>
       useMapStore.subscribe((s) => {
@@ -916,7 +719,6 @@ const outlineLayer =
           }
 
           const isVisible = !!s.visible[l.id];
-
           if (
             isVisible &&
             l.kind !== "raster" &&
@@ -931,8 +733,6 @@ const outlineLayer =
               ? "visible"
               : "none"
           );
-
-          // Label mengikuti visibility layer utama
           if (labelLayer) {
             map.setLayoutProperty(
               `${l.id}_label`,
@@ -942,28 +742,25 @@ const outlineLayer =
                 : "none"
             );
           }
-// Outline mengikuti visibility layer utama
-if (outlineLayer) {
-  map.setLayoutProperty(
-    `${l.id}_outline`,
-    "visibility",
-    isVisible
-      ? "visible"
-      : "none"
-  );
-}
+          if (outlineLayer) {
+            map.setLayoutProperty(
+              `${l.id}_outline`,
+              "visibility",
+              isVisible
+                ? "visible"
+                : "none"
+            );
+          }
           if (l.sublayers) {
             const filter = getSubkelasFilter(
               l,
               s.subVisible
             );
-
             map.setFilter(
               l.id,
               filter ?? null
             );
           }
-
           if (
             l.opacityProp &&
             s.opacity[l.id] != null
@@ -979,15 +776,11 @@ if (outlineLayer) {
     []
   );
 
-  // TERRAIN — baca nilai dari store sebagai dependency useEffect
   const terrainSource = useMapStore((s) => s.terrainSource);
-
   useEffect(() => {
     const map = mapRef.current;
     if (!map) return;
-
     const run = () => applyTerrain(map, terrainSource);
-
     if (map.isStyleLoaded()) {
       run();
     } else {
@@ -997,7 +790,6 @@ if (outlineLayer) {
 
   const loadingLayerNames = loadingLayerIds.map((id) => {
     const layer = ALL_LAYERS.find((l) => l.id === id);
-
     return layer
       ? t(layer.nameKey)
       : id;
@@ -1011,21 +803,17 @@ if (outlineLayer) {
       }}
       className="absolute inset-0 h-full w-full"
     >
-      {/* MAP */}
       <div
         ref={ref}
         className="absolute inset-0 h-full w-full"
       />
-
       {loadingLayerNames.length > 0 && (
         <div className="layer-loading-popup">
           <div className="layer-loading-spinner" />
-
           <div className="layer-loading-content">
             <div className="layer-loading-title">
               {t("loading_layer_title")}
             </div>
-
             <div className="layer-loading-text">
               <strong>
                 {loadingLayerNames.join(", ")}
