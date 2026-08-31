@@ -535,7 +535,7 @@ export const DICTS: Record<Lang, Dict> = {
     // Control Panel
     terrain_off: "Off",
     measurement: "Measurement",
-    distance: "Horizontal Distance",
+    distance: "Distance",
     elevation: "Elevation",
     slope: "Slope",
     area: "Area",
@@ -819,7 +819,7 @@ export const DICTS: Record<Lang, Dict> = {
     // Control Panel
     terrain_off: "Desativado",
     measurement: "Medição",
-    distance: "Distância Horizontal",
+    distance: "Distância",
     elevation: "Elevação",
     slope: "Declive",
     area: "Área",
