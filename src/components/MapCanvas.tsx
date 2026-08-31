@@ -602,7 +602,7 @@ export default function MapCanvas({
   }
 
   function applyTerrain(map: MLMap, source: "off" | "aws" | "r2") {
-    console.log("APPLY TERRAIN →", source, ");
+    console.log("APPLY TERRAIN →", source");
     if (source === "off") { map.setTerrain(null); return; }
     const opt = TERRAIN_OPTIONS[source];
     map.setTerrain({
