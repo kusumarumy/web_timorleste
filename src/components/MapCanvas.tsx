@@ -660,25 +660,31 @@ useEffect(() => {
   );
 }, [t]);
   useEffect(() => {
-    const unsubscribe = onToolMode((mode) => {
-      const measure = measureRef.current;
-      if (!mode) {
-        measure?.stop();
-        return;
-      }
-      if (mode === "identify") {
-        measure?.stop();
-        return;
-      }
-      if (!measure) {
-        console.warn("MEASURE: control belum siap");
-        return;
-      }
-      console.log("MEASURE MODE →", mode);
-      measure.start(mode);
-    });
-    return unsubscribe;
-  }, []);
+  const unsubscribe = onToolMode((mode) => {
+    const measure = measureRef.current;
+
+    if (!mode) {
+      measure?.stop();
+      return;
+    }
+
+    if (mode === "identify") {
+      measure?.stop();
+      return;
+    }
+
+    if (!measure) {
+      console.warn("MEASURE: control belum siap");
+      return;
+    }
+
+    console.log("MEASURE MODE →", mode);
+
+    measure.start(mode);
+  });
+
+  return unsubscribe;
+}, []);
 
   useEffect(
     () =>
