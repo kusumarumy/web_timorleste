@@ -1,7 +1,7 @@
 export const R2 = process.env.NEXT_PUBLIC_R2_BASE_URL ?? "";
 
 const GITHUB_RAW =
-  "https://raw.githubusercontent.com/kusumarumy/web_timorleste/refs/heads/main";
+  "https://raw.githubusercontent.com/kusumarumy/web_timorleste/main";
 
 const v = (name: string) =>
   `${GITHUB_RAW}/public/data/${name}.geojson`;
