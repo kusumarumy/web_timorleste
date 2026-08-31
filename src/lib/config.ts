@@ -290,6 +290,10 @@ const SYM = {
       color: "#8D4A2B",
       width: 1.2,
     },
+        upstream: {
+      color: "#0288D1",
+      width: 2.3,
+    },
   },
 
   point: {
