@@ -692,7 +692,7 @@ export const DICTS: Record<Lang, Dict> = {
     l_oe09_ar_mbox: "Caixa",
     l_oe09_ar_pemukiman: "Povoação",
     l_oe09_li_asesories: "Acessórios",
-    l_oe09_li_bmcp: "BM / CP",
+    l_oe09_li_bmcp: "BM & CP",
     l_oe09_li_desainpembuang: "Projeto de Drenagem",
     l_oe09_li_design: "Linha de Projeto",
     l_oe09_li_grid: "Grelha",
@@ -748,7 +748,7 @@ export const DICTS: Record<Lang, Dict> = {
     // RAIBERE 2009
     l_rei09_ar_0: "Área",
     l_rei09_ar_bangsadap: "Estrutura de Tomada",
-    l_rei09_ar_bmcp: "BMCP",
+    l_rei09_ar_bmcp: "BM & CP",
     l_rei09_ar_boxkwarter: "Caixa Quaternária",
     l_rei09_ar_boxtersier: "Caixa Terciária",
     l_rei09_ar_desain: "Projeto",
