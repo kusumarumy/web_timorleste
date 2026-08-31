@@ -1261,7 +1261,7 @@ export const GROUPS: LayerGroup[] = [
         kind: "symbol",
         data: v("genangan_titikdesain"),
         clickable: true,
-        icon: icon("desain.png"),
+        icon: icon("desain"),
         paint: {},
         defaultOn: false,
         legend: {
@@ -1446,7 +1446,7 @@ export const GROUPS: LayerGroup[] = [
             data: v("09_lo_po_asesories"),
             clickable: true,
             lazy: true,
-            icon: icon("aksesories.png"),
+            icon: icon("aksesories"),
             paint: {},
 
             defaultOn: false,
@@ -1464,7 +1464,7 @@ export const GROUPS: LayerGroup[] = [
             data: v("09_lo_po_bmcp"),
             clickable: true,
             lazy: true,
-            icon: icon("bm.png"),
+            icon: icon("bm"),
             paint: {},
             defaultOn: false,
             legend: {
@@ -1480,7 +1480,7 @@ export const GROUPS: LayerGroup[] = [
             data: v("09_lo_po_design"),
             clickable: true,
             lazy: true,
-            icon: icon("desain.png"),
+            icon: icon("desain"),
             paint: {},
             defaultOn: false,
             legend: {
@@ -1510,9 +1510,6 @@ export const GROUPS: LayerGroup[] = [
               circle: true,
             },
           },
-
-
-          /* ---------------- LINE ---------------- */
 
           {
             id: "lo_li_asjalan",
@@ -1659,9 +1656,6 @@ export const GROUPS: LayerGroup[] = [
             legend: lineLegend(SYM.line.irrigationTertiary),
           },
 
-
-          /* ---------------- POLYGON ---------------- */
-
           {
             id: "lo_ar_areal",
             nameKey: "l_lo_ar_areal",
@@ -1760,7 +1754,7 @@ export const GROUPS: LayerGroup[] = [
             kind: "symbol",
             data: v("09_rei_po_asesories"),
             defaultOn: false,
-            icon: icon("aksesories.png"),
+            icon: icon("aksesories"),
             paint: pointPaint(
               SYM.point.accessories,
               2.5,
