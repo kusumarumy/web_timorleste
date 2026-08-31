@@ -2317,7 +2317,7 @@ export const GROUPS: LayerGroup[] = [
             paint: {},
             defaultOn: false,
             legend: {
-              color: SYM.point.bmcp,
+              color: SYM.point.bm,
               circle: true,
             },
           },
@@ -2334,7 +2334,7 @@ export const GROUPS: LayerGroup[] = [
             paint:{},
             defaultOn: false,
             legend: {
-              color: SYM.point.legend,
+              color: SYM.point.cp,
               circle: true,
             },
           },
