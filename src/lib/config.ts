@@ -155,7 +155,7 @@ export interface LayerDef {
   paint: Record<string, unknown>;
 
   svg?: {
-    size: 0.7;
+    size: 0.5;
     svg: string;
   };
 
