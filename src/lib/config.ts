@@ -548,11 +548,11 @@ const lineLegend = (s: {
   width: number;
   dasharray?: readonly number[];
 }) => ({
-  color: style.color,
+  color: s.color,
   line: true,
-  width: style.width,
-  ...(style.dasharray
-    ? { dasharray: style.dasharray }
+  width: s.width,
+  ...(s.dasharray
+    ? { dasharray: [...s.dasharray] }
     : {}),
 });
 
@@ -593,7 +593,6 @@ const pointPaint = (
       }
     : {}),
 });
-
 export const GROUPS: LayerGroup[] = [
 
   {
