@@ -363,6 +363,14 @@ async function registerMapIcons(map: MLMap) {
       id: "coordinate",
       url: "/icons/coordinate.png",
     },
+    {
+      id: "canal",
+      url: "/icons/canal.png",
+    },
+    {
+      id: "profil",
+      url: "/icons/profil.png",
+    },
   ];
 
   for (const icon of icons) {
