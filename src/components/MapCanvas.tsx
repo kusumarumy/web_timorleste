@@ -340,6 +340,14 @@ async function registerMapIcons(map: MLMap) {
       url: "/icons/drill.png",
     },
     {
+      id: "bm",
+      url: "/icons/bm.png",
+    },
+    {
+      id: "aksesories",
+      url: "/icons/aksesories.png",
+    },
+    {
       id: "kupasan",
       url: "/icons/kupasan.png",
     },
