@@ -948,7 +948,7 @@ this.coords.forEach((p, index) => {
     type: "Feature",
     geometry: point,
     properties: {
-      llabel: `${this.t("measurement_point")} ${index + 1}`,
+      label: `${this.t("measurement_point")} ${index + 1}`,
     },
   });
 });
