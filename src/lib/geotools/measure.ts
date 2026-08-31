@@ -1,46 +1,24 @@
-import maplibregl, {
-  Map as MLMap,
-  MapMouseEvent,
-  GeoJSONSource,
-} from "maplibre-gl";
-
-import type {
-  Feature,
-  FeatureCollection,
-  LineString,
-  Point,
-  Polygon,
-} from "geojson";
-
-import {
-  measureLine,
-  measurePolygon,
-} from "./geo";
-
+import maplibregl, { Map as MLMap, MapMouseEvent, GeoJSONSource,} from "maplibre-gl";
+import type { Feature, FeatureCollection, LineString, Point, Polygon,} from "geojson";
+import { measureLine, measurePolygon,} from "./geo";
 import type { ToolMode } from "@/components/toolMode";
-
 const SRC = "__measure_src";
 const L_FILL = "__measure_fill";
 const L_LINE = "__measure_line";
 const L_VERT = "__measure_vert";
 const L_LABEL = "__measure_label";
-
 type MeasureMode = Exclude<ToolMode, null>;
-
 type Coordinate = [number, number];
-
 interface MeasureLineResult {
   total: number;
   [key: string]: unknown;
 }
-
 interface MeasurePolygonResult {
   area: number;
   length: number;
   width: number;
   [key: string]: unknown;
 }
-
 type MeasureResult =
   | {
       mode: "distance";
@@ -80,43 +58,38 @@ interface MeasureControlOptions {
   onResult?: (result: MeasureResult) => void;
   onStop?: () => void;
   scaleFactor?: number;
+  t?: (key: string) => string;
 }
 
 export class MeasureControl {
   map: MLMap;
-
   onResult: (result: MeasureResult) => void;
   onStop: () => void;
-
   scaleFactor: number;
-
+  t: (key: string) => string;
   mode: MeasureMode | null;
   coords: Coordinate[];
   hover: Coordinate | null;
   private _popups = new Set<maplibregl.Popup>();
-
   constructor(
   map: MLMap,
   options: MeasureControlOptions = {}
 ) {
   this.map = map;
-
   this.onResult =
     options.onResult ??
     (() => {});
-
   this.onStop =
     options.onStop ??
     (() => {});
-
   this.scaleFactor =
-    options.scaleFactor ?? 1;
-
+  options.scaleFactor ?? 1;
+  this.t =
+    options.t ??
+    ((key: string) => key);
   this.mode = null;
   this.coords = [];
   this.hover = null;
-
-  // Bind event handler
   this._onClick = this._onClick.bind(this);
   this._onMove = this._onMove.bind(this);
   this._onDbl = this._onDbl.bind(this);
@@ -242,11 +215,9 @@ private _addPopup(
   popup: maplibregl.Popup
 ): void {
   this._popups.add(popup);
-
   popup.on("close", () => {
     this._popups.delete(popup);
   });
-
   popup.addTo(this.map);
 }
 
@@ -254,10 +225,8 @@ private _closePopups(): void {
   this._popups.forEach((popup) => {
     popup.remove();
   });
-
   this._popups.clear();
 }
-
   start(mode: MeasureMode): void {
     console.log(
       "MEASURE START:",
@@ -301,28 +270,23 @@ private _closePopups(): void {
     "click",
     this._onClick
   );
-
   this.map.off(
     "mousemove",
     this._onMove
   );
-
   this.map.off(
     "dblclick",
     this._onDbl
   );
-
   if (removeKeyboard) {
     document.removeEventListener(
       "keydown",
       this._onKey
     );
   }
-
   if (this.map.doubleClickZoom) {
     this.map.doubleClickZoom.enable();
   }
-
   this.map
     .getCanvas()
     .style.cursor = "";
@@ -333,15 +297,11 @@ private _closePopups(): void {
   this.mode = null;
   this.onStop();
 }
-
   clear(): void {
   this._closePopups();
-
   this.coords = [];
   this.hover = null;
-
   this._setData([]);
-
   this.onResult(null);
 }
   
@@ -350,17 +310,14 @@ private _closePopups(): void {
   ): void {
     const source =
       this.map.getSource(SRC) as GeoJSONSource | undefined;
-
     if (!source) {
       console.warn(
         "MEASURE: source tidak ditemukan"
       );
       return;
     }
-
     const geojson =
       this._fc(coords);
-
     console.log(
       "MEASURE DRAW:",
       {
@@ -373,10 +330,8 @@ private _closePopups(): void {
           !!this.map.getLayer(L_VERT),
       }
     );
-
     source.setData(geojson);
   }
-
   private _getElevation(
   coord: Coordinate
 ): number | null {
@@ -549,10 +504,6 @@ this._showResultPopup(
     const c =
       this.coords.slice();
 
-    /*
-     * Hover hanya preview.
-     */
-
     if (
       this.hover &&
       this.coords.length > 0
@@ -577,11 +528,7 @@ this._showResultPopup(
       "MEASURE UPDATE:",
       c
     );
-
-    // Gambar geometry
     this._setData(c);
-
-    // Hitung hasil
     this._updateResult(
       c,
       finished
@@ -636,7 +583,6 @@ this._showResultPopup(
         return;
       }
 
-      // Elevasi terrain
       const elevation1 =
         this._getElevation(p1);
 
@@ -747,7 +693,9 @@ this._showResultPopup(
     const lng = position[0];
     const lat = position[1];
 
-    let html = `
+    const t = this.t;
+
+let html = `
   <div style="
     min-width: 190px;
     font-family: Arial, sans-serif;
@@ -755,15 +703,15 @@ this._showResultPopup(
     background: #ffffff;
   ">
 
-        <div style="
-          color: #0f766e;
-          font-size: 12px;
-          font-weight: 700;
-          margin-bottom: 8px;
-        ">
-          HASIL PENGUKURAN
-        </div>
-    `;
+    <div style="
+      color: #0f766e;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    ">
+      ${t("measurement_result")}
+    </div>
+`;
 
     if (mode === "distance") {
       const r =
@@ -774,16 +722,20 @@ this._showResultPopup(
 
       if (r) {
         html += `
-          <div style="
-            display:flex;
-            justify-content:space-between;
-            gap:15px;
-            margin-bottom:5px;
-          ">
-            <span style="color:#374151;">Jarak</span>
-<b style="color:#111827;">${fmtLen(r.total)}</b>
-          </div>
-        `;
+        <div style="
+          display:flex;
+          justify-content:space-between;
+          gap:15px;
+          margin-bottom:5px;
+        ">
+          <span style="color:#374151;">
+            ${t("measurement_distance")}
+          </span>
+          <b style="color:#111827;">
+            ${fmtLen(r.total)}
+          </b>
+        </div>
+      `;
       }
     }
 
@@ -818,75 +770,75 @@ if (
       (180 / Math.PI);
 
     html += `
-      <div style="
-        display:flex;
-        justify-content:space-between;
-        gap:15px;
-        margin-bottom:5px;
-      ">
-        <span style="color:#374151;">
-          Elevasi titik 1
-        </span>
-        <b style="color:#111827;">
-          ${elevation1.toFixed(2)} m
-        </b>
-      </div>
+  <div style="
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:5px;
+  ">
+    <span style="color:#374151;">
+      ${t("measurement_elevation_point_1")}
+    </span>
+    <b style="color:#111827;">
+      ${elevation1.toFixed(2)} m
+    </b>
+  </div>
 
-      <div style="
-        display:flex;
-        justify-content:space-between;
-        gap:15px;
-        margin-bottom:5px;
-      ">
-        <span style="color:#374151;">
-          Elevasi titik 2
-        </span>
-        <b style="color:#111827;">
-          ${elevation2.toFixed(2)} m
-        </b>
-      </div>
+  <div style="
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:5px;
+  ">
+    <span style="color:#374151;">
+      ${t("measurement_elevation_point_2")}
+    </span>
+    <b style="color:#111827;">
+      ${elevation2.toFixed(2)} m
+    </b>
+  </div>
 
-      <div style="
-        display:flex;
-        justify-content:space-between;
-        gap:15px;
-        margin-bottom:5px;
-      ">
-        <span style="color:#374151;">
-          Beda elevasi
-        </span>
-        <b style="color:#111827;">
-          ${deltaElevation.toFixed(2)} m
-        </b>
-      </div>
+  <div style="
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:5px;
+  ">
+    <span style="color:#374151;">
+      ${t("measurement_elevation_difference")}
+    </span>
+    <b style="color:#111827;">
+      ${deltaElevation.toFixed(2)} m
+    </b>
+  </div>
 
-      <div style="
-        display:flex;
-        justify-content:space-between;
-        gap:15px;
-        margin-bottom:5px;
-      ">
-        <span style="color:#374151;">
-          Slope (%)
-        </span>
-        <b style="color:#111827;">
-          ${slopePercent.toFixed(2)}%
-        </b>
-      </div>
+  <div style="
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin-bottom:5px;
+  ">
+    <span style="color:#374151;">
+      ${t("measurement_slope")}
+    </span>
+    <b style="color:#111827;">
+      ${slopePercent.toFixed(2)}%
+    </b>
+  </div>
 
-      <div style="
-        display:flex;
-        justify-content:space-between;
-        gap:15px;
-      ">
-        <span style="color:#374151;">
-          Sudut (°)
-        </span>
-        <b style="color:#111827;">
-          ${slopeDegree.toFixed(2)}°
-        </b>
-      </div>
-    `;
+  <div style="
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+  ">
+    <span style="color:#374151;">
+      ${t("measurement_angle")}
+    </span>
+    <b style="color:#111827;">
+      ${slopeDegree.toFixed(2)}°
+    </b>
+  </div>
+`;
   }
 }
 
@@ -907,7 +859,9 @@ if (
           gap:15px;
           margin-bottom:5px;
         ">
-          <span style="color:#374151;">Luas</span>
+          <span style="color:#374151;">
+  ${t("measurement_area")}
+</span>
 <b style="color:#111827;">${fmtArea(r.area)}</b>
         </div>
 
@@ -917,7 +871,9 @@ if (
           gap:15px;
           margin-bottom:5px;
         ">
-          <span style="color:#374151;">Panjang</span>
+          <span style="color:#374151;">
+  ${t("measurement_length")}
+</span>
 <b style="color:#111827;">${fmtLen(r.length)}</b>
         </div>
 
@@ -926,7 +882,9 @@ if (
           justify-content:space-between;
           gap:15px;
         ">
-          <span style="color:#374151;">Lebar</span>
+          <span style="color:#374151;">
+  ${t("measurement_width")}
+</span>
 <b style="color:#111827;">${fmtLen(r.width)}</b>
         </div>
       `;
