@@ -556,14 +556,17 @@ export default function MapCanvas({
     map.on("load", async () => {
       map.resize();
       await registerMapIcons(map);
-      const measure = new MeasureControl(map, {
-        onResult: (result) => {
-          console.log("MEASURE RESULT:", result);
-        },
-        onStop: () => {
-          console.log("MEASURE STOP");
-        },
-      });
+     const measure = new MeasureControl(map, {
+  t: (key) => tRef.current(key),
+
+  onResult: (result) => {
+    console.log("MEASURE RESULT:", result);
+  },
+
+  onStop: () => {
+    console.log("MEASURE STOP");
+  },
+});
       measureRef.current = measure;
       const initialLayers = ALL_LAYERS.filter(
         (l) =>
