@@ -83,7 +83,6 @@ const symbol = getPaintStyle(l);
 
   return (
     <div>
-      {/* LAYER UTAMA */}
       <div
         className={`group flex items-center gap-2.5 rounded-[10px] py-2 transition-colors hover:bg-teal/[0.07] ${
           depth > 0 ? "pl-5 pr-2" : "px-2"
