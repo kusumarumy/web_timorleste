@@ -255,6 +255,7 @@ export const DICTS: Record<Lang, Dict> = {
     measurement: "Pengukuran",
     distance: "Jarak",
     elevation: "Elevasi",
+    profile: "Profil",
     slope: "Slope",
     area: "Luas",
 
@@ -535,6 +536,7 @@ export const DICTS: Record<Lang, Dict> = {
     measurement: "Measurement",
     distance: "Distance",
     elevation: "Elevation",
+    profile: "Profile",
     slope: "Slope",
     area: "Area",
 
@@ -816,6 +818,7 @@ export const DICTS: Record<Lang, Dict> = {
     measurement: "Medição",
     distance: "Distância",
     elevation: "Elevação",
+    profil: "Perfil",
     slope: "Declive",
     area: "Área",
 
