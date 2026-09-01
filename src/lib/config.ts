@@ -1041,7 +1041,7 @@ export const GROUPS: LayerGroup[] = [
 
   legend: fillLegend(SYM.polygon.irrigationArea),
 
-  subProp: "Name",                 // ← nama kolom di GeoJSON, verifikasi dulu (lihat langkah 3)
+  subProp: "layer",                
 
   sublayers: [
     { id: "akadiru_kede", labelKey: "di_akadiru_kede", filterValue: "AKADIRU KEDE" },
