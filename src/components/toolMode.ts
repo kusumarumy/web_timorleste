@@ -1,6 +1,7 @@
 export type ToolMode =
   | "distance"
   | "area"
+  | "profile"
   | "elevation"
   | "identify"
   | null;
