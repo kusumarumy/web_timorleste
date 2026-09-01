@@ -159,7 +159,13 @@ export interface LayerDef {
     size: number;
     svg: string;
   };
-
+subProp?: string;
+  sublayers?: {
+    id: string;
+    labelKey: string;
+    filterValue: string;
+  }[];
+  
   defaultOn: boolean;
 
   opacity?: number;
@@ -1026,64 +1032,35 @@ export const GROUPS: LayerGroup[] = [
       },
 
       {
-        id: "8irrigationareas",
-        nameKey: "l_8irrigationareas",
-        kind: "fill",
-        data: v("8irrigationareas"),
-        clickable: true,
+  id: "10irrigationareas",         
+  nameKey: "l_10irrigationareas",   
+  kind: "fill",
+  data: v("10irrigationareas"),
+  clickable: true,
 
-        paint: fillPaint(SYM.polygon.irrigationArea),
+  paint: fillPaint(SYM.polygon.irrigationArea),
+  defaultOn: false,
 
-        defaultOn: false,
+  opacity: SYM.polygon.irrigationArea.opacity,
+  opacityProp: "fill-opacity",
 
-        opacity: SYM.polygon.irrigationArea.opacity,
-        opacityProp: "fill-opacity",
+  legend: fillLegend(SYM.polygon.irrigationArea),
 
-        legend: fillLegend(SYM.polygon.irrigationArea),
+  subProp: "Name",                 // ← nama kolom di GeoJSON, verifikasi dulu (lihat langkah 3)
 
-        sublayers: [
-          {
-            id: "akadiru_kede",
-            labelKey: "di_akadiru_kede",
-            filterValue: "AKADIRU KEDE",
-          },
-          {
-            id: "buiha",
-            labelKey: "di_buiha",
-            filterValue: "BUIHA",
-          },
-          {
-            id: "kakeulaku",
-            labelKey: "di_kakeulaku",
-            filterValue: "KAKEULAKU",
-          },
-          {
-            id: "lias",
-            labelKey: "di_lias",
-            filterValue: "LIAS",
-          },
-          {
-            id: "luan_kadoe",
-            labelKey: "di_luan_kadoe",
-            filterValue: "LUAN KADOE",
-          },
-          {
-            id: "oebaba",
-            labelKey: "di_oebaba",
-            filterValue: "OEBABA",
-          },
-          {
-            id: "paulata",
-            labelKey: "di_paulata",
-            filterValue: "PAULATA",
-          },
-          {
-            id: "raibere",
-            labelKey: "di_raibere",
-            filterValue: "RAIBRE",
-          },
-        ],
-      },
+  sublayers: [
+    { id: "akadiru_kede", labelKey: "di_akadiru_kede", filterValue: "AKADIRU KEDE" },
+    { id: "beco",         labelKey: "di_beco",         filterValue: "BECO" },
+    { id: "buiha",        labelKey: "di_buiha",        filterValue: "BUIHA" },
+    { id: "kakeulaku",    labelKey: "di_kakeulaku",    filterValue: "KAKEULAKU" },
+    { id: "lias",         labelKey: "di_lias",         filterValue: "LIAS" },
+    { id: "luan_kadoe",   labelKey: "di_luan_kadoe",   filterValue: "LUAN KADOE" },
+    { id: "paulata",      labelKey: "di_paulata",      filterValue: "PAULATA" },
+    { id: "raibere",      labelKey: "di_raibere",      filterValue: "RAIBERE" },
+    { id: "raimea",       labelKey: "di_raimea",       filterValue: "RAIMEA" },
+    { id: "taz_hilin",    labelKey: "di_taz_hilin",    filterValue: "TAZ HILIN" },
+  ],
+},
 
       {
         id: "building",
@@ -2881,11 +2858,6 @@ export const GROUPS: LayerGroup[] = [
   },
 ];
 
-
-/* =========================================================
-   LAYER HELPERS
-========================================================= */
-
 const flattenLayers = (
   layers: LayerDef[],
 ): LayerDef[] =>
@@ -2944,8 +2916,6 @@ export const getDescendantIds = (
     : [];
 };
 
-
-/** Apakah layer ini parent ber-cascade. */
 export const isCascadeParent = (
   id: string,
 ): boolean =>
@@ -2954,15 +2924,11 @@ export const isCascadeParent = (
     id,
   )?.cascade === true;
 
-
-/** Semua layer yang memiliki data, termasuk children. */
 export const ALL_LAYERS: LayerDef[] =
   GROUPS.flatMap((g) =>
     flattenLayers(g.layers)
   );
 
-
-/** Semua layer yang memiliki legend. */
 export const LEGEND_LAYERS: LayerDef[] =
   ALL_LAYERS.filter(
     (l) => l.legend
