@@ -47,7 +47,7 @@ export const DICTS: Record<Lang, Dict> = {
     l_sugarcane: "Tebu",
     l_urban: "Permukiman",
     l_ricefield: "Sawah",
-    l_10irrigationareas: "8 Daerah Irigasi",
+    l_10irrigationareas: "10 Daerah Irigasi",
 
     di_akadiru_kede: "AKADIRU KEDE",
     di_buiha: "BUIHA",
@@ -319,7 +319,7 @@ export const DICTS: Record<Lang, Dict> = {
     l_sugarcane: "Sugar Cane",
     l_urban: "Urban Area",
     l_ricefield: "Rice Field",
-    l_10irrigationareas: "8 Irrigation Areas",
+    l_10irrigationareas: "10 Irrigation Areas",
 
     di_akadiru_kede: "AKADIRU KEDE",
     di_buiha: "BUIHA",
@@ -598,7 +598,7 @@ export const DICTS: Record<Lang, Dict> = {
     l_sugarcane: "Cana-de-açúcar",
     l_urban: "Área Urbana",
     l_ricefield: "Arrozal",
-    l_10irrigationareas: "8 Áreas de Irrigação",
+    l_10irrigationareas: "10 Áreas de Irrigação",
 
     di_akadiru_kede: "AKADIRU KEDE",
     di_buiha: "BUIHA",
