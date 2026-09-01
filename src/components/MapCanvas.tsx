@@ -304,19 +304,22 @@ function getSubkelasFilter(
   if (!layer.sublayers || layer.sublayers.length === 0) {
     return undefined;
   }
+
+  const prop = layer.subProp ?? "subkelas";
+
   const activeValues = layer.sublayers
     .filter((sub) => subVisible[sub.id] !== false)
     .map((sub) => sub.filterValue);
 
   if (activeValues.length === 0) {
-    return ["==", ["get", "subkelas"], "__NONE__"] as any;
+    return ["==", ["literal", 1], ["literal", 0]] as any;
   }
   if (activeValues.length === layer.sublayers.length) {
     return undefined;
   }
   return [
     "in",
-    ["get", "subkelas"],
+    ["get", prop],
     ["literal", activeValues],
   ] as any;
 }
