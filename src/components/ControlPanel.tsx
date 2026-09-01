@@ -266,7 +266,7 @@ function MeasurementControl() {
     };
   }, []);
   const activate = (
-    mode: "distance" | "elevation" | "area"
+    mode: "distance" | "elevation" | "area" | "profile"
   ) => {
     if (active === mode) {
       setToolMode(null);
@@ -274,10 +274,11 @@ function MeasurementControl() {
     }
     setToolMode(mode);
   };
+
   const buttonClass = (
-    mode: "distance" | "elevation" | "area"
+    mode: "distance" | "elevation" | "area" | "profile"
   ) =>
-    `flex items-center justify-center gap-1.5 rounded-lg border px-1.5 py-1.5 transition-colors ${
+    `flex items-center justify-center gap-1.5 rounded-lg border px-1.5 py-2 transition-colors ${
       active === mode
         ? "border-teal/50 bg-teal text-[#04171a]"
         : "border-stroke bg-bg/30 text-muted hover:border-teal/30 hover:bg-teal/[0.07] hover:text-ink"
@@ -304,7 +305,7 @@ function MeasurementControl() {
         </svg>
         <span>{t("measurement")}</span>
       </div>
-      <div className="mt-2.5 grid grid-cols-3 gap-1 rounded-[10px] border border-stroke bg-bg/40 p-[3px]">
+            <div className="mt-2.5 grid grid-cols-2 gap-1 rounded-[10px] border border-stroke bg-bg/40 p-[3px]">
         <button
           type="button"
           onClick={() => activate("distance")}
@@ -312,7 +313,7 @@ function MeasurementControl() {
           aria-pressed={active === "distance"}
         >
           <span className="text-[13px]">📏</span>
-          <span className="whitespace-nowrap text-[10px] font-semibold">
+          <span className="whitespace-nowrap text-[10.5px] font-semibold">
             {t("distance")}
           </span>
         </button>
@@ -323,7 +324,7 @@ function MeasurementControl() {
           aria-pressed={active === "elevation"}
         >
           <span className="text-[14px]">↕</span>
-          <span className="whitespace-nowrap text-[10px] font-semibold">
+          <span className="whitespace-nowrap text-[10.5px] font-semibold">
             {t("elevation")}
           </span>
         </button>
@@ -334,8 +335,19 @@ function MeasurementControl() {
           aria-pressed={active === "area"}
         >
           <span className="text-[13px]">▱</span>
-          <span className="whitespace-nowrap text-[10px] font-semibold">
+          <span className="whitespace-nowrap text-[10.5px] font-semibold">
             {t("area")}
+          </span>
+        </button>
+        <button
+          type="button"
+          onClick={() => activate("profile")}
+          className={buttonClass("profile")}
+          aria-pressed={active === "profile"}
+        >
+          <span className="text-[13px]">📈</span>
+          <span className="whitespace-nowrap text-[10.5px] font-semibold">
+            {t("profile")}
           </span>
         </button>
       </div>
