@@ -10,6 +10,8 @@ import { getToolMode, onToolMode, setToolMode,} from "./toolMode";
 import { MeasureControl } from "@/lib/geotools/measure";
 import { IdentifyTool } from "@/lib/geotools/identifyTool";
 import { useI18n } from "@/lib/i18n";
+import ProfilePanel, { type ProfileData } from "./ProfilePanel";
+import type { ProfileSample } from "@/lib/geotools/measure";
 
 function isWGS84GeoJSON(geojson: any): boolean {
   const crsName =
@@ -411,6 +413,8 @@ export default function MapCanvas({
   const loadedLayers = useRef(new Set<string>());
   const loadingLayers = useRef(new Set<string>());
   const [loadingLayerIds, setLoadingLayerIds] = useState<string[]>([]);
+  const [profile, setProfile] = useState<ProfileData | null>(null);
+  const hoverMarkerRef = useRef<maplibregl.Marker | null>(null);
 
   async function loadGeoJSONLayer(
     map: MLMap,
@@ -579,11 +583,18 @@ export default function MapCanvas({
     map.on("load", async () => {
       map.resize();
       await registerMapIcons(map);
-     const measure = new MeasureControl(map, {
+          const measure = new MeasureControl(map, {
   t: (key) => tRef.current(key),
 
   onResult: (result) => {
-    console.log("MEASURE RESULT:", result);
+    if (result?.mode === "profile" && result.finished) {
+      setProfile(result as unknown as ProfileData);
+      return;
+    }
+
+    if (!result) {
+      setProfile(null);
+    }
   },
 
   onStop: () => {
@@ -658,8 +669,12 @@ export default function MapCanvas({
     });
 
 
-    return () => {
+    r    return () => {
       ro.disconnect();
+      if (hoverMarkerRef.current) {
+        hoverMarkerRef.current.remove();
+        hoverMarkerRef.current = null;
+      }
       if (measureRef.current) {
         measureRef.current.stop();
         measureRef.current = null;
@@ -684,16 +699,18 @@ useEffect(() => {
   );
 }, [t]);
   useEffect(() => {
-  const unsubscribe = onToolMode((mode) => {
+    const unsubscribe = onToolMode((mode) => {
     const measure = measureRef.current;
 
     if (!mode) {
       measure?.stop();
+      setProfile(null);
       return;
     }
 
     if (mode === "identify") {
       measure?.stop();
+      setProfile(null);
       return;
     }
 
@@ -704,6 +721,7 @@ useEffect(() => {
 
     console.log("MEASURE MODE →", mode);
 
+    setProfile(null);
     measure.start(mode);
   });
 
@@ -850,7 +868,7 @@ const outlineLayer =
         ref={ref}
         className="absolute inset-0 h-full w-full"
       />
-      {loadingLayerNames.length > 0 && (
+            {loadingLayerNames.length > 0 && (
         <div className="layer-loading-popup">
           <div className="layer-loading-spinner" />
           <div className="layer-loading-content">
@@ -866,6 +884,38 @@ const outlineLayer =
           </div>
         </div>
       )}
+
+      <ProfilePanel
+        data={profile}
+        onClose={() => {
+          setProfile(null);
+          hoverMarkerRef.current?.remove();
+          hoverMarkerRef.current = null;
+          measureRef.current?.clear();
+          setToolMode(null);
+        }}
+        onHoverSample={(s: ProfileSample | null) => {
+          const map = mapRef.current;
+          if (!map) return;
+
+          if (!s) {
+            hoverMarkerRef.current?.remove();
+            hoverMarkerRef.current = null;
+            return;
+          }
+
+          if (!hoverMarkerRef.current) {
+            const el = document.createElement("div");
+            el.style.cssText =
+              "width:12px;height:12px;border-radius:9999px;background:#2FA6A0;border:2px solid #04171a;box-shadow:0 0 0 2px rgba(47,166,160,.35);";
+            hoverMarkerRef.current = new maplibregl.Marker({
+              element: el,
+            });
+          }
+
+          hoverMarkerRef.current.setLngLat([s.lng, s.lat]).addTo(map);
+        }}
+      />
     </div>
   );
 }
