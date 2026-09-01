@@ -2,8 +2,8 @@
 
 import { useMemo } from "react";
 import { useI18n } from "@/lib/i18n";
-import type { ProfileSample } from "@/lib/geotools/measure";
-import type { ProfileSegment } from "@/lib/geotools/measure";
+import { useMapStore } from "@/lib/store";
+import type { ProfileSample, ProfileSegment } from "@/lib/geotools/measure";
 
 export interface ProfileData {
   samples: ProfileSample[];
@@ -19,41 +19,38 @@ export interface ProfileData {
   hasCounterSlope: boolean;
 }
 
-const W = 640;
-const H = 200;
-const PAD_L = 52;
-const PAD_R = 14;
-const PAD_T = 14;
-const PAD_B = 34;
+const W = 300;
+const H = 96;
+const PAD_L = 32;
+const PAD_R = 6;
+const PAD_T = 8;
+const PAD_B = 16;
 
-function fmtRatio(ratio: number | null): string {
-  if (ratio == null || !Number.isFinite(ratio)) return "—";
-  return `1 : ${Math.round(ratio)}`;
+function fmtRatio(r: number | null): string {
+  if (r == null || !Number.isFinite(r)) return "—";
+  return `1 : ${Math.round(r)}`;
 }
 
 function fmtDist(m: number): string {
   return m >= 1000 ? `${(m / 1000).toFixed(2)} km` : `${m.toFixed(0)} m`;
 }
 
-function Stat({ label, value }: { label: string; value: string }) {
+function Row({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-[10px] border border-strokeSoft bg-bg/40 px-3 py-2">
-      <div className="text-[10px] text-muted2">{label}</div>
-      <div className="mt-0.5 text-[15px] font-bold text-ink">{value}</div>
+    <div className="flex items-center justify-between gap-3 py-[3px]">
+      <span className="text-[11px] text-muted">{label}</span>
+      <span className="text-[11.5px] font-bold text-ink">{value}</span>
     </div>
   );
 }
 
-function nearestSample(
-  samples: ProfileSample[],
-  target: number
-): ProfileSample {
+function nearest(samples: ProfileSample[], target: number): ProfileSample {
   let best = samples[0];
   let bestDiff = Infinity;
   for (const s of samples) {
-    const diff = Math.abs(s.dist - target);
-    if (diff < bestDiff) {
-      bestDiff = diff;
+    const d = Math.abs(s.dist - target);
+    if (d < bestDiff) {
+      bestDiff = d;
       best = s;
     }
   }
@@ -79,14 +76,15 @@ export default function ProfilePanel({
   onHoverSample?: (sample: ProfileSample | null) => void;
 }) {
   const { t } = useI18n();
+  const terrainSource = useMapStore((s) => s.terrainSource);
 
   const geom = useMemo(() => {
     if (!data || data.samples.length < 2) return null;
 
     const { samples, minElev, maxElev, total } = data;
-    const range = Math.max(0.5, maxElev - minElev);
-    const yMin = minElev - range * 0.1;
-    const yMax = maxElev + range * 0.1;
+    const range = Math.max(0.3, maxElev - minElev);
+    const yMin = minElev - range * 0.12;
+    const yMax = maxElev + range * 0.12;
 
     const x = (d: number) => PAD_L + (d / total) * (W - PAD_L - PAD_R);
     const y = (e: number) =>
@@ -94,8 +92,6 @@ export default function ProfilePanel({
 
     const pt = (s: ProfileSample) =>
       `${x(s.dist).toFixed(1)},${y(s.elev).toFixed(1)}`;
-
-    const path = samples.map(pt).join(" ");
 
     const counter = data.segments
       .filter((sg) => sg.counterSlope)
@@ -108,15 +104,17 @@ export default function ProfilePanel({
       }))
       .filter((c) => c.points.length > 0);
 
-    const ticks = [0, 0.25, 0.5, 0.75, 1].map((f) => ({
-      value: yMax - (yMax - yMin) * f,
-      y: PAD_T + f * (H - PAD_T - PAD_B),
-    }));
-
-    return { path, counter, ticks };
+    return {
+      path: samples.map(pt).join(" "),
+      counter,
+      yTop: yMax,
+      yBot: yMin,
+    };
   }, [data]);
 
   if (!data || !geom) return null;
+
+  const descending = data.deltaElevation < 0;
 
   const handleMove = (e: React.MouseEvent<SVGSVGElement>) => {
     if (!onHoverSample) return;
@@ -127,7 +125,7 @@ export default function ProfilePanel({
       onHoverSample(null);
       return;
     }
-    onHoverSample(nearestSample(data.samples, ratio * data.total));
+    onHoverSample(nearest(data.samples, ratio * data.total));
   };
 
   const exportCsv = () => {
@@ -143,42 +141,26 @@ export default function ProfilePanel({
   };
 
   return (
-    <div className="absolute bottom-11 left-1/2 z-[16] w-[680px] max-w-[calc(100vw-2rem)] -translate-x-1/2 rounded-2xl border border-stroke bg-panel/95 p-4 shadow-[0_18px_50px_rgba(0,0,0,.5)] backdrop-blur-xl max-md:left-2.5 max-md:right-2.5 max-md:w-auto max-md:translate-x-0">
-      <div className="mb-3 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <span className="text-[13px]">📈</span>
-          <span className="text-[13px] font-bold text-ink">
-            {t("profile_title")}
-          </span>
-        </div>
-        <div className="flex items-center gap-1.5">
+    <div className="absolute bottom-11 right-4 z-[16] w-[336px] rounded-xl border border-stroke bg-panel/95 p-3 shadow-[0_12px_36px_rgba(0,0,0,.5)] backdrop-blur-xl max-md:left-2.5 max-md:right-2.5 max-md:w-auto">
+      <div className="mb-2 flex items-center justify-between">
+        <span className="text-[11.5px] font-bold text-teal">
+          {t("profile_title")}
+        </span>
+        <div className="flex items-center gap-1">
           <button
             onClick={exportCsv}
-            className="rounded-lg border border-stroke px-2.5 py-1 text-[10.5px] font-semibold text-muted transition-colors hover:border-teal/40 hover:text-ink"
+            className="rounded-md border border-stroke px-2 py-[3px] text-[10px] font-semibold text-muted transition-colors hover:border-teal/40 hover:text-ink"
           >
             CSV
           </button>
           <button
             onClick={onClose}
             aria-label="Close"
-            className="rounded-lg px-2 py-1 text-base leading-none text-muted transition-colors hover:bg-stroke hover:text-ink"
+            className="rounded-md px-1.5 py-[3px] text-[15px] leading-none text-muted transition-colors hover:bg-stroke hover:text-ink"
           >
             ×
           </button>
         </div>
-      </div>
-
-      <div className="mb-3 grid grid-cols-4 gap-2 max-md:grid-cols-2">
-        <Stat label={t("profile_length")} value={fmtDist(data.total)} />
-        <Stat
-          label={t("profile_delta")}
-          value={`${data.deltaElevation.toFixed(2)} m`}
-        />
-        <Stat
-          label={t("profile_slope")}
-          value={`${Math.abs(data.slopePercent).toFixed(2)}%`}
-        />
-        <Stat label={t("profile_ratio")} value={fmtRatio(data.slopeRatio)} />
       </div>
 
       <svg
@@ -187,90 +169,97 @@ export default function ProfilePanel({
         onMouseMove={handleMove}
         onMouseLeave={() => onHoverSample?.(null)}
       >
-        {geom.ticks.map((tk, i) => (
-          <g key={i}>
-            <line
-              x1={PAD_L}
-              y1={tk.y}
-              x2={W - PAD_R}
-              y2={tk.y}
-              stroke="#ffffff"
-              strokeOpacity={0.08}
-              strokeWidth={1}
-            />
-            <text
-              x={PAD_L - 8}
-              y={tk.y + 4}
-              textAnchor="end"
-              fontSize={10}
-              fill="#8fa3a8"
-            >
-              {tk.value.toFixed(1)}
-            </text>
-          </g>
-        ))}
+        <line
+          x1={PAD_L}
+          y1={PAD_T}
+          x2={W - PAD_R}
+          y2={PAD_T}
+          stroke="#ffffff"
+          strokeOpacity={0.07}
+        />
+        <line
+          x1={PAD_L}
+          y1={H - PAD_B}
+          x2={W - PAD_R}
+          y2={H - PAD_B}
+          stroke="#ffffff"
+          strokeOpacity={0.07}
+        />
+        <text x={PAD_L - 5} y={PAD_T + 4} textAnchor="end" fontSize={8.5} fill="#8fa3a8">
+          {geom.yTop.toFixed(1)}
+        </text>
+        <text x={PAD_L - 5} y={H - PAD_B + 3} textAnchor="end" fontSize={8.5} fill="#8fa3a8">
+          {geom.yBot.toFixed(1)}
+        </text>
 
         <polyline
           points={geom.path}
           fill="none"
           stroke="#2FA6A0"
-          strokeWidth={2}
+          strokeWidth={1.8}
           strokeLinejoin="round"
         />
-
         {geom.counter.map((c) => (
           <polyline
             key={c.key}
             points={c.points}
             fill="none"
             stroke="#EF4444"
-            strokeWidth={3}
+            strokeWidth={2.6}
             strokeLinejoin="round"
           />
         ))}
 
-        <text x={PAD_L} y={H - 10} fontSize={10} fill="#8fa3a8">
+        <text x={PAD_L} y={H - 3} fontSize={8.5} fill="#8fa3a8">
           0
         </text>
-        <text
-          x={W - PAD_R}
-          y={H - 10}
-          textAnchor="end"
-          fontSize={10}
-          fill="#8fa3a8"
-        >
+        <text x={W - PAD_R} y={H - 3} textAnchor="end" fontSize={8.5} fill="#8fa3a8">
           {fmtDist(data.total)}
         </text>
       </svg>
 
-      <div className="mt-3 max-h-[132px] overflow-y-auto border-t border-strokeSoft pt-2">
-        <table className="w-full text-[11px]">
-          <tbody>
-            {data.segments.map((sg) => (
-              <tr
-                key={sg.index}
-                className={sg.counterSlope ? "text-red-400" : "text-muted"}
-              >
-                <td className="py-1">
-                  {fmtDist(sg.from)} – {fmtDist(sg.to)}
-                </td>
-                <td className="py-1 text-right">
-                  {sg.slopePercent > 0 ? "+" : ""}
-                  {sg.slopePercent.toFixed(2)}%
-                </td>
-                <td className="py-1 text-right">
-                  {sg.counterSlope
-                    ? t("profile_counter_slope")
-                    : fmtRatio(sg.slopeRatio)}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="mt-2 border-t border-strokeSoft pt-1.5">
+        <Row label={t("profile_length")} value={fmtDist(data.total)} />
+        <Row
+          label={t("profile_delta")}
+          value={`${descending ? "↓" : "↑"} ${Math.abs(data.deltaElevation).toFixed(2)} m`}
+        />
+        <Row
+          label={t("profile_slope")}
+          value={`${Math.abs(data.slopePercent).toFixed(2)}%`}
+        />
+        <Row label={t("profile_ratio")} value={fmtRatio(data.slopeRatio)} />
       </div>
 
-      <p className="mt-2 text-[10px] leading-snug text-muted2">
-        ℹ {t("profile_geoid_note")}
+      {data.segments.length > 1 && (
+        <div className="mt-1.5 max-h-[88px] overflow-y-auto border-t border-strokeSoft pt-1.5">
+          {data.segments.map((sg) => (
+            <div
+              key={sg.index}
+              className={`flex items-center justify-between gap-2 py-[2px] text-[10px] ${
+                sg.counterSlope ? "text-red-400" : "text-muted2"
+              }`}
+            >
+              <span>
+                {fmtDist(sg.from)} – {fmtDist(sg.to)}
+              </span>
+              <span>
+                {sg.slopePercent > 0 ? "+" : ""}
+                {sg.slopePercent.toFixed(2)}%
+              </span>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {data.hasCounterSlope && (
+        <p className="mt-1.5 text-[9.5px] leading-snug text-red-400">
+          ⚠ {t("profile_counter_slope_warn")}
+        </p>
+      )}
+
+      <p className="mt-1.5 text-[9.5px] leading-snug text-muted2">
+        ℹ {t(terrainSource === "r2" ? "profile_note_dtm" : "profile_note_aws")}
       </p>
     </div>
   );
