@@ -160,11 +160,6 @@ export interface LayerDef {
     svg: string;
   };
 subProp?: string;
-  sublayers?: {
-    id: string;
-    labelKey: string;
-    filterValue: string;
-  }[];
   
   defaultOn: boolean;
 
