@@ -258,7 +258,17 @@ export const DICTS: Record<Lang, Dict> = {
     profile: "Profil",
     slope: "Slope",
     area: "Luas",
-
+    profile: "Profil",
+    profile_title: "Profil memanjang",
+    profile_length: "Panjang",
+    profile_delta: "Beda tinggi",
+    profile_slope: "Kemiringan",
+    profile_ratio: "Perbandingan",
+    profile_counter_slope: "menanjak",
+    profile_note_dtm:
+      "Tinggi dari DTM 3 m hasil pengukuran. Referensi tinggi mengikuti datum survei yang dipakai.",
+    profile_note_aws:
+      "Tinggi dari AWS Terrarium 30 m — resolusi kasar, hanya untuk gambaran umum. Gunakan DTM 3 m untuk analisis saluran.",
     measurement_click: "Klik titik",
     measurement_double_click: "Double klik",
     measurement_finish: "selesai",
@@ -539,7 +549,17 @@ export const DICTS: Record<Lang, Dict> = {
     profile: "Profile",
     slope: "Slope",
     area: "Area",
-
+  profile: "Profile",
+  profile_title: "Longitudinal profile",
+  profile_length: "Length",
+  profile_delta: "Elevation difference",
+  profile_slope: "Slope",
+  profile_ratio: "Ratio",
+  profile_counter_slope: "uphill",
+  profile_note_dtm:
+    "Elevation from the surveyed 3 m DTM. Vertical reference follows the survey datum.",
+  profile_note_aws:
+    "Elevation from AWS Terrarium 30 m — coarse resolution, indicative only. Use the 3 m DTM for canal analysis.",
     measurement_click: "Click points",
     measurement_double_click: "Double click",
     measurement_finish: "to finish",
@@ -821,7 +841,17 @@ export const DICTS: Record<Lang, Dict> = {
     profil: "Perfil",
     slope: "Declive",
     area: "Área",
-
+  profile: "Perfil",
+  profile_title: "Perfil longitudinal",
+  profile_length: "Comprimento",
+  profile_delta: "Diferença de altura",
+  profile_slope: "Declive",
+  profile_ratio: "Proporção",
+  profile_counter_slope: "a subir",
+  profile_note_dtm:
+    "Altitude do MDT de 3 m levantado. A referência vertical segue o datum do levantamento.",
+  profile_note_aws:
+    "Altitude do AWS Terrarium 30 m — resolução grosseira, apenas indicativa. Use o MDT de 3 m para análise de canais.",
     measurement_click: "Clique nos pontos",
     measurement_double_click: "Duplo clique",
     measurement_finish: "para concluir",
