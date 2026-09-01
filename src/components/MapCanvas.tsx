@@ -669,7 +669,7 @@ export default function MapCanvas({
     });
 
 
-    r    return () => {
+    return () => {
       ro.disconnect();
       if (hoverMarkerRef.current) {
         hoverMarkerRef.current.remove();
