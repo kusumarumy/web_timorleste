@@ -41,6 +41,24 @@ type MeasureResult =
       k: number;
       [key: string]: unknown;
     }
+    | {
+      mode: "profile";
+      samples: ProfileSample[];
+      segments: ProfileSegment[];
+      total: number;
+      elevStart: number;
+      elevEnd: number;
+      deltaElevation: number;
+      slopePercent: number;
+      slopeRatio: number | null;
+      minElev: number;
+      maxElev: number;
+            hasCounterSlope: boolean;
+      finished: boolean;
+      unit: "m";
+      k: number;
+      [key: string]: unknown;
+    }
   | {
       mode: "area";
       area?: number;
@@ -60,7 +78,25 @@ interface MeasureControlOptions {
   scaleFactor?: number;
   t?: (key: string) => string;
 }
+export interface ProfileSample {
+  dist: number;
+  elev: number;
+  lng: number;
+  lat: number;
+}
 
+export interface ProfileSegment {
+  index: number;
+  from: number;
+  to: number;
+  length: number;
+  elevFrom: number;
+  elevTo: number;
+  deltaElevation: number;
+  slopePercent: number;
+  slopeRatio: number | null;
+  counterSlope: boolean;
+}
 export class MeasureControl {
   map: MLMap;
   onResult: (result: MeasureResult) => void;
@@ -128,6 +164,151 @@ setTranslator(t: (key: string) => string): void {
       lat: position[1],
     });
   }
+}
+  private _sampleProfile(
+  coords: Coordinate[],
+  maxSamples = 400
+): ProfileSample[] {
+  if (coords.length < 2) {
+    return [];
+  }
+
+  const segLengths: number[] = [];
+  let totalLength = 0;
+
+  for (let i = 0; i < coords.length - 1; i++) {
+    const r = measureLine(
+      [coords[i], coords[i + 1]],
+      this.scaleFactor
+    ) as MeasureLineResult | null;
+
+    const len = r?.total ?? 0;
+    segLengths.push(len);
+    totalLength += len;
+  }
+
+  if (totalLength <= 0) {
+    return [];
+  }
+
+  const step = Math.max(2, totalLength / maxSamples);
+
+  const samples: ProfileSample[] = [];
+  let cumulative = 0;
+
+  for (let i = 0; i < coords.length - 1; i++) {
+    const a = coords[i];
+    const b = coords[i + 1];
+    const segLen = segLengths[i];
+
+    if (segLen <= 0) {
+      continue;
+    }
+
+    const n = Math.max(1, Math.ceil(segLen / step));
+
+    for (let j = 0; j < n; j++) {
+      const f = j / n;
+      const lng = a[0] + (b[0] - a[0]) * f;
+      const lat = a[1] + (b[1] - a[1]) * f;
+
+      const elev = this._getElevation([lng, lat]);
+
+      if (elev == null) {
+        continue;
+      }
+
+      samples.push({
+        dist: cumulative + segLen * f,
+        elev,
+        lng,
+        lat,
+      });
+    }
+
+    cumulative += segLen;
+  }
+
+  const last = coords[coords.length - 1];
+  const lastElev = this._getElevation(last);
+
+  if (lastElev != null) {
+    samples.push({
+      dist: cumulative,
+      elev: lastElev,
+      lng: last[0],
+      lat: last[1],
+    });
+  }
+
+  return samples;
+}
+  private _buildProfileSegments(
+  coords: Coordinate[],
+  samples: ProfileSample[]
+): ProfileSegment[] {
+  const segments: ProfileSegment[] = [];
+  let cumulative = 0;
+
+  const elevAt = (target: number): number | null => {
+    let best: ProfileSample | null = null;
+    let bestDiff = Infinity;
+
+    for (const s of samples) {
+      const diff = Math.abs(s.dist - target);
+      if (diff < bestDiff) {
+        bestDiff = diff;
+        best = s;
+      }
+    }
+
+    return best ? best.elev : null;
+  };
+
+  for (let i = 0; i < coords.length - 1; i++) {
+    const r = measureLine(
+      [coords[i], coords[i + 1]],
+      this.scaleFactor
+    ) as MeasureLineResult | null;
+
+    const len = r?.total ?? 0;
+    if (len <= 0) {
+      continue;
+    }
+
+    const from = cumulative;
+    const to = cumulative + len;
+
+    const elevFrom = elevAt(from);
+    const elevTo = elevAt(to);
+
+    cumulative = to;
+
+    if (elevFrom == null || elevTo == null) {
+      continue;
+    }
+
+    const delta = elevTo - elevFrom;
+    const slopePercent = (delta / len) * 100;
+
+    segments.push({
+      index: i + 1,
+      from,
+      to,
+      length: len,
+      elevFrom,
+      elevTo,
+      deltaElevation: delta,
+      slopePercent,
+      slopeRatio:
+        Math.abs(delta) > 0.001
+          ? len / Math.abs(delta)
+          : null,
+      counterSlope: delta > 0.01,
+    });
+  }
+
+  return segments;
 }
 private _ensureLayers(): void {
   if (!this.map.getSource(SRC)) {
@@ -488,14 +669,13 @@ private _closePopups(): void {
 
   this._closePopups();
 
-  this._showResultPopup(
-    finalCoords[finalCoords.length - 1],
-    finishedMode,
-    finalCoords
-  );
-
-  // Stop drawing interaction,
-  // tetapi keyboard ESC tetap aktif
+  if (finishedMode !== "profile") {
+    this._showResultPopup(
+      finalCoords[finalCoords.length - 1],
+      finishedMode,
+      finalCoords
+    );
+  }
   this._removeListeners(false);
 
   this.hover = null;
@@ -534,13 +714,15 @@ private _closePopups(): void {
       true
     );
 
-    this._closePopups();
+        this._closePopups();
 
-    this._showResultPopup(
-      finalCoords[finalCoords.length - 1],
-      finishedMode,
-      finalCoords
-    );
+    if (finishedMode !== "profile") {
+      this._showResultPopup(
+        finalCoords[finalCoords.length - 1],
+        finishedMode,
+        finalCoords
+      );
+    }
 
     this.stop();
 
@@ -679,7 +861,76 @@ private _closePopups(): void {
 
       return;
     }
+    if (this.mode === "profile") {
+      if (c.length < 2) {
+        this.onResult(null);
+        return;
+      }
 
+      // sampling hanya saat selesai — mahal untuk dijalankan tiap mousemove
+      if (!finished) {
+        const r = measureLine(
+          c,
+          k
+        ) as MeasureLineResult | null;
+
+        this.onResult(
+          r
+            ? {
+                mode: "distance",
+                ...r,
+                finished: false,
+                unit: "m",
+                k,
+              }
+            : null
+        );
+
+        return;
+      }
+
+      const samples = this._sampleProfile(c);
+
+      if (samples.length < 2) {
+        console.warn(
+          "PROFILE: elevasi tidak tersedia. Pastikan terrain aktif."
+        );
+        this.onResult(null);
+        return;
+      }
+
+      const segments = this._buildProfileSegments(c, samples);
+
+      const total = samples[samples.length - 1].dist;
+      const elevStart = samples[0].elev;
+      const elevEnd = samples[samples.length - 1].elev;
+      const delta = elevEnd - elevStart;
+
+      const elevs = samples.map((s) => s.elev);
+
+      this.onResult({
+        mode: "profile",
+        samples,
+        segments,
+        total,
+        elevStart,
+        elevEnd,
+        deltaElevation: delta,
+        slopePercent: (delta / total) * 100,
+        slopeRatio:
+          Math.abs(delta) > 0.001
+            ? total / Math.abs(delta)
+            : null,
+        minElev: Math.min(...elevs),
+        maxElev: Math.max(...elevs),
+        hasCounterSlope: segments.some((s) => s.counterSlope),
+        finished: true,
+        unit: "m",
+        k,
+      });
+
+      return;
+    }
     if (this.mode === "area") {
       if (c.length >= 3) {
         const r =
