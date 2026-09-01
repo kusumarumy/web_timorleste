@@ -155,7 +155,6 @@ const symbol = getPaintStyle(l);
         )}
       </div>
 
-      {/* SUBLAYERS LAMA */}
       {l.sublayers && on && (
         <div className="ml-10 mb-2 mt-0.5 space-y-0.5 border-l border-strokeSoft pl-3">
           {l.sublayers.map((sub) => (
