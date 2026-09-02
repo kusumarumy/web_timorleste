@@ -357,7 +357,10 @@ strais: {
       color: "#039BE5",
       width: 2.3,
     },
-
+intakePier: {
+  color: "#1976D2",
+  width: 2.3,
+},
     pier: {
       color: "#039BE5",
       width: 2.3,
@@ -1679,6 +1682,7 @@ export const GROUPS: LayerGroup[] = [
             data: v("09_lo_li_pembuangutama"),
             clickable: true,
             lazy: true,paint: linePaint(SYM.line.drainage),
+            defaultOn: false,
             legend: lineLegend(SYM.line.drainage),
           },
 
@@ -2675,10 +2679,9 @@ legend: fillLegend(SYM.polygon.building),
             data: v("oe_downstream"),
             clickable: true,
             defaultOn: false,
+paint: linePaint(SYM.line.downstream),
 
-            paint: linePaint(SYM.line.drainage),
-
-            legend: lineLegend(SYM.line.drainage),
+legend: lineLegend(SYM.line.downstream),
           },
 
           {
