@@ -960,45 +960,51 @@ export const GROUPS: LayerGroup[] = [
         legend: lineLegend(SYM.line.irrigationExisting),
       },
 
-      {
-        id: "catchment",
-        nameKey: "l_catchment",
-        kind: "fill",
-        data: v("catchment"),
-        clickable: true,
+     {
+  id: "catchment",
+  nameKey: "l_catchment",
+  kind: "fill",
+  data: v("catchment"),
+  clickable: true,
 
-        paint: fillPaint(SYM.polygon.catchment),
+  paint: fillPaint(SYM.polygon.catchment),
 
-        defaultOn: false,
+  defaultOn: false,
 
-        opacity: SYM.polygon.catchment.opacity,
-        opacityProp: "fill-opacity",
+  opacity: SYM.polygon.catchment.opacity,
+  opacityProp: "fill-opacity",
 
-        legend: fillLegend(SYM.polygon.catchment),
+  legend: fillLegend(SYM.polygon.catchment),
 
-        sublayers: [
-          {
-            id: "catchment_dam_1",
-            labelKey: "catchment_dam_1",
-            filterValue: "Catchment Area DAM 1",
-          },
-          {
-            id: "catchment_dam_2",
-            labelKey: "catchment_dam_2",
-            filterValue: "Catchment Area DAM 2",
-          },
-          {
-            id: "catchment_dam_3",
-            labelKey: "catchment_dam_3",
-            filterValue: "Catchment Area DAM 3",
-          },
-          {
-            id: "catchment_oebaba",
-            labelKey: "catchment_oebaba",
-            filterValue: "Catchment Area Oebaba",
-          },
-        ],
-      },
+  subProp: "layer",
+
+  sublayers: [
+    {
+      id: "catchment_dam_1",
+      labelKey: "catchment_dam_1",
+      filterValue: "Catchment Area DAM 1",
+      outlineColor: "#2196F3",
+    },
+    {
+      id: "catchment_dam_2",
+      labelKey: "catchment_dam_2",
+      filterValue: "Catchment Area DAM 2",
+      outlineColor: "#9C27B0",
+    },
+    {
+      id: "catchment_dam_3",
+      labelKey: "catchment_dam_3",
+      filterValue: "Catchment Area DAM 3",
+      outlineColor: "#FF9800",
+    },
+    {
+      id: "catchment_oebaba",
+      labelKey: "catchment_oebaba",
+      filterValue: "Catchment Area Oebaba",
+      outlineColor: "#F44336",
+    },
+  ],
+},
 
       {
         id: "river",
