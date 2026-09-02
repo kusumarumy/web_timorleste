@@ -338,11 +338,7 @@ function MeasurementControl() {
             {t("measurement_finish")} ·{" "}
             <b className="text-teal">Esc</b>{" "}
             {t("measurement_cancel")}
-            {active === "elevation" && (
-              <span className="mt-1 block text-teal/80">
-                ℹ {t("elevation_info")}
-              </span>
-            )}
+           
             {needsTerrain && terrainOff && (
               <span className="mt-1.5 block rounded-md border border-amber/40 bg-amber/10 px-2 py-1 text-amber">
                 ⚠ {t("terrain_required")}
