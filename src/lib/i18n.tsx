@@ -42,6 +42,7 @@ export const DICTS: Record<Lang, Dict> = {
     l_posto: "Batas Administrasi Posto",
     l_kotamadya: "Batas Administrasi Kotamadya",
     l_negara: "Batas Administrasi Negara",
+    l_batas_daerah_irigasi: "Batas Daerah Irigasi",
 
     // Land Cover
     l_sugarcane: "Tebu",
@@ -374,6 +375,7 @@ export const DICTS: Record<Lang, Dict> = {
     l_posto: "Administrative Post Boundary",
     l_kotamadya: "Municipal Boundary",
     l_negara: "International Boundary",
+    l_batas_daerah_irigasi: "Irrigation Area Boundary",
 
     // Contour
     l_contour: "Interval Contour 5 Meter",
@@ -665,6 +667,7 @@ export const DICTS: Record<Lang, Dict> = {
     l_posto: "Limite do Posto Administrativo",
     l_kotamadya: "Limite Municipal",
     l_negara: "Fronteira Internacional",
+    l_batas_daerah_irigasi: "Limite da Área de Irrigação",
 
     // Contour
     l_contour: "Contorno com Intervalo de 5 Metros",
