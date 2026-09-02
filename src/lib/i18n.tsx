@@ -293,7 +293,8 @@ export const DICTS: Record<Lang, Dict> = {
     bearing: "Arah",
     loading_layer_title: "Memuat Layer",
     loading_layer_text: "sedang dimuat...",
-    elevation_info: "Elevasi menggunakan DTM 3 m."
+    elevation_info: "Gunakan Terrain DTM 3 m untuk elevasi yang presisi.",
+    terrain_required: "Gunakan Terrain DTM 3 m untuk profil elevasi yang presisi.",
   },
 
   en: {
@@ -584,7 +585,8 @@ export const DICTS: Record<Lang, Dict> = {
     bearing: "Bearing",
     loading_layer_title: "Loading Layers",
     loading_layer_text: "are loading...",
-    elevation_info: "Elevation uses the 3 m DTM."
+    elevation_info: "Use the 3 m DTM Terrain for precise elevation.",
+    terrain_required: "Use the 3 m DTM Terrain for a precise elevation profile.",
   },
 
   pt: {
@@ -874,7 +876,8 @@ export const DICTS: Record<Lang, Dict> = {
     bearing: "Direção",
     loading_layer_title: "A carregar camadas",
     loading_layer_text: "estão a carregar...",
-    elevation_info: "A elevação utiliza o DTM de 3 m."
+    elevation_info: "Use o Terreno DTM de 3 m para uma elevação precisa.",
+    terrain_required: "Use o Terreno DTM de 3 m para um perfil de elevação preciso.",
   },
 };
 
