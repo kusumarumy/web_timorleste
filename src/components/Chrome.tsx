@@ -15,50 +15,35 @@ export function TopBar() {
 
   return (
     <>
-      {/* =====================================================
-          TOP BAR
-      ===================================================== */}
       <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex h-[70px] items-center bg-gradient-to-b from-bg/95 via-bg/65 to-transparent px-4">
-
-        {/* LOGO + TITLE */}
         <div className="pointer-events-auto flex items-center gap-3">
-
-          {/* 3 LOGOS */}
           <div className="flex h-[42px] items-center gap-1">
             <img
               src="/icons/1.png"
               alt=""
               className="h-[32px] w-[32px] object-contain"
             />
-
             <img
               src="/icons/2.png"
               alt=""
               className="h-[32px] w-[32px] object-contain"
             />
-
             <img
               src="/icons/3.png"
               alt=""
               className="h-[32px] w-[32px] object-contain"
             />
           </div>
-
-          {/* TITLE */}
           <div className="leading-none">
             <h1 className="font-display text-[17px] font-semibold tracking-[-0.02em] text-white">
               {t("title")}
             </h1>
-
             <span className="mt-1.5 block text-[10.5px] font-medium uppercase tracking-[0.12em] text-white/60 max-md:hidden">
               {t("sub")}
             </span>
           </div>
         </div>
-
         <div className="flex-1" />
-
-        {/* LANGUAGE */}
         <div className="pointer-events-auto flex gap-0.5 rounded-[9px] border border-stroke bg-white/85 p-[3px] backdrop-blur-md">
           {langs.map((l) => (
             <button
@@ -76,19 +61,13 @@ export function TopBar() {
         </div>
       </div>
 
-
-      {/* =====================================================
-          BASEMAP CONTROL
-      ===================================================== */}
       <div className="pointer-events-auto absolute right-4 top-[198px] z-[30]">
-
-        {/* BASEMAP BUTTON */}
         <button
           type="button"
           onClick={() => setBasemapOpen((prev) => !prev)}
           title="Basemap"
           aria-label="Basemap"
-          className={`flex h-[32px] w-[32px] items-center justify-center rounded-[7px] border border-stroke bg-panel text-ink shadow-[0_4px_12px_rgba(0,0,0,.35)] transition-all hover:bg-panel ${
+          className={`flex h-[32px] w-[32px] items-center justify-center rounded-[7px] border border-stroke bg-white text-[#26343b] shadow-[0_3px_10px_rgba(0,0,0,.18)] transition-all hover:bg-white ${
             basemapOpen ? "ring-2 ring-teal/40" : ""
           }`}
         >
