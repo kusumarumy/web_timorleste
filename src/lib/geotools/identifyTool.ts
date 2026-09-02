@@ -1,15 +1,8 @@
 import maplibregl, { Map as MLMap, MapMouseEvent } from "maplibre-gl";
 
 import { getToolMode, onToolMode, setToolMode } from "@/components/toolMode";
-
-// Tipe diturunkan dari versi maplibre yang terpasang,
-// jadi tidak bergantung pada nama tipe yang bisa berbeda antar versi.
 type QueriedFeature = ReturnType<MLMap["queryRenderedFeatures"]>[number];
 type QueryGeometry = Parameters<MLMap["queryRenderedFeatures"]>[0];
-
-// ============================================================
-// CURSOR — panah + badge huruf "i"
-// ============================================================
 
 function cursorSvg(accent: string): string {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
@@ -35,32 +28,14 @@ const ICON_SVG = `<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="t
   <rect x="10.85" y="10.4" width="2.3" height="7.2" rx="1.15" fill="currentColor"/>
 </svg>`;
 
-// ============================================================
-// OPTIONS
-// ============================================================
-
 export interface IdentifyToolOptions {
-  /** Layer id yang boleh di-query. Dipanggil tiap klik, jadi selalu up to date. */
   getLayerIds: (map: MLMap) => string[];
-
-  /** Nama layer untuk header popup, mis. hasil t(layer.nameKey). */
   getLayerLabel?: (layerId: string) => string;
-
-  /** Label field di popup. Default: snake_case → Title Case. */
   getFieldLabel?: (key: string) => string;
-
-  /** Field internal yang disembunyikan. */
   hiddenFields?: string[];
-
-  /** Kandidat field untuk judul popup, urut prioritas. */
   titleFields?: string[];
-
-  /** Maksimal fitur dalam pager popup. Default 8. */
   maxFeatures?: number;
-
-  /** Radius klik dalam pixel. Default 6. */
   tolerance?: number;
-
   texts?: {
     button?: string;
     empty?: string;
@@ -80,10 +55,6 @@ const DEFAULT_TITLE_FIELDS = [
 ];
 
 const DEFAULT_HIDDEN_FIELDS = ["geometry", "bbox", "__id", "layer", "source"];
-
-// ============================================================
-// HELPERS
-// ============================================================
 
 function titleCase(key: string): string {
   return key
@@ -119,13 +90,6 @@ function isLink(value: unknown): value is string {
   return typeof value === "string" && /^https?:\/\//i.test(value.trim());
 }
 
-// ============================================================
-// IDENTIFY TOOL
-// Pola sama seperti MeasureControl: new IdentifyTool(map, opts)
-// Tombolnya disisipkan sendiri ke container control kanan-atas,
-// jadi tidak menyentuh tipe IControl sama sekali.
-// ============================================================
-
 export class IdentifyTool {
   map: MLMap;
 
@@ -152,16 +116,21 @@ export class IdentifyTool {
     this._sync(getToolMode() === "identify");
   }
 
-  // ---------- BUTTON ----------
-
   private _mountButton(): void {
     const container = document.createElement("div");
     container.className =
       "maplibregl-ctrl maplibregl-ctrl-group identify-ctrl";
-
+    
+    container.style.borderRadius = "7px";
+    container.style.overflow = "hidden";
     const button = document.createElement("button");
     button.type = "button";
     button.className = "identify-ctrl-btn";
+    
+    button.style.width = "32px";
+    button.style.height = "32px";
+    button.style.borderRadius = "7px";
+    button.style.overflow = "hidden";
 
     const label = this.opts.texts?.button ?? "Identify";
     button.title = label;
@@ -177,9 +146,7 @@ export class IdentifyTool {
     });
 
     container.appendChild(button);
-
-    // Disisipkan ke grup control kanan-atas, setelah NavigationControl,
-    // sehingga tombol duduk tepat di bawah kompas.
+    
     const slot = this.map
       .getContainer()
       .querySelector(".maplibregl-ctrl-top-right");
@@ -200,8 +167,6 @@ export class IdentifyTool {
     this.container = container;
     this.button = button;
   }
-
-  // ---------- STATE ----------
 
   private _sync(next: boolean): void {
     if (next === this.active) return;
@@ -237,21 +202,14 @@ export class IdentifyTool {
 
     console.log("IDENTIFY STOP");
   }
-
-  /** Matikan tool dari luar (mis. saat measure dinyalakan). */
   stop(): void {
     setToolMode(null);
   }
-
-  /** Bersihkan listener dan hapus tombol. Dipanggil saat map di-unmount. */
   destroy(): void {
     this._sync(false);
-
     this.unsub?.();
     this.unsub = null;
-
     this.container?.parentNode?.removeChild(this.container);
-
     this.container = null;
     this.button = null;
   }
@@ -261,23 +219,16 @@ export class IdentifyTool {
     this.popup = null;
   }
 
-  // ---------- EVENTS ----------
-
   private _onMove(e: MapMouseEvent): void {
     if (!this.active) return;
-
     const hit = this._query(e.point).length > 0;
-
     this.map.getCanvas().style.cursor = hit ? CURSOR_HIT : CURSOR_IDLE;
   }
 
   private _onClick(e: MapMouseEvent): void {
     if (!this.active) return;
-
     const features = this._query(e.point);
-
     this._closePopup();
-
     const popup = new maplibregl.Popup({
       offset: 14,
       maxWidth: "330px",
@@ -285,70 +236,51 @@ export class IdentifyTool {
       closeButton: true,
       closeOnClick: false,
     }).setLngLat(e.lngLat);
-
     if (features.length === 0) {
       const empty = document.createElement("div");
       empty.className = "identify-pop identify-pop--empty";
       empty.textContent =
         this.opts.texts?.empty ?? "Tidak ada fitur di titik ini.";
-
       popup.setDOMContent(empty);
     } else {
       popup.setDOMContent(this._buildContent(features));
     }
-
     popup.addTo(this.map);
-
     this.popup = popup;
   }
-
-  // ---------- QUERY ----------
 
   private _query(point: { x: number; y: number }): QueriedFeature[] {
     const ids = this.opts
       .getLayerIds(this.map)
       .filter((id) => !!this.map.getLayer(id));
-
     if (ids.length === 0) return [];
-
     const pad = this.opts.tolerance ?? 6;
-
     const bbox = [
       [point.x - pad, point.y - pad],
       [point.x + pad, point.y + pad],
     ] as unknown as QueryGeometry;
-
     let raw: QueriedFeature[] = [];
-
     try {
       raw = this.map.queryRenderedFeatures(bbox, { layers: ids });
     } catch (err) {
       console.warn("IDENTIFY: query gagal", err);
       return [];
     }
-
-    // Poligon/garis yang terpotong antar tile bisa muncul berkali-kali
+    
     const seen = new Set<string>();
     const out: QueriedFeature[] = [];
     const max = this.opts.maxFeatures ?? 8;
-
     for (const f of raw) {
       const key = `${f.layer?.id}::${
         f.id ?? JSON.stringify(f.properties ?? {})
       }`;
-
       if (seen.has(key)) continue;
-
       seen.add(key);
       out.push(f);
-
       if (out.length >= max) break;
     }
-
     return out;
   }
-
-  // ---------- POPUP CONTENT ----------
 
   private _layerLabel(layerId: string): string {
     return this.opts.getLayerLabel?.(layerId) ?? titleCase(layerId);
@@ -388,7 +320,6 @@ export class IdentifyTool {
       const f = features[index];
       const props = (f.properties ?? {}) as Record<string, unknown>;
 
-      // HEAD
       const head = document.createElement("div");
       head.className = "identify-pop-head";
 
@@ -403,7 +334,6 @@ export class IdentifyTool {
       head.append(title, sub);
       root.appendChild(head);
 
-      // PAGER
       if (features.length > 1) {
         const pager = document.createElement("div");
         pager.className = "identify-pager";
@@ -436,7 +366,6 @@ export class IdentifyTool {
         root.appendChild(pager);
       }
 
-      // BODY — semua atribut GeoJSON, otomatis
       const hidden = new Set(
         (this.opts.hiddenFields ?? DEFAULT_HIDDEN_FIELDS).map((k) =>
           k.toLowerCase()
