@@ -102,56 +102,59 @@ export function Legend() {
                       className="max-h-[24px] max-w-[24px] object-contain"
                     />
                   </span>
+                ) : l.legend?.line ? (
+                  /* LINE / DASHED LINE */
+                  <span className="flex h-[24px] w-[24px] flex-none items-center">
+                    <svg
+                      width="24"
+                      height="12"
+                      viewBox="0 0 24 12"
+                      className="block"
+                      style={{
+                        opacity: l.legend.opacity ?? 1,
+                      }}
+                    >
+                      <line
+                        x1="1"
+                        y1="6"
+                        x2="23"
+                        y2="6"
+                        stroke={l.legend.color}
+                        strokeWidth={Math.max(
+                          1,
+                          l.legend.width ?? 2
+                        )}
+                        strokeLinecap="butt"
+                        strokeDasharray={
+                          l.legend.dasharray
+                            ? l.legend.dasharray.join(" ")
+                            : undefined
+                        }
+                      />
+                    </svg>
+                  </span>
+                ) : l.legend?.circle ? (
+                  /* CIRCLE */
+                  <span
+                    className="h-[12px] w-[12px] flex-none rounded-full"
+                    style={{
+                      background: l.legend.color,
+                      opacity: l.legend.opacity ?? 1,
+                    }}
+                  />
                 ) : (
-                  {/* FALLBACK LEGEND */}
-{l.legend?.line ? (
-  <span className="flex h-[24px] w-[24px] flex-none items-center">
-    <svg
-      width="24"
-      height="12"
-      viewBox="0 0 24 12"
-      className="block"
-      style={{
-        opacity: l.legend.opacity ?? 1,
-      }}
-    >
-      <line
-        x1="1"
-        y1="6"
-        x2="23"
-        y2="6"
-        stroke={l.legend.color}
-        strokeWidth={Math.max(1, l.legend.width ?? 2)}
-        strokeLinecap="butt"
-        strokeDasharray={
-          l.legend.dasharray
-            ? l.legend.dasharray.join(" ")
-            : undefined
-        }
-      />
-    </svg>
-  </span>
-) : l.legend?.circle ? (
-  <span
-    className="h-[12px] w-[12px] flex-none rounded-full"
-    style={{
-      background: l.legend.color,
-      opacity: l.legend.opacity ?? 1,
-    }}
-  />
-) : (
-  <span
-    className="h-[13px] w-[18px] flex-none rounded-[2px]"
-    style={{
-      background: l.legend?.color,
-      opacity: l.legend?.opacity ?? 1,
-      border:
-        l.kind === "fill"
-          ? `1px solid ${l.legend?.color}`
-          : undefined,
-    }}
-  />
-)}
+                  /* FILL */
+                  <span
+                    className="h-[13px] w-[18px] flex-none rounded-[2px]"
+                    style={{
+                      background: l.legend?.color,
+                      opacity: l.legend?.opacity ?? 1,
+                      border:
+                        l.kind === "fill"
+                          ? `1px solid ${l.legend?.color}`
+                          : undefined,
+                    }}
+                  />
                 )}
 
                 {t(l.nameKey)}
