@@ -1470,24 +1470,28 @@ export const GROUPS: LayerGroup[] = [
           },
 
           {
-            id: "lo_po_bm",
-            nameKey: "l_lo_po_bm",
-            kind: "symbol",
-            data: v("09_lo_po_bm"),
-            clickable: true,
-            lazy: true,
-            icon: icon("bm"),
-            iconSize: 0.02,
-            paint: pointPaint(
-              SYM.point.bm,
-              2.5,
-            ),
-            
-            legend: {
-              color: SYM.point.bm,
-              circle: true,
-            },
-          },
+  id: "lo_po_bm",
+  nameKey: "l_lo_po_bm",
+  kind: "symbol",
+  data: v("09_lo_po_bm"),
+  clickable: true,
+  lazy: true,
+  icon: icon("bm"),
+  iconSize: 0.02,
+
+  paint: pointPaint(
+    "#6A1B9A",
+    2.5,
+    "#4C136E",
+  ),
+
+  defaultOn: false,
+
+  legend: {
+    color: "#6A1B9A",
+    circle: true,
+  },
+},
 
           {
             id: "lo_li_asjalan",
