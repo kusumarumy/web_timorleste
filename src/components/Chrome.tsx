@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { BASEMAPS } from "@/lib/config";
+import { BASEMAPS, GROUPS } from "@/lib/config";
 import { useMapStore } from "@/lib/store";
 import { useI18n, Lang } from "@/lib/i18n";
 
