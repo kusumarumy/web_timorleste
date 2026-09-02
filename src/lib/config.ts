@@ -1479,13 +1479,12 @@ export const GROUPS: LayerGroup[] = [
             icon: icon("bm"),
             iconSize: 0.02,
             paint: pointPaint(
-              "#6A1B9A",
+              SYM.point.bm,
               2.5,
-              "#4C136E",
             ),
-            defaultOn: false,
+            
             legend: {
-              color: "#6A1B9A",
+              color: SYM.point.bm,
               circle: true,
             },
           },
@@ -1918,14 +1917,12 @@ export const GROUPS: LayerGroup[] = [
             nameKey: "l_rei09_ar_legend",
             kind: "fill",
             data: v("09_rei_ar_legend"),
-            defaultOn: false,
+            defaultOn: false,paint: fillPaint(SYM.polygon.building),
 
-            paint: fillPaint(SYM.polygon.areaGeneral),
+opacity: SYM.polygon.building.opacity,
+opacityProp: "fill-opacity",
 
-            opacity: SYM.polygon.areaGeneral.opacity,
-            opacityProp: "fill-opacity",
-
-            legend: fillLegend(SYM.polygon.areaGeneral),
+legend: fillLegend(SYM.polygon.building),
           },
 
           {
@@ -2330,19 +2327,11 @@ export const GROUPS: LayerGroup[] = [
             clickable: true,
             lazy: true,
 
-            paint: {
-              ...linePaint(SYM.line.drainage),
-              "line-dasharray": [8, 3],
-            },
-
+            paint: linePaint(SYM.line.drainage),
+            
             defaultOn: false,
-
-            legend: {
-              color: SYM.line.drainage.color,
-              line: true,
-              width: SYM.line.drainage.width,
-              dasharray: [8, 3],
-            },
+            
+            legend: lineLegend(SYM.line.drainage),
           },
 
           {
@@ -2464,9 +2453,6 @@ export const GROUPS: LayerGroup[] = [
 
             legend: lineLegend(SYM.line.river),
           },
-
-
-          /* ---------------- POLYGON ---------------- */
 
           {
             id: "oe09_ar_aliranair",
@@ -2659,11 +2645,8 @@ export const GROUPS: LayerGroup[] = [
             kind: "line",
             data: v("oe_ingatpier"),
             clickable: true,
-            defaultOn: false,
-
-            paint: linePaint(SYM.line.irrigationExisting),
-
-            legend: lineLegend(SYM.line.irrigationExisting),
+            defaultOn: false,paint: linePaint(SYM.line.pier),
+            legend: lineLegend(SYM.line.pier),
           },
 
           {
@@ -2685,11 +2668,8 @@ export const GROUPS: LayerGroup[] = [
             kind: "line",
             data: v("oe_irrigationpier"),
             clickable: true,
-            defaultOn: false,
-
-            paint: linePaint(SYM.line.irrigationTertiary),
-
-            legend: lineLegend(SYM.line.irrigationTertiary),
+            defaultOn: false,paint: linePaint(SYM.line.pier),
+legend: lineLegend(SYM.line.pier),
           },
 
           {
