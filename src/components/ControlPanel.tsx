@@ -22,7 +22,6 @@ function LayerSymbol({ l }: { l: LayerDef }) {
 
   const paint = (l.paint ?? {}) as Record<string, unknown>;
 
-  // ICON
   if (l.icon) {
     return (
       <span className="flex h-[24px] w-[28px] flex-none items-center justify-center">
@@ -35,7 +34,6 @@ function LayerSymbol({ l }: { l: LayerDef }) {
     );
   }
 
-  // WARNA DARI LEGEND / PAINT
   const color =
     legend?.color ??
     (typeof paint["line-color"] === "string"
@@ -68,7 +66,6 @@ function LayerSymbol({ l }: { l: LayerDef }) {
       ? (paint["line-dasharray"] as number[])
       : undefined);
 
-  // LINE
   if (legend?.line === true || l.kind === "line") {
     if (!color) return null;
 
@@ -100,7 +97,6 @@ function LayerSymbol({ l }: { l: LayerDef }) {
     );
   }
 
-  // CIRCLE / POINT
   if (legend?.circle === true || l.kind === "circle") {
     if (!color) return null;
 
@@ -115,7 +111,6 @@ function LayerSymbol({ l }: { l: LayerDef }) {
     );
   }
 
-  // FILL / POLYGON
   if (l.kind === "fill") {
     return (
       <span
@@ -134,7 +129,6 @@ function LayerSymbol({ l }: { l: LayerDef }) {
     );
   }
 
-  // FALLBACK
   if (!color) return null;
 
   return (
@@ -198,24 +192,36 @@ function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
           />
         )}
       </div>
-      {l.sublayers && on && (
-        <div className="ml-10 mb-2 mt-0.5 space-y-0.5 border-l border-strokeSoft pl-3">
-          {l.sublayers.map((sub) => (
-            <label
-              key={sub.id}
-              className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-[11.5px] text-muted hover:bg-teal/[0.07]"
-            >
-              <input
-                type="checkbox"
-                checked={subVisible[sub.id] ?? true}
-                onChange={() => toggleSub(sub.id)}
-                className="h-3.5 w-3.5 accent-teal"
-              />
-              <span>{t(sub.labelKey)}</span>
-            </label>
-          ))}
-        </div>
-      )}
+{l.sublayers && on && (
+  <div className="ml-10 mb-2 mt-0.5 space-y-0.5 border-l border-strokeSoft pl-3">
+    {l.sublayers.map((sub) => (
+      <label
+        key={sub.id}
+        className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-[11.5px] text-muted hover:bg-teal/[0.07]"
+      >
+        <input
+          type="checkbox"
+          checked={subVisible[sub.id] ?? true}
+          onChange={() => toggleSub(sub.id)}
+          className="h-3.5 w-3.5 accent-teal"
+        />
+
+        <span
+  className="h-[11px] w-[22px] flex-none rounded-[2px]"
+  style={{
+    backgroundColor: "#66BB6A",
+    opacity: 0.25,
+    border: `2px solid ${sub.outlineColor ?? "#2E7D32"}`,
+  }}
+/>
+
+        <span className="truncate">
+          {t(sub.labelKey)}
+        </span>
+      </label>
+    ))}
+  </div>
+)}
       {l.children && l.children.length > 0 && on && (
         <div className="ml-5 mb-1 border-l border-strokeSoft pl-2">
           {l.children.map((child) => (
