@@ -684,19 +684,11 @@ export const GROUPS: LayerGroup[] = [
     {
       id: "desa",
       nameKey: "l_desa",
-      kind: "fill",
+      kind: "line",
       data: v("desa"),
-
-      paint: {
-        "fill-color": SYM.line.adminVillage.color,
-        "fill-opacity": 0,
-        "fill-outline-color": SYM.line.adminVillage.color,
-      },
-
+      paint: linePaint(SYM.line.adminVillage),
       defaultOn: false,
-
       legend: lineLegend(SYM.line.adminVillage),
-
       label: {
         field: "adm3_name",
         size: 10,
@@ -709,19 +701,11 @@ export const GROUPS: LayerGroup[] = [
     {
       id: "posto",
       nameKey: "l_posto",
-      kind: "fill",
+      kind: "line",
       data: v("posto"),
-
-      paint: {
-        "fill-color": SYM.line.adminPosto.color,
-        "fill-opacity": 0,
-        "fill-outline-color": SYM.line.adminPosto.color,
-      },
-
+      paint: linePaint(SYM.line.adminPosto),
       defaultOn: false,
-
       legend: lineLegend(SYM.line.adminPosto),
-
       label: {
         field: "adm2_name",
         size: 11,
@@ -734,19 +718,11 @@ export const GROUPS: LayerGroup[] = [
     {
       id: "kotamadya",
       nameKey: "l_kotamadya",
-      kind: "fill",
+      kind: "line",
       data: v("kotamadya"),
-
-      paint: {
-        "fill-color": SYM.line.adminMunicipality.color,
-        "fill-opacity": 0,
-        "fill-outline-color": SYM.line.adminMunicipality.color,
-      },
-
+      paint: linePaint(SYM.line.adminMunicipality),
       defaultOn: false,
-
       legend: lineLegend(SYM.line.adminMunicipality),
-
       label: {
         field: "adm1_name",
         size: 12,
@@ -761,11 +737,8 @@ export const GROUPS: LayerGroup[] = [
       nameKey: "l_negara",
       kind: "line",
       data: v("negara"),
-
       paint: linePaint(SYM.line.adminCountry),
-
       defaultOn: false,
-
       legend: lineLegend(SYM.line.adminCountry),
     },
 
