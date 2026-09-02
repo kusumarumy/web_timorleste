@@ -765,6 +765,29 @@ export const GROUPS: LayerGroup[] = [
           dasharray: [14, 7],
         },
       },
+      {
+      id: "batas_daerah_irigasi",
+      nameKey: "l_batas_daerah_irigasi",
+      kind: "line",
+      data: v("batas_daerah_irigasi"),
+      clickable: true,
+    
+      paint: {
+        "line-color": "#00897B",
+        "line-width": 2.5,
+        "line-dasharray": [8, 4],
+        "line-opacity": 1,
+      },
+    
+      defaultOn: false,
+    
+      legend: {
+        color: "#00897B",
+        line: true,
+        width: 2.5,
+        dasharray: [8, 4],
+      },
+    },
     ],
   },
 
