@@ -199,91 +199,82 @@ if (iconId) {
             : "none",
         },
       } as any);
-      if (l.label) {
-  const isPolygon = l.kind === "fill";
-  const isLine = l.kind === "line";
-  const labelLayout: Record<string, unknown> = {
-    visibility: l.defaultOn
-      ? "visible"
-      : "none",
-    "text-field": [
-      "coalesce",
-      ["get", l.label.field],
-      "",
-    ],
-    "text-size": l.label.size ?? 11,
-    "text-pitch-alignment": "viewport",
-    "text-allow-overlap": false,
-    "text-ignore-placement": false,
-  };
-        
-  if (isPolygon) {
-    labelLayout["symbol-placement"] = "point";
-    labelLayout["text-anchor"] = "center";
-    labelLayout["text-rotation-alignment"] = "viewport";
-  }
-  else if (isLine) {
-    labelLayout["symbol-placement"] = "line";
-    labelLayout["symbol-spacing"] =
-      l.label.spacing ?? 250;
-    labelLayout["text-rotation-alignment"] = "map";
-    labelLayout["text-max-angle"] = 30;
-    labelLayout["text-keep-upright"] = true;
-  }
-  layers.push({
-    id: `${l.id}_label`,
-    type: "symbol",
-    source: l.id,
-    minzoom: l.label.minzoom ?? 0,
-    maxzoom: l.label.maxzoom ?? 24,
-    layout: labelLayout,
-    paint: {
-      "text-color":
-        l.label.color ?? "#5A1715",
-      "text-halo-color":
-        l.label.haloColor ?? "#FFFFFF",
-      "text-halo-width":
-        l.label.haloWidth ?? 2,
-      "text-halo-blur": 0.2,
-    },
-  } as any);
-        
-if (l.kind === "fill") {
-  const fillOutlineColor =
-    (l.paint as any)?.["fill-outline-color"] ??
-    l.legend?.color ??
-    "#000000";
+            if (l.label) {
+        const isPolygon = l.kind === "fill";
+        const isLine = l.kind === "line";
 
-  const legend = l.legend;
+        const labelLayout: Record<string, unknown> = {
+          visibility: l.defaultOn ? "visible" : "none",
+          "text-field": [
+            "coalesce",
+            ["get", l.label.field],
+            "",
+          ],
+          "text-size": l.label.size ?? 11,
+          "text-pitch-alignment": "viewport",
+          "text-allow-overlap": false,
+          "text-ignore-placement": false,
+        };
 
-  layers.push({
-    id: `${l.id}_outline`,
-    type: "line",
-    source: l.id,
+        if (isPolygon) {
+          labelLayout["symbol-placement"] = "point";
+          labelLayout["text-anchor"] = "center";
+          labelLayout["text-rotation-alignment"] = "viewport";
+        } else if (isLine) {
+          labelLayout["symbol-placement"] = "line";
+          labelLayout["symbol-spacing"] = l.label.spacing ?? 250;
+          labelLayout["text-rotation-alignment"] = "map";
+          labelLayout["text-max-angle"] = 30;
+          labelLayout["text-keep-upright"] = true;
+        }
 
-    layout: {
-      visibility: l.defaultOn
-        ? "visible"
-        : "none",
-    },
+        layers.push({
+          id: `${l.id}_label`,
+          type: "symbol",
+          source: l.id,
+          minzoom: l.label.minzoom ?? 0,
+          maxzoom: l.label.maxzoom ?? 24,
+          layout: labelLayout,
+          paint: {
+            "text-color": l.label.color ?? "#5A1715",
+            "text-halo-color": l.label.haloColor ?? "#FFFFFF",
+            "text-halo-width": l.label.haloWidth ?? 2,
+            "text-halo-blur": 0.2,
+          },
+        } as any);
+      }
 
-    paint: {
-      "line-color": fillOutlineColor,
-      "line-width": legend?.width ?? 1.5,
-      "line-opacity": legend?.opacity ?? 1,
+      // OUTLINE POLYGON
+      if (l.kind === "fill") {
+        const fillOutlineColor =
+          (l.paint as any)?.["fill-outline-color"] ??
+          l.legend?.color ??
+          "#000000";
 
-      ...(legend?.dasharray
-        ? {
-            "line-dasharray": legend.dasharray,
-          }
-        : {}),
-    },
-  } as any);
-}
-}
-}
+        const legend = l.legend;
+
+        layers.push({
+          id: `${l.id}_outline`,
+          type: "line",
+          source: l.id,
+          layout: {
+            visibility: l.defaultOn ? "visible" : "none",
+          },
+          paint: {
+            "line-color": fillOutlineColor,
+            "line-width": legend?.width ?? 1.5,
+            "line-opacity": legend?.opacity ?? 1,
+            ...(legend?.dasharray
+              ? {
+                  "line-dasharray": legend.dasharray,
+                }
+              : {}),
+          },
+        } as any);
+      }
     }
   });
+
   return {
     version: 8,
     glyphs:
