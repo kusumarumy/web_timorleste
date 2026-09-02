@@ -388,7 +388,7 @@ async function registerMapIcons(map: MLMap) {
         map.addImage(icon.id, image.data);
       }
       //console.log(`✓ Icon ${icon.id} berhasil didaftarkan`);
-    } //catch (error) {
+    //} //catch (error) {
       //console.error(
         //`✗ Gagal load icon ${icon.id}:`,
        // error
