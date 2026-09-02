@@ -188,17 +188,23 @@ if (iconId) {
           features: [],
         },
       };
-      layers.push({
-        id: l.id,
-        type: l.kind,
-        source: l.id,
-        paint: l.paint,
-        layout: {
-          visibility: l.defaultOn
-            ? "visible"
-            : "none",
-        },
-      } as any);
+const layerPaint = { ...(l.paint as any) };
+
+if (l.kind === "fill" && l.sublayers?.length) {
+  delete layerPaint["fill-outline-color"];
+}
+
+layers.push({
+  id: l.id,
+  type: l.kind,
+  source: l.id,
+  paint: layerPaint,
+  layout: {
+    visibility: l.defaultOn
+      ? "visible"
+      : "none",
+  },
+} as any);
             if (l.label) {
         const isPolygon = l.kind === "fill";
         const isLine = l.kind === "line";
