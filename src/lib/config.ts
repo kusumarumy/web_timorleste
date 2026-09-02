@@ -2779,17 +2779,16 @@ legend: lineLegend(SYM.line.downstream),
           },
 
 
-          {
-            id: "oe_intake",
-            nameKey: "l_oe_intake",
-            kind: "fill",
-            data: v("oe_intake"),
-            clickable: true,
-            defaultOn: false,
-          
-          paint: linePaint(SYM.line.intakePier),
-          legend: lineLegend(SYM.line.intakePier),
-          },
+        {
+          id: "oe_intake",
+          nameKey: "l_oe_intake",
+          kind: "fill",
+          data: v("oe_intake"),
+          clickable: true,
+          defaultOn: false,
+          paint: fillPaint(SYM.polygon.intake),
+          legend: fillLegend(SYM.polygon.intake),
+        },
           
             {
           id: "oe_irrigationgate",
