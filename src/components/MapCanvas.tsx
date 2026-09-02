@@ -274,7 +274,46 @@ if (iconId) {
       }
     }
   });
+  // DEBUG: cek style layer yang tidak cocok dengan paint-nya
+  layers.forEach((layer, index) => {
+    const paint = (layer as any).paint ?? {};
+    const type = (layer as any).type;
 
+    const hasLinePaint =
+      "line-color" in paint ||
+      "line-width" in paint ||
+      "line-dasharray" in paint;
+
+    const hasFillPaint =
+      "fill-color" in paint ||
+      "fill-opacity" in paint ||
+      "fill-outline-color" in paint;
+
+    if (type !== "line" && hasLinePaint) {
+      console.error(
+        `❌ INVALID MAP LAYER [${index}]`,
+        {
+          id: (layer as any).id,
+          type,
+          paint,
+        }
+      );
+    }
+
+    if (type !== "fill" && hasFillPaint) {
+      console.error(
+        `❌ INVALID FILL LAYER [${index}]`,
+        {
+          id: (layer as any).id,
+          type,
+          paint,
+        }
+      );
+    }
+  });
+
+  return {
+    version: 8,
   return {
     version: 8,
     glyphs:
