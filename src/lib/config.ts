@@ -178,11 +178,12 @@ subProp?: string;
 
   clickable?: boolean;
 
-  sublayers?: {
-    id: string;
-    labelKey: string;
-    filterValue: string;
-  }[];
+sublayers?: {
+  id: string;
+  labelKey: string;
+  filterValue: string;
+  outlineColor?: string;
+}[];
 
   children?: LayerDef[];
 
@@ -197,9 +198,6 @@ export interface LayerGroup {
 
 const SYM = {
   line: {
-    // =========================
-    // JALAN
-    // =========================
     road: {
       color: "#424242",
       width: 2.4,
@@ -214,9 +212,6 @@ strais: {
   width: 2.0,
   dasharray: [2, 2],
 },
-    // =========================
-    // IRIGASI
-    // =========================
     irrigationExisting: {
       color: "#00897B",
       width: 2.4,
@@ -233,10 +228,6 @@ strais: {
       width: 2.5,
       dasharray: [8, 4],
     },
-
-    // =========================
-    // DRAINASE
-    // =========================
     drainage: {
       color: "#1565C0",
       width: 2.4,
@@ -254,27 +245,16 @@ strais: {
       width: 2.2,
       dasharray: [4, 3],
     },
-
-    // =========================
-    // SUNGAI
-    // =========================
     river: {
       color: "#00A6D6",
       width: 2.5,
     },
 
-    // =========================
-    // DESAIN / RENCANA
-    // =========================
     design: {
       color: "#F39C12",
       width: 2.0,
       dasharray: [6, 3],
     },
-
-    // =========================
-    // BATAS
-    // =========================
     boundary: {
       color: "#616161",
       width: 1.2,
@@ -304,10 +284,6 @@ strais: {
       width: 1.6,
       dasharray: [4, 3],
     },
-
-    // =========================
-    // BANGUNAN / STRUKTUR
-    // =========================
     building: {
       color: "#8D6E63",
       width: 2.0,
@@ -340,9 +316,6 @@ strais: {
       width: 2.0,
     },
 
-    // =========================
-    // BANGUNAN BENDUNG
-    // =========================
     flushing: {
       color: "#00ACC1",
       width: 2.3,
@@ -386,9 +359,6 @@ intakePier: {
       width: 2.3,
     },
 
-    // =========================
-    // KONTUR
-    // =========================
     contour: {
       color: "#8D4A2B",
       width: 1.2,
@@ -396,34 +366,20 @@ intakePier: {
   },
 
   point: {
-    // =========================
-    // TITIK SURVEY
-    // =========================
     patokSaluran: "#D32F2F",
     bm: "#1E88E5",
     design: "#F39C12",
     accessories: "#D81B60",
     cp: "#424242",
     profile: "#7E57C2",
-
-    // =========================
-    // STRUKTUR AIR
-    // =========================
     intake: "#0284C7",
     gate: "#15803D",
-
-    // =========================
-    // HASIL / REFERENSI
-    // =========================
     coordinate: "#7B1FA2",
     kupasan: "#D32F2F",
     drill: "#D32F2F",
   },
 
   polygon: {
-    // =========================
-    // BANGUNAN & PEMUKIMAN
-    // =========================
     building: {
       color: "#E53935",
       opacity: 0.45,
@@ -442,9 +398,6 @@ intakePier: {
       outline: "#A45252",
     },
 
-    // =========================
-    // IRIGASI
-    // =========================
     irrigationArea: {
       color: "#66BB6A",
       opacity: 0.25,
@@ -463,9 +416,6 @@ intakePier: {
       outline: "#B76D00",
     },
 
-    // =========================
-    // AIR
-    // =========================
     water: {
       color: "#29B6F6",
       opacity: 0.40,
@@ -484,18 +434,12 @@ intakePier: {
       outline: "#0F488A",
     },
 
-    // =========================
-    // DESAIN
-    // =========================
     design: {
       color: "#F39C12",
       opacity: 0.35,
       outline: "#B76D00",
     },
 
-    // =========================
-    // AREA UMUM
-    // =========================
     areaGeneral: {
       color: "#9E9E9E",
       opacity: 0.30,
@@ -520,9 +464,6 @@ intakePier: {
       outline: "#888888",
     },
 
-    // =========================
-    // BENDUNG / STRUKTUR AIR
-    // =========================
     stilling: {
       color: "#4FC3F7",
       opacity: 0.30,
@@ -607,9 +548,6 @@ intakePier: {
       outline: "#573D33",
     },
 
-    // =========================
-    // VEGETASI / TUTUPAN LAHAN
-    // =========================
     lowVegetation: {
       color: "#9CCC65",
       opacity: 0.35,
@@ -652,18 +590,11 @@ intakePier: {
       outline: "#004D40",
     },
 
-    // =========================
-    // GENANGAN
-    // =========================
     inundation: {
       color: "#1976D2",
       opacity: 0.40,
       outline: "#125497",
     },
-
-    // =========================
-    // LAINNYA
-    // =========================
     catchment: {
       color: "#90CAF9",
       opacity: 0.22,
@@ -1152,17 +1083,67 @@ export const GROUPS: LayerGroup[] = [
   subProp: "layer",                
 
   sublayers: [
-    { id: "akadiru_kede", labelKey: "di_akadiru_kede", filterValue: "AKADIRU KEDE" },
-    { id: "beco",         labelKey: "di_beco",         filterValue: "BECO" },
-    { id: "buiha",        labelKey: "di_buiha",        filterValue: "BUIHA" },
-    { id: "kakeulaku",    labelKey: "di_kakeulaku",    filterValue: "KAKEULAKU" },
-    { id: "lias",         labelKey: "di_lias",         filterValue: "LIAS" },
-    { id: "luan_kadoe",   labelKey: "di_luan_kadoe",   filterValue: "LUAN KADOE" },
-    { id: "paulata",      labelKey: "di_paulata",      filterValue: "PAULATA" },
-    { id: "raibere",      labelKey: "di_raibere",      filterValue: "RAIBERE" },
-    { id: "raimea",       labelKey: "di_raimea",       filterValue: "RAIMEA" },
-    { id: "taz_hilin",    labelKey: "di_taz_hilin",    filterValue: "TAZ HILIN" },
-  ],
+  {
+    id: "akadiru_kede",
+    labelKey: "di_akadiru_kede",
+    filterValue: "AKADIRU KEDE",
+    outlineColor: "#2196F3",
+  },
+  {
+    id: "beco",
+    labelKey: "di_beco",
+    filterValue: "BECO",
+    outlineColor: "#9C27B0",
+  },
+  {
+    id: "buiha",
+    labelKey: "di_buiha",
+    filterValue: "BUIHA",
+    outlineColor: "#FF9800",
+  },
+  {
+    id: "kakeulaku",
+    labelKey: "di_kakeulaku",
+    filterValue: "KAKEULAKU",
+    outlineColor: "#F44336",
+  },
+  {
+    id: "lias",
+    labelKey: "di_lias",
+    filterValue: "LIAS",
+    outlineColor: "#FFC107",
+  },
+  {
+    id: "luan_kadoe",
+    labelKey: "di_luan_kadoe",
+    filterValue: "LUAN KADOE",
+    outlineColor: "#00BCD4",
+  },
+  {
+    id: "paulata",
+    labelKey: "di_paulata",
+    filterValue: "PAULATA",
+    outlineColor: "#E91E63",
+  },
+  {
+    id: "raibere",
+    labelKey: "di_raibere",
+    filterValue: "RAIBERE",
+    outlineColor: "#4CAF50",
+  },
+  {
+    id: "raimea",
+    labelKey: "di_raimea",
+    filterValue: "RAIMEA",
+    outlineColor: "#FF4081",
+  },
+  {
+    id: "taz_hilin",
+    labelKey: "di_taz_hilin",
+    filterValue: "TAZ HILIN",
+    outlineColor: "#FFFFFF",
+  },
+],
 },
 
       {
