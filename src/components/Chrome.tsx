@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { BASEMAPS, GROUPS } from "@/lib/config";
+import { BASEMAPS } from "@/lib/config";
 import { useMapStore } from "@/lib/store";
 import { useI18n, Lang } from "@/lib/i18n";
 
@@ -15,34 +15,32 @@ export function TopBar() {
 
   return (
     <>
-      {/* =========================
+      {/* =====================================================
           TOP BAR
-      ========================== */}
+      ===================================================== */}
       <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex h-[70px] items-center bg-gradient-to-b from-bg/95 via-bg/65 to-transparent px-4">
-        
-        {/* =========================
-            LOGO + TITLE
-        ========================== */}
+
+        {/* LOGO + TITLE */}
         <div className="pointer-events-auto flex items-center gap-3">
-          
+
           {/* 3 LOGOS */}
-          <div className="flex h-[46px] items-center gap-1.5">
+          <div className="flex h-[42px] items-center gap-1">
             <img
               src="/icons/1.png"
               alt=""
-              className="h-[38px] w-[38px] object-contain"
+              className="h-[32px] w-[32px] object-contain"
             />
 
             <img
               src="/icons/2.png"
               alt=""
-              className="h-[38px] w-[38px] object-contain"
+              className="h-[32px] w-[32px] object-contain"
             />
 
             <img
               src="/icons/3.png"
               alt=""
-              className="h-[38px] w-[38px] object-contain"
+              className="h-[32px] w-[32px] object-contain"
             />
           </div>
 
@@ -58,20 +56,17 @@ export function TopBar() {
           </div>
         </div>
 
-        {/* SPACER */}
         <div className="flex-1" />
 
-        {/* =========================
-            LANGUAGE
-        ========================== */}
-        <div className="pointer-events-auto flex gap-0.5 rounded-[10px] border border-stroke bg-white/85 p-[3px] backdrop-blur-md">
+        {/* LANGUAGE */}
+        <div className="pointer-events-auto flex gap-0.5 rounded-[9px] border border-stroke bg-white/85 p-[3px] backdrop-blur-md">
           {langs.map((l) => (
             <button
               key={l}
               onClick={() => setLang(l)}
-              className={`rounded-[7px] px-2.5 py-1.5 text-[11.5px] font-bold uppercase tracking-wide transition-colors ${
+              className={`rounded-[6px] px-2.5 py-1.5 text-[11px] font-bold uppercase tracking-wide transition-colors ${
                 lang === l
-                  ? "bg-teal text-ink shadow-[0_1px_6px_rgba(47,166,160,.4)]"
+                  ? "bg-teal text-ink shadow-[0_1px_5px_rgba(47,166,160,.4)]"
                   : "text-black/70 hover:text-ink"
               }`}
             >
@@ -81,28 +76,27 @@ export function TopBar() {
         </div>
       </div>
 
-      {/* ==================================================
+
+      {/* =====================================================
           BASEMAP CONTROL
-          Diletakkan di bawah NavigationControl MapLibre
-      =================================================== */}
-      <div className="pointer-events-auto absolute right-4 top-[185px] z-[30]">
-        
+          Tombol kecil di kanan
+      ===================================================== */}
+      <div className="pointer-events-auto absolute right-4 top-[198px] z-[30]">
+
         {/* BASEMAP BUTTON */}
         <button
           type="button"
           onClick={() => setBasemapOpen((prev) => !prev)}
           title="Basemap"
           aria-label="Basemap"
-          className={`flex h-[42px] w-[42px] items-center justify-center rounded-[9px] border border-stroke bg-white/95 text-[#26343b] shadow-[0_4px_14px_rgba(0,0,0,.18)] backdrop-blur-md transition-all hover:bg-white ${
-            basemapOpen
-              ? "ring-2 ring-teal/40"
-              : ""
+          className={`flex h-[34px] w-[34px] items-center justify-center rounded-[8px] border border-stroke bg-white/95 text-[#26343b] shadow-[0_3px_10px_rgba(0,0,0,.16)] backdrop-blur-md transition-all hover:bg-white ${
+            basemapOpen ? "ring-2 ring-teal/35" : ""
           }`}
         >
           {/* MAP ICON */}
           <svg
-            width="21"
-            height="21"
+            width="18"
+            height="18"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -116,20 +110,22 @@ export function TopBar() {
           </svg>
         </button>
 
-        {/* =========================
-            BASEMAP PANEL
-        ========================== */}
+
+        {/* =================================================
+            BASEMAP POPUP
+        ================================================== */}
         {basemapOpen && (
-          <div className="absolute right-0 top-[50px] w-[245px] overflow-hidden rounded-[14px] border border-stroke bg-white/95 shadow-[0_14px_40px_rgba(0,0,0,.25)] backdrop-blur-xl">
-            
+          <div className="absolute right-0 top-[42px] w-[205px] overflow-hidden rounded-[12px] border border-stroke bg-white/96 shadow-[0_10px_28px_rgba(0,0,0,.20)] backdrop-blur-xl">
+
             {/* HEADER */}
-            <div className="flex items-center justify-between border-b border-black/10 px-3.5 py-3">
+            <div className="flex items-center justify-between border-b border-black/10 px-3 py-2.5">
+
               <div>
-                <div className="text-[11px] font-bold uppercase tracking-[0.1em] text-black/70">
-                  {lang === "id" ? "Basemap" : "Basemap"}
+                <div className="text-[10.5px] font-bold uppercase tracking-[0.1em] text-black/70">
+                  BASEMAP
                 </div>
 
-                <div className="mt-0.5 text-[10px] text-black/45">
+                <div className="mt-0.5 text-[9px] text-black/45">
                   {lang === "id"
                     ? "Pilih tampilan peta"
                     : "Choose map style"}
@@ -139,14 +135,16 @@ export function TopBar() {
               <button
                 type="button"
                 onClick={() => setBasemapOpen(false)}
-                className="flex h-6 w-6 items-center justify-center rounded-md text-black/45 hover:bg-black/5 hover:text-black/80"
+                className="flex h-5 w-5 items-center justify-center rounded-md text-[16px] leading-none text-black/40 hover:bg-black/5 hover:text-black/80"
               >
                 ×
               </button>
             </div>
 
+
             {/* BASEMAP OPTIONS */}
-            <div className="p-2">
+            <div className="p-1.5">
+
               {BASEMAPS.map((b) => (
                 <button
                   key={b.id}
@@ -155,52 +153,58 @@ export function TopBar() {
                     setBasemap(b.id);
                     setBasemapOpen(false);
                   }}
-                  className={`group flex w-full items-center gap-3 rounded-[9px] px-2.5 py-2.5 text-left transition-all ${
+                  className={`group flex w-full items-center gap-2.5 rounded-[8px] px-2 py-2 text-left transition-all ${
                     basemap === b.id
                       ? "bg-teal/15 text-[#063c3a]"
                       : "text-black/75 hover:bg-black/5"
                   }`}
                 >
+
                   {/* ICON */}
                   <div
-                    className={`flex h-[34px] w-[34px] flex-none items-center justify-center rounded-[8px] border ${
+                    className={`flex h-[28px] w-[28px] flex-none items-center justify-center rounded-[7px] border ${
                       basemap === b.id
-                        ? "border-teal/40 bg-teal/20"
-                        : "border-black/10 bg-black/[0.035]"
+                        ? "border-teal/40 bg-teal/15"
+                        : "border-black/10 bg-black/[0.025]"
                     }`}
                   >
                     {b.id === "sat" ? (
-                      <span className="text-[17px]">🛰️</span>
+                      <span className="text-[13px]">🛰️</span>
                     ) : b.id === "ortho" ? (
-                      <span className="text-[17px]">▦</span>
+                      <span className="text-[13px]">▦</span>
                     ) : b.id === "streets" ? (
-                      <span className="text-[17px]">🛣️</span>
+                      <span className="text-[13px]">🛣️</span>
                     ) : b.id === "topo" ? (
-                      <span className="text-[17px]">⛰️</span>
+                      <span className="text-[13px]">⛰️</span>
                     ) : (
-                      <span className="text-[17px]">🗺️</span>
+                      <span className="text-[13px]">🗺️</span>
                     )}
                   </div>
 
+
                   {/* NAME */}
                   <div className="min-w-0 flex-1">
-                    <div className="text-[12px] font-semibold">
+
+                    <div className="truncate text-[11px] font-semibold">
                       {t(b.labelKey)}
                     </div>
 
                     {basemap === b.id && (
-                      <div className="mt-0.5 text-[9.5px] font-medium text-teal">
+                      <div className="mt-[1px] text-[8.5px] font-medium text-teal">
                         {lang === "id" ? "Aktif" : "Active"}
                       </div>
                     )}
+
                   </div>
+
 
                   {/* CHECK */}
                   {basemap === b.id && (
-                    <div className="flex h-5 w-5 items-center justify-center rounded-full bg-teal text-white">
+                    <div className="flex h-[18px] w-[18px] flex-none items-center justify-center rounded-full bg-teal text-white">
+
                       <svg
-                        width="12"
-                        height="12"
+                        width="10"
+                        height="10"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
@@ -208,10 +212,13 @@ export function TopBar() {
                       >
                         <path d="M5 12l4 4L19 7" />
                       </svg>
+
                     </div>
                   )}
+
                 </button>
               ))}
+
             </div>
           </div>
         )}
@@ -219,12 +226,6 @@ export function TopBar() {
     </>
   );
 }
-
-
-/* =====================================================
-   LEGEND
-===================================================== */
-
 export function Legend() {
   const { t } = useI18n();
   const { visible } = useMapStore();
