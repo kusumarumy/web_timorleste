@@ -976,7 +976,7 @@ export const GROUPS: LayerGroup[] = [
 
   legend: fillLegend(SYM.polygon.catchment),
 
-  subProp: "layer",
+  subProp: "subkelas",
 
   sublayers: [
     {
