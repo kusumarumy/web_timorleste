@@ -1761,18 +1761,6 @@ export const GROUPS: LayerGroup[] = [
             },
           },
           {
-            id: "rei09_li_bangunan",
-            nameKey: "l_rei09_li_bangunan",
-            kind: "line",
-            data: v("09_rei_li_bangunan"),
-            defaultOn: false,
-
-            paint: linePaint(SYM.line.building),
-
-            legend: lineLegend(SYM.line.building),
-          },
-
-          {
             id: "rei09_li_cotambah",
             nameKey: "l_rei09_li_cotambah",
             kind: "line",
