@@ -2162,19 +2162,12 @@ legend: fillLegend(SYM.polygon.building),
   kind: "fill",
   data: v("26_rei_ar_silt"),
   defaultOn: false,
+           paint: fillPaint(SYM.polygon.silt),
 
-  paint: {
-    "fill-color": "#FF0000",
-    "fill-opacity": 0.8,
-    "fill-outline-color": "#000000",
-  },
+            opacity: SYM.polygon.silt.opacity,
+            opacityProp: "fill-opacity",
 
-  opacity: 0.8,
-  opacityProp: "fill-opacity",
-
-  legend: {
-    color: "#FF0000",
-  },
+            legend: fillLegend(SYM.polygon.silt),
 },
 
           {
