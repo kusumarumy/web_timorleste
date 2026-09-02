@@ -677,99 +677,113 @@ export const GROUPS: LayerGroup[] = [
   },
 
   {
-    titleKey: "g_admin",
-    dot: "#212121",
+  titleKey: "g_admin",
+  dot: "#212121",
 
-    layers: [
-      {
-        id: "desa",
-        nameKey: "l_desa",
-        kind: "fill",
-        data: v("desa"),
+  layers: [
+    {
+      id: "desa",
+      nameKey: "l_desa",
+      kind: "fill",
+      data: v("desa"),
 
-        paint: {
-          "fill-color": SYM.line.adminVillage.color,
-          "fill-opacity": 0,
-          "fill-outline-color": SYM.line.adminVillage.color,
-        },
-        
-        legend: lineLegend(SYM.line.adminVillage),
-
-        label: {
-          field: "adm3_name",
-          size: 10,
-          color: "#C62828",
-          haloColor: "#FFFFFF",
-          haloWidth: 1.5,
-        },
+      paint: {
+        "fill-color": SYM.line.adminVillage.color,
+        "fill-opacity": 0,
+        "fill-outline-color": SYM.line.adminVillage.color,
       },
 
-      {
-        id: "posto",
-        nameKey: "l_posto",
-        kind: "fill",
-        data: v("posto"),
+      defaultOn: false,
 
-        paint: {
-  "fill-color": SYM.line.adminPosto.color,
-  "fill-opacity": 0,
-  "fill-outline-color": SYM.line.adminPosto.color,
-},
+      legend: lineLegend(SYM.line.adminVillage),
 
-legend: lineLegend(SYM.line.adminPosto),
+      label: {
+        field: "adm3_name",
+        size: 10,
+        color: "#C62828",
+        haloColor: "#FFFFFF",
+        haloWidth: 1.5,
+      },
+    },
 
-        label: {
-          field: "adm2_name",
-          size: 11,
-          color: "#C62828",
-          haloColor: "#FFFFFF",
-          haloWidth: 1.5,
-        },
+    {
+      id: "posto",
+      nameKey: "l_posto",
+      kind: "fill",
+      data: v("posto"),
+
+      paint: {
+        "fill-color": SYM.line.adminPosto.color,
+        "fill-opacity": 0,
+        "fill-outline-color": SYM.line.adminPosto.color,
       },
 
-      {
-        id: "kotamadya",
-        nameKey: "l_kotamadya",
-        kind: "fill",
-        data: v("kotamadya"),
+      defaultOn: false,
 
-        paint: linePaint(SYM.line.adminCountry),
+      legend: lineLegend(SYM.line.adminPosto),
 
-legend: lineLegend(SYM.line.adminCountry),
+      label: {
+        field: "adm2_name",
+        size: 11,
+        color: "#C62828",
+        haloColor: "#FFFFFF",
+        haloWidth: 1.5,
+      },
+    },
 
-        label: {
-          field: "adm1_name",
-          size: 12,
-          color: "#7B3FB3",
-          haloColor: "#FFFFFF",
-          haloWidth: 2,
-        },
+    {
+      id: "kotamadya",
+      nameKey: "l_kotamadya",
+      kind: "fill",
+      data: v("kotamadya"),
+
+      paint: {
+        "fill-color": SYM.line.adminMunicipality.color,
+        "fill-opacity": 0,
+        "fill-outline-color": SYM.line.adminMunicipality.color,
       },
 
-      {
-        id: "negara",
-        nameKey: "l_negara",
-        kind: "line",
-        data: v("negara"),
+      defaultOn: false,
 
-        paint: linePaint(SYM.line.adminCountry),
+      legend: lineLegend(SYM.line.adminMunicipality),
 
-legend: lineLegend(SYM.line.adminCountry),
+      label: {
+        field: "adm1_name",
+        size: 12,
+        color: "#7B3FB3",
+        haloColor: "#FFFFFF",
+        haloWidth: 2,
       },
-      {
+    },
+
+    {
+      id: "negara",
+      nameKey: "l_negara",
+      kind: "line",
+      data: v("negara"),
+
+      paint: linePaint(SYM.line.adminCountry),
+
+      defaultOn: false,
+
+      legend: lineLegend(SYM.line.adminCountry),
+    },
+
+    {
       id: "batas_daerah_irigasi",
       nameKey: "l_batas_daerah_irigasi",
       kind: "line",
       data: v("batas_daerah_irigasi"),
       clickable: true,
-    
+
       paint: linePaint(SYM.line.irrigationBoundary),
 
-legend: lineLegend(SYM.line.irrigationBoundary),
-    },
-    ],
-  },
+      defaultOn: false,
 
+      legend: lineLegend(SYM.line.irrigationBoundary),
+    },
+  ],
+},
   {
     titleKey: "g_contour",
     dot: "#8D4A2B",
