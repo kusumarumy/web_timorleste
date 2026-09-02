@@ -17,39 +17,18 @@ function Toggle({ on, onClick }: { on: boolean; onClick: () => void }) {
     </button>
   );
 }
-function getPaintStyle(l: LayerDef) {
-  const paint = l.paint as Record<string, unknown>;
-  if (l.kind === "line") {
-    return {
-      type: "line" as const,
-      color: paint["line-color"] as string | undefined,
-      opacity:
-        typeof paint["line-opacity"] === "number"
-          ? paint["line-opacity"]
-          : 1,
-    };
-  }
-  if (l.kind === "fill") {
-    return {
-      type: "fill" as const,
-      color: paint["fill-color"] as string | undefined,
-      opacity:
-        typeof paint["fill-opacity"] === "number"
-          ? paint["fill-opacity"]
-          : 1,
-    };
-  }
-  if (l.kind === "circle") {
-    return {
-      type: "circle" as const,
-      color: paint["circle-color"] as string | undefined,
-      opacity:
-        typeof paint["circle-opacity"] === "number"
-          ? paint["circle-opacity"]
-          : 1,
-    };
-  }
-  return null;
+function getLegendStyle(l: LayerDef) {
+  if (!l.legend) return null;
+
+  return {
+    color: l.legend.color,
+    line: l.legend.line === true,
+    circle: l.legend.circle === true,
+    svg: l.legend.svg,
+    width: l.legend.width ?? 2,
+    dasharray: l.legend.dasharray,
+    opacity: l.legend.opacity ?? 1,
+  };
 }
 
 function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
@@ -63,7 +42,7 @@ function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
     toggleSub,
   } = useMapStore();
   const on = visible[l.id];
-  const symbol = getPaintStyle(l);
+  const symbol = getLegendStyle(l);
   const handleToggle = () => {
     const next = !on;
     toggle(l.id);
@@ -90,35 +69,60 @@ function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
       className="max-h-[24px] max-w-[24px] object-contain"
     />
   </span>
+) : symbol?.svg ? (
+  <span className="flex h-[24px] w-[24px] flex-none items-center justify-center">
+    <span
+      className="h-[18px] w-[18px] rounded-full"
+      style={{
+        background: symbol.color,
+        opacity: symbol.opacity,
+      }}
+    />
+  </span>
+) : symbol?.line ? (
+  <span
+    className="flex h-[18px] w-[24px] flex-none items-center"
+    style={{ opacity: symbol.opacity }}
+  >
+    <span
+      className="block h-0"
+      style={{
+        width: 24,
+        borderTop: `${Math.max(1, symbol.width)}px solid transparent`,
+        backgroundImage: symbol.dasharray
+          ? `repeating-linear-gradient(
+              to right,
+              ${symbol.color} 0,
+              ${symbol.color} ${symbol.dasharray[0] ?? 6}px,
+              transparent ${symbol.dasharray[0] ?? 6}px,
+              transparent ${
+                (symbol.dasharray[0] ?? 6) +
+                (symbol.dasharray[1] ?? 3)
+              }px
+            )`
+          : `linear-gradient(
+              to right,
+              ${symbol.color},
+              ${symbol.color}
+            )`,
+      }}
+    />
+  </span>
+) : symbol?.circle ? (
+  <span
+    className="h-[12px] w-[12px] flex-none rounded-full"
+    style={{
+      background: symbol.color,
+      opacity: symbol.opacity,
+    }}
+  />
 ) : symbol?.color ? (
   <span
-    className="inline-block flex-none"
-    style={
-      symbol.type === "line"
-        ? {
-            width: 18,
-            height: 0,
-            background: "none",
-            borderTop: `3px solid ${symbol.color}`,
-            opacity: symbol.opacity,
-          }
-        : symbol.type === "circle"
-        ? {
-            width: 12,
-            height: 12,
-            background: symbol.color,
-            opacity: symbol.opacity,
-            borderRadius: "9999px",
-          }
-        : {
-            width: 11,
-            height: 11,
-            background: symbol.color,
-            opacity: symbol.opacity,
-            border: `1px solid ${symbol.color}`,
-            borderRadius: "3px",
-          }
-    }
+    className="h-[11px] w-[11px] flex-none rounded-[3px]"
+    style={{
+      background: symbol.color,
+      opacity: symbol.opacity,
+    }}
   />
 ) : null}
             {t(l.nameKey)}
