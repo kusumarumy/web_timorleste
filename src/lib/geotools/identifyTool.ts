@@ -192,16 +192,18 @@ export class IdentifyTool {
     console.log("IDENTIFY START");
   }
 
-  private _disable(): void {
-    this.map.off("click", this._onClick);
-    this.map.off("mousemove", this._onMove);
+private _disable(): void {
+  this.map.off("click", this._onClick);
+  this.map.off("mousemove", this._onMove);
 
-    this.map.getCanvas().style.cursor = this.prevCursor || "";
+  this.map.getCanvas().style.cursor = this.prevCursor || "";
 
-    this._closePopup();
+  this._closePopup();
 
-    console.log("IDENTIFY STOP");
-  }
+  this._clearHighlight();
+
+  console.log("IDENTIFY STOP");
+}
   stop(): void {
     setToolMode(null);
   }
@@ -219,35 +221,161 @@ export class IdentifyTool {
     this.popup = null;
   }
 
+private _clearHighlight(): void {
+  const map = this.map;
+
+  const layers = [
+    "identify-highlight-fill",
+    "identify-highlight-line",
+    "identify-highlight-line-inner",
+    "identify-highlight-point",
+  ];
+
+  layers.forEach((id) => {
+    if (map.getLayer(id)) {
+      map.removeLayer(id);
+    }
+  });
+
+  if (map.getSource("identify-highlight")) {
+    map.removeSource("identify-highlight");
+  }
+}
+
+private _showHighlight(feature: QueriedFeature): void {
+  const map = this.map;
+
+  this._clearHighlight();
+
+  if (!feature.geometry) return;
+
+  map.addSource("identify-highlight", {
+    type: "geojson",
+    data: {
+      type: "FeatureCollection",
+      features: [
+        {
+          type: "Feature",
+          geometry: feature.geometry,
+          properties: {},
+        },
+      ],
+    },
+  });
+
+  const geometryType = feature.geometry.type;
+  if (
+    geometryType === "Polygon" ||
+    geometryType === "MultiPolygon"
+  ) {
+    map.addLayer({
+      id: "identify-highlight-fill",
+      type: "fill",
+      source: "identify-highlight",
+      paint: {
+        "fill-color": "#2FA6A0",
+        "fill-opacity": 0.28,
+      },
+    });
+
+    map.addLayer({
+      id: "identify-highlight-line",
+      type: "line",
+      source: "identify-highlight",
+      paint: {
+        "line-color": "#FFFFFF",
+        "line-width": 4,
+        "line-opacity": 0.95,
+      },
+    });
+  }
+
+  else if (
+    geometryType === "LineString" ||
+    geometryType === "MultiLineString"
+  ) {
+    map.addLayer({
+      id: "identify-highlight-line",
+      type: "line",
+      source: "identify-highlight",
+      paint: {
+        "line-color": "#2FA6A0",
+        "line-width": 7,
+        "line-opacity": 0.95,
+        "line-blur": 0.5,
+      },
+    });
+
+    map.addLayer({
+      id: "identify-highlight-line-inner",
+      type: "line",
+      source: "identify-highlight",
+      paint: {
+        "line-color": "#FFFFFF",
+        "line-width": 2,
+        "line-opacity": 0.9,
+      },
+    });
+  }
+  else if (
+    geometryType === "Point" ||
+    geometryType === "MultiPoint"
+  ) {
+    map.addLayer({
+      id: "identify-highlight-point",
+      type: "circle",
+      source: "identify-highlight",
+      paint: {
+        "circle-radius": 9,
+        "circle-color": "#2FA6A0",
+        "circle-opacity": 0.9,
+        "circle-stroke-color": "#FFFFFF",
+        "circle-stroke-width": 3,
+      },
+    });
+  }
+}
   private _onMove(e: MapMouseEvent): void {
     if (!this.active) return;
     const hit = this._query(e.point).length > 0;
     this.map.getCanvas().style.cursor = hit ? CURSOR_HIT : CURSOR_IDLE;
   }
 
-  private _onClick(e: MapMouseEvent): void {
-    if (!this.active) return;
-    const features = this._query(e.point);
-    this._closePopup();
-    const popup = new maplibregl.Popup({
-      offset: 14,
-      maxWidth: "330px",
-      className: "identify-popup",
-      closeButton: true,
-      closeOnClick: false,
-    }).setLngLat(e.lngLat);
-    if (features.length === 0) {
-      const empty = document.createElement("div");
-      empty.className = "identify-pop identify-pop--empty";
-      empty.textContent =
-        this.opts.texts?.empty ?? "Tidak ada fitur di titik ini.";
-      popup.setDOMContent(empty);
-    } else {
-      popup.setDOMContent(this._buildContent(features));
-    }
-    popup.addTo(this.map);
-    this.popup = popup;
+private _onClick(e: MapMouseEvent): void {
+  if (!this.active) return;
+
+  const features = this._query(e.point);
+
+  this._closePopup();
+  if (features.length > 0) {
+    this._showHighlight(features[0]);
+  } else {
+    this._clearHighlight();
   }
+
+  const popup = new maplibregl.Popup({
+    offset: 14,
+    maxWidth: "330px",
+    className: "identify-popup",
+    closeButton: true,
+    closeOnClick: false,
+  }).setLngLat(e.lngLat);
+
+  if (features.length === 0) {
+    const empty = document.createElement("div");
+    empty.className = "identify-pop identify-pop--empty";
+    empty.textContent =
+      this.opts.texts?.empty ?? "Tidak ada fitur di titik ini.";
+
+    popup.setDOMContent(empty);
+  } else {
+    popup.setDOMContent(this._buildContent(features));
+  }
+
+  popup.addTo(this.map);
+
+  this.popup = popup;
+}
 
   private _query(point: { x: number; y: number }): QueriedFeature[] {
     const ids = this.opts
@@ -343,10 +471,13 @@ export class IdentifyTool {
         prev.className = "identify-pager-btn";
         prev.textContent = "‹";
         prev.setAttribute("aria-label", "Fitur sebelumnya");
-        prev.addEventListener("click", () => {
-          index = (index - 1 + features.length) % features.length;
-          render();
-        });
+prev.addEventListener("click", () => {
+  index = (index - 1 + features.length) % features.length;
+
+  this._showHighlight(features[index]);
+
+  render();
+});
 
         const count = document.createElement("span");
         count.className = "identify-pager-count";
@@ -357,10 +488,13 @@ export class IdentifyTool {
         next.className = "identify-pager-btn";
         next.textContent = "›";
         next.setAttribute("aria-label", "Fitur berikutnya");
-        next.addEventListener("click", () => {
-          index = (index + 1) % features.length;
-          render();
-        });
+next.addEventListener("click", () => {
+  index = (index + 1) % features.length;
+
+  this._showHighlight(features[index]);
+
+  render();
+});
 
         pager.append(prev, count, next);
         root.appendChild(pager);
