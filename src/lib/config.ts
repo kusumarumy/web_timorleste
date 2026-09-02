@@ -301,27 +301,27 @@ const SYM = {
       width: 2.5,
       dasharray: [8, 4],
     },
-    adminCountry: {
-  color: "#424242",
+adminCountry: {
+  color: "#303030",
   width: 2.4,
   dasharray: [14, 7],
 },
 
 adminMunicipality: {
-  color: "#424242",
+  color: "#555555",
   width: 2.0,
   dasharray: [10, 5],
 },
 
 adminPosto: {
-  color: "#424242",
-  width: 2.0,
+  color: "#777777",
+  width: 1.8,
   dasharray: [7, 4],
 },
 
 adminVillage: {
-  color: "#424242",
-  width: 2.0,
+  color: "#999999",
+  width: 1.6,
   dasharray: [4, 3],
 },
   },
