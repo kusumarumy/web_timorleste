@@ -302,22 +302,28 @@ const SYM = {
       dasharray: [8, 4],
     },
     adminCountry: {
-      color: "#212121",
-      width: 2.4,
-      dasharray: [14, 7],
-    },
-    adminVillage: {
-      color: "#FBC02D",
-      width: 2.0,
-    },
-    adminPosto: {
-      color: "#F57C00",
-      width: 2.0,
-    },
-    adminMunicipality: {
-      color: "#C2185B",
-      width: 2.0,
-    },
+  color: "#424242",
+  width: 2.4,
+  dasharray: [14, 7],
+},
+
+adminMunicipality: {
+  color: "#424242",
+  width: 2.0,
+  dasharray: [10, 5],
+},
+
+adminPosto: {
+  color: "#424242",
+  width: 2.0,
+  dasharray: [7, 4],
+},
+
+adminVillage: {
+  color: "#424242",
+  width: 2.0,
+  dasharray: [4, 3],
+},
   },
 
   point: {
