@@ -17,18 +17,145 @@ function Toggle({ on, onClick }: { on: boolean; onClick: () => void }) {
     </button>
   );
 }
-function getLegendStyle(l: LayerDef) {
-  if (!l.legend) return null;
+function LayerSymbol({ l }: { l: LayerDef }) {
+  const legend = l.legend as
+    | {
+        color?: string;
+        line?: boolean;
+        circle?: boolean;
+        svg?: string;
+        width?: number;
+        dasharray?: number[];
+        opacity?: number;
+      }
+    | undefined;
 
-  return {
-    color: l.legend.color,
-    line: l.legend.line === true,
-    circle: l.legend.circle === true,
-    svg: l.legend.svg,
-    width: l.legend.width ?? 2,
-    dasharray: l.legend.dasharray,
-    opacity: l.legend.opacity ?? 1,
-  };
+  const paint = (l.paint ?? {}) as Record<string, unknown>;
+
+  // Ambil warna dari legend terlebih dahulu,
+  // fallback ke paint kalau legend tidak punya warna.
+  const color =
+    legend?.color ??
+    (typeof paint["line-color"] === "string"
+      ? paint["line-color"]
+      : typeof paint["fill-color"] === "string"
+      ? paint["fill-color"]
+      : typeof paint["circle-color"] === "string"
+      ? paint["circle-color"]
+      : undefined);
+
+  if (!color) return null;
+
+  const opacity =
+    legend?.opacity ??
+    (typeof paint["line-opacity"] === "number"
+      ? paint["line-opacity"]
+      : typeof paint["fill-opacity"] === "number"
+      ? paint["fill-opacity"]
+      : typeof paint["circle-opacity"] === "number"
+      ? paint["circle-opacity"]
+      : 1);
+
+  const width =
+    legend?.width ??
+    (typeof paint["line-width"] === "number"
+      ? paint["line-width"]
+      : 2);
+
+  const dasharray =
+    legend?.dasharray ??
+    (Array.isArray(paint["line-dasharray"])
+      ? (paint["line-dasharray"] as number[])
+      : undefined);
+
+  // =========================
+  // ICON SVG
+  // =========================
+  if (l.icon) {
+    return (
+      <span className="flex h-[24px] w-[28px] flex-none items-center justify-center">
+        <img
+          src={l.icon}
+          alt=""
+          className="max-h-[22px] max-w-[22px] object-contain"
+        />
+      </span>
+    );
+  }
+
+  // =========================
+  // LINE
+  // =========================
+  if (legend?.line === true || l.kind === "line") {
+    return (
+      <span className="flex h-[24px] w-[28px] flex-none items-center">
+        <svg
+          width="28"
+          height="12"
+          viewBox="0 0 28 12"
+          className="block"
+          style={{ opacity }}
+        >
+          <line
+            x1="1"
+            y1="6"
+            x2="27"
+            y2="6"
+            stroke={color}
+            strokeWidth={Math.max(1, width)}
+            strokeLinecap="butt"
+            strokeDasharray={
+              dasharray ? dasharray.join(" ") : undefined
+            }
+          />
+        </svg>
+      </span>
+    );
+  }
+
+  // =========================
+  // CIRCLE
+  // =========================
+  if (legend?.circle === true || l.kind === "circle") {
+    return (
+      <span
+        className="h-[12px] w-[12px] flex-none rounded-full"
+        style={{
+          backgroundColor: color,
+          opacity,
+        }}
+      />
+    );
+  }
+
+  // =========================
+  // FILL
+  // =========================
+  if (l.kind === "fill") {
+    return (
+      <span
+        className="h-[13px] w-[20px] flex-none rounded-[2px]"
+        style={{
+          backgroundColor:
+            typeof paint["fill-color"] === "string"
+              ? (paint["fill-color"] as string)
+              : "transparent",
+          opacity,
+          border: `${Math.max(1, width)}px solid ${color}`,
+        }}
+      />
+    );
+  }
+
+  return (
+    <span
+      className="h-[12px] w-[12px] flex-none rounded-full"
+      style={{
+        backgroundColor: color,
+        opacity,
+      }}
+    />
+  );
 }
 
 function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
@@ -42,7 +169,6 @@ function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
     toggleSub,
   } = useMapStore();
   const on = visible[l.id];
-  const symbol = getLegendStyle(l);
   const handleToggle = () => {
     const next = !on;
     toggle(l.id);
@@ -61,70 +187,7 @@ function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
       >        <Toggle on={on} onClick={handleToggle} />
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 text-[13px] font-semibold text-ink">
-{l.icon ? (
-  <span className="flex h-[24px] w-[24px] flex-none items-center justify-center">
-    <img
-      src={l.icon}
-      alt=""
-      className="max-h-[24px] max-w-[24px] object-contain"
-    />
-  </span>
-) : symbol?.svg ? (
-  <span className="flex h-[24px] w-[24px] flex-none items-center justify-center">
-    <span
-      className="h-[18px] w-[18px] rounded-full"
-      style={{
-        background: symbol.color,
-        opacity: symbol.opacity,
-      }}
-    />
-  </span>
-) : symbol?.line ? (
-  <span
-    className="flex h-[18px] w-[24px] flex-none items-center"
-    style={{ opacity: symbol.opacity }}
-  >
-    <span
-      className="block h-0"
-      style={{
-        width: 24,
-        borderTop: `${Math.max(1, symbol.width)}px solid transparent`,
-        backgroundImage: symbol.dasharray
-          ? `repeating-linear-gradient(
-              to right,
-              ${symbol.color} 0,
-              ${symbol.color} ${symbol.dasharray[0] ?? 6}px,
-              transparent ${symbol.dasharray[0] ?? 6}px,
-              transparent ${
-                (symbol.dasharray[0] ?? 6) +
-                (symbol.dasharray[1] ?? 3)
-              }px
-            )`
-          : `linear-gradient(
-              to right,
-              ${symbol.color},
-              ${symbol.color}
-            )`,
-      }}
-    />
-  </span>
-) : symbol?.circle ? (
-  <span
-    className="h-[12px] w-[12px] flex-none rounded-full"
-    style={{
-      background: symbol.color,
-      opacity: symbol.opacity,
-    }}
-  />
-) : symbol?.color ? (
-  <span
-    className="h-[11px] w-[11px] flex-none rounded-[3px]"
-    style={{
-      background: symbol.color,
-      opacity: symbol.opacity,
-    }}
-  />
-) : null}
+<LayerSymbol l={l} />
             {t(l.nameKey)}
           </div>
           {l.subKey && (
