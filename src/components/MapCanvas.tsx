@@ -314,8 +314,6 @@ if (iconId) {
 
   return {
     version: 8,
-  return {
-    version: 8,
     glyphs:
       "https://basemaps.cartocdn.com/fonts/{fontstack}/{range}.pbf",
     sources: sources as any,
