@@ -243,35 +243,64 @@ if (iconId) {
           },
         } as any);
       }
-
-      // OUTLINE POLYGON
       if (l.kind === "fill") {
-        const fillOutlineColor =
-          (l.paint as any)?.["fill-outline-color"] ??
-          l.legend?.color ??
-          "#000000";
+  const legend = l.legend;
 
-        const legend = l.legend;
+  let outlineColor: any =
+    (l.paint as any)?.["fill-outline-color"] ??
+    l.legend?.color ??
+    "#2E7D32";
 
-        layers.push({
-          id: `${l.id}_outline`,
-          type: "line",
-          source: l.id,
-          layout: {
-            visibility: l.defaultOn ? "visible" : "none",
-          },
-          paint: {
-            "line-color": fillOutlineColor,
-            "line-width": legend?.width ?? 1.5,
-            "line-opacity": legend?.opacity ?? 1,
-            ...(legend?.dasharray
-              ? {
-                  "line-dasharray": legend.dasharray,
-                }
-              : {}),
-          },
-        } as any);
-      }
+  // Jika layer mempunyai sublayer,
+  // buat warna outline berdasarkan property "layer"
+  if (l.sublayers && l.sublayers.length > 0) {
+    const prop = l.subProp ?? "subkelas";
+
+    const expression: any[] = [
+      "match",
+      ["get", prop],
+    ];
+
+    for (const sub of l.sublayers) {
+      expression.push(
+        sub.filterValue,
+        sub.outlineColor ?? "#2E7D32"
+      );
+    }
+
+    // warna default jika nilai "layer"
+    // tidak cocok dengan salah satu DI
+    expression.push("#2E7D32");
+
+    outlineColor = expression;
+  }
+
+  layers.push({
+    id: `${l.id}_outline`,
+    type: "line",
+    source: l.id,
+
+    layout: {
+      visibility: l.defaultOn
+        ? "visible"
+        : "none",
+    },
+
+    paint: {
+      "line-color": outlineColor,
+
+      "line-width": 2,
+
+      "line-opacity": 1,
+
+      ...(legend?.dasharray
+        ? {
+            "line-dasharray": legend.dasharray,
+          }
+        : {}),
+    },
+  } as any);
+}
     }
   });
   // DEBUG: cek style layer yang tidak cocok dengan paint-nya
@@ -834,16 +863,28 @@ const outlineLayer =
                 : "none"
             );
           }
-          if (l.sublayers) {
-            const filter = getSubkelasFilter(
-              l,
-              s.subVisible
-            );
-            map.setFilter(
-              l.id,
-              filter ?? null
-            );
-          }
+if (l.sublayers) {
+  const filter = getSubkelasFilter(
+    l,
+    s.subVisible
+  );
+
+  // Fill
+  map.setFilter(
+    l.id,
+    filter ?? null
+  );
+
+  // Outline
+  const outlineId = `${l.id}_outline`;
+
+  if (map.getLayer(outlineId)) {
+    map.setFilter(
+      outlineId,
+      filter ?? null
+    );
+  }
+}
           if (
             l.opacityProp &&
             s.opacity[l.id] != null
