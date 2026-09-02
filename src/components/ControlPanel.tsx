@@ -19,7 +19,6 @@ function Toggle({ on, onClick }: { on: boolean; onClick: () => void }) {
 }
 function getPaintStyle(l: LayerDef) {
   const paint = l.paint as Record<string, unknown>;
-
   if (l.kind === "line") {
     return {
       type: "line" as const,
@@ -30,7 +29,6 @@ function getPaintStyle(l: LayerDef) {
           : 1,
     };
   }
-
   if (l.kind === "fill") {
     return {
       type: "fill" as const,
@@ -41,7 +39,6 @@ function getPaintStyle(l: LayerDef) {
           : 1,
     };
   }
-
   if (l.kind === "circle") {
     return {
       type: "circle" as const,
@@ -52,9 +49,9 @@ function getPaintStyle(l: LayerDef) {
           : 1,
     };
   }
-
   return null;
 }
+
 function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
   const { t } = useI18n();
   const {
@@ -65,22 +62,17 @@ function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
     subVisible,
     toggleSub,
   } = useMapStore();
-
   const on = visible[l.id];
-const symbol = getPaintStyle(l);
-
+  const symbol = getPaintStyle(l);
   const handleToggle = () => {
     const next = !on;
     toggle(l.id);
-
-    // parent ber-cascade: samakan seluruh turunannya dengan status parent
     if (l.cascade) {
       for (const childId of getDescendantIds(l.id)) {
         if ((visible[childId] ?? false) !== next) toggle(childId);
       }
     }
   };
-
   return (
     <div>
       <div
@@ -88,7 +80,6 @@ const symbol = getPaintStyle(l);
           depth > 0 ? "pl-5 pr-2" : "px-2"
         }`}
       >        <Toggle on={on} onClick={handleToggle} />
-
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 text-[13px] font-semibold text-ink">
 {l.icon ? (
@@ -130,17 +121,14 @@ const symbol = getPaintStyle(l);
     }
   />
 ) : null}
-
             {t(l.nameKey)}
           </div>
-
           {l.subKey && (
             <div className="mt-0.5 text-[10.5px] text-muted2">
               {t(l.subKey)}
             </div>
           )}
         </div>
-
         {l.opacityProp != null && (
           <input
             type="range"
@@ -153,7 +141,6 @@ const symbol = getPaintStyle(l);
           />
         )}
       </div>
-
       {l.sublayers && on && (
         <div className="ml-10 mb-2 mt-0.5 space-y-0.5 border-l border-strokeSoft pl-3">
           {l.sublayers.map((sub) => (
@@ -167,14 +154,11 @@ const symbol = getPaintStyle(l);
                 onChange={() => toggleSub(sub.id)}
                 className="h-3.5 w-3.5 accent-teal"
               />
-
               <span>{t(sub.labelKey)}</span>
             </label>
           ))}
         </div>
       )}
-
-      {/* CHILDREN */}
       {l.children && l.children.length > 0 && on && (
         <div className="ml-5 mb-1 border-l border-strokeSoft pl-2">
           {l.children.map((child) => (
@@ -196,16 +180,13 @@ function TerrainControl() {
     terrainSource,
     setTerrainSource,
   } = useMapStore();
-
   const options: { id: "off" | "aws" | "r2"; label: string }[] = [
     { id: "off", label: t("terrain_off") },
     { id: "aws", label: "AWS Terrarium 30 m" },
     { id: "r2", label: "DTM 3 m" },
   ];
-
   return (
     <div className="m-1.5 rounded-xl border border-strokeSoft bg-gradient-to-br from-teal/10 to-teal/[0.02] p-3">
-      {/* Judul */}
       <div className="flex items-center gap-2 text-[13px] font-bold text-ink">
         <svg
           viewBox="0 0 24 24"
@@ -221,8 +202,6 @@ function TerrainControl() {
         </svg>
         {t("terrain")}
       </div>
-
-      {/* Pilihan Terrain */}
       <div className="mt-2.5 flex gap-1 rounded-[10px] border border-stroke bg-bg/40 p-[3px]">
         {options.map((opt) => (
           <button
@@ -244,22 +223,20 @@ function TerrainControl() {
 
 function MeasurementControl() {
   const { t } = useI18n();
+  const { terrainSource } = useMapStore();
   const [active, setActive] = useState(getToolMode());
-
+  const needsTerrain = active === "elevation" || active === "profile";
+  const terrainOff = terrainSource === "off";
   useEffect(() => {
     const unsubscribe = onToolMode((mode) => {
       setActive(mode);
     });
-
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        // Matikan status tool di ControlPanel
         setToolMode(null);
       }
     };
-
     window.addEventListener("keydown", handleKeyDown);
-
     return () => {
       unsubscribe();
       window.removeEventListener("keydown", handleKeyDown);
@@ -352,26 +329,30 @@ function MeasurementControl() {
         </button>
       </div>
       <p className="mt-2 text-[10px] leading-snug text-muted2">
-  {active ? (
-    <>
-      {t("measurement_click")} ·{" "}
-      <b className="text-teal">
-        {t("measurement_double_click")}
-      </b>{" "}
-      {t("measurement_finish")} ·{" "}
-      <b className="text-teal">Esc</b>{" "}
-      {t("measurement_cancel")}
-
-      {active === "elevation" && (
-        <span className="mt-1 block text-teal/80">
-          ℹ {t("elevation_info")}
-        </span>
-      )}
-    </>
-  ) : (
-    t("measurement_select")
-  )}
-</p>
+        {active ? (
+          <>
+            {t("measurement_click")} ·{" "}
+            <b className="text-teal">
+              {t("measurement_double_click")}
+            </b>{" "}
+            {t("measurement_finish")} ·{" "}
+            <b className="text-teal">Esc</b>{" "}
+            {t("measurement_cancel")}
+            {active === "elevation" && (
+              <span className="mt-1 block text-teal/80">
+                ℹ {t("elevation_info")}
+              </span>
+            )}
+            {needsTerrain && terrainOff && (
+              <span className="mt-1.5 block rounded-md border border-amber/40 bg-amber/10 px-2 py-1 text-amber">
+                ⚠ {t("terrain_required")}
+              </span>
+            )}
+          </>
+        ) : (
+          t("measurement_select")
+        )}
+      </p>
     </div>
   );
 }
