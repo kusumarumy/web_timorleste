@@ -296,6 +296,28 @@ const SYM = {
       color: "#0288D1",
       width: 2.3,
     },
+    irrigationBoundary: {
+      color: "#00897B",
+      width: 2.5,
+      dasharray: [8, 4],
+    },
+    adminCountry: {
+      color: "#212121",
+      width: 2.4,
+      dasharray: [14, 7],
+    },
+    adminVillage: {
+      color: "#FBC02D",
+      width: 2.0,
+    },
+    adminPosto: {
+      color: "#F57C00",
+      width: 2.0,
+    },
+    adminMunicipality: {
+      color: "#C2185B",
+      width: 2.0,
+    },
   },
 
   point: {
@@ -666,17 +688,12 @@ export const GROUPS: LayerGroup[] = [
         data: v("desa"),
 
         paint: {
-          "fill-color": "#FBC02D",
+          "fill-color": SYM.line.adminVillage.color,
           "fill-opacity": 0,
-          "fill-outline-color": "#FBC02D",
+          "fill-outline-color": SYM.line.adminVillage.color,
         },
-
-        defaultOn: false,
-
-        legend: {
-          color: "#FBC02D",
-          line: true,
-        },
+        
+        legend: lineLegend(SYM.line.adminVillage),
 
         label: {
           field: "adm3_name",
@@ -694,17 +711,12 @@ export const GROUPS: LayerGroup[] = [
         data: v("posto"),
 
         paint: {
-          "fill-color": "#F57C00",
-          "fill-opacity": 0,
-          "fill-outline-color": "#F57C00",
-        },
+  "fill-color": SYM.line.adminPosto.color,
+  "fill-opacity": 0,
+  "fill-outline-color": SYM.line.adminPosto.color,
+},
 
-        defaultOn: false,
-
-        legend: {
-          color: "#F57C00",
-          line: true,
-        },
+legend: lineLegend(SYM.line.adminPosto),
 
         label: {
           field: "adm2_name",
@@ -721,18 +733,9 @@ export const GROUPS: LayerGroup[] = [
         kind: "fill",
         data: v("kotamadya"),
 
-        paint: {
-          "fill-color": "#C2185B",
-          "fill-opacity": 0,
-          "fill-outline-color": "#C2185B",
-        },
+        paint: linePaint(SYM.line.adminCountry),
 
-        defaultOn: false,
-
-        legend: {
-          color: "#C2185B",
-          line: true,
-        },
+legend: lineLegend(SYM.line.adminCountry),
 
         label: {
           field: "adm1_name",
@@ -749,21 +752,9 @@ export const GROUPS: LayerGroup[] = [
         kind: "line",
         data: v("negara"),
 
-        paint: {
-          "line-color": "#212121",
-          "line-width": 2.4,
-          "line-dasharray": [14, 7],
-          "line-opacity": 1,
-        },
+        paint: linePaint(SYM.line.adminCountry),
 
-        defaultOn: false,
-
-        legend: {
-          color: "#212121",
-          line: true,
-          width: 2.4,
-          dasharray: [14, 7],
-        },
+legend: lineLegend(SYM.line.adminCountry),
       },
       {
       id: "batas_daerah_irigasi",
@@ -772,21 +763,9 @@ export const GROUPS: LayerGroup[] = [
       data: v("batas_daerah_irigasi"),
       clickable: true,
     
-      paint: {
-        "line-color": "#00897B",
-        "line-width": 2.5,
-        "line-dasharray": [8, 4],
-        "line-opacity": 1,
-      },
-    
-      defaultOn: false,
-    
-      legend: {
-        color: "#00897B",
-        line: true,
-        width: 2.5,
-        dasharray: [8, 4],
-      },
+      paint: linePaint(SYM.line.irrigationBoundary),
+
+legend: lineLegend(SYM.line.irrigationBoundary),
     },
     ],
   },
