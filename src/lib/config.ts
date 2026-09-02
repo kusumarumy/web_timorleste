@@ -308,19 +308,19 @@ adminCountry: {
 },
 
 adminMunicipality: {
-  color: "#555555",
-  width: 2.0,
-  dasharray: [10, 5],
+  color: "#3A3A3A",
+  width: 2.2,
+  dasharray: [12, 6],
 },
 
 adminPosto: {
-  color: "#777777",
-  width: 1.8,
-  dasharray: [7, 4],
+  color: "#707070",
+  width: 1.9,
+  dasharray: [8, 4],
 },
 
 adminVillage: {
-  color: "#999999",
+  color: "#B0B0B0",
   width: 1.6,
   dasharray: [4, 3],
 },
