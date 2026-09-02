@@ -18,22 +18,24 @@ function Toggle({ on, onClick }: { on: boolean; onClick: () => void }) {
   );
 }
 function LayerSymbol({ l }: { l: LayerDef }) {
-  const legend = l.legend as
-    | {
-        color?: string;
-        line?: boolean;
-        circle?: boolean;
-        svg?: string;
-        width?: number;
-        dasharray?: number[];
-        opacity?: number;
-      }
-    | undefined;
+  const legend = l.legend;
 
   const paint = (l.paint ?? {}) as Record<string, unknown>;
 
-  // Ambil warna dari legend terlebih dahulu,
-  // fallback ke paint kalau legend tidak punya warna.
+  // ICON
+  if (l.icon) {
+    return (
+      <span className="flex h-[24px] w-[28px] flex-none items-center justify-center">
+        <img
+          src={l.icon}
+          alt=""
+          className="max-h-[22px] max-w-[22px] object-contain"
+        />
+      </span>
+    );
+  }
+
+  // WARNA DARI LEGEND / PAINT
   const color =
     legend?.color ??
     (typeof paint["line-color"] === "string"
@@ -43,8 +45,6 @@ function LayerSymbol({ l }: { l: LayerDef }) {
       : typeof paint["circle-color"] === "string"
       ? paint["circle-color"]
       : undefined);
-
-  if (!color) return null;
 
   const opacity =
     legend?.opacity ??
@@ -68,25 +68,10 @@ function LayerSymbol({ l }: { l: LayerDef }) {
       ? (paint["line-dasharray"] as number[])
       : undefined);
 
-  // =========================
-  // ICON SVG
-  // =========================
-  if (l.icon) {
-    return (
-      <span className="flex h-[24px] w-[28px] flex-none items-center justify-center">
-        <img
-          src={l.icon}
-          alt=""
-          className="max-h-[22px] max-w-[22px] object-contain"
-        />
-      </span>
-    );
-  }
-
-  // =========================
   // LINE
-  // =========================
   if (legend?.line === true || l.kind === "line") {
+    if (!color) return null;
+
     return (
       <span className="flex h-[24px] w-[28px] flex-none items-center">
         <svg
@@ -105,7 +90,9 @@ function LayerSymbol({ l }: { l: LayerDef }) {
             strokeWidth={Math.max(1, width)}
             strokeLinecap="butt"
             strokeDasharray={
-              dasharray ? dasharray.join(" ") : undefined
+              dasharray
+                ? dasharray.join(" ")
+                : undefined
             }
           />
         </svg>
@@ -113,10 +100,10 @@ function LayerSymbol({ l }: { l: LayerDef }) {
     );
   }
 
-  // =========================
-  // CIRCLE
-  // =========================
+  // CIRCLE / POINT
   if (legend?.circle === true || l.kind === "circle") {
+    if (!color) return null;
+
     return (
       <span
         className="h-[12px] w-[12px] flex-none rounded-full"
@@ -128,9 +115,7 @@ function LayerSymbol({ l }: { l: LayerDef }) {
     );
   }
 
-  // =========================
-  // FILL
-  // =========================
+  // FILL / POLYGON
   if (l.kind === "fill") {
     return (
       <span
@@ -141,11 +126,16 @@ function LayerSymbol({ l }: { l: LayerDef }) {
               ? (paint["fill-color"] as string)
               : "transparent",
           opacity,
-          border: `${Math.max(1, width)}px solid ${color}`,
+          border: color
+            ? `${Math.max(1, width)}px solid ${color}`
+            : undefined,
         }}
       />
     );
   }
+
+  // FALLBACK
+  if (!color) return null;
 
   return (
     <span
