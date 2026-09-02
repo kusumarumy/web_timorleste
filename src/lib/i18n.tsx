@@ -274,6 +274,7 @@ export const DICTS: Record<Lang, Dict> = {
     profile_gain: "Total naik",
     profile_loss: "Total turun",
     profile_max_slope: "Kemiringan maks",
+    profile_counter_slope_warn: "Terdapat segmen kontra-kemiringan (ditandai merah) — arah kelerengan berlawanan dari tren jalur.",
     measurement_click: "Klik titik",
     measurement_double_click: "Double klik",
     measurement_finish: "selesai",
@@ -566,6 +567,7 @@ export const DICTS: Record<Lang, Dict> = {
       "Elevation from the surveyed 3 m DTM. Vertical reference follows the survey datum.",
     profile_note_aws:
       "Elevation from AWS Terrarium 30 m — coarse resolution, indicative only. Use the 3 m DTM for canal analysis.",
+    profile_counter_slope_warn: "Contains counter-slope segments (marked red) — the gradient reverses against the overall trend.",
     profile_max: "Highest point",
     profile_min: "Lowest point",
     profile_gain: "Total ascent",
@@ -864,6 +866,7 @@ export const DICTS: Record<Lang, Dict> = {
       "Altitude do MDT de 3 m levantado. A referência vertical segue o datum do levantamento.",
     profile_note_aws:
       "Altitude do AWS Terrarium 30 m — resolução grosseira, apenas indicativa. Use o MDT de 3 m para análise de canais.",
+    profile_counter_slope_warn: "Contém segmentos de contra-declive (marcados a vermelho) — o gradiente inverte-se em relação à tendência geral.",
     profile_max: "Ponto mais alto",
     profile_min: "Ponto mais baixo",
     profile_gain: "Subida total",
