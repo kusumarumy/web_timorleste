@@ -1,4 +1,5 @@
 "use client";
+
 import { useState } from "react";
 import { BASEMAPS, GROUPS } from "@/lib/config";
 import { useMapStore } from "@/lib/store";
@@ -7,47 +8,222 @@ import { useI18n, Lang } from "@/lib/i18n";
 export function TopBar() {
   const { t, lang, setLang } = useI18n();
   const { basemap, setBasemap } = useMapStore();
-  const langs: Lang[] = ["id", "en", "pt"];
-  return (
-    <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex h-14 items-center gap-4 bg-gradient-to-b from-bg/95 via-bg/60 to-transparent px-4">
-      <div className="pointer-events-auto flex items-center gap-3">
-        <div className="flex h-10 items-center">
-  <img
-    src="https://vectorseek.com/wp-content/uploads/2023/09/Republica-Democratica-Timor-Leste-Logo-Vector.svg-.png"
-    alt=" "
-    className="h-8 w-auto object-contain"
-  />
-</div>
-        <div className="leading-none">
-  <h1 className="font-display text-[17px] font-semibold tracking-[-0.02em] text-white">
-    {t("title")}
-  </h1>
 
-  <span className="mt-1.5 block text-[10.5px] font-medium uppercase tracking-[0.12em] text-white/60 max-md:hidden">
-    {t("sub")}
-  </span>
-</div>
+  const [basemapOpen, setBasemapOpen] = useState(false);
+
+  const langs: Lang[] = ["id", "en", "pt"];
+
+  return (
+    <>
+      {/* =========================
+          TOP BAR
+      ========================== */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex h-[70px] items-center bg-gradient-to-b from-bg/95 via-bg/65 to-transparent px-4">
+        
+        {/* =========================
+            LOGO + TITLE
+        ========================== */}
+        <div className="pointer-events-auto flex items-center gap-3">
+          
+          {/* 3 LOGOS */}
+          <div className="flex h-[46px] items-center gap-1.5">
+            <img
+              src="/icons/1.png"
+              alt=""
+              className="h-[38px] w-[38px] object-contain"
+            />
+
+            <img
+              src="/icons/2.png"
+              alt=""
+              className="h-[38px] w-[38px] object-contain"
+            />
+
+            <img
+              src="/icons/3.png"
+              alt=""
+              className="h-[38px] w-[38px] object-contain"
+            />
+          </div>
+
+          {/* TITLE */}
+          <div className="leading-none">
+            <h1 className="font-display text-[17px] font-semibold tracking-[-0.02em] text-white">
+              {t("title")}
+            </h1>
+
+            <span className="mt-1.5 block text-[10.5px] font-medium uppercase tracking-[0.12em] text-white/60 max-md:hidden">
+              {t("sub")}
+            </span>
+          </div>
+        </div>
+
+        {/* SPACER */}
+        <div className="flex-1" />
+
+        {/* =========================
+            LANGUAGE
+        ========================== */}
+        <div className="pointer-events-auto flex gap-0.5 rounded-[10px] border border-stroke bg-white/85 p-[3px] backdrop-blur-md">
+          {langs.map((l) => (
+            <button
+              key={l}
+              onClick={() => setLang(l)}
+              className={`rounded-[7px] px-2.5 py-1.5 text-[11.5px] font-bold uppercase tracking-wide transition-colors ${
+                lang === l
+                  ? "bg-teal text-ink shadow-[0_1px_6px_rgba(47,166,160,.4)]"
+                  : "text-black/70 hover:text-ink"
+              }`}
+            >
+              {l}
+            </button>
+          ))}
+        </div>
       </div>
-      <div className="flex-1" />
-      <div className="pointer-events-auto flex rounded-[11px] border border-stroke bg-white/85 p-[3px] backdrop-blur-md">
-        {BASEMAPS.map((b) => (
-          <button key={b.id} onClick={() => setBasemap(b.id)}
-            className={`rounded-lg px-3 py-1.5 text-[12.5px] font-semibold transition-colors ${basemap === b.id ? "bg-teal text-[#04171a] shadow-[0_1px_6px_rgba(47,166,160,.4)]" : "text-black/70 hover:text-ink"}`}>
-            {t(b.labelKey)}
-          </button>
-        ))}
+
+      {/* ==================================================
+          BASEMAP CONTROL
+          Diletakkan di bawah NavigationControl MapLibre
+      =================================================== */}
+      <div className="pointer-events-auto absolute right-4 top-[185px] z-[30]">
+        
+        {/* BASEMAP BUTTON */}
+        <button
+          type="button"
+          onClick={() => setBasemapOpen((prev) => !prev)}
+          title="Basemap"
+          aria-label="Basemap"
+          className={`flex h-[42px] w-[42px] items-center justify-center rounded-[9px] border border-stroke bg-white/95 text-[#26343b] shadow-[0_4px_14px_rgba(0,0,0,.18)] backdrop-blur-md transition-all hover:bg-white ${
+            basemapOpen
+              ? "ring-2 ring-teal/40"
+              : ""
+          }`}
+        >
+          {/* MAP ICON */}
+          <svg
+            width="21"
+            height="21"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M9 18l-6 3V6l6-3 6 3 6-3v15l-6 3-6-3z" />
+            <path d="M9 3v15" />
+            <path d="M15 6v15" />
+          </svg>
+        </button>
+
+        {/* =========================
+            BASEMAP PANEL
+        ========================== */}
+        {basemapOpen && (
+          <div className="absolute right-0 top-[50px] w-[245px] overflow-hidden rounded-[14px] border border-stroke bg-white/95 shadow-[0_14px_40px_rgba(0,0,0,.25)] backdrop-blur-xl">
+            
+            {/* HEADER */}
+            <div className="flex items-center justify-between border-b border-black/10 px-3.5 py-3">
+              <div>
+                <div className="text-[11px] font-bold uppercase tracking-[0.1em] text-black/70">
+                  {lang === "id" ? "Basemap" : "Basemap"}
+                </div>
+
+                <div className="mt-0.5 text-[10px] text-black/45">
+                  {lang === "id"
+                    ? "Pilih tampilan peta"
+                    : "Choose map style"}
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setBasemapOpen(false)}
+                className="flex h-6 w-6 items-center justify-center rounded-md text-black/45 hover:bg-black/5 hover:text-black/80"
+              >
+                ×
+              </button>
+            </div>
+
+            {/* BASEMAP OPTIONS */}
+            <div className="p-2">
+              {BASEMAPS.map((b) => (
+                <button
+                  key={b.id}
+                  type="button"
+                  onClick={() => {
+                    setBasemap(b.id);
+                    setBasemapOpen(false);
+                  }}
+                  className={`group flex w-full items-center gap-3 rounded-[9px] px-2.5 py-2.5 text-left transition-all ${
+                    basemap === b.id
+                      ? "bg-teal/15 text-[#063c3a]"
+                      : "text-black/75 hover:bg-black/5"
+                  }`}
+                >
+                  {/* ICON */}
+                  <div
+                    className={`flex h-[34px] w-[34px] flex-none items-center justify-center rounded-[8px] border ${
+                      basemap === b.id
+                        ? "border-teal/40 bg-teal/20"
+                        : "border-black/10 bg-black/[0.035]"
+                    }`}
+                  >
+                    {b.id === "sat" ? (
+                      <span className="text-[17px]">🛰️</span>
+                    ) : b.id === "ortho" ? (
+                      <span className="text-[17px]">▦</span>
+                    ) : b.id === "streets" ? (
+                      <span className="text-[17px]">🛣️</span>
+                    ) : b.id === "topo" ? (
+                      <span className="text-[17px]">⛰️</span>
+                    ) : (
+                      <span className="text-[17px]">🗺️</span>
+                    )}
+                  </div>
+
+                  {/* NAME */}
+                  <div className="min-w-0 flex-1">
+                    <div className="text-[12px] font-semibold">
+                      {t(b.labelKey)}
+                    </div>
+
+                    {basemap === b.id && (
+                      <div className="mt-0.5 text-[9.5px] font-medium text-teal">
+                        {lang === "id" ? "Aktif" : "Active"}
+                      </div>
+                    )}
+                  </div>
+
+                  {/* CHECK */}
+                  {basemap === b.id && (
+                    <div className="flex h-5 w-5 items-center justify-center rounded-full bg-teal text-white">
+                      <svg
+                        width="12"
+                        height="12"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="3"
+                      >
+                        <path d="M5 12l4 4L19 7" />
+                      </svg>
+                    </div>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
-      <div className="pointer-events-auto flex gap-0.5 rounded-[10px] border border-stroke bg-white/85 p-[3px] backdrop-blur-md">
-        {langs.map((l) => (
-          <button key={l} onClick={() => setLang(l)}
-            className={`rounded-[7px] px-2.5 py-1.5 text-[11.5px] font-bold uppercase tracking-wide ${lang === l ? "bg-teal text-ink" : "text-black/70 hover:text-ink"}`}>
-            {l}
-          </button>
-        ))}
-      </div>
-    </div>
+    </>
   );
 }
+
+
+/* =====================================================
+   LEGEND
+===================================================== */
 
 export function Legend() {
   const { t } = useI18n();
@@ -158,7 +334,6 @@ export function Legend() {
                 )}
 
                 {t(l.nameKey)}
-
               </div>
             ))}
 
@@ -169,28 +344,79 @@ export function Legend() {
   );
 }
 
+
+/* =====================================================
+   STATUS BAR
+===================================================== */
+
 export function StatusBar() {
   const { t } = useI18n();
   const { lng, lat, zoom, pitch, bearing } = useMapStore();
+
   return (
     <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[14] flex h-8 items-center gap-4 bg-gradient-to-t from-bg/95 to-transparent px-4 text-[11.5px] text-muted [font-variant-numeric:tabular-nums]">
-      <span>Lon <b className="text-ink">{lng != null ? lng.toFixed(5) : "—"}</b> · Lat <b className="text-ink">{lat != null ? lat.toFixed(5) : "—"}</b></span>
-      <span>{t("zoom")} <b className="text-ink">{zoom.toFixed(1)}</b></span>
-      <span>{t("pitch")} <b className="text-ink">{Math.round(pitch)}°</b> · {Math.round(bearing)}°</span>
+
+      <span>
+        Lon{" "}
+        <b className="text-ink">
+          {lng != null ? lng.toFixed(5) : "—"}
+        </b>{" "}
+        · Lat{" "}
+        <b className="text-ink">
+          {lat != null ? lat.toFixed(5) : "—"}
+        </b>
+      </span>
+
+      <span>
+        {t("zoom")}{" "}
+        <b className="text-ink">
+          {zoom.toFixed(1)}
+        </b>
+      </span>
+
+      <span>
+        {t("pitch")}{" "}
+        <b className="text-ink">
+          {Math.round(pitch)}°
+        </b>{" "}
+        · {Math.round(bearing)}°
+      </span>
+
       <div className="flex-1" />
+
       <span>{t("crs")}</span>
     </div>
   );
 }
 
+
+/* =====================================================
+   LOADER
+===================================================== */
+
 export function Loader({ hidden }: { hidden: boolean }) {
   const { t } = useI18n();
+
   return (
-    <div className={`absolute inset-0 z-40 grid place-items-center bg-bg transition-opacity duration-500 ${hidden ? "pointer-events-none opacity-0" : ""}`}>
+    <div
+      className={`absolute inset-0 z-40 grid place-items-center bg-bg transition-opacity duration-500 ${
+        hidden
+          ? "pointer-events-none opacity-0"
+          : ""
+      }`}
+    >
       <div className="text-center">
+
         <div className="mx-auto mb-4 h-[46px] w-[46px] animate-spin rounded-full border-[3px] border-stroke border-t-teal" />
-        <div className="mb-1.5 font-display text-[15px] font-semibold text-ink">{t("load")}</div>
-        <p className="text-[12.5px] tracking-wide text-muted">{t("load2")}</p>
+
+        <div className="mb-1.5 font-display text-[15px] font-semibold text-ink">
+          {t("load")}
+        </div>
+
+        <p className="text-[12.5px] tracking-wide text-muted">
+          {t("load2")}
+        </p>
+
       </div>
     </div>
   );
