@@ -61,7 +61,7 @@ export function TopBar() {
         </div>
       </div>
 
-      <div className="pointer-events-auto absolute right-4 top-[198px] z-[30]">
+      <div className="pointer-events-auto absolute right-[10px] top-[198px] z-[30]">
         <button
           type="button"
           onClick={() => setBasemapOpen((prev) => !prev)}
@@ -87,10 +87,6 @@ export function TopBar() {
           </svg>
         </button>
 
-
-        {/* =================================================
-            BASEMAP POPUP
-        ================================================== */}
         {basemapOpen && (
           <div className="absolute right-0 top-[39px] w-[195px] overflow-hidden rounded-[12px] border border-stroke bg-panel shadow-[0_14px_40px_rgba(0,0,0,.45)]">
 
