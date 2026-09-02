@@ -196,18 +196,27 @@ export interface LayerGroup {
 }
 
 const SYM = {
-
   line: {
+    // =========================
+    // JALAN
+    // =========================
     road: {
       color: "#424242",
       width: 2.4,
     },
 
     roadAccess: {
-      color: "#616161",
+      color: "#8E44AD",
       width: 2.0,
     },
-
+strais: {
+  color: "#6D4C41",
+  width: 2.0,
+  dasharray: [2, 2],
+},
+    // =========================
+    // IRIGASI
+    // =========================
     irrigationExisting: {
       color: "#00897B",
       width: 2.4,
@@ -219,6 +228,15 @@ const SYM = {
       dasharray: [6, 3],
     },
 
+    irrigationBoundary: {
+      color: "#00A65A",
+      width: 2.5,
+      dasharray: [8, 4],
+    },
+
+    // =========================
+    // DRAINASE
+    // =========================
     drainage: {
       color: "#1565C0",
       width: 2.4,
@@ -226,28 +244,70 @@ const SYM = {
     },
 
     drainageSecondary: {
-      color: "#0288D1",
+      color: "#26A69A",
       width: 2.2,
       dasharray: [6, 3],
     },
 
+    drainageDesign: {
+      color: "#E67E22",
+      width: 2.2,
+      dasharray: [4, 3],
+    },
+
+    // =========================
+    // SUNGAI
+    // =========================
     river: {
       color: "#00A6D6",
       width: 2.5,
     },
 
+    // =========================
+    // DESAIN / RENCANA
+    // =========================
     design: {
       color: "#F39C12",
       width: 2.0,
       dasharray: [6, 3],
     },
 
+    // =========================
+    // BATAS
+    // =========================
     boundary: {
       color: "#616161",
       width: 1.2,
       dasharray: [7, 4],
     },
 
+    adminCountry: {
+      color: "#303030",
+      width: 2.4,
+      dasharray: [14, 7],
+    },
+
+    adminMunicipality: {
+      color: "#3A3A3A",
+      width: 2.2,
+      dasharray: [12, 6],
+    },
+
+    adminPosto: {
+      color: "#707070",
+      width: 1.9,
+      dasharray: [8, 4],
+    },
+
+    adminVillage: {
+      color: "#B0B0B0",
+      width: 1.6,
+      dasharray: [4, 3],
+    },
+
+    // =========================
+    // BANGUNAN / STRUKTUR
+    // =========================
     building: {
       color: "#8D6E63",
       width: 2.0,
@@ -263,13 +323,38 @@ const SYM = {
       width: 2.0,
     },
 
+    crossline: {
+      color: "#D35400",
+      width: 2.0,
+      dasharray: [3, 2],
+    },
+
+    cotambah: {
+      color: "#C0392B",
+      width: 2.0,
+      dasharray: [5, 3],
+    },
+
     guideWall: {
       color: "#616161",
       width: 2.0,
     },
 
+    // =========================
+    // BANGUNAN BENDUNG
+    // =========================
     flushing: {
       color: "#00ACC1",
+      width: 2.3,
+    },
+
+    flushingPier: {
+      color: "#00BCD4",
+      width: 2.3,
+    },
+
+    irrigationPier: {
+      color: "#039BE5",
       width: 2.3,
     },
 
@@ -288,59 +373,54 @@ const SYM = {
       width: 2.3,
     },
 
+    upstream: {
+      color: "#00695C",
+      width: 2.3,
+    },
+
+    downstream: {
+      color: "#C62828",
+      width: 2.3,
+    },
+
+    // =========================
+    // KONTUR
+    // =========================
     contour: {
       color: "#8D4A2B",
       width: 1.2,
     },
-        upstream: {
-      color: "#0288D1",
-      width: 2.3,
-    },
-    irrigationBoundary: {
-      color: "#00897B",
-      width: 2.5,
-      dasharray: [8, 4],
-    },
-adminCountry: {
-  color: "#303030",
-  width: 2.4,
-  dasharray: [14, 7],
-},
-
-adminMunicipality: {
-  color: "#3A3A3A",
-  width: 2.2,
-  dasharray: [12, 6],
-},
-
-adminPosto: {
-  color: "#707070",
-  width: 1.9,
-  dasharray: [8, 4],
-},
-
-adminVillage: {
-  color: "#B0B0B0",
-  width: 1.6,
-  dasharray: [4, 3],
-},
   },
 
   point: {
+    // =========================
+    // TITIK SURVEY
+    // =========================
     patokSaluran: "#D32F2F",
     bm: "#1E88E5",
     design: "#F39C12",
     accessories: "#D81B60",
     cp: "#424242",
     profile: "#7E57C2",
+
+    // =========================
+    // STRUKTUR AIR
+    // =========================
     intake: "#0284C7",
     gate: "#15803D",
+
+    // =========================
+    // HASIL / REFERENSI
+    // =========================
     coordinate: "#7B1FA2",
     kupasan: "#D32F2F",
     drill: "#D32F2F",
   },
 
   polygon: {
+    // =========================
+    // BANGUNAN & PEMUKIMAN
+    // =========================
     building: {
       color: "#E53935",
       opacity: 0.45,
@@ -353,12 +433,36 @@ adminVillage: {
       outline: "#AF7445",
     },
 
+    urban: {
+      color: "#E57373",
+      opacity: 0.35,
+      outline: "#A45252",
+    },
+
+    // =========================
+    // IRIGASI
+    // =========================
     irrigationArea: {
       color: "#66BB6A",
       opacity: 0.25,
       outline: "#2E7D32",
     },
 
+    canal: {
+      color: "#26A69A",
+      opacity: 0.35,
+      outline: "#1B776E",
+    },
+
+    access: {
+      color: "#FFB74D",
+      opacity: 0.35,
+      outline: "#B76D00",
+    },
+
+    // =========================
+    // AIR
+    // =========================
     water: {
       color: "#29B6F6",
       opacity: 0.40,
@@ -371,48 +475,24 @@ adminVillage: {
       outline: "#00779A",
     },
 
-    catchment: {
-      color: "#90CAF9",
-      opacity: 0.22,
-      outline: "#5C8FB5",
-    },
-
-    watershed: {
-      color: "#B3E5FC",
-      opacity: 0.18,
-      outline: "#6B9CAF",
-    },
-
-    road: {
-      color: "#616161",
-      opacity: 0.40,
-      outline: "#212121",
-    },
-
-    access: {
-      color: "#FFB74D",
-      opacity: 0.35,
-      outline: "#B76D00",
-    },
-
-    canal: {
-      color: "#26A69A",
-      opacity: 0.35,
-      outline: "#1B776E",
-    },
-
     drainage: {
       color: "#1565C0",
       opacity: 0.35,
       outline: "#0F488A",
     },
 
+    // =========================
+    // DESAIN
+    // =========================
     design: {
       color: "#F39C12",
       opacity: 0.35,
       outline: "#B76D00",
     },
 
+    // =========================
+    // AREA UMUM
+    // =========================
     areaGeneral: {
       color: "#9E9E9E",
       opacity: 0.30,
@@ -437,6 +517,9 @@ adminVillage: {
       outline: "#888888",
     },
 
+    // =========================
+    // BENDUNG / STRUKTUR AIR
+    // =========================
     stilling: {
       color: "#4FC3F7",
       opacity: 0.30,
@@ -449,6 +532,12 @@ adminVillage: {
       outline: "#3A2078",
     },
 
+    weirCrest: {
+      color: "#6A1B9A",
+      opacity: 0.35,
+      outline: "#4A126B",
+    },
+
     wing: {
       color: "#3949AB",
       opacity: 0.35,
@@ -456,15 +545,15 @@ adminVillage: {
     },
 
     upstream: {
-      color: "#0288D1",
+      color: "#00695C",
       opacity: 0.30,
-      outline: "#016196",
+      outline: "#004D40",
     },
 
     downstream: {
-      color: "#1565C0",
+      color: "#C62828",
       opacity: 0.30,
-      outline: "#0F488A",
+      outline: "#8E1C1C",
     },
 
     flushing: {
@@ -480,23 +569,23 @@ adminVillage: {
     },
 
     flushingPier: {
-      color: "#039BE5",
+      color: "#00BCD4",
       opacity: 0.30,
-      outline: "#026FA4",
+      outline: "#00879A",
     },
 
     intake: {
-    color: "#43A047",
-    opacity: 0.30,
-    outline: "#307333",
+      color: "#43A047",
+      opacity: 0.30,
+      outline: "#307333",
     },
-    
+
     gate: {
       color: "#15803D",
       opacity: 0.30,
       outline: "#0F5C2B",
     },
-    
+
     irrigationStructure: {
       color: "#2E7D32",
       opacity: 0.30,
@@ -515,12 +604,9 @@ adminVillage: {
       outline: "#573D33",
     },
 
-    urban: {
-      color: "#E57373",
-      opacity: 0.35,
-      outline: "#A45252",
-    },
-
+    // =========================
+    // VEGETASI / TUTUPAN LAHAN
+    // =========================
     lowVegetation: {
       color: "#9CCC65",
       opacity: 0.35,
@@ -563,10 +649,34 @@ adminVillage: {
       outline: "#004D40",
     },
 
+    // =========================
+    // GENANGAN
+    // =========================
     inundation: {
       color: "#1976D2",
       opacity: 0.40,
       outline: "#125497",
+    },
+
+    // =========================
+    // LAINNYA
+    // =========================
+    catchment: {
+      color: "#90CAF9",
+      opacity: 0.22,
+      outline: "#5C8FB5",
+    },
+
+    watershed: {
+      color: "#B3E5FC",
+      opacity: 0.18,
+      outline: "#6B9CAF",
+    },
+
+    road: {
+      color: "#616161",
+      opacity: 0.40,
+      outline: "#212121",
     },
   },
 } as const;
@@ -1515,12 +1625,9 @@ export const GROUPS: LayerGroup[] = [
             data: v("09_lo_li_crossline"),
             clickable: true,
             lazy: true,
-
-            paint: linePaint(SYM.line.structure),
-
+            paint: linePaint(SYM.line.crossline),
             defaultOn: false,
-
-            legend: lineLegend(SYM.line.structure),
+            legend: lineLegend(SYM.line.crossline),
           },
 
           {
@@ -1530,12 +1637,9 @@ export const GROUPS: LayerGroup[] = [
             data: v("09_lo_li_desaindrain"),
             clickable: true,
             lazy: true,
-
-            paint: linePaint(SYM.line.drainage),
-
+            paint: linePaint(SYM.line.drainageDesign),
             defaultOn: false,
-
-            legend: lineLegend(SYM.line.drainage),
+            legend: lineLegend(SYM.line.drainageDesign),
           },
 
           {
@@ -1574,12 +1678,7 @@ export const GROUPS: LayerGroup[] = [
             kind: "line",
             data: v("09_lo_li_pembuangutama"),
             clickable: true,
-            lazy: true,
-
-            paint: linePaint(SYM.line.drainage),
-
-            defaultOn: false,
-
+            lazy: true,paint: linePaint(SYM.line.drainage),
             legend: lineLegend(SYM.line.drainage),
           },
 
@@ -1768,11 +1867,8 @@ export const GROUPS: LayerGroup[] = [
             nameKey: "l_rei09_li_cotambah",
             kind: "line",
             data: v("09_rei_li_cotambah"),
-            defaultOn: false,
-
-            paint: linePaint(SYM.line.structure),
-
-            legend: lineLegend(SYM.line.structure),
+            defaultOn: false,paint: linePaint(SYM.line.cotambah),
+            legend: lineLegend(SYM.line.cotambah),
           },
 
           {
@@ -1946,11 +2042,6 @@ legend: fillLegend(SYM.polygon.building),
         ],
       },
 
-
-      /* =====================================================
-         RAIBERE 2026
-      ===================================================== */
-
       {
         id: "raibere_2026",
         nameKey: "l_raibere_2026",
@@ -1981,14 +2072,10 @@ legend: fillLegend(SYM.polygon.building),
             nameKey: "l_rei26_ar_crest",
             kind: "fill",
             data: v("26_rei_ar_crest"),
-            defaultOn: false,
-
-            paint: fillPaint(SYM.polygon.weirBody),
-
-            opacity: SYM.polygon.weirBody.opacity,
+            defaultOn: false,paint: fillPaint(SYM.polygon.weirCrest),
+            opacity: SYM.polygon.weirCrest.opacity,
             opacityProp: "fill-opacity",
-
-            legend: fillLegend(SYM.polygon.weirBody),
+            legend: fillLegend(SYM.polygon.weirCrest),
           },
 
           {
@@ -2323,12 +2410,9 @@ legend: fillLegend(SYM.polygon.building),
             data: v("09_oe_li_desainpembuang"),
             clickable: true,
             lazy: true,
-
-            paint: linePaint(SYM.line.drainage),
-            
+            paint: linePaint(SYM.line.drainageDesign),
             defaultOn: false,
-            
-            legend: lineLegend(SYM.line.drainage),
+            legend: lineLegend(SYM.line.drainageDesign),
           },
 
           {
@@ -2616,11 +2700,8 @@ legend: fillLegend(SYM.polygon.building),
             kind: "line",
             data: v("oe_flushingpier"),
             clickable: true,
-            defaultOn: false,
-
-            paint: linePaint(SYM.line.pier),
-
-            legend: lineLegend(SYM.line.pier),
+            defaultOn: false,paint: linePaint(SYM.line.flushingPier),
+            legend: lineLegend(SYM.line.flushingPier),
           },
 
           {
@@ -2665,8 +2746,9 @@ legend: fillLegend(SYM.polygon.building),
             kind: "line",
             data: v("oe_irrigationpier"),
             clickable: true,
-            defaultOn: false,paint: linePaint(SYM.line.pier),
-legend: lineLegend(SYM.line.pier),
+            defaultOn: false,
+            paint: linePaint(SYM.line.irrigationPier),
+            legend: lineLegend(SYM.line.irrigationPier),
           },
 
           {
@@ -2676,10 +2758,8 @@ legend: lineLegend(SYM.line.pier),
             data: v("oe_strais"),
             clickable: true,
             defaultOn: false,
-
-            paint: linePaint(SYM.line.structure),
-
-            legend: lineLegend(SYM.line.structure),
+            paint: linePaint(SYM.line.strais),
+            legend: lineLegend(SYM.line.strais),
           },
 
           {
@@ -2704,12 +2784,8 @@ legend: lineLegend(SYM.line.pier),
             clickable: true,
             defaultOn: false,
           
-            paint: fillPaint(SYM.polygon.intake),
-          
-            opacity: SYM.polygon.intake.opacity,
-            opacityProp: "fill-opacity",
-          
-            legend: fillLegend(SYM.polygon.intake),
+          paint: linePaint(SYM.line.intakePier),
+          legend: lineLegend(SYM.line.intakePier),
           },
           
             {
