@@ -249,43 +249,37 @@ if (iconId) {
   } as any);
         
 if (l.kind === "fill") {
+  const fillOutlineColor =
+    (l.paint as any)?.["fill-outline-color"] ??
+    l.legend?.color ??
+    "#000000";
+
+  const legend = l.legend;
+
   layers.push({
     id: `${l.id}_outline`,
     type: "line",
     source: l.id,
+
     layout: {
       visibility: l.defaultOn
         ? "visible"
         : "none",
     },
+
     paint: {
-      "line-color":
-        l.id === "desa"
-          ? "#E53935"
-          : l.id === "posto"
-          ? "#FF6B6B"
-          : l.id === "kotamadya"
-          ? "#A66DD4"
-          : "#000000",
-      "line-width":
-        l.id === "desa"
-          ? 1.2
-          : l.id === "posto"
-          ? 1.6
-          : l.id === "kotamadya"
-          ? 2
-          : 1,
-      "line-dasharray":
-        l.id === "desa"
-          ? [8, 4]
-          : l.id === "posto"
-          ? [10, 5]
-          : l.id === "kotamadya"
-          ? [12, 5]
-          : [1, 0],
-      "line-opacity": 1,
+      "line-color": fillOutlineColor,
+      "line-width": legend?.width ?? 1.5,
+      "line-opacity": legend?.opacity ?? 1,
+
+      ...(legend?.dasharray
+        ? {
+            "line-dasharray": legend.dasharray,
+          }
+        : {}),
     },
   } as any);
+}
 }
 }
     }
