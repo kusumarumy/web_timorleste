@@ -222,7 +222,7 @@
 
 .identify-popup .maplibregl-popup-close-button:hover {
   background: transparent;
-  color: #ffffff;
+  color: rgb(47, 166, 160);
 }
 
 .identify-pop {
