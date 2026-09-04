@@ -88,9 +88,9 @@ export function TopBar() {
         </button>
 
 {basemapOpen && (
-  <div className="absolute right-0 top-[39px] w-[310px] rounded-[16px] border border-[#e1e5e8] bg-white p-2.5 shadow-[0_10px_30px_rgba(0,0,0,.25)]">
+  <div className="absolute right-0 top-[39px] w-[270px] rounded-[16px] border border-[#e1e5e8] bg-panel shadow-[0_14px_40px_rgba(0,0,0,.45)]">
 
-    <div className="grid grid-cols-2 gap-2.5">
+    <div className="grid grid-cols-2 gap-2">
 
       {BASEMAPS.map((b) => {
         const isActive = basemap === b.id;
@@ -111,17 +111,17 @@ export function TopBar() {
           >
 
             {/* ICON */}
-            <div className="mb-1.5 flex h-[34px] w-[34px] items-center justify-center">
+            <div className="mb-1.5 flex h-[30px] w-[30px] items-center justify-center">
               {b.id === "sat" ? (
                 <span className="text-[25px]">🛰️</span>
               ) : b.id === "ortho" ? (
-                <span className="text-[25px]">📷</span>
+                <span className="text-[25px]">▦</span>
               ) : b.id === "streets" ? (
-                <span className="text-[25px]">🚗</span>
+                <span className="text-[25px]">🛣️</span>
               ) : b.id === "topo" ? (
                 <span className="text-[25px]">⛰️</span>
               ) : (
-                <span className="text-[25px]">🌎</span>
+                <span className="text-[25px]">🗺️</span>
               )}
             </div>
 
