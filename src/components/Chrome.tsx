@@ -88,7 +88,7 @@ export function TopBar() {
         </button>
 
 {basemapOpen && (
-  <div className="absolute right-0 top-[39px] w-[260px] rounded-[16px] border bg-panel/90 p-2.5 shadow-[0_14px_40px_rgba(0,0,0,.45)]">
+  <div className="absolute right-0 top-[39px] w-[260px] rounded-[16px] border border-[#52616a] bg-[#142733] p-2.5 shadow-[0_14px_40px_rgba(0,0,0,.45)]">
 
     <div className="grid grid-cols-2 gap-1.5">
 
@@ -103,32 +103,30 @@ export function TopBar() {
               setBasemap(b.id);
               setBasemapOpen(false);
             }}
-            className={`flex h-[46px] w-full flex-col items-center justify-center rounded-[10px] border from-teal/10 to-teal/[0.02] transition-all ${
+            className={`flex h-[46px] w-full flex-col items-center justify-center rounded-[10px] border transition-all ${
               isActive
-                ? "border-teal-500 shadow-[0_0_0_1px_rgba(47,166,160,.3)]"
-                : "border-[#d9dee3] hover:border-teal-400 hover:bg-[#f8fafb]"
+                ? "border-teal-300 bg-teal-500 text-[#10252d] shadow-[0_0_0_1px_rgba(47,166,160,.35)]"
+                : "border-[#304650] bg-[#10232d] text-[#a5b6be] hover:border-teal-400/60 hover:bg-[#18333d]"
             }`}
           >
 
             {/* ICON */}
             <div className="mb-0.5 flex h-[24px] w-[24px] items-center justify-center">
               {b.id === "sat" ? (
-                <span className="text-[20px]">🛰️</span>
+                <span className="text-[22px]">🛰️</span>
               ) : b.id === "ortho" ? (
-                <span className="text-[20px]">▦</span>
+                <span className="text-[22px]">▦</span>
               ) : b.id === "streets" ? (
-                <span className="text-[20px]">🛣️</span>
-              ) : b.id === "opentopo" ? (
-                <span className="text-[20px]">⛰️</span>
-              ) : b.id === "hybrid" ? (
-                <span className="text-[20px]">🗺️</span>
+                <span className="text-[22px]">🛣️</span>
+              ) : b.id === "topo" ? (
+                <span className="text-[22px]">⛰️</span>
               ) : (
-                <span className="text-[20px]">🌍</span>
+                <span className="text-[22px]">🗺️</span>
               )}
             </div>
 
             {/* NAME */}
-            <span className="max-w-[115px] truncate text-center text-[11px] font-medium leading-tight text-[#26343b]">
+            <span className="max-w-[115px] truncate text-center text-[11px] font-medium leading-tight">
               {t(b.labelKey)}
             </span>
 
