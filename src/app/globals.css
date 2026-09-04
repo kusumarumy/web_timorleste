@@ -8,7 +8,7 @@
 
 .maplibregl-ctrl-top-right {
   top: 64px;
-  margin-top: 50px
+  margin-top: 50px;
 }
 
 .maplibregl-ctrl-bottom-right {
@@ -19,16 +19,33 @@
   bottom: 20px !important;
 }
 
+/* Container control */
 .maplibregl-ctrl-group {
-  background: rgba(16, 31, 44, .9);
-  border: 1px solid #22394A;
+  background: rgba(16, 31, 44, 0.9) !important;
+  border: 1px solid #22394A !important;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
 }
 
-.maplibregl-ctrl button+button {
-  border-top: 1px solid #22394A;
+/* SEMUA BUTTON di dalam control */
+.maplibregl-ctrl-group button {
+  background-color: rgba(16, 31, 44, 0.9) !important;
+  color: #E7EFF3;
 }
 
-.maplibregl-ctrl button .maplibregl-ctrl-icon {
+/* Hover */
+.maplibregl-ctrl-group button:hover {
+  background-color: rgba(34, 57, 74, 0.95) !important;
+}
+
+/* Separator antar button */
+.maplibregl-ctrl-group button + button {
+  border-top: 1px solid #22394A !important;
+}
+
+/* Icon MapLibre */
+.maplibregl-ctrl-group button .maplibregl-ctrl-icon {
   filter: invert(0.85);
 }
 
@@ -177,21 +194,23 @@
   }
 }
 
-
 .identify-ctrl .identify-ctrl-btn {
   display: flex;
   align-items: center;
   justify-content: center;
+
   width: 29px;
   height: 29px;
+
   padding: 0;
   border: 0;
-  background: rgba(16,31,44,.9);
+
+  background: rgba(16, 31, 44, 0.9) !important;
   cursor: pointer;
 }
 
 .identify-ctrl .identify-ctrl-btn:hover {
-  background: #f1f5f9;
+  background: rgba(34, 57, 74, 0.95) !important;
 }
 
 .identify-ctrl .identify-ctrl-btn:focus-visible {
@@ -200,7 +219,7 @@
 }
 
 .identify-ctrl.is-active .identify-ctrl-btn {
-  background: #2563eb;
+  background: #2563eb !important;
   color: #ffffff;
 }
 
