@@ -178,10 +178,6 @@
   }
 }
 
-/* ============================================================
-   IDENTIFY TOOL
-   Tombol duduk di grup control kanan-atas, tepat di bawah kompas.
-   ============================================================ */
 
 .identify-ctrl .identify-ctrl-btn {
   display: flex;
@@ -191,7 +187,7 @@
   height: 29px;
   padding: 0;
   border: 0;
-  background: #ffffff;
+  background: rgba(16,31,44,.9);
   color: #1f2937;
   cursor: pointer;
 }
@@ -209,8 +205,6 @@
   background: #2563eb;
   color: #ffffff;
 }
-
-/* ---------- POPUP ---------- */
 
 .identify-popup .maplibregl-popup-content {
   padding: 0;
