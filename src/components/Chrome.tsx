@@ -88,7 +88,7 @@ export function TopBar() {
         </button>
 
 {basemapOpen && (
-  <div className="absolute right-0 top-[39px] w-[260px] rounded-[16px] border border-teal-400 bg-teal-500 p-2.5 shadow-[0_14px_40px_rgba(0,0,0,.45)]">
+  <div className="absolute right-0 top-[39px] w-[260px] rounded-[16px] border border-teal-400 bg-teal-800 p-2.5 shadow-[0_14px_40px_rgba(0,0,0,.45)]">
 
     <div className="grid grid-cols-2 gap-1.5">
 
@@ -103,7 +103,7 @@ export function TopBar() {
               setBasemap(b.id);
               setBasemapOpen(false);
             }}
-            className={`flex h-[46px] w-full flex-col items-center justify-center rounded-[10px] border bg-white transition-all ${
+            className={`flex h-[46px] w-full flex-col items-center justify-center rounded-[10px] border bg-teal transition-all ${
               isActive
                 ? "border-teal-500 shadow-[0_0_0_1px_rgba(47,166,160,.3)]"
                 : "border-[#d9dee3] hover:border-teal-400 hover:bg-[#f8fafb]"
@@ -113,15 +113,17 @@ export function TopBar() {
             {/* ICON */}
             <div className="mb-0.5 flex h-[24px] w-[24px] items-center justify-center">
               {b.id === "sat" ? (
-                <span className="text-[22px]">🛰️</span>
+                <span className="text-[20px]">🛰️</span>
               ) : b.id === "ortho" ? (
-                <span className="text-[22px]">▦</span>
+                <span className="text-[20px]">▦</span>
               ) : b.id === "streets" ? (
-                <span className="text-[22px]">🛣️</span>
-              ) : b.id === "topo" ? (
-                <span className="text-[22px]">⛰️</span>
+                <span className="text-[20px]">🛣️</span>
+              ) : b.id === "opentopo" ? (
+                <span className="text-[20px]">⛰️</span>
+              ) : b.id === "hybrid" ? (
+                <span className="text-[20px]">🗺️</span>
               ) : (
-                <span className="text-[22px]">🗺️</span>
+                <span className="text-[20px]">🌍</span>
               )}
             </div>
 
