@@ -67,7 +67,7 @@ export function TopBar() {
           onClick={() => setBasemapOpen((prev) => !prev)}
           title="Basemap"
           aria-label="Basemap"
-          className={`flex h-[32px] w-[32px] items-center justify-center rounded-[7px] border border-stroke bg-white text-[#26343b] shadow-[0_3px_10px_rgba(0,0,0,.18)] transition-all hover:bg-white ${
+          className={`flex h-[32px] w-[32px] items-center justify-center rounded-[7px] border border-stroke bg-panel/90 text-[#26343b] shadow-[0_3px_10px_rgba(0,0,0,.18)] transition-all hover:bg-white ${
             basemapOpen ? "ring-2 ring-teal/40" : ""
           }`}
         >
@@ -76,7 +76,7 @@ export function TopBar() {
             height="17"
             viewBox="0 0 24 24"
             fill="none"
-            stroke="currentColor"
+            stroke="white"
             strokeWidth="1.8"
             strokeLinecap="round"
             strokeLinejoin="round"
