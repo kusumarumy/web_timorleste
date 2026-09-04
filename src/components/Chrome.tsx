@@ -90,19 +90,6 @@ export function TopBar() {
         {basemapOpen && (
           <div className="absolute right-0 top-[39px] w-[195px] overflow-hidden rounded-[12px] border border-stroke bg-panel shadow-[0_14px_40px_rgba(0,0,0,.45)]">
 
-            {/* HEADER */}
-            <div className="flex items-center justify-between border-b border-strokeSoft px-3 py-2.5">
-
-              <button
-                type="button"
-                onClick={() => setBasemapOpen(false)}
-                className="flex h-5 w-5 items-center justify-center rounded-md text-[15px] leading-none text-muted transition-colors hover:bg-white/5 hover:text-ink"
-              >
-                ×
-              </button>
-            </div>
-
-
             {/* BASEMAP OPTIONS */}
             <div className="grid grid-cols-2 gap-1 p-1.5">
 
