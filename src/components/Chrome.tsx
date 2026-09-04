@@ -93,18 +93,6 @@ export function TopBar() {
             {/* HEADER */}
             <div className="flex items-center justify-between border-b border-strokeSoft px-3 py-2.5">
 
-              <div>
-                <div className="text-[10.5px] font-bold uppercase tracking-[0.1em] text-ink">
-                  BASEMAP
-                </div>
-
-                <div className="mt-0.5 text-[9px] text-muted">
-                  {lang === "id"
-                    ? "Pilih tampilan peta"
-                    : "Choose map style"}
-                </div>
-              </div>
-
               <button
                 type="button"
                 onClick={() => setBasemapOpen(false)}
