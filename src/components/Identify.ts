@@ -1,27 +1,9 @@
 "use client";
 
-import type {
-  IControl,
-  Map as MLMap,
-  MapGeoJSONFeature,
-  MapMouseEvent,
-  PointLike,
-  GeoJSONSource,
-} from "maplibre-gl";
-
+import type {IControl, Map as MLMap, MapGeoJSONFeature, MapMouseEvent, PointLike, GeoJSONSource,} from "maplibre-gl";
 import type { Feature } from "geojson";
-
 import { Popup } from "maplibre-gl";
-
-import {
-  getToolMode,
-  onToolMode,
-  setToolMode,
-} from "@/components/toolMode";
-
-// ============================================================
-// CURSOR
-// ============================================================
+import { getToolMode, onToolMode, setToolMode,} from "@/components/toolMode";
 
 function cursorSvg(accent: string) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
@@ -41,32 +23,23 @@ function toCursor(svg: string) {
 const CURSOR_IDLE = toCursor(cursorSvg("#2563EB"));
 const CURSOR_HIT = toCursor(cursorSvg("#16A34A"));
 
-const ICON_SVG = `<svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+const ICON_SVG = `<svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
   <circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.9"/>
   <circle cx="12" cy="7.6" r="1.35" fill="currentColor"/>
   <rect x="10.85" y="10.4" width="2.3" height="7.2" rx="1.15" fill="currentColor"/>
 </svg>`;
 
-// Warna cahaya highlight
 const GLOW = "#22D3EE";
 const CORE = "#FFFFFF";
-
-// ============================================================
-// OPTIONS
-// ============================================================
 
 export type IdentifyControlOptions = {
   getLayerIds: (map: MLMap) => string[];
   getLayerLabel?: (layerId: string) => string;
   getFieldLabel?: (key: string) => string;
-
-  /** Tambahan field yang disembunyikan, di luar daftar bawaan. */
   hiddenFields?: string[];
-
   titleFields?: string[];
   maxFeatures?: number;
   tolerance?: number;
-
   texts?: {
     button?: string;
     empty?: string;
@@ -88,7 +61,6 @@ const DEFAULT_TITLE_FIELDS = [
   "kelas",
 ];
 
-// Atribut teknis + sisa styling dari konversi KML/KMZ
 const DEFAULT_HIDDEN_FIELDS = [
   "geometry",
   "bbox",
@@ -108,9 +80,6 @@ const DEFAULT_HIDDEN_FIELDS = [
   "gx_media_links",
 ];
 
-// Pola nama field yang hampir pasti styling, bukan data.
-// Contoh yang tertangkap: KML STYLE, POINT SYMB, FONT SIZE,
-// FONT COLOR, BORDER STY, BORDER COL, FILL COL.
 const HIDDEN_PATTERNS: RegExp[] = [
   /style/i,
   /symb/i,
@@ -122,10 +91,6 @@ const HIDDEN_PATTERNS: RegExp[] = [
   /^icon[\s_-]?(scale|color|href)?$/i,
   /^label[\s_-]?(color|size|scale)/i,
 ];
-
-// ============================================================
-// HELPERS
-// ============================================================
 
 function titleCase(key: string) {
   return key
@@ -191,19 +156,12 @@ const POINT_TYPES = [
   false,
 ] as any;
 
-// ============================================================
-// CONTROL
-// ============================================================
-
 export class IdentifyControl implements IControl {
   private opts: IdentifyControlOptions;
-
   private map: MLMap | null = null;
   private container: HTMLDivElement | null = null;
   private button: HTMLButtonElement | null = null;
   private popup: Popup | null = null;
-
-  // HIGHLIGHT
   private readonly HL_SRC = "__identify_hl_src";
   private readonly HL_FILL = "__identify_hl_fill";
   private readonly HL_GLOW = "__identify_hl_glow";
@@ -211,7 +169,6 @@ export class IdentifyControl implements IControl {
   private readonly HL_CORE = "__identify_hl_core";
   private readonly HL_PT_GLOW = "__identify_hl_pt_glow";
   private readonly HL_PT_CORE = "__identify_hl_pt_core";
-
   private get hlLayerIds(): string[] {
     return [
       this.HL_FILL,
@@ -222,10 +179,8 @@ export class IdentifyControl implements IControl {
       this.HL_PT_CORE,
     ];
   }
-
   private selectedFeature: MapGeoJSONFeature | null = null;
   private hoverFeature: MapGeoJSONFeature | null = null;
-
   private active = false;
   private prevCursor = "";
   private unsub: (() => void) | null = null;
@@ -236,8 +191,6 @@ export class IdentifyControl implements IControl {
   constructor(opts: IdentifyControlOptions) {
     this.opts = opts;
   }
-
-  // ---------- ICONTROL ----------
 
   onAdd(map: MLMap): HTMLElement {
     this.map = map;
@@ -379,10 +332,6 @@ private ensureHighlightLayers(): boolean {
     });
   }
 
-  // ============================================================
-  // POLYGON FILL
-  // ============================================================
-
   if (!map.getLayer(this.HL_FILL)) {
     map.addLayer({
       id: this.HL_FILL,
@@ -404,10 +353,6 @@ private ensureHighlightLayers(): boolean {
       },
     });
   }
-
-  // ============================================================
-  // OUTER GLOW
-  // ============================================================
 
   if (!map.getLayer(this.HL_GLOW)) {
     map.addLayer({
@@ -435,10 +380,6 @@ private ensureHighlightLayers(): boolean {
     });
   }
 
-  // ============================================================
-  // MIDDLE GLOW
-  // ============================================================
-
   if (!map.getLayer(this.HL_MID)) {
     map.addLayer({
       id: this.HL_MID,
@@ -465,10 +406,6 @@ private ensureHighlightLayers(): boolean {
     });
   }
 
-  // ============================================================
-  // WHITE CORE
-  // ============================================================
-
   if (!map.getLayer(this.HL_CORE)) {
     map.addLayer({
       id: this.HL_CORE,
@@ -492,10 +429,6 @@ private ensureHighlightLayers(): boolean {
       },
     });
   }
-
-  // ============================================================
-  // POINT GLOW
-  // ============================================================
 
   if (!map.getLayer(this.HL_PT_GLOW)) {
     map.addLayer({
@@ -522,10 +455,6 @@ private ensureHighlightLayers(): boolean {
       },
     });
   }
-
-  // ============================================================
-  // POINT CORE
-  // ============================================================
 
   if (!map.getLayer(this.HL_PT_CORE)) {
     map.addLayer({
@@ -612,8 +541,6 @@ private ensureHighlightLayers(): boolean {
     }
   }
 
-  // ---------- PULSE ----------
-
   private startPulse() {
     if (this.pulseRaf) return;
 
@@ -628,8 +555,6 @@ private ensureHighlightLayers(): boolean {
       }
 
       const t = (performance.now() - this.pulseStart) / 1000;
-
-      // 0 → 1 → 0 setiap ~1,6 detik
       const s = (Math.sin((t * Math.PI * 2) / 1.6) + 1) / 2;
 
       try {
@@ -676,8 +601,6 @@ private ensureHighlightLayers(): boolean {
     cancelAnimationFrame(this.pulseRaf);
     this.pulseRaf = 0;
   }
-
-  // ---------- EVENTS ----------
 
   private handleMove = (e: MapMouseEvent) => {
     const map = this.map;
@@ -752,8 +675,6 @@ private ensureHighlightLayers(): boolean {
     this.popup = popup;
   };
 
-  // ---------- QUERY ----------
-
   private query(point: { x: number; y: number }): MapGeoJSONFeature[] {
     const map = this.map;
     if (!map) return [];
@@ -797,8 +718,6 @@ private ensureHighlightLayers(): boolean {
 
     return out;
   }
-
-  // ---------- POPUP CONTENT ----------
 
   private layerLabel(layerId: string) {
     return this.opts.getLayerLabel?.(layerId) ?? titleCase(layerId);
@@ -854,8 +773,6 @@ private ensureHighlightLayers(): boolean {
 
       const f = features[index];
       const props = (f.properties ?? {}) as Record<string, unknown>;
-
-      // HEADER
       const head = document.createElement("div");
       head.className = "identify-pop-head";
 
@@ -870,7 +787,6 @@ private ensureHighlightLayers(): boolean {
       head.append(title, sub);
       root.appendChild(head);
 
-      // PAGER
       if (features.length > 1) {
         const pager = document.createElement("div");
         pager.className = "identify-pager";
@@ -910,7 +826,6 @@ private ensureHighlightLayers(): boolean {
         root.appendChild(pager);
       }
 
-      // ATRIBUT
       const all = Object.entries(props).filter(([, v]) => {
         if (v === null || v === undefined) return false;
         if (typeof v === "string" && v.trim() === "") return false;
@@ -974,7 +889,6 @@ private ensureHighlightLayers(): boolean {
 
       root.appendChild(body);
 
-      // TOGGLE ATRIBUT TEKNIS
       if (hiddenCount > 0) {
         const foot = document.createElement("div");
         foot.className = "identify-pop-foot";
