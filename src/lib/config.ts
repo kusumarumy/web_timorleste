@@ -361,7 +361,7 @@ intakePier: {
 
     contour: {
       color: "#8D4A2B",
-      width: 1.2,
+      width: 1.5,
     },
   },
 
