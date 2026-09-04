@@ -87,83 +87,56 @@ export function TopBar() {
           </svg>
         </button>
 
-        {basemapOpen && (
-          <div className="absolute right-0 top-[39px] w-[250px] overflow-hidden rounded-[12px] border border-stroke bg-panel shadow-[0_14px_40px_rgba(0,0,0,.45)]">
+{basemapOpen && (
+  <div className="absolute right-0 top-[39px] w-[310px] rounded-[16px] border border-[#e1e5e8] bg-white p-2.5 shadow-[0_10px_30px_rgba(0,0,0,.25)]">
 
-            {/* BASEMAP OPTIONS */}
-            <div className="grid grid-cols-2 gap-1 p-1.5">
+    <div className="grid grid-cols-2 gap-2.5">
 
-              {BASEMAPS.map((b) => (
-                <button
-                  key={b.id}
-                  type="button"
-                  onClick={() => {
-                    setBasemap(b.id);
-                    setBasemapOpen(false);
-                  }}
-                  className={`group flex w-full items-center gap-1.5 rounded-[8px] px-1.5 py-1.5 text-left transition-all ${
-                    basemap === b.id
-                      ? "bg-teal/20 text-ink"
-                      : "text-ink hover:bg-white/5"
-                  }`}
-                >
+      {BASEMAPS.map((b) => {
+        const isActive = basemap === b.id;
 
-                  <div
-                    className={`flex h-[25px] w-[25px] flex-none items-center justify-center rounded-[6px] border ${
-                      basemap === b.id
-                        ? "border-teal/50 bg-teal/15"
-                        : "border-stroke bg-white/[0.03]"
-                    }`}
-                  >
-                    {b.id === "sat" ? (
-                      <span className="text-[11px]">🛰️</span>
-                    ) : b.id === "ortho" ? (
-                      <span className="text-[11px]">▦</span>
-                    ) : b.id === "streets" ? (
-                      <span className="text-[11px]">🛣️</span>
-                    ) : b.id === "topo" ? (
-                      <span className="text-[11px]">⛰️</span>
-                    ) : (
-                      <span className="text-[11px]">🗺️</span>
-                    )}
-                  </div>
+        return (
+          <button
+            key={b.id}
+            type="button"
+            onClick={() => {
+              setBasemap(b.id);
+              setBasemapOpen(false);
+            }}
+            className={`flex h-[88px] w-full flex-col items-center justify-center rounded-[11px] border bg-white transition-all ${
+              isActive
+                ? "border-teal shadow-[0_0_0_1px_rgba(47,166,160,.25)]"
+                : "border-[#d9dee3] hover:border-teal/60 hover:bg-[#f8fafb]"
+            }`}
+          >
 
-                  <div className="min-w-0 flex-1">
-
-                    <div className="truncate text-[10.5px] font-semibold leading-tight">
-                      {t(b.labelKey)}
-                    </div>
-
-                    {basemap === b.id && (
-                      <div className="mt-[1px] text-[8px] font-medium text-teal">
-                        {lang === "id" ? "Aktif" : "Active"}
-                      </div>
-                    )}
-
-                  </div>
-                  {basemap === b.id && (
-                    <div className="flex h-[17px] w-[17px] flex-none items-center justify-center rounded-full bg-teal text-white">
-
-                      <svg
-                        width="9"
-                        height="9"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="3"
-                      >
-                        <path d="M5 12l4 4L19 7" />
-                      </svg>
-
-                    </div>
-                  )}
-
-                </button>
-              ))}
-
+            {/* ICON */}
+            <div className="mb-1.5 flex h-[34px] w-[34px] items-center justify-center">
+              {b.id === "sat" ? (
+                <span className="text-[25px]">🛰️</span>
+              ) : b.id === "ortho" ? (
+                <span className="text-[25px]">📷</span>
+              ) : b.id === "streets" ? (
+                <span className="text-[25px]">🚗</span>
+              ) : b.id === "topo" ? (
+                <span className="text-[25px]">⛰️</span>
+              ) : (
+                <span className="text-[25px]">🌎</span>
+              )}
             </div>
-          </div>
-        )}
+
+            {/* NAME */}
+            <span className="max-w-[125px] truncate text-center text-[12px] font-medium leading-tight text-[#26343b]">
+              {t(b.labelKey)}
+            </span>
+
+          </button>
+        );
+      })}
+
+    </div>
+  </div>
+)}
       </div>
     </>
   );
