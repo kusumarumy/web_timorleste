@@ -6,7 +6,6 @@
   color-scheme: dark;
 }
 
-/* MapLibre navigation/scale controls tuned to the dark theme */
 .maplibregl-ctrl-top-right {
   top: 64px;
   margin-top: 50px
@@ -21,7 +20,7 @@
 }
 
 .maplibregl-ctrl-group {
-  background: #101F2C;
+  background: rgba(16, 31, 44, .9);
   border: 1px solid #22394A;
 }
 
