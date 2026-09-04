@@ -116,7 +116,7 @@ export function TopBar() {
 
 
             {/* BASEMAP OPTIONS */}
-            <div className="p-1">
+            <div className="grid grid-cols-2 gap-1 p-1.5">
 
               {BASEMAPS.map((b) => (
                 <button
