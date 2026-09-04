@@ -8,11 +8,8 @@ import { useI18n, Lang } from "@/lib/i18n";
 export function TopBar() {
   const { t, lang, setLang } = useI18n();
   const { basemap, setBasemap } = useMapStore();
-
   const [basemapOpen, setBasemapOpen] = useState(false);
-
   const langs: Lang[] = ["id", "en", "pt"];
-
   return (
     <>
       <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex h-[70px] items-center bg-gradient-to-b from-bg/95 via-bg/65 to-transparent px-4">
@@ -89,12 +86,9 @@ export function TopBar() {
 
 {basemapOpen && (
   <div className="absolute right-0 top-[39px] w-[260px] rounded-[16px] border border-[#52616a] bg-[#142733] p-2.5 shadow-[0_14px_40px_rgba(0,0,0,.45)]">
-
     <div className="grid grid-cols-2 gap-1.5">
-
       {BASEMAPS.map((b) => {
         const isActive = basemap === b.id;
-
         return (
           <button
             key={b.id}
@@ -109,35 +103,30 @@ export function TopBar() {
               : "border-[#304650] bg-[#10232d] text-[#a5b6be] hover:border-[#4fc5bd] hover:bg-[#18333d]"
           }`}
           >
-
-{/* ICON */}
-<div className="mb-0.5 flex h-[24px] w-[24px] items-center justify-center">
-  {b.id === "sat" ? (
-    <span className="text-[22px]">🛰️</span>
-  ) : b.id === "ortho" ? (
-    <span className="text-[22px]">▦</span>
-  ) : b.id === "streets" ? (
-    <span className="text-[22px]">🛣️</span>
-  ) : b.id === "opentopo" ? (
-    <span className="text-[22px]">⛰️</span>
-  ) : b.id === "hybrid" ? (
-    <span className="text-[22px]">🌍</span>
-  ) : (
-    <span className="text-[22px]">🗺️</span>
-  )}
-</div>
-
+					<div className="mb-0.5 flex h-[24px] w-[24px] items-center justify-center">
+					  {b.id === "sat" ? (
+					    <span className="text-[22px]">🛰️</span>
+					  ) : b.id === "ortho" ? (
+					    <span className="text-[22px]">▦</span>
+					  ) : b.id === "streets" ? (
+					    <span className="text-[22px]">🛣️</span>
+					  ) : b.id === "opentopo" ? (
+					    <span className="text-[22px]">⛰️</span>
+					  ) : b.id === "hybrid" ? (
+					    <span className="text-[22px]">🌍</span>
+					  ) : (
+					    <span className="text-[22px]">🗺️</span>
+					  )}
+					</div>
             <span className="max-w-[115px] truncate text-center text-[11px] font-semibold leading-tight">
-  {t(b.labelKey)}
-</span>
-
+						  {t(b.labelKey)}
+						</span>
           </button>
         );
-      })}
-
-    </div>
-  </div>
-)}
+			      })}
+			    </div>
+			  </div>
+			)}
       </div>
     </>
   );
@@ -146,7 +135,6 @@ export function Legend() {
   const { t } = useI18n();
   const { visible, subVisible } = useMapStore();
   const [open, setOpen] = useState(true);
-
   return (
     <div className="absolute bottom-[65px] right-4 z-[15] w-[210px] overflow-hidden rounded-[14px] border border-stroke bg-panel/90 shadow-[0_14px_40px_rgba(0,0,0,.4)] backdrop-blur-xl max-md:hidden">
       <button
@@ -156,7 +144,6 @@ export function Legend() {
         {t("legend")}
         <span>{open ? "▾" : "▸"}</span>
       </button>
-
       {open && (
         <div className="max-h-[55vh] overflow-y-auto px-3.5 pb-3 pt-2.5">
           <div className="flex flex-col gap-2.5">
@@ -166,7 +153,6 @@ export function Legend() {
   .filter((child) => visible[child.id])
   .map((child) => {
     if (!child.legend) return null;
-
     return (
       <div
         key={child.id}
@@ -231,23 +217,18 @@ export function Legend() {
             }}
           />
         )}
-
         {t(child.nameKey)}
       </div>
     );
   });
     }
 
-    // ==========================================
-    // 10 IRRIGATION AREAS + 10 DI
-    // ==========================================
     if (layer.sublayers?.length && visible[layer.id]) {
       return (
         <div
           key={layer.id}
           className="flex flex-col gap-2"
         >
-          {/* PARENT */}
           <div className="flex items-center gap-2.5 text-[12px] font-semibold text-ink">
             <span
               className="h-[13px] w-[18px] flex-none rounded-[2px]"
@@ -257,13 +238,10 @@ export function Legend() {
                 border: "1px solid #2E7D32",
               }}
             />
-
             <span className="truncate">
               {t(layer.nameKey)}
             </span>
           </div>
-
-          {/* DI */}
 <div className="ml-5 flex flex-col gap-1.5">
   {layer.sublayers
     .filter(
@@ -284,7 +262,6 @@ export function Legend() {
             }`,
           }}
         />
-
         <span className="truncate">
           {t(sub.labelKey)}
         </span>
@@ -295,13 +272,9 @@ export function Legend() {
       );
     }
 
-    // ==========================================
-    // LAYER BIASA
-    // ==========================================
     if (!layer.legend || !visible[layer.id]) {
       return null;
     }
-
     return (
       <div
         key={layer.id}
@@ -378,18 +351,11 @@ export function Legend() {
   );
 }
 
-
-/* =====================================================
-   STATUS BAR
-===================================================== */
-
 export function StatusBar() {
   const { t } = useI18n();
   const { lng, lat, zoom, pitch, bearing } = useMapStore();
-
   return (
     <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[14] flex h-8 items-center gap-4 bg-gradient-to-t from-bg/95 to-transparent px-4 text-[11.5px] text-muted [font-variant-numeric:tabular-nums]">
-
       <span>
         Lon{" "}
         <b className="text-ink">
@@ -400,14 +366,12 @@ export function StatusBar() {
           {lat != null ? lat.toFixed(5) : "—"}
         </b>
       </span>
-
       <span>
         {t("zoom")}{" "}
         <b className="text-ink">
           {zoom.toFixed(1)}
         </b>
       </span>
-
       <span>
         {t("pitch")}{" "}
         <b className="text-ink">
@@ -415,22 +379,14 @@ export function StatusBar() {
         </b>{" "}
         · {Math.round(bearing)}°
       </span>
-
       <div className="flex-1" />
-
       <span>{t("crs")}</span>
     </div>
   );
 }
 
-
-/* =====================================================
-   LOADER
-===================================================== */
-
 export function Loader({ hidden }: { hidden: boolean }) {
   const { t } = useI18n();
-
   return (
     <div
       className={`absolute inset-0 z-40 grid place-items-center bg-bg transition-opacity duration-500 ${
@@ -440,17 +396,13 @@ export function Loader({ hidden }: { hidden: boolean }) {
       }`}
     >
       <div className="text-center">
-
         <div className="mx-auto mb-4 h-[46px] w-[46px] animate-spin rounded-full border-[3px] border-stroke border-t-teal" />
-
         <div className="mb-1.5 font-display text-[15px] font-semibold text-ink">
           {t("load")}
         </div>
-
         <p className="text-[12.5px] tracking-wide text-muted">
           {t("load2")}
         </p>
-
       </div>
     </div>
   );
