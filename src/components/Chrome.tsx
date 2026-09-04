@@ -88,7 +88,7 @@ export function TopBar() {
         </button>
 
 {basemapOpen && (
-  <div className="absolute right-0 top-[39px] w-[260px] rounded-[16px] border border-teal-400 bg-teal-800 p-2.5 shadow-[0_14px_40px_rgba(0,0,0,.45)]">
+  <div className="absolute right-0 top-[39px] w-[260px] rounded-[16px] border bg-panel/90 p-2.5 shadow-[0_14px_40px_rgba(0,0,0,.45)]">
 
     <div className="grid grid-cols-2 gap-1.5">
 
@@ -103,7 +103,7 @@ export function TopBar() {
               setBasemap(b.id);
               setBasemapOpen(false);
             }}
-            className={`flex h-[46px] w-full flex-col items-center justify-center rounded-[10px] border bg-teal transition-all ${
+            className={`flex h-[46px] w-full flex-col items-center justify-center rounded-[10px] border from-teal/10 to-teal/[0.02] transition-all ${
               isActive
                 ? "border-teal-500 shadow-[0_0_0_1px_rgba(47,166,160,.3)]"
                 : "border-[#d9dee3] hover:border-teal-400 hover:bg-[#f8fafb]"
