@@ -88,9 +88,9 @@ export function TopBar() {
         </button>
 
 {basemapOpen && (
-  <div className="absolute right-0 top-[39px] w-[270px] rounded-[16px] border border-[#e1e5e8] bg-panel shadow-[0_14px_40px_rgba(0,0,0,.45)]">
+  <div className="absolute right-0 top-[39px] w-[260px] rounded-[16px] border border-teal-400 bg-teal-500 p-2.5 shadow-[0_14px_40px_rgba(0,0,0,.45)]">
 
-    <div className="grid grid-cols-2 gap-2">
+    <div className="grid grid-cols-2 gap-1.5">
 
       {BASEMAPS.map((b) => {
         const isActive = basemap === b.id;
@@ -103,30 +103,30 @@ export function TopBar() {
               setBasemap(b.id);
               setBasemapOpen(false);
             }}
-            className={`flex h-[88px] w-full flex-col items-center justify-center rounded-[11px] border bg-white transition-all ${
+            className={`flex h-[46px] w-full flex-col items-center justify-center rounded-[10px] border bg-white transition-all ${
               isActive
-                ? "border-teal shadow-[0_0_0_1px_rgba(47,166,160,.25)]"
-                : "border-[#d9dee3] hover:border-teal/60 hover:bg-[#f8fafb]"
+                ? "border-teal-500 shadow-[0_0_0_1px_rgba(47,166,160,.3)]"
+                : "border-[#d9dee3] hover:border-teal-400 hover:bg-[#f8fafb]"
             }`}
           >
 
             {/* ICON */}
-            <div className="mb-1.5 flex h-[30px] w-[30px] items-center justify-center">
+            <div className="mb-0.5 flex h-[24px] w-[24px] items-center justify-center">
               {b.id === "sat" ? (
-                <span className="text-[25px]">🛰️</span>
+                <span className="text-[22px]">🛰️</span>
               ) : b.id === "ortho" ? (
-                <span className="text-[25px]">▦</span>
+                <span className="text-[22px]">▦</span>
               ) : b.id === "streets" ? (
-                <span className="text-[25px]">🛣️</span>
+                <span className="text-[22px]">🛣️</span>
               ) : b.id === "topo" ? (
-                <span className="text-[25px]">⛰️</span>
+                <span className="text-[22px]">⛰️</span>
               ) : (
-                <span className="text-[25px]">🗺️</span>
+                <span className="text-[22px]">🗺️</span>
               )}
             </div>
 
             {/* NAME */}
-            <span className="max-w-[125px] truncate text-center text-[12px] font-medium leading-tight text-[#26343b]">
+            <span className="max-w-[115px] truncate text-center text-[11px] font-medium leading-tight text-[#26343b]">
               {t(b.labelKey)}
             </span>
 
