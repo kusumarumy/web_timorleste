@@ -681,7 +681,7 @@ export const GROUPS: LayerGroup[] = [
 
   {
     titleKey: "g_aoi",
-    dot: "#00A6D6",
+    dot: "#EF4444",
 
     layers: [
       {
@@ -728,7 +728,7 @@ export const GROUPS: LayerGroup[] = [
 
   {
   titleKey: "g_admin",
-  dot: "#212121",
+  dot: "#F97316",
 
   layers: [
     {
@@ -809,7 +809,7 @@ export const GROUPS: LayerGroup[] = [
 },
   {
     titleKey: "g_contour",
-    dot: "#8D4A2B",
+    dot: "#EAB308",
 
     layers: [
       {
@@ -838,7 +838,7 @@ export const GROUPS: LayerGroup[] = [
   },
   {
     titleKey: "g_net",
-    dot: SYM.line.road.color,
+    dot: "#84CC16",
 
     layers: [
       {
@@ -859,7 +859,7 @@ export const GROUPS: LayerGroup[] = [
 
   {
     titleKey: "g_hydro",
-    dot: "#1E88E5",
+    dot: "#06B6D4",
 
     layers: [
 
@@ -1044,7 +1044,7 @@ export const GROUPS: LayerGroup[] = [
 
   {
     titleKey: "g_land",
-    dot: "#2E7D32",
+    dot: "#3B82F6",
 
     layers: [
 
@@ -1309,7 +1309,7 @@ export const GROUPS: LayerGroup[] = [
 
   {
     titleKey: "g_genangan",
-    dot: "#7B1FA2",
+    dot: "#6366F1",
 
     layers: [
 
@@ -1502,7 +1502,7 @@ export const GROUPS: LayerGroup[] = [
 
   {
     titleKey: "g_lomea",
-    dot: "#FF9800",
+    dot: "#8B5CF6",
 
     layers: [
 
@@ -1806,7 +1806,7 @@ export const GROUPS: LayerGroup[] = [
 
   {
     titleKey: "g_raibere",
-    dot: "#14B8A6",
+    dot: "#D946EF",
 
     layers: [
 
@@ -2314,7 +2314,7 @@ legend: fillLegend(SYM.polygon.building),
 
   {
     titleKey: "g_oebaba",
-    dot: "#6A1B9A",
+    dot: "#EC4899",
 
     layers: [
       {
