@@ -104,10 +104,10 @@ export function TopBar() {
               setBasemapOpen(false);
             }}
             className={`flex h-[46px] w-full flex-col items-center justify-center rounded-[10px] border transition-all ${
-              isActive
-                ? "border-teal-300 bg-teal-500 text-[#10252d] shadow-[0_0_0_1px_rgba(47,166,160,.35)]"
-                : "border-[#304650] bg-[#10232d] text-[#a5b6be] hover:border-teal-400/60 hover:bg-[#18333d]"
-            }`}
+            isActive
+              ? "border-[#7ee7df] bg-[#2fa6a0] text-[#0b252b] shadow-[0_0_0_1px_rgba(126,231,223,.45),0_2px_8px_rgba(47,166,160,.35)]"
+              : "border-[#304650] bg-[#10232d] text-[#a5b6be] hover:border-[#4fc5bd] hover:bg-[#18333d]"
+          }`}
           >
 
             {/* ICON */}
@@ -125,10 +125,9 @@ export function TopBar() {
               )}
             </div>
 
-            {/* NAME */}
-            <span className="max-w-[115px] truncate text-center text-[11px] font-medium leading-tight">
-              {t(b.labelKey)}
-            </span>
+            <span className="max-w-[115px] truncate text-center text-[11px] font-semibold leading-tight">
+  {t(b.labelKey)}
+</span>
 
           </button>
         );
