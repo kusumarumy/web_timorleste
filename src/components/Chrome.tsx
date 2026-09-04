@@ -41,7 +41,7 @@ export function TopBar() {
           </div>
         </div>
         <div className="flex-1" />
-        <div className="pointer-events-auto flex gap-0.5 rounded-[9px] border border-stroke bg-white/85 p-[3px] backdrop-blur-md">
+        <div className="pointer-events-auto flex gap-0.5 rounded-[9px] border border-stroke bg-panel/90 p-[3px] backdrop-blur-md">
           {langs.map((l) => (
             <button
               key={l}
@@ -49,7 +49,7 @@ export function TopBar() {
               className={`rounded-[6px] px-2.5 py-1.5 text-[11px] font-bold uppercase tracking-wide transition-colors ${
                 lang === l
                   ? "bg-teal text-ink shadow-[0_1px_5px_rgba(47,166,160,.4)]"
-                  : "text-black/70 hover:text-ink"
+                  : "text-white/70 hover:text-white"
               }`}
             >
               {l}
