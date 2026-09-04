@@ -88,7 +88,7 @@ export function TopBar() {
         </button>
 
         {basemapOpen && (
-          <div className="absolute right-0 top-[39px] w-[195px] overflow-hidden rounded-[12px] border border-stroke bg-panel shadow-[0_14px_40px_rgba(0,0,0,.45)]">
+          <div className="absolute right-0 top-[39px] w-[250px] overflow-hidden rounded-[12px] border border-stroke bg-panel shadow-[0_14px_40px_rgba(0,0,0,.45)]">
 
             {/* BASEMAP OPTIONS */}
             <div className="grid grid-cols-2 gap-1 p-1.5">
