@@ -24,9 +24,9 @@ const CURSOR_IDLE = toCursor(cursorSvg("#2563EB"));
 const CURSOR_HIT = toCursor(cursorSvg("#16A34A"));
 
 const ICON_SVG = `<svg width="17" height="17" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-  <circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.9"/>
-  <circle cx="12" cy="7.6" r="1.35" fill="currentColor"/>
-  <rect x="10.85" y="10.4" width="2.3" height="7.2" rx="1.15" fill="currentColor"/>
+  <circle cx="12" cy="12" r="9.2" fill="none" stroke="white" stroke-width="1.9"/>
+  <circle cx="12" cy="7.6" r="1.35" fill="white"/>
+  <rect x="10.85" y="10.4" width="2.3" height="7.2" rx="1.15" fill="white"/>
 </svg>`;
 
 const GLOW = "#22D3EE";
