@@ -219,7 +219,7 @@
 }
 
 .identify-ctrl.is-active .identify-ctrl-btn {
-  background: #2563eb !important;
+  background: rgb(47 166 160) !important;
   color: #ffffff;
 }
 
