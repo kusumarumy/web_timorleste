@@ -110,20 +110,22 @@ export function TopBar() {
           }`}
           >
 
-            {/* ICON */}
-            <div className="mb-0.5 flex h-[24px] w-[24px] items-center justify-center">
-              {b.id === "sat" ? (
-                <span className="text-[22px]">🛰️</span>
-              ) : b.id === "ortho" ? (
-                <span className="text-[22px]">▦</span>
-              ) : b.id === "streets" ? (
-                <span className="text-[22px]">🛣️</span>
-              ) : b.id === "topo" ? (
-                <span className="text-[22px]">⛰️</span>
-              ) : (
-                <span className="text-[22px]">🗺️</span>
-              )}
-            </div>
+{/* ICON */}
+<div className="mb-0.5 flex h-[24px] w-[24px] items-center justify-center">
+  {b.id === "sat" ? (
+    <span className="text-[22px]">🛰️</span>
+  ) : b.id === "ortho" ? (
+    <span className="text-[22px]">▦</span>
+  ) : b.id === "streets" ? (
+    <span className="text-[22px]">🛣️</span>
+  ) : b.id === "opentopo" ? (
+    <span className="text-[22px]">⛰️</span>
+  ) : b.id === "hybrid" ? (
+    <span className="text-[22px]">🌍</span>
+  ) : (
+    <span className="text-[22px]">🗺️</span>
+  )}
+</div>
 
             <span className="max-w-[115px] truncate text-center text-[11px] font-semibold leading-tight">
   {t(b.labelKey)}
