@@ -59,7 +59,7 @@
 }
 
 .maplibregl-ctrl-scale {
-  background: rgba(11, 22, 32, .6);
+  background: rgb(47 166 160);
   border-color: #22394A;
   color: #8FA6B4;
   font-size: 12px;
