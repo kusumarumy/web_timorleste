@@ -781,6 +781,28 @@ export const GROUPS: LayerGroup[] = [
 
       legend: lineLegend(SYM.line.irrigationBoundary),
     },
+    {
+        id: "forestprotected",
+        nameKey: "l_forestprotected",
+        kind: "line",
+        data: v("forestprotected"),
+
+        paint: {
+          "line-color": SYM.polygon.protectedForest.outline,
+          "line-width": 1.6,
+          "line-dasharray": [6, 3],
+          "line-opacity": 1,
+        },
+
+        defaultOn: false,
+
+        legend: {
+          color: SYM.polygon.protectedForest.outline,
+          line: true,
+          width: 1.6,
+          dasharray: [6, 3],
+        },
+      },
   ],
 },
   {
@@ -1007,30 +1029,6 @@ export const GROUPS: LayerGroup[] = [
     dot: "#3B82F6",
 
     layers: [
-
-      {
-        id: "forestprotected",
-        nameKey: "l_forestprotected",
-        kind: "line",
-        data: v("forestprotected"),
-
-        paint: {
-          "line-color": SYM.polygon.protectedForest.outline,
-          "line-width": 1.6,
-          "line-dasharray": [6, 3],
-          "line-opacity": 1,
-        },
-
-        defaultOn: false,
-
-        legend: {
-          color: SYM.polygon.protectedForest.outline,
-          line: true,
-          width: 1.6,
-          dasharray: [6, 3],
-        },
-      },
-
       {
   id: "10irrigationareas",         
   nameKey: "l_10irrigationareas",   
