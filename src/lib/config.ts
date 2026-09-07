@@ -956,79 +956,7 @@ export const GROUPS: LayerGroup[] = [
 
         legend: lineLegend(SYM.line.irrigationExisting),
       },
-
-     {
-  id: "watershed",
-  nameKey: "l_watershed",
-  kind: "fill",
-  data: v("watershed"),
-  clickable: true,
-
-  paint: fillPaint(SYM.polygon.watershed),
-
-  defaultOn: false,
-
-  opacity: SYM.polygon.watershed.opacity,
-  opacityProp: "fill-opacity",
-
-  legend: fillLegend(SYM.polygon.watershed),
-
-  subProp: "subkelas",
-
-  sublayers: [
     {
-      id: "watershed_dam_1",
-      labelKey: "watershed_dam_1",
-      filterValue: "watershed DAM 1",
-      outlineColor: "#2196F3",
-    },
-    {
-      id: "watershed_dam_2",
-      labelKey: "watershed_dam_2",
-      filterValue: "watershed DAM 2",
-      outlineColor: "#9C27B0",
-    },
-    {
-      id: "watershed_dam_3",
-      labelKey: "watershed_dam_3",
-      filterValue: "watershed DAM 3",
-      outlineColor: "#FF9800",
-    },
-    {
-      id: "watershed_oebaba",
-      labelKey: "watershed_oebaba",
-      filterValue: "watershed Oebaba",
-      outlineColor: "#F44336",
-    },
-  ],
-},
-
-      {
-        id: "river",
-        nameKey: "l_river",
-        kind: "fill",
-        data: v("river"),
-        clickable: true,
-
-        paint: fillPaint(SYM.polygon.river),
-
-        defaultOn: false,
-
-        opacity: SYM.polygon.river.opacity,
-        opacityProp: "fill-opacity",
-
-        legend: fillLegend(SYM.polygon.river),
-      },
-  
-    ],
-  },
-
-  {
-    titleKey: "g_land",
-    dot: "#3B82F6",
-
-    layers: [
-      {
   id: "10irrigationareas",         
   nameKey: "l_10irrigationareas",   
   kind: "fill",
@@ -1109,6 +1037,77 @@ export const GROUPS: LayerGroup[] = [
 ],
 },
 
+     {
+  id: "watershed",
+  nameKey: "l_watershed",
+  kind: "fill",
+  data: v("watershed"),
+  clickable: true,
+
+  paint: fillPaint(SYM.polygon.watershed),
+
+  defaultOn: false,
+
+  opacity: SYM.polygon.watershed.opacity,
+  opacityProp: "fill-opacity",
+
+  legend: fillLegend(SYM.polygon.watershed),
+
+  subProp: "subkelas",
+
+  sublayers: [
+    {
+      id: "watershed_dam_1",
+      labelKey: "watershed_dam_1",
+      filterValue: "watershed DAM 1",
+      outlineColor: "#2196F3",
+    },
+    {
+      id: "watershed_dam_2",
+      labelKey: "watershed_dam_2",
+      filterValue: "watershed DAM 2",
+      outlineColor: "#9C27B0",
+    },
+    {
+      id: "watershed_dam_3",
+      labelKey: "watershed_dam_3",
+      filterValue: "watershed DAM 3",
+      outlineColor: "#FF9800",
+    },
+    {
+      id: "watershed_oebaba",
+      labelKey: "watershed_oebaba",
+      filterValue: "watershed Oebaba",
+      outlineColor: "#F44336",
+    },
+  ],
+},
+
+      {
+        id: "river",
+        nameKey: "l_river",
+        kind: "fill",
+        data: v("river"),
+        clickable: true,
+
+        paint: fillPaint(SYM.polygon.river),
+
+        defaultOn: false,
+
+        opacity: SYM.polygon.river.opacity,
+        opacityProp: "fill-opacity",
+
+        legend: fillLegend(SYM.polygon.river),
+      },
+  
+    ],
+  },
+
+  {
+    titleKey: "g_land",
+    dot: "#3B82F6",
+
+    layers: [
       {
         id: "building",
         nameKey: "l_building",
