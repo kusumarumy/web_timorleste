@@ -20,7 +20,7 @@ export const DICTS: Record<Lang, Dict> = {
 
     // Group
     g_aoi: "Area of Interest",
-    g_admin: "Batas Administrasi",
+    g_admin: "Administrasi",
     g_net: "Jaringan",
     g_contour: "Kontur",
     g_hydro: "Hidrologi",
@@ -38,11 +38,12 @@ export const DICTS: Record<Lang, Dict> = {
     l_lomea_2009: "LOMEA 2009",
 
     // Administration
-    l_desa: "Batas Administrasi Desa",
-    l_posto: "Batas Administrasi Posto",
-    l_kotamadya: "Batas Administrasi Kotamadya",
-    l_negara: "Batas Administrasi Negara",
+    l_desa: "Batas Administratif Desa",
+    l_posto: "Batas Administratif Posto",
+    l_kotamadya: "Batas Administratif Kotamadya",
+    l_negara: "Batas Administratif Negara",
     l_batas_daerah_irigasi: "Batas Daerah Irigasi",
+    l_forestprotected: "Batas Kawasan Hutan Lindung Xanana Gusmão",
 
     // Land Cover
     l_urban: "Permukiman",
@@ -62,7 +63,7 @@ export const DICTS: Record<Lang, Dict> = {
     l_highveg: "Vegetasi Tinggi",
     l_lowveg: "Vegetasi Rendah",
     l_building: "Bangunan",
-    l_forestprotected: "Hutan Lindung Xanana Gusmao",
+    
 
     // Hydrology
     l_river: "Sungai",
@@ -327,7 +328,13 @@ export const DICTS: Record<Lang, Dict> = {
     l_oebaba_2009: "OEBABA 2009",
     l_oebaba_2026: "OEBABA 2026",
     l_lomea_2009: "LOMEA 2009",
-
+    // Administration
+    l_desa: "Village Boundary",
+    l_posto: "Administrative Post Boundary",
+    l_kotamadya: "Municipal Boundary",
+    l_negara: "International Boundary",
+    l_batas_daerah_irigasi: "Irrigation Area Boundary",
+    l_forestprotected: "Xanana Gusmão Protected Forest Boundary",
     // Land Cover
     l_urban: "Urban Area",
     l_10irrigationareas: "8 Irrigation Areas",
@@ -346,7 +353,7 @@ export const DICTS: Record<Lang, Dict> = {
     l_highveg: "High Vegetation",
     l_lowveg: "Low Vegetation",
     l_building: "Building",
-    l_forestprotected: "Xanana Gusmao Protected Forest",
+
 
     // Hydrology
     l_river: "River",
@@ -363,12 +370,6 @@ export const DICTS: Record<Lang, Dict> = {
     // Network
     l_road: "Road",
 
-    // Administration
-    l_desa: "Village Boundary",
-    l_posto: "Administrative Post Boundary",
-    l_kotamadya: "Municipal Boundary",
-    l_negara: "International Boundary",
-    l_batas_daerah_irigasi: "Irrigation Area Boundary",
 
     // Contour
     l_contour: "Interval Contour 5 Meter",
@@ -619,7 +620,13 @@ export const DICTS: Record<Lang, Dict> = {
     l_oebaba_2009: "OEBABA 2009",
     l_oebaba_2026: "OEBABA 2026",
     l_lomea_2009: "LOMEA 2009",
-
+    // Administration
+    l_desa: "Limite do Suco",
+    l_posto: "Limite do Posto Administrativo",
+    l_kotamadya: "Limite Municipal",
+    l_negara: "Fronteira Internacional",
+    l_batas_daerah_irigasi: "Limite da Área de Irrigação",
+    l_forestprotected: "Limite da Floresta Protegida Xanana Gusmão",
     // Land Cover
     l_urban: "Área Urbana",
     l_10irrigationareas: "8 Áreas de Irrigação",
@@ -638,7 +645,7 @@ export const DICTS: Record<Lang, Dict> = {
     l_highveg: "Vegetação Alta",
     l_lowveg: "Vegetação Baixa",
     l_building: "Edifício",
-    l_forestprotected: "Floresta Protegida Xanana Gusmão",
+
 
     // Hydrology
     l_river: "Rio",
@@ -654,12 +661,6 @@ export const DICTS: Record<Lang, Dict> = {
     // Network
     l_road: "Estrada",
 
-    // Administration
-    l_desa: "Limite da Suco",
-    l_posto: "Limite do Posto Administrativo",
-    l_kotamadya: "Limite Municipal",
-    l_negara: "Fronteira Internacional",
-    l_batas_daerah_irigasi: "Limite da Área de Irrigação",
 
     // Contour
     l_contour: "Contorno com Intervalo de 5 Metros",
