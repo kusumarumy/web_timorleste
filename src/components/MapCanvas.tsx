@@ -311,36 +311,8 @@ layers.push({
     },
   } as any);
 }
-
-  layers.push({
-    id: `${l.id}_outline`,
-    type: "line",
-    source: l.id,
-
-    layout: {
-      visibility: l.defaultOn
-        ? "visible"
-        : "none",
-    },
-
-    paint: {
-      "line-color": outlineColor,
-
-      "line-width": 2,
-
-      "line-opacity": 1,
-
-      ...(legend?.dasharray
-        ? {
-            "line-dasharray": legend.dasharray,
-          }
-        : {}),
-    },
-  } as any);
-}
     }
   });
-  // DEBUG: cek style layer yang tidak cocok dengan paint-nya
   layers.forEach((layer, index) => {
     const paint = (layer as any).paint ?? {};
     const type = (layer as any).type;
