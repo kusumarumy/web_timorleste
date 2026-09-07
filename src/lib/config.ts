@@ -566,24 +566,6 @@ intakePier: {
       outline: "#90795A",
     },
 
-    palm: {
-      color: "#66A65C",
-      opacity: 0.35,
-      outline: "#497742",
-    },
-
-    ricefield: {
-      color: "#FBC02D",
-      opacity: 0.35,
-      outline: "#B48A20",
-    },
-
-    sugarcane: {
-      color: "#9CCC65",
-      opacity: 0.35,
-      outline: "#668E3E",
-    },
-
     protectedForest: {
       color: "#00695C",
       opacity: 0.25,
@@ -1196,57 +1178,6 @@ export const GROUPS: LayerGroup[] = [
         opacityProp: "fill-opacity",
 
         legend: fillLegend(SYM.polygon.ground),
-      },
-
-      {
-        id: "palm",
-        nameKey: "l_palm",
-        kind: "fill",
-        data: v("palm"),
-        clickable: true,
-
-        paint: fillPaint(SYM.polygon.palm),
-
-        defaultOn: false,
-
-        opacity: SYM.polygon.palm.opacity,
-        opacityProp: "fill-opacity",
-
-        legend: fillLegend(SYM.polygon.palm),
-      },
-
-      {
-        id: "ricefield",
-        nameKey: "l_ricefield",
-        kind: "fill",
-        data: v("ricefield"),
-        clickable: true,
-
-        paint: fillPaint(SYM.polygon.ricefield),
-
-        defaultOn: false,
-
-        opacity: SYM.polygon.ricefield.opacity,
-        opacityProp: "fill-opacity",
-
-        legend: fillLegend(SYM.polygon.ricefield),
-      },
-
-      {
-        id: "sugarcane",
-        nameKey: "l_sugarcane",
-        kind: "fill",
-        data: v("sugarcane"),
-        clickable: true,
-
-        paint: fillPaint(SYM.polygon.sugarcane),
-
-        defaultOn: false,
-
-        opacity: SYM.polygon.sugarcane.opacity,
-        opacityProp: "fill-opacity",
-
-        legend: fillLegend(SYM.polygon.sugarcane),
       },
 
       {
