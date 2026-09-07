@@ -45,11 +45,8 @@ export const DICTS: Record<Lang, Dict> = {
     l_batas_daerah_irigasi: "Batas Daerah Irigasi",
 
     // Land Cover
-    l_sugarcane: "Tebu",
     l_urban: "Permukiman",
-    l_ricefield: "Sawah",
-    l_10irrigationareas: "10 Daerah Irigasi",
-
+    l_10irrigationareas: "8 Daerah Irigasi",
     di_akadiru_kede: "AKADIRU KEDE",
     di_beco: "BECO",
     di_buiha: "BUIHA",
@@ -60,14 +57,12 @@ export const DICTS: Record<Lang, Dict> = {
     di_raibere: "RAIBERE",
     di_raimea: "RAIMEA",
     di_taz_hilin: "TAZ HILIN",
-
     l_waterbody: "Badan Air",
     l_ground: "Lahan Terbuka",
-    l_palm: "Kelapa Sawit",
     l_highveg: "Vegetasi Tinggi",
     l_lowveg: "Vegetasi Rendah",
     l_building: "Bangunan",
-    l_forestprotected: "Hutan Lindung",
+    l_forestprotected: "Hutan Lindung Xanana Gusmao",
 
     // Hydrology
     l_river: "Sungai",
@@ -334,11 +329,8 @@ export const DICTS: Record<Lang, Dict> = {
     l_lomea_2009: "LOMEA 2009",
 
     // Land Cover
-    l_sugarcane: "Sugar Cane",
     l_urban: "Urban Area",
-    l_ricefield: "Rice Field",
-    l_10irrigationareas: "10 Irrigation Areas",
-
+    l_10irrigationareas: "8 Irrigation Areas",
     di_akadiru_kede: "AKADIRU KEDE",
     di_beco: "BECO",
     di_buiha: "BUIHA",
@@ -349,14 +341,12 @@ export const DICTS: Record<Lang, Dict> = {
     di_raibere: "RAIBERE",
     di_raimea: "RAIMEA",
     di_taz_hilin: "TAZ HILIN",
-
     l_waterbody: "Water Body",
     l_ground: "Ground",
-    l_palm: "Palm Tree",
     l_highveg: "High Vegetation",
     l_lowveg: "Low Vegetation",
     l_building: "Building",
-    l_forestprotected: "Protected Forest Boundary",
+    l_forestprotected: "Xanana Gusmao Protected Forest",
 
     // Hydrology
     l_river: "River",
@@ -631,11 +621,8 @@ export const DICTS: Record<Lang, Dict> = {
     l_lomea_2009: "LOMEA 2009",
 
     // Land Cover
-    l_sugarcane: "Cana-de-açúcar",
     l_urban: "Área Urbana",
-    l_ricefield: "Arrozal",
-    l_10irrigationareas: "10 Áreas de Irrigação",
-
+    l_10irrigationareas: "8 Áreas de Irrigação",
     di_akadiru_kede: "AKADIRU KEDE",
     di_beco: "BECO",
     di_buiha: "BUIHA",
@@ -648,11 +635,10 @@ export const DICTS: Record<Lang, Dict> = {
     di_taz_hilin: "TAZ HILIN",
     l_waterbody: "Corpo de Água",
     l_ground: "Solo Exposto",
-    l_palm: "Palmeiras",
     l_highveg: "Vegetação Alta",
     l_lowveg: "Vegetação Baixa",
     l_building: "Edifício",
-    l_forestprotected: "Limite da Floresta Protegida",
+    l_forestprotected: "Floresta Protegida Xanana Gusmão",
 
     // Hydrology
     l_river: "Rio",
