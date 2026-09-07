@@ -943,19 +943,48 @@ export const GROUPS: LayerGroup[] = [
         },
       },
 
-      {
-        id: "irrigation",
-        nameKey: "l_irrigation",
-        kind: "line",
-        data: v("irrigation"),
-        clickable: true,
+{
+  id: "irrigation",
+  nameKey: "l_irrigation",
+  kind: "line",
+  data: v("irrigation"),
+  clickable: true,
 
-        paint: linePaint(SYM.line.irrigationExisting),
+  paint: linePaint(SYM.line.irrigationExisting),
 
-        defaultOn: false,
+  defaultOn: false,
 
-        legend: lineLegend(SYM.line.irrigationExisting),
-      },
+  legend: lineLegend(SYM.line.irrigationExisting),
+
+  subProp: "layer",
+
+  sublayers: [
+    {
+      id: "belum_teridentifikasi",
+      labelKey: "irrigation_unidentified",
+      filterValue: "BELUM TERIDENTIFIKASI",
+      outlineColor: "#00BCD4",
+    },
+    {
+      id: "pembuang",
+      labelKey: "irrigation_pembuang",
+      filterValue: "PEMBUANG",
+      outlineColor: "#00E676",
+    },
+    {
+      id: "primer",
+      labelKey: "irrigation_primer",
+      filterValue: "PRIMER",
+      outlineColor: "#FFD600",
+    },
+    {
+      id: "sekunder",
+      labelKey: "irrigation_sekunder",
+      filterValue: "SEKUNDER",
+      outlineColor: "#F44336",
+    },
+  ],
+},
     {
   id: "8irrigationareas",         
   nameKey: "l_8irrigationareas",   
