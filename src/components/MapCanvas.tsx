@@ -249,7 +249,7 @@ layers.push({
           },
         } as any);
       }
-      if (l.kind === "fill") {
+     if (l.kind === "fill") {
   const legend = l.legend;
 
   let outlineColor: any =
@@ -257,32 +257,27 @@ layers.push({
     l.legend?.color ??
     "#2E7D32";
 
+  // Jika layer memiliki sublayer,
+  // warna outline mengikuti outlineColor masing-masing sublayer
   if (l.sublayers && l.sublayers.length > 0) {
     const prop = l.subProp ?? "subkelas";
 
-    outlineColor = [
+    const matchExpression: any[] = [
       "match",
       ["get", prop],
-
-      // Watershed DAM 1
-      "watershed DAM 1",
-      "#2196F3",
-
-      // Watershed DAM 2
-      "watershed DAM 2",
-      "#9C27B0",
-
-      // Watershed DAM 3
-      "watershed DAM 3",
-      "#FF9800",
-
-      // Watershed Oebaba
-      "watershed Oebaba",
-      "#F44336",
-
-      // Default
-      "#2E7D32",
     ];
+
+    l.sublayers.forEach((sub) => {
+      matchExpression.push(
+        sub.filterValue,
+        sub.outlineColor ?? outlineColor
+      );
+    });
+
+    // fallback jika tidak ada nilai yang cocok
+    matchExpression.push(outlineColor);
+
+    outlineColor = matchExpression;
   }
 
   layers.push({
@@ -298,9 +293,7 @@ layers.push({
 
     paint: {
       "line-color": outlineColor,
-
       "line-width": 2,
-
       "line-opacity": 1,
 
       ...(legend?.dasharray
