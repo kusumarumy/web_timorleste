@@ -595,16 +595,10 @@ intakePier: {
       opacity: 0.40,
       outline: "#125497",
     },
-    catchment: {
+    watershed: {
       color: "#90CAF9",
       opacity: 0.22,
       outline: "#5C8FB5",
-    },
-
-    watershed: {
-      color: "#B3E5FC",
-      opacity: 0.18,
-      outline: "#6B9CAF",
     },
 
     road: {
@@ -961,46 +955,46 @@ export const GROUPS: LayerGroup[] = [
       },
 
      {
-  id: "catchment",
-  nameKey: "l_catchment",
+  id: "watershed",
+  nameKey: "l_watershed",
   kind: "fill",
-  data: v("catchment"),
+  data: v("watershed"),
   clickable: true,
 
-  paint: fillPaint(SYM.polygon.catchment),
+  paint: fillPaint(SYM.polygon.watershed),
 
   defaultOn: false,
 
-  opacity: SYM.polygon.catchment.opacity,
+  opacity: SYM.polygon.watershed.opacity,
   opacityProp: "fill-opacity",
 
-  legend: fillLegend(SYM.polygon.catchment),
+  legend: fillLegend(SYM.polygon.watershed),
 
   subProp: "subkelas",
 
   sublayers: [
     {
-      id: "catchment_dam_1",
-      labelKey: "catchment_dam_1",
-      filterValue: "Catchment Area DAM 1",
+      id: "watershed_dam_1",
+      labelKey: "watershed_dam_1",
+      filterValue: "watershed DAM 1",
       outlineColor: "#2196F3",
     },
     {
-      id: "catchment_dam_2",
-      labelKey: "catchment_dam_2",
-      filterValue: "Catchment Area DAM 2",
+      id: "watershed_dam_2",
+      labelKey: "watershed_dam_2",
+      filterValue: "watershed DAM 2",
       outlineColor: "#9C27B0",
     },
     {
-      id: "catchment_dam_3",
-      labelKey: "catchment_dam_3",
-      filterValue: "Catchment Area DAM 3",
+      id: "watershed_dam_3",
+      labelKey: "watershed_dam_3",
+      filterValue: "watershed DAM 3",
       outlineColor: "#FF9800",
     },
     {
-      id: "catchment_oebaba",
-      labelKey: "catchment_oebaba",
-      filterValue: "Catchment Area Oebaba",
+      id: "watershed_oebaba",
+      labelKey: "watershed_oebaba",
+      filterValue: "watershed Oebaba",
       outlineColor: "#F44336",
     },
   ],
@@ -1022,23 +1016,7 @@ export const GROUPS: LayerGroup[] = [
 
         legend: fillLegend(SYM.polygon.river),
       },
-
-      {
-        id: "watershed",
-        nameKey: "l_watershed",
-        kind: "fill",
-        data: v("watershed"),
-        clickable: true,
-
-        paint: fillPaint(SYM.polygon.watershed),
-
-        defaultOn: false,
-
-        opacity: SYM.polygon.watershed.opacity,
-        opacityProp: "fill-opacity",
-
-        legend: fillLegend(SYM.polygon.watershed),
-      },
+  
     ],
   },
 
