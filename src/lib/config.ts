@@ -957,10 +957,10 @@ export const GROUPS: LayerGroup[] = [
         legend: lineLegend(SYM.line.irrigationExisting),
       },
     {
-  id: "10irrigationareas",         
-  nameKey: "l_10irrigationareas",   
+  id: "8irrigationareas",         
+  nameKey: "l_8irrigationareas",   
   kind: "fill",
-  data: v("10irrigationareas"),
+  data: v("8irrigationareas"),
   clickable: true,
 
   paint: fillPaint(SYM.polygon.irrigationArea),
@@ -979,12 +979,6 @@ export const GROUPS: LayerGroup[] = [
     labelKey: "di_akadiru_kede",
     filterValue: "AKADIRU KEDE",
     outlineColor: "#2196F3",
-  },
-  {
-    id: "beco",
-    labelKey: "di_beco",
-    filterValue: "BECO",
-    outlineColor: "#9C27B0",
   },
   {
     id: "buiha",
@@ -1022,16 +1016,11 @@ export const GROUPS: LayerGroup[] = [
     filterValue: "RAIBERE",
     outlineColor: "#4CAF50",
   },
+
   {
-    id: "raimea",
-    labelKey: "di_raimea",
-    filterValue: "RAIMEA",
-    outlineColor: "#FF4081",
-  },
-  {
-    id: "taz_hilin",
-    labelKey: "di_taz_hilin",
-    filterValue: "TAZ HILIN",
+    id: "oebaba",
+    labelKey: "di_oebaba",
+    filterValue: "OEBABA",
     outlineColor: "#FFFFFF",
   },
 ],
