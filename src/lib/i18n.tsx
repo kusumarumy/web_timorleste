@@ -75,12 +75,11 @@ export const DICTS: Record<Lang, Dict> = {
     l_rainfall: "Stasiun Pencatatan Curah Hujan",
     l_irrigation_point: "Titik Irigasi",
     l_irrigation: "Irigasi",
-    l_catchment: "Daerah Tangkapan Air",
     l_watershed: "Daerah Aliran Sungai",
-    catchment_dam_1: "Daerah Tangkapan Air DAM 1",
-    catchment_dam_2: "Daerah Tangkapan Air DAM 2",
-    catchment_dam_3: "Daerah Tangkapan Air DAM 3",
-    catchment_oebaba: "Daerah Tangkapan Air OEBABA",
+    watershed:_dam_1: "Daerah Aliran Sungai DAM 1",
+    watershed:_dam_2: "Daerah Aliran Sungai DAM 2",
+    watershed:_dam_3: "Daerah TAliran Sungai DAM 3",
+    watershed:_oebaba: "Daerah Aliran Sungai OEBABA",
 
     // Transportation
     l_road: "Jalan",
@@ -365,12 +364,11 @@ export const DICTS: Record<Lang, Dict> = {
     l_rainfall: "Rainfall Record Station",
     l_irrigation_point: "Irrigation Point",
     l_irrigation: "Irrigation",
-    l_catchment: "Catchment Area",
     l_watershed: "Watershed",
-    catchment_dam_1: "Catchment Area DAM 1",
-    catchment_dam_2: "Catchment Area DAM 2",
-    catchment_dam_3: "Catchment Area DAM 3",
-    catchment_oebaba: "Catchment Area OEBABA",
+    watershed:_dam_1: "Watershed DAM 1",
+    watershed:_dam_2: "Watershed DAM 2",
+    watershed:_dam_3: "Watershed DAM 3",
+    watershed:_oebaba: "Watershed OEBABA",
 
     // Network
     l_road: "Road",
@@ -662,13 +660,11 @@ export const DICTS: Record<Lang, Dict> = {
     l_rainfall: "Estação de Registo de Precipitação",
     l_irrigation_point: "Ponto de Irrigação",
     l_irrigation: "Irrigação",
-    l_catchment: "Bacia de Drenagem",
     l_watershed: "Bacia Hidrográfica",
-    catchment_dam_1: "Área de Captação DAM 1",
-    catchment_dam_2: "Área de Captação DAM 2",
-    catchment_dam_3: "Área de Captação DAM 3",
-    catchment_oebaba: "Área de Captação OEBABA",
-
+    watershed_dam_1: "Bacia Hidrográfica DAM 1",
+    watershed_dam_2: "Bacia Hidrográfica DAM 2",
+    watershed_dam_3: "Bacia Hidrográfica DAM 3",
+    watershed_oebaba: "Bacia Hidrográfica OEBABA",
     // Network
     l_road: "Estrada",
 
