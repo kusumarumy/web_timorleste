@@ -183,6 +183,7 @@ sublayers?: {
   labelKey: string;
   filterValue: string;
   outlineColor?: string;
+  color?: string;
 }[];
 
   children?: LayerDef[];
