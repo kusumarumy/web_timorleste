@@ -942,7 +942,6 @@ export const GROUPS: LayerGroup[] = [
           svg: "weir",
         },
       },
-
 {
   id: "irrigation",
   nameKey: "l_irrigation",
@@ -963,25 +962,25 @@ export const GROUPS: LayerGroup[] = [
       id: "belum_teridentifikasi",
       labelKey: "irrigation_unidentified",
       filterValue: "BELUM TERIDENTIFIKASI",
-      outlineColor: "#00BCD4",
+      color: "#00BCD4",
     },
     {
       id: "pembuang",
       labelKey: "irrigation_pembuang",
       filterValue: "PEMBUANG",
-      outlineColor: "#00E676",
+      color: "#00E676",
     },
     {
       id: "primer",
       labelKey: "irrigation_primer",
       filterValue: "PRIMER",
-      outlineColor: "#FFD600",
+      color: "#FFD600",
     },
     {
       id: "sekunder",
       labelKey: "irrigation_sekunder",
       filterValue: "SEKUNDER",
-      outlineColor: "#F44336",
+      color: "#F44336",
     },
   ],
 },
