@@ -76,10 +76,10 @@ export const DICTS: Record<Lang, Dict> = {
     l_irrigation_point: "Titik Irigasi",
     l_irrigation: "Irigasi",
     l_watershed: "Daerah Aliran Sungai",
-    watershed:_dam_1: "Daerah Aliran Sungai DAM 1",
-    watershed:_dam_2: "Daerah Aliran Sungai DAM 2",
-    watershed:_dam_3: "Daerah TAliran Sungai DAM 3",
-    watershed:_oebaba: "Daerah Aliran Sungai OEBABA",
+    watershed_dam_1: "Daerah Aliran Sungai DAM 1",
+    watershed_dam_2: "Daerah Aliran Sungai DAM 2",
+    watershed_dam_3: "Daerah TAliran Sungai DAM 3",
+    watershed_oebaba: "Daerah Aliran Sungai OEBABA",
 
     // Transportation
     l_road: "Jalan",
@@ -365,10 +365,10 @@ export const DICTS: Record<Lang, Dict> = {
     l_irrigation_point: "Irrigation Point",
     l_irrigation: "Irrigation",
     l_watershed: "Watershed",
-    watershed:_dam_1: "Watershed DAM 1",
-    watershed:_dam_2: "Watershed DAM 2",
-    watershed:_dam_3: "Watershed DAM 3",
-    watershed:_oebaba: "Watershed OEBABA",
+    watershed_dam_1: "Watershed DAM 1",
+    watershed_dam_2: "Watershed DAM 2",
+    watershed_dam_3: "Watershed DAM 3",
+    watershed_oebaba: "Watershed OEBABA",
 
     // Network
     l_road: "Road",
