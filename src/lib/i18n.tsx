@@ -14,9 +14,20 @@ export const DICTS: Record<Lang, Dict> = {
     panelsub: "Nyalakan atau matikan layer sesuai kebutuhan analisis.",
     legend: "Legenda",
     crs: "EPSG:32751 (WGS 84 / UTM 51S)",
+welcomeDescription:
+  "Jelajahi bentang alam, terrain, dan informasi spasial Ainaro–Belulik.",
 
-    load: "Memuat GeoLandscape",
-    load2: "Menyiapkan terrain & layer spasial",
+loadPhase1:
+  "Menyiapkan terrain...",
+loadPhase2:
+  "Memuat data spasial...",
+loadPhase3:
+  "Membangun visualisasi landscape...",
+loadPhase4:
+  "Menyiapkan peta untuk eksplorasi...",
+
+live:
+  "Live",
 
     // Group
     g_aoi: "Area of Interest",
@@ -315,9 +326,20 @@ export const DICTS: Record<Lang, Dict> = {
     panelsub: "Toggle layers on or off to fit your analysis.",
     legend: "Legend",
     crs: "EPSG:32751 (WGS 84 / UTM 51S)",
+welcomeDescription:
+  "Explore the landscape, terrain, and spatial information of Ainaro–Belulik.",
 
-    load: "Loading GeoLandscape",
-    load2: "Preparing terrain & spatial layers",
+loadPhase1:
+  "Preparing terrain...",
+loadPhase2:
+  "Loading spatial data...",
+loadPhase3:
+  "Building the landscape visualization...",
+loadPhase4:
+  "Preparing the map for exploration...",
+
+live:
+  "Live",
 
     // Group
     g_aoi: "Area of Interest",
@@ -617,9 +639,20 @@ export const DICTS: Record<Lang, Dict> = {
     panelsub: "Ative ou desative camadas conforme a sua análise.",
     legend: "Legenda",
     crs: "EPSG:32751 (WGS 84 / UTM 51S)",
+welcomeDescription:
+  "Explore a paisagem, o terreno e a informação espacial de Ainaro–Belulik.",
 
-    load: "A carregar o GeoLandscape",
-    load2: "A preparar o terreno e as camadas espaciais",
+loadPhase1:
+  "A preparar o terreno...",
+loadPhase2:
+  "A carregar dados espaciais...",
+loadPhase3:
+  "A construir a visualização da paisagem...",
+loadPhase4:
+  "A preparar o mapa para exploração...",
+
+live:
+  "Ao vivo",
 
     // Group
     g_aoi: "Área de Interesse",
