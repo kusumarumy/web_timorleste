@@ -896,7 +896,7 @@ export const GROUPS: LayerGroup[] = [
         clickable: true,
 
         icon: icon("rainfall"),
-        iconSize: 0.04,
+        iconSize: 0.05,
         paint: {},
 
         defaultOn: false,
@@ -924,7 +924,7 @@ export const GROUPS: LayerGroup[] = [
         clickable: true,
 
         icon: icon("weir"),
-        iconSize: 0.04,
+        iconSize: 0.05,
         paint: {},
 
         defaultOn: false,
