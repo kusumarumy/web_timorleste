@@ -529,130 +529,76 @@ export function Loader({ hidden }: { hidden: boolean }) {
           : "opacity-100"
       }`}
     >
-      {/* ======================================================
-          CINEMATIC BACKGROUND
-      ====================================================== */}
+     {/* ======================================================
+    CINEMATIC BACKGROUND
+====================================================== */}
 
-      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+<div className="pointer-events-none absolute inset-0 overflow-hidden">
 
-        {/* AINARO LANDSCAPE */}
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage:
-              "url('/images/ainaro-landscape.jpg')",
-            filter:
-              "brightness(.43) saturate(.78) contrast(1.08)",
-          }}
-        />
+  {/* ==================================================
+      AINARO – BELULIK LANDSCAPE
+  ================================================== */}
 
-        {/* Deep cinematic blue */}
-        <div className="absolute inset-0 bg-[#06151E]/55" />
+  <img
+    src="/icons/loading.png"
+    alt=""
+    className="absolute inset-0 h-full w-full object-cover"
+    style={{
+      filter:
+        "brightness(.48) saturate(.82) contrast(1.08)",
+    }}
+  />
 
-        {/* Central atmosphere */}
-        <div
-          className="absolute left-1/2 top-[43%] h-[600px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal/[0.08] blur-[130px]"
-          style={{
-            animation:
-              "geoAtmosphere 7s ease-in-out infinite",
-          }}
-        />
+  {/* ==================================================
+      DEEP CINEMATIC OVERLAY
+  ================================================== */}
 
-        {/* ==================================================
-            TOPOGRAPHIC CONTOUR — LEFT
-        ================================================== */}
+  <div className="absolute inset-0 bg-[#03131B]/42" />
 
-        <svg
-          className="absolute left-[-8%] top-[10%] h-[72%] w-[48%] opacity-[0.18]"
-          viewBox="0 0 500 700"
-          fill="none"
-        >
-          <path
-            d="M40 90 C120 20 230 45 280 120 C330 195 245 235 150 220 C55 205 15 285 80 350 C145 415 300 365 360 430 C420 495 345 570 240 590 C135 610 80 660 40 700"
-            stroke="currentColor"
-            className="text-teal"
-            strokeWidth="1"
-          />
+  {/* ==================================================
+      CENTRAL TEAL ATMOSPHERE
+  ================================================== */}
 
-          <path
-            d="M20 130 C110 55 215 75 255 145 C295 215 225 250 145 240 C65 230 35 290 95 335 C155 380 280 350 330 425 C380 500 315 545 225 565 C135 585 75 635 35 690"
-            stroke="currentColor"
-            className="text-teal"
-            strokeWidth="1"
-          />
+  <div
+    className="absolute left-1/2 top-[43%] h-[650px] w-[850px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal/[0.08] blur-[140px]"
+    style={{
+      animation:
+        "geoAtmosphere 7s ease-in-out infinite",
+    }}
+  />
 
-          <path
-            d="M90 165 C150 110 205 125 225 170 C245 215 200 235 150 230 C100 225 80 275 120 305 C160 335 245 325 280 390 C315 455 275 500 210 515"
-            stroke="currentColor"
-            className="text-teal"
-            strokeWidth="1"
-          />
+  {/* ==================================================
+      SPATIAL GRID
+  ================================================== */}
 
-          <path
-            d="M120 200 C160 165 195 170 205 200 C215 230 185 240 150 238 C120 236 105 265 135 285 C165 305 220 300 245 340"
-            stroke="currentColor"
-            className="text-teal"
-            strokeWidth="1"
-          />
-        </svg>
+  <div
+    className="absolute inset-0 opacity-[0.035]"
+    style={{
+      backgroundImage:
+        "linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px)",
+      backgroundSize: "70px 70px",
+    }}
+  />
 
-        {/* ==================================================
-            TOPOGRAPHIC CONTOUR — RIGHT
-        ================================================== */}
+  {/* ==================================================
+      CENTER FOCUS
+  ================================================== */}
 
-        <svg
-          className="absolute right-[-10%] bottom-[0%] h-[62%] w-[45%] opacity-[0.15]"
-          viewBox="0 0 500 600"
-          fill="none"
-        >
-          <path
-            d="M450 20 C360 70 330 130 390 185 C450 240 340 285 260 255 C180 225 120 290 170 350 C220 410 350 390 390 455 C430 520 340 560 250 590"
-            stroke="currentColor"
-            className="text-teal"
-            strokeWidth="1"
-          />
+  <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_42%,transparent_15%,rgba(2,10,15,.12)_48%,rgba(2,8,12,.72)_100%)]" />
 
-          <path
-            d="M470 70 C390 110 365 150 410 200 C450 245 355 270 285 250 C215 230 155 285 200 330 C245 375 345 365 375 425 C405 485 330 525 270 550"
-            stroke="currentColor"
-            className="text-teal"
-            strokeWidth="1"
-          />
+  {/* ==================================================
+      BOTTOM CINEMATIC FADE
+  ================================================== */}
 
-          <path
-            d="M440 115 C385 145 375 175 405 205 C430 235 355 250 305 240 C255 230 210 270 240 300 C270 330 330 325 350 370"
-            stroke="currentColor"
-            className="text-teal"
-            strokeWidth="1"
-          />
-        </svg>
+  <div className="absolute inset-x-0 bottom-0 h-[38%] bg-gradient-to-t from-[#06151E] via-[#06151E]/65 to-transparent" />
 
-        {/* ==================================================
-            SPATIAL GRID
-        ================================================== */}
+  {/* ==================================================
+      TOP CINEMATIC FADE
+  ================================================== */}
 
-        <div
-          className="absolute inset-0 opacity-[0.045]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px)",
-            backgroundSize: "70px 70px",
-          }}
-        />
+  <div className="absolute inset-x-0 top-0 h-[24%] bg-gradient-to-b from-[#06151E]/60 to-transparent" />
 
-        {/* ==================================================
-            VIGNETTE
-        ================================================== */}
-
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_12%,rgba(2,10,15,.18)_45%,rgba(2,8,12,.78)_100%)]" />
-
-        {/* Bottom cinematic fade */}
-        <div className="absolute inset-x-0 bottom-0 h-[35%] bg-gradient-to-t from-[#06151E] via-[#06151E]/70 to-transparent" />
-
-        {/* Top cinematic fade */}
-        <div className="absolute inset-x-0 top-0 h-[22%] bg-gradient-to-b from-[#06151E]/65 to-transparent" />
-      </div>
-
+</div>
       {/* ======================================================
           SPATIAL LOCATION HUD
       ====================================================== */}
