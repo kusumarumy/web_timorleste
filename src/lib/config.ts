@@ -913,31 +913,31 @@ export const GROUPS: LayerGroup[] = [
       opacity: SYM.polygon.irrigationScheme.opacity,
       opacityProp: "fill-opacity",
       sublayers: [
-        {
-          id: "4schema_oebaba",
-          labelKey: "l_4schema_oebaba",
-          filterValue: "OEBABA",
-          outlineColor: SYM.polygon.irrigationScheme.outlines.oebaba,
-        },
-        {
-          id: "4schema_luan_kadoe",
-          labelKey: "l_4schema_luan_kadoe",
-          filterValue: "LUAN KADOE, AKADIRU KEDE, &KAKEULAKU",
-          outlineColor: SYM.polygon.irrigationScheme.outlines.luanKadoe,
-        },
-        {
-          id: "4schema_paulata_lias",
-          labelKey: "l_4schema_paulata_lias",
-          filterValue: "PAULATA & LIAS",
-          outlineColor: SYM.polygon.irrigationScheme.outlines.paulataLias,
-        },
-        {
-          id: "4schema_raibere_buiha",
-          labelKey: "l_4schema_raibere_buiha",
-          filterValue: "RAIBERE & BUIHA",
-          outlineColor: SYM.polygon.irrigationScheme.outlines.raibereBuiha,
-        },
-      ],
+      {
+        id: "4schema_oebaba",
+        labelKey: "l_4schema_oebaba",
+        filterValue: "OEBABA",
+        outlineColor: "#00E5FF",
+      },
+      {
+        id: "4schema_luan_kadoe",
+        labelKey: "l_4schema_luan_kadoe",
+        filterValue: "LUAN KADOE, AKADIRU KEDE, &KAKEULAKU",
+        outlineColor: "#B6FF00",
+      },
+      {
+        id: "4schema_paulata_lias",
+        labelKey: "l_4schema_paulata_lias",
+        filterValue: "PAULATA & LIAS",
+        outlineColor: "#FFB300",
+      },
+      {
+        id: "4schema_raibere_buiha",
+        labelKey: "l_4schema_raibere_buiha",
+        filterValue: "RAIBERE & BUIHA",
+        outlineColor: "#FF4D6D",
+      },
+    ],
     },
     {
       id: "8irrigationareas",
