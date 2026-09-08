@@ -177,8 +177,8 @@ export interface LayerDef {
     size: number;
     svg: string;
   };
-
   subProp?: string;
+  sublayers?: LayerSubLayer[];
 
   defaultOn: boolean;
 
