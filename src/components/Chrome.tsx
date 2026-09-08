@@ -545,7 +545,12 @@ export function Loader({ hidden }: { hidden: boolean }) {
 
               <div className="flex h-[48px] w-[48px] items-center justify-center rounded-[14px] border border-white/10 bg-white/[0.035] shadow-[0_8px_35px_rgba(0,0,0,.25)]">
 
-                <div className="h-[24px] w-[24px] rounded-full border-[2px] border-teal/30 border-t-teal animate-spin" />
+                <div
+  className="h-[24px] w-[24px] rounded-full border-[2px] border-teal/30 border-t-teal"
+  style={{
+    animation: "layerLoadingSpin 1s linear infinite",
+  }}
+/>
 
               </div>
 
@@ -777,12 +782,15 @@ export function Loader({ hidden }: { hidden: boolean }) {
 
               <span className="h-1.5 w-1.5 rounded-full bg-teal animate-pulse" />
 
-              <span
-                key={phase}
-                className="text-[11px] font-medium tracking-wide text-white/55"
-              >
-                {phases[phase]}
-              </span>
+<span
+  key={phase}
+  className="text-[11px] font-medium tracking-wide text-white/55"
+  style={{
+    animation: "layerLoadingIn 0.45s ease-out",
+  }}
+>
+  {phases[phase]}
+</span>
 
             </div>
 
@@ -791,7 +799,7 @@ export function Loader({ hidden }: { hidden: boolean }) {
 
             <div className="mx-auto h-[2px] w-[180px] overflow-hidden rounded-full bg-white/[0.07]">
 
-              <div className="h-full w-[45%] animate-[loading_2.4s_ease-in-out_infinite] rounded-full bg-teal" />
+              className="h-full w-[45%] animate-[layerLoadingProgress_2.4s_ease-in-out_infinite] rounded-full bg-teal"
 
             </div>
 
