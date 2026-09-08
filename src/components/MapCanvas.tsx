@@ -1035,8 +1035,8 @@ const outlineLayer =
     className="layer-loading-popup"
     style={{
       position: "absolute",
-      top: "78px",
-      right: "360px",
+      top: "15px",
+      right: "150px",
       zIndex: 30,
     }}
   >
