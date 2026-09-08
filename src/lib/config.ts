@@ -178,19 +178,17 @@ subProp?: string;
 
   clickable?: boolean;
 
-sublayers?: {
+type LayerSubLayer = {
   id: string;
   labelKey: string;
   filterValue: string;
   color?: string;
   outlineColor?: string;
 
-  statuses?: {
-    id: string;
-    labelKey: string;
-    filterValue: string;
-  }[];
-}[];
+  subProp?: string;
+
+  sublayers?: LayerSubLayer[];
+};
 
   children?: LayerDef[];
 
@@ -991,7 +989,7 @@ export const GROUPS: LayerGroup[] = [
     },
   ],
 },
-  {
+ {
   id: "8irrigationareas",
   nameKey: "l_8irrigationareas",
   kind: "fill",
@@ -1015,15 +1013,15 @@ export const GROUPS: LayerGroup[] = [
       filterValue: "AKADIRU KEDE",
       outlineColor: "#2196F3",
 
-      statuses: [
+      sublayers: [
         {
           id: "akadiru_kede_fungsional",
-          labelKey: "fungsional",
+          labelKey: "irrigation_functional",
           filterValue: "FUNGSIONAL",
         },
         {
           id: "akadiru_kede_potensial",
-          labelKey: "potensial",
+          labelKey: "irrigation_potential",
           filterValue: "POTENSIAL",
         },
       ],
@@ -1035,20 +1033,20 @@ export const GROUPS: LayerGroup[] = [
       filterValue: "BUIHA",
       outlineColor: "#FF9800",
 
-      statuses: [
+      sublayers: [
         {
           id: "buiha_fungsional",
-          labelKey: "fungsional",
+          labelKey: "irrigation_functional",
           filterValue: "FUNGSIONAL",
         },
         {
           id: "buiha_potensial",
-          labelKey: "potensial",
+          labelKey: "irrigation_potential",
           filterValue: "POTENSIAL",
         },
         {
-          id: "buiha_crop",
-          labelKey: "crop_plantation",
+          id: "buiha_crop_plantation",
+          labelKey: "irrigation_crop_plantation",
           filterValue: "CROP PLANTATION",
         },
       ],
@@ -1060,15 +1058,15 @@ export const GROUPS: LayerGroup[] = [
       filterValue: "KAKEULAKU",
       outlineColor: "#F44336",
 
-      statuses: [
+      sublayers: [
         {
           id: "kakeulaku_fungsional",
-          labelKey: "fungsional",
+          labelKey: "irrigation_functional",
           filterValue: "FUNGSIONAL",
         },
         {
           id: "kakeulaku_potensial",
-          labelKey: "potensial",
+          labelKey: "irrigation_potential",
           filterValue: "POTENSIAL",
         },
       ],
@@ -1080,15 +1078,15 @@ export const GROUPS: LayerGroup[] = [
       filterValue: "LIAS",
       outlineColor: "#FFC107",
 
-      statuses: [
+      sublayers: [
         {
           id: "lias_fungsional",
-          labelKey: "fungsional",
+          labelKey: "irrigation_functional",
           filterValue: "FUNGSIONAL",
         },
         {
-          id: "lias_crop",
-          labelKey: "crop_plantation",
+          id: "lias_crop_plantation",
+          labelKey: "irrigation_crop_plantation",
           filterValue: "CROP PLANTATION",
         },
       ],
@@ -1100,10 +1098,10 @@ export const GROUPS: LayerGroup[] = [
       filterValue: "LUAN KADOE",
       outlineColor: "#00BCD4",
 
-      statuses: [
+      sublayers: [
         {
           id: "luan_kadoe_fungsional",
-          labelKey: "fungsional",
+          labelKey: "irrigation_functional",
           filterValue: "FUNGSIONAL",
         },
       ],
@@ -1115,10 +1113,10 @@ export const GROUPS: LayerGroup[] = [
       filterValue: "PAULATA",
       outlineColor: "#E91E63",
 
-      statuses: [
+      sublayers: [
         {
           id: "paulata_fungsional",
-          labelKey: "fungsional",
+          labelKey: "irrigation_functional",
           filterValue: "FUNGSIONAL",
         },
       ],
@@ -1130,15 +1128,15 @@ export const GROUPS: LayerGroup[] = [
       filterValue: "RAIBERE",
       outlineColor: "#4CAF50",
 
-      statuses: [
+      sublayers: [
         {
           id: "raibere_fungsional",
-          labelKey: "fungsional",
+          labelKey: "irrigation_functional",
           filterValue: "FUNGSIONAL",
         },
         {
           id: "raibere_potensial",
-          labelKey: "potensial",
+          labelKey: "irrigation_potential",
           filterValue: "POTENSIAL",
         },
       ],
@@ -1150,20 +1148,20 @@ export const GROUPS: LayerGroup[] = [
       filterValue: "OEBABA",
       outlineColor: "#FFFFFF",
 
-      statuses: [
+      sublayers: [
         {
           id: "oebaba_fungsional",
-          labelKey: "fungsional",
+          labelKey: "irrigation_functional",
           filterValue: "FUNGSIONAL",
         },
         {
           id: "oebaba_potensial",
-          labelKey: "potensial",
+          labelKey: "irrigation_potential",
           filterValue: "POTENSIAL",
         },
         {
-          id: "oebaba_crop",
-          labelKey: "crop_plantation",
+          id: "oebaba_crop_plantation",
+          labelKey: "irrigation_crop_plantation",
           filterValue: "CROP PLANTATION",
         },
       ],
