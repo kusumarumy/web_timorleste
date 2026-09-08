@@ -192,7 +192,6 @@ function LayerRow({
 
   return (
     <div>
-      {/* MAIN LAYER */}
       <div
         className={`group flex items-center gap-1.5 rounded-[8px] py-1 transition-colors hover:bg-teal/[0.07] ${
           depth > 0 ? "pl-4 pr-1.5" : "px-1.5"
@@ -296,8 +295,8 @@ function LayerRow({
 
                           <span className="h-[5px] w-[5px] flex-none rounded-full bg-muted2/70" />
 
-                          <span className="truncate">
-                            {t(status.labelKey)}
+                          <span className="min-w-0 leading-tight break-words">
+                            {t(l.nameKey)}
                           </span>
                         </label>
                       );
