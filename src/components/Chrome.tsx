@@ -1094,145 +1094,531 @@ useEffect(() => {
       0 m
     </div>
 
- <svg
+{/* ==================================================
+    3D MOUNTAIN TERRAIN PROFILE
+================================================== */}
+
+<svg
   viewBox="0 0 700 160"
   preserveAspectRatio="none"
   className="absolute inset-x-5 bottom-5 h-[155px] w-[calc(100%-40px)]"
 >
-  {/* TERRAIN BASE */}
+  <defs>
+
+    {/* MAIN TERRAIN GRADIENT */}
+    <linearGradient
+      id="terrainFill"
+      x1="0"
+      y1="0"
+      x2="0"
+      y2="1"
+    >
+      <stop
+        offset="0%"
+        stopColor="#39d6cf"
+        stopOpacity="0.48"
+      />
+
+      <stop
+        offset="45%"
+        stopColor="#168e91"
+        stopOpacity="0.28"
+      />
+
+      <stop
+        offset="100%"
+        stopColor="#06343e"
+        stopOpacity="0.08"
+      />
+    </linearGradient>
+
+    {/* BACK MOUNTAIN */}
+    <linearGradient
+      id="backMountain"
+      x1="0"
+      y1="0"
+      x2="0"
+      y2="1"
+    >
+      <stop
+        offset="0%"
+        stopColor="#5be0da"
+        stopOpacity="0.28"
+      />
+
+      <stop
+        offset="100%"
+        stopColor="#062631"
+        stopOpacity="0.05"
+      />
+    </linearGradient>
+
+    {/* FRONT MOUNTAIN */}
+    <linearGradient
+      id="frontMountain"
+      x1="0"
+      y1="0"
+      x2="0"
+      y2="1"
+    >
+      <stop
+        offset="0%"
+        stopColor="#20c8c2"
+        stopOpacity="0.52"
+      />
+
+      <stop
+        offset="50%"
+        stopColor="#08777c"
+        stopOpacity="0.35"
+      />
+
+      <stop
+        offset="100%"
+        stopColor="#031b25"
+        stopOpacity="0.08"
+      />
+    </linearGradient>
+
+    {/* GLOW */}
+    <filter
+      id="terrainGlow"
+      x="-30%"
+      y="-30%"
+      width="160%"
+      height="160%"
+    >
+      <feGaussianBlur
+        stdDeviation="2"
+        result="blur"
+      />
+
+      <feMerge>
+        <feMergeNode in="blur" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+
+  </defs>
+
+
+  {/* ==================================================
+      BACK MOUNTAIN RANGE
+  ================================================== */}
+
   <path
     d="
-      M0 135
-      C35 130 55 112 85 118
-      C115 124 130 105 150 92
-      C172 77 188 42 215 50
-      C242 58 250 91 275 99
-      C300 106 318 77 340 59
-      C360 42 375 30 394 42
-      C418 58 425 89 448 96
-      C470 103 490 78 510 55
-      C528 35 545 28 563 43
-      C585 60 592 88 615 91
-      C642 94 665 70 700 62
+      M0 128
+
+      L55 106
+      L95 115
+      L135 82
+      L172 104
+
+      L215 68
+      L250 92
+
+      L290 54
+      L325 82
+
+      L365 38
+      L405 83
+
+      L445 61
+      L480 94
+
+      L520 48
+      L555 79
+
+      L600 57
+      L640 89
+      L700 62
+
       L700 160
       L0 160
       Z
     "
-    className="fill-teal/[0.16]"
+    fill="url(#backMountain)"
   />
 
-  {/* TERRAIN SHADOW */}
+
+  {/* ==================================================
+      BACK MOUNTAIN RIDGE
+  ================================================== */}
+
   <path
     d="
-      M0 138
-      C40 131 58 119 86 123
-      C115 127 136 108 154 98
-      C178 84 188 58 213 64
-      C238 70 251 98 276 105
-      C301 111 320 88 340 72
-      C362 55 378 44 395 55
-      C418 70 427 98 449 103
-      C472 108 491 88 511 67
-      C531 47 545 41 562 54
-      C585 71 593 96 616 99
-      C645 103 670 80 700 72
-      L700 160
-      L0 160
+      M0 128
+      L55 106
+      L95 115
+      L135 82
+      L172 104
+      L215 68
+      L250 92
+      L290 54
+      L325 82
+      L365 38
+      L405 83
+      L445 61
+      L480 94
+      L520 48
+      L555 79
+      L600 57
+      L640 89
+      L700 62
+    "
+    fill="none"
+    stroke="#54d9d3"
+    strokeWidth="1"
+    strokeOpacity="0.45"
+  />
+
+
+  {/* ==================================================
+      MOUNTAIN SHADING FACETS
+  ================================================== */}
+
+  {/* Peak 1 */}
+
+  <path
+    d="
+      M135 82
+      L108 108
+      L151 98
+      L172 104
       Z
     "
-    className="fill-[#061923]/80"
+    fill="#63e4dd"
+    fillOpacity="0.18"
   />
 
-  {/* MOUNTAIN RIDGES */}
   <path
     d="
-      M0 135
-      C35 130 55 112 85 118
-      C115 124 130 105 150 92
-      C172 77 188 42 215 50
-      C242 58 250 91 275 99
-
-      M300 106
-      C318 77 340 59 360 43
-      C375 30 390 31 405 47
-      C420 64 430 91 448 96
-
-      M470 103
-      C490 78 510 55 528 38
-      C544 25 557 31 570 47
-      C586 66 595 88 615 91
-
-      M642 94
-      C665 70 680 66 700 62
+      M135 82
+      L151 98
+      L140 116
+      L108 108
+      Z
     "
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="1.3"
-    className="text-teal/70"
+    fill="#052a35"
+    fillOpacity="0.55"
   />
 
-  {/* INNER CONTOURS */}
+
+  {/* Peak 2 */}
+
   <path
     d="
-      M65 119
-      C105 118 130 103 153 91
-      C178 77 190 59 212 65
-      C235 72 246 91 270 97
+      M215 68
+      L187 101
+      L225 89
+      L250 92
+      Z
+    "
+    fill="#6ce7e0"
+    fillOpacity="0.22"
+  />
 
-      M305 96
-      C330 75 347 57 365 50
-      C382 44 395 51 408 65
-      C423 82 431 94 448 98
+  <path
+    d="
+      M215 68
+      L225 89
+      L250 92
+      L238 111
+      L205 96
+      Z
+    "
+    fill="#052832"
+    fillOpacity="0.65"
+  />
 
-      M480 92
-      C500 74 515 57 530 49
-      C545 42 558 49 570 62
-      C584 77 594 89 610 92
+
+  {/* Main central mountain */}
+
+  <path
+    d="
+      M365 38
+      L326 91
+      L365 70
+      L405 83
+      Z
+    "
+    fill="#78eee7"
+    fillOpacity="0.30"
+  />
+
+  <path
+    d="
+      M365 38
+      L365 70
+      L405 83
+      L389 110
+      L348 91
+      Z
+    "
+    fill="#03222c"
+    fillOpacity="0.70"
+  />
+
+
+  {/* Peak 4 */}
+
+  <path
+    d="
+      M520 48
+      L484 92
+      L523 76
+      L555 79
+      Z
+    "
+    fill="#67e4de"
+    fillOpacity="0.24"
+  />
+
+  <path
+    d="
+      M520 48
+      L523 76
+      L555 79
+      L543 105
+      L505 91
+      Z
+    "
+    fill="#042630"
+    fillOpacity="0.65"
+  />
+
+
+  {/* ==================================================
+      INNER MOUNTAIN CONTOURS
+  ================================================== */}
+
+  <path
+    d="
+      M116 106
+      C127 101 136 96 145 91
+      C153 95 161 99 169 101
     "
     fill="none"
-    stroke="currentColor"
+    stroke="#6ce9e2"
+    strokeWidth="0.7"
+    strokeOpacity="0.45"
+  />
+
+  <path
+    d="
+      M125 111
+      C138 104 148 100 158 98
+      C168 100 176 104 185 108
+    "
+    fill="none"
+    stroke="#45cbc7"
+    strokeWidth="0.55"
+    strokeOpacity="0.35"
+  />
+
+
+  {/* Central mountain contours */}
+
+  <path
+    d="
+      M331 89
+      C343 78 355 68 365 58
+      C376 68 388 76 399 81
+    "
+    fill="none"
+    stroke="#82eee8"
     strokeWidth="0.8"
-    className="text-teal/35"
+    strokeOpacity="0.55"
   />
 
   <path
     d="
-      M90 122
-      C125 116 148 101 168 91
-      C187 81 198 70 214 73
-
-      M320 100
-      C343 82 355 69 370 62
-      C386 56 398 63 410 76
-
-      M495 96
-      C515 80 527 67 540 61
-      C553 56 564 63 574 75
+      M321 99
+      C338 86 350 78 365 68
+      C379 78 393 87 411 94
     "
     fill="none"
-    stroke="currentColor"
+    stroke="#45cbc7"
     strokeWidth="0.6"
-    className="text-teal/25"
+    strokeOpacity="0.38"
   />
 
-  {/* MAIN ELEVATION LINE */}
   <path
     d="
-      M0 130
-      C35 122 55 105 84 109
-      C112 113 128 121 151 104
-      C176 86 189 54 216 61
-      C244 68 257 100 280 89
-      C307 76 327 35 353 43
-      C381 51 394 86 418 76
-      C446 65 465 34 491 44
-      C520 55 531 89 555 81
-      C585 71 620 51 700 47
+      M313 108
+      C332 94 348 87 365 77
+      C383 89 399 97 420 103
     "
     fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    className="text-teal"
+    stroke="#36aaa9"
+    strokeWidth="0.55"
+    strokeOpacity="0.28"
+  />
+
+
+  {/* Right mountain contours */}
+
+  <path
+    d="
+      M489 91
+      C501 81 511 72 520 61
+      C530 70 540 77 551 82
+    "
+    fill="none"
+    stroke="#7aeae4"
+    strokeWidth="0.7"
+    strokeOpacity="0.48"
+  />
+
+  <path
+    d="
+      M480 101
+      C497 88 509 81 521 71
+      C535 83 548 89 564 94
+    "
+    fill="none"
+    stroke="#42c5c2"
+    strokeWidth="0.55"
+    strokeOpacity="0.32"
+  />
+
+
+  {/* ==================================================
+      FRONT TERRAIN MASS
+  ================================================== */}
+
+  <path
+    d="
+      M0 139
+
+      C35 131 55 126 80 129
+      C105 132 122 122 145 117
+
+      C170 111 186 119 210 116
+
+      C238 112 254 96 275 99
+
+      C300 103 315 116 340 112
+
+      C365 108 381 91 404 94
+
+      C430 98 443 112 470 109
+
+      C498 106 512 91 535 93
+
+      C558 95 573 108 600 105
+
+      C630 101 654 91 700 88
+
+      L700 160
+      L0 160
+      Z
+    "
+    fill="url(#frontMountain)"
+  />
+
+
+  {/* ==================================================
+      FRONT TERRAIN RIDGE
+  ================================================== */}
+
+  <path
+    d="
+      M0 139
+
+      C35 131 55 126 80 129
+      C105 132 122 122 145 117
+
+      C170 111 186 119 210 116
+
+      C238 112 254 96 275 99
+
+      C300 103 315 116 340 112
+
+      C365 108 381 91 404 94
+
+      C430 98 443 112 470 109
+
+      C498 106 512 91 535 93
+
+      C558 95 573 108 600 105
+
+      C630 101 654 91 700 88
+    "
+    fill="none"
+    stroke="#3bd8d2"
+    strokeWidth="1.4"
+    strokeOpacity="0.65"
+  />
+
+
+  {/* ==================================================
+      FRONT CONTOUR LINES
+  ================================================== */}
+
+  <path
+    d="
+      M30 143
+      C70 135 100 137 130 127
+      C160 117 180 126 210 122
+      C240 117 257 105 276 107
+      C301 111 318 123 342 119
+      C368 114 382 101 404 102
+      C430 105 445 119 470 115
+      C500 111 516 100 536 101
+      C560 103 578 115 602 112
+      C635 108 665 99 700 96
+    "
+    fill="none"
+    stroke="#53d5d0"
+    strokeWidth="0.7"
+    strokeOpacity="0.32"
+  />
+
+  <path
+    d="
+      M55 149
+      C88 142 112 143 140 135
+      C168 127 190 134 214 130
+      C244 125 260 114 280 115
+      C304 119 320 130 345 126
+      C370 122 386 110 407 111
+      C431 114 449 128 474 123
+      C501 119 518 109 540 110
+      C563 112 579 123 605 119
+      C636 115 668 108 700 105
+    "
+    fill="none"
+    stroke="#2aa9aa"
+    strokeWidth="0.55"
+    strokeOpacity="0.25"
+  />
+
+
+  {/* ==================================================
+      MAIN ELEVATION LINE
+      Ini sekarang hanya OVERLAY
+  ================================================== */}
+
+  <path
+    d="
+      M0 136
+      C35 127 60 116 88 121
+      C118 127 137 119 158 108
+      C181 96 198 88 220 96
+      C246 105 259 113 282 98
+      C309 80 332 57 355 63
+      C383 70 398 96 421 89
+      C447 81 470 58 494 65
+      C521 73 536 99 560 91
+      C591 81 625 69 700 64
+    "
+    fill="none"
+    stroke="#55eee7"
+    strokeWidth="1.8"
+    strokeOpacity="0.9"
+    filter="url(#terrainGlow)"
     pathLength="1"
     strokeDasharray="1"
     strokeDashoffset="1"
@@ -1246,49 +1632,55 @@ useEffect(() => {
     />
   </path>
 
-  {/* ACTIVE ELEVATION */}
+
+  {/* ==================================================
+      ACTIVE ELEVATION POINT
+  ================================================== */}
+
   <line
-    x1="491"
-    y1="35"
-    x2="491"
+    x1="494"
+    y1="48"
+    x2="494"
     y2="150"
-    stroke="currentColor"
+    stroke="#37ddd7"
     strokeWidth="0.7"
-    className="text-teal/30"
+    strokeOpacity="0.35"
   />
 
   <circle
-    cx="491"
-    cy="44"
+    cx="494"
+    cy="65"
     r="4"
-    className="fill-teal"
+    fill="#5ff4ed"
+    filter="url(#terrainGlow)"
   />
 
   <circle
-    cx="491"
-    cy="44"
+    cx="494"
+    cy="65"
     r="8"
     fill="none"
-    stroke="currentColor"
-    className="text-teal/40"
+    stroke="#49e5df"
+    strokeWidth="1"
+    strokeOpacity="0.45"
   >
     <animate
       attributeName="r"
-      values="5;11;5"
+      values="5;12;5"
       dur="2.5s"
       repeatCount="indefinite"
     />
 
     <animate
       attributeName="opacity"
-      values="0.8;0.1;0.8"
+      values="0.8;0.05;0.8"
       dur="2.5s"
       repeatCount="indefinite"
     />
   </circle>
-</svg>
-   
 
+</svg>
+    
     {/* ==================================================
         LOW / HIGH
     ================================================== */}
