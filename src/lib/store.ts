@@ -1,7 +1,11 @@
 "use client";
 
 import { create } from "zustand";
-import { ALL_LAYERS, TerrainKey } from "./config";
+import {
+  ALL_LAYERS,
+  LayerSubLayer,
+  TerrainKey,
+} from "./config";
 
 interface MapState {
   basemap: string;
@@ -10,13 +14,9 @@ interface MapState {
   visible: Record<string, boolean>;
   toggle: (id: string) => void;
 
-  // KELAS_DI
+  // KELAS_DI + KETERANGAN
   subVisible: Record<string, boolean>;
   toggleSub: (id: string) => void;
-
-  // KETERANGAN / status
-  statusVisible: Record<string, boolean>;
-  toggleStatus: (id: string) => void;
 
   opacity: Record<string, number>;
   setOpacity: (id: string, v: number) => void;
@@ -50,7 +50,34 @@ interface MapState {
 const initialVisible: Record<string, boolean> = {};
 const initialOpacity: Record<string, number> = {};
 const initialSubVisible: Record<string, boolean> = {};
-const initialStatusVisible: Record<string, boolean> = {};
+
+/*
+ * Semua level sublayer diinisialisasi secara recursive.
+ *
+ * Contoh:
+ *
+ * 8 Daerah Irigasi
+ * ├── AKADIRU KEDE
+ * │   ├── FUNGSIONAL
+ * │   └── POTENSIAL
+ * ├── BUIHA
+ * │   ├── FUNGSIONAL
+ * │   ├── POTENSIAL
+ * │   └── CROP PLANTATION
+ * └── ...
+ */
+function collectSubVisible(
+  sublayers?: LayerSubLayer[]
+) {
+  if (!sublayers) return;
+
+  for (const sub of sublayers) {
+    initialSubVisible[sub.id] = true;
+
+    // Kalau masih mempunyai anak, lanjut recursive
+    collectSubVisible(sub.sublayers);
+  }
+}
 
 ALL_LAYERS.forEach((layer) => {
   initialVisible[layer.id] = layer.defaultOn;
@@ -59,19 +86,7 @@ ALL_LAYERS.forEach((layer) => {
     initialOpacity[layer.id] = layer.opacity;
   }
 
-  /*
-   * KELAS_DI
-   */
-  (layer.sublayers ?? []).forEach((sub) => {
-    initialSubVisible[sub.id] = true;
-
-    /*
-     * KETERANGAN / STATUS
-     */
-    (sub.statuses ?? []).forEach((status) => {
-      initialStatusVisible[status.id] = true;
-    });
-  });
+  collectSubVisible(layer.sublayers);
 });
 
 /* =========================================================
@@ -105,40 +120,18 @@ export const useMapStore = create<MapState>((set) => ({
     })),
 
   /* -------------------------
-     KELAS_DI
+     KELAS_DI + KETERANGAN
   ------------------------- */
 
   subVisible: initialSubVisible,
 
   toggleSub: (id) =>
-    set((state) => {
-      const newValue = !state.subVisible[id];
-
-      return {
-        subVisible: {
-          ...state.subVisible,
-          [id]: newValue,
-        },
-      };
-    }),
-
-  /* -------------------------
-     KETERANGAN / STATUS
-  ------------------------- */
-
-  statusVisible: initialStatusVisible,
-
-  toggleStatus: (id) =>
-    set((state) => {
-      const newValue = !state.statusVisible[id];
-
-      return {
-        statusVisible: {
-          ...state.statusVisible,
-          [id]: newValue,
-        },
-      };
-    }),
+    set((state) => ({
+      subVisible: {
+        ...state.subVisible,
+        [id]: !(state.subVisible[id] ?? true),
+      },
+    })),
 
   /* -------------------------
      OPACITY
