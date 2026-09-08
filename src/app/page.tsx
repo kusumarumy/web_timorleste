@@ -5,9 +5,7 @@ import { I18nProvider } from "@/lib/i18n";
 import ControlPanel from "@/components/ControlPanel";
 import { TopBar, Legend, StatusBar, Loader } from "@/components/Chrome";
 
-// MapLibre touches `window`, so load the map only on the client.
 const MapCanvas = dynamic(() => import("@/components/MapCanvas"), { ssr: false });
-
 export default function Page() {
   const [ready, setReady] = useState(false);
   return (
