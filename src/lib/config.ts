@@ -1005,164 +1005,185 @@ export const GROUPS: LayerGroup[] = [
       ],
     },
     {
-      id: "8irrigationareas",
-      nameKey: "l_8irrigationareas",
-      kind: "fill",
-      data: v("8irrigationareas"),
-      clickable: true,
-      paint: fillPaint(SYM.polygon.irrigationArea),
-      defaultOn: false,
-      opacity: SYM.polygon.irrigationArea.opacity,
-      opacityProp: "fill-opacity",
-      legend: fillLegend(SYM.polygon.irrigationArea),
-      subProp: "KELAS_DI",
+  id: "8irrigationareas",
+  nameKey: "l_8irrigationareas",
+  kind: "fill",
+  data: v("8irrigationareas"),
+  clickable: true,
+
+  paint: fillPaint(SYM.polygon.irrigationArea),
+
+  defaultOn: false,
+
+  opacity: SYM.polygon.irrigationArea.opacity,
+  opacityProp: "fill-opacity",
+
+  legend: fillLegend(SYM.polygon.irrigationArea),
+
+  subProp: "KELAS_DI",
+
+  sublayers: [
+    {
+      id: "akadiru_kede",
+      labelKey: "di_akadiru_kede",
+      filterValue: "AKADIRU KEDE",
+      outlineColor: "#1565C0",
+
       sublayers: [
         {
-          id: "akadiru_kede",
-          labelKey: "di_akadiru_kede",
-          filterValue: "AKADIRU KEDE",
-          outlineColor: "#01579B",
-          sublayers: [
-            {
-              id: "akadiru_kede_fungsional",
-              labelKey: "irrigation_functional",
-              filterValue: "FUNGSIONAL",
-            },
-            {
-              id: "akadiru_kede_potensial",
-              labelKey: "irrigation_potential",
-              filterValue: "POTENSIAL",
-            },
-          ],
+          id: "akadiru_kede_fungsional",
+          labelKey: "irrigation_functional",
+          filterValue: "FUNGSIONAL",
         },
         {
-          id: "buiha",
-          labelKey: "di_buiha",
-          filterValue: "BUIHA",
-          outlineColor: "#0277BD",
-          sublayers: [
-            {
-              id: "buiha_fungsional",
-              labelKey: "irrigation_functional",
-              filterValue: "FUNGSIONAL",
-            },
-            {
-              id: "buiha_potensial",
-              labelKey: "irrigation_potential",
-              filterValue: "POTENSIAL",
-            },
-            {
-              id: "buiha_crop_plantation",
-              labelKey: "irrigation_crop_plantation",
-              filterValue: "CROP PLANTATION",
-            },
-          ],
-        },
-        {
-          id: "kakeulaku",
-          labelKey: "di_kakeulaku",
-          filterValue: "KAKEULAKU",
-          outlineColor: "#0288D1",
-          sublayers: [
-            {
-              id: "kakeulaku_fungsional",
-              labelKey: "irrigation_functional",
-              filterValue: "FUNGSIONAL",
-            },
-            {
-              id: "kakeulaku_potensial",
-              labelKey: "irrigation_potential",
-              filterValue: "POTENSIAL",
-            },
-          ],
-        },
-        {
-          id: "lias",
-          labelKey: "di_lias",
-          filterValue: "LIAS",
-          outlineColor: "#039BE5",
-          sublayers: [
-            {
-              id: "lias_fungsional",
-              labelKey: "irrigation_functional",
-              filterValue: "FUNGSIONAL",
-            },
-            {
-              id: "lias_crop_plantation",
-              labelKey: "irrigation_crop_plantation",
-              filterValue: "CROP PLANTATION",
-            },
-          ],
-        },
-        {
-          id: "luan_kadoe",
-          labelKey: "di_luan_kadoe",
-          filterValue: "LUAN KADOE",
-          outlineColor: "#00ACC1",
-          sublayers: [
-            {
-              id: "luan_kadoe_fungsional",
-              labelKey: "irrigation_functional",
-              filterValue: "FUNGSIONAL",
-            },
-          ],
-        },
-        {
-          id: "paulata",
-          labelKey: "di_paulata",
-          filterValue: "PAULATA",
-          outlineColor: "#00BCD4",
-          sublayers: [
-            {
-              id: "paulata_fungsional",
-              labelKey: "irrigation_functional",
-              filterValue: "FUNGSIONAL",
-            },
-          ],
-        },
-        {
-          id: "raibere",
-          labelKey: "di_raibere",
-          filterValue: "RAIBERE",
-          outlineColor: "#26C6DA",
-          sublayers: [
-            {
-              id: "raibere_fungsional",
-              labelKey: "irrigation_functional",
-              filterValue: "FUNGSIONAL",
-            },
-            {
-              id: "raibere_potensial",
-              labelKey: "irrigation_potential",
-              filterValue: "POTENSIAL",
-            },
-          ],
-        },
-        {
-          id: "oebaba",
-          labelKey: "di_oebaba",
-          filterValue: "OEBABA",
-          outlineColor: "#4DD0E1",
-          sublayers: [
-            {
-              id: "oebaba_fungsional",
-              labelKey: "irrigation_functional",
-              filterValue: "FUNGSIONAL",
-            },
-            {
-              id: "oebaba_potensial",
-              labelKey: "irrigation_potential",
-              filterValue: "POTENSIAL",
-            },
-            {
-              id: "oebaba_crop_plantation",
-              labelKey: "irrigation_crop_plantation",
-              filterValue: "CROP PLANTATION",
-            },
-          ],
+          id: "akadiru_kede_potensial",
+          labelKey: "irrigation_potential",
+          filterValue: "POTENSIAL",
         },
       ],
     },
+
+    {
+      id: "buiha",
+      labelKey: "di_buiha",
+      filterValue: "BUIHA",
+      outlineColor: "#00ACC1",
+
+      sublayers: [
+        {
+          id: "buiha_fungsional",
+          labelKey: "irrigation_functional",
+          filterValue: "FUNGSIONAL",
+        },
+        {
+          id: "buiha_potensial",
+          labelKey: "irrigation_potential",
+          filterValue: "POTENSIAL",
+        },
+        {
+          id: "buiha_crop_plantation",
+          labelKey: "irrigation_crop_plantation",
+          filterValue: "CROP PLANTATION",
+        },
+      ],
+    },
+
+    {
+      id: "kakeulaku",
+      labelKey: "di_kakeulaku",
+      filterValue: "KAKEULAKU",
+      outlineColor: "#00897B",
+
+      sublayers: [
+        {
+          id: "kakeulaku_fungsional",
+          labelKey: "irrigation_functional",
+          filterValue: "FUNGSIONAL",
+        },
+        {
+          id: "kakeulaku_potensial",
+          labelKey: "irrigation_potential",
+          filterValue: "POTENSIAL",
+        },
+      ],
+    },
+
+    {
+      id: "lias",
+      labelKey: "di_lias",
+      filterValue: "LIAS",
+      outlineColor: "#7B1FA2",
+
+      sublayers: [
+        {
+          id: "lias_fungsional",
+          labelKey: "irrigation_functional",
+          filterValue: "FUNGSIONAL",
+        },
+        {
+          id: "lias_crop_plantation",
+          labelKey: "irrigation_crop_plantation",
+          filterValue: "CROP PLANTATION",
+        },
+      ],
+    },
+
+    {
+      id: "luan_kadoe",
+      labelKey: "di_luan_kadoe",
+      filterValue: "LUAN KADOE",
+      outlineColor: "#3949AB",
+
+      sublayers: [
+        {
+          id: "luan_kadoe_fungsional",
+          labelKey: "irrigation_functional",
+          filterValue: "FUNGSIONAL",
+        },
+      ],
+    },
+
+    {
+      id: "paulata",
+      labelKey: "di_paulata",
+      filterValue: "PAULATA",
+      outlineColor: "#F57C00",
+
+      sublayers: [
+        {
+          id: "paulata_fungsional",
+          labelKey: "irrigation_functional",
+          filterValue: "FUNGSIONAL",
+        },
+      ],
+    },
+
+    {
+      id: "raibere",
+      labelKey: "di_raibere",
+      filterValue: "RAIBERE",
+      outlineColor: "#2E7D32",
+
+      sublayers: [
+        {
+          id: "raibere_fungsional",
+          labelKey: "irrigation_functional",
+          filterValue: "FUNGSIONAL",
+        },
+        {
+          id: "raibere_potensial",
+          labelKey: "irrigation_potential",
+          filterValue: "POTENSIAL",
+        },
+      ],
+    },
+
+    {
+      id: "oebaba",
+      labelKey: "di_oebaba",
+      filterValue: "OEBABA",
+      outlineColor: "#D81B60",
+
+      sublayers: [
+        {
+          id: "oebaba_fungsional",
+          labelKey: "irrigation_functional",
+          filterValue: "FUNGSIONAL",
+        },
+        {
+          id: "oebaba_potensial",
+          labelKey: "irrigation_potential",
+          filterValue: "POTENSIAL",
+        },
+        {
+          id: "oebaba_crop_plantation",
+          labelKey: "irrigation_crop_plantation",
+          filterValue: "CROP PLANTATION",
+        },
+      ],
+    },
+  ],
+},
      {
   id: "watershed",
   nameKey: "l_watershed",
