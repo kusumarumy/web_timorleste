@@ -1038,6 +1038,11 @@ const outlineLayer =
       top: "15px",
       right: "150px",
       zIndex: 30,
+
+      width: "280px",
+      maxHeight: "150px",
+      overflowY: "auto",
+      overflowX: "hidden",
     }}
   >
     <div className="layer-loading-spinner" />
