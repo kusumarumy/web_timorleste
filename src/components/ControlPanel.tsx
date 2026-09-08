@@ -538,7 +538,7 @@ export default function ControlPanel() {
 <MeasurementControl />
     
 <div className="m-1.5 mt-2 rounded-xl border border-strokeSoft bg-gradient-to-br from-teal/10 to-teal/[0.02] p-3">
-  <div className="flex items-center gap-2 text-[13px] font-bold text-ink">
+  <div className="flex items-center gap-2 text-[11px] font-bold text-ink">
     <svg
       viewBox="0 0 24 24"
       width="15"
