@@ -145,16 +145,14 @@ function LayerSymbol({ l }: { l: LayerDef }) {
 function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
   const { t } = useI18n();
 
-  const {
-    visible,
-    toggle,
-    opacity,
-    setOpacity,
-    subVisible,
-    toggleSub,
-    statusVisible,
-    toggleStatus,
-  } = useMapStore();
+const {
+  visible,
+  toggle,
+  opacity,
+  setOpacity,
+  subVisible,
+  toggleSub,
+} = useMapStore();
 
   const on = visible[l.id];
 
@@ -250,40 +248,36 @@ function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
                     {t(sub.labelKey)}
                   </span>
                 </label>
+{/* ---------------------------------------------
+    KETERANGAN
+--------------------------------------------- */}
+{sub.sublayers?.length && subOn ? (
+  <div className="ml-8 mb-1 mt-0.5 space-y-0.5 border-l border-strokeSoft/60 pl-2">
+    {sub.sublayers.map((status) => {
+      const statusOn = subVisible[status.id] ?? true;
 
-                {/* ---------------------------------------------
-                    KETERANGAN / STATUS
-                --------------------------------------------- */}
-                {sub.statuses?.length && subOn ? (
-                  <div className="ml-8 mb-1 mt-0.5 space-y-0.5 border-l border-strokeSoft/60 pl-2">
-                    {sub.statuses.map((status) => {
-                      const statusOn =
-                        statusVisible[status.id] ?? true;
+      return (
+        <label
+          key={status.id}
+          className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 text-[10.5px] text-muted2 hover:bg-teal/[0.07]"
+        >
+          <input
+            type="checkbox"
+            checked={statusOn}
+            onChange={() => toggleSub(status.id)}
+            className="h-3 w-3 accent-teal"
+          />
 
-                      return (
-                        <label
-                          key={status.id}
-                          className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 text-[10.5px] text-muted2 hover:bg-teal/[0.07]"
-                        >
-                          <input
-                            type="checkbox"
-                            checked={statusOn}
-                            onChange={() =>
-                              toggleStatus(status.id)
-                            }
-                            className="h-3 w-3 accent-teal"
-                          />
+          <span className="h-[5px] w-[5px] flex-none rounded-full bg-muted2/70" />
 
-                          <span className="h-[5px] w-[5px] flex-none rounded-full bg-muted2/70" />
-
-                          <span className="truncate">
-                            {t(status.labelKey)}
-                          </span>
-                        </label>
-                      );
-                    })}
-                  </div>
-                ) : null}
+          <span className="truncate">
+            {t(status.labelKey)}
+          </span>
+        </label>
+      );
+    })}
+  </div>
+) : null}
               </div>
             );
           })}
