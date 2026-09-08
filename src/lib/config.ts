@@ -579,9 +579,9 @@ intakePier: {
     },
 
     protectedForest: {
-      color: "#00695C",
+      color: "#FF2D95",
       opacity: 0.25,
-      outline: "#004D40",
+      outline: "#FF2D95",
     },
 
     inundation: {
@@ -800,17 +800,16 @@ export const GROUPS: LayerGroup[] = [
       data: v("forestprotected"),
       paint: {
         "line-color": SYM.polygon.protectedForest.outline,
-        "line-width": 1.6,
+        "line-width": 2,
         "line-dasharray": [6, 3],
         "line-opacity": 1,
       },
       defaultOn: false,
       opacity: 1,
-      opacityProp: "line-opacity",
       legend: {
         color: SYM.polygon.protectedForest.outline,
         line: true,
-        width: 1.6,
+        width: 2,
         dasharray: [6, 3],
       },
     },
