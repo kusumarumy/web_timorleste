@@ -243,28 +243,46 @@ export function Legend() {
             </span>
           </div>
 <div className="ml-5 flex flex-col gap-1.5">
+  <div className="ml-5 flex flex-col gap-1.5">
   {layer.sublayers
-    .filter(
-      (sub) => subVisible[sub.id] ?? true
-    )
+    .filter((sub) => subVisible[sub.id] ?? true)
     .map((sub) => (
-      <div
-        key={sub.id}
-        className="flex items-center gap-2 text-[11px] text-ink"
-      >
-        <span
-          className="h-[11px] w-[22px] flex-none rounded-[2px]"
-          style={{
-            backgroundColor: "#66BB6A",
-            opacity: 0.25,
-            border: `2px solid ${
-              sub.outlineColor ?? "#2E7D32"
-            }`,
-          }}
-        />
-        <span className="truncate">
-          {t(sub.labelKey)}
-        </span>
+      <div key={sub.id} className="flex flex-col gap-1">
+        {/* KELAS_DI */}
+        <div className="flex items-center gap-2 text-[11px] text-ink">
+          <span
+            className="h-[11px] w-[22px] flex-none rounded-[2px]"
+            style={{
+              backgroundColor: "#66BB6A",
+              opacity: 0.25,
+              border: `2px solid ${
+                sub.outlineColor ?? "#2E7D32"
+              }`,
+            }}
+          />
+
+          <span className="truncate">
+            {t(sub.labelKey)}
+          </span>
+        </div>
+
+        {/* KETERANGAN */}
+        {sub.statuses?.length ? (
+          <div className="ml-5 flex flex-col gap-1">
+            {sub.statuses.map((status) => (
+              <div
+                key={status.id}
+                className="flex items-center gap-2 text-[10px] text-muted"
+              >
+                <span className="h-[5px] w-[5px] flex-none rounded-full bg-muted/70" />
+
+                <span className="truncate">
+                  {t(status.labelKey)}
+                </span>
+              </div>
+            ))}
+          </div>
+        ) : null}
       </div>
     ))}
 </div>
