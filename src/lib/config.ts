@@ -290,366 +290,254 @@ const SYM = {
       color: "#C62828",
       width: 2.0,
     },
-
     bridge: {
       color: "#212121",
       width: 3.0,
     },
-
     structure: {
       color: "#8E3B46",
       width: 2.0,
     },
-
     crossline: {
       color: "#D35400",
       width: 2.0,
       dasharray: [3, 2],
     },
-
     cotambah: {
       color: "#B71C1C",
       width: 2.0,
       dasharray: [5, 3],
     },
-
     guideWall: {
       color: "#5D4037",
       width: 2.0,
     },
-
-    // =========================
-    // FLUSHING / WATER STRUCTURE
-    // =========================
     flushing: {
       color: "#00838F",
       width: 2.3,
     },
-
     flushingPier: {
       color: "#00ACC1",
       width: 2.3,
     },
-
     irrigationPier: {
       color: "#0288D1",
       width: 2.3,
     },
-
     intakePier: {
       color: "#1976D2",
       width: 2.3,
     },
-
     pier: {
       color: "#039BE5",
       width: 2.3,
     },
-
-    // =========================
-    // WEIR / DAM STRUCTURES
-    // =========================
     weir: {
       color: "#512DA8",
       width: 2.5,
     },
-
     wing: {
       color: "#3949AB",
       width: 2.3,
     },
-
     upstream: {
       color: "#00695C",
       width: 2.3,
     },
-
     downstream: {
       color: "#E65100",
       width: 2.3,
     },
-
-    // =========================
-    // TERRAIN
-    // =========================
     contour: {
       color: "#8D4A2B",
       width: 1.5,
     },
   },
-
-  // =========================================================
-  // POINT
-  // =========================================================
   point: {
-    // Irrigation marker
     patokSaluran: "#0A93FC",
-
-    // Survey / control point
     bm: "#D32F2F",
-
-    // Design
     design: "#F39C12",
-
-    // Accessories
     accessories: "#D81B60",
-
-    // Control point
     cp: "#424242",
-
-    // Profile
     profile: "#7E57C2",
-
-    // Water intake
     intake: "#0288D1",
-
-    // Gate
     gate: "#15803D",
-
-    // Coordinate
     coordinate: "#7B1FA2",
-
-    // Excavation / stripping
     kupasan: "#8D4A2B",
-
-    // Drill point
     drill: "#5D4037",
   },
 
-  // =========================================================
-  // POLYGON
-  // =========================================================
   polygon: {
-    // =========================
-    // BUILDING / SETTLEMENT
-    // =========================
     building: {
       color: "#E53935",
       opacity: 0.45,
       outline: "#B71C1C",
     },
-
-    settlement: {
-      color: "#F4A261",
+    lowVegetation: {
+      color: "#9CCC65",
       opacity: 0.35,
-      outline: "#AF7445",
+      outline: "#558B2F",
     },
-
+    highVegetation: {
+      color: "#2E7D32",
+      opacity: 0.40,
+      outline: "#1B5E20",
+    },
+    ground: {
+      color: "#C8A97E",
+      opacity: 0.35,
+      outline: "#795548",
+    },
     urban: {
-      color: "#E57373",
+      color: "#FF8A65",
       opacity: 0.35,
-      outline: "#A45252",
+      outline: "#D84315",
     },
-
-    // =========================
-    // IRRIGATION / HYDROLOGY
-    // =========================
-    irrigationArea: {
-      color: "#CCFFFF",
-      opacity: 0.35,
-      outline: "#00A6D6",
-    },
-
-    canal: {
-      color: "#26C6DA",
-      opacity: 0.30,
-      outline: "#008FA3",
-    },
-
     water: {
       color: "#29B6F6",
       opacity: 0.40,
       outline: "#0277BD",
     },
-
+    settlement: {
+      color: "#F4A261",
+      opacity: 0.35,
+      outline: "#AF7445",
+    },
+    irrigationArea: {
+      color: "#CCFFFF",
+      opacity: 0.35,
+      outline: "#00A6D6",
+    },
+    canal: {
+      color: "#26C6DA",
+      opacity: 0.30,
+      outline: "#008FA3",
+    },
     river: {
       color: "#00A6D6",
       opacity: 0.45,
       outline: "#00779A",
     },
-
     drainage: {
       color: "#1565C0",
       opacity: 0.35,
       outline: "#0F488A",
     },
-
-    // =========================
-    // DESIGN / PLANNING
-    // =========================
     design: {
       color: "#F39C12",
       opacity: 0.35,
       outline: "#B76D00",
     },
-
     areaGeneral: {
       color: "#9E9E9E",
       opacity: 0.30,
       outline: "#717171",
     },
-
-    // =========================
-    // SOIL / GEOLOGY
-    // =========================
     soil: {
       color: "#8D6E63",
       opacity: 0.30,
       outline: "#5D4037",
     },
-
     rock: {
       color: "#757575",
       opacity: 0.30,
       outline: "#4E4E4E",
     },
-
     silt: {
       color: "#BDBDBD",
       opacity: 0.35,
       outline: "#888888",
     },
-
-    // =========================
-    // WATER STRUCTURES
-    // =========================
     stilling: {
       color: "#4FC3F7",
       opacity: 0.30,
       outline: "#388CB1",
     },
-
     weirBody: {
       color: "#512DA8",
       opacity: 0.40,
       outline: "#3A2078",
     },
-
     weirCrest: {
       color: "#6A1B9A",
       opacity: 0.35,
       outline: "#4A126B",
     },
-
     wing: {
       color: "#3949AB",
       opacity: 0.35,
       outline: "#29347B",
     },
-
     upstream: {
       color: "#00695C",
       opacity: 0.30,
       outline: "#004D40",
     },
-
     downstream: {
       color: "#E65100",
       opacity: 0.30,
       outline: "#A83A00",
     },
-
     flushing: {
       color: "#00ACC1",
       opacity: 0.30,
       outline: "#007B8A",
     },
-
     flushingGate: {
       color: "#00838F",
       opacity: 0.30,
       outline: "#005E66",
     },
-
     flushingPier: {
       color: "#00BCD4",
       opacity: 0.30,
       outline: "#00879A",
     },
-
     intake: {
       color: "#0288D1",
       opacity: 0.30,
       outline: "#01579B",
     },
-
     gate: {
       color: "#15803D",
       opacity: 0.30,
       outline: "#0F5C2B",
     },
-
     irrigationStructure: {
       color: "#00796B",
       opacity: 0.30,
       outline: "#004D40",
     },
-
-    // =========================
-    // TRANSPORTATION
-    // =========================
     parking: {
       color: "#616161",
       opacity: 0.30,
       outline: "#454545",
     },
-
     road: {
       color: "#616161",
       opacity: 0.40,
       outline: "#212121",
     },
-
     access: {
       color: "#FFB74D",
       opacity: 0.35,
       outline: "#B76D00",
     },
-
-    // =========================
-    // VEGETATION / LAND COVER
-    // =========================
     primer: {
       color: "#795548",
       opacity: 0.30,
       outline: "#573D33",
     },
-
-    lowVegetation: {
-      color: "#9CCC65",
-      opacity: 0.35,
-      outline: "#709248",
-    },
-
-    highVegetation: {
-      color: "#2E7D32",
-      opacity: 0.40,
-      outline: "#215A24",
-    },
-
-    ground: {
-      color: "#C8A97E",
-      opacity: 0.35,
-      outline: "#90795A",
-    },
-
-    // Sangat terang agar tetap terbaca
-    // di satellite / orthophoto
     protectedForest: {
       color: "#B6FF00",
       opacity: 0.35,
       outline: "#DFFF00",
     },
-
-    // =========================
-    // SPECIAL / ANALYSIS
-    // =========================
     inundation: {
       color: "#1976D2",
       opacity: 0.40,
       outline: "#125497",
     },
-
     watershed: {
       color: "#90CAF9",
       opacity: 0.22,
@@ -669,7 +557,6 @@ const linePaint = (s: {
     ? { "line-dasharray": [...s.dasharray] }
     : {}),
 });
-
 const lineLegend = (s: {
   color: string;
   width: number;
@@ -682,7 +569,6 @@ const lineLegend = (s: {
     ? { dasharray: [...s.dasharray] }
     : {}),
 });
-
 const fillPaint = (
   style: {
     color: string;
@@ -694,7 +580,6 @@ const fillPaint = (
   "fill-opacity": style.opacity,
   "fill-outline-color": style.outline,
 });
-
 const fillLegend = (
   style: {
     color: string;
@@ -704,7 +589,6 @@ const fillLegend = (
   color: style.color,
   opacity: style.opacity,
 });
-
 const pointPaint = (
   color: string,
   radius = 2.5,
@@ -720,8 +604,8 @@ const pointPaint = (
       }
     : {}),
 });
-export const GROUPS: LayerGroup[] = [
 
+export const GROUPS: LayerGroup[] = [
   {
   titleKey: "g_aoi",
   dot: "#D500F9",
@@ -893,7 +777,6 @@ export const GROUPS: LayerGroup[] = [
     },
   ],
 },
-
   {
   titleKey: "g_hydro",
   dot: "#0A93FC",
@@ -1005,224 +888,203 @@ export const GROUPS: LayerGroup[] = [
       ],
     },
     {
-  id: "8irrigationareas",
-  nameKey: "l_8irrigationareas",
-  kind: "fill",
-  data: v("8irrigationareas"),
-  clickable: true,
-
-  paint: fillPaint(SYM.polygon.irrigationArea),
-
-  defaultOn: false,
-
-  opacity: SYM.polygon.irrigationArea.opacity,
-  opacityProp: "fill-opacity",
-
-  legend: fillLegend(SYM.polygon.irrigationArea),
-
-  subProp: "KELAS_DI",
-
-  sublayers: [
-    {
-      id: "akadiru_kede",
-      labelKey: "di_akadiru_kede",
-      filterValue: "AKADIRU KEDE",
-      outlineColor: "#1565C0",
-
+      id: "8irrigationareas",
+      nameKey: "l_8irrigationareas",
+      kind: "fill",
+      data: v("8irrigationareas"),
+      clickable: true,
+      paint: fillPaint(SYM.polygon.irrigationArea),
+      defaultOn: false,
+      opacity: SYM.polygon.irrigationArea.opacity,
+      opacityProp: "fill-opacity",
+      legend: fillLegend(SYM.polygon.irrigationArea),
+      subProp: "KELAS_DI",
       sublayers: [
         {
-          id: "akadiru_kede_fungsional",
-          labelKey: "irrigation_functional",
-          filterValue: "FUNGSIONAL",
+          id: "akadiru_kede",
+          labelKey: "di_akadiru_kede",
+          filterValue: "AKADIRU KEDE",
+          outlineColor: "#1565C0",
+          sublayers: [
+            {
+              id: "akadiru_kede_fungsional",
+              labelKey: "irrigation_functional",
+              filterValue: "FUNGSIONAL",
+            },
+            {
+              id: "akadiru_kede_potensial",
+              labelKey: "irrigation_potential",
+              filterValue: "POTENSIAL",
+            },
+          ],
         },
         {
-          id: "akadiru_kede_potensial",
-          labelKey: "irrigation_potential",
-          filterValue: "POTENSIAL",
+          id: "buiha",
+          labelKey: "di_buiha",
+          filterValue: "BUIHA",
+          outlineColor: "#00ACC1",
+          sublayers: [
+            {
+              id: "buiha_fungsional",
+              labelKey: "irrigation_functional",
+              filterValue: "FUNGSIONAL",
+            },
+            {
+              id: "buiha_potensial",
+              labelKey: "irrigation_potential",
+              filterValue: "POTENSIAL",
+            },
+            {
+              id: "buiha_crop_plantation",
+              labelKey: "irrigation_crop_plantation",
+              filterValue: "CROP PLANTATION",
+            },
+          ],
+        },
+        {
+          id: "kakeulaku",
+          labelKey: "di_kakeulaku",
+          filterValue: "KAKEULAKU",
+          outlineColor: "#00897B",
+          sublayers: [
+            {
+              id: "kakeulaku_fungsional",
+              labelKey: "irrigation_functional",
+              filterValue: "FUNGSIONAL",
+            },
+            {
+              id: "kakeulaku_potensial",
+              labelKey: "irrigation_potential",
+              filterValue: "POTENSIAL",
+            },
+          ],
+        },
+        {
+          id: "lias",
+          labelKey: "di_lias",
+          filterValue: "LIAS",
+          outlineColor: "#7B1FA2",
+          sublayers: [
+            {
+              id: "lias_fungsional",
+              labelKey: "irrigation_functional",
+              filterValue: "FUNGSIONAL",
+            },
+            {
+              id: "lias_crop_plantation",
+              labelKey: "irrigation_crop_plantation",
+              filterValue: "CROP PLANTATION",
+            },
+          ],
+        },
+        {
+          id: "luan_kadoe",
+          labelKey: "di_luan_kadoe",
+          filterValue: "LUAN KADOE",
+          outlineColor: "#3949AB",
+          sublayers: [
+            {
+              id: "luan_kadoe_fungsional",
+              labelKey: "irrigation_functional",
+              filterValue: "FUNGSIONAL",
+            },
+          ],
+        },
+        {
+          id: "paulata",
+          labelKey: "di_paulata",
+          filterValue: "PAULATA",
+          outlineColor: "#F57C00",
+          sublayers: [
+            {
+              id: "paulata_fungsional",
+              labelKey: "irrigation_functional",
+              filterValue: "FUNGSIONAL",
+            },
+          ],
+        },
+        {
+          id: "raibere",
+          labelKey: "di_raibere",
+          filterValue: "RAIBERE",
+          outlineColor: "#2E7D32",
+          sublayers: [
+            {
+              id: "raibere_fungsional",
+              labelKey: "irrigation_functional",
+              filterValue: "FUNGSIONAL",
+            },
+            {
+              id: "raibere_potensial",
+              labelKey: "irrigation_potential",
+              filterValue: "POTENSIAL",
+            },
+          ],
+        },
+        {
+          id: "oebaba",
+          labelKey: "di_oebaba",
+          filterValue: "OEBABA",
+          outlineColor: "#D81B60",
+          sublayers: [
+            {
+              id: "oebaba_fungsional",
+              labelKey: "irrigation_functional",
+              filterValue: "FUNGSIONAL",
+            },
+            {
+              id: "oebaba_potensial",
+              labelKey: "irrigation_potential",
+              filterValue: "POTENSIAL",
+            },
+            {
+              id: "oebaba_crop_plantation",
+              labelKey: "irrigation_crop_plantation",
+              filterValue: "CROP PLANTATION",
+            },
+          ],
         },
       ],
     },
-
-    {
-      id: "buiha",
-      labelKey: "di_buiha",
-      filterValue: "BUIHA",
-      outlineColor: "#00ACC1",
-
-      sublayers: [
-        {
-          id: "buiha_fungsional",
-          labelKey: "irrigation_functional",
-          filterValue: "FUNGSIONAL",
-        },
-        {
-          id: "buiha_potensial",
-          labelKey: "irrigation_potential",
-          filterValue: "POTENSIAL",
-        },
-        {
-          id: "buiha_crop_plantation",
-          labelKey: "irrigation_crop_plantation",
-          filterValue: "CROP PLANTATION",
-        },
-      ],
-    },
-
-    {
-      id: "kakeulaku",
-      labelKey: "di_kakeulaku",
-      filterValue: "KAKEULAKU",
-      outlineColor: "#00897B",
-
-      sublayers: [
-        {
-          id: "kakeulaku_fungsional",
-          labelKey: "irrigation_functional",
-          filterValue: "FUNGSIONAL",
-        },
-        {
-          id: "kakeulaku_potensial",
-          labelKey: "irrigation_potential",
-          filterValue: "POTENSIAL",
-        },
-      ],
-    },
-
-    {
-      id: "lias",
-      labelKey: "di_lias",
-      filterValue: "LIAS",
-      outlineColor: "#7B1FA2",
-
-      sublayers: [
-        {
-          id: "lias_fungsional",
-          labelKey: "irrigation_functional",
-          filterValue: "FUNGSIONAL",
-        },
-        {
-          id: "lias_crop_plantation",
-          labelKey: "irrigation_crop_plantation",
-          filterValue: "CROP PLANTATION",
-        },
-      ],
-    },
-
-    {
-      id: "luan_kadoe",
-      labelKey: "di_luan_kadoe",
-      filterValue: "LUAN KADOE",
-      outlineColor: "#3949AB",
-
-      sublayers: [
-        {
-          id: "luan_kadoe_fungsional",
-          labelKey: "irrigation_functional",
-          filterValue: "FUNGSIONAL",
-        },
-      ],
-    },
-
-    {
-      id: "paulata",
-      labelKey: "di_paulata",
-      filterValue: "PAULATA",
-      outlineColor: "#F57C00",
-
-      sublayers: [
-        {
-          id: "paulata_fungsional",
-          labelKey: "irrigation_functional",
-          filterValue: "FUNGSIONAL",
-        },
-      ],
-    },
-
-    {
-      id: "raibere",
-      labelKey: "di_raibere",
-      filterValue: "RAIBERE",
-      outlineColor: "#2E7D32",
-
-      sublayers: [
-        {
-          id: "raibere_fungsional",
-          labelKey: "irrigation_functional",
-          filterValue: "FUNGSIONAL",
-        },
-        {
-          id: "raibere_potensial",
-          labelKey: "irrigation_potential",
-          filterValue: "POTENSIAL",
-        },
-      ],
-    },
-
-    {
-      id: "oebaba",
-      labelKey: "di_oebaba",
-      filterValue: "OEBABA",
-      outlineColor: "#D81B60",
-
-      sublayers: [
-        {
-          id: "oebaba_fungsional",
-          labelKey: "irrigation_functional",
-          filterValue: "FUNGSIONAL",
-        },
-        {
-          id: "oebaba_potensial",
-          labelKey: "irrigation_potential",
-          filterValue: "POTENSIAL",
-        },
-        {
-          id: "oebaba_crop_plantation",
-          labelKey: "irrigation_crop_plantation",
-          filterValue: "CROP PLANTATION",
-        },
-      ],
-    },
-  ],
-},
      {
-  id: "watershed",
-  nameKey: "l_watershed",
-  kind: "fill",
-  data: v("watershed"),
-  clickable: true,
-  paint: fillPaint(SYM.polygon.watershed),
-  defaultOn: false,
-  opacity: SYM.polygon.watershed.opacity,
-  opacityProp: "fill-opacity",
-  legend: fillLegend(SYM.polygon.watershed),
-  subProp: "subkelas",
-  sublayers: [
-    {
-      id: "watershed_dam_1",
-      labelKey: "watershed_dam_1",
-      filterValue: "Watershed DAM 1",
-      outlineColor: "#2196F3",
+      id: "watershed",
+      nameKey: "l_watershed",
+      kind: "fill",
+      data: v("watershed"),
+      clickable: true,
+      paint: fillPaint(SYM.polygon.watershed),
+      defaultOn: false,
+      opacity: SYM.polygon.watershed.opacity,
+      opacityProp: "fill-opacity",
+      legend: fillLegend(SYM.polygon.watershed),
+      subProp: "subkelas",
+      sublayers: [
+        {
+          id: "watershed_dam_1",
+          labelKey: "watershed_dam_1",
+          filterValue: "Watershed DAM 1",
+          outlineColor: "#2196F3",
+        },
+        {
+          id: "watershed_dam_2",
+          labelKey: "watershed_dam_2",
+          filterValue: "Watershed DAM 2",
+          outlineColor: "#9C27B0",
+        },
+        {
+          id: "watershed_dam_3",
+          labelKey: "watershed_dam_3",
+          filterValue: "Watershed DAM 3",
+          outlineColor: "#FF9800",
+        },
+        {
+          id: "watershed_oebaba",
+          labelKey: "watershed_oebaba",
+          filterValue: "Watershed Oebaba",
+          outlineColor: "#F44336",
+        },
+      ],
     },
-    {
-      id: "watershed_dam_2",
-      labelKey: "watershed_dam_2",
-      filterValue: "Watershed DAM 2",
-      outlineColor: "#9C27B0",
-    },
-    {
-      id: "watershed_dam_3",
-      labelKey: "watershed_dam_3",
-      filterValue: "Watershed DAM 3",
-      outlineColor: "#FF9800",
-    },
-    {
-      id: "watershed_oebaba",
-      labelKey: "watershed_oebaba",
-      filterValue: "Watershed Oebaba",
-      outlineColor: "#F44336",
-    },
-  ],
-},
       {
         id: "river",
         nameKey: "l_river",
@@ -1237,116 +1099,114 @@ export const GROUPS: LayerGroup[] = [
       },
     ],
   },
-
-  {
-    titleKey: "g_land",
-    dot: "#3B82F6",
-
-    layers: [
       {
-        id: "building",
-        nameKey: "l_building",
-        kind: "fill",
-        data: v("building"),
-        clickable: true,
-
-        paint: fillPaint(SYM.polygon.building),
-
-        defaultOn: false,
-
-        opacity: SYM.polygon.building.opacity,
-        opacityProp: "fill-opacity",
-
-        legend: fillLegend(SYM.polygon.building),
-      },
-
-      {
-        id: "lowveg",
-        nameKey: "l_lowveg",
-        kind: "fill",
-        data: v("lowveg"),
-        clickable: true,
-
-        paint: fillPaint(SYM.polygon.lowVegetation),
-
-        defaultOn: false,
-
-        opacity: SYM.polygon.lowVegetation.opacity,
-        opacityProp: "fill-opacity",
-
-        legend: fillLegend(SYM.polygon.lowVegetation),
-      },
-
-      {
-        id: "highveg",
-        nameKey: "l_highveg",
-        kind: "fill",
-        data: v("highveg"),
-        clickable: true,
-
-        paint: fillPaint(SYM.polygon.highVegetation),
-
-        defaultOn: false,
-
-        opacity: SYM.polygon.highVegetation.opacity,
-        opacityProp: "fill-opacity",
-
-        legend: fillLegend(SYM.polygon.highVegetation),
-      },
-
-      {
-        id: "ground",
-        nameKey: "l_ground",
-        kind: "fill",
-        data: v("ground"),
-        clickable: true,
-
-        paint: fillPaint(SYM.polygon.ground),
-
-        defaultOn: false,
-
-        opacity: SYM.polygon.ground.opacity,
-        opacityProp: "fill-opacity",
-
-        legend: fillLegend(SYM.polygon.ground),
-      },
-
-      {
-        id: "urban",
-        nameKey: "l_urban",
-        kind: "fill",
-        data: v("urban"),
-        clickable: true,
-
-        paint: fillPaint(SYM.polygon.urban),
-
-        defaultOn: false,
-
-        opacity: SYM.polygon.urban.opacity,
-        opacityProp: "fill-opacity",
-
-        legend: fillLegend(SYM.polygon.urban),
-      },
-
-      {
-        id: "waterbody",
-        nameKey: "l_waterbody",
-        kind: "fill",
-        data: v("waterbody"),
-        clickable: true,
-
-        paint: fillPaint(SYM.polygon.water),
-
-        defaultOn: false,
-
-        opacity: SYM.polygon.water.opacity,
-        opacityProp: "fill-opacity",
-
-        legend: fillLegend(SYM.polygon.water),
-      },
-    ],
-  },
-
+      titleKey: "g_land",
+      dot: "#22C55E",
+    
+      layers: [
+        {
+          id: "building",
+          nameKey: "l_building",
+          kind: "fill",
+          data: v("building"),
+          clickable: true,
+    
+          paint: fillPaint(SYM.polygon.building),
+    
+          defaultOn: false,
+    
+          opacity: SYM.polygon.building.opacity,
+          opacityProp: "fill-opacity",
+    
+          legend: fillLegend(SYM.polygon.building),
+        },
+    
+        {
+          id: "lowveg",
+          nameKey: "l_lowveg",
+          kind: "fill",
+          data: v("lowveg"),
+          clickable: true,
+    
+          paint: fillPaint(SYM.polygon.lowVegetation),
+    
+          defaultOn: false,
+    
+          opacity: SYM.polygon.lowVegetation.opacity,
+          opacityProp: "fill-opacity",
+    
+          legend: fillLegend(SYM.polygon.lowVegetation),
+        },
+    
+        {
+          id: "highveg",
+          nameKey: "l_highveg",
+          kind: "fill",
+          data: v("highveg"),
+          clickable: true,
+    
+          paint: fillPaint(SYM.polygon.highVegetation),
+    
+          defaultOn: false,
+    
+          opacity: SYM.polygon.highVegetation.opacity,
+          opacityProp: "fill-opacity",
+    
+          legend: fillLegend(SYM.polygon.highVegetation),
+        },
+    
+        {
+          id: "ground",
+          nameKey: "l_ground",
+          kind: "fill",
+          data: v("ground"),
+          clickable: true,
+    
+          paint: fillPaint(SYM.polygon.ground),
+    
+          defaultOn: false,
+    
+          opacity: SYM.polygon.ground.opacity,
+          opacityProp: "fill-opacity",
+    
+          legend: fillLegend(SYM.polygon.ground),
+        },
+    
+        {
+          id: "urban",
+          nameKey: "l_urban",
+          kind: "fill",
+          data: v("urban"),
+          clickable: true,
+    
+          paint: fillPaint(SYM.polygon.urban),
+    
+          defaultOn: false,
+    
+          opacity: SYM.polygon.urban.opacity,
+          opacityProp: "fill-opacity",
+    
+          legend: fillLegend(SYM.polygon.urban),
+        },
+    
+        {
+          id: "waterbody",
+          nameKey: "l_waterbody",
+          kind: "fill",
+          data: v("waterbody"),
+          clickable: true,
+    
+          paint: fillPaint(SYM.polygon.water),
+    
+          defaultOn: false,
+    
+          opacity: SYM.polygon.water.opacity,
+          opacityProp: "fill-opacity",
+    
+          legend: fillLegend(SYM.polygon.water),
+        },
+      ],
+    },
   {
     titleKey: "g_genangan",
     dot: "#6366F1",
