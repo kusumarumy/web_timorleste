@@ -172,9 +172,6 @@ const {
 
   return (
     <div>
-      {/* =====================================================
-          MAIN LAYER
-      ===================================================== */}
       <div
         className={`group flex items-center gap-2.5 rounded-[10px] py-2 transition-colors hover:bg-teal/[0.07] ${
           depth > 0 ? "pl-5 pr-2" : "px-2"
@@ -210,9 +207,6 @@ const {
         )}
       </div>
 
-      {/* =====================================================
-          SUBLAYERS / KELAS_DI
-      ===================================================== */}
       {l.sublayers && on && (
         <div className="ml-10 mb-2 mt-0.5 space-y-0.5 border-l border-strokeSoft pl-3">
           {l.sublayers.map((sub) => {
@@ -220,52 +214,40 @@ const {
 
             return (
               <div key={sub.id}>
-                {/* ---------------------------------------------
-                    KELAS_DI
-                --------------------------------------------- */}
                 <label
-                  className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-[11.5px] text-muted hover:bg-teal/[0.07]"
-                >
-                  <input
-                    type="checkbox"
-                    checked={subOn}
-                    onChange={() => toggleSub(sub.id)}
-                    className="h-3.5 w-3.5 accent-teal"
-                  />
+  className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-[11.5px] text-muted hover:bg-teal/[0.07]"
+>
+  <input
+    type="checkbox"
+    checked={subOn}
+    onChange={() => toggleSub(sub.id)}
+    className="h-3.5 w-3.5 accent-teal"
+  />
 
-                  {l.kind === "line" ? (
-  <span
-    className="block h-[2px] w-[22px] flex-none"
-    style={{
-      backgroundColor: sub.color ?? "#2FA6A0",
-    }}
-  />
-) : (
-  {layer.kind === "line" ? (
-  <span
-    className="block h-[2px] w-[22px] flex-none"
-    style={{
-      backgroundColor: sub.color ?? "#2FA6A0",
-    }}
-  />
-) : (
-  <span
-    className="h-[11px] w-[22px] flex-none rounded-[2px]"
-    style={{
-      backgroundColor: "#66BB6A",
-      opacity: 0.25,
-      border: `2px solid ${
-        sub.outlineColor ?? "#2E7D32"
-      }`,
-    }}
-  />
-)}
-)}
+  {l.kind === "line" ? (
+    <span
+      className="block h-[2px] w-[22px] flex-none"
+      style={{
+        backgroundColor: sub.color ?? "#2FA6A0",
+      }}
+    />
+  ) : (
+    <span
+      className="h-[11px] w-[22px] flex-none rounded-[2px]"
+      style={{
+        backgroundColor: "#66BB6A",
+        opacity: 0.25,
+        border: `2px solid ${
+          sub.outlineColor ?? "#2E7D32"
+        }`,
+      }}
+    />
+  )}
 
-                  <span className="truncate">
-                    {t(sub.labelKey)}
-                  </span>
-                </label>
+  <span className="truncate">
+    {t(sub.labelKey)}
+  </span>
+</label>
                 
 {sub.sublayers?.length && subOn ? (
   <div className="ml-8 mb-1 mt-0.5 space-y-0.5 border-l border-strokeSoft/60 pl-2">
