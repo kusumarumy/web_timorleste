@@ -233,24 +233,40 @@ const {
                     className="h-3.5 w-3.5 accent-teal"
                   />
 
-                  <span
-                    className="h-[11px] w-[22px] flex-none rounded-[2px]"
-                    style={{
-                      backgroundColor: "#66BB6A",
-                      opacity: 0.25,
-                      border: `2px solid ${
-                        sub.outlineColor ?? "#2E7D32"
-                      }`,
-                    }}
-                  />
+                  {l.kind === "line" ? (
+  <span
+    className="block h-[2px] w-[22px] flex-none"
+    style={{
+      backgroundColor: sub.color ?? "#2FA6A0",
+    }}
+  />
+) : (
+  {layer.kind === "line" ? (
+  <span
+    className="block h-[2px] w-[22px] flex-none"
+    style={{
+      backgroundColor: sub.color ?? "#2FA6A0",
+    }}
+  />
+) : (
+  <span
+    className="h-[11px] w-[22px] flex-none rounded-[2px]"
+    style={{
+      backgroundColor: "#66BB6A",
+      opacity: 0.25,
+      border: `2px solid ${
+        sub.outlineColor ?? "#2E7D32"
+      }`,
+    }}
+  />
+)}
+)}
 
                   <span className="truncate">
                     {t(sub.labelKey)}
                   </span>
                 </label>
-{/* ---------------------------------------------
-    KETERANGAN
---------------------------------------------- */}
+                
 {sub.sublayers?.length && subOn ? (
   <div className="ml-8 mb-1 mt-0.5 space-y-0.5 border-l border-strokeSoft/60 pl-2">
     {sub.sublayers.map((status) => {
@@ -284,9 +300,6 @@ const {
         </div>
       )}
 
-      {/* =====================================================
-          CHILDREN
-      ===================================================== */}
       {l.children && l.children.length > 0 && on && (
         <div className="ml-5 mb-1 border-l border-strokeSoft pl-2">
           {l.children.map((child) => (
