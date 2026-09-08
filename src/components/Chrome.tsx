@@ -1094,7 +1094,151 @@ useEffect(() => {
       0 m
     </div>
 
+ <svg
+    viewBox="0 0 700 150"
+    preserveAspectRatio="none"
+    className="absolute inset-x-5 bottom-5 h-[155px] w-[calc(100%-40px)]"
+  >
 
+    {/* TERRAIN MASS */}
+    <path
+      d="
+        M0 130
+        L35 116 L65 108 L92 118
+        L125 98 L150 82 L172 62 L195 78 L220 105
+        L250 94 L278 70 L305 84
+        L335 55 L365 30 L395 55 L420 92
+        L450 72 L478 55 L505 25 L532 48 L555 82
+        L585 70 L610 78 L640 62 L670 48 L700 43
+        L700 150 L0 150 Z
+      "
+      className="fill-teal/[0.16]"
+    />
+
+    {/* SECOND TERRAIN LAYER */}
+    <path
+      d="
+        M0 132
+        L40 120 L70 113 L98 121
+        L130 104 L153 88 L174 72 L196 87 L220 110
+        L252 100 L280 80 L306 92
+        L337 65 L365 42 L392 66 L420 98
+        L452 80 L480 65 L506 40 L532 60 L556 91
+        L586 80 L612 87 L642 73 L672 61 L700 55
+        L700 150 L0 150 Z
+      "
+      className="fill-teal/[0.09]"
+    />
+
+    {/* MOUNTAIN HIGHLIGHT */}
+    <path
+      d="
+        M35 116
+        L65 108 L92 118
+        L125 98 L150 82 L172 62 L195 78 L220 105
+        L250 94 L278 70 L305 84
+        L335 55 L365 30 L395 55 L420 92
+        L450 72 L478 55 L505 25 L532 48 L555 82
+        L585 70 L610 78 L640 62 L670 48 L700 43
+      "
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      className="text-teal/70"
+    />
+
+    {/* CONTOUR 1 */}
+    <path
+      d="
+        M70 110 L125 99 L172 69 L218 105
+        M265 91 L305 85 L365 38 L420 92
+        M460 70 L505 32 L555 82
+        M610 76 L670 50
+      "
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="0.8"
+      className="text-teal/35"
+    />
+
+    {/* CONTOUR 2 */}
+    <path
+      d="
+        M95 116 L145 101 L172 80 L202 92 L230 108
+        M280 98 L310 91 L365 52 L410 99
+        M480 80 L505 48 L548 91
+        M620 87 L675 62
+      "
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="0.65"
+      className="text-teal/25"
+    />
+
+    {/* MAIN ELEVATION PROFILE */}
+    <path
+      d="
+        M0 128
+        C38 120 55 101 82 104
+        C110 107 125 119 150 103
+        C177 86 190 53 220 61
+        C250 69 260 103 292 87
+        C320 72 335 32 365 40
+        C395 48 410 89 438 73
+        C466 57 480 29 510 40
+        C540 51 552 88 580 76
+        C615 62 650 43 700 47
+      "
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      className="text-teal"
+    />
+
+    {/* CURRENT ELEVATION LINE */}
+    <line
+      x1="510"
+      y1="20"
+      x2="510"
+      y2="150"
+      stroke="currentColor"
+      strokeWidth="0.7"
+      className="text-teal/30"
+    />
+
+    {/* CURRENT POINT */}
+    <circle
+      cx="510"
+      cy="40"
+      r="4"
+      fill="currentColor"
+      className="text-teal"
+    />
+
+    <circle
+      cx="510"
+      cy="40"
+      r="8"
+      fill="none"
+      stroke="currentColor"
+      className="text-teal/40"
+    >
+      <animate
+        attributeName="r"
+        values="5;11;5"
+        dur="2.5s"
+        repeatCount="indefinite"
+      />
+
+      <animate
+        attributeName="opacity"
+        values="0.8;0.1;0.8"
+        dur="2.5s"
+        repeatCount="indefinite"
+      />
+    </circle>
+
+  </svg>
    
 
     {/* ==================================================
