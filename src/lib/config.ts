@@ -556,6 +556,7 @@ const SYM = {
     irrigationScheme: {
       color: "#26A69A",
       opacity: 0.25,
+      outline: "#FFFFFF",
     },
   },
 } as const;
