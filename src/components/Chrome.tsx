@@ -137,7 +137,6 @@ export function Legend() {
   const {
     visible,
     subVisible,
-    statusVisible,
   } = useMapStore();
 
   const [open, setOpen] = useState(true);
@@ -301,32 +300,27 @@ export function Legend() {
                               </span>
                             </div>
 
-                            {/* KETERANGAN */}
-                            {sub.statuses?.length ? (
-                              <div className="ml-5 flex flex-col gap-1">
-                                {sub.statuses
-                                  .filter(
-                                    (status) =>
-                                      statusVisible[
-                                        status.id
-                                      ] ?? true
-                                  )
-                                  .map((status) => (
-                                    <div
-                                      key={status.id}
-                                      className="flex items-center gap-2 text-[10px] text-muted"
-                                    >
-                                      <span className="h-[5px] w-[5px] flex-none rounded-full bg-muted/70" />
+                           {sub.sublayers?.length ? (
+  <div className="ml-5 flex flex-col gap-1">
+    {sub.sublayers
+      .filter(
+        (status) =>
+          subVisible[status.id] ?? true
+      )
+      .map((status) => (
+        <div
+          key={status.id}
+          className="flex items-center gap-2 text-[10px] text-muted"
+        >
+          <span className="h-[5px] w-[5px] flex-none rounded-full bg-muted/70" />
 
-                                      <span className="truncate">
-                                        {t(
-                                          status.labelKey
-                                        )}
-                                      </span>
-                                    </div>
-                                  ))}
-                              </div>
-                            ) : null}
+          <span className="truncate">
+            {t(status.labelKey)}
+          </span>
+        </div>
+      ))}
+  </div>
+) : null}
                           </div>
                         ))}
                     </div>
