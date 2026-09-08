@@ -898,6 +898,57 @@ export const GROUPS: LayerGroup[] = [
       ],
     },
     {
+      id: "4schema",
+      nameKey: "l_4schema",
+      kind: "fill",
+      data: v("4schema"),
+      clickable: true,
+      paint: {
+        "fill-color": [
+          "match",
+          ["get", "kelas"],
+          "OEBABA",
+          "#00E5FF",
+          "LUAN KADOE, AKADIRU KEDE, &KAKEULAKU",
+          "#B6FF00",
+          "PAULATA & LIAS",
+          "#FFB300",
+          "RAIBERE & BUIHA",
+          "#FF4D6D",
+          "#999999",
+        ],
+        "fill-opacity": 0.35,
+        "fill-outline-color": "#FFFFFF",
+      },
+      defaultOn: false,
+      sublayers: [
+        {
+          id: "4schema_oebaba",
+          labelKey: "l_4schema_oebaba",
+          filterValue: "OEBABA",
+          outlineColor: "#00E5FF",
+        },
+        {
+          id: "4schema_luan_kadoe",
+          labelKey: "l_4schema_luan_kadoe",
+          filterValue: "LUAN KADOE, AKADIRU KEDE, &KAKEULAKU",
+          outlineColor: "#B6FF00",
+        },
+        {
+          id: "4schema_paulata_lias",
+          labelKey: "l_4schema_paulata_lias",
+          filterValue: "PAULATA & LIAS",
+          outlineColor: "#FFB300",
+        },
+        {
+          id: "4schema_raibere_buiha",
+          labelKey: "l_4schema_raibere_buiha",
+          filterValue: "RAIBERE & BUIHA",
+          outlineColor: "#FF4D6D",
+        },
+      ],
+    }
+    {
       id: "8irrigationareas",
       nameKey: "l_8irrigationareas",
       kind: "fill",
