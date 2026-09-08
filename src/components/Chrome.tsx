@@ -453,6 +453,7 @@ export function Loader({ hidden }: { hidden: boolean }) {
   const [phase, setPhase] = useState(0);
   const [logoIntroDone, setLogoIntroDone] = useState(false);
   const [welcomeVisible, setWelcomeVisible] = useState(false);
+  const [introReady, setIntroReady] = useState(false);
 
   const phases = [
     t("loadPhase1"),
@@ -461,50 +462,47 @@ export function Loader({ hidden }: { hidden: boolean }) {
     t("loadPhase4"),
   ];
 
-  // ============================================================
-  // OPENING SEQUENCE
-  //
-  // 0.0s  → Logo 1
-  // 0.7s  → Logo 2
-  // 1.3s  → Logo 3
-  // 2.2s  → All logos move upward
-  // 2.7s  → Welcome appears
-  // ============================================================
-  useEffect(() => {
-    const logoTimer = setTimeout(() => {
-      setLogoIntroDone(true);
-    }, 2200);
+useEffect(() => {
+  setLogoIntroDone(false);
+  setWelcomeVisible(false);
+  setIntroReady(false);
 
-    const welcomeTimer = setTimeout(() => {
-      setWelcomeVisible(true);
-    }, 2550);
+  const logoTimer = setTimeout(() => {
+    setLogoIntroDone(true);
+  }, 2200);
 
-    return () => {
-      clearTimeout(logoTimer);
-      clearTimeout(welcomeTimer);
-    };
-  }, []);
+  const welcomeTimer = setTimeout(() => {
+    setWelcomeVisible(true);
+  }, 2550);
 
-  // ============================================================
-  // ROTATING LOADING MESSAGE
-  // ============================================================
-  useEffect(() => {
-    if (!welcomeVisible) return;
+  const introReadyTimer = setTimeout(() => {
+    setIntroReady(true);
+  }, 3000);
 
-    const interval = setInterval(() => {
-      setPhase((prev) => (prev + 1) % phases.length);
-    }, 2200);
+  return () => {
+    clearTimeout(logoTimer);
+    clearTimeout(welcomeTimer);
+    clearTimeout(introReadyTimer);
+  };
+}, []);
 
-    return () => clearInterval(interval);
-  }, [welcomeVisible, phases.length]);
+useEffect(() => {
+  if (!welcomeVisible) return;
+
+  const interval = setInterval(() => {
+    setPhase((prev) => (prev + 1) % phases.length);
+  }, 1800);
+
+  return () => clearInterval(interval);
+}, [welcomeVisible, phases.length]);
 
   return (
     <div
-      className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all duration-1000 ${
-        hidden
-          ? "pointer-events-none opacity-0"
-          : "opacity-100"
-      }`}
+className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all duration-1000 ${
+  hidden && introReady
+    ? "pointer-events-none opacity-0"
+    : "opacity-100"
+}`}
     >
 
       {/* ======================================================
