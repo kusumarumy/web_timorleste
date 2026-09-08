@@ -297,6 +297,128 @@
     transform: translate(8px, -10px);
   }
 }
+/* =========================================================
+   GEOLANDSCAPE INTRO
+   ========================================================= */
+
+@keyframes geoLogoIntro {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.92);
+    filter: blur(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes geoLogoDivider {
+  from {
+    opacity: 0;
+    transform: scaleY(0);
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleY(1);
+  }
+}
+
+@keyframes geoLogoAccent {
+  from {
+    opacity: 0;
+    transform: scaleX(0.2);
+  }
+
+  to {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+}
+
+@keyframes geoLogoText {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Logo bergerak ke atas sebelum Welcome muncul */
+@keyframes geoLogoExit {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-30vh);
+  }
+}
+
+/* Welcome muncul dari bawah */
+@keyframes geoWelcomeIn {
+  from {
+    opacity: 0;
+    transform: translateY(35px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Background glow */
+@keyframes geoAtmosphere {
+  0%,
+  100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.7;
+    transform: scale(1.12);
+  }
+}
+
+/* Floating data points */
+@keyframes geoDataFloat {
+  0%,
+  100% {
+    opacity: 0.25;
+    transform: translate(0, 0);
+  }
+
+  50% {
+    opacity: 0.75;
+    transform: translate(8px, -10px);
+  }
+}
+
+/* Loading progress */
+@keyframes layerLoadingProgress {
+  0% {
+    transform: translateX(-120%);
+  }
+
+  50% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(300%);
+  }
+}
 .identify-ctrl .identify-ctrl-btn {
   display: flex;
   align-items: center;
