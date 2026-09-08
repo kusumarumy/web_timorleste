@@ -182,8 +182,14 @@ sublayers?: {
   id: string;
   labelKey: string;
   filterValue: string;
-  outlineColor?: string;
   color?: string;
+  outlineColor?: string;
+
+  statuses?: {
+    id: string;
+    labelKey: string;
+    filterValue: string;
+  }[];
 }[];
 
   children?: LayerDef[];
@@ -985,9 +991,9 @@ export const GROUPS: LayerGroup[] = [
     },
   ],
 },
-    {
-  id: "8irrigationareas",         
-  nameKey: "l_8irrigationareas",   
+  {
+  id: "8irrigationareas",
+  nameKey: "l_8irrigationareas",
   kind: "fill",
   data: v("8irrigationareas"),
   clickable: true,
@@ -1000,61 +1006,170 @@ export const GROUPS: LayerGroup[] = [
 
   legend: fillLegend(SYM.polygon.irrigationArea),
 
-  subProp: "KELAS_DI",                
+  subProp: "KELAS_DI",
 
   sublayers: [
-  {
-    id: "akadiru_kede",
-    labelKey: "di_akadiru_kede",
-    filterValue: "AKADIRU KEDE",
-    outlineColor: "#2196F3",
-  },
-  {
-    id: "buiha",
-    labelKey: "di_buiha",
-    filterValue: "BUIHA",
-    outlineColor: "#FF9800",
-  },
-  {
-    id: "kakeulaku",
-    labelKey: "di_kakeulaku",
-    filterValue: "KAKEULAKU",
-    outlineColor: "#F44336",
-  },
-  {
-    id: "lias",
-    labelKey: "di_lias",
-    filterValue: "LIAS",
-    outlineColor: "#FFC107",
-  },
-  {
-    id: "luan_kadoe",
-    labelKey: "di_luan_kadoe",
-    filterValue: "LUAN KADOE",
-    outlineColor: "#00BCD4",
-  },
-  {
-    id: "paulata",
-    labelKey: "di_paulata",
-    filterValue: "PAULATA",
-    outlineColor: "#E91E63",
-  },
-  {
-    id: "raibere",
-    labelKey: "di_raibere",
-    filterValue: "RAIBERE",
-    outlineColor: "#4CAF50",
-  },
+    {
+      id: "akadiru_kede",
+      labelKey: "di_akadiru_kede",
+      filterValue: "AKADIRU KEDE",
+      outlineColor: "#2196F3",
 
-  {
-    id: "oebaba",
-    labelKey: "di_oebaba",
-    filterValue: "OEBABA",
-    outlineColor: "#FFFFFF",
-  },
-],
+      statuses: [
+        {
+          id: "akadiru_kede_fungsional",
+          labelKey: "fungsional",
+          filterValue: "FUNGSIONAL",
+        },
+        {
+          id: "akadiru_kede_potensial",
+          labelKey: "potensial",
+          filterValue: "POTENSIAL",
+        },
+      ],
+    },
+
+    {
+      id: "buiha",
+      labelKey: "di_buiha",
+      filterValue: "BUIHA",
+      outlineColor: "#FF9800",
+
+      statuses: [
+        {
+          id: "buiha_fungsional",
+          labelKey: "fungsional",
+          filterValue: "FUNGSIONAL",
+        },
+        {
+          id: "buiha_potensial",
+          labelKey: "potensial",
+          filterValue: "POTENSIAL",
+        },
+        {
+          id: "buiha_crop",
+          labelKey: "crop_plantation",
+          filterValue: "CROP PLANTATION",
+        },
+      ],
+    },
+
+    {
+      id: "kakeulaku",
+      labelKey: "di_kakeulaku",
+      filterValue: "KAKEULAKU",
+      outlineColor: "#F44336",
+
+      statuses: [
+        {
+          id: "kakeulaku_fungsional",
+          labelKey: "fungsional",
+          filterValue: "FUNGSIONAL",
+        },
+        {
+          id: "kakeulaku_potensial",
+          labelKey: "potensial",
+          filterValue: "POTENSIAL",
+        },
+      ],
+    },
+
+    {
+      id: "lias",
+      labelKey: "di_lias",
+      filterValue: "LIAS",
+      outlineColor: "#FFC107",
+
+      statuses: [
+        {
+          id: "lias_fungsional",
+          labelKey: "fungsional",
+          filterValue: "FUNGSIONAL",
+        },
+        {
+          id: "lias_crop",
+          labelKey: "crop_plantation",
+          filterValue: "CROP PLANTATION",
+        },
+      ],
+    },
+
+    {
+      id: "luan_kadoe",
+      labelKey: "di_luan_kadoe",
+      filterValue: "LUAN KADOE",
+      outlineColor: "#00BCD4",
+
+      statuses: [
+        {
+          id: "luan_kadoe_fungsional",
+          labelKey: "fungsional",
+          filterValue: "FUNGSIONAL",
+        },
+      ],
+    },
+
+    {
+      id: "paulata",
+      labelKey: "di_paulata",
+      filterValue: "PAULATA",
+      outlineColor: "#E91E63",
+
+      statuses: [
+        {
+          id: "paulata_fungsional",
+          labelKey: "fungsional",
+          filterValue: "FUNGSIONAL",
+        },
+      ],
+    },
+
+    {
+      id: "raibere",
+      labelKey: "di_raibere",
+      filterValue: "RAIBERE",
+      outlineColor: "#4CAF50",
+
+      statuses: [
+        {
+          id: "raibere_fungsional",
+          labelKey: "fungsional",
+          filterValue: "FUNGSIONAL",
+        },
+        {
+          id: "raibere_potensial",
+          labelKey: "potensial",
+          filterValue: "POTENSIAL",
+        },
+      ],
+    },
+
+    {
+      id: "oebaba",
+      labelKey: "di_oebaba",
+      filterValue: "OEBABA",
+      outlineColor: "#FFFFFF",
+
+      statuses: [
+        {
+          id: "oebaba_fungsional",
+          labelKey: "fungsional",
+          filterValue: "FUNGSIONAL",
+        },
+        {
+          id: "oebaba_potensial",
+          labelKey: "potensial",
+          filterValue: "POTENSIAL",
+        },
+        {
+          id: "oebaba_crop",
+          labelKey: "crop_plantation",
+          filterValue: "CROP PLANTATION",
+        },
+      ],
+    },
+  ],
 },
-
      {
   id: "watershed",
   nameKey: "l_watershed",
