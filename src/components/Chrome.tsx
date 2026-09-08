@@ -447,15 +447,12 @@ export function StatusBar() {
   );
 }
 
-/* ============================================================
-   LOADER
-   ============================================================ */
-
 export function Loader({ hidden }: { hidden: boolean }) {
   const { t } = useI18n();
 
-  const [introDone, setIntroDone] = useState(false);
   const [phase, setPhase] = useState(0);
+  const [logoIntroDone, setLogoIntroDone] = useState(false);
+  const [welcomeVisible, setWelcomeVisible] = useState(false);
 
   const phases = [
     t("loadPhase1"),
@@ -464,31 +461,42 @@ export function Loader({ hidden }: { hidden: boolean }) {
     t("loadPhase4"),
   ];
 
-  /* ==========================================================
-     LOGO INTRO
-  ========================================================== */
-
+  // ============================================================
+  // OPENING SEQUENCE
+  //
+  // 0.0s  → Logo 1
+  // 0.7s  → Logo 2
+  // 1.3s  → Logo 3
+  // 2.2s  → All logos move upward
+  // 2.7s  → Welcome appears
+  // ============================================================
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIntroDone(true);
-    }, 3000);
+    const logoTimer = setTimeout(() => {
+      setLogoIntroDone(true);
+    }, 2200);
 
-    return () => clearTimeout(timer);
+    const welcomeTimer = setTimeout(() => {
+      setWelcomeVisible(true);
+    }, 2550);
+
+    return () => {
+      clearTimeout(logoTimer);
+      clearTimeout(welcomeTimer);
+    };
   }, []);
 
-  /* ==========================================================
-     ROTATING LOADING PHASE
-  ========================================================== */
-
+  // ============================================================
+  // ROTATING LOADING MESSAGE
+  // ============================================================
   useEffect(() => {
-    if (!introDone) return;
+    if (!welcomeVisible) return;
 
     const interval = setInterval(() => {
       setPhase((prev) => (prev + 1) % phases.length);
     }, 2200);
 
     return () => clearInterval(interval);
-  }, [introDone, phases.length]);
+  }, [welcomeVisible, phases.length]);
 
   return (
     <div
@@ -498,15 +506,21 @@ export function Loader({ hidden }: { hidden: boolean }) {
           : "opacity-100"
       }`}
     >
+
       {/* ======================================================
           BACKGROUND ATMOSPHERE
       ====================================================== */}
-
       <div className="pointer-events-none absolute inset-0">
-        {/* radial glow */}
-        <div className="absolute left-1/2 top-[42%] h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal/[0.035] blur-[100px]" />
 
-        {/* subtle grid */}
+        {/* Main radial atmosphere */}
+        <div
+          className="absolute left-1/2 top-[42%] h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal/[0.035] blur-[100px]"
+          style={{
+            animation: "geoAtmosphere 6s ease-in-out infinite",
+          }}
+        />
+
+        {/* Subtle spatial grid */}
         <div
           className="absolute inset-0 opacity-[0.035]"
           style={{
@@ -516,186 +530,212 @@ export function Loader({ hidden }: { hidden: boolean }) {
           }}
         />
 
-        {/* extra atmospheric glow */}
-        <div
-          className="absolute left-[10%] top-[15%] h-[180px] w-[180px] rounded-full bg-teal/[0.025] blur-[80px]"
-          style={{
-            animation: "geoAtmosphere 5s ease-in-out infinite",
-          }}
-        />
+        {/* Vignette */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,rgba(2,10,15,.38)_100%)]" />
 
-        <div
-          className="absolute bottom-[10%] right-[12%] h-[220px] w-[220px] rounded-full bg-teal/[0.02] blur-[90px]"
-          style={{
-            animation:
-              "geoAtmosphere 6s ease-in-out infinite reverse",
-          }}
-        />
       </div>
 
+
       {/* ======================================================
-          FLOATING DATA POINTS
+          FLOATING SPATIAL DATA POINTS
       ====================================================== */}
-
       <div className="pointer-events-none absolute inset-0">
-        <span className="absolute left-[18%] top-[25%] h-1 w-1 animate-pulse rounded-full bg-teal/70" />
 
         <span
-          className="absolute left-[28%] top-[62%] h-1.5 w-1.5 animate-pulse rounded-full bg-teal/40"
-          style={{ animationDelay: "700ms" }}
-        />
-
-        <span
-          className="absolute right-[22%] top-[31%] h-1 w-1 animate-pulse rounded-full bg-teal/60"
-          style={{ animationDelay: "1200ms" }}
-        />
-
-        <span
-          className="absolute right-[31%] top-[67%] h-1.5 w-1.5 animate-pulse rounded-full bg-teal/40"
-          style={{ animationDelay: "400ms" }}
-        />
-
-        <span
-          className="absolute left-[11%] top-[47%] h-1 w-1 rounded-full bg-teal/30"
+          className="absolute left-[18%] top-[25%] h-1 w-1 rounded-full bg-teal/70"
           style={{
             animation: "geoDataFloat 4s ease-in-out infinite",
           }}
         />
 
         <span
-          className="absolute right-[12%] top-[53%] h-1 w-1 rounded-full bg-teal/30"
+          className="absolute left-[28%] top-[62%] h-1.5 w-1.5 rounded-full bg-teal/40"
           style={{
-            animation:
-              "geoDataFloat 5s ease-in-out infinite reverse",
+            animation: "geoDataFloat 5s ease-in-out infinite",
+            animationDelay: "700ms",
           }}
         />
+
+        <span
+          className="absolute right-[22%] top-[31%] h-1 w-1 rounded-full bg-teal/60"
+          style={{
+            animation: "geoDataFloat 4.5s ease-in-out infinite",
+            animationDelay: "1200ms",
+          }}
+        />
+
+        <span
+          className="absolute right-[31%] top-[67%] h-1.5 w-1.5 rounded-full bg-teal/40"
+          style={{
+            animation: "geoDataFloat 5.5s ease-in-out infinite",
+            animationDelay: "400ms",
+          }}
+        />
+
       </div>
+
 
       {/* ======================================================
           LOGO INTRO
+          3 LOGOS APPEAR ONE BY ONE
+          THEN MOVE UP TO MAKE SPACE FOR WELCOME
       ====================================================== */}
+      <div
+        className={`absolute inset-0 z-50 flex items-center justify-center px-5 transition-all duration-1000 ease-[cubic-bezier(.22,1,.36,1)] ${
+          logoIntroDone
+            ? "-translate-y-[30vh] opacity-0"
+            : "translate-y-0 opacity-100"
+        }`}
+      >
 
-      {!introDone && (
-        <div
-          className="absolute inset-0 z-50 flex flex-col items-center justify-center"
-          style={{
-            animation: "geoIntroExit 0.8s ease-in-out 2.35s forwards",
-          }}
-        >
-          {/* logos */}
-          <div className="flex items-center gap-5 sm:gap-7">
+        <div className="flex flex-col items-center">
+
+          {/* ==================================================
+              THREE LOGOS
+          ================================================== */}
+          <div className="flex items-center gap-3 md:gap-7">
+
             {/* LOGO 1 */}
             <div
-              className="flex h-[66px] w-[90px] items-center justify-center opacity-0 sm:h-[76px] sm:w-[105px]"
+              className="flex h-[62px] w-[78px] items-center justify-center md:h-[76px] md:w-[105px]"
               style={{
+                opacity: 0,
                 animation:
-                  "geoLogoIntro 0.7s cubic-bezier(.22,1,.36,1) forwards",
+                  "geoLogoIntro 0.8s cubic-bezier(.22,1,.36,1) forwards",
                 animationDelay: "0.15s",
               }}
             >
               <img
                 src="/icons/1.png"
                 alt=""
-                className="max-h-full max-w-full object-contain"
+                className="max-h-[58px] max-w-[74px] object-contain md:max-h-[70px] md:max-w-[100px]"
               />
             </div>
 
-            {/* divider */}
+
+            {/* DIVIDER */}
             <div
-              className="h-[34px] w-px bg-white/[0.12] opacity-0"
+              className="hidden h-[38px] w-px bg-white/10 md:block"
               style={{
+                opacity: 0,
+                transform: "scaleY(0)",
                 animation:
-                  "geoLogoDivider 0.45s ease-out forwards",
-                animationDelay: "0.75s",
+                  "geoLogoDivider 0.5s ease-out forwards",
+                animationDelay: "0.65s",
               }}
             />
 
+
             {/* LOGO 2 */}
             <div
-              className="flex h-[66px] w-[90px] items-center justify-center opacity-0 sm:h-[76px] sm:w-[105px]"
+              className="flex h-[62px] w-[78px] items-center justify-center md:h-[76px] md:w-[105px]"
               style={{
+                opacity: 0,
                 animation:
-                  "geoLogoIntro 0.7s cubic-bezier(.22,1,.36,1) forwards",
+                  "geoLogoIntro 0.8s cubic-bezier(.22,1,.36,1) forwards",
                 animationDelay: "0.75s",
               }}
             >
               <img
                 src="/icons/2.png"
                 alt=""
-                className="max-h-full max-w-full object-contain"
+                className="max-h-[58px] max-w-[74px] object-contain md:max-h-[70px] md:max-w-[100px]"
               />
             </div>
 
-            {/* divider */}
+
+            {/* DIVIDER */}
             <div
-              className="h-[34px] w-px bg-white/[0.12] opacity-0"
+              className="hidden h-[38px] w-px bg-white/10 md:block"
               style={{
+                opacity: 0,
+                transform: "scaleY(0)",
                 animation:
-                  "geoLogoDivider 0.45s ease-out forwards",
-                animationDelay: "1.35s",
+                  "geoLogoDivider 0.5s ease-out forwards",
+                animationDelay: "1.2s",
               }}
             />
 
+
             {/* LOGO 3 */}
             <div
-              className="flex h-[66px] w-[90px] items-center justify-center opacity-0 sm:h-[76px] sm:w-[105px]"
+              className="flex h-[62px] w-[78px] items-center justify-center md:h-[76px] md:w-[105px]"
               style={{
+                opacity: 0,
                 animation:
-                  "geoLogoIntro 0.7s cubic-bezier(.22,1,.36,1) forwards",
+                  "geoLogoIntro 0.8s cubic-bezier(.22,1,.36,1) forwards",
                 animationDelay: "1.35s",
               }}
             >
               <img
                 src="/icons/3.png"
                 alt=""
-                className="max-h-full max-w-full object-contain"
+                className="max-h-[58px] max-w-[74px] object-contain md:max-h-[70px] md:max-w-[100px]"
               />
             </div>
+
           </div>
 
-          {/* thin accent */}
+
+          {/* ==================================================
+              ACCENT LINE
+          ================================================== */}
           <div
-            className="mt-9 h-px w-[90px] bg-gradient-to-r from-transparent via-teal/50 to-transparent opacity-0"
+            className="mt-7 h-px w-[100px] bg-teal/50"
             style={{
+              opacity: 0,
+              transform: "scaleX(0.2)",
               animation:
                 "geoLogoAccent 0.7s ease-out forwards",
-              animationDelay: "1.55s",
+              animationDelay: "1.7s",
             }}
           />
 
-          {/* small label */}
+
+          {/* ==================================================
+              SMALL LABEL
+          ================================================== */}
           <div
-            className="mt-5 text-[8px] font-semibold tracking-[0.3em] text-white/25 opacity-0"
+            className="mt-4 text-[8px] font-medium uppercase tracking-[0.28em] text-white/30"
             style={{
-              animation: "geoLogoText 0.7s ease-out forwards",
-              animationDelay: "1.7s",
+              opacity: 0,
+              animation:
+                "geoLogoText 0.7s ease-out forwards",
+              animationDelay: "1.85s",
             }}
           >
             GEOSPATIAL COLLABORATION
           </div>
+
         </div>
-      )}
+
+      </div>
+
 
       {/* ======================================================
-          ADVANCED WELCOME / LOADING
+          MAIN WELCOME CONTENT
       ====================================================== */}
-
       <div
-        className={`absolute inset-0 flex items-center justify-center px-5 transition-all duration-1000 ${
-          introDone
+        className={`relative z-10 flex min-h-full items-center justify-center px-5 transition-all duration-1000 ease-[cubic-bezier(.22,1,.36,1)] ${
+          welcomeVisible
             ? "translate-y-0 opacity-100"
-            : "translate-y-5 opacity-0"
+            : "translate-y-10 opacity-0"
         }`}
       >
+
         <div className="w-full max-w-[620px]">
 
-          {/* ==================================================
-              BRAND
-          ================================================== */}
 
+          {/* ==================================================
+              BRAND / WELCOME
+          ================================================== */}
           <div className="mb-8 text-center">
+
+            {/* Loading icon */}
             <div className="mb-5 flex justify-center">
+
               <div className="flex h-[48px] w-[48px] items-center justify-center rounded-[14px] border border-white/10 bg-white/[0.035] shadow-[0_8px_35px_rgba(0,0,0,.25)]">
+
                 <div
                   className="h-[24px] w-[24px] rounded-full border-[2px] border-teal/30 border-t-teal"
                   style={{
@@ -703,31 +743,44 @@ export function Loader({ hidden }: { hidden: boolean }) {
                       "layerLoadingSpin 1s linear infinite",
                   }}
                 />
+
               </div>
+
             </div>
 
+
+            {/* Product name */}
             <div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.28em] text-teal/80">
               GEOLANDSCAPE
             </div>
 
+
+            {/* Location */}
             <h1 className="font-display text-[32px] font-semibold tracking-[-0.04em] text-white md:text-[38px]">
               Ainaro – Belulik
             </h1>
 
+
+            {/* Description */}
             <p className="mx-auto mt-3 max-w-[430px] text-[13px] leading-relaxed text-white/45">
               {t("welcomeDescription")}
             </p>
+
           </div>
 
-          {/* ==================================================
-              TERRAIN GRAPH
-          ================================================== */}
 
+          {/* ==================================================
+              TERRAIN PROFILE
+          ================================================== */}
           <div className="relative overflow-hidden rounded-[20px] border border-white/[0.08] bg-white/[0.025] shadow-[0_25px_80px_rgba(0,0,0,.35)]">
 
-            {/* graph header */}
+            {/* ----------------------------------------------
+                HEADER
+            ---------------------------------------------- */}
             <div className="flex items-center justify-between border-b border-white/[0.06] px-5 py-3">
+
               <div>
+
                 <div className="text-[9px] font-bold uppercase tracking-[0.18em] text-white/35">
                   LANDSCAPE PROFILE
                 </div>
@@ -735,37 +788,53 @@ export function Loader({ hidden }: { hidden: boolean }) {
                 <div className="mt-1 text-[11px] text-white/55">
                   Ainaro – Belulik
                 </div>
+
               </div>
 
+
+              {/* Live */}
               <div className="flex items-center gap-1.5">
+
                 <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-teal" />
 
                 <span className="text-[9px] uppercase tracking-[0.12em] text-white/35">
                   {t("live")}
                 </span>
+
               </div>
+
             </div>
 
-            {/* terrain chart */}
+
+            {/* ----------------------------------------------
+                TERRAIN GRAPH
+            ---------------------------------------------- */}
             <div className="relative h-[155px] overflow-hidden px-5 pt-5">
 
-              {/* horizontal grid */}
+              {/* Horizontal grid */}
               <div className="absolute inset-x-5 top-[28px] border-t border-white/[0.035]" />
+
               <div className="absolute inset-x-5 top-[68px] border-t border-white/[0.035]" />
+
               <div className="absolute inset-x-5 top-[108px] border-t border-white/[0.035]" />
 
-              {/* vertical grid */}
+
+              {/* Vertical grid */}
               <div className="absolute bottom-5 left-[25%] top-5 border-l border-white/[0.025]" />
+
               <div className="absolute bottom-5 left-[50%] top-5 border-l border-white/[0.025]" />
+
               <div className="absolute bottom-5 left-[75%] top-5 border-l border-white/[0.025]" />
 
-              {/* animated terrain */}
+
+              {/* Terrain SVG */}
               <svg
                 viewBox="0 0 600 130"
                 preserveAspectRatio="none"
                 className="absolute inset-x-5 bottom-5 h-[125px] w-[calc(100%-40px)]"
               >
-                {/* fill */}
+
+                {/* Terrain fill */}
                 <path
                   d="
                     M0 105
@@ -785,7 +854,8 @@ export function Loader({ hidden }: { hidden: boolean }) {
                   className="fill-teal/[0.07]"
                 />
 
-                {/* main terrain line */}
+
+                {/* Main terrain line */}
                 <path
                   d="
                     M0 105
@@ -807,6 +877,7 @@ export function Loader({ hidden }: { hidden: boolean }) {
                   strokeDasharray="1"
                   strokeDashoffset="1"
                 >
+
                   <animate
                     attributeName="stroke-dashoffset"
                     from="1"
@@ -814,14 +885,17 @@ export function Loader({ hidden }: { hidden: boolean }) {
                     dur="3s"
                     repeatCount="indefinite"
                   />
+
                 </path>
 
-                {/* moving point */}
+
+                {/* Moving point */}
                 <circle
                   r="3"
                   fill="currentColor"
                   className="text-teal"
                 >
+
                   <animateMotion
                     dur="4s"
                     repeatCount="indefinite"
@@ -838,10 +912,13 @@ export function Loader({ hidden }: { hidden: boolean }) {
                       C572 58 585 43 600 47
                     "
                   />
+
                 </circle>
+
               </svg>
 
-              {/* elevation labels */}
+
+              {/* Elevation labels */}
               <div className="absolute bottom-2 left-5 text-[8px] text-white/20">
                 LOW
               </div>
@@ -849,15 +926,18 @@ export function Loader({ hidden }: { hidden: boolean }) {
               <div className="absolute bottom-2 right-5 text-[8px] text-white/20">
                 HIGH
               </div>
+
             </div>
 
-            {/* =================================================
-                DATA STATUS
-            ================================================= */}
 
+            {/* ==================================================
+                DATA STATUS
+            ================================================== */}
             <div className="grid grid-cols-3 border-t border-white/[0.06]">
 
+              {/* Terrain */}
               <div className="border-r border-white/[0.06] px-4 py-3">
+
                 <div className="text-[8px] uppercase tracking-[0.15em] text-white/30">
                   Terrain
                 </div>
@@ -865,9 +945,13 @@ export function Loader({ hidden }: { hidden: boolean }) {
                 <div className="mt-1 text-[11px] font-semibold text-white/70">
                   Processing
                 </div>
+
               </div>
 
+
+              {/* Spatial */}
               <div className="border-r border-white/[0.06] px-4 py-3">
+
                 <div className="text-[8px] uppercase tracking-[0.15em] text-white/30">
                   Spatial
                 </div>
@@ -875,29 +959,39 @@ export function Loader({ hidden }: { hidden: boolean }) {
                 <div className="mt-1 text-[11px] font-semibold text-white/70">
                   Preparing
                 </div>
+
               </div>
 
+
+              {/* 3D */}
               <div className="px-4 py-3">
+
                 <div className="text-[8px] uppercase tracking-[0.15em] text-white/30">
                   3D Scene
                 </div>
 
                 <div className="mt-1 flex items-center gap-1.5 text-[11px] font-semibold text-white/70">
+
                   <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-teal" />
 
                   Initializing
+
                 </div>
+
               </div>
 
             </div>
+
           </div>
+
 
           {/* ==================================================
               LOADING STATUS
           ================================================== */}
-
           <div className="mt-7 text-center">
+
             <div className="mb-3 flex items-center justify-center gap-2">
+
               <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-teal" />
 
               <span
@@ -910,10 +1004,13 @@ export function Loader({ hidden }: { hidden: boolean }) {
               >
                 {phases[phase]}
               </span>
+
             </div>
 
-            {/* progress animation */}
+
+            {/* Progress bar */}
             <div className="mx-auto h-[2px] w-[180px] overflow-hidden rounded-full bg-white/[0.07]">
+
               <div
                 className="h-full w-[45%] rounded-full bg-teal"
                 style={{
@@ -921,21 +1018,27 @@ export function Loader({ hidden }: { hidden: boolean }) {
                     "layerLoadingProgress 2.4s ease-in-out infinite",
                 }}
               />
+
             </div>
+
           </div>
+
 
           {/* ==================================================
               FOOTER
           ================================================== */}
-
           <div className="mt-8 text-center">
+
             <p className="text-[9px] uppercase tracking-[0.2em] text-white/20">
               Spatial Data · Terrain · Landscape
             </p>
+
           </div>
 
         </div>
+
       </div>
+
     </div>
   );
 }
