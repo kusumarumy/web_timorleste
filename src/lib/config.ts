@@ -1204,7 +1204,7 @@ export const GROUPS: LayerGroup[] = [
     {
       id: "watershed_dam_3",
       labelKey: "watershed_dam_3",
-      filterValue: "watershed DAM 3",
+      filterValue: "Watershed DAM 3",
       outlineColor: "#FF9800",
     },
     {
