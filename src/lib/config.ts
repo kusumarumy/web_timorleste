@@ -578,10 +578,10 @@ intakePier: {
       outline: "#90795A",
     },
 
- protectedForest: {
-  color: "#32CD32",
-  opacity: 0.25,
-  outline: "#228B22",
+protectedForest: {
+  color: "#B6FF00",
+  opacity: 0.35,
+  outline: "#DFFF00",
 },
 
     inundation: {
