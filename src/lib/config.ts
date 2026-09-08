@@ -210,113 +210,82 @@ export interface LayerGroup {
 
 const SYM = {
   line: {
-    // =========================
-    // TRANSPORTATION
-    // =========================
     road: {
       color: "#424242",
       width: 2.4,
     },
-
     roadAccess: {
       color: "#795548",
       width: 2.0,
     },
-
     strais: {
       color: "#6D4C41",
       width: 2.0,
       dasharray: [2, 2],
     },
-
-    // =========================
-    // IRRIGATION / HYDROLOGY
-    // =========================
     irrigationExisting: {
       color: "#0A93FC",
       width: 2.4,
     },
-
     irrigationTertiary: {
       color: "#4FC3F7",
       width: 2.2,
       dasharray: [6, 3],
     },
-
     irrigationBoundary: {
       color: "#00BCD4",
       width: 2.5,
       dasharray: [8, 4],
     },
-
     drainage: {
       color: "#1565C0",
       width: 2.4,
       dasharray: [10, 4],
     },
-
     drainageSecondary: {
       color: "#42A5F5",
       width: 2.2,
       dasharray: [6, 3],
     },
-
     drainageDesign: {
       color: "#FF8F00",
       width: 2.2,
       dasharray: [4, 3],
     },
-
     river: {
       color: "#0077B6",
       width: 2.5,
     },
-
-    // =========================
-    // DESIGN / PLANNING
-    // =========================
     design: {
       color: "#F39C12",
       width: 2.0,
       dasharray: [6, 3],
     },
-
     boundary: {
       color: "#757575",
       width: 1.2,
       dasharray: [7, 4],
     },
-
-    // =========================
-    // ADMINISTRATIVE
-    // =========================
     adminCountry: {
-      color: "#4A148C",
+      color: "#3A3A3A",
       width: 2.4,
       dasharray: [14, 7],
     },
-
     adminMunicipality: {
-      color: "#6A1B9A",
+      color: "#555555",
       width: 2.2,
       dasharray: [12, 6],
     },
-
     adminPosto: {
-      color: "#8E24AA",
+      color: "#707070",
       width: 1.9,
       dasharray: [8, 4],
     },
-
     adminVillage: {
-      color: "#AB47BC",
+      color: "#999999",
       width: 1.6,
       dasharray: [4, 3],
     },
-
-    // =========================
-    // BUILDING / STRUCTURES
-    // =========================
     building: {
       color: "#C62828",
       width: 2.0,
@@ -764,12 +733,12 @@ export const GROUPS: LayerGroup[] = [
       data: v("aoi_photo"),
       clickable: true,
       paint: linePaint({
-        color: "#D500F9", 
+        color: "#B000D4", 
         width: 2.5,
       }),
       defaultOn: true,
       legend: lineLegend({
-        color: "#D500F9",
+        color: "#B000D4",
         width: 2.5,
       }),
     },
@@ -780,12 +749,12 @@ export const GROUPS: LayerGroup[] = [
       data: v("aoi_lidar"),
       clickable: true,
       paint: linePaint({
-        color: "#F5A3FF",
+        color: "#D58BE5",
         width: 2.5,
       }),
       defaultOn: true,
       legend: lineLegend({
-        color: "#F5A3FF",
+        color: "#D58BE5",
         width: 2.5,
       }),
     },
@@ -806,7 +775,7 @@ export const GROUPS: LayerGroup[] = [
       label: {
         field: "adm3_name",
         size: 10,
-        color: "#8E24AA",
+        color: "#555555",
         haloColor: "#FFFFFF",
         haloWidth: 1.5,
       },
@@ -822,7 +791,7 @@ export const GROUPS: LayerGroup[] = [
       label: {
         field: "adm2_name",
         size: 11,
-        color: "#7B1FA2",
+        color: "#444444",
         haloColor: "#FFFFFF",
         haloWidth: 1.5,
       },
@@ -838,7 +807,7 @@ export const GROUPS: LayerGroup[] = [
       label: {
         field: "adm1_name",
         size: 12,
-        color: "#6A1B9A",
+        color: "#333333",
         haloColor: "#FFFFFF",
         haloWidth: 2,
       },
