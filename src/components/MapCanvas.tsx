@@ -1039,8 +1039,8 @@ const outlineLayer =
       right: "150px",
       zIndex: 30,
 
-      width: "320px",
-      maxHeight: "150px",
+      width: "280px",
+      maxHeight: "100px",
       overflowY: "auto",
       overflowX: "hidden",
     }}
