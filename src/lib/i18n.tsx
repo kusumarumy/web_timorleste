@@ -76,7 +76,7 @@ export const DICTS: Record<Lang, Dict> = {
     l_watershed: "Daerah Aliran Sungai",
     watershed_dam_1: "Daerah Aliran Sungai DAM 1",
     watershed_dam_2: "Daerah Aliran Sungai DAM 2",
-    watershed_dam_3: "Daerah TAliran Sungai DAM 3",
+    watershed_dam_3: "Daerah Aliran Sungai DAM 3",
     watershed_oebaba: "Daerah Aliran Sungai OEBABA",
 
     // Transportation
