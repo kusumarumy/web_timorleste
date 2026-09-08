@@ -912,6 +912,7 @@ export const GROUPS: LayerGroup[] = [
       defaultOn: false,
       opacity: SYM.polygon.irrigationScheme.opacity,
       opacityProp: "fill-opacity",
+      subProp: "kelas",
       sublayers: [
       {
         id: "4schema_oebaba",
