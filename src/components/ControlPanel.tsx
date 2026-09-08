@@ -144,6 +144,7 @@ function LayerSymbol({ l }: { l: LayerDef }) {
 
 function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
   const { t } = useI18n();
+
   const {
     visible,
     toggle,
@@ -151,35 +152,51 @@ function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
     setOpacity,
     subVisible,
     toggleSub,
+    statusVisible,
+    toggleStatus,
   } = useMapStore();
+
   const on = visible[l.id];
+
   const handleToggle = () => {
     const next = !on;
+
     toggle(l.id);
+
     if (l.cascade) {
       for (const childId of getDescendantIds(l.id)) {
-        if ((visible[childId] ?? false) !== next) toggle(childId);
+        if ((visible[childId] ?? false) !== next) {
+          toggle(childId);
+        }
       }
     }
   };
+
   return (
     <div>
+      {/* =====================================================
+          MAIN LAYER
+      ===================================================== */}
       <div
         className={`group flex items-center gap-2.5 rounded-[10px] py-2 transition-colors hover:bg-teal/[0.07] ${
           depth > 0 ? "pl-5 pr-2" : "px-2"
         }`}
-      >        <Toggle on={on} onClick={handleToggle} />
+      >
+        <Toggle on={on} onClick={handleToggle} />
+
         <div className="min-w-0 flex-1">
           <div className="flex items-center gap-2 text-[13px] font-semibold text-ink">
-<LayerSymbol l={l} />
+            <LayerSymbol l={l} />
             {t(l.nameKey)}
           </div>
+
           {l.subKey && (
             <div className="mt-0.5 text-[10.5px] text-muted2">
               {t(l.subKey)}
             </div>
           )}
         </div>
+
         {l.opacityProp != null && (
           <input
             type="range"
@@ -187,41 +204,95 @@ function LayerRow({ l, depth = 0 }: { l: LayerDef; depth?: number }) {
             max={1}
             step={0.05}
             value={opacity[l.id] ?? 1}
-            onChange={(e) => setOpacity(l.id, +e.target.value)}
+            onChange={(e) =>
+              setOpacity(l.id, +e.target.value)
+            }
             className="h-[3px] w-16 flex-none accent-teal"
           />
         )}
       </div>
-{l.sublayers && on && (
-  <div className="ml-10 mb-2 mt-0.5 space-y-0.5 border-l border-strokeSoft pl-3">
-    {l.sublayers.map((sub) => (
-      <label
-        key={sub.id}
-        className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-[11.5px] text-muted hover:bg-teal/[0.07]"
-      >
-        <input
-          type="checkbox"
-          checked={subVisible[sub.id] ?? true}
-          onChange={() => toggleSub(sub.id)}
-          className="h-3.5 w-3.5 accent-teal"
-        />
 
-        <span
-  className="h-[11px] w-[22px] flex-none rounded-[2px]"
-  style={{
-    backgroundColor: "#66BB6A",
-    opacity: 0.25,
-    border: `2px solid ${sub.outlineColor ?? "#2E7D32"}`,
-  }}
-/>
+      {/* =====================================================
+          SUBLAYERS / KELAS_DI
+      ===================================================== */}
+      {l.sublayers && on && (
+        <div className="ml-10 mb-2 mt-0.5 space-y-0.5 border-l border-strokeSoft pl-3">
+          {l.sublayers.map((sub) => {
+            const subOn = subVisible[sub.id] ?? true;
 
-        <span className="truncate">
-          {t(sub.labelKey)}
-        </span>
-      </label>
-    ))}
-  </div>
-)}
+            return (
+              <div key={sub.id}>
+                {/* ---------------------------------------------
+                    KELAS_DI
+                --------------------------------------------- */}
+                <label
+                  className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 text-[11.5px] text-muted hover:bg-teal/[0.07]"
+                >
+                  <input
+                    type="checkbox"
+                    checked={subOn}
+                    onChange={() => toggleSub(sub.id)}
+                    className="h-3.5 w-3.5 accent-teal"
+                  />
+
+                  <span
+                    className="h-[11px] w-[22px] flex-none rounded-[2px]"
+                    style={{
+                      backgroundColor: "#66BB6A",
+                      opacity: 0.25,
+                      border: `2px solid ${
+                        sub.outlineColor ?? "#2E7D32"
+                      }`,
+                    }}
+                  />
+
+                  <span className="truncate">
+                    {t(sub.labelKey)}
+                  </span>
+                </label>
+
+                {/* ---------------------------------------------
+                    KETERANGAN / STATUS
+                --------------------------------------------- */}
+                {sub.statuses?.length && subOn ? (
+                  <div className="ml-8 mb-1 mt-0.5 space-y-0.5 border-l border-strokeSoft/60 pl-2">
+                    {sub.statuses.map((status) => {
+                      const statusOn =
+                        statusVisible[status.id] ?? true;
+
+                      return (
+                        <label
+                          key={status.id}
+                          className="flex cursor-pointer items-center gap-2 rounded-md px-2 py-1 text-[10.5px] text-muted2 hover:bg-teal/[0.07]"
+                        >
+                          <input
+                            type="checkbox"
+                            checked={statusOn}
+                            onChange={() =>
+                              toggleStatus(status.id)
+                            }
+                            className="h-3 w-3 accent-teal"
+                          />
+
+                          <span className="h-[5px] w-[5px] flex-none rounded-full bg-muted2/70" />
+
+                          <span className="truncate">
+                            {t(status.labelKey)}
+                          </span>
+                        </label>
+                      );
+                    })}
+                  </div>
+                ) : null}
+              </div>
+            );
+          })}
+        </div>
+      )}
+
+      {/* =====================================================
+          CHILDREN
+      ===================================================== */}
       {l.children && l.children.length > 0 && on && (
         <div className="ml-5 mb-1 border-l border-strokeSoft pl-2">
           {l.children.map((child) => (
