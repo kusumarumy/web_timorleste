@@ -188,23 +188,30 @@ if (iconId) {
           features: [],
         },
       };
-const layerPaint = { ...(l.paint as any) };
-
-if (l.kind === "fill" && l.sublayers?.length) {
-  delete layerPaint["fill-outline-color"];
-}
-
-layers.push({
-  id: l.id,
-  type: l.kind,
-  source: l.id,
-  paint: layerPaint,
-  layout: {
-    visibility: l.defaultOn
-      ? "visible"
-      : "none",
-  },
-} as any);
+        const layerPaint = { ...(l.paint as any) };
+        if (l.kind === "line" && l.sublayers?.length) {
+          layerPaint["line-color"] = getSubLayerColorExpression(
+            l,
+            "color",
+            typeof layerPaint["line-color"] === "string"
+              ? layerPaint["line-color"]
+              : "#2E7D32"
+          );
+        }
+        if (l.kind === "fill" && l.sublayers?.length) {
+          delete layerPaint["fill-outline-color"];
+        }
+        layers.push({
+          id: l.id,
+          type: l.kind,
+          source: l.id,
+          paint: layerPaint,
+          layout: {
+            visibility: l.defaultOn
+              ? "visible"
+              : "none",
+          },
+        } as any);
             if (l.label) {
         const isPolygon = l.kind === "fill";
         const isLine = l.kind === "line";
@@ -249,61 +256,40 @@ layers.push({
           },
         } as any);
       }
-     if (l.kind === "fill") {
-  const legend = l.legend;
-
-  let outlineColor: any =
-    (l.paint as any)?.["fill-outline-color"] ??
-    l.legend?.color ??
-    "#2E7D32";
-
-  // Jika layer memiliki sublayer,
-  // warna outline mengikuti outlineColor masing-masing sublayer
-  if (l.sublayers && l.sublayers.length > 0) {
-    const prop = l.subProp ?? "subkelas";
-
-    const matchExpression: any[] = [
-      "match",
-      ["get", prop],
-    ];
-
-    l.sublayers.forEach((sub) => {
-      matchExpression.push(
-        sub.filterValue,
-        sub.outlineColor ?? outlineColor
-      );
-    });
-
-    // fallback jika tidak ada nilai yang cocok
-    matchExpression.push(outlineColor);
-
-    outlineColor = matchExpression;
-  }
-
-  layers.push({
-    id: `${l.id}_outline`,
-    type: "line",
-    source: l.id,
-
-    layout: {
-      visibility: l.defaultOn
-        ? "visible"
-        : "none",
-    },
-
-    paint: {
-      "line-color": outlineColor,
-      "line-width": 2,
-      "line-opacity": 1,
-
-      ...(legend?.dasharray
-        ? {
-            "line-dasharray": legend.dasharray,
-          }
-        : {}),
-    },
-  } as any);
-}
+      if (l.kind === "fill") {
+        const legend = l.legend;
+        const baseOutlineColor =
+          (l.paint as any)?.["fill-outline-color"] ??
+          l.legend?.color ??
+          "#2E7D32";
+        const outlineColor = l.sublayers?.length
+          ? getSubLayerColorExpression(
+              l,
+              "outlineColor",
+              baseOutlineColor
+            )
+          : baseOutlineColor;
+        layers.push({
+          id: `${l.id}_outline`,
+          type: "line",
+          source: l.id,
+          layout: {
+            visibility: l.defaultOn
+              ? "visible"
+              : "none",
+          },
+          paint: {
+            "line-color": outlineColor,
+            "line-width": 2,
+            "line-opacity": 1,
+            ...(legend?.dasharray
+              ? {
+                  "line-dasharray": legend.dasharray,
+                }
+              : {}),
+          },
+        } as any);
+      }
     }
   });
   layers.forEach((layer, index) => {
@@ -359,26 +345,51 @@ function getSubkelasFilter(
   if (!layer.sublayers || layer.sublayers.length === 0) {
     return undefined;
   }
-
   const prop = layer.subProp ?? "subkelas";
-
   const activeValues = layer.sublayers
     .filter((sub) => subVisible[sub.id] !== false)
     .map((sub) => sub.filterValue);
-
   if (activeValues.length === 0) {
     return ["==", ["literal", 1], ["literal", 0]] as any;
   }
   if (activeValues.length === layer.sublayers.length) {
     return undefined;
   }
-  return [
-    "in",
+  const expression: any[] = [
+    "match",
     ["get", prop],
-    ["literal", activeValues],
-  ] as any;
+  ];
+  activeValues.forEach((value) => {
+    expression.push(value, true);
+  });
+  expression.push(false);
+  return expression as any;
 }
-
+function getSubLayerColorExpression(
+  layer: typeof ALL_LAYERS[number],
+  colorKey: "color" | "outlineColor",
+  fallback: string
+): any {
+  if (!layer.sublayers || layer.sublayers.length === 0) {
+    return fallback;
+  }
+  const prop = layer.subProp ?? "subkelas";
+  const expression: any[] = [
+    "match",
+    ["get", prop],
+  ];
+  layer.sublayers.forEach((sub) => {
+    const color = sub[colorKey];
+    if (color) {
+      expression.push(
+        sub.filterValue,
+        color
+      );
+    }
+  });
+  expression.push(fallback);
+  return expression;
+}
 async function registerMapIcons(map: MLMap) {
   const icons = [
     {
@@ -865,28 +876,23 @@ const outlineLayer =
                 : "none"
             );
           }
-if (l.sublayers) {
-  const filter = getSubkelasFilter(
-    l,
-    s.subVisible
-  );
-
-  // Fill
-  map.setFilter(
-    l.id,
-    filter ?? null
-  );
-
-  // Outline
-  const outlineId = `${l.id}_outline`;
-
-  if (map.getLayer(outlineId)) {
-    map.setFilter(
-      outlineId,
-      filter ?? null
-    );
-  }
-}
+          if (l.sublayers) {
+            const filter = getSubkelasFilter(
+              l,
+              s.subVisible
+            );
+            map.setFilter(
+              l.id,
+              filter ?? null
+            );
+            const outlineId = `${l.id}_outline`;
+            if (map.getLayer(outlineId)) {
+              map.setFilter(
+                outlineId,
+                filter ?? null
+              );
+            }
+          }
           if (
             l.opacityProp &&
             s.opacity[l.id] != null
