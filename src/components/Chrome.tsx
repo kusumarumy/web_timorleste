@@ -461,7 +461,10 @@ export function StatusBar() {
 
 export function Loader({ hidden }: { hidden: boolean }) {
   const { t } = useI18n();
-
+useEffect(() => {
+  const img = new window.Image();
+  img.src = "/icons/loading.png";
+}, []);
   const [phase, setPhase] = useState(0);
   const [logoIntroDone, setLogoIntroDone] = useState(false);
   const [welcomeVisible, setWelcomeVisible] = useState(false);
@@ -533,34 +536,34 @@ export function Loader({ hidden }: { hidden: boolean }) {
     CINEMATIC BACKGROUND
 ====================================================== */}
 
-<div className="pointer-events-none absolute inset-0 overflow-hidden">
+<div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
 
   {/* ==================================================
       AINARO – BELULIK LANDSCAPE
   ================================================== */}
 
   <img
-    src="/icons/loading.png"
-    alt=""
-    className="absolute inset-0 h-full w-full object-cover"
-    style={{
-      filter:
-        "brightness(.48) saturate(.82) contrast(1.08)",
-    }}
-  />
-
+  src="/icons/loading.png"
+  alt=""
+  draggable={false}
+  className="absolute inset-0 z-0 h-full w-full object-cover"
+  style={{
+    filter:
+      "brightness(.58) saturate(.88) contrast(1.08)",
+  }}
+/>
   {/* ==================================================
       DEEP CINEMATIC OVERLAY
   ================================================== */}
 
-  <div className="absolute inset-0 bg-[#03131B]/42" />
+<div className="absolute inset-0 z-[1] bg-[#03131B]/28" />
 
   {/* ==================================================
       CENTRAL TEAL ATMOSPHERE
   ================================================== */}
 
   <div
-    className="absolute left-1/2 top-[43%] h-[650px] w-[850px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal/[0.08] blur-[140px]"
+    className="absolute left-1/2 top-[43%] z-[2] h-[650px] w-[850px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal/[0.08] blur-[140px]"
     style={{
       animation:
         "geoAtmosphere 7s ease-in-out infinite",
@@ -911,413 +914,681 @@ export function Loader({ hidden }: { hidden: boolean }) {
           </div>
 
           {/* ==================================================
-              TERRAIN PROFILE CARD
-          ================================================== */}
+    TERRAIN PROFILE CARD
+================================================== */}
 
-          <div
-            className="
-              relative overflow-hidden rounded-[20px]
-              border border-teal/20
-              bg-[#071B25]/75
-              shadow-[0_25px_100px_rgba(0,0,0,.6)]
-              backdrop-blur-[5px]
-            "
+<div
+  className="
+    relative overflow-hidden rounded-[20px]
+    border border-teal/25
+    bg-[#061A24]/82
+    shadow-[0_25px_90px_rgba(0,0,0,.62)]
+    backdrop-blur-[6px]
+  "
+>
+  {/* ==================================================
+      CARD GLOW
+  ================================================== */}
+
+  <div className="pointer-events-none absolute inset-0">
+
+    {/* top cyan edge */}
+    <div className="absolute left-[8%] right-[8%] top-0 h-px bg-teal/55 blur-[1px]" />
+
+    {/* right glow */}
+    <div className="absolute right-[-90px] top-[-90px] h-[220px] w-[220px] rounded-full bg-teal/[0.08] blur-[80px]" />
+
+    {/* bottom glow */}
+    <div className="absolute bottom-[-100px] left-[-80px] h-[220px] w-[220px] rounded-full bg-teal/[0.06] blur-[80px]" />
+
+  </div>
+
+
+  {/* ==================================================
+      HEADER
+  ================================================== */}
+
+  <div
+    className="
+      relative flex items-center justify-between
+      border-b border-white/[0.07]
+      px-5 py-3.5
+    "
+  >
+
+    {/* LEFT */}
+
+    <div>
+
+      <div
+        className="
+          flex items-center gap-2
+          text-[9px] font-bold
+          uppercase tracking-[0.18em]
+          text-teal
+        "
+      >
+
+        {/* terrain icon */}
+
+        <svg
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.6"
+        >
+          <path d="M3 17l6-6 4 4 5-7 3 3" />
+          <path d="M3 21h18" />
+        </svg>
+
+        LANDSCAPE PROFILE
+
+      </div>
+
+
+      {/* LOCATION */}
+
+      <div className="mt-1.5 flex items-center gap-2">
+
+        <svg
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.7"
+          className="text-white/45"
+        >
+          <path d="M20 10c0 5-8 11-8 11S4 15 4 10a8 8 0 1 1 16 0Z" />
+          <circle cx="12" cy="10" r="2.5" />
+        </svg>
+
+        <span className="text-[11px] font-medium text-white/65">
+          Ainaro – Belulik
+        </span>
+
+      </div>
+
+    </div>
+
+
+    {/* ==================================================
+        LIVE
+    ================================================== */}
+
+    <div className="flex items-center gap-2">
+
+      <span
+        className="
+          h-2 w-2 rounded-full
+          bg-teal
+          shadow-[0_0_12px_rgba(47,220,220,.9)]
+          animate-pulse
+        "
+      />
+
+      <span
+        className="
+          text-[9px] font-medium
+          uppercase tracking-[0.13em]
+          text-teal/90
+        "
+      >
+        {t("live")}
+      </span>
+
+    </div>
+
+  </div>
+
+
+  {/* ==================================================
+      TERRAIN GRAPH
+  ================================================== */}
+
+  <div className="relative h-[185px] overflow-hidden px-5 pt-4">
+
+    {/* ==================================================
+        HORIZONTAL GRID
+    ================================================== */}
+
+    <div className="absolute inset-x-5 top-[30px] border-t border-teal/[0.08]" />
+
+    <div className="absolute inset-x-5 top-[70px] border-t border-teal/[0.07]" />
+
+    <div className="absolute inset-x-5 top-[110px] border-t border-teal/[0.06]" />
+
+    <div className="absolute inset-x-5 top-[150px] border-t border-teal/[0.05]" />
+
+
+    {/* ==================================================
+        VERTICAL GRID
+    ================================================== */}
+
+    <div className="absolute bottom-5 left-[25%] top-4 border-l border-teal/[0.045]" />
+
+    <div className="absolute bottom-5 left-[50%] top-4 border-l border-teal/[0.045]" />
+
+    <div className="absolute bottom-5 left-[75%] top-4 border-l border-teal/[0.045]" />
+
+
+    {/* ==================================================
+        ELEVATION LABELS
+    ================================================== */}
+
+    <div className="absolute left-5 top-[25px] text-[8px] font-medium text-white/55">
+      1.200 m
+    </div>
+
+    <div className="absolute left-5 top-[65px] text-[8px] font-medium text-white/55">
+      800 m
+    </div>
+
+    <div className="absolute left-5 top-[105px] text-[8px] font-medium text-white/55">
+      400 m
+    </div>
+
+    <div className="absolute bottom-[24px] left-5 text-[8px] font-medium text-white/55">
+      0 m
+    </div>
+
+
+    {/* ==================================================
+        TERRAIN SVG
+    ================================================== */}
+
+    <svg
+      viewBox="0 0 700 150"
+      preserveAspectRatio="none"
+      className="
+        absolute
+        inset-x-5
+        bottom-5
+        h-[155px]
+        w-[calc(100%-40px)]
+      "
+    >
+
+      {/* ==================================================
+          TERRAIN BASE
+      ================================================== */}
+
+      <path
+        d="
+          M0 128
+
+          C38 120 52 95 82 99
+          C112 103 122 120 150 105
+
+          C178 90 192 48 220 58
+          C248 68 260 105 292 88
+
+          C322 72 332 28 365 39
+          C396 49 408 91 438 74
+
+          C468 57 480 24 510 39
+          C540 54 550 91 580 78
+
+          C612 64 650 42 700 47
+
+          L700 150
+          L0 150
+          Z
+        "
+        className="fill-teal/[0.13]"
+      />
+
+
+      {/* ==================================================
+          INNER TERRAIN
+      ================================================== */}
+
+      <path
+        d="
+          M0 128
+
+          C38 120 52 95 82 99
+          C112 103 122 120 150 105
+
+          C178 90 192 48 220 58
+          C248 68 260 105 292 88
+
+          C322 72 332 28 365 39
+          C396 49 408 91 438 74
+
+          C468 57 480 24 510 39
+          C540 54 550 91 580 78
+
+          C612 64 650 42 700 47
+
+          L700 150
+          L0 150
+          Z
+        "
+        className="fill-teal/[0.055]"
+      />
+
+
+      {/* ==================================================
+          MOUNTAIN CONTOUR
+      ================================================== */}
+
+      <path
+        d="
+          M0 128
+
+          C38 120 52 95 82 99
+          C112 103 122 120 150 105
+
+          C178 90 192 48 220 58
+          C248 68 260 105 292 88
+
+          C322 72 332 28 365 39
+          C396 49 408 91 438 74
+
+          C468 57 480 24 510 39
+          C540 54 550 91 580 78
+
+          C612 64 650 42 700 47
+        "
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        className="text-teal"
+        pathLength="1"
+        strokeDasharray="1"
+        strokeDashoffset="1"
+      >
+        <animate
+          attributeName="stroke-dashoffset"
+          from="1"
+          to="0"
+          dur="3s"
+          repeatCount="indefinite"
+        />
+      </path>
+
+
+      {/* ==================================================
+          SECONDARY TERRAIN LINE
+      ================================================== */}
+
+      <path
+        d="
+          M0 136
+
+          C42 128 58 108 86 111
+          C115 114 130 130 156 117
+
+          C184 103 198 69 224 76
+          C252 83 266 116 296 102
+
+          C324 88 338 52 365 59
+
+          C394 66 408 106 438 90
+
+          C468 75 482 48 510 59
+
+          C542 72 557 107 585 94
+
+          C620 80 657 62 700 66
+        "
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="0.7"
+        className="text-teal/45"
+      />
+
+
+      {/* ==================================================
+          CURRENT ELEVATION VERTICAL
+      ================================================== */}
+
+      <line
+        x1="510"
+        y1="20"
+        x2="510"
+        y2="150"
+        stroke="currentColor"
+        strokeWidth="0.7"
+        className="text-teal/30"
+      />
+
+
+      {/* ==================================================
+          CURRENT POINT
+      ================================================== */}
+
+      <circle
+        cx="510"
+        cy="39"
+        r="4"
+        fill="currentColor"
+        className="text-teal"
+      />
+
+      <circle
+        cx="510"
+        cy="39"
+        r="8"
+        fill="none"
+        stroke="currentColor"
+        className="text-teal/35"
+      >
+        <animate
+          attributeName="r"
+          values="5;11;5"
+          dur="2.5s"
+          repeatCount="indefinite"
+        />
+
+        <animate
+          attributeName="opacity"
+          values="0.8;0.1;0.8"
+          dur="2.5s"
+          repeatCount="indefinite"
+        />
+      </circle>
+
+
+      {/* ==================================================
+          MOVING DATA POINT
+      ================================================== */}
+
+      <circle
+        r="3"
+        fill="currentColor"
+        className="text-teal"
+      >
+        <animateMotion
+          dur="4s"
+          repeatCount="indefinite"
+          path="
+            M0 128
+            C38 120 52 95 82 99
+            C112 103 122 120 150 105
+            C178 90 192 48 220 58
+            C248 68 260 105 292 88
+            C322 72 332 28 365 39
+            C396 49 408 91 438 74
+            C468 57 480 24 510 39
+            C540 54 550 91 580 78
+            C612 64 650 42 700 47
+          "
+        />
+      </circle>
+
+    </svg>
+
+
+    {/* ==================================================
+        LOW / HIGH
+    ================================================== */}
+
+    <div
+      className="
+        absolute bottom-2 left-5
+        text-[8px] font-bold
+        tracking-[0.08em]
+        text-teal
+      "
+    >
+      LOW
+    </div>
+
+    <div
+      className="
+        absolute bottom-2 right-5
+        text-[8px] font-bold
+        tracking-[0.08em]
+        text-teal
+      "
+    >
+      HIGH
+    </div>
+
+  </div>
+
+
+  {/* ==================================================
+      DATA STATUS
+  ================================================== */}
+
+  <div
+    className="
+      relative grid grid-cols-[1fr_auto_1fr_auto_1fr]
+      items-center
+      border-t border-white/[0.07]
+      bg-black/[0.13]
+      px-4 py-3.5
+    "
+  >
+
+    {/* ==================================================
+        TERRAIN
+    ================================================== */}
+
+    <div
+      className="
+        rounded-[14px]
+        border border-teal/25
+        bg-[#071D28]/75
+        px-4 py-3
+      "
+    >
+
+      <div className="flex items-center gap-3">
+
+        <div
+          className="
+            flex h-8 w-8 shrink-0
+            items-center justify-center
+            rounded-full
+            border border-teal/20
+            bg-teal/[0.05]
+          "
+        >
+
+          <svg
+            width="17"
+            height="17"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            className="text-teal"
           >
+            <path d="M3 17l6-6 4 4 5-7 3 3" />
+            <path d="M3 21h18" />
+          </svg>
 
-            {/* CARD GLOW */}
-            <div className="pointer-events-none absolute inset-0">
+        </div>
 
-              <div className="absolute left-1/2 top-0 h-px w-[70%] -translate-x-1/2 bg-teal/50 blur-[1px]" />
+        <div>
 
-              <div className="absolute right-[-80px] top-[-80px] h-[180px] w-[180px] rounded-full bg-teal/[0.09] blur-[70px]" />
+          <div className="text-[8px] uppercase tracking-[0.15em] text-teal/70">
+            Terrain
+          </div>
 
-              <div className="absolute bottom-[-100px] left-[-60px] h-[180px] w-[180px] rounded-full bg-teal/[0.06] blur-[70px]" />
+          <div className="mt-1 text-[11px] font-semibold text-white/75">
+            Processing
+          </div>
 
-            </div>
+        </div>
 
-            {/* ==================================================
-                HEADER
-            ================================================== */}
+      </div>
 
-            <div className="relative flex items-center justify-between border-b border-white/[0.06] px-5 py-3.5">
+    </div>
 
-              <div>
 
-                <div className="flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.18em] text-teal/80">
+    {/* ARROW */}
 
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                  >
-                    <path d="M3 17l6-6 4 4 5-7 3 3" />
-                    <path d="M3 21h18" />
-                  </svg>
+    <div className="flex w-8 items-center justify-center text-teal">
 
-                  LANDSCAPE PROFILE
+      <svg
+        width="17"
+        height="17"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      >
+        <path d="M9 5l7 7-7 7" />
+      </svg>
 
-                </div>
+    </div>
 
-                <div className="mt-1 text-[11px] text-white/55">
-                  Ainaro – Belulik
-                </div>
 
-              </div>
+    {/* ==================================================
+        SPATIAL
+    ================================================== */}
 
-              {/* LIVE */}
-              <div className="flex items-center gap-1.5">
-
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-teal shadow-[0_0_10px_rgba(47,166,160,.8)]" />
-
-                <span className="text-[9px] uppercase tracking-[0.12em] text-white/45">
-                  {t("live")}
-                </span>
-
-              </div>
-
-            </div>
-
-            {/* ==================================================
-                TERRAIN GRAPH
-            ================================================== */}
-
-            <div className="relative h-[155px] overflow-hidden px-5 pt-5">
-
-              {/* Horizontal grid */}
-
-              <div className="absolute inset-x-5 top-[28px] border-t border-white/[0.045]" />
-
-              <div className="absolute inset-x-5 top-[68px] border-t border-white/[0.045]" />
-
-              <div className="absolute inset-x-5 top-[108px] border-t border-white/[0.045]" />
-
-              {/* Vertical grid */}
-
-              <div className="absolute bottom-5 left-[25%] top-5 border-l border-white/[0.03]" />
-
-              <div className="absolute bottom-5 left-[50%] top-5 border-l border-white/[0.03]" />
-
-              <div className="absolute bottom-5 left-[75%] top-5 border-l border-white/[0.03]" />
-
-              {/* Elevation labels */}
-
-              <div className="absolute left-5 top-[22px] text-[7px] text-white/20">
-                1.200 m
-              </div>
-
-              <div className="absolute left-5 top-[62px] text-[7px] text-white/20">
-                800 m
-              </div>
-
-              <div className="absolute left-5 top-[102px] text-[7px] text-white/20">
-                400 m
-              </div>
-
-              <div className="absolute left-5 bottom-[22px] text-[7px] text-white/20">
-                0 m
-              </div>
-
-              {/* TERRAIN SVG */}
-
-              <svg
-                viewBox="0 0 600 130"
-                preserveAspectRatio="none"
-                className="absolute inset-x-5 bottom-5 h-[125px] w-[calc(100%-40px)]"
-              >
-
-                {/* Terrain fill */}
-                <path
-                  d="
-                    M0 105
-                    C35 96 45 76 78 82
-                    C108 88 118 108 145 91
-                    C172 74 183 42 215 51
-                    C247 60 255 93 282 79
-                    C310 65 322 31 350 39
-                    C378 47 390 83 416 70
-                    C445 55 456 29 485 43
-                    C513 56 528 81 552 68
-                    C572 58 585 43 600 47
-                    L600 130
-                    L0 130
-                    Z
-                  "
-                  className="fill-teal/[0.09]"
-                />
-
-                {/* Mountain-like inner fill */}
-                <path
-                  d="
-                    M0 105
-                    C35 96 45 76 78 82
-                    C108 88 118 108 145 91
-                    C172 74 183 42 215 51
-                    C247 60 255 93 282 79
-                    C310 65 322 31 350 39
-                    C378 47 390 83 416 70
-                    C445 55 456 29 485 43
-                    C513 56 528 81 552 68
-                    C572 58 585 43 600 47
-                    L600 130
-                    L0 130
-                    Z
-                  "
-                  className="fill-teal/[0.035]"
-                />
-
-                {/* Main terrain line */}
-
-                <path
-                  d="
-                    M0 105
-                    C35 96 45 76 78 82
-                    C108 88 118 108 145 91
-                    C172 74 183 42 215 51
-                    C247 60 255 93 282 79
-                    C310 65 322 31 350 39
-                    C378 47 390 83 416 70
-                    C445 55 456 29 485 43
-                    C513 56 528 81 552 68
-                    C572 58 585 43 600 47
-                  "
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.8"
-                  className="text-teal"
-                  pathLength="1"
-                  strokeDasharray="1"
-                  strokeDashoffset="1"
-                >
-                  <animate
-                    attributeName="stroke-dashoffset"
-                    from="1"
-                    to="0"
-                    dur="3s"
-                    repeatCount="indefinite"
-                  />
-                </path>
-
-                {/* Secondary terrain line */}
-
-                <path
-                  d="
-                    M0 113
-                    C40 104 55 89 82 94
-                    C112 100 125 115 150 100
-                    C180 82 190 58 218 63
-                    C250 69 265 102 288 89
-                    C315 75 325 49 350 54
-                    C380 59 392 94 420 81
-                    C450 67 460 48 487 58
-                    C520 70 535 94 560 80
-                  "
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="0.7"
-                  className="text-teal/40"
-                />
-
-                {/* Moving point */}
-
-                <circle
-                  r="3.5"
-                  fill="currentColor"
-                  className="text-teal"
-                >
-                  <animateMotion
-                    dur="4s"
-                    repeatCount="indefinite"
-                    path="
-                      M0 105
-                      C35 96 45 76 78 82
-                      C108 88 118 108 145 91
-                      C172 74 183 42 215 51
-                      C247 60 255 93 282 79
-                      C310 65 322 31 350 39
-                      C378 47 390 83 416 70
-                      C445 55 456 29 485 43
-                      C513 56 528 81 552 68
-                      C572 58 585 43 600 47
-                    "
-                  />
-                </circle>
-
-                {/* Current point glow */}
-
-                <circle
-                  cx="350"
-                  cy="39"
-                  r="6"
-                  fill="none"
-                  stroke="currentColor"
-                  className="text-teal/30"
-                >
-                  <animate
-                    attributeName="r"
-                    values="4;9;4"
-                    dur="2.5s"
-                    repeatCount="indefinite"
-                  />
-
-                  <animate
-                    attributeName="opacity"
-                    values="0.7;0.1;0.7"
-                    dur="2.5s"
-                    repeatCount="indefinite"
-                  />
-                </circle>
-
-              </svg>
-
-              {/* LOW / HIGH */}
-
-              <div className="absolute bottom-2 left-5 text-[8px] font-medium tracking-[0.08em] text-teal/45">
-                LOW
-              </div>
-
-              <div className="absolute bottom-2 right-5 text-[8px] font-medium tracking-[0.08em] text-teal/45">
-                HIGH
-              </div>
-
-            </div>
-
-            {/* ==================================================
-                DATA STATUS
-            ================================================== */}
-
-            <div className="relative grid grid-cols-3 border-t border-white/[0.06] bg-black/[0.12]">
-
-              {/* TERRAIN */}
-
-              <div className="border-r border-white/[0.06] px-4 py-3">
-
-                <div className="flex items-center gap-2.5">
-
-                  <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-teal/20 bg-teal/[0.06]">
-
-                    <svg
-                      width="15"
-                      height="15"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      className="text-teal"
-                    >
-                      <path d="M3 17l6-6 4 4 5-7 3 3" />
-                      <path d="M3 21h18" />
-                    </svg>
-
-                  </div>
-
-                  <div>
-
-                    <div className="text-[8px] uppercase tracking-[0.15em] text-teal/55">
-                      Terrain
-                    </div>
-
-                    <div className="mt-1 text-[11px] font-semibold text-white/70">
-                      Processing
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-              {/* SPATIAL */}
-
-              <div className="border-r border-white/[0.06] px-4 py-3">
-
-                <div className="flex items-center gap-2.5">
-
-                  <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-teal/20 bg-teal/[0.06]">
-
-                    <svg
-                      width="15"
-                      height="15"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      className="text-teal"
-                    >
-                      <ellipse cx="12" cy="5" rx="7" ry="3" />
-                      <path d="M5 5v7c0 1.7 3.1 3 7 3s7-1.3 7-3V5" />
-                      <path d="M5 12v7c0 1.7 3.1 3 7 3s7-1.3 7-3v-7" />
-                    </svg>
-
-                  </div>
-
-                  <div>
-
-                    <div className="text-[8px] uppercase tracking-[0.15em] text-teal/55">
-                      Spatial
-                    </div>
-
-                    <div className="mt-1 text-[11px] font-semibold text-white/70">
-                      Preparing
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-              {/* 3D SCENE */}
-
-              <div className="px-4 py-3">
-
-                <div className="flex items-center gap-2.5">
-
-                  <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-teal/20 bg-teal/[0.06]">
-
-                    <svg
-                      width="15"
-                      height="15"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.5"
-                      className="text-teal"
-                    >
-                      <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z" />
-                      <path d="M12 12l8-4.5" />
-                      <path d="M12 12L4 7.5" />
-                      <path d="M12 12v9" />
-                    </svg>
-
-                  </div>
-
-                  <div>
-
-                    <div className="text-[8px] uppercase tracking-[0.15em] text-teal/55">
-                      3D Scene
-                    </div>
-
-                    <div className="mt-1 flex items-center gap-1.5 text-[11px] font-semibold text-white/70">
-
-                      <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-teal shadow-[0_0_8px_rgba(47,166,160,.8)]" />
-
-                      Initializing
-
-                    </div>
-
-                  </div>
-
-                </div>
-
-              </div>
-
-            </div>
+    <div
+      className="
+        rounded-[14px]
+        border border-teal/25
+        bg-[#071D28]/75
+        px-4 py-3
+      "
+    >
+
+      <div className="flex items-center gap-3">
+
+        <div
+          className="
+            flex h-8 w-8 shrink-0
+            items-center justify-center
+            rounded-full
+            border border-teal/20
+            bg-teal/[0.05]
+          "
+        >
+
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            className="text-teal"
+          >
+            <ellipse cx="12" cy="5" rx="7" ry="3" />
+            <path d="M5 5v7c0 1.7 3.1 3 7 3s7-1.3 7-3V5" />
+            <path d="M5 12v7c0 1.7 3.1 3 7 3s7-1.3 7-3v-7" />
+          </svg>
+
+        </div>
+
+        <div>
+
+          <div className="text-[8px] uppercase tracking-[0.15em] text-teal/70">
+            Spatial
+          </div>
+
+          <div className="mt-1 text-[11px] font-semibold text-white/75">
+            Preparing
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    {/* ARROW */}
+
+    <div className="flex w-8 items-center justify-center text-teal">
+
+      <svg
+        width="17"
+        height="17"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      >
+        <path d="M9 5l7 7-7 7" />
+      </svg>
+
+    </div>
+
+
+    {/* ==================================================
+        3D SCENE
+    ================================================== */}
+
+    <div
+      className="
+        rounded-[14px]
+        border border-teal/25
+        bg-[#071D28]/75
+        px-4 py-3
+      "
+    >
+
+      <div className="flex items-center gap-3">
+
+        <div
+          className="
+            flex h-8 w-8 shrink-0
+            items-center justify-center
+            rounded-full
+            border border-teal/20
+            bg-teal/[0.05]
+          "
+        >
+
+          <svg
+            width="17"
+            height="17"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            className="text-teal"
+          >
+            <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z" />
+            <path d="M12 12l8-4.5" />
+            <path d="M12 12L4 7.5" />
+            <path d="M12 12v9" />
+          </svg>
+
+        </div>
+
+        <div>
+
+          <div className="text-[8px] uppercase tracking-[0.15em] text-teal/70">
+            3D Scene
+          </div>
+
+          <div className="mt-1 flex items-center gap-1.5 text-[11px] font-semibold text-white/75">
+
+            <span
+              className="
+                h-1.5 w-1.5 rounded-full
+                bg-teal
+                shadow-[0_0_8px_rgba(47,166,160,.8)]
+                animate-pulse
+              "
+            />
+
+            Initializing
 
           </div>
 
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
           {/* ==================================================
               LOADING STATUS
           ================================================== */}
