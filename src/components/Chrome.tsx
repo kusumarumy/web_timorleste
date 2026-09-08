@@ -1095,150 +1095,198 @@ useEffect(() => {
     </div>
 
  <svg
-    viewBox="0 0 700 150"
-    preserveAspectRatio="none"
-    className="absolute inset-x-5 bottom-5 h-[155px] w-[calc(100%-40px)]"
+  viewBox="0 0 700 160"
+  preserveAspectRatio="none"
+  className="absolute inset-x-5 bottom-5 h-[155px] w-[calc(100%-40px)]"
+>
+  {/* TERRAIN BASE */}
+  <path
+    d="
+      M0 135
+      C35 130 55 112 85 118
+      C115 124 130 105 150 92
+      C172 77 188 42 215 50
+      C242 58 250 91 275 99
+      C300 106 318 77 340 59
+      C360 42 375 30 394 42
+      C418 58 425 89 448 96
+      C470 103 490 78 510 55
+      C528 35 545 28 563 43
+      C585 60 592 88 615 91
+      C642 94 665 70 700 62
+      L700 160
+      L0 160
+      Z
+    "
+    className="fill-teal/[0.16]"
+  />
+
+  {/* TERRAIN SHADOW */}
+  <path
+    d="
+      M0 138
+      C40 131 58 119 86 123
+      C115 127 136 108 154 98
+      C178 84 188 58 213 64
+      C238 70 251 98 276 105
+      C301 111 320 88 340 72
+      C362 55 378 44 395 55
+      C418 70 427 98 449 103
+      C472 108 491 88 511 67
+      C531 47 545 41 562 54
+      C585 71 593 96 616 99
+      C645 103 670 80 700 72
+      L700 160
+      L0 160
+      Z
+    "
+    className="fill-[#061923]/80"
+  />
+
+  {/* MOUNTAIN RIDGES */}
+  <path
+    d="
+      M0 135
+      C35 130 55 112 85 118
+      C115 124 130 105 150 92
+      C172 77 188 42 215 50
+      C242 58 250 91 275 99
+
+      M300 106
+      C318 77 340 59 360 43
+      C375 30 390 31 405 47
+      C420 64 430 91 448 96
+
+      M470 103
+      C490 78 510 55 528 38
+      C544 25 557 31 570 47
+      C586 66 595 88 615 91
+
+      M642 94
+      C665 70 680 66 700 62
+    "
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="1.3"
+    className="text-teal/70"
+  />
+
+  {/* INNER CONTOURS */}
+  <path
+    d="
+      M65 119
+      C105 118 130 103 153 91
+      C178 77 190 59 212 65
+      C235 72 246 91 270 97
+
+      M305 96
+      C330 75 347 57 365 50
+      C382 44 395 51 408 65
+      C423 82 431 94 448 98
+
+      M480 92
+      C500 74 515 57 530 49
+      C545 42 558 49 570 62
+      C584 77 594 89 610 92
+    "
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="0.8"
+    className="text-teal/35"
+  />
+
+  <path
+    d="
+      M90 122
+      C125 116 148 101 168 91
+      C187 81 198 70 214 73
+
+      M320 100
+      C343 82 355 69 370 62
+      C386 56 398 63 410 76
+
+      M495 96
+      C515 80 527 67 540 61
+      C553 56 564 63 574 75
+    "
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="0.6"
+    className="text-teal/25"
+  />
+
+  {/* MAIN ELEVATION LINE */}
+  <path
+    d="
+      M0 130
+      C35 122 55 105 84 109
+      C112 113 128 121 151 104
+      C176 86 189 54 216 61
+      C244 68 257 100 280 89
+      C307 76 327 35 353 43
+      C381 51 394 86 418 76
+      C446 65 465 34 491 44
+      C520 55 531 89 555 81
+      C585 71 620 51 700 47
+    "
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    className="text-teal"
+    pathLength="1"
+    strokeDasharray="1"
+    strokeDashoffset="1"
   >
+    <animate
+      attributeName="stroke-dashoffset"
+      from="1"
+      to="0"
+      dur="3s"
+      repeatCount="indefinite"
+    />
+  </path>
 
-    {/* TERRAIN MASS */}
-    <path
-      d="
-        M0 130
-        L35 116 L65 108 L92 118
-        L125 98 L150 82 L172 62 L195 78 L220 105
-        L250 94 L278 70 L305 84
-        L335 55 L365 30 L395 55 L420 92
-        L450 72 L478 55 L505 25 L532 48 L555 82
-        L585 70 L610 78 L640 62 L670 48 L700 43
-        L700 150 L0 150 Z
-      "
-      className="fill-teal/[0.16]"
+  {/* ACTIVE ELEVATION */}
+  <line
+    x1="491"
+    y1="35"
+    x2="491"
+    y2="150"
+    stroke="currentColor"
+    strokeWidth="0.7"
+    className="text-teal/30"
+  />
+
+  <circle
+    cx="491"
+    cy="44"
+    r="4"
+    className="fill-teal"
+  />
+
+  <circle
+    cx="491"
+    cy="44"
+    r="8"
+    fill="none"
+    stroke="currentColor"
+    className="text-teal/40"
+  >
+    <animate
+      attributeName="r"
+      values="5;11;5"
+      dur="2.5s"
+      repeatCount="indefinite"
     />
 
-    {/* SECOND TERRAIN LAYER */}
-    <path
-      d="
-        M0 132
-        L40 120 L70 113 L98 121
-        L130 104 L153 88 L174 72 L196 87 L220 110
-        L252 100 L280 80 L306 92
-        L337 65 L365 42 L392 66 L420 98
-        L452 80 L480 65 L506 40 L532 60 L556 91
-        L586 80 L612 87 L642 73 L672 61 L700 55
-        L700 150 L0 150 Z
-      "
-      className="fill-teal/[0.09]"
+    <animate
+      attributeName="opacity"
+      values="0.8;0.1;0.8"
+      dur="2.5s"
+      repeatCount="indefinite"
     />
-
-    {/* MOUNTAIN HIGHLIGHT */}
-    <path
-      d="
-        M35 116
-        L65 108 L92 118
-        L125 98 L150 82 L172 62 L195 78 L220 105
-        L250 94 L278 70 L305 84
-        L335 55 L365 30 L395 55 L420 92
-        L450 72 L478 55 L505 25 L532 48 L555 82
-        L585 70 L610 78 L640 62 L670 48 L700 43
-      "
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.4"
-      className="text-teal/70"
-    />
-
-    {/* CONTOUR 1 */}
-    <path
-      d="
-        M70 110 L125 99 L172 69 L218 105
-        M265 91 L305 85 L365 38 L420 92
-        M460 70 L505 32 L555 82
-        M610 76 L670 50
-      "
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="0.8"
-      className="text-teal/35"
-    />
-
-    {/* CONTOUR 2 */}
-    <path
-      d="
-        M95 116 L145 101 L172 80 L202 92 L230 108
-        M280 98 L310 91 L365 52 L410 99
-        M480 80 L505 48 L548 91
-        M620 87 L675 62
-      "
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="0.65"
-      className="text-teal/25"
-    />
-
-    {/* MAIN ELEVATION PROFILE */}
-    <path
-      d="
-        M0 128
-        C38 120 55 101 82 104
-        C110 107 125 119 150 103
-        C177 86 190 53 220 61
-        C250 69 260 103 292 87
-        C320 72 335 32 365 40
-        C395 48 410 89 438 73
-        C466 57 480 29 510 40
-        C540 51 552 88 580 76
-        C615 62 650 43 700 47
-      "
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      className="text-teal"
-    />
-
-    {/* CURRENT ELEVATION LINE */}
-    <line
-      x1="510"
-      y1="20"
-      x2="510"
-      y2="150"
-      stroke="currentColor"
-      strokeWidth="0.7"
-      className="text-teal/30"
-    />
-
-    {/* CURRENT POINT */}
-    <circle
-      cx="510"
-      cy="40"
-      r="4"
-      fill="currentColor"
-      className="text-teal"
-    />
-
-    <circle
-      cx="510"
-      cy="40"
-      r="8"
-      fill="none"
-      stroke="currentColor"
-      className="text-teal/40"
-    >
-      <animate
-        attributeName="r"
-        values="5;11;5"
-        dur="2.5s"
-        repeatCount="indefinite"
-      />
-
-      <animate
-        attributeName="opacity"
-        values="0.8;0.1;0.8"
-        dur="2.5s"
-        repeatCount="indefinite"
-      />
-    </circle>
-
-  </svg>
+  </circle>
+</svg>
    
 
     {/* ==================================================
