@@ -345,25 +345,116 @@ function getSubkelasFilter(
   if (!layer.sublayers || layer.sublayers.length === 0) {
     return undefined;
   }
-  const prop = layer.subProp ?? "subkelas";
-  const activeValues = layer.sublayers
-    .filter((sub) => subVisible[sub.id] !== false)
-    .map((sub) => sub.filterValue);
-  if (activeValues.length === 0) {
-    return ["==", ["literal", 1], ["literal", 0]] as any;
+
+  const parentProp = layer.subProp ?? "subkelas";
+
+  const parentConditions: any[] = [];
+
+  for (const parent of layer.sublayers) {
+    // Parent/KELAS_DI tidak aktif
+    if (subVisible[parent.id] === false) {
+      continue;
+    }
+
+    // =========================
+    // PARENT TANPA CHILD
+    // =========================
+    if (!parent.sublayers || parent.sublayers.length === 0) {
+      parentConditions.push([
+        "==",
+        ["get", parentProp],
+        parent.filterValue,
+      ]);
+
+      continue;
+    }
+
+    // =========================
+    // PARENT DENGAN CHILD
+    // =========================
+
+    const childProp =
+      parent.sublayers[0].subProp ?? "KETERANGAN";
+
+    const activeChildren = parent.sublayers.filter(
+      (child) => subVisible[child.id] !== false
+    );
+
+    // Tidak ada child yang aktif
+    if (activeChildren.length === 0) {
+      continue;
+    }
+
+    // Semua child aktif
+    if (activeChildren.length === parent.sublayers.length) {
+      parentConditions.push([
+        "==",
+        ["get", parentProp],
+        parent.filterValue,
+      ]);
+
+      continue;
+    }
+
+    // Hanya child tertentu yang aktif
+    const childConditions: any[] = activeChildren.map(
+      (child) => [
+        "==",
+        ["get", childProp],
+        child.filterValue,
+      ]
+    );
+
+    parentConditions.push([
+      "all",
+      [
+        "==",
+        ["get", parentProp],
+        parent.filterValue,
+      ],
+      [
+        "any",
+        ...childConditions,
+      ],
+    ]);
   }
-  if (activeValues.length === layer.sublayers.length) {
-    return undefined;
+
+  // Tidak ada parent/child aktif
+  if (parentConditions.length === 0) {
+    return [
+      "==",
+      ["literal", 1],
+      ["literal", 0],
+    ] as any;
   }
-  const expression: any[] = [
-    "match",
-    ["get", prop],
-  ];
-  activeValues.forEach((value) => {
-    expression.push(value, true);
-  });
-  expression.push(false);
-  return expression as any;
+
+  // Semua parent aktif dan seluruh child aktif
+  if (parentConditions.length === layer.sublayers.length) {
+    const allParentsFullyActive = layer.sublayers.every(
+      (parent) => {
+        if (subVisible[parent.id] === false) {
+          return false;
+        }
+
+        if (!parent.sublayers?.length) {
+          return true;
+        }
+
+        return parent.sublayers.every(
+          (child) => subVisible[child.id] !== false
+        );
+      }
+    );
+
+    if (allParentsFullyActive) {
+      return undefined;
+    }
+  }
+
+  return [
+    "any",
+    ...parentConditions,
+  ] as any;
 }
 function getSubLayerColorExpression(
   layer: typeof ALL_LAYERS[number],
