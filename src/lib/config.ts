@@ -956,7 +956,7 @@ export const GROUPS: LayerGroup[] = [
 
   legend: lineLegend(SYM.line.irrigationExisting),
 
-  subProp: "layer",
+  subProp: "class",
 
   sublayers: [
     {
@@ -1000,7 +1000,7 @@ export const GROUPS: LayerGroup[] = [
 
   legend: fillLegend(SYM.polygon.irrigationArea),
 
-  subProp: "layer",                
+  subProp: "KELAS_DI",                
 
   sublayers: [
   {
@@ -1077,25 +1077,25 @@ export const GROUPS: LayerGroup[] = [
     {
       id: "watershed_dam_1",
       labelKey: "watershed_dam_1",
-      filterValue: "watershed DAM 1",
+      filterValue: "Watershed DAM 1",
       outlineColor: "#2196F3",
     },
     {
       id: "watershed_dam_2",
       labelKey: "watershed_dam_2",
-      filterValue: "watershed DAM 2",
+      filterValue: "Watershed DAM 2",
       outlineColor: "#9C27B0",
     },
     {
       id: "watershed_dam_3",
-      labelKey: "watershed_dam_3",
+      labelKey: "Watershed_dam_3",
       filterValue: "watershed DAM 3",
       outlineColor: "#FF9800",
     },
     {
       id: "watershed_oebaba",
       labelKey: "watershed_oebaba",
-      filterValue: "watershed Oebaba",
+      filterValue: "Watershed Oebaba",
       outlineColor: "#F44336",
     },
   ],
