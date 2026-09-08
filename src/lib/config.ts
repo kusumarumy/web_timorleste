@@ -618,7 +618,7 @@ const pointPaint = (
 export const GROUPS: LayerGroup[] = [
   {
   titleKey: "g_aoi",
-  dot: "#D500F9",
+  dot: "#2DD4BF",
   layers: [
     {
       id: "aoi_photo",
@@ -656,7 +656,7 @@ export const GROUPS: LayerGroup[] = [
 },
  {
   titleKey: "g_admin",
-  dot: "#7B1FA2",
+  dot: "#2DD4BF",
   layers: [
     {
       id: "desa",
@@ -749,7 +749,7 @@ export const GROUPS: LayerGroup[] = [
 },
   {
   titleKey: "g_contour",
-  dot: "#8D4A2B",
+  dot: "#2DD4BF",
   layers: [
     {
       id: "contour",
@@ -773,7 +773,7 @@ export const GROUPS: LayerGroup[] = [
 },
   {
   titleKey: "g_net",
-  dot: "#424242",
+  dot: "#2DD4BF",
   layers: [
     {
       id: "road",
@@ -789,7 +789,7 @@ export const GROUPS: LayerGroup[] = [
 },
   {
   titleKey: "g_hydro",
-  dot: "#0A93FC",
+  dot: "#2DD4BF",
   layers: [
     {
       id: "irrigation_point",
@@ -1111,7 +1111,7 @@ export const GROUPS: LayerGroup[] = [
   },
       {
       titleKey: "g_land",
-      dot: "#22C55E",
+      dot: "#2DD4BF",
       layers: [
         {
           id: "building",
@@ -1189,7 +1189,7 @@ export const GROUPS: LayerGroup[] = [
     },
         {
         titleKey: "g_genangan",
-        dot: "#6366F1",
+        dot: "#2DD4BF",
         layers: [
           {
             id: "genangan_titikbor",
@@ -1354,7 +1354,7 @@ export const GROUPS: LayerGroup[] = [
       },
           {
           titleKey: "g_lomea",
-          dot: "#8B5CF6",
+          dot: "#2DD4BF",
           layers: [
             {
               id: "lomea_2009",
@@ -1601,7 +1601,7 @@ export const GROUPS: LayerGroup[] = [
         },
             {
             titleKey: "g_raibere",
-            dot: "#D946EF",
+            dot: "#2DD4BF",
             layers: [
               {
                 id: "raibere_2009",
@@ -2001,7 +2001,7 @@ export const GROUPS: LayerGroup[] = [
           },
            {
             titleKey: "g_oebaba",
-            dot: "#EC4899",
+            dot: "#2DD4BF",
             layers: [
               {
                 id: "oebaba_2009",
