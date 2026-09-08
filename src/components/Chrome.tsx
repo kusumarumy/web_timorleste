@@ -133,8 +133,15 @@ export function TopBar() {
 }
 export function Legend() {
   const { t } = useI18n();
-  const { visible, subVisible } = useMapStore();
+
+  const {
+    visible,
+    subVisible,
+    statusVisible,
+  } = useMapStore();
+
   const [open, setOpen] = useState(true);
+
   return (
     <div className="absolute bottom-[65px] right-4 z-[15] w-[210px] overflow-hidden rounded-[14px] border border-stroke bg-panel/90 shadow-[0_14px_40px_rgba(0,0,0,.4)] backdrop-blur-xl max-md:hidden">
       <button
@@ -144,225 +151,281 @@ export function Legend() {
         {t("legend")}
         <span>{open ? "▾" : "▸"}</span>
       </button>
+
       {open && (
         <div className="max-h-[55vh] overflow-y-auto px-3.5 pb-3 pt-2.5">
           <div className="flex flex-col gap-2.5">
-  {GROUPS.flatMap((g) => g.layers).map((layer) => {
-    if (layer.children?.length) {
-     return layer.children
-  .filter((child) => visible[child.id])
-  .map((child) => {
-    if (!child.legend) return null;
-    return (
-      <div
-        key={child.id}
-        className="flex items-center gap-2.5 text-[12px] text-ink"
-      >
-        {child.icon ? (
-          <span className="flex h-[24px] w-[24px] flex-none items-center justify-center">
-            <img
-              src={child.icon}
-              alt=""
-              className="max-h-[24px] max-w-[24px] object-contain"
-            />
-          </span>
-        ) : child.legend.line ? (
-          <span className="flex h-[24px] w-[24px] flex-none items-center">
-            <svg
-              width="24"
-              height="12"
-              viewBox="0 0 24 12"
-              className="block"
-              style={{
-                opacity: child.legend.opacity ?? 1,
-              }}
-            >
-              <line
-                x1="1"
-                y1="6"
-                x2="23"
-                y2="6"
-                stroke={child.legend.color}
-                strokeWidth={Math.max(
-                  1,
-                  child.legend.width ?? 2
-                )}
-                strokeLinecap="butt"
-                strokeDasharray={
-                  child.legend.dasharray
-                    ? child.legend.dasharray.join(" ")
-                    : undefined
-                }
-              />
-            </svg>
-          </span>
-        ) : child.legend.circle ? (
-          <span
-            className="h-[12px] w-[12px] flex-none rounded-full"
-            style={{
-              background: child.legend.color,
-              opacity: child.legend.opacity ?? 1,
-            }}
-          />
-        ) : (
-          <span
-            className="h-[13px] w-[18px] flex-none rounded-[2px]"
-            style={{
-              background: child.legend.color,
-              opacity: child.legend.opacity ?? 1,
-              border:
-                child.kind === "fill"
-                  ? `1px solid ${child.legend.color}`
-                  : undefined,
-            }}
-          />
-        )}
-        {t(child.nameKey)}
-      </div>
-    );
-  });
-    }
 
-    if (layer.sublayers?.length && visible[layer.id]) {
-      return (
-        <div
-          key={layer.id}
-          className="flex flex-col gap-2"
-        >
-          <div className="flex items-center gap-2.5 text-[12px] font-semibold text-ink">
-            <span
-              className="h-[13px] w-[18px] flex-none rounded-[2px]"
-              style={{
-                backgroundColor: "#66BB6A",
-                opacity: 0.25,
-                border: "1px solid #2E7D32",
-              }}
-            />
-            <span className="truncate">
-              {t(layer.nameKey)}
-            </span>
+            {GROUPS.flatMap((g) => g.layers).map((layer) => {
+
+              /* CHILD LAYERS */
+              if (layer.children?.length) {
+                return layer.children
+                  .filter((child) => visible[child.id])
+                  .map((child) => {
+                    if (!child.legend) return null;
+
+                    return (
+                      <div
+                        key={child.id}
+                        className="flex items-center gap-2.5 text-[12px] text-ink"
+                      >
+                        {child.icon ? (
+                          <span className="flex h-[24px] w-[24px] flex-none items-center justify-center">
+                            <img
+                              src={child.icon}
+                              alt=""
+                              className="max-h-[24px] max-w-[24px] object-contain"
+                            />
+                          </span>
+                        ) : child.legend.line ? (
+                          <span className="flex h-[24px] w-[24px] flex-none items-center">
+                            <svg
+                              width="24"
+                              height="12"
+                              viewBox="0 0 24 12"
+                              className="block"
+                              style={{
+                                opacity:
+                                  child.legend.opacity ?? 1,
+                              }}
+                            >
+                              <line
+                                x1="1"
+                                y1="6"
+                                x2="23"
+                                y2="6"
+                                stroke={child.legend.color}
+                                strokeWidth={Math.max(
+                                  1,
+                                  child.legend.width ?? 2
+                                )}
+                                strokeLinecap="butt"
+                                strokeDasharray={
+                                  child.legend.dasharray
+                                    ? child.legend.dasharray.join(" ")
+                                    : undefined
+                                }
+                              />
+                            </svg>
+                          </span>
+                        ) : child.legend.circle ? (
+                          <span
+                            className="h-[12px] w-[12px] flex-none rounded-full"
+                            style={{
+                              background:
+                                child.legend.color,
+                              opacity:
+                                child.legend.opacity ?? 1,
+                            }}
+                          />
+                        ) : (
+                          <span
+                            className="h-[13px] w-[18px] flex-none rounded-[2px]"
+                            style={{
+                              background:
+                                child.legend.color,
+                              opacity:
+                                child.legend.opacity ?? 1,
+                              border:
+                                child.kind === "fill"
+                                  ? `1px solid ${child.legend.color}`
+                                  : undefined,
+                            }}
+                          />
+                        )}
+
+                        {t(child.nameKey)}
+                      </div>
+                    );
+                  });
+              }
+
+              /* SUBLAYERS + KETERANGAN */
+              if (
+                layer.sublayers?.length &&
+                visible[layer.id]
+              ) {
+                return (
+                  <div
+                    key={layer.id}
+                    className="flex flex-col gap-2"
+                  >
+                    {/* MAIN LAYER */}
+                    <div className="flex items-center gap-2.5 text-[12px] font-semibold text-ink">
+                      <span
+                        className="h-[13px] w-[18px] flex-none rounded-[2px]"
+                        style={{
+                          backgroundColor:
+                            "#66BB6A",
+                          opacity: 0.25,
+                          border:
+                            "1px solid #2E7D32",
+                        }}
+                      />
+
+                      <span className="truncate">
+                        {t(layer.nameKey)}
+                      </span>
+                    </div>
+
+                    {/* KELAS_DI */}
+                    <div className="ml-5 flex flex-col gap-1.5">
+                      {layer.sublayers
+                        .filter(
+                          (sub) =>
+                            subVisible[sub.id] ??
+                            true
+                        )
+                        .map((sub) => (
+                          <div
+                            key={sub.id}
+                            className="flex flex-col gap-1"
+                          >
+                            <div className="flex items-center gap-2 text-[11px] text-ink">
+                              <span
+                                className="h-[11px] w-[22px] flex-none rounded-[2px]"
+                                style={{
+                                  backgroundColor:
+                                    "#66BB6A",
+                                  opacity: 0.25,
+                                  border: `2px solid ${
+                                    sub.outlineColor ??
+                                    "#2E7D32"
+                                  }`,
+                                }}
+                              />
+
+                              <span className="truncate">
+                                {t(sub.labelKey)}
+                              </span>
+                            </div>
+
+                            {/* KETERANGAN */}
+                            {sub.statuses?.length ? (
+                              <div className="ml-5 flex flex-col gap-1">
+                                {sub.statuses
+                                  .filter(
+                                    (status) =>
+                                      statusVisible[
+                                        status.id
+                                      ] ?? true
+                                  )
+                                  .map((status) => (
+                                    <div
+                                      key={status.id}
+                                      className="flex items-center gap-2 text-[10px] text-muted"
+                                    >
+                                      <span className="h-[5px] w-[5px] flex-none rounded-full bg-muted/70" />
+
+                                      <span className="truncate">
+                                        {t(
+                                          status.labelKey
+                                        )}
+                                      </span>
+                                    </div>
+                                  ))}
+                              </div>
+                            ) : null}
+                          </div>
+                        ))}
+                    </div>
+                  </div>
+                );
+              }
+
+              /* NORMAL LAYER */
+              if (
+                !layer.legend ||
+                !visible[layer.id]
+              ) {
+                return null;
+              }
+
+              return (
+                <div
+                  key={layer.id}
+                  className="flex items-center gap-2.5 text-[12px] text-ink"
+                >
+                  {layer.icon ? (
+                    <span className="flex h-[24px] w-[24px] flex-none items-center justify-center">
+                      <img
+                        src={layer.icon}
+                        alt=""
+                        className="max-h-[24px] max-w-[24px] object-contain"
+                      />
+                    </span>
+                  ) : layer.legend.line ? (
+                    <span className="flex h-[24px] w-[24px] flex-none items-center">
+                      <svg
+                        width="24"
+                        height="12"
+                        viewBox="0 0 24 12"
+                        className="block"
+                        style={{
+                          opacity:
+                            layer.legend.opacity ??
+                            1,
+                        }}
+                      >
+                        <line
+                          x1="1"
+                          y1="6"
+                          x2="23"
+                          y2="6"
+                          stroke={
+                            layer.legend.color
+                          }
+                          strokeWidth={Math.max(
+                            1,
+                            layer.legend.width ??
+                              2
+                          )}
+                          strokeLinecap="butt"
+                          strokeDasharray={
+                            layer.legend.dasharray
+                              ? layer.legend.dasharray.join(
+                                  " "
+                                )
+                              : undefined
+                          }
+                        />
+                      </svg>
+                    </span>
+                  ) : layer.legend.circle ? (
+                    <span
+                      className="h-[12px] w-[12px] flex-none rounded-full"
+                      style={{
+                        background:
+                          layer.legend.color,
+                        opacity:
+                          layer.legend.opacity ??
+                          1,
+                      }}
+                    />
+                  ) : (
+                    <span
+                      className="h-[13px] w-[18px] flex-none rounded-[2px]"
+                      style={{
+                        background:
+                          layer.legend.color,
+                        opacity:
+                          layer.legend.opacity ??
+                          1,
+                        border:
+                          layer.kind === "fill"
+                            ? `1px solid ${layer.legend.color}`
+                            : undefined,
+                      }}
+                    />
+                  )}
+
+                  {t(layer.nameKey)}
+                </div>
+              );
+            })}
+
           </div>
-<div className="ml-5 flex flex-col gap-1.5">
-  <div className="ml-5 flex flex-col gap-1.5">
-  {layer.sublayers
-    .filter((sub) => subVisible[sub.id] ?? true)
-    .map((sub) => (
-      <div key={sub.id} className="flex flex-col gap-1">
-        {/* KELAS_DI */}
-        <div className="flex items-center gap-2 text-[11px] text-ink">
-          <span
-            className="h-[11px] w-[22px] flex-none rounded-[2px]"
-            style={{
-              backgroundColor: "#66BB6A",
-              opacity: 0.25,
-              border: `2px solid ${
-                sub.outlineColor ?? "#2E7D32"
-              }`,
-            }}
-          />
-
-          <span className="truncate">
-            {t(sub.labelKey)}
-          </span>
-        </div>
-
-        {/* KETERANGAN */}
-        {sub.statuses?.length ? (
-          <div className="ml-5 flex flex-col gap-1">
-            {sub.statuses.map((status) => (
-              <div
-                key={status.id}
-                className="flex items-center gap-2 text-[10px] text-muted"
-              >
-                <span className="h-[5px] w-[5px] flex-none rounded-full bg-muted/70" />
-
-                <span className="truncate">
-                  {t(status.labelKey)}
-                </span>
-              </div>
-            ))}
-          </div>
-        ) : null}
-      </div>
-    ))}
-</div>
-        </div>
-      );
-    }
-
-    if (!layer.legend || !visible[layer.id]) {
-      return null;
-    }
-    return (
-      <div
-        key={layer.id}
-        className="flex items-center gap-2.5 text-[12px] text-ink"
-      >
-        {layer.icon ? (
-          <span className="flex h-[24px] w-[24px] flex-none items-center justify-center">
-            <img
-              src={layer.icon}
-              alt=""
-              className="max-h-[24px] max-w-[24px] object-contain"
-            />
-          </span>
-        ) : layer.legend.line ? (
-          <span className="flex h-[24px] w-[24px] flex-none items-center">
-            <svg
-              width="24"
-              height="12"
-              viewBox="0 0 24 12"
-              className="block"
-              style={{
-                opacity: layer.legend.opacity ?? 1,
-              }}
-            >
-              <line
-                x1="1"
-                y1="6"
-                x2="23"
-                y2="6"
-                stroke={layer.legend.color}
-                strokeWidth={Math.max(
-                  1,
-                  layer.legend.width ?? 2
-                )}
-                strokeLinecap="butt"
-                strokeDasharray={
-                  layer.legend.dasharray
-                    ? layer.legend.dasharray.join(" ")
-                    : undefined
-                }
-              />
-            </svg>
-          </span>
-        ) : layer.legend.circle ? (
-          <span
-            className="h-[12px] w-[12px] flex-none rounded-full"
-            style={{
-              background: layer.legend.color,
-              opacity: layer.legend.opacity ?? 1,
-            }}
-          />
-        ) : (
-          <span
-            className="h-[13px] w-[18px] flex-none rounded-[2px]"
-            style={{
-              background: layer.legend.color,
-              opacity: layer.legend.opacity ?? 1,
-              border:
-                layer.kind === "fill"
-                  ? `1px solid ${layer.legend.color}`
-                  : undefined,
-            }}
-          />
-        )}
-
-        {t(layer.nameKey)}
-      </div>
-    );
-  })}
-</div>
         </div>
       )}
     </div>
