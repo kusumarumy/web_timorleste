@@ -947,7 +947,7 @@ export const GROUPS: LayerGroup[] = [
           outlineColor: "#FF4D6D",
         },
       ],
-    }
+    },
     {
       id: "8irrigationareas",
       nameKey: "l_8irrigationareas",
