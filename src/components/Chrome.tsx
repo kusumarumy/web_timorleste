@@ -142,6 +142,11 @@ export function TopBar() {
   );
 }
 
+/* ============================================================
+   LEGEND
+   TIDAK DIUBAH
+============================================================ */
+
 export function Legend() {
   const { t } = useI18n();
 
@@ -242,10 +247,7 @@ export function Legend() {
               }
 
               /* SUBLAYERS + KETERANGAN */
-              if (
-                layer.sublayers?.length &&
-                visible[layer.id]
-              ) {
+              if (layer.sublayers?.length && visible[layer.id]) {
                 return (
                   <div
                     key={layer.id}
@@ -408,6 +410,11 @@ export function Legend() {
   );
 }
 
+/* ============================================================
+   STATUS BAR
+   TIDAK DIUBAH
+============================================================ */
+
 export function StatusBar() {
   const { t } = useI18n();
   const { lng, lat, zoom, pitch, bearing } = useMapStore();
@@ -447,6 +454,11 @@ export function StatusBar() {
   );
 }
 
+/* ============================================================
+   LOADER
+   CINEMATIC AINARO - BELULIK
+============================================================ */
+
 export function Loader({ hidden }: { hidden: boolean }) {
   const { t } = useI18n();
 
@@ -462,94 +474,301 @@ export function Loader({ hidden }: { hidden: boolean }) {
     t("loadPhase4"),
   ];
 
-useEffect(() => {
-  setLogoIntroDone(false);
-  setWelcomeVisible(false);
-  setIntroReady(false);
+  /* ==========================================================
+     INTRO TIMING
+  ========================================================== */
 
-  const logoTimer = setTimeout(() => {
-    setLogoIntroDone(true);
-  }, 2200);
+  useEffect(() => {
+    setLogoIntroDone(false);
+    setWelcomeVisible(false);
+    setIntroReady(false);
+    setPhase(0);
 
-  const welcomeTimer = setTimeout(() => {
-    setWelcomeVisible(true);
-  }, 2550);
+    const logoTimer = setTimeout(() => {
+      setLogoIntroDone(true);
+    }, 2200);
 
-  const introReadyTimer = setTimeout(() => {
-    setIntroReady(true);
-  }, 3000);
+    const welcomeTimer = setTimeout(() => {
+      setWelcomeVisible(true);
+    }, 2550);
 
-  return () => {
-    clearTimeout(logoTimer);
-    clearTimeout(welcomeTimer);
-    clearTimeout(introReadyTimer);
-  };
-}, []);
+    /*
+      Jangan izinkan Loader hilang sebelum
+      sequence intro selesai.
+    */
+    const introReadyTimer = setTimeout(() => {
+      setIntroReady(true);
+    }, 3000);
 
-useEffect(() => {
-  if (!welcomeVisible) return;
+    return () => {
+      clearTimeout(logoTimer);
+      clearTimeout(welcomeTimer);
+      clearTimeout(introReadyTimer);
+    };
+  }, []);
 
-  const interval = setInterval(() => {
-    setPhase((prev) => (prev + 1) % phases.length);
-  }, 1800);
+  /* ==========================================================
+     LOADING PHASE ROTATION
+  ========================================================== */
 
-  return () => clearInterval(interval);
-}, [welcomeVisible, phases.length]);
+  useEffect(() => {
+    if (!welcomeVisible) return;
+
+    const interval = setInterval(() => {
+      setPhase((prev) => (prev + 1) % phases.length);
+    }, 1800);
+
+    return () => clearInterval(interval);
+  }, [welcomeVisible, phases.length]);
 
   return (
     <div
-className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all duration-1000 ${
-  hidden && introReady
-    ? "pointer-events-none opacity-0"
-    : "opacity-100"
-}`}
+      className={`absolute inset-0 z-40 overflow-hidden bg-[#06151E] transition-all duration-1000 ${
+        hidden && introReady
+          ? "pointer-events-none opacity-0"
+          : "opacity-100"
+      }`}
     >
-
       {/* ======================================================
-          BACKGROUND ATMOSPHERE
+          CINEMATIC BACKGROUND
       ====================================================== */}
-      <div className="pointer-events-none absolute inset-0">
 
-        {/* Main radial atmosphere */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+
+        {/* AINARO LANDSCAPE */}
         <div
-          className="absolute left-1/2 top-[42%] h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal/[0.035] blur-[100px]"
+          className="absolute inset-0 bg-cover bg-center"
           style={{
-            animation: "geoAtmosphere 6s ease-in-out infinite",
+            backgroundImage:
+              "url('/images/ainaro-landscape.jpg')",
+            filter:
+              "brightness(.43) saturate(.78) contrast(1.08)",
           }}
         />
 
-        {/* Subtle spatial grid */}
+        {/* Deep cinematic blue */}
+        <div className="absolute inset-0 bg-[#06151E]/55" />
+
+        {/* Central atmosphere */}
         <div
-          className="absolute inset-0 opacity-[0.035]"
+          className="absolute left-1/2 top-[43%] h-[600px] w-[760px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal/[0.08] blur-[130px]"
+          style={{
+            animation:
+              "geoAtmosphere 7s ease-in-out infinite",
+          }}
+        />
+
+        {/* ==================================================
+            TOPOGRAPHIC CONTOUR — LEFT
+        ================================================== */}
+
+        <svg
+          className="absolute left-[-8%] top-[10%] h-[72%] w-[48%] opacity-[0.18]"
+          viewBox="0 0 500 700"
+          fill="none"
+        >
+          <path
+            d="M40 90 C120 20 230 45 280 120 C330 195 245 235 150 220 C55 205 15 285 80 350 C145 415 300 365 360 430 C420 495 345 570 240 590 C135 610 80 660 40 700"
+            stroke="currentColor"
+            className="text-teal"
+            strokeWidth="1"
+          />
+
+          <path
+            d="M20 130 C110 55 215 75 255 145 C295 215 225 250 145 240 C65 230 35 290 95 335 C155 380 280 350 330 425 C380 500 315 545 225 565 C135 585 75 635 35 690"
+            stroke="currentColor"
+            className="text-teal"
+            strokeWidth="1"
+          />
+
+          <path
+            d="M90 165 C150 110 205 125 225 170 C245 215 200 235 150 230 C100 225 80 275 120 305 C160 335 245 325 280 390 C315 455 275 500 210 515"
+            stroke="currentColor"
+            className="text-teal"
+            strokeWidth="1"
+          />
+
+          <path
+            d="M120 200 C160 165 195 170 205 200 C215 230 185 240 150 238 C120 236 105 265 135 285 C165 305 220 300 245 340"
+            stroke="currentColor"
+            className="text-teal"
+            strokeWidth="1"
+          />
+        </svg>
+
+        {/* ==================================================
+            TOPOGRAPHIC CONTOUR — RIGHT
+        ================================================== */}
+
+        <svg
+          className="absolute right-[-10%] bottom-[0%] h-[62%] w-[45%] opacity-[0.15]"
+          viewBox="0 0 500 600"
+          fill="none"
+        >
+          <path
+            d="M450 20 C360 70 330 130 390 185 C450 240 340 285 260 255 C180 225 120 290 170 350 C220 410 350 390 390 455 C430 520 340 560 250 590"
+            stroke="currentColor"
+            className="text-teal"
+            strokeWidth="1"
+          />
+
+          <path
+            d="M470 70 C390 110 365 150 410 200 C450 245 355 270 285 250 C215 230 155 285 200 330 C245 375 345 365 375 425 C405 485 330 525 270 550"
+            stroke="currentColor"
+            className="text-teal"
+            strokeWidth="1"
+          />
+
+          <path
+            d="M440 115 C385 145 375 175 405 205 C430 235 355 250 305 240 C255 230 210 270 240 300 C270 330 330 325 350 370"
+            stroke="currentColor"
+            className="text-teal"
+            strokeWidth="1"
+          />
+        </svg>
+
+        {/* ==================================================
+            SPATIAL GRID
+        ================================================== */}
+
+        <div
+          className="absolute inset-0 opacity-[0.045]"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.5) 1px, transparent 1px)",
+              "linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px)",
             backgroundSize: "70px 70px",
           }}
         />
 
-        {/* Vignette */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_20%,rgba(2,10,15,.38)_100%)]" />
+        {/* ==================================================
+            VIGNETTE
+        ================================================== */}
 
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_12%,rgba(2,10,15,.18)_45%,rgba(2,8,12,.78)_100%)]" />
+
+        {/* Bottom cinematic fade */}
+        <div className="absolute inset-x-0 bottom-0 h-[35%] bg-gradient-to-t from-[#06151E] via-[#06151E]/70 to-transparent" />
+
+        {/* Top cinematic fade */}
+        <div className="absolute inset-x-0 top-0 h-[22%] bg-gradient-to-b from-[#06151E]/65 to-transparent" />
       </div>
 
+      {/* ======================================================
+          SPATIAL LOCATION HUD
+      ====================================================== */}
+
+      <div className="pointer-events-none absolute inset-0 z-[5]">
+
+        {/* AINARO */}
+        <div className="absolute left-7 top-7 md:left-12 md:top-10">
+          <div className="flex items-start gap-2">
+
+            <div className="mt-[3px] text-[13px] text-teal">
+              ●
+            </div>
+
+            <div>
+              <div className="text-[10px] font-semibold uppercase tracking-[0.14em] text-white/70">
+                Ainaro
+              </div>
+
+              <div className="mt-0.5 text-[8px] uppercase tracking-[0.18em] text-white/35">
+                Timor Leste
+              </div>
+            </div>
+
+          </div>
+
+          <div className="mt-4 h-px w-[28px] bg-teal/60" />
+        </div>
+
+        {/* COORDINATES */}
+        <div className="absolute right-7 top-7 text-right md:right-12 md:top-10">
+
+          <div className="text-[8px] uppercase tracking-[0.16em] text-white/30">
+            LOCATION
+          </div>
+
+          <div className="mt-1 text-[9px] font-medium tracking-[0.12em] text-white/55">
+            8.6167° S
+          </div>
+
+          <div className="text-[9px] font-medium tracking-[0.12em] text-white/55">
+            125.5833° E
+          </div>
+        </div>
+
+        {/* CROSSHAIR */}
+        <div className="absolute right-[12%] top-[15%] hidden h-9 w-9 items-center justify-center md:flex">
+
+          <div className="absolute h-px w-full bg-teal/35" />
+          <div className="absolute h-full w-px bg-teal/35" />
+
+          <div className="h-2 w-2 rounded-full border border-teal/80" />
+
+          <div className="absolute -right-1 -top-1 h-2 w-2 border-r border-t border-teal/50" />
+          <div className="absolute -bottom-1 -left-1 h-2 w-2 border-b border-l border-teal/50" />
+        </div>
+
+        {/* LEFT TARGET */}
+        <div className="absolute left-[8%] top-[34%] hidden md:block">
+          <div className="h-2 w-2 rounded-full bg-teal shadow-[0_0_12px_rgba(47,166,160,.8)]" />
+
+          <div className="absolute left-3 top-1 h-px w-[55px] bg-teal/20" />
+        </div>
+
+        {/* RIGHT TARGET */}
+        <div className="absolute right-[21%] top-[30%] hidden md:block">
+          <div className="h-1.5 w-1.5 rounded-full bg-teal/60 shadow-[0_0_10px_rgba(47,166,160,.7)]" />
+        </div>
+
+        {/* BOTTOM LEFT */}
+        <div className="absolute bottom-10 left-7 md:left-12">
+          <div className="text-[8px] uppercase tracking-[0.24em] text-white/25">
+            Ainaro
+          </div>
+
+          <div className="text-[8px] uppercase tracking-[0.24em] text-white/20">
+            Timor Leste
+          </div>
+
+          <div className="mt-2 h-px w-[28px] bg-teal/60" />
+        </div>
+
+        {/* BOTTOM RIGHT */}
+        <div className="absolute bottom-10 right-7 text-right md:right-12">
+
+          <div className="text-[8px] uppercase tracking-[0.2em] text-white/25">
+            AIR UNTUK TANAH
+          </div>
+
+          <div className="mt-0.5 text-[8px] uppercase tracking-[0.2em] text-white/20">
+            TANAH UNTUK HIDUP
+          </div>
+
+          <div className="mt-2 ml-auto h-px w-[28px] bg-teal/60" />
+        </div>
+      </div>
 
       {/* ======================================================
-          FLOATING SPATIAL DATA POINTS
+          FLOATING DATA POINTS
       ====================================================== */}
-      <div className="pointer-events-none absolute inset-0">
+
+      <div className="pointer-events-none absolute inset-0 z-[6]">
 
         <span
           className="absolute left-[18%] top-[25%] h-1 w-1 rounded-full bg-teal/70"
           style={{
-            animation: "geoDataFloat 4s ease-in-out infinite",
+            animation:
+              "geoDataFloat 4s ease-in-out infinite",
           }}
         />
 
         <span
           className="absolute left-[28%] top-[62%] h-1.5 w-1.5 rounded-full bg-teal/40"
           style={{
-            animation: "geoDataFloat 5s ease-in-out infinite",
+            animation:
+              "geoDataFloat 5s ease-in-out infinite",
             animationDelay: "700ms",
           }}
         />
@@ -557,7 +776,8 @@ className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all du
         <span
           className="absolute right-[22%] top-[31%] h-1 w-1 rounded-full bg-teal/60"
           style={{
-            animation: "geoDataFloat 4.5s ease-in-out infinite",
+            animation:
+              "geoDataFloat 4.5s ease-in-out infinite",
             animationDelay: "1200ms",
           }}
         />
@@ -565,19 +785,18 @@ className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all du
         <span
           className="absolute right-[31%] top-[67%] h-1.5 w-1.5 rounded-full bg-teal/40"
           style={{
-            animation: "geoDataFloat 5.5s ease-in-out infinite",
+            animation:
+              "geoDataFloat 5.5s ease-in-out infinite",
             animationDelay: "400ms",
           }}
         />
 
       </div>
 
-
       {/* ======================================================
           LOGO INTRO
-          3 LOGOS APPEAR ONE BY ONE
-          THEN MOVE UP TO MAKE SPACE FOR WELCOME
       ====================================================== */}
+
       <div
         className={`absolute inset-0 z-50 flex items-center justify-center px-5 transition-all duration-1000 ease-[cubic-bezier(.22,1,.36,1)] ${
           logoIntroDone
@@ -585,12 +804,8 @@ className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all du
             : "translate-y-0 opacity-100"
         }`}
       >
-
         <div className="flex flex-col items-center">
 
-          {/* ==================================================
-              THREE LOGOS
-          ================================================== */}
           <div className="flex items-center gap-3 md:gap-7">
 
             {/* LOGO 1 */}
@@ -610,7 +825,6 @@ className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all du
               />
             </div>
 
-
             {/* DIVIDER */}
             <div
               className="hidden h-[38px] w-px bg-white/10 md:block"
@@ -622,7 +836,6 @@ className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all du
                 animationDelay: "0.65s",
               }}
             />
-
 
             {/* LOGO 2 */}
             <div
@@ -641,7 +854,6 @@ className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all du
               />
             </div>
 
-
             {/* DIVIDER */}
             <div
               className="hidden h-[38px] w-px bg-white/10 md:block"
@@ -653,7 +865,6 @@ className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all du
                 animationDelay: "1.2s",
               }}
             />
-
 
             {/* LOGO 3 */}
             <div
@@ -674,10 +885,7 @@ className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all du
 
           </div>
 
-
-          {/* ==================================================
-              ACCENT LINE
-          ================================================== */}
+          {/* ACCENT */}
           <div
             className="mt-7 h-px w-[100px] bg-teal/50"
             style={{
@@ -689,10 +897,7 @@ className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all du
             }}
           />
 
-
-          {/* ==================================================
-              SMALL LABEL
-          ================================================== */}
+          {/* LABEL */}
           <div
             className="mt-4 text-[8px] font-medium uppercase tracking-[0.28em] text-white/30"
             style={{
@@ -706,13 +911,12 @@ className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all du
           </div>
 
         </div>
-
       </div>
-
 
       {/* ======================================================
           MAIN WELCOME CONTENT
       ====================================================== */}
+
       <div
         className={`relative z-10 flex min-h-full items-center justify-center px-5 transition-all duration-1000 ease-[cubic-bezier(.22,1,.36,1)] ${
           welcomeVisible
@@ -720,19 +924,17 @@ className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all du
             : "translate-y-10 opacity-0"
         }`}
       >
-
-        <div className="w-full max-w-[620px]">
-
+        <div className="w-full max-w-[820px]">
 
           {/* ==================================================
-              BRAND / WELCOME
+              BRAND
           ================================================== */}
-          <div className="mb-8 text-center">
+
+          <div className="mb-7 text-center">
 
             {/* Loading icon */}
-            <div className="mb-5 flex justify-center">
-
-              <div className="flex h-[48px] w-[48px] items-center justify-center rounded-[14px] border border-white/10 bg-white/[0.035] shadow-[0_8px_35px_rgba(0,0,0,.25)]">
+            <div className="mb-4 flex justify-center">
+              <div className="flex h-[48px] w-[48px] items-center justify-center rounded-[14px] border border-white/10 bg-[#071A24]/75 shadow-[0_8px_35px_rgba(0,0,0,.35)] backdrop-blur-md">
 
                 <div
                   className="h-[24px] w-[24px] rounded-full border-[2px] border-teal/30 border-t-teal"
@@ -743,44 +945,74 @@ className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all du
                 />
 
               </div>
-
             </div>
 
-
-            {/* Product name */}
-            <div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.28em] text-teal/80">
+            {/* Product */}
+            <div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.32em] text-teal/90">
               GEOLANDSCAPE
             </div>
 
-
             {/* Location */}
-            <h1 className="font-display text-[32px] font-semibold tracking-[-0.04em] text-white md:text-[38px]">
+            <h1 className="font-display text-[32px] font-semibold tracking-[-0.04em] text-white drop-shadow-[0_4px_20px_rgba(0,0,0,.45)] md:text-[46px]">
               Ainaro – Belulik
             </h1>
 
-
             {/* Description */}
-            <p className="mx-auto mt-3 max-w-[430px] text-[13px] leading-relaxed text-white/45">
+            <p className="mx-auto mt-3 max-w-[500px] text-[13px] leading-relaxed text-white/55">
               {t("welcomeDescription")}
             </p>
 
           </div>
 
-
           {/* ==================================================
-              TERRAIN PROFILE
+              TERRAIN PROFILE CARD
           ================================================== */}
-          <div className="relative overflow-hidden rounded-[20px] border border-white/[0.08] bg-white/[0.025] shadow-[0_25px_80px_rgba(0,0,0,.35)]">
 
-            {/* ----------------------------------------------
+          <div
+            className="
+              relative overflow-hidden rounded-[20px]
+              border border-teal/20
+              bg-[#071B25]/75
+              shadow-[0_25px_100px_rgba(0,0,0,.6)]
+              backdrop-blur-[5px]
+            "
+          >
+
+            {/* CARD GLOW */}
+            <div className="pointer-events-none absolute inset-0">
+
+              <div className="absolute left-1/2 top-0 h-px w-[70%] -translate-x-1/2 bg-teal/50 blur-[1px]" />
+
+              <div className="absolute right-[-80px] top-[-80px] h-[180px] w-[180px] rounded-full bg-teal/[0.09] blur-[70px]" />
+
+              <div className="absolute bottom-[-100px] left-[-60px] h-[180px] w-[180px] rounded-full bg-teal/[0.06] blur-[70px]" />
+
+            </div>
+
+            {/* ==================================================
                 HEADER
-            ---------------------------------------------- */}
-            <div className="flex items-center justify-between border-b border-white/[0.06] px-5 py-3">
+            ================================================== */}
+
+            <div className="relative flex items-center justify-between border-b border-white/[0.06] px-5 py-3.5">
 
               <div>
 
-                <div className="text-[9px] font-bold uppercase tracking-[0.18em] text-white/35">
+                <div className="flex items-center gap-2 text-[9px] font-bold uppercase tracking-[0.18em] text-teal/80">
+
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                  >
+                    <path d="M3 17l6-6 4 4 5-7 3 3" />
+                    <path d="M3 21h18" />
+                  </svg>
+
                   LANDSCAPE PROFILE
+
                 </div>
 
                 <div className="mt-1 text-[11px] text-white/55">
@@ -789,13 +1021,12 @@ className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all du
 
               </div>
 
-
-              {/* Live */}
+              {/* LIVE */}
               <div className="flex items-center gap-1.5">
 
-                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-teal" />
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-teal shadow-[0_0_10px_rgba(47,166,160,.8)]" />
 
-                <span className="text-[9px] uppercase tracking-[0.12em] text-white/35">
+                <span className="text-[9px] uppercase tracking-[0.12em] text-white/45">
                   {t("live")}
                 </span>
 
@@ -803,29 +1034,48 @@ className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all du
 
             </div>
 
-
-            {/* ----------------------------------------------
+            {/* ==================================================
                 TERRAIN GRAPH
-            ---------------------------------------------- */}
+            ================================================== */}
+
             <div className="relative h-[155px] overflow-hidden px-5 pt-5">
 
               {/* Horizontal grid */}
-              <div className="absolute inset-x-5 top-[28px] border-t border-white/[0.035]" />
 
-              <div className="absolute inset-x-5 top-[68px] border-t border-white/[0.035]" />
+              <div className="absolute inset-x-5 top-[28px] border-t border-white/[0.045]" />
 
-              <div className="absolute inset-x-5 top-[108px] border-t border-white/[0.035]" />
+              <div className="absolute inset-x-5 top-[68px] border-t border-white/[0.045]" />
 
+              <div className="absolute inset-x-5 top-[108px] border-t border-white/[0.045]" />
 
               {/* Vertical grid */}
-              <div className="absolute bottom-5 left-[25%] top-5 border-l border-white/[0.025]" />
 
-              <div className="absolute bottom-5 left-[50%] top-5 border-l border-white/[0.025]" />
+              <div className="absolute bottom-5 left-[25%] top-5 border-l border-white/[0.03]" />
 
-              <div className="absolute bottom-5 left-[75%] top-5 border-l border-white/[0.025]" />
+              <div className="absolute bottom-5 left-[50%] top-5 border-l border-white/[0.03]" />
 
+              <div className="absolute bottom-5 left-[75%] top-5 border-l border-white/[0.03]" />
 
-              {/* Terrain SVG */}
+              {/* Elevation labels */}
+
+              <div className="absolute left-5 top-[22px] text-[7px] text-white/20">
+                1.200 m
+              </div>
+
+              <div className="absolute left-5 top-[62px] text-[7px] text-white/20">
+                800 m
+              </div>
+
+              <div className="absolute left-5 top-[102px] text-[7px] text-white/20">
+                400 m
+              </div>
+
+              <div className="absolute left-5 bottom-[22px] text-[7px] text-white/20">
+                0 m
+              </div>
+
+              {/* TERRAIN SVG */}
+
               <svg
                 viewBox="0 0 600 130"
                 preserveAspectRatio="none"
@@ -849,11 +1099,31 @@ className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all du
                     L0 130
                     Z
                   "
-                  className="fill-teal/[0.07]"
+                  className="fill-teal/[0.09]"
                 />
 
+                {/* Mountain-like inner fill */}
+                <path
+                  d="
+                    M0 105
+                    C35 96 45 76 78 82
+                    C108 88 118 108 145 91
+                    C172 74 183 42 215 51
+                    C247 60 255 93 282 79
+                    C310 65 322 31 350 39
+                    C378 47 390 83 416 70
+                    C445 55 456 29 485 43
+                    C513 56 528 81 552 68
+                    C572 58 585 43 600 47
+                    L600 130
+                    L0 130
+                    Z
+                  "
+                  className="fill-teal/[0.035]"
+                />
 
                 {/* Main terrain line */}
+
                 <path
                   d="
                     M0 105
@@ -875,7 +1145,6 @@ className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all du
                   strokeDasharray="1"
                   strokeDashoffset="1"
                 >
-
                   <animate
                     attributeName="stroke-dashoffset"
                     from="1"
@@ -883,17 +1152,35 @@ className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all du
                     dur="3s"
                     repeatCount="indefinite"
                   />
-
                 </path>
 
+                {/* Secondary terrain line */}
+
+                <path
+                  d="
+                    M0 113
+                    C40 104 55 89 82 94
+                    C112 100 125 115 150 100
+                    C180 82 190 58 218 63
+                    C250 69 265 102 288 89
+                    C315 75 325 49 350 54
+                    C380 59 392 94 420 81
+                    C450 67 460 48 487 58
+                    C520 70 535 94 560 80
+                  "
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="0.7"
+                  className="text-teal/40"
+                />
 
                 {/* Moving point */}
+
                 <circle
-                  r="3"
+                  r="3.5"
                   fill="currentColor"
                   className="text-teal"
                 >
-
                   <animateMotion
                     dur="4s"
                     repeatCount="indefinite"
@@ -910,69 +1197,172 @@ className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all du
                       C572 58 585 43 600 47
                     "
                   />
+                </circle>
 
+                {/* Current point glow */}
+
+                <circle
+                  cx="350"
+                  cy="39"
+                  r="6"
+                  fill="none"
+                  stroke="currentColor"
+                  className="text-teal/30"
+                >
+                  <animate
+                    attributeName="r"
+                    values="4;9;4"
+                    dur="2.5s"
+                    repeatCount="indefinite"
+                  />
+
+                  <animate
+                    attributeName="opacity"
+                    values="0.7;0.1;0.7"
+                    dur="2.5s"
+                    repeatCount="indefinite"
+                  />
                 </circle>
 
               </svg>
 
+              {/* LOW / HIGH */}
 
-              {/* Elevation labels */}
-              <div className="absolute bottom-2 left-5 text-[8px] text-white/20">
+              <div className="absolute bottom-2 left-5 text-[8px] font-medium tracking-[0.08em] text-teal/45">
                 LOW
               </div>
 
-              <div className="absolute bottom-2 right-5 text-[8px] text-white/20">
+              <div className="absolute bottom-2 right-5 text-[8px] font-medium tracking-[0.08em] text-teal/45">
                 HIGH
               </div>
 
             </div>
 
-
             {/* ==================================================
                 DATA STATUS
             ================================================== */}
-            <div className="grid grid-cols-3 border-t border-white/[0.06]">
 
-              {/* Terrain */}
+            <div className="relative grid grid-cols-3 border-t border-white/[0.06] bg-black/[0.12]">
+
+              {/* TERRAIN */}
+
               <div className="border-r border-white/[0.06] px-4 py-3">
 
-                <div className="text-[8px] uppercase tracking-[0.15em] text-white/30">
-                  Terrain
-                </div>
+                <div className="flex items-center gap-2.5">
 
-                <div className="mt-1 text-[11px] font-semibold text-white/70">
-                  Processing
+                  <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-teal/20 bg-teal/[0.06]">
+
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      className="text-teal"
+                    >
+                      <path d="M3 17l6-6 4 4 5-7 3 3" />
+                      <path d="M3 21h18" />
+                    </svg>
+
+                  </div>
+
+                  <div>
+
+                    <div className="text-[8px] uppercase tracking-[0.15em] text-teal/55">
+                      Terrain
+                    </div>
+
+                    <div className="mt-1 text-[11px] font-semibold text-white/70">
+                      Processing
+                    </div>
+
+                  </div>
+
                 </div>
 
               </div>
 
+              {/* SPATIAL */}
 
-              {/* Spatial */}
               <div className="border-r border-white/[0.06] px-4 py-3">
 
-                <div className="text-[8px] uppercase tracking-[0.15em] text-white/30">
-                  Spatial
-                </div>
+                <div className="flex items-center gap-2.5">
 
-                <div className="mt-1 text-[11px] font-semibold text-white/70">
-                  Preparing
+                  <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-teal/20 bg-teal/[0.06]">
+
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      className="text-teal"
+                    >
+                      <ellipse cx="12" cy="5" rx="7" ry="3" />
+                      <path d="M5 5v7c0 1.7 3.1 3 7 3s7-1.3 7-3V5" />
+                      <path d="M5 12v7c0 1.7 3.1 3 7 3s7-1.3 7-3v-7" />
+                    </svg>
+
+                  </div>
+
+                  <div>
+
+                    <div className="text-[8px] uppercase tracking-[0.15em] text-teal/55">
+                      Spatial
+                    </div>
+
+                    <div className="mt-1 text-[11px] font-semibold text-white/70">
+                      Preparing
+                    </div>
+
+                  </div>
+
                 </div>
 
               </div>
 
+              {/* 3D SCENE */}
 
-              {/* 3D */}
               <div className="px-4 py-3">
 
-                <div className="text-[8px] uppercase tracking-[0.15em] text-white/30">
-                  3D Scene
-                </div>
+                <div className="flex items-center gap-2.5">
 
-                <div className="mt-1 flex items-center gap-1.5 text-[11px] font-semibold text-white/70">
+                  <div className="flex h-7 w-7 items-center justify-center rounded-lg border border-teal/20 bg-teal/[0.06]">
 
-                  <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-teal" />
+                    <svg
+                      width="15"
+                      height="15"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      className="text-teal"
+                    >
+                      <path d="M12 3l8 4.5v9L12 21l-8-4.5v-9L12 3z" />
+                      <path d="M12 12l8-4.5" />
+                      <path d="M12 12L4 7.5" />
+                      <path d="M12 12v9" />
+                    </svg>
 
-                  Initializing
+                  </div>
+
+                  <div>
+
+                    <div className="text-[8px] uppercase tracking-[0.15em] text-teal/55">
+                      3D Scene
+                    </div>
+
+                    <div className="mt-1 flex items-center gap-1.5 text-[11px] font-semibold text-white/70">
+
+                      <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-teal shadow-[0_0_8px_rgba(47,166,160,.8)]" />
+
+                      Initializing
+
+                    </div>
+
+                  </div>
 
                 </div>
 
@@ -982,19 +1372,19 @@ className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all du
 
           </div>
 
-
           {/* ==================================================
               LOADING STATUS
           ================================================== */}
+
           <div className="mt-7 text-center">
 
             <div className="mb-3 flex items-center justify-center gap-2">
 
-              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-teal" />
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-teal shadow-[0_0_8px_rgba(47,166,160,.8)]" />
 
               <span
                 key={phase}
-                className="text-[11px] font-medium tracking-wide text-white/55"
+                className="text-[11px] font-medium tracking-wide text-white/60"
                 style={{
                   animation:
                     "layerLoadingIn 0.45s ease-out",
@@ -1005,12 +1395,12 @@ className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all du
 
             </div>
 
+            {/* Progress */}
 
-            {/* Progress bar */}
-            <div className="mx-auto h-[2px] w-[180px] overflow-hidden rounded-full bg-white/[0.07]">
+            <div className="mx-auto h-[2px] w-[220px] overflow-hidden rounded-full bg-white/[0.08]">
 
               <div
-                className="h-full w-[45%] rounded-full bg-teal"
+                className="h-full w-[45%] rounded-full bg-teal shadow-[0_0_10px_rgba(47,166,160,.6)]"
                 style={{
                   animation:
                     "layerLoadingProgress 2.4s ease-in-out infinite",
@@ -1021,14 +1411,18 @@ className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all du
 
           </div>
 
-
           {/* ==================================================
               FOOTER
           ================================================== */}
-          <div className="mt-8 text-center">
 
-            <p className="text-[9px] uppercase tracking-[0.2em] text-white/20">
-              Spatial Data · Terrain · Landscape
+          <div className="mt-7 text-center">
+
+            <p className="text-[8px] font-medium uppercase tracking-[0.28em] text-white/25">
+              Spatial Data
+              <span className="mx-2 text-teal/40">·</span>
+              Terrain
+              <span className="mx-2 text-teal/40">·</span>
+              Landscape
             </p>
 
           </div>
@@ -1036,7 +1430,6 @@ className={`absolute inset-0 z-40 overflow-hidden bg-[#08151E] transition-all du
         </div>
 
       </div>
-
     </div>
   );
 }
