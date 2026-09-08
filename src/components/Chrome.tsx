@@ -9,7 +9,9 @@ export function TopBar() {
   const { t, lang, setLang } = useI18n();
   const { basemap, setBasemap } = useMapStore();
   const [basemapOpen, setBasemapOpen] = useState(false);
+
   const langs: Lang[] = ["id", "en", "pt"];
+
   return (
     <>
       <div className="pointer-events-none absolute inset-x-0 top-0 z-20 flex h-[70px] items-center bg-gradient-to-b from-bg/95 via-bg/65 to-transparent px-4">
@@ -20,27 +22,33 @@ export function TopBar() {
               alt=""
               className="h-[32px] w-[32px] object-contain"
             />
+
             <img
               src="/icons/2.png"
               alt=""
               className="h-[32px] w-[32px] object-contain"
             />
+
             <img
               src="/icons/3.png"
               alt=""
               className="h-[32px] w-[32px] object-contain"
             />
           </div>
+
           <div className="leading-none">
             <h1 className="font-display text-[17px] font-semibold tracking-[-0.02em] text-white">
               {t("title")}
             </h1>
+
             <span className="mt-1.5 block text-[10.5px] font-medium uppercase tracking-[0.12em] text-white/60 max-md:hidden">
               {t("sub")}
             </span>
           </div>
         </div>
+
         <div className="flex-1" />
+
         <div className="pointer-events-auto flex gap-0.5 rounded-[9px] border border-stroke bg-panel/90 p-[3px] backdrop-blur-md">
           {langs.map((l) => (
             <button
@@ -65,8 +73,8 @@ export function TopBar() {
           title="Basemap"
           aria-label="Basemap"
           className={`flex h-[32px] w-[32px] items-center justify-center rounded-[7px] border border-stroke bg-panel/90 text-[#26343b] shadow-[0_3px_10px_rgba(0,0,0,.18)] transition-all hover:bg-[#22394A] ${
-  basemapOpen ? "ring-2 ring-teal/40" : ""
-}`}
+            basemapOpen ? "ring-2 ring-teal/40" : ""
+          }`}
         >
           <svg
             width="17"
@@ -84,60 +92,60 @@ export function TopBar() {
           </svg>
         </button>
 
-{basemapOpen && (
-  <div className="absolute right-0 top-[39px] w-[260px] rounded-[16px] border border-[#52616a] bg-[#142733] p-2.5 shadow-[0_14px_40px_rgba(0,0,0,.45)]">
-    <div className="grid grid-cols-2 gap-1.5">
-      {BASEMAPS.map((b) => {
-        const isActive = basemap === b.id;
-        return (
-          <button
-            key={b.id}
-            type="button"
-            onClick={() => {
-              setBasemap(b.id);
-              setBasemapOpen(false);
-            }}
-            className={`flex h-[46px] w-full flex-col items-center justify-center rounded-[10px] border transition-all ${
-            isActive
-              ? "border-[#7ee7df] bg-[#2fa6a0] text-[#0b252b] shadow-[0_0_0_1px_rgba(126,231,223,.45),0_2px_8px_rgba(47,166,160,.35)]"
-              : "border-[#304650] bg-[#10232d] text-[#a5b6be] hover:border-[#4fc5bd] hover:bg-[#18333d]"
-          }`}
-          >
-					<div className="mb-0.5 flex h-[24px] w-[24px] items-center justify-center">
-					  {b.id === "sat" ? (
-					    <span className="text-[22px]">🛰️</span>
-					  ) : b.id === "ortho" ? (
-					    <span className="text-[22px]">▦</span>
-					  ) : b.id === "streets" ? (
-					    <span className="text-[22px]">🛣️</span>
-					  ) : b.id === "opentopo" ? (
-					    <span className="text-[22px]">⛰️</span>
-					  ) : b.id === "hybrid" ? (
-					    <span className="text-[22px]">🌍</span>
-					  ) : (
-					    <span className="text-[22px]">🗺️</span>
-					  )}
-					</div>
-            <span className="max-w-[115px] truncate text-center text-[11px] font-semibold leading-tight">
-						  {t(b.labelKey)}
-						</span>
-          </button>
-        );
-			      })}
-			    </div>
-			  </div>
-			)}
+        {basemapOpen && (
+          <div className="absolute right-0 top-[39px] w-[260px] rounded-[16px] border border-[#52616a] bg-[#142733] p-2.5 shadow-[0_14px_40px_rgba(0,0,0,.45)]">
+            <div className="grid grid-cols-2 gap-1.5">
+              {BASEMAPS.map((b) => {
+                const isActive = basemap === b.id;
+
+                return (
+                  <button
+                    key={b.id}
+                    type="button"
+                    onClick={() => {
+                      setBasemap(b.id);
+                      setBasemapOpen(false);
+                    }}
+                    className={`flex h-[46px] w-full flex-col items-center justify-center rounded-[10px] border transition-all ${
+                      isActive
+                        ? "border-[#7ee7df] bg-[#2fa6a0] text-[#0b252b] shadow-[0_0_0_1px_rgba(126,231,223,.45),0_2px_8px_rgba(47,166,160,.35)]"
+                        : "border-[#304650] bg-[#10232d] text-[#a5b6be] hover:border-[#4fc5bd] hover:bg-[#18333d]"
+                    }`}
+                  >
+                    <div className="mb-0.5 flex h-[24px] w-[24px] items-center justify-center">
+                      {b.id === "sat" ? (
+                        <span className="text-[22px]">🛰️</span>
+                      ) : b.id === "ortho" ? (
+                        <span className="text-[22px]">▦</span>
+                      ) : b.id === "streets" ? (
+                        <span className="text-[22px]">🛣️</span>
+                      ) : b.id === "opentopo" ? (
+                        <span className="text-[22px]">⛰️</span>
+                      ) : b.id === "hybrid" ? (
+                        <span className="text-[22px]">🌍</span>
+                      ) : (
+                        <span className="text-[22px]">🗺️</span>
+                      )}
+                    </div>
+
+                    <span className="max-w-[115px] truncate text-center text-[11px] font-semibold leading-tight">
+                      {t(b.labelKey)}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        )}
       </div>
     </>
   );
 }
+
 export function Legend() {
   const { t } = useI18n();
 
-  const {
-    visible,
-    subVisible,
-  } = useMapStore();
+  const { visible, subVisible } = useMapStore();
 
   const [open, setOpen] = useState(true);
 
@@ -154,9 +162,7 @@ export function Legend() {
       {open && (
         <div className="max-h-[55vh] overflow-y-auto px-3.5 pb-3 pt-2.5">
           <div className="flex flex-col gap-2.5">
-
             {GROUPS.flatMap((g) => g.layers).map((layer) => {
-
               /* CHILD LAYERS */
               if (layer.children?.length) {
                 return layer.children
@@ -185,8 +191,7 @@ export function Legend() {
                               viewBox="0 0 24 12"
                               className="block"
                               style={{
-                                opacity:
-                                  child.legend.opacity ?? 1,
+                                opacity: child.legend.opacity ?? 1,
                               }}
                             >
                               <line
@@ -212,20 +217,16 @@ export function Legend() {
                           <span
                             className="h-[12px] w-[12px] flex-none rounded-full"
                             style={{
-                              background:
-                                child.legend.color,
-                              opacity:
-                                child.legend.opacity ?? 1,
+                              background: child.legend.color,
+                              opacity: child.legend.opacity ?? 1,
                             }}
                           />
                         ) : (
                           <span
                             className="h-[13px] w-[18px] flex-none rounded-[2px]"
                             style={{
-                              background:
-                                child.legend.color,
-                              opacity:
-                                child.legend.opacity ?? 1,
+                              background: child.legend.color,
+                              opacity: child.legend.opacity ?? 1,
                               border:
                                 child.kind === "fill"
                                   ? `1px solid ${child.legend.color}`
@@ -255,11 +256,9 @@ export function Legend() {
                       <span
                         className="h-[13px] w-[18px] flex-none rounded-[2px]"
                         style={{
-                          backgroundColor:
-                            "#66BB6A",
+                          backgroundColor: "#66BB6A",
                           opacity: 0.25,
-                          border:
-                            "1px solid #2E7D32",
+                          border: "1px solid #2E7D32",
                         }}
                       />
 
@@ -273,8 +272,7 @@ export function Legend() {
                       {layer.sublayers
                         .filter(
                           (sub) =>
-                            subVisible[sub.id] ??
-                            true
+                            subVisible[sub.id] ?? true
                         )
                         .map((sub) => (
                           <div
@@ -285,12 +283,10 @@ export function Legend() {
                               <span
                                 className="h-[11px] w-[22px] flex-none rounded-[2px]"
                                 style={{
-                                  backgroundColor:
-                                    "#66BB6A",
+                                  backgroundColor: "#66BB6A",
                                   opacity: 0.25,
                                   border: `2px solid ${
-                                    sub.outlineColor ??
-                                    "#2E7D32"
+                                    sub.outlineColor ?? "#2E7D32"
                                   }`,
                                 }}
                               />
@@ -300,27 +296,27 @@ export function Legend() {
                               </span>
                             </div>
 
-                           {sub.sublayers?.length ? (
-  <div className="ml-5 flex flex-col gap-1">
-    {sub.sublayers
-      .filter(
-        (status) =>
-          subVisible[status.id] ?? true
-      )
-      .map((status) => (
-        <div
-          key={status.id}
-          className="flex items-center gap-2 text-[10px] text-muted"
-        >
-          <span className="h-[5px] w-[5px] flex-none rounded-full bg-muted/70" />
+                            {sub.sublayers?.length ? (
+                              <div className="ml-5 flex flex-col gap-1">
+                                {sub.sublayers
+                                  .filter(
+                                    (status) =>
+                                      subVisible[status.id] ?? true
+                                  )
+                                  .map((status) => (
+                                    <div
+                                      key={status.id}
+                                      className="flex items-center gap-2 text-[10px] text-muted"
+                                    >
+                                      <span className="h-[5px] w-[5px] flex-none rounded-full bg-muted/70" />
 
-          <span className="truncate">
-            {t(status.labelKey)}
-          </span>
-        </div>
-      ))}
-  </div>
-) : null}
+                                      <span className="truncate">
+                                        {t(status.labelKey)}
+                                      </span>
+                                    </div>
+                                  ))}
+                              </div>
+                            ) : null}
                           </div>
                         ))}
                     </div>
@@ -357,9 +353,7 @@ export function Legend() {
                         viewBox="0 0 24 12"
                         className="block"
                         style={{
-                          opacity:
-                            layer.legend.opacity ??
-                            1,
+                          opacity: layer.legend.opacity ?? 1,
                         }}
                       >
                         <line
@@ -367,20 +361,15 @@ export function Legend() {
                           y1="6"
                           x2="23"
                           y2="6"
-                          stroke={
-                            layer.legend.color
-                          }
+                          stroke={layer.legend.color}
                           strokeWidth={Math.max(
                             1,
-                            layer.legend.width ??
-                              2
+                            layer.legend.width ?? 2
                           )}
                           strokeLinecap="butt"
                           strokeDasharray={
                             layer.legend.dasharray
-                              ? layer.legend.dasharray.join(
-                                  " "
-                                )
+                              ? layer.legend.dasharray.join(" ")
                               : undefined
                           }
                         />
@@ -390,22 +379,16 @@ export function Legend() {
                     <span
                       className="h-[12px] w-[12px] flex-none rounded-full"
                       style={{
-                        background:
-                          layer.legend.color,
-                        opacity:
-                          layer.legend.opacity ??
-                          1,
+                        background: layer.legend.color,
+                        opacity: layer.legend.opacity ?? 1,
                       }}
                     />
                   ) : (
                     <span
                       className="h-[13px] w-[18px] flex-none rounded-[2px]"
                       style={{
-                        background:
-                          layer.legend.color,
-                        opacity:
-                          layer.legend.opacity ??
-                          1,
+                        background: layer.legend.color,
+                        opacity: layer.legend.opacity ?? 1,
                         border:
                           layer.kind === "fill"
                             ? `1px solid ${layer.legend.color}`
@@ -418,7 +401,6 @@ export function Legend() {
                 </div>
               );
             })}
-
           </div>
         </div>
       )}
@@ -429,6 +411,7 @@ export function Legend() {
 export function StatusBar() {
   const { t } = useI18n();
   const { lng, lat, zoom, pitch, bearing } = useMapStore();
+
   return (
     <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[14] flex h-8 items-center gap-4 bg-gradient-to-t from-bg/95 to-transparent px-4 text-[11.5px] text-muted [font-variant-numeric:tabular-nums]">
       <span>
@@ -441,12 +424,14 @@ export function StatusBar() {
           {lat != null ? lat.toFixed(5) : "—"}
         </b>
       </span>
+
       <span>
         {t("zoom")}{" "}
         <b className="text-ink">
           {zoom.toFixed(1)}
         </b>
       </span>
+
       <span>
         {t("pitch")}{" "}
         <b className="text-ink">
@@ -454,14 +439,22 @@ export function StatusBar() {
         </b>{" "}
         · {Math.round(bearing)}°
       </span>
+
       <div className="flex-1" />
+
       <span>{t("crs")}</span>
     </div>
   );
 }
 
+/* ============================================================
+   LOADER
+   ============================================================ */
+
 export function Loader({ hidden }: { hidden: boolean }) {
   const { t } = useI18n();
+
+  const [introDone, setIntroDone] = useState(false);
   const [phase, setPhase] = useState(0);
 
   const phases = [
@@ -471,14 +464,31 @@ export function Loader({ hidden }: { hidden: boolean }) {
     t("loadPhase4"),
   ];
 
-  // Rotate loading message
+  /* ==========================================================
+     LOGO INTRO
+  ========================================================== */
+
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setIntroDone(true);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  /* ==========================================================
+     ROTATING LOADING PHASE
+  ========================================================== */
+
+  useEffect(() => {
+    if (!introDone) return;
+
     const interval = setInterval(() => {
       setPhase((prev) => (prev + 1) % phases.length);
     }, 2200);
 
     return () => clearInterval(interval);
-  }, [phases.length]);
+  }, [introDone, phases.length]);
 
   return (
     <div
@@ -488,13 +498,11 @@ export function Loader({ hidden }: { hidden: boolean }) {
           : "opacity-100"
       }`}
     >
-
-      {/* =====================================================
+      {/* ======================================================
           BACKGROUND ATMOSPHERE
-      ===================================================== */}
+      ====================================================== */}
 
       <div className="pointer-events-none absolute inset-0">
-
         {/* radial glow */}
         <div className="absolute left-1/2 top-[42%] h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-teal/[0.035] blur-[100px]" />
 
@@ -507,53 +515,195 @@ export function Loader({ hidden }: { hidden: boolean }) {
             backgroundSize: "70px 70px",
           }}
         />
+
+        {/* extra atmospheric glow */}
+        <div
+          className="absolute left-[10%] top-[15%] h-[180px] w-[180px] rounded-full bg-teal/[0.025] blur-[80px]"
+          style={{
+            animation: "geoAtmosphere 5s ease-in-out infinite",
+          }}
+        />
+
+        <div
+          className="absolute bottom-[10%] right-[12%] h-[220px] w-[220px] rounded-full bg-teal/[0.02] blur-[90px]"
+          style={{
+            animation:
+              "geoAtmosphere 6s ease-in-out infinite reverse",
+          }}
+        />
       </div>
 
-
-      {/* =====================================================
+      {/* ======================================================
           FLOATING DATA POINTS
-      ===================================================== */}
+      ====================================================== */}
 
       <div className="pointer-events-none absolute inset-0">
-
         <span className="absolute left-[18%] top-[25%] h-1 w-1 animate-pulse rounded-full bg-teal/70" />
 
-        <span className="absolute left-[28%] top-[62%] h-1.5 w-1.5 animate-pulse rounded-full bg-teal/40 [animation-delay:700ms]" />
+        <span
+          className="absolute left-[28%] top-[62%] h-1.5 w-1.5 animate-pulse rounded-full bg-teal/40"
+          style={{ animationDelay: "700ms" }}
+        />
 
-        <span className="absolute right-[22%] top-[31%] h-1 w-1 animate-pulse rounded-full bg-teal/60 [animation-delay:1200ms]" />
+        <span
+          className="absolute right-[22%] top-[31%] h-1 w-1 animate-pulse rounded-full bg-teal/60"
+          style={{ animationDelay: "1200ms" }}
+        />
 
-        <span className="absolute right-[31%] top-[67%] h-1.5 w-1.5 animate-pulse rounded-full bg-teal/40 [animation-delay:400ms]" />
+        <span
+          className="absolute right-[31%] top-[67%] h-1.5 w-1.5 animate-pulse rounded-full bg-teal/40"
+          style={{ animationDelay: "400ms" }}
+        />
 
+        <span
+          className="absolute left-[11%] top-[47%] h-1 w-1 rounded-full bg-teal/30"
+          style={{
+            animation: "geoDataFloat 4s ease-in-out infinite",
+          }}
+        />
+
+        <span
+          className="absolute right-[12%] top-[53%] h-1 w-1 rounded-full bg-teal/30"
+          style={{
+            animation:
+              "geoDataFloat 5s ease-in-out infinite reverse",
+          }}
+        />
       </div>
 
+      {/* ======================================================
+          LOGO INTRO
+      ====================================================== */}
 
-      {/* =====================================================
-          MAIN CONTENT
-      ===================================================== */}
+      {!introDone && (
+        <div
+          className="absolute inset-0 z-50 flex flex-col items-center justify-center"
+          style={{
+            animation: "geoIntroExit 0.8s ease-in-out 2.35s forwards",
+          }}
+        >
+          {/* logos */}
+          <div className="flex items-center gap-5 sm:gap-7">
+            {/* LOGO 1 */}
+            <div
+              className="flex h-[66px] w-[90px] items-center justify-center opacity-0 sm:h-[76px] sm:w-[105px]"
+              style={{
+                animation:
+                  "geoLogoIntro 0.7s cubic-bezier(.22,1,.36,1) forwards",
+                animationDelay: "0.15s",
+              }}
+            >
+              <img
+                src="/icons/1.png"
+                alt=""
+                className="max-h-full max-w-full object-contain"
+              />
+            </div>
 
-      <div className="relative z-10 flex min-h-full items-center justify-center px-5">
+            {/* divider */}
+            <div
+              className="h-[34px] w-px bg-white/[0.12] opacity-0"
+              style={{
+                animation:
+                  "geoLogoDivider 0.45s ease-out forwards",
+                animationDelay: "0.75s",
+              }}
+            />
 
+            {/* LOGO 2 */}
+            <div
+              className="flex h-[66px] w-[90px] items-center justify-center opacity-0 sm:h-[76px] sm:w-[105px]"
+              style={{
+                animation:
+                  "geoLogoIntro 0.7s cubic-bezier(.22,1,.36,1) forwards",
+                animationDelay: "0.75s",
+              }}
+            >
+              <img
+                src="/icons/2.png"
+                alt=""
+                className="max-h-full max-w-full object-contain"
+              />
+            </div>
+
+            {/* divider */}
+            <div
+              className="h-[34px] w-px bg-white/[0.12] opacity-0"
+              style={{
+                animation:
+                  "geoLogoDivider 0.45s ease-out forwards",
+                animationDelay: "1.35s",
+              }}
+            />
+
+            {/* LOGO 3 */}
+            <div
+              className="flex h-[66px] w-[90px] items-center justify-center opacity-0 sm:h-[76px] sm:w-[105px]"
+              style={{
+                animation:
+                  "geoLogoIntro 0.7s cubic-bezier(.22,1,.36,1) forwards",
+                animationDelay: "1.35s",
+              }}
+            >
+              <img
+                src="/icons/3.png"
+                alt=""
+                className="max-h-full max-w-full object-contain"
+              />
+            </div>
+          </div>
+
+          {/* thin accent */}
+          <div
+            className="mt-9 h-px w-[90px] bg-gradient-to-r from-transparent via-teal/50 to-transparent opacity-0"
+            style={{
+              animation:
+                "geoLogoAccent 0.7s ease-out forwards",
+              animationDelay: "1.55s",
+            }}
+          />
+
+          {/* small label */}
+          <div
+            className="mt-5 text-[8px] font-semibold tracking-[0.3em] text-white/25 opacity-0"
+            style={{
+              animation: "geoLogoText 0.7s ease-out forwards",
+              animationDelay: "1.7s",
+            }}
+          >
+            GEOSPATIAL COLLABORATION
+          </div>
+        </div>
+      )}
+
+      {/* ======================================================
+          ADVANCED WELCOME / LOADING
+      ====================================================== */}
+
+      <div
+        className={`absolute inset-0 flex items-center justify-center px-5 transition-all duration-1000 ${
+          introDone
+            ? "translate-y-0 opacity-100"
+            : "translate-y-5 opacity-0"
+        }`}
+      >
         <div className="w-full max-w-[620px]">
 
-          {/* -----------------------------------------------
+          {/* ==================================================
               BRAND
-          ------------------------------------------------ */}
+          ================================================== */}
 
           <div className="mb-8 text-center">
-
             <div className="mb-5 flex justify-center">
-
               <div className="flex h-[48px] w-[48px] items-center justify-center rounded-[14px] border border-white/10 bg-white/[0.035] shadow-[0_8px_35px_rgba(0,0,0,.25)]">
-
                 <div
-  className="h-[24px] w-[24px] rounded-full border-[2px] border-teal/30 border-t-teal"
-  style={{
-    animation: "layerLoadingSpin 1s linear infinite",
-  }}
-/>
-
+                  className="h-[24px] w-[24px] rounded-full border-[2px] border-teal/30 border-t-teal"
+                  style={{
+                    animation:
+                      "layerLoadingSpin 1s linear infinite",
+                  }}
+                />
               </div>
-
             </div>
 
             <div className="mb-2 text-[10px] font-semibold uppercase tracking-[0.28em] text-teal/80">
@@ -567,20 +717,16 @@ export function Loader({ hidden }: { hidden: boolean }) {
             <p className="mx-auto mt-3 max-w-[430px] text-[13px] leading-relaxed text-white/45">
               {t("welcomeDescription")}
             </p>
-
           </div>
 
-
-          {/* =================================================
+          {/* ==================================================
               TERRAIN GRAPH
-          ================================================= */}
+          ================================================== */}
 
           <div className="relative overflow-hidden rounded-[20px] border border-white/[0.08] bg-white/[0.025] shadow-[0_25px_80px_rgba(0,0,0,.35)]">
 
             {/* graph header */}
-
             <div className="flex items-center justify-between border-b border-white/[0.06] px-5 py-3">
-
               <div>
                 <div className="text-[9px] font-bold uppercase tracking-[0.18em] text-white/35">
                   LANDSCAPE PROFILE
@@ -592,44 +738,34 @@ export function Loader({ hidden }: { hidden: boolean }) {
               </div>
 
               <div className="flex items-center gap-1.5">
-
-                <span className="h-1.5 w-1.5 rounded-full bg-teal animate-pulse" />
+                <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-teal" />
 
                 <span className="text-[9px] uppercase tracking-[0.12em] text-white/35">
                   {t("live")}
                 </span>
-
               </div>
-
             </div>
 
-
             {/* terrain chart */}
-
             <div className="relative h-[155px] overflow-hidden px-5 pt-5">
 
               {/* horizontal grid */}
-
               <div className="absolute inset-x-5 top-[28px] border-t border-white/[0.035]" />
               <div className="absolute inset-x-5 top-[68px] border-t border-white/[0.035]" />
               <div className="absolute inset-x-5 top-[108px] border-t border-white/[0.035]" />
 
               {/* vertical grid */}
-
               <div className="absolute bottom-5 left-[25%] top-5 border-l border-white/[0.025]" />
               <div className="absolute bottom-5 left-[50%] top-5 border-l border-white/[0.025]" />
               <div className="absolute bottom-5 left-[75%] top-5 border-l border-white/[0.025]" />
 
               {/* animated terrain */}
-
               <svg
                 viewBox="0 0 600 130"
                 preserveAspectRatio="none"
                 className="absolute inset-x-5 bottom-5 h-[125px] w-[calc(100%-40px)]"
               >
-
                 {/* fill */}
-
                 <path
                   d="
                     M0 105
@@ -650,7 +786,6 @@ export function Loader({ hidden }: { hidden: boolean }) {
                 />
 
                 {/* main terrain line */}
-
                 <path
                   d="
                     M0 105
@@ -682,7 +817,6 @@ export function Loader({ hidden }: { hidden: boolean }) {
                 </path>
 
                 {/* moving point */}
-
                 <circle
                   r="3"
                   fill="currentColor"
@@ -705,11 +839,9 @@ export function Loader({ hidden }: { hidden: boolean }) {
                     "
                   />
                 </circle>
-
               </svg>
 
               {/* elevation labels */}
-
               <div className="absolute bottom-2 left-5 text-[8px] text-white/20">
                 LOW
               </div>
@@ -717,9 +849,7 @@ export function Loader({ hidden }: { hidden: boolean }) {
               <div className="absolute bottom-2 right-5 text-[8px] text-white/20">
                 HIGH
               </div>
-
             </div>
-
 
             {/* =================================================
                 DATA STATUS
@@ -728,7 +858,6 @@ export function Loader({ hidden }: { hidden: boolean }) {
             <div className="grid grid-cols-3 border-t border-white/[0.06]">
 
               <div className="border-r border-white/[0.06] px-4 py-3">
-
                 <div className="text-[8px] uppercase tracking-[0.15em] text-white/30">
                   Terrain
                 </div>
@@ -736,11 +865,9 @@ export function Loader({ hidden }: { hidden: boolean }) {
                 <div className="mt-1 text-[11px] font-semibold text-white/70">
                   Processing
                 </div>
-
               </div>
 
               <div className="border-r border-white/[0.06] px-4 py-3">
-
                 <div className="text-[8px] uppercase tracking-[0.15em] text-white/30">
                   Spatial
                 </div>
@@ -748,80 +875,67 @@ export function Loader({ hidden }: { hidden: boolean }) {
                 <div className="mt-1 text-[11px] font-semibold text-white/70">
                   Preparing
                 </div>
-
               </div>
 
               <div className="px-4 py-3">
-
                 <div className="text-[8px] uppercase tracking-[0.15em] text-white/30">
                   3D Scene
                 </div>
 
                 <div className="mt-1 flex items-center gap-1.5 text-[11px] font-semibold text-white/70">
-
                   <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-teal" />
 
                   Initializing
-
                 </div>
-
               </div>
 
             </div>
-
           </div>
 
-
-          {/* =================================================
+          {/* ==================================================
               LOADING STATUS
-          ================================================= */}
+          ================================================== */}
 
           <div className="mt-7 text-center">
-
             <div className="mb-3 flex items-center justify-center gap-2">
+              <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-teal" />
 
-              <span className="h-1.5 w-1.5 rounded-full bg-teal animate-pulse" />
-
-<span
-  key={phase}
-  className="text-[11px] font-medium tracking-wide text-white/55"
-  style={{
-    animation: "layerLoadingIn 0.45s ease-out",
-  }}
->
-  {phases[phase]}
-</span>
-
+              <span
+                key={phase}
+                className="text-[11px] font-medium tracking-wide text-white/55"
+                style={{
+                  animation:
+                    "layerLoadingIn 0.45s ease-out",
+                }}
+              >
+                {phases[phase]}
+              </span>
             </div>
-
 
             {/* progress animation */}
-
             <div className="mx-auto h-[2px] w-[180px] overflow-hidden rounded-full bg-white/[0.07]">
-
-              className="h-full w-[45%] animate-[layerLoadingProgress_2.4s_ease-in-out_infinite] rounded-full bg-teal"
-
+              <div
+                className="h-full w-[45%] rounded-full bg-teal"
+                style={{
+                  animation:
+                    "layerLoadingProgress 2.4s ease-in-out infinite",
+                }}
+              />
             </div>
-
           </div>
 
-
-          {/* =================================================
+          {/* ==================================================
               FOOTER
-          ================================================= */}
+          ================================================== */}
 
           <div className="mt-8 text-center">
-
             <p className="text-[9px] uppercase tracking-[0.2em] text-white/20">
               Spatial Data · Terrain · Landscape
             </p>
-
           </div>
 
         </div>
-
       </div>
-
     </div>
   );
 }
