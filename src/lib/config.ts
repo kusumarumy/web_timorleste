@@ -523,6 +523,11 @@ const SYM = {
       opacity: 0.35,
       outline: "#B76D00",
     },
+    potentialLand: {
+      color: "#F6D365",
+      opacity: 0.30,
+      outline: "#C49A00",
+    },
     primer: {
       color: "#795548",
       opacity: 0.30,
@@ -1994,571 +1999,475 @@ export const GROUPS: LayerGroup[] = [
               },
             ],
           },
-  {
-    titleKey: "g_oebaba",
-    dot: "#EC4899",
-
-    layers: [
-      {
-        id: "oebaba_2009",
-        nameKey: "l_oebaba_2009",
-        kind: "line",
-        paint: {},
-        defaultOn: false,
-        lazy: true,
-        cascade: true,
-        children: [
-          {
-            id: "oe09_po_bm",
-            nameKey: "l_oe09_po_bm",
-            kind: "symbol",
-            data: v("09_oe_po_bm"),
-            clickable: true,
-            lazy: true,
-            icon: icon("bm"),
-            iconSize: 0.02,
-            paint: {},
-            defaultOn: false,
-            legend: {
-              color: SYM.point.bm,
-              circle: true,
-            },
+           {
+            titleKey: "g_oebaba",
+            dot: "#EC4899",
+            layers: [
+              {
+                id: "oebaba_2009",
+                nameKey: "l_oebaba_2009",
+                kind: "line",
+                paint: {},
+                defaultOn: false,
+                lazy: true,
+                cascade: true,
+                children: [
+                  {
+                    id: "oe09_po_bm",
+                    nameKey: "l_oe09_po_bm",
+                    kind: "symbol",
+                    data: v("09_oe_po_bm"),
+                    clickable: true,
+                    lazy: true,
+                    icon: icon("bm"),
+                    iconSize: 0.02,
+                    paint: pointPaint(
+                      SYM.point.bm,
+                      2.5,
+                      "#8B1A1A",
+                    ),
+                    defaultOn: false,
+                    legend: {
+                      color: SYM.point.bm,
+                      circle: true,
+                    },
+                  },
+                  {
+                    id: "oe09_po_cp",
+                    nameKey: "l_oe09_po_cp",
+                    kind: "symbol",
+                    data: v("09_oe_po_cp"),
+                    clickable: true,
+                    lazy: true,
+                    icon: icon("cp"),
+                    iconSize: 0.02,
+                    paint: pointPaint(
+                      SYM.point.cp,
+                      2.5,
+                      "#222222",
+                    ),
+                    defaultOn: false,
+                    legend: {
+                      color: SYM.point.cp,
+                      circle: true,
+                    },
+                  },
+                  {
+                    id: "oe09_po_patoksaluran",
+                    nameKey: "l_oe09_po_patoksaluran",
+                    kind: "symbol",
+                    data: v("09_oe_po_patoksaluran"),
+                    clickable: true,
+                    lazy: true,
+                    icon: icon("canal"),
+                    iconSize: 0.02,
+                    paint: pointPaint(
+                      SYM.point.patokSaluran,
+                      2.5,
+                      "#075B91",
+                    ),
+                    defaultOn: false,
+                    legend: {
+                      color: SYM.point.patokSaluran,
+                      circle: true,
+                    },
+                  },
+                  {
+                    id: "oe09_po_profile",
+                    nameKey: "l_oe09_po_profile",
+                    kind: "symbol",
+                    data: v("09_oe_po_profile"),
+                    clickable: true,
+                    lazy: true,
+                    icon: icon("profil"),
+                    iconSize: 0.02,
+                    paint: pointPaint(
+                      SYM.point.profile,
+                      2.5,
+                      "#513A8A",
+                    ),
+                    defaultOn: false,
+                    legend: {
+                      color: SYM.point.profile,
+                      circle: true,
+                    },
+                  },
+                  {
+                    id: "oe09_li_desainpembuang",
+                    nameKey: "l_oe09_li_desainpembuang",
+                    kind: "line",
+                    data: v("09_oe_li_desainpembuang"),
+                    clickable: true,
+                    lazy: true,
+                    paint: linePaint(SYM.line.drainageDesign),
+                    defaultOn: false,
+                    legend: lineLegend(SYM.line.drainageDesign),
+                  },
+                  {
+                    id: "oe09_li_design",
+                    nameKey: "l_oe09_li_design",
+                    kind: "line",
+                    data: v("09_oe_li_design"),
+                    clickable: true,
+                    lazy: true,
+                    paint: linePaint(SYM.line.design),
+                    defaultOn: false,
+                    legend: lineLegend(SYM.line.design),
+                  },
+                  {
+                    id: "oe09_li_jalan",
+                    nameKey: "l_oe09_li_jalan",
+                    kind: "line",
+                    data: v("09_oe_li_jalan"),
+                    clickable: true,
+                    lazy: true,
+                    paint: linePaint(SYM.line.road),
+                    defaultOn: false,
+                    legend: lineLegend(SYM.line.road),
+                  },
+                  {
+                    id: "oe09_li_linepol",
+                    nameKey: "l_oe09_li_linepol",
+                    kind: "line",
+                    data: v("09_oe_li_linepol"),
+                    clickable: true,
+                    lazy: true,
+                    paint: linePaint(SYM.line.boundary),
+                    defaultOn: false,
+                    legend: lineLegend(SYM.line.boundary),
+                  },
+                  {
+                    id: "oe09_li_msalkwarter",
+                    nameKey: "l_oe09_li_msalkwarter",
+                    kind: "line",
+                    data: v("09_oe_li_msalkwarter"),
+                    clickable: true,
+                    lazy: true,
+                    paint: linePaint(SYM.line.flushing),
+                    defaultOn: false,
+                    legend: lineLegend(SYM.line.flushing),
+                  },
+                  {
+                    id: "oe09_li_msalpembuang",
+                    nameKey: "l_oe09_li_msalpembuang",
+                    kind: "line",
+                    data: v("09_oe_li_msalpembuang"),
+                    clickable: true,
+                    lazy: true,
+                    paint: linePaint(SYM.line.drainageSecondary),
+                    defaultOn: false,
+                    legend: lineLegend(SYM.line.drainageSecondary),
+                  },
+                  {
+                    id: "oe09_li_msaltersier",
+                    nameKey: "l_oe09_li_msaltersier",
+                    kind: "line",
+                    data: v("09_oe_li_msaltersier"),
+                    clickable: true,
+                    lazy: true,
+                    paint: linePaint(SYM.line.irrigationTertiary),
+                    defaultOn: false,
+                    legend: lineLegend(SYM.line.irrigationTertiary),
+                  },
+                  {
+                    id: "oe09_li_salexisting",
+                    nameKey: "l_oe09_li_salexisting",
+                    kind: "line",
+                    data: v("09_oe_li_salexisting"),
+                    clickable: true,
+                    lazy: true,
+                    paint: linePaint(SYM.line.irrigationExisting),
+                    defaultOn: false,
+                    legend: lineLegend(SYM.line.irrigationExisting),
+                  },
+                  {
+                    id: "oe09_li_sungaialur",
+                    nameKey: "l_oe09_li_sungaialur",
+                    kind: "line",
+                    data: v("09_oe_li_sungaialur"),
+                    clickable: true,
+                    lazy: true,
+                    paint: linePaint(SYM.line.river),
+                    defaultOn: false,
+                    legend: lineLegend(SYM.line.river),
+                  },
+                  {
+                    id: "oe09_ar_aliranair",
+                    nameKey: "l_oe09_ar_aliranair",
+                    kind: "fill",
+                    data: v("09_oe_ar_aliranair"),
+                    clickable: true,
+                    lazy: true,
+                    paint: fillPaint(SYM.polygon.water),
+                    defaultOn: false,
+                    opacity: SYM.polygon.water.opacity,
+                    opacityProp: "fill-opacity",
+                    legend: fillLegend(SYM.polygon.water),
+                  },
+                  {
+                    id: "oe09_ar_arsir",
+                    nameKey: "l_oe09_ar_arsir",
+                    kind: "fill",
+                    data: v("09_oe_ar_arsir"),
+                    clickable: true,
+                    lazy: true,
+                    paint: fillPaint(SYM.polygon.silt),
+                    defaultOn: false,
+                    opacity: SYM.polygon.silt.opacity,
+                    opacityProp: "fill-opacity",
+                    legend: fillLegend(SYM.polygon.silt),
+                  },
+                  {
+                    id: "oe09_ar_bangbagi",
+                    nameKey: "l_oe09_ar_bangbagi",
+                    kind: "fill",
+                    data: v("09_oe_ar_bangbagi"),
+                    clickable: true,
+                    lazy: true,
+                    paint: fillPaint(SYM.polygon.irrigationStructure),
+                    defaultOn: false,
+                    opacity: SYM.polygon.irrigationStructure.opacity,
+                    opacityProp: "fill-opacity",
+                    legend: fillLegend(SYM.polygon.irrigationStructure),
+                  },
+                  {
+                    id: "oe09_ar_lahanpotensi",
+                    nameKey: "l_oe09_ar_lahanpotensi",
+                    kind: "fill",
+                    data: v("09_oe_ar_lahanpotensi"),
+                    clickable: true,
+                    lazy: true,
+                    paint: fillPaint(SYM.polygon.potentialLand),
+                    defaultOn: false,
+                    opacity: SYM.polygon.potentialLand.opacity,
+                    opacityProp: "fill-opacity",
+                    legend: fillLegend(SYM.polygon.potentialLand),
+                  },
+                  {
+                    id: "oe09_ar_mbangsadap",
+                    nameKey: "l_oe09_ar_mbangsadap",
+                    kind: "fill",
+                    data: v("09_oe_ar_mbangsadap"),
+                    clickable: true,
+                    lazy: true,
+                    paint: fillPaint(SYM.polygon.access),
+                    defaultOn: false,
+                    opacity: SYM.polygon.access.opacity,
+                    opacityProp: "fill-opacity",
+                    legend: fillLegend(SYM.polygon.access),
+                  },
+                  {
+                    id: "oe09_ar_pemukiman",
+                    nameKey: "l_oe09_ar_pemukiman",
+                    kind: "fill",
+                    data: v("09_oe_ar_pemukiman"),
+                    clickable: true,
+                    lazy: true,
+                    paint: fillPaint(SYM.polygon.settlement),
+                    defaultOn: false,
+                    opacity: SYM.polygon.settlement.opacity,
+                    opacityProp: "fill-opacity",
+                    legend: fillLegend(SYM.polygon.settlement),
+                  },
+                ],
+              },
+              {
+                id: "oebaba_2026",
+                nameKey: "l_oebaba_2026",
+                kind: "line",
+                paint: {},
+                defaultOn: false,
+                cascade: true,
+                children: [
+                  {
+                    id: "oe_crest",
+                    nameKey: "l_oe_crest",
+                    kind: "line",
+                    data: v("oe_crest"),
+                    clickable: true,
+                    defaultOn: false,
+                    paint: linePaint(SYM.line.weir),
+                    legend: lineLegend(SYM.line.weir),
+                  },
+                  {
+                    id: "oe_downstream",
+                    nameKey: "l_oe_downstream",
+                    kind: "line",
+                    data: v("oe_downstream"),
+                    clickable: true,
+                    defaultOn: false,
+                    paint: linePaint(SYM.line.downstream),
+                    legend: lineLegend(SYM.line.downstream),
+                  },
+                  {
+                    id: "oe_flushingcanal",
+                    nameKey: "l_oe_flushingcanal",
+                    kind: "line",
+                    data: v("oe_flushingcanal"),
+                    clickable: true,
+                    defaultOn: false,
+                    paint: linePaint(SYM.line.flushing),
+                    legend: lineLegend(SYM.line.flushing),
+                  },
+                  {
+                    id: "oe_flushingpier",
+                    nameKey: "l_oe_flushingpier",
+                    kind: "line",
+                    data: v("oe_flushingpier"),
+                    clickable: true,
+                    defaultOn: false,
+                    paint: linePaint(SYM.line.flushingPier),
+                    legend: lineLegend(SYM.line.flushingPier),
+                  },
+                  {
+                    id: "oe_guidewall",
+                    nameKey: "l_oe_guidewall",
+                    kind: "line",
+                    data: v("oe_guidewall"),
+                    clickable: true,
+                    defaultOn: false,
+                    paint: linePaint(SYM.line.guideWall),
+                    legend: lineLegend(SYM.line.guideWall),
+                  },
+                  {
+                    id: "oe_ingatpier",
+                    nameKey: "l_oe_ingatpier",
+                    kind: "line",
+                    data: v("oe_ingatpier"),
+                    clickable: true,
+                    defaultOn: false,
+                    paint: linePaint(SYM.line.pier),
+                    legend: lineLegend(SYM.line.pier),
+                  },
+                  {
+                    id: "oe_irrigationcanal",
+                    nameKey: "l_oe_irrigationcanal",
+                    kind: "line",
+                    data: v("oe_irrigationcanal"),
+                    clickable: true,
+                    defaultOn: false,
+                    paint: linePaint(SYM.line.irrigationExisting),
+                    legend: lineLegend(SYM.line.irrigationExisting),
+                  },
+                  {
+                    id: "oe_irrigationpier",
+                    nameKey: "l_oe_irrigationpier",
+                    kind: "line",
+                    data: v("oe_irrigationpier"),
+                    clickable: true,
+                    defaultOn: false,
+                    paint: linePaint(SYM.line.irrigationPier),
+                    legend: lineLegend(SYM.line.irrigationPier),
+                  },
+                  {
+                    id: "oe_strais",
+                    nameKey: "l_oe_strais",
+                    kind: "line",
+                    data: v("oe_strais"),
+                    clickable: true,
+                    defaultOn: false,
+                    paint: linePaint(SYM.line.strais),
+                    legend: lineLegend(SYM.line.strais),
+                  },
+                  {
+                    id: "oe_upstream",
+                    nameKey: "l_oe_upstream",
+                    kind: "line",
+                    data: v("oe_upstream"),
+                    clickable: true,
+                    defaultOn: false,
+                    paint: linePaint(SYM.line.upstream),
+                    legend: lineLegend(SYM.line.upstream),
+                  },
+                  {
+                    id: "oe_intake",
+                    nameKey: "l_oe_intake",
+                    kind: "fill",
+                    data: v("oe_intake"),
+                    clickable: true,
+                    defaultOn: false,
+                    paint: fillPaint(SYM.polygon.intake),
+                    opacity: SYM.polygon.intake.opacity,
+                    opacityProp: "fill-opacity",
+                    legend: fillLegend(SYM.polygon.intake),
+                  },
+                  {
+                    id: "oe_irrigationgate",
+                    nameKey: "l_oe_irrigationgate",
+                    kind: "fill",
+                    data: v("oe_irrigationgate"),
+                    clickable: true,
+                    defaultOn: false,
+                    paint: fillPaint(SYM.polygon.gate),
+                    opacity: SYM.polygon.gate.opacity,
+                    opacityProp: "fill-opacity",
+                    legend: fillLegend(SYM.polygon.gate),
+                  },
+                  {
+                    id: "oe_operatinghouse",
+                    nameKey: "l_oe_operatinghouse",
+                    kind: "fill",
+                    data: v("oe_operatinghouse"),
+                    clickable: true,
+                    defaultOn: false,
+                    paint: fillPaint(SYM.polygon.building),
+                    opacity: SYM.polygon.building.opacity,
+                    opacityProp: "fill-opacity",
+                    legend: fillLegend(SYM.polygon.building),
+                  },
+                  {
+                    id: "oe_silt",
+                    nameKey: "l_oe_silt",
+                    kind: "fill",
+                    data: v("oe_silt"),
+                    clickable: true,
+                    defaultOn: false,
+                    paint: fillPaint(SYM.polygon.silt),
+                    opacity: SYM.polygon.silt.opacity,
+                    opacityProp: "fill-opacity",
+                    legend: fillLegend(SYM.polygon.silt),
+                  },
+                  {
+                    id: "oe_stilling",
+                    nameKey: "l_oe_stilling",
+                    kind: "fill",
+                    data: v("oe_stilling"),
+                    clickable: true,
+                    defaultOn: false,
+                    paint: fillPaint(SYM.polygon.stilling),
+                    opacity: SYM.polygon.stilling.opacity,
+                    opacityProp: "fill-opacity",
+                    legend: fillLegend(SYM.polygon.stilling),
+                  },
+                  {
+                    id: "oe_weirbody",
+                    nameKey: "l_oe_weirbody",
+                    kind: "fill",
+                    data: v("oe_weirbody"),
+                    clickable: true,
+                    defaultOn: false,
+                    paint: fillPaint(SYM.polygon.weirBody),
+                    opacity: SYM.polygon.weirBody.opacity,
+                    opacityProp: "fill-opacity",
+                    legend: fillLegend(SYM.polygon.weirBody),
+                  },
+                  {
+                    id: "oe_wing",
+                    nameKey: "l_oe_wing",
+                    kind: "fill",
+                    data: v("oe_wing"),
+                    clickable: true,
+                    defaultOn: false,
+                    paint: fillPaint(SYM.polygon.wing),
+                    opacity: SYM.polygon.wing.opacity,
+                    opacityProp: "fill-opacity",
+                    legend: fillLegend(SYM.polygon.wing),
+                  },
+                ],
+              },
+            ],
           },
-
-          {
-            id: "oe09_po_cp",
-            nameKey: "l_oe09_po_cp",
-            kind: "symbol",
-            data: v("09_oe_po_cp"),
-            clickable: true,
-            lazy: true,
-            icon: icon("cp"),
-            iconSize: 0.02,
-            paint:{},
-            defaultOn: false,
-            legend: {
-              color: SYM.point.cp,
-              circle: true,
-            },
-          },
-
-          {
-            id: "oe09_po_patoksaluran",
-            nameKey: "l_oe09_po_patoksaluran",
-            kind: "symbol",
-            data: v("09_oe_po_patoksaluran"),
-            clickable: true,
-            lazy: true,
-            icon: icon("canal"),
-            iconSize: 0.02,
-            paint: {},
-            defaultOn: false,
-            legend: {
-              color: SYM.point.patokSaluran,
-              circle: true,
-            },
-          },
-
-          {
-            id: "oe09_po_profile",
-            nameKey: "l_oe09_po_profile",
-            kind: "symbol",
-            data: v("09_oe_po_profile"),
-            clickable: true,
-            lazy: true,
-            icon: icon("profil"),
-            iconSize: 0.02,
-            paint: {},
-            defaultOn: false,
-            legend: {
-              color: SYM.point.profile,
-              circle: true,
-            },
-          },
-
-          {
-            id: "oe09_li_desainpembuang",
-            nameKey: "l_oe09_li_desainpembuang",
-            kind: "line",
-            data: v("09_oe_li_desainpembuang"),
-            clickable: true,
-            lazy: true,
-            paint: linePaint(SYM.line.drainageDesign),
-            defaultOn: false,
-            legend: lineLegend(SYM.line.drainageDesign),
-          },
-
-          {
-            id: "oe09_li_design",
-            nameKey: "l_oe09_li_design",
-            kind: "line",
-            data: v("09_oe_li_design"),
-            clickable: true,
-            lazy: true,
-
-            paint: linePaint(SYM.line.design),
-
-            defaultOn: false,
-
-            legend: lineLegend(SYM.line.design),
-          },
-
-          {
-            id: "oe09_li_jalan",
-            nameKey: "l_oe09_li_jalan",
-            kind: "line",
-            data: v("09_oe_li_jalan"),
-            clickable: true,
-            lazy: true,
-
-            paint: linePaint(SYM.line.road),
-
-            defaultOn: false,
-
-            legend: lineLegend(SYM.line.road),
-          },
-
-          {
-            id: "oe09_li_linepol",
-            nameKey: "l_oe09_li_linepol",
-            kind: "line",
-            data: v("09_oe_li_linepol"),
-            clickable: true,
-            lazy: true,
-
-            paint: linePaint(SYM.line.boundary),
-
-            defaultOn: false,
-
-            legend: lineLegend(SYM.line.boundary),
-          },
-
-          {
-            id: "oe09_li_msalkwarter",
-            nameKey: "l_oe09_li_msalkwarter",
-            kind: "line",
-            data: v("09_oe_li_msalkwarter"),
-            clickable: true,
-            lazy: true,
-
-            paint: linePaint(SYM.line.flushing),
-
-            defaultOn: false,
-
-            legend: lineLegend(SYM.line.flushing),
-          },
-
-          {
-            id: "oe09_li_msalpembuang",
-            nameKey: "l_oe09_li_msalpembuang",
-            kind: "line",
-            data: v("09_oe_li_msalpembuang"),
-            clickable: true,
-            lazy: true,
-
-            paint: linePaint(SYM.line.drainageSecondary),
-
-            defaultOn: false,
-
-            legend: lineLegend(SYM.line.drainageSecondary),
-          },
-
-          {
-            id: "oe09_li_msaltersier",
-            nameKey: "l_oe09_li_msaltersier",
-            kind: "line",
-            data: v("09_oe_li_msaltersier"),
-            clickable: true,
-            lazy: true,
-
-            paint: linePaint(SYM.line.irrigationTertiary),
-
-            defaultOn: false,
-
-            legend: lineLegend(SYM.line.irrigationTertiary),
-          },
-
-          {
-            id: "oe09_li_salexisting",
-            nameKey: "l_oe09_li_salexisting",
-            kind: "line",
-            data: v("09_oe_li_salexisting"),
-            clickable: true,
-            lazy: true,
-
-            paint: linePaint(SYM.line.irrigationExisting),
-
-            defaultOn: false,
-
-            legend: lineLegend(SYM.line.irrigationExisting),
-          },
-
-          {
-            id: "oe09_li_sungaialur",
-            nameKey: "l_oe09_li_sungaialur",
-            kind: "line",
-            data: v("09_oe_li_sungaialur"),
-            clickable: true,
-            lazy: true,
-
-            paint: linePaint(SYM.line.river),
-
-            defaultOn: false,
-
-            legend: lineLegend(SYM.line.river),
-          },
-
-          {
-            id: "oe09_ar_aliranair",
-            nameKey: "l_oe09_ar_aliranair",
-            kind: "fill",
-            data: v("09_oe_ar_aliranair"),
-            clickable: true,
-            lazy: true,
-
-            paint: fillPaint(SYM.polygon.water),
-
-            defaultOn: false,
-
-            opacity: SYM.polygon.water.opacity,
-            opacityProp: "fill-opacity",
-
-            legend: fillLegend(SYM.polygon.water),
-          },
-
-          {
-            id: "oe09_ar_arsir",
-            nameKey: "l_oe09_ar_arsir",
-            kind: "fill",
-            data: v("09_oe_ar_arsir"),
-            clickable: true,
-            lazy: true,
-
-            paint: fillPaint(SYM.polygon.silt),
-
-            defaultOn: false,
-
-            opacity: SYM.polygon.silt.opacity,
-            opacityProp: "fill-opacity",
-
-            legend: fillLegend(SYM.polygon.silt),
-          },
-
-          {
-            id: "oe09_ar_bangbagi",
-            nameKey: "l_oe09_ar_bangbagi",
-            kind: "fill",
-            data: v("09_oe_ar_bangbagi"),
-            clickable: true,
-            lazy: true,
-
-            paint: fillPaint(SYM.polygon.building),
-
-            defaultOn: false,
-
-            opacity: SYM.polygon.building.opacity,
-            opacityProp: "fill-opacity",
-
-            legend: fillLegend(SYM.polygon.building),
-          },
-
-          {
-            id: "oe09_ar_lahanpotensi",
-            nameKey: "l_oe09_ar_lahanpotensi",
-            kind: "fill",
-            data: v("09_oe_ar_lahanpotensi"),
-            clickable: true,
-            lazy: true,
-
-            paint: fillPaint(SYM.polygon.irrigationArea),
-
-            defaultOn: false,
-
-            opacity: SYM.polygon.irrigationArea.opacity,
-            opacityProp: "fill-opacity",
-
-            legend: fillLegend(SYM.polygon.irrigationArea),
-          },
-
-          {
-            id: "oe09_ar_mbangsadap",
-            nameKey: "l_oe09_ar_mbangsadap",
-            kind: "fill",
-            data: v("09_oe_ar_mbangsadap"),
-            clickable: true,
-            lazy: true,
-
-            paint: fillPaint(SYM.polygon.access),
-
-            defaultOn: false,
-
-            opacity: SYM.polygon.access.opacity,
-            opacityProp: "fill-opacity",
-
-            legend: fillLegend(SYM.polygon.access),
-          },
-
-          {
-            id: "oe09_ar_pemukiman",
-            nameKey: "l_oe09_ar_pemukiman",
-            kind: "fill",
-            data: v("09_oe_ar_pemukiman"),
-            clickable: true,
-            lazy: true,
-
-            paint: fillPaint(SYM.polygon.settlement),
-
-            defaultOn: false,
-
-            opacity: SYM.polygon.settlement.opacity,
-            opacityProp: "fill-opacity",
-
-            legend: fillLegend(SYM.polygon.settlement),
-          },
-        ],
-      },
-
-      {
-        id: "oebaba_2026",
-        nameKey: "l_oebaba_2026",
-        kind: "line",
-        paint: {},
-        defaultOn: false,
-        cascade: true,
-
-        children: [
-
-          {
-            id: "oe_crest",
-            nameKey: "l_oe_crest",
-            kind: "line",
-            data: v("oe_crest"),
-            clickable: true,
-            defaultOn: false,
-
-            paint: linePaint(SYM.line.weir),
-
-            legend: lineLegend(SYM.line.weir),
-          },
-
-          {
-            id: "oe_downstream",
-            nameKey: "l_oe_downstream",
-            kind: "line",
-            data: v("oe_downstream"),
-            clickable: true,
-            defaultOn: false,
-paint: linePaint(SYM.line.downstream),
-
-legend: lineLegend(SYM.line.downstream),
-          },
-
-          {
-            id: "oe_flushingcanal",
-            nameKey: "l_oe_flushingcanal",
-            kind: "line",
-            data: v("oe_flushingcanal"),
-            clickable: true,
-            defaultOn: false,
-
-            paint: linePaint(SYM.line.flushing),
-
-            legend: lineLegend(SYM.line.flushing),
-          },
-
-          {
-            id: "oe_flushingpier",
-            nameKey: "l_oe_flushingpier",
-            kind: "line",
-            data: v("oe_flushingpier"),
-            clickable: true,
-            defaultOn: false,paint: linePaint(SYM.line.flushingPier),
-            legend: lineLegend(SYM.line.flushingPier),
-          },
-
-          {
-            id: "oe_guidewall",
-            nameKey: "l_oe_guidewall",
-            kind: "line",
-            data: v("oe_guidewall"),
-            clickable: true,
-            defaultOn: false,
-
-            paint: linePaint(SYM.line.guideWall),
-
-            legend: lineLegend(SYM.line.guideWall),
-          },
-
-          {
-            id: "oe_ingatpier",
-            nameKey: "l_oe_ingatpier",
-            kind: "line",
-            data: v("oe_ingatpier"),
-            clickable: true,
-            defaultOn: false,paint: linePaint(SYM.line.pier),
-            legend: lineLegend(SYM.line.pier),
-          },
-
-          {
-            id: "oe_irrigationcanal",
-            nameKey: "l_oe_irrigationcanal",
-            kind: "line",
-            data: v("oe_irrigationcanal"),
-            clickable: true,
-            defaultOn: false,
-
-            paint: linePaint(SYM.line.irrigationExisting),
-
-            legend: lineLegend(SYM.line.irrigationExisting),
-          },
-
-          {
-            id: "oe_irrigationpier",
-            nameKey: "l_oe_irrigationpier",
-            kind: "line",
-            data: v("oe_irrigationpier"),
-            clickable: true,
-            defaultOn: false,
-            paint: linePaint(SYM.line.irrigationPier),
-            legend: lineLegend(SYM.line.irrigationPier),
-          },
-
-          {
-            id: "oe_strais",
-            nameKey: "l_oe_strais",
-            kind: "line",
-            data: v("oe_strais"),
-            clickable: true,
-            defaultOn: false,
-            paint: linePaint(SYM.line.strais),
-            legend: lineLegend(SYM.line.strais),
-          },
-
-          {
-            id: "oe_upstream",
-            nameKey: "l_oe_upstream",
-            kind: "line",
-            data: v("oe_upstream"),
-            clickable: true,
-            defaultOn: false,
-
-            paint: linePaint(SYM.line.upstream),
-
-            legend: lineLegend(SYM.line.upstream),
-          },
-
-
-        {
-          id: "oe_intake",
-          nameKey: "l_oe_intake",
-          kind: "fill",
-          data: v("oe_intake"),
-          clickable: true,
-          defaultOn: false,
-          paint: fillPaint(SYM.polygon.intake),
-          legend: fillLegend(SYM.polygon.intake),
-        },
-          
-            {
-          id: "oe_irrigationgate",
-          nameKey: "l_oe_irrigationgate",
-          kind: "fill",
-          data: v("oe_irrigationgate"),
-          clickable: true,
-          defaultOn: false,
-        
-          paint: fillPaint(SYM.polygon.gate),
-        
-          opacity: SYM.polygon.gate.opacity,
-          opacityProp: "fill-opacity",
-        
-          legend: fillLegend(SYM.polygon.gate),
-        },
-
-          {
-            id: "oe_operatinghouse",
-            nameKey: "l_oe_operatinghouse",
-            kind: "fill",
-            data: v("oe_operatinghouse"),
-            clickable: true,
-            defaultOn: false,
-
-            paint: fillPaint(SYM.polygon.building),
-
-            opacity: SYM.polygon.building.opacity,
-            opacityProp: "fill-opacity",
-
-            legend: fillLegend(SYM.polygon.building),
-          },
-
-          {
-            id: "oe_silt",
-            nameKey: "l_oe_silt",
-            kind: "fill",
-            data: v("oe_silt"),
-            clickable: true,
-            defaultOn: false,
-
-            paint: fillPaint(SYM.polygon.silt),
-
-            opacity: SYM.polygon.silt.opacity,
-            opacityProp: "fill-opacity",
-
-            legend: fillLegend(SYM.polygon.silt),
-          },
-
-          {
-            id: "oe_stilling",
-            nameKey: "l_oe_stilling",
-            kind: "fill",
-            data: v("oe_stilling"),
-            clickable: true,
-            defaultOn: false,
-
-            paint: fillPaint(SYM.polygon.stilling),
-
-            opacity: SYM.polygon.stilling.opacity,
-            opacityProp: "fill-opacity",
-
-            legend: fillLegend(SYM.polygon.stilling),
-          },
-
-          {
-            id: "oe_weirbody",
-            nameKey: "l_oe_weirbody",
-            kind: "fill",
-            data: v("oe_weirbody"),
-            clickable: true,
-            defaultOn: false,
-
-            paint: fillPaint(SYM.polygon.weirBody),
-
-            opacity: SYM.polygon.weirBody.opacity,
-            opacityProp: "fill-opacity",
-
-            legend: fillLegend(SYM.polygon.weirBody),
-          },
-
-          {
-            id: "oe_wing",
-            nameKey: "l_oe_wing",
-            kind: "fill",
-            data: v("oe_wing"),
-            clickable: true,
-            defaultOn: false,
-
-            paint: fillPaint(SYM.polygon.wing),
-
-            opacity: SYM.polygon.wing.opacity,
-            opacityProp: "fill-opacity",
-
-            legend: fillLegend(SYM.polygon.wing),
-          },
-        ],
-      },
-    ],
-  },
-];
+  ];
 
 const flattenLayers = (
   layers: LayerDef[],
@@ -2570,24 +2479,19 @@ const flattenLayers = (
       : []),
   ]);
 
-
 const findLayer = (
   layers: LayerDef[],
   id: string,
 ): LayerDef | undefined => {
   for (const l of layers) {
     if (l.id === id) return l;
-
     const hit =
       l.children &&
       findLayer(l.children, id);
-
     if (hit) return hit;
   }
-
   return undefined;
 };
-
 
 const collectIds = (
   layers: LayerDef[],
@@ -2599,12 +2503,6 @@ const collectIds = (
       : []),
   ]);
 
-
-/* =========================================================
-   PUBLIC HELPERS
-========================================================= */
-
-/** Semua id turunan secara rekursif dari sebuah layer parent. */
 export const getDescendantIds = (
   id: string,
 ): string[] => {
@@ -2612,7 +2510,6 @@ export const getDescendantIds = (
     GROUPS.flatMap((g) => g.layers),
     id,
   );
-
   return node?.children
     ? collectIds(node.children)
     : [];
