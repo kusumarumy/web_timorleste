@@ -1102,7 +1102,6 @@ export const GROUPS: LayerGroup[] = [
       {
       titleKey: "g_land",
       dot: "#22C55E",
-    
       layers: [
         {
           id: "building",
@@ -1110,296 +1109,239 @@ export const GROUPS: LayerGroup[] = [
           kind: "fill",
           data: v("building"),
           clickable: true,
-    
           paint: fillPaint(SYM.polygon.building),
-    
           defaultOn: false,
-    
           opacity: SYM.polygon.building.opacity,
           opacityProp: "fill-opacity",
-    
           legend: fillLegend(SYM.polygon.building),
         },
-    
         {
           id: "lowveg",
           nameKey: "l_lowveg",
           kind: "fill",
           data: v("lowveg"),
           clickable: true,
-    
           paint: fillPaint(SYM.polygon.lowVegetation),
-    
           defaultOn: false,
-    
           opacity: SYM.polygon.lowVegetation.opacity,
           opacityProp: "fill-opacity",
-    
           legend: fillLegend(SYM.polygon.lowVegetation),
         },
-    
         {
           id: "highveg",
           nameKey: "l_highveg",
           kind: "fill",
           data: v("highveg"),
           clickable: true,
-    
           paint: fillPaint(SYM.polygon.highVegetation),
-    
           defaultOn: false,
-    
           opacity: SYM.polygon.highVegetation.opacity,
           opacityProp: "fill-opacity",
-    
           legend: fillLegend(SYM.polygon.highVegetation),
         },
-    
         {
           id: "ground",
           nameKey: "l_ground",
           kind: "fill",
           data: v("ground"),
           clickable: true,
-    
           paint: fillPaint(SYM.polygon.ground),
-    
           defaultOn: false,
-    
           opacity: SYM.polygon.ground.opacity,
           opacityProp: "fill-opacity",
-    
           legend: fillLegend(SYM.polygon.ground),
         },
-    
         {
           id: "urban",
           nameKey: "l_urban",
           kind: "fill",
           data: v("urban"),
           clickable: true,
-    
           paint: fillPaint(SYM.polygon.urban),
-    
           defaultOn: false,
-    
           opacity: SYM.polygon.urban.opacity,
           opacityProp: "fill-opacity",
-    
           legend: fillLegend(SYM.polygon.urban),
         },
-    
         {
           id: "waterbody",
           nameKey: "l_waterbody",
           kind: "fill",
           data: v("waterbody"),
           clickable: true,
-    
           paint: fillPaint(SYM.polygon.water),
-    
           defaultOn: false,
-    
           opacity: SYM.polygon.water.opacity,
           opacityProp: "fill-opacity",
-    
           legend: fillLegend(SYM.polygon.water),
         },
       ],
     },
-  {
-    titleKey: "g_genangan",
-    dot: "#6366F1",
-
-    layers: [
-
-      {
-        id: "genangan_titikbor",
-        nameKey: "l_genangan_titikbor",
-        kind: "symbol",
-        data: v("genangan_titikbor"),
-        clickable: true,
-        icon: icon("drill"),
-        iconSize: 0.02,
-        paint: {},
-        defaultOn: false,
-        legend: {
-          color: SYM.point.drill,
-          svg: "drill",
-        },
+        {
+        titleKey: "g_genangan",
+        dot: "#6366F1",
+        layers: [
+          {
+            id: "genangan_titikbor",
+            nameKey: "l_genangan_titikbor",
+            kind: "symbol",
+            data: v("genangan_titikbor"),
+            clickable: true,
+            icon: icon("drill"),
+            iconSize: 0.02,
+            paint: {},
+            defaultOn: false,
+            legend: {
+              color: SYM.point.drill,
+              svg: "drill",
+            },
+          },
+          {
+            id: "genangan_titikdesain",
+            nameKey: "l_genangan_titikdesain",
+            kind: "symbol",
+            data: v("genangan_titikdesain"),
+            clickable: true,
+            icon: icon("desain"),
+            iconSize: 0.02,
+            paint: {},
+            defaultOn: false,
+            legend: {
+              color: SYM.point.design,
+              svg: "desain",
+            },
+          },
+          {
+            id: "genangan_titikkoordinat",
+            nameKey: "l_genangan_titikkoordinat",
+            kind: "symbol",
+            data: v("genangan_titikkoordinat"),
+            clickable: true,
+            icon: icon("coordinate"),
+            iconSize: 0.02,
+            paint: {},
+            defaultOn: false,
+            legend: {
+              color: SYM.point.coordinate,
+              svg: "coordinate",
+            },
+          },
+          {
+            id: "genangan_titikkupasan",
+            nameKey: "l_genangan_titikkupasan",
+            kind: "symbol",
+            data: v("genangan_titikkupasan"),
+            clickable: true,
+            icon: icon("kupasan"),
+            iconSize: 0.02,
+            paint: {},
+            defaultOn: false,
+            legend: {
+              color: SYM.point.kupasan,
+              svg: "kupasan",
+            },
+          },
+          {
+            id: "genangan_garisdesain",
+            nameKey: "l_genangan_garisdesain",
+            kind: "line",
+            data: v("genangan_garisdesain"),
+            paint: linePaint({
+              color: SYM.line.design.color,
+              width: 2.0,
+              dasharray: [6, 3],
+            }),
+            defaultOn: false,
+            legend: {
+              color: SYM.line.design.color,
+              line: true,
+              width: 2.0,
+              dasharray: [6, 3],
+            },
+          },
+          {
+            id: "genangan_gariskoordinat",
+            nameKey: "l_genangan_gariskoordinat",
+            kind: "line",
+            data: v("genangan_gariskoordinat"),
+            paint: {
+              "line-color": SYM.point.coordinate,
+              "line-width": 1.5,
+              "line-dasharray": [4, 3],
+              "line-opacity": 1,
+            },
+            defaultOn: false,
+            legend: {
+              color: SYM.point.coordinate,
+              line: true,
+              width: 1.5,
+              dasharray: [4, 3],
+            },
+          },
+          {
+            id: "genangan_gariskupasan",
+            nameKey: "l_genangan_gariskupasan",
+            kind: "line",
+            data: v("genangan_gariskupasan"),
+            paint: {
+              "line-color": SYM.point.kupasan,
+              "line-width": 2.0,
+              "line-opacity": 1,
+            },
+            defaultOn: false,
+            legend: {
+              color: SYM.point.kupasan,
+              line: true,
+              width: 2.0,
+            },
+          },
+          {
+            id: "genangan_garissungai",
+            nameKey: "l_genangan_garissungai",
+            kind: "line",
+            data: v("genangan_garissungai"),
+            paint: linePaint(SYM.line.river),
+            defaultOn: false,
+            legend: lineLegend(SYM.line.river),
+          },
+          {
+            id: "genangan_areadesain",
+            nameKey: "l_genangan_areadesain",
+            kind: "fill",
+            data: v("genangan_areadesain"),
+            clickable: true,
+            paint: fillPaint(SYM.polygon.design),
+            defaultOn: false,
+            opacity: SYM.polygon.design.opacity,
+            opacityProp: "fill-opacity",
+            legend: fillLegend(SYM.polygon.design),
+          },
+          {
+            id: "genangan_areagenangan",
+            nameKey: "l_genangan_areagenangan",
+            kind: "fill",
+            data: v("genangan_areagenangan"),
+            clickable: true,
+            paint: fillPaint(SYM.polygon.inundation),
+            defaultOn: false,
+            opacity: SYM.polygon.inundation.opacity,
+            opacityProp: "fill-opacity",
+            legend: fillLegend(SYM.polygon.inundation),
+          },
+          {
+            id: "genangan_areasungai",
+            nameKey: "l_genangan_areasungai",
+            kind: "fill",
+            data: v("genangan_areasungai"),
+            clickable: true,
+            paint: fillPaint(SYM.polygon.river),
+            defaultOn: false,
+            opacity: SYM.polygon.river.opacity,
+            opacityProp: "fill-opacity",
+            legend: fillLegend(SYM.polygon.river),
+          },
+        ],
       },
-
-      {
-        id: "genangan_titikdesain",
-        nameKey: "l_genangan_titikdesain",
-        kind: "symbol",
-        data: v("genangan_titikdesain"),
-        clickable: true,
-        icon: icon("desain"),
-        iconSize: 0.02,
-        paint: {},
-        defaultOn: false,
-        legend: {
-          color: SYM.point.design,
-          svg: "desain",
-        },
-      },
-
-      {
-        id: "genangan_titikkoordinat",
-        nameKey: "l_genangan_titikkoordinat",
-        kind: "symbol",
-        data: v("genangan_titikkoordinat"),
-        clickable: true,
-        icon: icon("coordinate"),
-        iconSize: 0.02,
-        paint: {},
-        defaultOn: false,
-        legend: {
-          color: SYM.point.coordinate,
-          svg: "coordinate",
-        },
-      },
-
-      {
-        id: "genangan_titikkupasan",
-        nameKey: "l_genangan_titikkupasan",
-        kind: "symbol",
-        data: v("genangan_titikkupasan"),
-        clickable: true,
-        icon: icon("kupasan"),
-        iconSize: 0.02,
-        paint: {},
-        defaultOn: false,
-        legend: {
-          color: SYM.point.kupasan,
-          svg: "kupasan",
-        },
-      },
-
-      {
-        id: "genangan_garisdesain",
-        nameKey: "l_genangan_garisdesain",
-        kind: "line",
-        data: v("genangan_garisdesain"),
-
-        paint: linePaint(SYM.line.design),
-
-        defaultOn: false,
-
-        legend: lineLegend(SYM.line.design),
-      },
-
-      {
-        id: "genangan_gariskoordinat",
-        nameKey: "l_genangan_gariskoordinat",
-        kind: "line",
-        data: v("genangan_gariskoordinat"),
-
-        paint: {
-          "line-color": SYM.point.coordinate,
-          "line-width": 1.5,
-          "line-dasharray": [4, 3],
-          "line-opacity": 1,
-        },
-
-        defaultOn: false,
-
-        legend: {
-          color: SYM.point.coordinate,
-          line: true,
-          width: 1.5,
-          dasharray: [4, 3],
-        },
-      },
-
-      {
-        id: "genangan_gariskupasan",
-        nameKey: "l_genangan_gariskupasan",
-        kind: "line",
-        data: v("genangan_gariskupasan"),
-
-        paint: {
-          "line-color": SYM.point.kupasan,
-          "line-width": 2,
-          "line-opacity": 1,
-        },
-
-        defaultOn: false,
-
-        legend: {
-          color: SYM.point.kupasan,
-          line: true,
-          width: 2,
-        },
-      },
-
-      {
-        id: "genangan_garissungai",
-        nameKey: "l_genangan_garissungai",
-        kind: "line",
-        data: v("genangan_garissungai"),
-
-        paint: linePaint(SYM.line.river),
-
-        defaultOn: false,
-
-        legend: lineLegend(SYM.line.river),
-      },
-
-      {
-        id: "genangan_areadesain",
-        nameKey: "l_genangan_areadesain",
-        kind: "fill",
-        data: v("genangan_areadesain"),
-        clickable: true,
-
-        paint: fillPaint(SYM.polygon.design),
-
-        defaultOn: false,
-
-        opacity: SYM.polygon.design.opacity,
-        opacityProp: "fill-opacity",
-
-        legend: fillLegend(SYM.polygon.design),
-      },
-
-      {
-        id: "genangan_areagenangan",
-        nameKey: "l_genangan_areagenangan",
-        kind: "fill",
-        data: v("genangan_areagenangan"),
-        clickable: true,
-
-        paint: fillPaint(SYM.polygon.inundation),
-
-        defaultOn: false,
-
-        opacity: SYM.polygon.inundation.opacity,
-        opacityProp: "fill-opacity",
-
-        legend: fillLegend(SYM.polygon.inundation),
-      },
-
-      {
-        id: "genangan_areasungai",
-        nameKey: "l_genangan_areasungai",
-        kind: "fill",
-        data: v("genangan_areasungai"),
-        clickable: true,
-
-        paint: fillPaint(SYM.polygon.river),
-
-        defaultOn: false,
-
-        opacity: SYM.polygon.river.opacity,
-        opacityProp: "fill-opacity",
-
-        legend: fillLegend(SYM.polygon.river),
-      },
-    ],
-  },
-
   {
     titleKey: "g_lomea",
     dot: "#8B5CF6",
