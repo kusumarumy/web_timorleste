@@ -1030,22 +1030,32 @@ const outlineLayer =
         ref={ref}
         className="absolute inset-0 h-full w-full"
       />
-            {loadingLayerNames.length > 0 && (
-        <div className="layer-loading-popup">
-          <div className="layer-loading-spinner" />
-          <div className="layer-loading-content">
-            <div className="layer-loading-title">
-              {t("loading_layer_title")}
-            </div>
-            <div className="layer-loading-text">
-              <strong>
-                {loadingLayerNames.join(", ")}
-              </strong>{" "}
-              {t("loading_layer_text")}
-            </div>
-          </div>
-        </div>
-      )}
+{loadingLayerNames.length > 0 && (
+  <div
+    className="layer-loading-popup"
+    style={{
+      position: "absolute",
+      top: "78px",
+      right: "360px",
+      zIndex: 30,
+    }}
+  >
+    <div className="layer-loading-spinner" />
+
+    <div className="layer-loading-content">
+      <div className="layer-loading-title">
+        {t("loading_layer_title")}
+      </div>
+
+      <div className="layer-loading-text">
+        <strong>
+          {loadingLayerNames.join(", ")}
+        </strong>{" "}
+        {t("loading_layer_text")}
+      </div>
+    </div>
+  </div>
+)}
 
       <ProfilePanel
         data={profile}
