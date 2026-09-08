@@ -129,6 +129,24 @@ export type LayerKind =
   | "circle"
   | "symbol";
 
+export type LayerSubLayer = {
+  id: string;
+  labelKey: string;
+  filterValue: string;
+  color?: string;
+  outlineColor?: string;
+
+  subProp?: string;
+
+  statuses?: {
+    id: string;
+    labelKey: string;
+    filterValue: string;
+  }[];
+
+  sublayers?: LayerSubLayer[];
+};
+
 export interface LayerDef {
   id: string;
   nameKey: string;
@@ -159,8 +177,9 @@ export interface LayerDef {
     size: number;
     svg: string;
   };
-subProp?: string;
-  
+
+  subProp?: string;
+
   defaultOn: boolean;
 
   opacity?: number;
@@ -177,18 +196,6 @@ subProp?: string;
   };
 
   clickable?: boolean;
-
-type LayerSubLayer = {
-  id: string;
-  labelKey: string;
-  filterValue: string;
-  color?: string;
-  outlineColor?: string;
-
-  subProp?: string;
-
-  sublayers?: LayerSubLayer[];
-};
 
   children?: LayerDef[];
 
