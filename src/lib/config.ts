@@ -1194,26 +1194,18 @@ export const GROUPS: LayerGroup[] = [
         },
       ],
     },
-  ],
-},
      {
   id: "watershed",
   nameKey: "l_watershed",
   kind: "fill",
   data: v("watershed"),
   clickable: true,
-
   paint: fillPaint(SYM.polygon.watershed),
-
   defaultOn: false,
-
   opacity: SYM.polygon.watershed.opacity,
   opacityProp: "fill-opacity",
-
   legend: fillLegend(SYM.polygon.watershed),
-
   subProp: "subkelas",
-
   sublayers: [
     {
       id: "watershed_dam_1",
@@ -1241,24 +1233,18 @@ export const GROUPS: LayerGroup[] = [
     },
   ],
 },
-
       {
         id: "river",
         nameKey: "l_river",
         kind: "fill",
         data: v("river"),
         clickable: true,
-
         paint: fillPaint(SYM.polygon.river),
-
         defaultOn: false,
-
         opacity: SYM.polygon.river.opacity,
         opacityProp: "fill-opacity",
-
         legend: fillLegend(SYM.polygon.river),
       },
-  
     ],
   },
 
