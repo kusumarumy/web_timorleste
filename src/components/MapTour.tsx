@@ -96,7 +96,10 @@ useEffect(() => {
 
 const updatePosition = () => {
   const target = document.getElementById(current.target);
-  if (!target) return;
+
+  if (!target) {
+    return;
+  }
 
   const rect = target.getBoundingClientRect();
 
@@ -178,21 +181,28 @@ const updatePosition = () => {
     };
   }, [visible, step, current.target]);
 
-  /* ==========================================================
-     HIGHLIGHT TARGET
-  ========================================================== */
 useEffect(() => {
   if (!visible) return;
 
   let timer: ReturnType<typeof setTimeout> | null = null;
+  let cancelled = false;
 
   const applyHighlight = () => {
+    if (cancelled) return;
+
     const target = document.getElementById(current.target);
 
+    // Target belum tersedia → coba lagi
     if (!target) {
-      timer = setTimeout(applyHighlight, 150);
+      timer = setTimeout(applyHighlight, 100);
       return;
     }
+
+    console.log(
+      "[GEOLANDSCAPE TOUR] TARGET FOUND:",
+      current.target,
+      target
+    );
 
     target.classList.add("geolandscape-tour-target");
 
@@ -221,15 +231,22 @@ useEffect(() => {
   applyHighlight();
 
   return () => {
-    if (timer) clearTimeout(timer);
+    cancelled = true;
+
+    if (timer) {
+      clearTimeout(timer);
+    }
 
     const target = document.getElementById(current.target);
 
-    target?.classList.remove("geolandscape-tour-target");
+    target?.classList.remove(
+      "geolandscape-tour-target"
+    );
 
     if (current.target === "tour-information") {
       const button = target as HTMLElement | null;
-      const container = button?.parentElement as HTMLElement | null;
+      const container =
+        button?.parentElement as HTMLElement | null;
 
       if (button) {
         button.style.position = "";
