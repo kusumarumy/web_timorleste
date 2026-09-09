@@ -803,18 +803,12 @@ map.setSky({
 
 map.resize();
 
-/**
- * ==========================================================
- * WAIT UNTIL MAP RENDERING IS COMPLETELY IDLE
- * ==========================================================
- */
 const waitForMapReady = () => {
   if (!map.isStyleLoaded()) {
     requestAnimationFrame(waitForMapReady);
     return;
   }
 
-  // Pastikan satu frame render sudah lewat
   requestAnimationFrame(() => {
     map.once("idle", () => {
       console.log("=================================");
@@ -831,6 +825,7 @@ const waitForMapReady = () => {
 };
 
 waitForMapReady();
+    });
 
     const readout = () => {
       const c = map.getCenter();
