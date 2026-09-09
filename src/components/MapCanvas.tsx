@@ -748,7 +748,22 @@ if (navigationElement) {
       }),
       "bottom-left"
     );
+const scaleControl = new maplibregl.ScaleControl({
+  maxWidth: 120,
+  unit: "metric",
+});
 
+map.addControl(scaleControl, "bottom-left");
+
+const scaleElement = map
+  .getContainer()
+  .querySelector(
+    ".maplibregl-ctrl-bottom-left .maplibregl-ctrl-scale"
+  ) as HTMLElement | null;
+
+if (scaleElement) {
+  scaleElement.id = "tour-scale";
+}
     map.on("load", async () => {
       map.resize();
       await registerMapIcons(map);
