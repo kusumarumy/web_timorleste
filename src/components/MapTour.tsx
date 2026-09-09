@@ -75,7 +75,12 @@ export function MapTour({ ready = false }: MapTourProps) {
     top: 0,
     left: 0,
   });
-
+const [targetRect, setTargetRect] = useState({
+  top: 0,
+  left: 0,
+  width: 0,
+  height: 0,
+});
   const current = TOUR_STEPS[step];
 
 useEffect(() => {
@@ -102,7 +107,12 @@ const updatePosition = () => {
   }
 
   const rect = target.getBoundingClientRect();
-
+setTargetRect({
+  top: rect.top,
+  left: rect.left,
+  width: rect.width,
+  height: rect.height,
+});
   const tooltipWidth = 300;
   const tooltipHeight = 175;
   const gap = 18;
@@ -206,22 +216,6 @@ useEffect(() => {
 
     target.classList.add("geolandscape-tour-target");
 
-if (current.target === "tour-information") {
-  const button = target as HTMLElement;
-  const container = button.parentElement as HTMLElement | null;
-
-  button.style.position = "relative";
-  button.style.zIndex = "10001";
-  button.style.outline = "3px solid #22D3EE";
-  button.style.outlineOffset = "5px";
-  button.style.boxShadow =
-    "0 0 0 7px rgba(34,211,238,.18), 0 0 28px rgba(34,211,238,.9)";
-
-  if (container) {
-    container.style.position = "relative";
-    container.style.zIndex = "10001";
-  }
-}
   };
 
   applyHighlight();
@@ -302,15 +296,41 @@ const finishTour = () => {
           DARK SPOTLIGHT
       ====================================================== */}
 
-      <div
-        className="
-          pointer-events-none
-          fixed inset-0
-          z-[9990]
-          bg-black/35
-          backdrop-blur-[1px]
-        "
-      />
+<div
+  className="
+    pointer-events-none
+    fixed inset-0
+    z-[9990]
+    bg-black/35
+    backdrop-blur-[1px]
+  "
+/>
+
+{/* TOUR SPOTLIGHT */}
+<div
+  className="
+    pointer-events-none
+    fixed
+    z-[9991]
+    rounded-[7px]
+    border-[2px]
+    border-cyan-400
+  "
+  style={{
+    top: targetRect.top - 6,
+    left: targetRect.left - 6,
+    width: targetRect.width + 12,
+    height: targetRect.height + 12,
+
+    background: "transparent",
+
+    boxShadow: `
+      0 0 0 2px rgba(34,211,238,.45),
+      0 0 18px 4px rgba(34,211,238,.75),
+      0 0 0 9999px rgba(0,0,0,0)
+    `,
+  }}
+/>
 
       {/* ======================================================
           TOOLTIP
