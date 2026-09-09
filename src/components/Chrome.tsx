@@ -49,7 +49,9 @@ export function TopBar() {
 
         <div className="flex-1" />
 
-        <div className="pointer-events-auto flex gap-0.5 rounded-[9px] border border-stroke bg-panel/90 p-[3px] backdrop-blur-md">
+        <div 
+          id="tour-language"
+          className="pointer-events-auto flex gap-0.5 rounded-[9px] border border-stroke bg-panel/90 p-[3px] backdrop-blur-md">
           {langs.map((l) => (
             <button
               key={l}
@@ -68,6 +70,7 @@ export function TopBar() {
 
       <div className="pointer-events-auto absolute right-[10px] top-[198px] z-[30]">
         <button
+          id="tour-basemap-button"
           type="button"
           onClick={() => setBasemapOpen((prev) => !prev)}
           title="Basemap"
@@ -157,6 +160,7 @@ export function Legend() {
   return (
     <div className="absolute bottom-[65px] right-4 z-[15] w-[210px] overflow-hidden rounded-[14px] border border-stroke bg-panel/90 shadow-[0_14px_40px_rgba(0,0,0,.4)] backdrop-blur-xl max-md:hidden">
       <button
+        id="tour-legend"
         onClick={() => setOpen(!open)}
         className="flex w-full items-center justify-between border-b border-strokeSoft px-3.5 py-2.5 text-[11px] font-bold uppercase tracking-wide text-muted"
       >
@@ -420,7 +424,9 @@ export function StatusBar() {
   const { lng, lat, zoom, pitch, bearing } = useMapStore();
 
   return (
-    <div className="pointer-events-none absolute inset-x-0 bottom-0 z-[14] flex h-8 items-center gap-4 bg-gradient-to-t from-bg/95 to-transparent px-4 text-[11.5px] text-muted [font-variant-numeric:tabular-nums]">
+    <div 
+      id="tour-map-status"
+      className="pointer-events-none absolute inset-x-0 bottom-0 z-[14] flex h-8 items-center gap-4 bg-gradient-to-t from-bg/95 to-transparent px-4 text-[11.5px] text-muted [font-variant-numeric:tabular-nums]">
       <span>
         Lon{" "}
         <b className="text-ink">
@@ -449,7 +455,9 @@ export function StatusBar() {
 
       <div className="flex-1" />
 
-      <span>{t("crs")}</span>
+      <span id="tour-datum">
+        {t("crs")}
+      </span>
     </div>
   );
 }
