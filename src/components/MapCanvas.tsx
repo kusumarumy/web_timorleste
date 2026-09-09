@@ -1075,7 +1075,7 @@ const outlineLayer =
   </div>
 )}
 
-      <ProfilePanel
+           <ProfilePanel
         data={profile}
         onClose={() => {
           setProfile(null);
@@ -1096,16 +1096,25 @@ const outlineLayer =
 
           if (!hoverMarkerRef.current) {
             const el = document.createElement("div");
+
             el.style.cssText =
               "width:12px;height:12px;border-radius:9999px;background:#2FA6A0;border:2px solid #04171a;box-shadow:0 0 0 2px rgba(47,166,160,.35);";
-            hoverMarkerRef.current = new maplibregl.Marker({
-              element: el,
-            });
+
+            hoverMarkerRef.current =
+              new maplibregl.Marker({
+                element: el,
+              });
           }
 
-          hoverMarkerRef.current.setLngLat([s.lng, s.lat]).addTo(map);
+          hoverMarkerRef.current
+            .setLngLat([s.lng, s.lat])
+            .addTo(map);
         }}
       />
+
+      {/* GeoLandscape Mini Tour */}
+      <MapTour />
+
     </div>
   );
 }
