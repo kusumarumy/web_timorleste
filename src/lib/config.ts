@@ -923,7 +923,7 @@ export const GROUPS: LayerGroup[] = [
       {
         id: "4schema_luan_kadoe",
         labelKey: "l_4schema_luan_kadoe",
-        filterValue: "LUAN KADOE, AKADIRU KEDE, &KAKEULAKU",
+        filterValue: "LUAN KADOE, AKADIRU KEDE, & KAKEULAKU",
         outlineColor: "#B6FF00",
       },
       {
