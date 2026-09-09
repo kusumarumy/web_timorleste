@@ -1134,8 +1134,8 @@ useEffect(() => {
         }}
       />
 
-      {/* GeoLandscape Mini Tour */}
-      <MapTour ready={mapReady} />
+{/* GeoLandscape Mini Tour */}
+<MapTour ready={mapReady} />
 
     </div>
   );
