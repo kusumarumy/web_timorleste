@@ -12,7 +12,6 @@ import { IdentifyTool } from "@/lib/geotools/identifyTool";
 import { useI18n } from "@/lib/i18n";
 import ProfilePanel, { type ProfileData } from "./ProfilePanel";
 import type { ProfileSample } from "@/lib/geotools/measure";
-import { MapTour } from "@/components/MapTour";
 
 function isWGS84GeoJSON(geojson: any): boolean {
   const crsName =
@@ -1133,9 +1132,6 @@ useEffect(() => {
             .addTo(map);
         }}
       />
-
-{/* GeoLandscape Mini Tour */}
-<MapTour ready={mapReady} />
 
     </div>
   );
