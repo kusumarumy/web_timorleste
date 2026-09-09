@@ -685,6 +685,7 @@ export default function ControlPanel() {
       {/* OPEN BUTTON */}
       {!open && (
         <button
+          id="tour-menu"
           onClick={() => setOpen(true)}
           className="absolute left-4 top-[70px] z-[15] flex items-center gap-2 rounded-xl border border-stroke bg-panel/90 px-3 py-2 text-[11px] font-bold text-ink shadow-[0_8px_25px_rgba(0,0,0,.35)] backdrop-blur-xl transition-colors hover:bg-panel"
         >
