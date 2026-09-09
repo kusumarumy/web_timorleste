@@ -414,20 +414,17 @@ export function Legend() {
   );
 }
 
-/* ============================================================
-   STATUS BAR
-   TIDAK DIUBAH
-============================================================ */
-
 export function StatusBar() {
   const { t } = useI18n();
   const { lng, lat, zoom, pitch, bearing } = useMapStore();
 
   return (
-    <div 
+    <div
       id="tour-map-status"
-      className="pointer-events-none absolute inset-x-0 bottom-0 z-[14] flex h-8 items-center gap-4 bg-gradient-to-t from-bg/95 to-transparent px-4 text-[11.5px] text-muted [font-variant-numeric:tabular-nums]">
-      <span>
+      className="pointer-events-none absolute inset-x-0 bottom-0 z-[14] flex h-8 items-center gap-4 bg-gradient-to-t from-bg/95 to-transparent px-4 text-[11.5px] text-muted [font-variant-numeric:tabular-nums]"
+    >
+      {/* COORDINATE */}
+      <span id="tour-coordinate">
         Lon{" "}
         <b className="text-ink">
           {lng != null ? lng.toFixed(5) : "—"}
@@ -438,6 +435,7 @@ export function StatusBar() {
         </b>
       </span>
 
+      {/* ZOOM */}
       <span>
         {t("zoom")}{" "}
         <b className="text-ink">
@@ -445,6 +443,7 @@ export function StatusBar() {
         </b>
       </span>
 
+      {/* PITCH / BEARING */}
       <span>
         {t("pitch")}{" "}
         <b className="text-ink">
@@ -455,6 +454,7 @@ export function StatusBar() {
 
       <div className="flex-1" />
 
+      {/* DATUM */}
       <span id="tour-datum">
         {t("crs")}
       </span>
