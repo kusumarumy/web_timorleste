@@ -257,8 +257,6 @@ export class IdentifyControl implements IControl {
     this.map = null;
   }
 
-  // ---------- STATE ----------
-
   private sync(next: boolean) {
     if (next === this.active) return;
 
