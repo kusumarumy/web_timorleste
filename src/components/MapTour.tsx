@@ -41,7 +41,11 @@ const TOUR_STEPS: TourStep[] = [
   },
 ];
 
-export function MapTour() {
+type MapTourProps = {
+  ready?: boolean;
+};
+
+export function MapTour({ ready = false }: MapTourProps) {
   const [step, setStep] = useState(0);
   const [visible, setVisible] = useState(false);
   const [position, setPosition] = useState({
@@ -55,19 +59,21 @@ export function MapTour() {
      START TOUR
   ========================================================== */
 
-  useEffect(() => {
-    const completed = localStorage.getItem(
-      "geolandscape-tour-completed"
-    );
+ useEffect(() => {
+  if (!ready) return;
 
-    if (!completed) {
-      const timer = setTimeout(() => {
-        setVisible(true);
-      }, 900);
+  const completed = localStorage.getItem(
+    "geolandscape-tour-completed"
+  );
 
-      return () => clearTimeout(timer);
-    }
-  }, []);
+  if (completed) return;
+
+  const timer = setTimeout(() => {
+    setVisible(true);
+  }, 900);
+
+  return () => clearTimeout(timer);
+}, [ready]);
 
   /* ==========================================================
      CALCULATE TARGET POSITION
