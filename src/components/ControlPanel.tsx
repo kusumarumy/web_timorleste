@@ -738,7 +738,9 @@ export default function ControlPanel() {
             <MeasurementControl />
 
             {/* DATA LAYER */}
-            <div className="m-1.5 mt-1.5 min-w-0 rounded-xl border border-strokeSoft bg-gradient-to-br from-teal/10 to-teal/[0.02] p-2">
+            <div 
+              id="tour-data-layer"
+              className="m-1.5 mt-1.5 min-w-0 rounded-xl border border-strokeSoft bg-gradient-to-br from-teal/10 to-teal/[0.02] p-2">
               <div className="flex items-center gap-1.5 text-[10px] font-bold text-ink">
                 <svg
                   viewBox="0 0 24 24"
