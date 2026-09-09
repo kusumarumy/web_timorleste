@@ -25,37 +25,37 @@ const TOUR_STEPS: TourStep[] = [
     target: "tour-navigation",
     title: "Map Navigation",
     description:
-      "Gunakan kontrol navigasi untuk memperbesar, memperkecil, dan mengeksplorasi tampilan 3D landscape.",
+      "Gunakan kontrol ini untuk zoom, tilt, dan mengeksplorasi landscape 3D.",
   },
   {
     target: "tour-information",
-    title: "Information",
+    title: "Identify",
     description:
-      "Gunakan tombol Identify untuk melihat informasi dan atribut objek spasial pada peta.",
+      "Gunakan Identify untuk memilih objek pada peta dan melihat informasi serta atribut spasialnya.",
   },
   {
     target: "tour-legend",
     title: "Legend",
     description:
-      "Gunakan legenda untuk memahami simbol, warna, dan klasifikasi layer yang sedang ditampilkan.",
+      "Gunakan legenda untuk memahami simbol, warna, dan klasifikasi layer yang sedang aktif.",
   },
   {
     target: "tour-map-status",
     title: "Map Status",
     description:
-      "Pantau skala peta, koordinat posisi, zoom, dan kemiringan kamera secara langsung.",
+      "Pantau koordinat, zoom, pitch, dan orientasi kamera secara langsung.",
   },
   {
     target: "tour-language",
     title: "Language",
     description:
-      "Pilih bahasa antarmuka GeoLandscape sesuai kebutuhan.",
+      "Pilih bahasa antarmuka GeoLandscape: Indonesia, English, atau Português.",
   },
   {
     target: "tour-datum",
     title: "Coordinate Reference",
     description:
-      "Informasi sistem referensi koordinat dan datum yang digunakan oleh peta.",
+      "Lihat sistem referensi koordinat dan datum yang digunakan pada peta.",
   },
 ];
 
