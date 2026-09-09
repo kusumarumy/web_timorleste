@@ -206,26 +206,22 @@ useEffect(() => {
 
     target.classList.add("geolandscape-tour-target");
 
-    // ========================================================
-    // IDENTIFY
-    // ========================================================
+if (current.target === "tour-information") {
+  const button = target as HTMLElement;
+  const container = button.parentElement as HTMLElement | null;
 
-    if (current.target === "tour-information") {
-      const button = target as HTMLElement;
-      const container = button.parentElement as HTMLElement | null;
+  button.style.position = "relative";
+  button.style.zIndex = "10001";
+  button.style.outline = "3px solid #22D3EE";
+  button.style.outlineOffset = "5px";
+  button.style.boxShadow =
+    "0 0 0 7px rgba(34,211,238,.18), 0 0 28px rgba(34,211,238,.9)";
 
-      button.style.position = "relative";
-      button.style.zIndex = "10001";
-      button.style.outline = "3px solid #22D3EE";
-      button.style.outlineOffset = "5px";
-      button.style.boxShadow =
-        "0 0 0 7px rgba(34,211,238,.18), 0 0 28px rgba(34,211,238,.9)";
-
-      if (container) {
-        container.style.position = "relative";
-        container.style.zIndex = "10001";
-      }
-    }
+  if (container) {
+    container.style.position = "relative";
+    container.style.zIndex = "10001";
+  }
+}
   };
 
   applyHighlight();
@@ -243,24 +239,35 @@ useEffect(() => {
       "geolandscape-tour-target"
     );
 
-    if (current.target === "tour-information") {
-      const button = target as HTMLElement | null;
-      const container =
-        button?.parentElement as HTMLElement | null;
+if (current.target === "tour-information") {
+  const button = target as HTMLElement | null;
 
-      if (button) {
-        button.style.position = "";
-        button.style.zIndex = "";
-        button.style.outline = "";
-        button.style.outlineOffset = "";
-        button.style.boxShadow = "";
-      }
+  const container =
+    button?.parentElement as HTMLElement | null;
 
-      if (container) {
-        container.style.position = "";
-        container.style.zIndex = "";
-      }
-    }
+  const mapControl =
+    button?.closest(
+      ".maplibregl-ctrl-top-right"
+    ) as HTMLElement | null;
+
+  if (button) {
+    button.style.position = "";
+    button.style.zIndex = "";
+    button.style.outline = "";
+    button.style.outlineOffset = "";
+    button.style.boxShadow = "";
+  }
+
+  if (container) {
+    container.style.position = "";
+    container.style.zIndex = "";
+  }
+
+  if (mapControl) {
+    mapControl.style.position = "";
+    mapControl.style.zIndex = "";
+  }
+}
   };
 }, [visible, current.target]);
 
