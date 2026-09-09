@@ -55,17 +55,13 @@ export function MapTour({ ready = false }: MapTourProps) {
 
   const current = TOUR_STEPS[step];
 
-  /* ==========================================================
-     START TOUR
-  ========================================================== */
 useEffect(() => {
-  if (!ready) return;
+  if (!ready) {
+    setVisible(false);
+    return;
+  }
 
-  const timer = setTimeout(() => {
-    setVisible(true);
-  }, 700);
-
-  return () => clearTimeout(timer);
+  setVisible(true);
 }, [ready]);
 
   /* ==========================================================
