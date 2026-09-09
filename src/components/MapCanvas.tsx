@@ -786,29 +786,39 @@ await Promise.all(
   )
 );
 
-console.log(
-  "Initial GeoJSON lazy loading selesai."
-);
+console.log("Initial GeoJSON lazy loading selesai.");
 
 const s = store.getState();
 
 applyTerrain(map, s.terrainSource);
 
+map.setSky({
+  "sky-color": "#12324A",
+  "horizon-color": "#0B1620",
+  "fog-color": "#0B1620",
+  "sky-horizon-blend": 0.6,
+  "horizon-fog-blend": 0.5,
+  "fog-ground-blend": 0.4,
+} as any);
+
 map.resize();
 
-onReady?.(map);
+/**
+ * TUNGGU SAMPAI MAP BENAR-BENAR IDLE
+ * sebelum menganggap MapTour siap.
+ */
+map.once("idle", () => {
+  console.log("=================================");
+  console.log("✓ GEOLANDSCAPE MAP READY");
+  console.log("✓ TERRAIN READY");
+  console.log("✓ INITIAL LAYERS READY");
+  console.log("✓ MAP IDLE");
+  console.log("=================================");
 
-setMapReady(true);
-      map.setSky({
-        "sky-color": "#12324A",
-        "horizon-color": "#0B1620",
-        "fog-color": "#0B1620",
-        "sky-horizon-blend": 0.6,
-        "horizon-fog-blend": 0.5,
-        "fog-ground-blend": 0.4,
-      } as any);
-      onReady?.(map);
-    });
+  setMapReady(true);
+
+  onReady?.(map);
+});
 
 
     const readout = () => {
