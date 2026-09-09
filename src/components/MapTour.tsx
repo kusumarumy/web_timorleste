@@ -16,28 +16,46 @@ const TOUR_STEPS: TourStep[] = [
       "Buka menu untuk menjelajahi layer, data spasial, dan fitur GeoLandscape.",
   },
   {
-    target: "tour-basemap",
+    target: "tour-basemap-button",
     title: "Basemap",
     description:
-      "Pilih tampilan peta yang paling sesuai untuk mengeksplorasi Ainaro–Belulik.",
+      "Pilih basemap yang paling sesuai untuk mengeksplorasi wilayah Ainaro–Belulik.",
   },
   {
     target: "tour-navigation",
     title: "Map Navigation",
     description:
-      "Gunakan kontrol ini untuk zoom, tilt, dan mengeksplorasi landscape.",
+      "Gunakan kontrol navigasi untuk memperbesar, memperkecil, dan mengeksplorasi tampilan 3D landscape.",
   },
   {
     target: "tour-information",
     title: "Information",
     description:
-      "Lihat informasi dan detail mengenai data spasial yang tersedia.",
+      "Gunakan tombol Identify untuk melihat informasi dan atribut objek spasial pada peta.",
   },
   {
     target: "tour-legend",
     title: "Legend",
     description:
-      "Gunakan legenda untuk memahami simbol dan klasifikasi layer yang aktif.",
+      "Gunakan legenda untuk memahami simbol, warna, dan klasifikasi layer yang sedang ditampilkan.",
+  },
+  {
+    target: "tour-map-status",
+    title: "Map Status",
+    description:
+      "Pantau skala peta, koordinat posisi, zoom, dan kemiringan kamera secara langsung.",
+  },
+  {
+    target: "tour-language",
+    title: "Language",
+    description:
+      "Pilih bahasa antarmuka GeoLandscape sesuai kebutuhan.",
+  },
+  {
+    target: "tour-datum",
+    title: "Coordinate Reference",
+    description:
+      "Informasi sistem referensi koordinat dan datum yang digunakan oleh peta.",
   },
 ];
 
