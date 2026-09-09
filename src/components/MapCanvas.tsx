@@ -715,7 +715,6 @@ const navigationElement =
 if (navigationElement) {
   navigationElement.id = "tour-navigation";
 }
-}
     identifyRef.current = new IdentifyTool(map, {
       getLayerIds: (m) => {
         const s = store.getState();
