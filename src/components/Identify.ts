@@ -202,6 +202,7 @@ export class IdentifyControl implements IControl {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "identify-ctrl-btn";
+    button.id = "tour-information";
 
     const label = this.opts.texts?.button ?? "Identify";
     button.title = label;
