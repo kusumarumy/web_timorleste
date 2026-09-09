@@ -58,19 +58,12 @@ export function MapTour({ ready = false }: MapTourProps) {
   /* ==========================================================
      START TOUR
   ========================================================== */
-
- useEffect(() => {
+useEffect(() => {
   if (!ready) return;
-
-  const completed = localStorage.getItem(
-    "geolandscape-tour-completed"
-  );
-
-  if (completed) return;
 
   const timer = setTimeout(() => {
     setVisible(true);
-  }, 900);
+  }, 700);
 
   return () => clearTimeout(timer);
 }, [ready]);
@@ -191,14 +184,9 @@ export function MapTour({ ready = false }: MapTourProps) {
      COMPLETE
   ========================================================== */
 
-  const finishTour = () => {
-    localStorage.setItem(
-      "geolandscape-tour-completed",
-      "true"
-    );
-
-    setVisible(false);
-  };
+const finishTour = () => {
+  setVisible(false);
+};
 
   const nextStep = () => {
     if (step >= TOUR_STEPS.length - 1) {
