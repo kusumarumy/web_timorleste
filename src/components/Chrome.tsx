@@ -453,13 +453,12 @@ export function StatusBar() {
     </div>
   );
 }
+type LoaderProps = {
+  hidden: boolean;
+  onFinished?: () => void;
+};
 
-/* ============================================================
-   LOADER
-   CINEMATIC AINARO - BELULIK
-============================================================ */
-
-export function Loader({ hidden }: { hidden: boolean }) {
+export function Loader({ hidden, onFinished }: LoaderProps) {
   const { t } = useI18n();
 useEffect(() => {
   const img = new window.Image();
@@ -509,7 +508,15 @@ useEffect(() => {
       clearTimeout(introReadyTimer);
     };
   }, []);
+useEffect(() => {
+  if (!hidden || !introReady) return;
 
+  const timer = setTimeout(() => {
+    onFinished?.();
+  }, 1000);
+
+  return () => clearTimeout(timer);
+}, [hidden, introReady, onFinished]);
   /* ==========================================================
      LOADING PHASE ROTATION
   ========================================================== */
