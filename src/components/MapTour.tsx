@@ -182,25 +182,42 @@ const updatePosition = () => {
      HIGHLIGHT TARGET
   ========================================================== */
 
-  useEffect(() => {
-    if (!visible) return;
+useEffect(() => {
+  if (!visible) return;
 
-    const target = document.getElementById(
-      current.target
-    );
+  let timer: ReturnType<typeof setTimeout> | null = null;
 
-    if (!target) return;
+  const applyHighlight = () => {
+    const target = document.getElementById(current.target);
 
-    target.classList.add(
-      "geolandscape-tour-target"
-    );
+    if (!target) {
+      timer = setTimeout(applyHighlight, 150);
+      return;
+    }
 
-    return () => {
-      target.classList.remove(
-        "geolandscape-tour-target"
+    target.classList.add("geolandscape-tour-target");
+
+    // Identify adalah tombol yang dibuat langsung oleh MapLibre control
+    if (current.target === "tour-information") {
+      target.parentElement?.classList.add(
+        "geolandscape-tour-target-parent"
       );
-    };
-  }, [visible, current.target]);
+    }
+  };
+
+  applyHighlight();
+
+  return () => {
+    if (timer) clearTimeout(timer);
+
+    const target = document.getElementById(current.target);
+
+    target?.classList.remove("geolandscape-tour-target");
+    target?.parentElement?.classList.remove(
+      "geolandscape-tour-target-parent"
+    );
+  };
+}, [visible, current.target]);
 
   /* ==========================================================
      COMPLETE
