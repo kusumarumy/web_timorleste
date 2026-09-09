@@ -13,13 +13,13 @@ const TOUR_STEPS: TourStep[] = [
     target: "tour-menu",
     title: "Explore Data",
     description:
-      "Buka menu untuk menjelajahi layer, data spasial, dan fitur GeoLandscape.",
+      "Buka kontrol utama untuk menjelajahi layer, data spasial, dan fitur GeoLandscape.",
   },
   {
-    target: "tour-basemap-button",
-    title: "Basemap",
+    target: "tour-language",
+    title: "Language",
     description:
-      "Pilih basemap yang paling sesuai untuk mengeksplorasi wilayah Ainaro–Belulik.",
+      "Pilih bahasa antarmuka GeoLandscape: Indonesia, English, atau Português.",
   },
   {
     target: "tour-navigation",
@@ -34,31 +34,36 @@ const TOUR_STEPS: TourStep[] = [
       "Gunakan Identify untuk memilih objek pada peta dan melihat informasi serta atribut spasialnya.",
   },
   {
+    target: "tour-basemap-button",
+    title: "Basemap",
+    description:
+      "Pilih basemap yang paling sesuai untuk mengeksplorasi wilayah Ainaro–Belulik.",
+  },
+  {
     target: "tour-legend",
     title: "Legend",
     description:
       "Gunakan legenda untuk memahami simbol, warna, dan klasifikasi layer yang sedang aktif.",
   },
   {
-    target: "tour-map-status",
-    title: "Map Status",
-    description:
-      "Pantau koordinat, zoom, pitch, dan orientasi kamera secara langsung.",
-  },
-  {
-    target: "tour-language",
-    title: "Language",
-    description:
-      "Pilih bahasa antarmuka GeoLandscape: Indonesia, English, atau Português.",
-  },
-  {
     target: "tour-datum",
-    title: "Coordinate Reference",
+    title: "Datum",
     description:
-      "Lihat sistem referensi koordinat dan datum yang digunakan pada peta.",
+      "Lihat datum dan sistem referensi koordinat yang digunakan pada peta.",
+  },
+  {
+    target: "tour-coordinate",
+    title: "Coordinate",
+    description:
+      "Pantau posisi koordinat longitude dan latitude secara langsung.",
+  },
+  {
+    target: "tour-scale",
+    title: "Scale Bar",
+    description:
+      "Gunakan scale bar untuk mengetahui perkiraan jarak pada tampilan peta.",
   },
 ];
-
 type MapTourProps = {
   ready?: boolean;
 };
@@ -89,52 +94,55 @@ useEffect(() => {
   useEffect(() => {
     if (!visible) return;
 
-    const updatePosition = () => {
-      const target = document.getElementById(current.target);
+const updatePosition = () => {
+  const target = document.getElementById(current.target);
+  if (!target) return;
 
-      if (!target) return;
+  const rect = target.getBoundingClientRect();
 
-      const rect = target.getBoundingClientRect();
+  const tooltipWidth = 300;
+  const tooltipHeight = 175;
+  const gap = 18;
+  const margin = 16;
 
-      const tooltipWidth = 300;
-      const tooltipHeight = 155;
-      const gap = 18;
+  let left = rect.left + rect.width / 2 - tooltipWidth / 2;
+  let top = rect.bottom + gap;
 
-      let left = rect.left + rect.width / 2 - tooltipWidth / 2;
-      let top = rect.bottom + gap;
+  // Legend → tetap di samping kiri karena panel legend ada di kanan
+  if (current.target === "tour-legend") {
+    left = rect.left - tooltipWidth - gap;
+    top = rect.top + rect.height / 2 - tooltipHeight / 2;
+  }
 
-      /* ------------------------------------------
-         KEEP INSIDE SCREEN
-      ------------------------------------------ */
+  // Jangan keluar kiri
+  if (left < margin) {
+    left = margin;
+  }
 
-      if (left < 16) {
-        left = 16;
-      }
+  // Jangan keluar kanan
+  if (left + tooltipWidth > window.innerWidth - margin) {
+    left = window.innerWidth - tooltipWidth - margin;
+  }
 
-      if (left + tooltipWidth > window.innerWidth - 16) {
-        left = window.innerWidth - tooltipWidth - 16;
-      }
+  // ============================================================
+  // SEMUA TARGET NORMAL → TOOLTIP TETAP DI BAWAH
+  // ============================================================
 
-      /* ------------------------------------------
-         FLIP TO TOP
-      ------------------------------------------ */
+  if (current.target !== "tour-legend") {
+    const maxTop = window.innerHeight - tooltipHeight - margin;
 
-      if (
-        top + tooltipHeight >
-        window.innerHeight - 16
-      ) {
-        top = rect.top - tooltipHeight - gap;
-      }
+    if (top > maxTop) {
+      top = maxTop;
+    }
+  }
 
-      if (top < 16) {
-        top = 16;
-      }
+  // Jangan keluar atas
+  if (top < margin) {
+    top = margin;
+  }
 
-      setPosition({
-        top,
-        left,
-      });
-    };
+  setPosition({ top, left });
+};
 
     updatePosition();
 
