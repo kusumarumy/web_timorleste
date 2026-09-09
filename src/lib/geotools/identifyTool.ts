@@ -126,7 +126,7 @@ export class IdentifyTool {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "identify-ctrl-btn";
-    
+    button.id = "tour-information";
     button.style.width = "32px";
     button.style.height = "32px";
     button.style.borderRadius = "7px";
