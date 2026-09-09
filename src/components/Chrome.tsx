@@ -1596,89 +1596,103 @@ useEffect(() => {
   />
 
 
-  {/* ==================================================
-      MAIN ELEVATION LINE
-      Ini sekarang hanya OVERLAY
-  ================================================== */}
+{/* ==================================================
+    ANIMATED TERRAIN RIDGE
+    GARIS BERJALAN TEPAT DI PUNCAK GUNUNG
+================================================== */}
 
-  <path
-    d="
-      M0 136
-      C35 127 60 116 88 121
-      C118 127 137 119 158 108
-      C181 96 198 88 220 96
-      C246 105 259 113 282 98
-      C309 80 332 57 355 63
-      C383 70 398 96 421 89
-      C447 81 470 58 494 65
-      C521 73 536 99 560 91
-      C591 81 625 69 700 64
-    "
-    fill="none"
-    stroke="#55eee7"
-    strokeWidth="1.8"
-    strokeOpacity="0.9"
-    filter="url(#terrainGlow)"
-    pathLength="1"
-    strokeDasharray="1"
-    strokeDashoffset="1"
-  >
-    <animate
-      attributeName="stroke-dashoffset"
-      from="1"
-      to="0"
-      dur="3s"
-      repeatCount="indefinite"
-    />
-  </path>
+<path
+  d="
+    M0 128
+
+    L55 106
+    L95 115
+    L135 82
+    L172 104
+
+    L215 68
+    L250 92
+
+    L290 54
+    L325 82
+
+    L365 38
+    L405 83
+
+    L445 61
+    L480 94
+
+    L520 48
+    L555 79
+
+    L600 57
+    L640 89
+    L700 62
+  "
+  fill="none"
+  stroke="#55eee7"
+  strokeWidth="1.8"
+  strokeOpacity="0.95"
+  filter="url(#terrainGlow)"
+  pathLength="1"
+  strokeDasharray="1"
+  strokeDashoffset="1"
+>
+  <animate
+    attributeName="stroke-dashoffset"
+    from="1"
+    to="0"
+    dur="3s"
+    repeatCount="indefinite"
+  />
+</path>
 
 
   {/* ==================================================
       ACTIVE ELEVATION POINT
   ================================================== */}
 
-  <line
-    x1="494"
-    y1="48"
-    x2="494"
-    y2="150"
-    stroke="#37ddd7"
-    strokeWidth="0.7"
-    strokeOpacity="0.35"
+ <line
+  x1="494"
+  y1="78"
+  x2="494"
+  y2="150"
+  stroke="#37ddd7"
+  strokeWidth="0.7"
+  strokeOpacity="0.35"
+/>
+
+<circle
+  cx="494"
+  cy="78"
+  r="4"
+  fill="#5ff4ed"
+  filter="url(#terrainGlow)"
+/>
+
+<circle
+  cx="494"
+  cy="78"
+  r="8"
+  fill="none"
+  stroke="#49e5df"
+  strokeWidth="1"
+  strokeOpacity="0.45"
+>
+  <animate
+    attributeName="r"
+    values="5;12;5"
+    dur="2.5s"
+    repeatCount="indefinite"
   />
 
-  <circle
-    cx="494"
-    cy="65"
-    r="4"
-    fill="#5ff4ed"
-    filter="url(#terrainGlow)"
+  <animate
+    attributeName="opacity"
+    values="0.8;0.05;0.8"
+    dur="2.5s"
+    repeatCount="indefinite"
   />
-
-  <circle
-    cx="494"
-    cy="65"
-    r="8"
-    fill="none"
-    stroke="#49e5df"
-    strokeWidth="1"
-    strokeOpacity="0.45"
-  >
-    <animate
-      attributeName="r"
-      values="5;12;5"
-      dur="2.5s"
-      repeatCount="indefinite"
-    />
-
-    <animate
-      attributeName="opacity"
-      values="0.8;0.05;0.8"
-      dur="2.5s"
-      repeatCount="indefinite"
-    />
-  </circle>
-
+</circle>
 </svg>
     
     {/* ==================================================
