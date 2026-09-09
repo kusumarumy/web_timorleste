@@ -12,6 +12,7 @@ import { IdentifyTool } from "@/lib/geotools/identifyTool";
 import { useI18n } from "@/lib/i18n";
 import ProfilePanel, { type ProfileData } from "./ProfilePanel";
 import type { ProfileSample } from "@/lib/geotools/measure";
+import { MapTour } from "@/components/MapTour";
 
 function isWGS84GeoJSON(geojson: any): boolean {
   const crsName =
@@ -696,12 +697,20 @@ export default function MapCanvas({
     map.on("error", (e) => {
       console.error("MAPLIBRE ERROR:", e.error);
     });
-    map.addControl(
-      new maplibregl.NavigationControl({
-        visualizePitch: true,
-      }),
-      "top-right"
-    );
+    const navigationControl =
+  new maplibregl.NavigationControl({
+    visualizePitch: true,
+  });
+
+map.addControl(
+  navigationControl,
+  "top-right"
+);
+
+const navigationElement =
+  navigationControl.getContainer();
+
+navigationElement.id = "tour-navigation";
     identifyRef.current = new IdentifyTool(map, {
       getLayerIds: (m) => {
         const s = store.getState();
