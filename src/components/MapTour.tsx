@@ -181,7 +181,6 @@ const updatePosition = () => {
   /* ==========================================================
      HIGHLIGHT TARGET
   ========================================================== */
-
 useEffect(() => {
   if (!visible) return;
 
@@ -197,11 +196,25 @@ useEffect(() => {
 
     target.classList.add("geolandscape-tour-target");
 
-    // Identify adalah tombol yang dibuat langsung oleh MapLibre control
+    // ========================================================
+    // IDENTIFY
+    // ========================================================
+
     if (current.target === "tour-information") {
-      target.parentElement?.classList.add(
-        "geolandscape-tour-target-parent"
-      );
+      const button = target as HTMLElement;
+      const container = button.parentElement as HTMLElement | null;
+
+      button.style.position = "relative";
+      button.style.zIndex = "10001";
+      button.style.outline = "3px solid #22D3EE";
+      button.style.outlineOffset = "5px";
+      button.style.boxShadow =
+        "0 0 0 7px rgba(34,211,238,.18), 0 0 28px rgba(34,211,238,.9)";
+
+      if (container) {
+        container.style.position = "relative";
+        container.style.zIndex = "10001";
+      }
     }
   };
 
@@ -213,9 +226,24 @@ useEffect(() => {
     const target = document.getElementById(current.target);
 
     target?.classList.remove("geolandscape-tour-target");
-    target?.parentElement?.classList.remove(
-      "geolandscape-tour-target-parent"
-    );
+
+    if (current.target === "tour-information") {
+      const button = target as HTMLElement | null;
+      const container = button?.parentElement as HTMLElement | null;
+
+      if (button) {
+        button.style.position = "";
+        button.style.zIndex = "";
+        button.style.outline = "";
+        button.style.outlineOffset = "";
+        button.style.boxShadow = "";
+      }
+
+      if (container) {
+        container.style.position = "";
+        container.style.zIndex = "";
+      }
+    }
   };
 }, [visible, current.target]);
 
