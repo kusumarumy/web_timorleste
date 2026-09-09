@@ -1,22 +1,4 @@
 "use client";
-import dynamic from "next/dynamic";
-import { useState } from "react";
-import { I18nProvider } from "@/lib/i18n";
-import ControlPanel from "@/components/ControlPanel";
-import { TopBar, Legend, StatusBar, Loader } from "@/components/Chrome";
-
-const MapCanvas = dynamic(() => import("@/components/MapCanvas"), { ssr: false });
-export default function Page() {
-  const [ready, setReady] = useState(false);
-  return (
-    <I18nProvider>
-      <main className="relative h-screen w-screen">
-        <MapCanvas onReady={() => setReady(true)} />
-        <TopBar />
-        <ControlPanel />
-        <Legend />
-        <StatusBar />
-        "use client";
 
 import dynamic from "next/dynamic";
 import { useState } from "react";
@@ -36,7 +18,7 @@ export default function Page() {
   return (
     <I18nProvider>
       <main className="relative h-screen w-screen">
-
+        
         <MapCanvas
           onReady={() => setMapReady(true)}
         />
@@ -51,7 +33,6 @@ export default function Page() {
           onFinished={() => setLoaderFinished(true)}
         />
 
-        {/* GeoLandscape Mini Tour */}
         <MapTour
           ready={mapReady && loaderFinished}
         />
