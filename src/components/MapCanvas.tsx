@@ -570,6 +570,8 @@ export default function MapCanvas({
   const loadingLayers = useRef(new Set<string>());
   const [loadingLayerIds, setLoadingLayerIds] = useState<string[]>([]);
   const [profile, setProfile] = useState<ProfileData | null>(null);
+  const [mapReady, setMapReady] =
+  useState(false);
   const hoverMarkerRef = useRef<maplibregl.Marker | null>(null);
 
   async function loadGeoJSONLayer(
@@ -778,16 +780,25 @@ if (navigationElement) {
           l.defaultOn
       );
 
-      await Promise.all(
-        initialLayers.map((l) =>
-          loadGeoJSONLayer(map, l)
-        )
-      );
-      console.log(
-        "Initial GeoJSON lazy loading selesai."
-      );
-      const s = store.getState();
-      applyTerrain(map, s.terrainSource);
+await Promise.all(
+  initialLayers.map((l) =>
+    loadGeoJSONLayer(map, l)
+  )
+);
+
+console.log(
+  "Initial GeoJSON lazy loading selesai."
+);
+
+const s = store.getState();
+
+applyTerrain(map, s.terrainSource);
+
+map.resize();
+
+onReady?.(map);
+
+setMapReady(true);
       map.setSky({
         "sky-color": "#12324A",
         "horizon-color": "#0B1620",
@@ -1113,7 +1124,7 @@ const outlineLayer =
       />
 
       {/* GeoLandscape Mini Tour */}
-      <MapTour />
+      <MapTour ready={mapReady} />
 
     </div>
   );
