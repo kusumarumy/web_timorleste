@@ -292,28 +292,13 @@ const finishTour = () => {
 
   return (
     <>
-      {/* ======================================================
-          DARK SPOTLIGHT
-      ====================================================== */}
-
-<div
-  className="
-    pointer-events-none
-    fixed inset-0
-    z-[9990]
-    bg-black/35
-    backdrop-blur-[1px]
-  "
-/>
-
-{/* TOUR SPOTLIGHT */}
-<div
+   <div
   className="
     pointer-events-none
     fixed
-    z-[9991]
-    rounded-[7px]
-    border-[2px]
+    z-[9990]
+    rounded-[8px]
+    border-2
     border-cyan-400
   "
   style={{
@@ -325,9 +310,9 @@ const finishTour = () => {
     background: "transparent",
 
     boxShadow: `
-      0 0 0 2px rgba(34,211,238,.45),
-      0 0 18px 4px rgba(34,211,238,.75),
-      0 0 0 9999px rgba(0,0,0,0)
+      0 0 0 9999px rgba(0,0,0,.35),
+      0 0 0 2px rgba(34,211,238,.35),
+      0 0 22px rgba(34,211,238,.9)
     `,
   }}
 />
