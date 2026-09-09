@@ -697,7 +697,7 @@ export default function MapCanvas({
     map.on("error", (e) => {
       console.error("MAPLIBRE ERROR:", e.error);
     });
-    const navigationControl =
+const navigationControl =
   new maplibregl.NavigationControl({
     visualizePitch: true,
   });
@@ -708,9 +708,14 @@ map.addControl(
 );
 
 const navigationElement =
-  navigationControl.getContainer();
+  map.getContainer().querySelector(
+    ".maplibregl-ctrl-top-right .maplibregl-ctrl-group"
+  ) as HTMLElement | null;
 
-navigationElement.id = "tour-navigation";
+if (navigationElement) {
+  navigationElement.id = "tour-navigation";
+}
+}
     identifyRef.current = new IdentifyTool(map, {
       getLayerIds: (m) => {
         const s = store.getState();
