@@ -709,7 +709,7 @@ export default function ControlPanel() {
 
       {/* PANEL */}
       {open && (
-       <aside className="absolute left-4 top-[70px] z-[15] flex h-[72vh] max-h-[calc(100vh-110px)] w-[285px] min-w-0 flex-col overflow-hidden rounded-2xl border border-stroke bg-panel/90 shadow-[0_18px_50px_rgba(0,0,0,.45)] backdrop-blur-xl max-md:inset-x-2.5 max-md:bottom-auto max-md:top-16 max-md:h-auto max-md:max-h-[52%] max-md:w-auto">
+       <aside className="absolute left-4 top-[70px] z-[15] flex h-[78vh] max-h-[calc(100vh-110px)] w-[285px] min-w-0 flex-col overflow-hidden rounded-2xl border border-stroke bg-panel/90 shadow-[0_18px_50px_rgba(0,0,0,.45)] backdrop-blur-xl max-md:inset-x-2.5 max-md:bottom-auto max-md:top-16 max-md:h-auto max-md:max-h-[52%] max-md:w-auto">
           {/* HEADER */}
           <div className="border-b border-strokeSoft px-3 pb-2 pt-3">
             <div className="flex items-start justify-between">
