@@ -741,13 +741,6 @@ if (navigationElement) {
         noAttribute: "Fitur ini tidak punya atribut.",
       },
     });
-    map.addControl(
-      new maplibregl.ScaleControl({
-        maxWidth: 120,
-        unit: "metric",
-      }),
-      "bottom-left"
-    );
 const scaleControl = new maplibregl.ScaleControl({
   maxWidth: 120,
   unit: "metric",
