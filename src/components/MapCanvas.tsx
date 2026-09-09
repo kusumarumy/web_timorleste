@@ -804,22 +804,33 @@ map.setSky({
 map.resize();
 
 /**
- * TUNGGU SAMPAI MAP BENAR-BENAR IDLE
- * sebelum menganggap MapTour siap.
+ * ==========================================================
+ * WAIT UNTIL MAP RENDERING IS COMPLETELY IDLE
+ * ==========================================================
  */
-map.once("idle", () => {
-  console.log("=================================");
-  console.log("✓ GEOLANDSCAPE MAP READY");
-  console.log("✓ TERRAIN READY");
-  console.log("✓ INITIAL LAYERS READY");
-  console.log("✓ MAP IDLE");
-  console.log("=================================");
+const waitForMapReady = () => {
+  if (!map.isStyleLoaded()) {
+    requestAnimationFrame(waitForMapReady);
+    return;
+  }
 
-  setMapReady(true);
+  // Pastikan satu frame render sudah lewat
+  requestAnimationFrame(() => {
+    map.once("idle", () => {
+      console.log("=================================");
+      console.log("✓ GEOLANDSCAPE MAP READY");
+      console.log("✓ TERRAIN APPLIED");
+      console.log("✓ INITIAL LAYERS READY");
+      console.log("✓ MAP IDLE");
+      console.log("=================================");
 
-  onReady?.(map);
-});
+      setMapReady(true);
+      onReady?.(map);
+    });
+  });
+};
 
+waitForMapReady();
 
     const readout = () => {
       const c = map.getCenter();
@@ -1034,17 +1045,12 @@ const outlineLayer =
   );
 
   const terrainSource = useMapStore((s) => s.terrainSource);
-  useEffect(() => {
-    const map = mapRef.current;
-    if (!map) return;
-    const run = () => applyTerrain(map, terrainSource);
-    if (map.isStyleLoaded()) {
-      run();
-    } else {
-      map.once("idle", run);
-    }
-  }, [terrainSource]);
+useEffect(() => {
+  const map = mapRef.current;
+  if (!map || !mapReady) return;
 
+  applyTerrain(map, terrainSource);
+}, [terrainSource, mapReady]);
   const loadingLayerNames = loadingLayerIds.map((id) => {
     const layer = ALL_LAYERS.find((l) => l.id === id);
     return layer
