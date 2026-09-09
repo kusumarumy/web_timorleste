@@ -403,7 +403,9 @@ function TerrainControl() {
   ];
 
   return (
-    <div className="m-1.5 rounded-xl border border-strokeSoft bg-gradient-to-br from-teal/10 to-teal/[0.02] p-2">
+    <div 
+      id="tour-terrain"
+      className="m-1.5 rounded-xl border border-strokeSoft bg-gradient-to-br from-teal/10 to-teal/[0.02] p-2">
       <div className="flex items-center gap-1.5 text-[11px] font-bold text-ink">
         <svg
           viewBox="0 0 24 24"
@@ -516,7 +518,9 @@ function MeasurementControl() {
     }`;
 
   return (
-    <div className="m-1.5 mt-1.5 rounded-xl border border-strokeSoft bg-gradient-to-br from-teal/10 to-teal/[0.02] p-2">
+    <div 
+      id="tour-measurement"
+      className="m-1.5 mt-1.5 rounded-xl border border-strokeSoft bg-gradient-to-br from-teal/10 to-teal/[0.02] p-2">
       <div className="flex items-center gap-1.5 text-[11px] font-bold text-ink">
         <svg
           viewBox="0 0 24 24"
