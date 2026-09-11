@@ -745,7 +745,9 @@ export const GROUPS: LayerGroup[] = [
     
       label: {
         field: "hutan",
+        minzoom: 10,
         size: 11,
+        spacing: 300,
         color: "#A8C957",
         haloColor: "#1F2A1F",
         haloWidth: 1,
