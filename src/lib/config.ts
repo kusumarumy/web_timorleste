@@ -733,29 +733,32 @@ export const GROUPS: LayerGroup[] = [
     {
       id: "forestprotected",
       nameKey: "l_forestprotected",
-      kind: "fill",
+      kind: "line",
       data: v("forestprotected"),
     
       paint: {
-        "fill-color": SYM.polygon.protectedForest.color,
-        "fill-opacity": SYM.polygon.protectedForest.opacity,
-        "fill-outline-color": SYM.polygon.protectedForest.outline,
+        "line-color": SYM.polygon.protectedForest.outline,
+        "line-width": 2,
+        "line-dasharray": [6, 3],
+        "line-opacity": 1,
       },
     
       label: {
         field: "hutan",
-        size: 12,
-        color: SYM.polygon.protectedForest.outline,
-        haloColor: "#FFFFFF",
-        haloWidth: 2,
+        size: 11,
+        color: "#A8C957",
+        haloColor: "#1F2A1F",
+        haloWidth: 1,
       },
     
       defaultOn: false,
       opacity: 1,
     
       legend: {
-        color: SYM.polygon.protectedForest.color,
-        opacity: SYM.polygon.protectedForest.opacity,
+        color: SYM.polygon.protectedForest.outline,
+        line: true,
+        width: 2,
+        dasharray: [6, 3],
       },
     },
   ],
