@@ -54,7 +54,7 @@ live:
     l_kotamadya: "Batas Administratif Kotamadya",
     l_negara: "Batas Administratif Negara",
     l_batas_daerah_irigasi: "Batas Daerah Irigasi",
-    l_forestprotected: "Batas Kawasan Hutan Lindung Xanana Gusmão",
+    l_forestprotected: "Batas Kawasan Hutan Lindung",
 
     // Land Cover
     l_urban: "Permukiman",
@@ -365,7 +365,7 @@ live:
     l_kotamadya: "Municipal Boundary",
     l_negara: "International Boundary",
     l_batas_daerah_irigasi: "Irrigation Area Boundary",
-    l_forestprotected: "Xanana Gusmão Protected Forest Boundary",
+    l_forestprotected: "Protected Forest Boundary",
     // Land Cover
     l_urban: "Urban Area",
     l_waterbody: "Water Body",
@@ -678,7 +678,7 @@ live:
     l_kotamadya: "Limite Municipal",
     l_negara: "Fronteira Internacional",
     l_batas_daerah_irigasi: "Limite da Área de Irrigação",
-    l_forestprotected: "Limite da Floresta Protegida Xanana Gusmão",
+    l_forestprotected: "Limite da Floresta Protegida",
     // Land Cover
     l_urban: "Área Urbana",
     l_waterbody: "Corpo de Água",
