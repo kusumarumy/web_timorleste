@@ -533,11 +533,6 @@ const SYM = {
       opacity: 0.30,
       outline: "#573D33",
     },
-    protectedForest: {
-      color: "#B6FF00",
-      opacity: 0.35,
-      outline: "#DFFF00",
-    },
     surveyControl: {
       color: "#D32F2F",
       opacity: 0.30,
@@ -557,6 +552,11 @@ const SYM = {
       color: "#26A69A",
       opacity: 0.25,
       outline: "#FFFFFF",
+    },
+    protectedForest: {
+      color: "#B6FF00",
+      opacity: 0.30,
+      outline: "#DFFF00",
     },
   },
 } as const;
@@ -733,21 +733,29 @@ export const GROUPS: LayerGroup[] = [
     {
       id: "forestprotected",
       nameKey: "l_forestprotected",
-      kind: "line",
+      kind: "fill",
       data: v("forestprotected"),
+    
       paint: {
-        "line-color": SYM.polygon.protectedForest.outline,
-        "line-width": 2,
-        "line-dasharray": [6, 3],
-        "line-opacity": 1,
+        "fill-color": SYM.polygon.protectedForest.color,
+        "fill-opacity": SYM.polygon.protectedForest.opacity,
+        "fill-outline-color": SYM.polygon.protectedForest.outline,
       },
+    
+      label: {
+        field: "hutan",
+        size: 12,
+        color: SYM.polygon.protectedForest.outline,
+        haloColor: "#FFFFFF",
+        haloWidth: 2,
+      },
+    
       defaultOn: false,
       opacity: 1,
+    
       legend: {
-        color: SYM.polygon.protectedForest.outline,
-        line: true,
-        width: 2,
-        dasharray: [6, 3],
+        color: SYM.polygon.protectedForest.color,
+        opacity: SYM.polygon.protectedForest.opacity,
       },
     },
   ],
